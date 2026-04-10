@@ -5,6 +5,7 @@ members = [
     "aios_policy",
     "aios_execution",
     "aios_context_resolver",
+    "aios_integration_tests",
 ]
 resolver = "2"
 

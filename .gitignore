@@ -1,0 +1,24 @@
+# Build artifacts
+/target/
+
+# Test artifacts
+# (Specific test output folders if any, but target/ covers most Rust tests)
+test-results/
+coverage/
+*.gcno
+*.gcda
+lcov.info
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Environment variables
+.env
+*.env.local
+
+# Logs
+*.log

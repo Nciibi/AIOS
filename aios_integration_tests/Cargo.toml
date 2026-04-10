@@ -1,0 +1,19 @@
+[package]
+name = "aios_integration_tests"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aios-core = { path = "../aios_core" }
+aios-intent = { path = "../aios_intent" }
+aios-policy = { path = "../aios_policy" }
+aios-context-resolver = { path = "../aios_context_resolver" }
+aios-executor = { path = "../aios_execution" }
+
+tokio = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+
+[dev-dependencies]
+tempfile = "3"
