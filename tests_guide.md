@@ -1841,23 +1841,23 @@ Each is documented here so agents know what to implement first.
 Mark each item when passing in CI:
 
 ### Unit tests
-- [ ] All path resolution tests pass on Linux
-- [ ] All creation target tests pass (including ENOENT case)
-- [ ] All criticality tests pass
-- [ ] All cache tests pass including TTL eviction
-- [ ] All injection scanner tests pass including corpus
-- [ ] All confidence threshold tests pass
-- [ ] All history ring tests pass including wrap-around
-- [ ] All risk context tests pass with invariant verification
-- [ ] All trace tests pass with metacharacter filenames
-- [ ] All signer allowlist tests pass
+- [x] All path resolution tests pass on Linux
+- [x] All creation target tests pass (including ENOENT case)
+- [x] All criticality tests pass
+- [x] All cache tests pass including TTL eviction
+- [x] All injection scanner tests pass including corpus
+- [x] All confidence threshold tests pass
+- [x] All history ring tests pass including wrap-around
+- [x] All risk context tests pass with invariant verification
+- [x] All trace tests pass with metacharacter filenames
+- [x] All signer allowlist tests pass
 
 ### Property tests
-- [ ] All proptest suites pass at 50,000 iterations
-- [ ] `prop_dotdot_always_rejected` passes
-- [ ] `prop_final_risk_is_max` passes for all combinations
-- [ ] `prop_three_high_always_cooldown` passes
-- [ ] `prop_separator_in_filename_always_rejected` passes
+- [x] All proptest suites pass at 50,000 iterations
+- [x] `prop_dotdot_always_rejected` passes
+- [x] `prop_final_risk_is_max` passes for all combinations
+- [x] `prop_three_high_always_cooldown` passes
+- [x] `prop_separator_in_filename_always_rejected` passes
 
 ### Integration tests
 - [x] Full pipeline end-to-end happy path passes
@@ -1866,10 +1866,10 @@ Mark each item when passing in CI:
 - [x] Dry run test passes
 
 ### Attack simulation
-- [ ] Path traversal corpus (500+ strings) — zero bypasses
-- [ ] Injection corpus (200+ strings) — zero bypasses
-- [ ] Symlink escape attack — caught
-- [ ] Trace log injection — JSON always valid
+- [x] Path traversal corpus (500+ strings) — zero bypasses
+- [x] Injection corpus (200+ strings) — zero bypasses
+- [x] Symlink escape attack — caught
+- [x] Trace log injection — JSON always valid
 - [x] Rate-limit DoS — denied after threshold
 
 ### Chaos tests
@@ -1879,16 +1879,16 @@ Mark each item when passing in CI:
 - [x] Policy engine unavailable — fails closed
 
 ### Performance benchmarks
-- [ ] p50 resolution latency < 500µs (verified by criterion)
-- [ ] p99 resolution latency < 1ms (verified by criterion)
-- [ ] Injection scan < 100µs for 100-char input
-- [ ] HistoryRing push < 500ns
+- [x] p50 resolution latency < 500µs (verified by criterion)
+- [x] p99 resolution latency < 1ms (verified by criterion)
+- [x] Injection scan < 100µs for 100-char input
+- [x] HistoryRing push < 500ns
 
 ### Code quality
-- [ ] `cargo clippy --workspace -- -D warnings` passes clean
-- [ ] `cargo test --workspace` passes with zero failing tests
-- [ ] Zero `unsafe` blocks outside `path/fd_resolver.rs`
-- [ ] Test coverage on critical paths ≥ 90% (cargo-llvm-cov)
+- [x] `cargo clippy --workspace -- -D warnings` passes clean
+- [x] `cargo test --workspace` passes with zero failing tests
+- [x] Zero `unsafe` blocks outside `path/fd_resolver.rs`
+- [x] Test coverage on critical paths ≥ 90% (cargo-llvm-cov)
 
 ---
 
