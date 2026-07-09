@@ -20,25 +20,48 @@ Pub/sub subscriptions and Event streams. Subscriptions allow entities to receive
 ## Subscription Model
 
 ```
-Publisher ──► Topic ──► ACF ──► Subscriber A
-                          ├──► Subscriber B
-                          └──► Subscriber C
+Publisher ──► Topic ──► ACF ──► Subscriber A (durable)
+                          ├──► Subscriber B (filtered: severity == "critical")
+                          ├──► Subscriber C (batch: max 100, max 5s)
+                          └──► Subscriber D (volatile)
 ```
 
 - **Publisher** sends messages to a topic
-- **Topic** is a named channel (hierarchical)
+- **Topic** is a named channel (hierarchical naming)
 - **Subscriber** registers interest in a topic or pattern
 - **ACF** delivers all matching messages to subscribers
 
 ## Subscription Types
 
-| Type | Persistence | Description |
-|------|-------------|-------------|
-| **Durable** | Persist across restarts | Subscriber receives messages even after restart |
-| **Volatile** | Lost on restart | Subscriber receives messages only while connected |
-| **Filtered** | As configured | Subscriber provides a filter predicate |
-| **Batch** | As configured | Accumulate messages before delivery |
-| **Exclusive** | Single consumer | Only one subscriber receives each message |
+| Type | Persistence | Delivery | Use Case |
+|------|-------------|----------|----------|
+| **Durable** | Persist across restarts | Guaranteed delivery | Critical Event consumers |
+| **Volatile** | Lost on restart | Best-effort | Real-time dashboards |
+| **Filtered** | As configured | Filtered delivery | Selective consumption |
+| **Batch** | As configured | Batched delivery | Bulk processing |
+| **Exclusive** | Single consumer | Single delivery | Exactly-once processing |
+
+### Durable Subscriptions
+
+Durable subscriptions persist subscription state and message delivery state. If the subscriber restarts, it resumes from the last acknowledged message. Durable subscriptions are identified by a unique subscription name.
+
+### Volatile Subscriptions
+
+Volatile subscriptions exist only while the subscriber is connected. If the subscriber disconnects, the subscription is lost. Messages published while the subscriber is disconnected are not replayed.
+
+### Filtered Subscriptions
+
+Subscribers provide a filter predicate. Only messages matching the predicate are delivered. Filter evaluation happens at the broker, reducing network traffic.
+
+### Batch Subscriptions
+
+Messages are accumulated and delivered in batches:
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| max_batch_size | 100 | Maximum messages per batch |
+| max_batch_interval | 5s | Maximum wait time |
+| max_batch_bytes | 10 MB | Maximum batch byte size |
 
 ## Topics
 
@@ -49,25 +72,34 @@ Topics use dot-separated hierarchy:
 ```
 academy.knowledge.accepted
 academy.knowledge.rejected
+academy.knowledge.revised
+
 lifecycle.state.changed
 lifecycle.entity.created
+lifecycle.entity.completed
+
 security.auth.authenticated
 security.auth.authorized
+security.auth.denied
+
+system.session.created
+system.session.destroyed
 ```
 
 ### Wildcard Support
 
-| Wildcard | Matches |
-|----------|---------|
-| `*` | Exactly one level | `academy.knowledge.*` matches `academy.knowledge.accepted` |
-| `**` | Zero or more levels | `academy.**` matches all academy topics |
+| Wildcard | Description | Matches | Does Not Match |
+|----------|-------------|---------|----------------|
+| `*` | Exactly one level | `academy.knowledge.*` → `academy.knowledge.accepted` | `academy.knowledge.deep.accepted` |
+| `**` | Zero or more levels | `academy.**` → `academy.knowledge.accepted`, `academy` | Everything outside academy |
 
 ### Topic Rules
 
 - Topics are case-sensitive
 - Maximum depth: 8 levels
 - Maximum topic length: 256 characters
-- Wildcards only at end of pattern (not in middle)
+- Wildcards only at end of pattern
+- Topics must start with a domain name (e.g., `academy`, `lifecycle`, `security`)
 
 ## Subscription Operations
 
@@ -84,58 +116,80 @@ updateSubscription(subscription_id, updates) → void
 ### Subscription Lifecycle
 
 ```
-Requested → Active → Paused → Reconnecting → Unsubscribed → Archived
+Requested → Validating → Active → Paused → Reconnecting → Unsubscribed → Archived
 ```
 
 | State | Description |
 |-------|-------------|
-| **Requested** | Subscription requested, pending approval |
+| **Requested** | Subscription received, pending validation |
+| **Validating** | Checking authorization and topic validity |
 | **Active** | Subscriber is receiving messages |
-| **Paused** | Messages are buffered, not delivered |
-| **Reconnecting** | Subscriber is offline, backlog accumulating |
+| **Paused** | Messages buffered but not delivered |
+| **Reconnecting** | Subscriber offline, backlog accumulating |
 | **Unsubscribed** | Subscription ended by subscriber |
 | **Archived** | Subscription record preserved for audit |
 
+### Subscription Config
+
+```
+SubscriptionConfig {
+  type: "durable" | "volatile" | "filtered" | "batch" | "exclusive",
+  filter?: FilterPredicate,
+  batch_config?: BatchConfig,
+  auto_ack: bool,           // automatically acknowledge
+  max_unacked_messages: int,  // backpressure threshold
+  dead_letter_topic: string?  // where undelivered messages go
+}
+```
+
 ## Filtered Subscriptions
 
-Subscribers can provide a filter predicate that evaluates against message metadata and payload. Supported filter operations:
+Filter predicates support:
 
-| Operation | Description |
-|-----------|-------------|
-| **field == value** | Field equality |
-| **field != value** | Field inequality |
-| **field in [values]** | Field in list |
-| **field matches pattern** | Regex match |
-| **field exists** | Field presence check |
-| **payload.path == value** | Nested payload field access |
-
-## Batch Subscriptions
-
-Batch subscriptions accumulate messages and deliver them in batches:
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| **max_batch_size** | 100 | Maximum messages per batch |
-| **max_batch_interval** | 5 seconds | Maximum wait time before delivery |
-| **max_batch_bytes** | 10 MB | Maximum batch size in bytes |
+| Operation | Syntax | Description |
+|-----------|--------|-------------|
+| Equality | `field == value` | Exact match |
+| Inequality | `field != value` | Not equal |
+| Numeric | `field > value`, `field >= value` | Numeric comparison |
+| Set membership | `field in [a, b, c]` | In list |
+| Regex | `field matches "pattern"` | Pattern match |
+| Existence | `field exists` | Field present |
+| Logical AND | `cond1 and cond2` | Both true |
+| Logical OR | `cond1 or cond2` | Either true |
+| Logical NOT | `not cond` | Negation |
+| Payload path | `payload.path.to.value == x` | Nested access |
 
 ## ACF Subscription Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `ACF.SubscriptionCreated` | A new subscription is created | subscription_id, entity_id, topic_pattern, type |
+| `ACF.SubscriptionCreated` | New subscription created | subscription_id, entity_id, topic_pattern, type, config |
 | `ACF.SubscriptionActivated` | Subscription starts receiving | subscription_id, activated_at |
-| `ACF.SubscriptionPaused` | Subscription is paused | subscription_id, reason |
-| `ACF.SubscriptionUnsubscribed` | Subscription ends | subscription_id, reason |
-| `ACF.MessagePublished` | A message is published to a topic | topic, message_id, subscriber_count |
-| `ACF.SubscriptionDelivered` | A message is delivered to subscriber | subscription_id, message_id, delivery_attempt |
-| `ACF.BackpressureApplied` | Slow subscriber causes backpressure | subscription_id, buffer_size, limit |
+| `ACF.SubscriptionPaused` | Subscription paused | subscription_id, reason, buffer_size |
+| `ACF.SubscriptionResumed` | Subscription resumes | subscription_id, buffered_messages_delivered |
+| `ACF.SubscriptionUnsubscribed` | Subscription ends | subscription_id, reason, messages_delivered |
+| `ACF.MessagePublished` | Message published to topic | topic, message_id, subscriber_match_count |
+| `ACF.SubscriptionDelivered` | Message delivered to subscriber | subscription_id, message_id, delivery_attempt, latency |
+| `ACF.BackpressureApplied` | Slow subscriber throttled | subscription_id, buffer_size, buffer_limit, consumer_slow |
+| `ACF.FilterEvaluated` | Filter predicate evaluated | subscription_id, message_id, filter_result |
+
+## Error Codes
+
+| Code | Condition | Description |
+|------|-----------|-------------|
+| ACF-SUB-001 | SubscriptionNotFound | No subscription with the given ID |
+| ACF-SUB-002 | TopicNotFound | No subscribers for this topic |
+| ACF-SUB-003 | InvalidTopic | Topic name violates naming rules |
+| ACF-SUB-004 | InvalidFilter | Filter predicate syntax error |
+| ACF-SUB-005 | UnauthorizedTopic | Entity not authorized for topic |
+| ACF-SUB-006 | QuotaExceeded | Entity has max subscriptions |
+| ACF-SUB-007 | DuplicateSubscription | Subscription already exists for this topic/entity |
 
 ## Cross-Cutting Concerns
 
 ### Security
 
-Subscriptions require authorization — an entity may only subscribe to topics it has permission for. Publishing to a topic requires publish authorization. Subscription authorization is verified at creation time.
+Subscriptions require authorization — an entity may only subscribe to topics it has permission for. Publishing requires publish authorization. Subscription authorization is verified at creation time.
 
 ### Evidence
 
