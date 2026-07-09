@@ -114,6 +114,19 @@ Signing keys follow KMS lifecycle with automatic rotation. Signatures include si
 ### Capability Bounds
 Entities may only use signing algorithms their capability profile permits. Multi-signature operations require all signers to have the required capability.
 
+### Communication
+Signing requests arrive via ACF. Verifications from other services (ATS, AGS, CAM) are routed through ACF. Multi-signature coordination messages use ACF streams.
+
+## Signature Events
+
+| Event Type | Produced When | Fields |
+|-----------|--------------|--------|
+| Signing.OperationCompleted | Signature produced | operation_id, algorithm, key_id, signing_time |
+| Signing.VerificationSuccess | Signature verified | operation_id, algorithm, key_id, verifier |
+| Signing.VerificationFailure | Signature verification failed | operation_id, algorithm, key_id, reason |
+| Signing.MultiSignatureCompleted | Threshold met | operation_id, signer_count, threshold, algorithm |
+| Signing.MultiSignatureFailed | Threshold not met | operation_id, signer_count, threshold, reason |
+
 ### Design DNA Compliance
 | Rule | Compliance |
 |------|------------|

@@ -117,6 +117,19 @@ Certificates follow the lifecycle defined in 001-CAM.md. Validation is performed
 ### Capability Bounds
 Entities may only hold certificates matching their purpose (e.g., a Worker cannot hold a CA certificate).
 
+### Communication
+Certificate operations reach CAM through ACF. CRL distribution and OCSP responses flow through ACF event streams. Certificate status change notifications are broadcast via ACF.
+
+## Certificate Events
+
+| Event Type | Produced When | Fields |
+|-----------|--------------|--------|
+| Certificate.Issued | New certificate issued | cert_id, subject, issuer, not_before, not_after, purpose |
+| Certificate.Revoked | Certificate revoked | cert_id, reason, revoked_by, revocation_time |
+| Certificate.Expired | Certificate reached not_after | cert_id, subject, serial_number |
+| Certificate.ValidationFailed | Chain validation failure | cert_id, reason, chain_length |
+| Certificate.CRLPublished | CRL updated | crl_id, revoked_count, effective_date |
+
 ### Design DNA Compliance
 | Rule | Compliance |
 |------|------------|
