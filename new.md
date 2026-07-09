@@ -834,26 +834,34 @@ From the Conversation's document quality rules: Every document has exactly **one
 
 *Fourth and final sweep: extracted every user proposal ("Can I add X?"), every assistant deferral/rejection, all Bible sub-volumes ever mentioned, and the full document folder inventory. Use this section to know what exists, what's pending, what was saved to which Bible, and where every feature belongs.*
 
-### 19.1 All "Yes Add" — Features Explicitly Accepted by User
+### 19.1 All "Yes Add" — Features Explicitly Accepted (Verified, All 20)
 
-These are points where the user said "yes add/that/this/too/it/him" and the feature was confirmed as part of the architecture. Line numbers refer to `ChatGPT-souuSouu Agent System Design.md`.
+*Exhaustive verification: searched every "yes add/save/include" in the conversation. Each was confirmed by the assistant. Line numbers from `ChatGPT-souuSouu Agent System Design.md`.*
 
-| Line | Feature | Destination | Notes |
-|------|---------|-------------|-------|
-| 17361 | ACF — AIOS Communication Fabric | Subsystem | Message routing, events, streams, request/reply. "Last major piece." |
-| 26484 | DTS — Digital Twin / Predictive Simulation Plane | Core Architecture Backlog | Before creating workers, simulate. Before refactoring, simulate impact. |
-| 26925 | AOP — AIOS Observability Platform | Backlog (not yet promoted) | Monitoring, explaining, debugging. Not a first-class subsystem until Constitution/Bible done. |
-| 28552 | Separation of Powers (Constitutional Principle) | Article II — AIOS Governance | No entity does two of: define, approve, execute a Mission. |
-| 29471 | ROS — Resource Orchestrator | Subsystem | The "98-99% complete" gap filler. Dedicated resource management. |
-| 44161 | RMP — Resource Marketplace | ROS Bible chapter | Provider selection, cost, reservations, cloud bursting, energy scheduling. |
-| 44602 | RXP — Resource Exchange Protocol | ROS Bible, later phase | Distributed/federated resource sharing. |
-| 45080 | Protocol family (AIP, MXP, KXP, GXP, OXP, SXP, EXP, TXP, PXP, CXP, IXP) | Networking Bible, long-term roadmap | Layered networking from single machine to global cluster. |
-| 49454 | OHS — Organization Health System | Organizations Bible | Saved for later; go next file. |
-| 51199 | DOM — Department Operating Model | Organizations Bible (not Constitution) | Layer between Organization and Worker for >500 Workers. |
-| 53583 | LMS — Lifecycle Management System | Dedicated Bible subsystem | Universal lifecycle manager alongside AGS, ROS, OSYS. |
-| 55793 | EEE & OPE — Experience Extraction Engine + Operational Pattern Engine | Organizations Bible | Complements OOM/OHS/ODS/ORG/DOM. |
+| # | Line | Feature | Destination | Confirmed? |
+|---|------|---------|-------------|------------|
+| 1 | 17361 | **ACF — AIOS Communication Fabric** | Core subsystem / permanent pillar | YES |
+| 2 | 18030 | **ACF naming finalized** ("Fabric" not "bus/IPC") | 5-pillars diagram | YES |
+| 3 | 26484 | **DTS — Digital Twin & Predictive Simulation** | Core Architecture Backlog (deferred) | YES |
+| 4 | 26925 | **AOP — AIOS Observability Platform** | Architecture Backlog (deferred) | YES |
+| 5 | 28552 | **Separation of Powers** (constitutional principle) | Constitution Article II | YES |
+| 6 | 29471 | **ROS — Resource Orchestrator** | Core Architecture (permanent) | YES |
+| 7 | 41613 | **AGS — AIOS Genome System** | Bible (OSYS/Organization specs) | YES |
+| 8 | 44161 | **RMP — Resource Marketplace** | ROS internal engine | YES |
+| 9 | 44602 | **RXP — Resource Exchange Protocol** | Master Plan / ROS Bible (deferred) | YES |
+| 10 | 45080 | **AIP + protocol family** (MXP, KXP, GXP, OXP, SXP, EXP, TXP, PXP, CXP, IXP) | Long-term roadmap / Bible | YES |
+| 11 | 49454 | **OHS — Organization Health System** | Organizations Bible (deferred) | YES |
+| 12 | 51199 | **DOM — Department Operating Model** | Organizations Bible | YES |
+| 13 | 53583 | **LMS — Lifecycle Management System** | Shared Frameworks / Master Plan | YES |
+| 14 | 55177 | **KMS + KEE + KCE** (Knowledge Management + Evolution + Confidence) | Academy Bible | YES |
+| 15 | 55793 | **EEE + OPE** (Experience Extraction + Operational Pattern Engines) | Organizations Bible | YES |
+| 16 | 60726 | **SSM — Security System Model** | Security Bible (top-level) | YES |
+| 17 | 66249 | **CSP + CAM** (Cryptographic Platform + Asset Model) | Security Bible | YES |
+| 18 | 66500 | **EVS + AUS** (Evidence System + Audit System) | Shared Infrastructure Bible | YES |
+| 19 | 68042 | **TP + Trust Graph + TPE** (Trust Platform) | Shared Infrastructure Bible (elevated from Security) | YES |
+| 20 | 70039 | **CRP + ADG** (Constitutional Review Platform + Architecture Decision Graph) | Governance Bible + Shared Infrastructure Bible | YES |
 
-### 19.2 All "Save for Bible" / "Save for Later" — Features Deferred to Bible or Backlog
+### 19.2 All "Save for Later" — Features Deferred to Bible or Backlog (16 Items)
 
 These were explicitly saved (not rejected). User said "save [it/this/that/all]" and assistant responded "I'm officially saving..."
 
