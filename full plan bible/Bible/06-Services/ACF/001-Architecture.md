@@ -30,44 +30,60 @@ ACF Architecture defines the component structure, data flow, clustering model, a
                               ▼
 ┌────────────────────────────────────────────────────────────┐
 │ ACF Gateway                                                │
-│  1. Receive message                                        │
-│  2. Authenticate sender (verify token)                     │
-│  3. Authorize message (check ACL)                          │
-│  4. Assign message_id, timestamps                          │
-│  5. Forward to Message Broker                              │
+│  1. Receive message from entity                            │
+│  2. Authenticate sender (verify auth_token)                │
+│  3. Authorize message (check ACL for sender→target)        │
+│  4. Assign message_id (UUIDv7), timestamp (HLC)            │
+│  5. Extract envelope, validate required fields             │
+│  6. Forward to Message Broker                              │
+│  7. Produce ACF.MessageSent Event                          │
 └────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌────────────────────────────────────────────────────────────┐
 │ Message Broker                                             │
-│  1. Persist message (if durable)                           │
-│  2. Produce Event "MessageQueued"                          │
-│  3. Forward to Router                                      │
+│  1. Receive validated message from Gateway                 │
+│  2. If durable: write to WAL (write-ahead log)             │
+│  3. Assign queue position                                  │
+│  4. Forward to Router                                      │
+│  5. Produce ACF.MessageQueued Event                        │
 └────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌────────────────────────────────────────────────────────────┐
 │ Router                                                     │
-│  1. Lookup target endpoint via routing table               │
-│  2. Apply load balancing                                   │
-│  3. Forward to target's delivery queue                     │
-│  4. Produce Event "MessageRouted"                          │
+│  1. Look up target endpoint in routing table               │
+│  2. Apply pattern matching (most specific wins)            │
+│  3. Filter by health status (PSAP integration)             │
+│  4. Apply load balancing strategy                          │
+│  5. Forward to target's delivery queue                     │
+│  6. Produce ACF.MessageRouted Event                        │
+└────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌────────────────────────────────────────────────────────────┐
+│ Delivery Queue (Per-Receiver)                              │
+│  1. Queue message for receiver                             │
+│  2. If receiver is offline: buffer (configurable)          │
+│  3. Deliver to receiver's ACF Gateway                      │
 └────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌────────────────────────────────────────────────────────────┐
 │ ACF Gateway (Receiver Side)                                │
 │  1. Receive message from delivery queue                    │
-│  2. Validate message integrity                             │
+│  2. Validate message integrity (check hash)                │
 │  3. Deliver to receiver entity                             │
-│  4. Produce Event "MessageDelivered"                       │
+│  4. Wait for acknowledgment (configurable timeout)         │
+│  5. Produce ACF.MessageDelivered Event                     │
 └────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌────────────────────────────────────────────────────────────┐
 │ Receiver Entity                                            │
 │  ┌──────────┐                                              │
-│  │  Entity  │◄─── Delivered Message                        │
+│  │  Entity  │◄─── Message delivered                        │
+│  │          │───► Acknowledgment sent                      │
 │  └──────────┘                                              │
 └────────────────────────────────────────────────────────────┘
 ```
@@ -82,30 +98,52 @@ Message Broker → Router → Load Balancer →
 Delivery Queue → ACF Gateway → Receiver
 ```
 
-Each step produces an Event. The full chain is:
-1. `ACF.MessageSent` — Sender dispatched
-2. `ACF.MessageAuthenticated` — Token verified
-3. `ACF.MessageAuthorized` — Route permitted
-4. `ACF.MessageQueued` — Persisted in broker
-5. `ACF.MessageRouted` — Target selected
-6. `ACF.MessageDelivered` — Receiver got it
-7. `ACF.MessageAcknowledged` — Receiver processed (if ack required)
+Each step produces an Event. The full Event chain for a message:
+
+| Step | Event | Produced By |
+|------|-------|-------------|
+| 1. Sender dispatches | `ACF.MessageSent` | Sender's ACF Gateway |
+| 2. Token verified | `ACF.MessageAuthenticated` | ACF Gateway |
+| 3. Route permitted | `ACF.MessageAuthorized` | ACF Gateway |
+| 4. Message persisted | `ACF.MessageQueued` | Message Broker |
+| 5. Target selected | `ACF.MessageRouted` | Router |
+| 6. Delivered to receiver | `ACF.MessageDelivered` | Receiver's ACF Gateway |
+| 7. Receiver acknowledges | `ACF.MessageAcknowledged` | Receiver's ACF Gateway |
 
 ## ACF Clustering
 
-ACF runs as a distributed cluster. The cluster model:
+ACF runs as a distributed cluster with three node roles:
 
-| Component | Consensus Protocol | Purpose |
-|-----------|-------------------|---------|
-| **Metadata store** | Raft | Routing tables, subscription state, cluster membership |
-| **Message topics** | Partitioned | Throughput — topics are partitioned across brokers |
-| **Delivery queues** | Sharded | Per-entity delivery queues, sharded by entity_id |
+| Node Role | Consensus | Data | Scaling |
+|-----------|-----------|------|---------|
+| **Metadata nodes** | Raft | Routing tables, subscriptions, cluster membership | 3 or 5 nodes |
+| **Broker nodes** | Partitioned | Message topics, delivery queues | Horizontal (add partitions) |
+| **Gateway nodes** | Stateless | None | Horizontal (add instances) |
 
-### Cluster Topology
+### Metadata Store (Raft)
 
-- **Broker nodes**: Handle message ingestion and delivery. Stateless for messages (state is in the metadata store and partitioned topics).
-- **Metadata nodes**: Run Raft for cluster-wide metadata. 3 or 5 nodes for fault tolerance.
-- **Gateway nodes**: Edge proxies that handle authentication, authorization, and protocol adaptation.
+Manages cluster-wide state: routing tables, subscription state, topic partitions, cluster membership. Raft ensures consistency across the cluster. Reads are served by any metadata node. Writes go through the Raft leader.
+
+### Topic Partitioning
+
+Topics are partitioned for throughput:
+
+| Aspect | Configuration |
+|--------|--------------|
+| Default partitions per topic | 3 |
+| Max partitions per topic | 100 |
+| Partition assignment | Consistent hashing on partition key |
+| Replication factor | 2 (leader + 1 follower) |
+
+### Delivery Queue Sharding
+
+Per-entity delivery queues are sharded by entity_id:
+
+```
+queue_{entity_id_hash % shard_count}
+```
+
+Default shard count: 10. Configurable per instance.
 
 ## Addressing Format
 
@@ -115,34 +153,56 @@ ACF addressing follows Foundations/007-Naming-Conventions.md:
 aios:{entity_type}:{sub_type}:{instance_id}
 ```
 
+| Segment | Description | Example |
+|---------|-------------|---------|
+| prefix | Always `aios:` | `aios:` |
+| entity_type | Entity type | `engine`, `session`, `org` |
+| sub_type | Optional qualifier | `sec`, `worker`, `user_int` |
+| instance_id | Instance identifier | `lms:001`, `001:a3f2c9d2` |
+
 Examples:
-- `aios:engine:sec:lms:001` — LMS instance
-- `aios:engine:sec:evs:001` — Event Store instance
+- `aios:engine:sec:lms:001` — LMS instance 001
+- `aios:engine:sec:evs:001` — Event Store instance 001
 - `aios:org:001:a3f2c9d2` — Organization
 - `aios:session:worker:004:d1e2f3a4` — Worker Session
 - `aios:engine:sec:council:001` — Security Council
+- `aios:user:008:a1b2c3d4` — User
 
 ### Address Resolution
 
 1. Sender provides target address in message envelope
-2. ACF Gateway looks up target in routing table
-3. Routing table maps patterns to active endpoints
-4. If no route matches, message is rejected with `ACF.AddressUnresolvable`
+2. ACF Gateway strips the `aios:` prefix
+3. Router matches address against routing table patterns
+4. Pattern matching: direct match → type match → wildcard match
+5. If no match, return `ACF.AddressUnresolvable`
+6. If matched, return endpoint(s) for delivery
+
+## Performance Targets
+
+| Metric | Target |
+|--------|--------|
+| Message throughput | >100000 messages/s per broker node |
+| P50 latency | <10ms (intra-instance) |
+| P99 latency | <100ms (intra-instance) |
+| Max message size | 10MB (default), 100MB (max) |
+| Max concurrent connections | 10000 per gateway node |
+| Cluster size | Up to 100 nodes |
 
 ## ACF Architecture Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `ACF.ClusterNodeJoined` | A new ACF node joins the cluster | node_id, node_type, endpoint |
-| `ACF.ClusterNodeLeft` | A node leaves the cluster | node_id, reason |
-| `ACF.ClusterLeaderElected` | A new Raft leader is elected | term, leader_id |
-| `ACF.TopicPartitionReassigned` | A topic partition is reassigned | topic, partition, old_leader, new_leader |
+| `ACF.ClusterNodeJoined` | New node joins cluster | node_id, node_type, endpoint, cluster_size |
+| `ACF.ClusterNodeLeft` | Node leaves cluster | node_id, node_type, reason, uptime_seconds |
+| `ACF.ClusterLeaderElected` | New Raft leader | term, leader_id, previous_leader |
+| `ACF.TopicPartitionCreated` | Topic partition created | topic, partition, node_assignment |
+| `ACF.TopicPartitionReassigned` | Partition reassigned | topic, partition, old_leader, new_leader, reason |
 
 ## Cross-Cutting Concerns
 
 ### Security
 
-Every message is authenticated (token verified) and authorized (route permitted) at the ACF Gateway. Messages without valid tokens are rejected with `ACF.AuthenticationFailed`. Unauthorized routes produce `ACF.AuthorizationDenied`.
+Every message is authenticated (token verified) and authorized (route permitted) at the ACF Gateway. Messages without valid tokens are rejected. Unauthorized routes are denied. All gateway operations log security Events.
 
 ### Evidence
 
@@ -150,11 +210,11 @@ Every step in the data flow produces an Event. The full chain of Events for a me
 
 ### Lifecycle
 
-ACF follows the Platform service lifecycle. Cluster nodes follow: Joining → Active → Leaving → Removed. Topics follow: Created → Active → Partitioned → Archived.
+ACF follows the Platform service lifecycle. Cluster nodes follow: Joining → Syncing → Active → Leaving → Removed. Topics follow: Created → Active → Partitioned → Archived.
 
 ### Communication
 
-ACF itself is the communication layer. ACF nodes communicate with each other through internal channels (not through ACF itself — that would be recursive).
+ACF itself is the communication layer. ACF nodes communicate with each other through internal channels (not through ACF itself — that would be recursive). Internal communication uses a lightweight protocol over TCP with mTLS.
 
 ### Design DNA
 
