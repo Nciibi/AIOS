@@ -830,4 +830,189 @@ From the Conversation's document quality rules: Every document has exactly **one
 
 ---
 
-*Notebook complete. 3 sweeps: architecture (agents 1–7) → granular (agents 8–11) → self-Q&A (agents 12–16). Use §17 for quick lookup of concrete values/names, §18 for answers to specific design questions. Total reading of 74,817 lines confirmed via range-delegated subagent reads.*
+## §19 — Complete Sweep: Backlog, Bible Structure, Saved Features, and Document Inventory
+
+*Fourth and final sweep: extracted every user proposal ("Can I add X?"), every assistant deferral/rejection, all Bible sub-volumes ever mentioned, and the full document folder inventory. Use this section to know what exists, what's pending, what was saved to which Bible, and where every feature belongs.*
+
+### 19.1 All "Yes Add" — Features Explicitly Accepted by User
+
+These are points where the user said "yes add/that/this/too/it/him" and the feature was confirmed as part of the architecture. Line numbers refer to `ChatGPT-souuSouu Agent System Design.md`.
+
+| Line | Feature | Destination | Notes |
+|------|---------|-------------|-------|
+| 17361 | ACF — AIOS Communication Fabric | Subsystem | Message routing, events, streams, request/reply. "Last major piece." |
+| 26484 | DTS — Digital Twin / Predictive Simulation Plane | Core Architecture Backlog | Before creating workers, simulate. Before refactoring, simulate impact. |
+| 26925 | AOP — AIOS Observability Platform | Backlog (not yet promoted) | Monitoring, explaining, debugging. Not a first-class subsystem until Constitution/Bible done. |
+| 28552 | Separation of Powers (Constitutional Principle) | Article II — AIOS Governance | No entity does two of: define, approve, execute a Mission. |
+| 29471 | ROS — Resource Orchestrator | Subsystem | The "98-99% complete" gap filler. Dedicated resource management. |
+| 44161 | RMP — Resource Marketplace | ROS Bible chapter | Provider selection, cost, reservations, cloud bursting, energy scheduling. |
+| 44602 | RXP — Resource Exchange Protocol | ROS Bible, later phase | Distributed/federated resource sharing. |
+| 45080 | Protocol family (AIP, MXP, KXP, GXP, OXP, SXP, EXP, TXP, PXP, CXP, IXP) | Networking Bible, long-term roadmap | Layered networking from single machine to global cluster. |
+| 49454 | OHS — Organization Health System | Organizations Bible | Saved for later; go next file. |
+| 51199 | DOM — Department Operating Model | Organizations Bible (not Constitution) | Layer between Organization and Worker for >500 Workers. |
+| 53583 | LMS — Lifecycle Management System | Dedicated Bible subsystem | Universal lifecycle manager alongside AGS, ROS, OSYS. |
+| 55793 | EEE & OPE — Experience Extraction Engine + Operational Pattern Engine | Organizations Bible | Complements OOM/OHS/ODS/ORG/DOM. |
+
+### 19.2 All "Save for Bible" / "Save for Later" — Features Deferred to Bible or Backlog
+
+These were explicitly saved (not rejected). User said "save [it/this/that/all]" and assistant responded "I'm officially saving..."
+
+| Line | Feature | Saved To | Acronym Expansion |
+|------|---------|----------|-------------------|
+| 21796 | Future DNA Additions | Backlog: "Future DNA Additions" | 013-Evolution.md, 014-Quality-Standards.md, AOM spec, ACF spec, ADR, Naming Rules |
+| 24015 | OSYS — Organization System | Architecture Backlog | Separate from Sou. Sou decides WHAT orgs, OSYS manages creation/scale/lifecycle. |
+| 25895 | Documentation improvements | Architecture Backlog | RFC-style folder structure, Constitution re-org |
+| 53583 | LMS — Lifecycle Management System | AIOS Master Plan / Bible | Lifecycle Management System |
+| 55177 | Academy Knowledge subsystems | Academy Bible | KMS, KEE, KCE, Knowledge Graph, Registry, Validator, Verifier, Review, Versioning, Distribution, Search, Provenance, Analytics, API, SDK |
+| 57037 | Autonomy engines | Autonomy Bible | AMS (Autonomy Management System), ACE (Autonomy Control Engine), ABE (Autonomy Boundary Engine) |
+| 57961 | Full conversation knowledge | AIOS Master Knowledge Base | Restructured into short focused files |
+| 60726 | SSM — Security System Model | Security Bible | Umbrella spec: Identity→Auth→Policy→Risk→Trust→Crypto→Audit→Evidence→Sandbox |
+| 61349 | TLM — Trust Lifecycle Management | Security Bible | Trust creation→expiration lifecycle |
+| 61955 | IDS — Identity System | Security Bible | Identity Registry, Resolution, Lifecycle, Metadata, Federation, Provenance |
+| 62501 | ATS — Authentication System | Security Bible | Auth methods, MFA, session management, credential lifecycle |
+| 63117 | AZS — Authorization System | Security Bible | Authorization model (RBAC/ABAC/Capability-based) |
+| 63756 | PS + PDG + PVE — Policy System | Security Bible | Policy System, Policy Dependency Graph, Policy Verification Engine |
+| 64309 | CAS + CDG + CCA — Capability Architecture | Security Bible | Capability Assignment System, Capability Dependency Graph, Capability Certification Authority |
+| 64870 | Risk System (RE, RKG, ARE) | Security Bible | Risk Engine, Risk Knowledge Graph, Automated Risk Evaluation |
+| 64955 | BAS — Bible Authoring Standards | Global Bible standard | Every Bible document follows: RFC Metadata, Purpose, Abstract, Goals, Non-Goals, Terminology, Principles, Architecture, Responsibilities, etc. |
+| 65686 | EAS — Execution Authorization System | Security Bible | Execution Authorization System, EAC, EAL |
+| 66249 | CSP + CAM — Cryptography | Security Bible | Cryptographic Security Platform, Cryptographic Asset Model |
+| 66500 | EVS + AUS — Evidence + Audit | Shared Infrastructure Bible | Evidence System, Audit System |
+| 66945 | EPG — Evidence Provenance Graph | Shared Infrastructure Bible | Why evidence exists, how it was created |
+| 67338 | EIP + BG — Execution Isolation Platform | Shared Infrastructure Bible | Execution Isolation Platform, Boundary Graph |
+| 68042 | TP + TEE + TPE — Trust Platform | Shared Infrastructure Bible | Trust Platform, Trust Evaluation Engine, Trust Provenance Engine |
+| 68505 | CP — Compliance Platform | Shared Infrastructure Bible | Compliance for Orgs, Runtime, Evolution, Federation |
+| 68808 | PSAP — Platform Service Architecture Pattern | Foundations / Bible | Template for designing platform services |
+| 69369 | CLS + DGP + CKR — Governance | Governance Bible | Constitution Lifecycle System, Document Governance Platform, Constitutional Knowledge Registry |
+| 70039 | ADG + CRP + AKM — Governance | Governance Bible | Architecture Decision Graph, Constitutional Review Platform, Architectural Knowledge Management |
+
+### 19.3 All Deferred/Rejected Features (Assistant Said "Not Yet" or "Not Now")
+
+Features proposed by the assistant where the assistant itself recommended deferring to a later phase (the user did not explicitly reject these — the assistant's architecture judgment deferred them).
+
+| Line(s) | Feature | Deferral Language | Notes |
+|---------|---------|-------------------|-------|
+| 20863 | Deep per-term spec documents (Bible) | "not yet the level I want" | Each term eventually gets 20-50 pages |
+| 21801 | 6 DNA documentation ideas | "Future DNA Additions backlog" | Evolution, Quality, AOM, ACF, ADR, Naming |
+| 22229 | "Future Extensions" sections on every doc | "saved that idea to our backlog" | Standard section for deferred features |
+| 23402 | AIOS Design Language (ADL) standards | "saved this idea to the backlog" | Colors, diagram symbols, naming prefixes |
+| 25239 | DNA folder restructure (Core/Philosophy/Governance) | "wouldn't apply this yet" | Do after Constitution/Physics/Bible |
+| 26230-26422 | Marketplace, Plugin System, Ecosystem | "Future Platform Features" | 13 items: Org marketplace, Skill marketplace, Mission templates, Knowledge Packs, Experience Packs, Voice Packs, Runtime Adapters, Plugin System, Infinite Workers, Runtime Neutrality, Dynamic Skill Injection, etc. |
+| 28559 | Separation of Powers (Constitution-level) | "Architecture Backlog" | Later promoted to Article II |
+| 31508 | Constitutional Obligations per subsystem | "would not add this now" | Moved to Art. II section 006 |
+| 33890 | ACF protocol implementation detail | "wouldn't add it" — REJECTED | Too detailed for Constitution |
+| 38193 | Departments organizational layer | "don't add to Constitution — save for Bible" | OSYS and Organization specs |
+| 48492 | Roles as versioned/reusable entities | "wouldn't add to Constitution" | Belongs in Bible (OSYS/Organizations/AGS) |
+| 51954-51974 | WOM, WHS, WSS, WCS — Worker subsystems | "Saved for the Bible" | Worker Operating Model, Health System, Skill System, Context System |
+| 57914 | Federation / Distributed AIOS | "intentionally deferred" | Let AIOS mature first |
+| 58247 | Human-friendly documentation | "would not write a human doc" — REJECTED | ACT (Architect Context Transfer) instead |
+| 3209-3227 | Phases 2-5 roadmap | Future phases | Phase 2=Orchestration, 3=Intelligence, 4=Integration, 5=Ecosystem |
+
+### 19.4 Complete Bible Volume/Folder Structure (All Volumes Ever Referenced)
+
+The Bible tier **does not exist as a directory yet** — only referenced by name in the conversation. Below is the definitive structure extracted from all mentions. This needs to be created under `full plan bible/Bible/`.
+
+#### 19.4.1 Master Architecture Plan (0000–0008)
+
+These should be the root files that index everything:
+
+```
+Bible/0000-Master-Architecture-Plan.md     — Master index, spine of all docs
+Bible/0001-Constitution-Roadmap.md         — Constitution expansion roadmap
+Bible/0002-Bible-Roadmap.md                — EVERY Bible folder, subsystem, file (~40k-80k words)
+Bible/0003-Platform-Architecture.md        — Platform architecture
+Bible/0004-Service-Architecture.md         — Service architecture
+Bible/0005-Domain-Architecture.md          — Domain architecture
+Bible/0006-Reference-Architecture.md       — Reference architecture
+Bible/0007-Implementation-Roadmap.md       — Implementation roadmap
+Bible/0008-Future-Research.md              — Future research directions
+```
+
+#### 19.4.2 Top-Level Bible Volumes (By Layer)
+
+```
+Bible/00-Foundations/           — DNA summary, preamble, vision, philosophy
+Bible/01-Governance/            — Governance Bible (CLS, DGP, CRP, CKR, ADG, AKM)
+Bible/02-Core-Institutions/     — Sou Bible, Academy Bible, OSYS Bible, DTS Bible, ROS Bible, AGS Bible
+Bible/03-Organizations/         — Organizations Bible (OOM, OHS, ODS, ORG, DOM, OIS, EEE, OPE)
+Bible/04-Workers/               — Workers Bible (WOM, WHS, WSS, WCS)
+Bible/05-Missions/              — Missions Bible
+Bible/06-Runtime/               — Runtime adapters SDK, Claude, Codex, Ollama, Browser, Trading, Robotics
+Bible/07-Security/              — Security Bible (SSM, IDS, ATS, AZS, PS, PDG, PVE, CAS, CDG, CSP, CAM)
+Bible/08-Shared-Infrastructure/ — Shared Infrastructure (EVS, AUS, EPG, EIP, BG, TP, CP)
+Bible/09-Communication/         — ACF Bible
+Bible/10-Federation/            — Networking/Federation Bible (AIP, RXP, MXP, KXP, GXP, OXP, SXP, EXP, TXP, PXP, CXP, IXP)
+Bible/11-Intelligence/          — Autonomy Bible (AMS, ACE, ABE), Learning, Evolution
+Bible/12-Resource-Management/   — ROS Bible details (RMP, RXP, Provider SDK, Federation, Cost, Energy)
+Bible/13-Observability/       — AOP Bible (AOP details, monitoring, dashboards)
+Bible/14-Platform/              — LMS (Lifecycle Management System), State Machine Engine
+Bible/15-SDKs/                  — Runtime SDK, Audit SDK, Knowledge SDK, Provider SDK
+Bible/16-APIs/                  — API specifications
+Bible/17-Ecosystem/             — Marketplace, Skills, Templates, Plugins
+Bible/18-Reference/             — Decision logs, Architecture Decision Graph
+Bible/19-Research/              — Future research, Phase 2-5 roadmaps
+```
+
+#### 19.4.3 Per-Bible Internal Structures
+
+**Security Bible** folders: `SSM/`, `IDS/` (Identity), `ATS/` (Auth), `AZS/` (Authorization), `Policy-System/`, `Risk/`, `Trust/`, `Crypto/`, `Audit/`, `Sandbox/`, `Execution-Auth/`. Plus top-level: `000-Overview.md`, `001-Architecture.md`, `002-Trust-Model.md`.
+
+**Academy Bible**: `000-Overview.md`, `001-Architecture.md`, `002-KMS.md`, `003-Knowledge-Graph.md`, `004-Knowledge-Registry.md`, `005-Knowledge-Validator.md`, `006-Knowledge-Verifier.md`, `007-Knowledge-Review.md`, `008-Knowledge-Versioning.md`, `009-Knowledge-Distribution.md`, `010-Knowledge-Search.md`, `011-Knowledge-Provenance.md`, `012-Knowledge-Analytics.md`, `013-KEE.md`, `014-KCE.md`, `015-Knowledge-SDK.md`, `016-Knowledge-API.md`.
+
+**ROS Bible**: `000-Overview.md`, `001-Architecture.md`, `002-Resource-Registry.md`, `003-Resource-Allocator.md`, `004-Capacity-Planner.md`, `005-Budget-Manager.md`, `006-Quota-Manager.md`, `007-RMP.md`, `008-Provider-SDK.md`, `009-Reservation-System.md`, `010-Cost-Engine.md`, `011-Energy-Manager.md`, `012-Recovery-Engine.md`, `013-Observability.md`.
+
+**Organizations Bible** (per conversation lines 49326-50521): OOM, OHS, ODS, ORG, DOM, OIS, EEE, OPE.
+
+**Governance Bible**: CLS (Constitution Lifecycle System), DGP (Document Governance Platform), CRP (Constitutional Review Platform), CKR (Constitutional Knowledge Registry), ADG (Architecture Decision Graph), AKM (Architectural Knowledge Management).
+
+**Shared Infrastructure Bible**: EVS (Evidence System), AUS (Audit System), EPG (Evidence Provenance Graph), EIP (Execution Isolation Platform), BG (Boundary Graph), TP (Trust Platform), TEE, TPE, CP (Compliance Platform).
+
+### 19.5 All Empty / Missing Document Folders in the Repo
+
+Current state of `full plan bible/`:
+
+| Folder | Status | Has Content? |
+|--------|--------|-------------|
+| `ADR/` | COMPLETE | 14 documents (000-014), all written |
+| `DNA/` | COMPLETE | 12 documents (000-011), all written |
+| `CONSTITUTION/` | EXISTS | Articles I-V, all files populated (2-10 KB each). Most need expansion to full constitutional depth. |
+| `Physics/` | **MISSING** | Does not exist. Needs 10 Laws + Design DNA 15 rules + canonical invariants. |
+| `Bible/` | **MISSING** | Does not exist. Needs all volumes in §19.4. |
+| `RFC/` | **MISSING** | Does not exist. Needs lifecycle docs template. |
+
+### 19.6 Constitution Section Content Status (What's Thin vs Complete)
+
+All Constitution files are filled (none are pure stubs at 0 bytes), but many are 2-3 KB outlines:
+
+| Min File | Max File | Threshold |
+|----------|----------|-----------|
+| **Thin (2.1-3.6 KB) — outlines only** | 004-Ratification, 007-Deprecation, 006-Compatibility, 003-Review, 002-Amendments, 005-Versioning, 012-Transitional, 011-Interpretation, 008-Migration, 009-Conflict, 013-Federation, 010-Supremacy, 001-Evolution, 014-Compliance | These are Article V (Parts A-C) mostly; 5-7 pages each would be full depth |
+| **Medium (3.6-6 KB)** | Most Security (Art IV), most Society (Art III-B), Art I, Art II | ~8-12 pages each |
+| **Heaviest (6-9.6 KB)** | AGS (9.4), DTS (9.7), OSYS (7.0), Academy (6.6), ROS (6.5), Art II sections | ~12-20 pages each |
+
+Target per Constitution section: 150-300 lines (per §17.22).
+
+### 19.7 The "Don't Forget" Items from User — Early Conversation
+
+These 4 early "don't forget" / "remember" requests were incorporated directly into the architecture (not backlogged):
+
+1. **Line 2283**: "dont forget to include ECC in the building" → ECC was integrated as a runtime (one of many runtimes, not the architecture's centerpiece).
+2. **Line 3242**: "dont forget about the engines" → Led to the engine catalog (22 engines in the first Bible proposal).
+3. **Line 10514**: "dont forget the skills place + learning persistence" → Led to the AI Brain / Knowledge Repository / Skills Registry / Experience Memory model.
+4. **Line 12822**: "remember you munchened another layers before" → Led to the full 8-layer AIOS Stack architecture.
+
+### 19.8 Summary: What to Build Next
+
+Priority order for filling the missing architecture:
+
+1. **Create `full plan bible/Physics/`** — 10 Physics Laws + 15 Design DNA rules + canonical invariants (identity, lifecycle, execution, learning)
+2. **Create `full plan bible/Bible/0000-Master-Architecture-Plan.md`** — The spine indexing everything
+3. **Create `full plan bible/Bible/0002-Bible-Roadmap.md`** — The 40k-80k word Bible outline
+4. **Expand thin Constitution sections** (Art V Part A-C: ratification, deprecation, compatibility, migration, conflict, supremacy, interpretation, transitional)
+5. **Create `full plan bible/RFC/`** — RFC template and process doc
+6. **Create Bible per-volume folders** — start with Security Bible, then Academy, ROS, Organizations
+7. **Write the 31 "saved" subsystems** into their respective Bible volumes (LMS, KMS, SSM, IDS, ATS, AZS, Policy System, Risk, etc.)
+
+---
+
+*Notebook complete. 4 sweeps: architecture (agents 1-7) → granular (agents 8-11) → self-Q&A (agents 12-16) → final backlog/Bible/feature inventory (agents 17-18). Total reading of all 74,817 lines confirmed via 18 parallel subagent ranges. Use §17 for values, §18 for Q&A, §19 for what's missing and where everything goes.*
