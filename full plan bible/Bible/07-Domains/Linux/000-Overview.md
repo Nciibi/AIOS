@@ -146,6 +146,19 @@ All Linux domain communication flows through ACF. Remote host access uses SSH or
 | R10 (Simpler Over Complex) | Infrastructure is declarative — desired state, not step-by-step scripts |
 | R13 (Design for Failure) | Configuration changes are transactional — rollback on failure; commands have timeouts |
 
+## Performance Characteristics
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| Single command execution | < 2 seconds | 10 seconds |
+| Playbook execution (10 tasks) | < 30 seconds | 2 minutes |
+| Playbook execution (50 tasks) | < 5 minutes | 15 minutes |
+| Configuration drift detection | < 10 seconds | 30 seconds |
+| Compliance scan (single host) | < 1 minute | 5 minutes |
+| Compliance scan (100 hosts) | < 10 minutes | 30 minutes |
+| Patch application (single host) | < 2 minutes | 10 minutes |
+| Host discovery scan (/24 subnet) | < 5 minutes | 15 minutes |
+
 ## Related Documents
 
 | Document | Relationship |
@@ -160,5 +173,7 @@ All Linux domain communication flows through ACF. Remote host access uses SSH or
 | Bible/02-Core/DTS/000-Overview.md | DTS — Change impact assessment |
 | Bible/02-Core/ROS/000-Overview.md | ROS — Compute budgets for monitoring and compliance |
 | Bible/03-Institutions/Workers/005-Playbook-Manager.md | Playbook Manager — Automated runbook execution |
+| Bible/04-Execution/Security/ATS/000-Auth-Methods.md | ATS — Host access authentication |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — SSH and API transport providers |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
