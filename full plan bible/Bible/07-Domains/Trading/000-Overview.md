@@ -152,6 +152,20 @@ All Trading domain communication flows through ACF. Market data arrives through 
 | R13 (Design for Failure) | Order failures trigger automatic position reconciliation; exchange disconnects trigger circuit breaker |
 | R14 (Paved Path) | Paved path: research → backtest → paper → deploy → monitor → retire |
 
+## Performance Characteristics
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| Strategy research | < 60 minutes | 4 hours |
+| Backtest (1 year, 1 instrument) | < 5 minutes | 15 minutes |
+| Backtest (5 years, 50 instruments) | < 30 minutes | 2 hours |
+| Paper trade (per session) | 1–30 days | N/A (calendar-based) |
+| Order placement latency | < 50ms | 500ms |
+| Order fill confirmation | < 100ms | 1 second |
+| Risk check (pre-trade) | < 10ms | 50ms |
+| P&L calculation (per position) | < 100ms | 500ms |
+| Market data processing latency | < 10ms | 100ms |
+
 ## Related Documents
 
 | Document | Relationship |
@@ -167,5 +181,7 @@ All Trading domain communication flows through ACF. Market data arrives through 
 | Bible/02-Core/ROS/000-Overview.md | ROS — Capital allocation and position sizing |
 | Bible/06-Services/ACF/000-Overview.md | ACF — Market data and order transport |
 | Bible/06-Services/Cryptography/KMS/000-KMS.md | KMS — Exchange credential management |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — Exchange connectivity provider |
+| Bible/08-Interfaces/API/000-Specifications.md | API — Market data API contract specifications |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
