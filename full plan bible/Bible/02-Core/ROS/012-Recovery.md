@@ -165,6 +165,97 @@ Recovery is triggered by LMS lifecycle transitions:
 | Non-blocking | Recovery runs asynchronously; it does not block other ROS operations |
 | Auditability | Every recovered allocation produces a deallocation Event |
 
+## Recovery Scenarios
+
+### Entity Crash Recovery
+
+When LMS detects an entity crash:
+1. LMS sends `EntityCrashed` Event to Recovery
+2. Recovery immediately triggers force recovery for the entity
+3. All active allocations are force-released on their providers
+4. All active reservations are expired
+5. Budget is adjusted: used -= recovered amount
+6. `RecoveryCompleted` Event produced
+7. Entities depending on the crashed entity's resources (e.g., through ACF calls) receive notifications
+
+| Step | Action | Time Budget |
+|------|--------|-------------|
+| 1 | LMS notification received | < 1 second |
+| 2 | Allocations identified | < 2 seconds |
+| 3 | Force release initiated | < 5 seconds |
+| 4 | Provider confirmations | < 10 seconds |
+| 5 | Budget adjusted | < 1 second |
+| 6 | Completion Event produced | < 1 second |
+
+### Mission Completion Recovery
+
+When a Mission completes:
+1. Sou sends `MissionCompleted` Event to Recovery
+2. Recovery triggers graceful recovery for all mission entities
+3. Each entity receives a grace period notification (30 seconds)
+4. Entities may complete in-flight operations
+5. After grace period, any remaining allocations are force-released
+6. Mission budget is finalized and archived
+7. `RecoveryCompleted` Event produced with mission summary
+
+### Organization Dissolution Recovery
+
+When an Organization dissolves:
+1. OSYS sends `OrganizationDissolving` Event to Recovery
+2. Recovery triggers graceful recovery for all member entities
+3. Organization-level budget and quota are deactivated
+4. Entity budgets are adjusted to remove organization-level allocations
+5. Member entities may continue as independent entities or be assigned to a new organization
+6. Organization resource records are archived
+
+### Scheduled Maintenance Recovery
+
+When maintenance is planned:
+1. Administrator triggers recovery with `maintenance` reason
+2. Recovery initiates graceful recovery for targeted providers
+3. Entities on affected providers receive extended grace period (configurable, default 5 minutes)
+4. Allocator redirects new allocations to alternative providers
+5. After grace period, remaining allocations on target providers are force-released
+6. Providers are drained and maintenance proceeds
+7. After maintenance, providers re-register and capacities are restored
+
+## Recovery Guarantees and Edge Cases
+
+| Edge Case | Handling |
+|-----------|----------|
+| Recovery triggered for already-terminated entity | Idempotent — no-op, already-released allocations are skipped |
+| Provider unreachable during recovery | Retry 3 times with exponential backoff; mark allocation as released in ROS; flag for manual reconciliation |
+| Recovery during active allocation | Grace period allows completion; force recovery aborts immediately |
+| Recovery race condition (two triggers simultaneously) | First trigger acquires lock; second trigger returns already-in-progress |
+| Budget inconsistency after recovery | Budget is adjusted to reflect actual released amount; discrepancy logged for audit |
+| Partial recovery (some allocations fail to release) | Failed allocations are flagged for manual intervention; recovery is marked as partial |
+
+## Recovery Audit Trail
+
+Every recovery produces an immutable audit record:
+
+```
+RecoveryAuditRecord {
+    recovery_id: UUID
+    scope_type: Enum
+    scope_id: UUID
+    trigger_type: Enum
+    force: Boolean
+    started_at: Timestamp
+    completed_at: Timestamp
+    duration_ms: Int
+    total_allocations: Int
+    graceful_releases: Int
+    force_releases: Int
+    failed_releases: Int
+    resources_recovered: Map<ResourceType, Quantity>
+    providers_notified: List<UUID>
+    errors: List<RecoveryError>
+}
+```
+
+Audit records are retained for the lifetime of the AIOS instance and are accessible only to the Security Council.
+
 ## Events
 
 | Event | Trigger | Payload |

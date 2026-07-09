@@ -152,6 +152,108 @@ Per PHI-009 (Simpler Over Complex):
 4. **No performance degradation**: Energy optimization does not reduce allocated resources or increase latency beyond configured thresholds.
 5. **Provider neutrality**: Energy optimization does not exclude providers; it prefers lower-energy options among equivalent providers.
 
+## Energy Data Structures
+
+```
+EnergyReport {
+    provider_id: UUID
+    resource_type: ResourceType
+    base_power_watts: Float
+    per_unit_power_watts: Float
+    current_power_watts: Float
+    energy_consumed_wh: Float
+    carbon_intensity: Float (optional)
+    energy_source: Enum (grid, solar, battery, hybrid)
+    measured_at: Timestamp
+}
+
+EnergyBudget {
+    scope_type: Enum (entity, organization, system)
+    scope_id: UUID
+    power_cap_watts: Float
+    energy_cap_wh_daily: Float
+    current_power_watts: Float
+    current_energy_wh: Float
+    energy_remaining_wh: Float
+    cap_reset_at: Timestamp
+}
+
+EnergyOptimizationDecision {
+    allocation_id: UUID
+    entity_id: UUID
+    selected_provider: UUID
+    alternative_providers: List<UUID>
+    energy_saved_wh: Float
+    cost_impact: Float
+    reason: String
+}
+```
+
+## Energy Monitoring
+
+Energy monitoring tracks consumption at multiple levels:
+
+| Level | Metrics | Update Frequency |
+|-------|---------|------------------|
+| Provider | Instantaneous power, cumulative energy, carbon intensity | Every 30 seconds |
+| Entity | Power draw, daily energy, energy cap utilization | Every 60 seconds |
+| Organization | Aggregate power, total daily energy, organization efficiency | Every 5 minutes |
+| System | Total power draw, grid vs renewable ratio, carbon footprint | Every 15 minutes |
+
+Energy monitoring data is exposed via Observability (013-Observability) dashboards and alerting.
+
+## Energy Optimization Strategies
+
+### Provider Preference
+
+When energy optimization is enabled, providers are ranked by energy preference:
+
+```
+provider_energy_score = current_power_watts / total_capacity
+                       × carbon_intensity_factor
+                       × time_of_day_factor
+```
+
+| Factor | Description | Range |
+|--------|-------------|-------|
+| Efficiency | Power per unit of capacity | 0–1 (lower is better) |
+| Carbon intensity | Carbon emissions per kWh | 0–1 (lower is better) |
+| Time of day | Peak vs off-peak factor | 0.5–1.5 (lower during off-peak) |
+
+### Workload Scheduling
+
+Energy-aware scheduling can defer non-urgent workloads:
+
+| Workload Type | Scheduling Behavior |
+|---------------|---------------------|
+| Interactive | Always immediate (no deferral) |
+| Batch | May be deferred to off-peak (max 1 hour delay) |
+| Background | May be deferred to off-peak (max 8 hours delay) |
+| Maintenance | Scheduled during minimum energy cost period |
+
+### Provider Power Management
+
+When a provider has no active allocations for more than 5 minutes, ROS may:
+
+1. Notify the provider to enter low-power state
+2. Consolidate remaining workloads to fewer providers
+3. Power down idle providers (if supported by provider type)
+
+Power management is always optional per-provider. Providers opt in during registration.
+
+## Energy and Carbon Reporting
+
+Periodic energy and carbon reports are generated:
+
+| Report Type | Audience | Content |
+|-------------|----------|---------|
+| Entity energy report | Entity supervisor | Power draw, energy consumed, carbon footprint |
+| Organization energy report | Organization admin | Aggregate power, energy efficiency, optimization opportunities |
+| System sustainability report | Security Council | Total energy, renewable percentage, carbon offset recommendations |
+| Provider energy report | Provider operator | Provider efficiency, utilization vs energy consumption |
+
+Reports are generated monthly by default and retained for 36 months.
+
 ## Events
 
 | Event | Trigger | Payload |
