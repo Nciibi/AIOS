@@ -170,6 +170,105 @@ Per CPR-010 (Evidence Privacy):
 
 Metrics dashboards display aggregated data only. Per-entity usage details are never exposed outside the entity's organization. Anonymised aggregate data may be used for system-wide planning.
 
+## Metric Derivation Pipeline
+
+All metrics are derived from Events through a defined pipeline:
+
+```
+Event Store (append-only log)
+    │
+    ▼
+Event Stream Processor
+    │
+    ├──→ Real-time aggregator (1-second windows)
+    │       └──→ Current-state gauges (utilization, health)
+    │
+    ├──→ Sliding window aggregator (5-minute windows)
+    │       └──→ Rate metrics (allocations/second, denial rate)
+    │
+    ├──→ Cumulative aggregator (lifetime)
+    │       └──→ Counter metrics (total allocations, total cost)
+    │
+    └──→ Histogram aggregator (latency distributions)
+            └──→ Latency metrics (P50, P95, P99)
+```
+
+| Aggregation Type | Window | Metrics | Update |
+|------------------|--------|---------|--------|
+| Current state | Latest value | Gauges (utilization, health) | Per Event |
+| Rate | 1-minute sliding | Requests/sec, denial rate | Every 10 seconds |
+| Rate | 5-minute sliding | Latency percentiles | Every 30 seconds |
+| Cumulative | Lifetime | Total counts, total cost | Per Event |
+| Daily | 24-hour rolling | Daily utilization patterns | Every hour |
+| Monthly | Calendar month | Monthly cost, monthly allocations | End of day |
+
+## Dashboard Types
+
+### Security Council Dashboard (System View)
+
+```
+╔═══════════════════════════════════════════════════════════════╗
+║  SYSTEM RESOURCE OVERVIEW                    Last updated: 12s║
+╠═══════════════════════════════════════════════════════════════╣
+║  ┌──────────────────┐  ┌──────────────────┐                  ║
+║  │ CPU Utilization  │  │ Memory Util.     │                  ║
+║  │ ████████████░░ 65%│  │ ██████████████░ 78%│                  ║
+║  │ Total: 256 cores │  │ Total: 1 TB RAM │                  ║
+║  └──────────────────┘  └──────────────────┘                  ║
+║  ┌──────────────────┐  ┌──────────────────┐                  ║
+║  │ GPU Utilization  │  │ Token Utilization│                  ║
+║  │ ████████░░░░ 42% │  │ █████████████ 82%│                  ║
+║  │ Total: 32 GPUs   │  │ Today: 2.1M tkns│                  ║
+║  └──────────────────┘  └──────────────────┘                  ║
+║                                                               ║
+║  Provider Health: ■■■■□ 4/5 healthy                           ║
+║  Active Alerts:     ● 2 critical, ◐ 3 warning                 ║
+║  Quota Violations:  12 this hour                              ║
+║  Recovery Activity: 3 in progress                             ║
+╚═══════════════════════════════════════════════════════════════╝
+```
+
+### Organization Manager Dashboard
+
+```
+╔═══════════════════════════════════════════════════════════════╗
+║  ORGANIZATION: Research Division           Period: June 2026  ║
+╠═══════════════════════════════════════════════════════════════╣
+║  Resource Utilization by Type                                ║
+║  ┌────────────────────────────────────────────────────────┐  ║
+║  │ ████████████████ Compute    68%  (1,360/2,000 cores)   │  ║
+║  │ ████████████████████ Memory     88%  (704/800 GB)         │  ║
+║  │ ██████████ Storage     48%  (4.8/10 TB)               │  ║
+║  │ ████████████████████████████ Tokens    95%  (950K/1M)     │  ║
+║  └────────────────────────────────────────────────────────┘  ║
+║                                                               ║
+║  Budget Status: 3 entities at warning, 1 exhausted            ║
+║  Top Spenders: entity-a (32%), entity-b (28%), entity-c (18%)║
+║  Cost This Period: 45,230 credits (12% above plan)           ║
+╚═══════════════════════════════════════════════════════════════╝
+```
+
+## Logging
+
+ROS produces structured logs for all operations:
+
+| Log Level | Usage | Examples |
+|-----------|-------|----------|
+| ERROR | Operation failures, system errors | Allocation denied due to quota, provider unreachable |
+| WARN | Degraded conditions, warnings | Budget at 80%, heartbeat missed, soft quota exceeded |
+| INFO | Normal operations | Allocation completed, provider registered, budget set |
+| DEBUG | Detailed diagnostic information (disabled in production) | Provider selection details, policy evaluation trace |
+
+Log format:
+```
+{timestamp} {level} {component} {message} {context}
+```
+
+Example:
+```
+2026-07-09T14:30:00.123Z INFO allocator allocation.completed allocation_id=abc-123 entity_id=xyz-789 resource_type=compute quantity=4 strategy=priority
+```
+
 ## Events
 
 | Event | Trigger | Payload |
