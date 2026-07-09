@@ -149,6 +149,16 @@ All FPGA domain communication flows through ACF. Synthesis and P&R jobs are subm
 | R13 (Design for Failure) | Synthesis failures return complete logs; partial P&R results preserved |
 | R14 (Paved Path) | Paved path: RTL → simulate → synthesize → P&R → analyze → program |
 
+## Component Map
+
+| Component | Document | Function |
+|-----------|----------|----------|
+| RTL Designer | FPGA/001-RTL.md | HDL generation, module composition, IP instantiation |
+| Simulation Engine | FPGA/002-Simulation.md | RTL simulation, gate-level simulation, waveform analysis |
+| Synthesis Manager | FPGA/003-Synthesis.md | Synthesis tool orchestration, constraint management, optimization |
+| P&R Controller | FPGA/004-PAR.md | Placement and routing, congestion management, timing closure |
+| Bitstream Publisher | FPGA/005-Bitstream.md | Bitstream generation, signing, encryption, programming |
+
 ## Performance Characteristics
 
 | Metric | Target | Hard Limit |

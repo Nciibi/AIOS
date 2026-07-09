@@ -152,6 +152,15 @@ All Research domain communication flows through ACF. Web search results and retr
 | R10 (Simpler Over Complex) | Research methodology is linear — no unbounded exploration loops |
 | R13 (Design for Failure) | Incomplete source retrieval produces partial results with gaps noted |
 
+## Component Map
+
+| Component | Document | Function |
+|-----------|----------|----------|
+| Web Research Engine | Research/001-Web.md | Web search, content retrieval, source verification, citation extraction |
+| Data Analysis Engine | Research/002-Analysis.md | Statistical analysis, visualization, pattern detection, ML pipelines |
+| Literature Review Engine | Research/003-Literature.md | Paper search, citation graph, finding comparison, gap analysis |
+| Synthesis Engine | Research/004-Synthesis.md | Report generation, conclusion formulation, evidence chain assembly |
+
 ## Performance Characteristics
 
 | Metric | Target | Hard Limit |
