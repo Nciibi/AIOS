@@ -8,7 +8,7 @@
 | Category | Physics |
 | Document ID | AIOS-PHY-005 |
 | Applies To | All Events, Evidence, Records, Observability, Audit Trails, Logging, Telemetry, State Changes, Notifications |
-| Source Laws | Law 1 — Law of Evidence, Law 6 — Law of Lifecycle Compliance |
+| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle Compliance |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | None |
