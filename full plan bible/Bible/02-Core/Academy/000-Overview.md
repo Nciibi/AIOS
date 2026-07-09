@@ -125,6 +125,78 @@ All Academy communication flows through the Application Communication Framework 
 | R13 | Academy fails closed on dependency failure (deny knowledge acceptance) |
 | R14 | The paved path for knowledge is: evidence → validate → accept → distribute |
 
+## Learning Model Detail
+
+The six-stage learning model is the core operational loop of the Academy:
+
+### Stage 1: Evidence Ingestion
+
+The Academy subscribes to the Event Store (Physics/005-Events.md) and receives Events as they are produced. Not all Events are learnable — the Evidence Ingestor filters for Events that contain actionable information, patterns, or outcomes that can improve AIOS's knowledge base.
+
+| Event Learnability Criteria | Description |
+|----------------------------|-------------|
+| Has structured outcome | Event contains a result, decision, or outcome |
+| Is constitutional | Event does not violate privacy (CPR-010) |
+| Is analyzable | Event payload can be parsed and contextualized |
+| Is consented | Entity/organization has consented to learning |
+
+### Stage 2: Analysis
+
+The Knowledge Pipeline transforms raw Events into structured knowledge artifacts. This involves parsing, contextualizing against existing knowledge, abstracting patterns, and formatting into the canonical artifact schema.
+
+Analysis is deterministic (R9): given the same Events and the same existing knowledge state, the same analysis output is produced. This ensures reproducibility of knowledge generation.
+
+### Stage 3: Knowledge Production
+
+The KMS (002) accepts the structured artifact from the Pipeline and assigns it a version (1.0.0), a status (Generated), and a unique ID. The artifact is now persisted in the KMS event log.
+
+### Stage 4: Validation
+
+The artifact passes through three gates:
+1. **Validator (005)** — Constitutional consistency, schema, provenance, non-contradiction, privacy, quality
+2. **Verifier (006)** — Evidence replay, cross-validation, confidence scoring, adversarial testing
+3. **Review (007)** — Human/Engine review (conditional: high-impact, low-confidence, novel)
+
+Any gate can reject the artifact. Rejection returns the artifact with structured feedback.
+
+### Stage 5: Acceptance
+
+The Knowledge Registry (004) registers the approved artifact. This is a constitutional event — once registered, the knowledge is authoritative. The Registry entry is signed and includes the full validation chain.
+
+### Stage 6: Distribution
+
+The Distribution service (009) pushes the artifact to subscribers, makes it available via Search (010), and updates the Knowledge Graph (003). The artifact is now consumable by entities across AIOS.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Learning Loop                                                 │
+│                                                               │
+│  Evidence ──▶ Analysis ──▶ Knowledge ──▶ Validation ──▶      │
+│       ▲                                   Acceptance ──▶      │
+│       │                                   Distribution        │
+│       └────────────────── Feedback ◀──────┘                   │
+│                                                               │
+│  Feedback: KEE (013) execution results,                       │
+│  KCE (014) composition results, usage analytics (012)         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Academy Integration Points
+
+The Academy integrates with the following AIOS systems:
+
+| System | Integration | Documents |
+|--------|-------------|-----------|
+| Event Store | Source of all evidence for learning | Physics/005-Events.md |
+| IDS — Identity Service | Entity identity for knowledge operations | Foundations/001-AIOS-Philosophy.md (PHI-004) |
+| ATS — Authentication | Authentication for all API/SDK calls | Physics/008-Security.md |
+| CCA — Capabilities | Capability bounds for knowledge operations | Physics/007-Capabilities.md |
+| ROS — Resources | Resource budgets for knowledge execution | Core/ROS/000-Overview.md |
+| Runtime Engine | Execution of knowledge-driven plans | Physics/010-Execution.md |
+| DTS — Decision Trust | Confidence scoring and reputation | Core/DTS/004-Confidence.md |
+| Sou — Decision Engine | Strategic knowledge consumption | Core/Sou/005-Knowledge.md |
+| Security Council | Oversight, deprecation, escalation | Physics/008-Security.md |
+
 ## Related Documents
 
 | Document | Relationship |
