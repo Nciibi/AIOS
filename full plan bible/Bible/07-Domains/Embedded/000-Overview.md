@@ -76,16 +76,38 @@ Embedded development in AIOS follows this workflow:
 13. Academy indexes new board-support knowledge
 ```
 
+## Invariants
+
+1. **EMB-I-001 — Target-Bounded**: A FirmwareWorker may only generate code for MCU targets that are registered and verified in its Genome. Cross-target code generation is prohibited.
+
+2. **EMB-I-002 — Toolchain Verified**: Every cross-compilation uses a pinned, verified toolchain. Toolchains are cryptographically hashed and compared against known-good hashes before use.
+
+3. **EMB-I-003 — Resource-Constrained Design**: Generated firmware must not exceed the target device's flash and RAM bounds. Violations cause build failure.
+
+4. **EMB-I-004 — Hardware Safety**: Hardware-in-the-loop tests require physical safety verification before execution. High-power or hazardous hardware tests require Security Council authorization.
+
+5. **EMB-I-005 — Deterministic Build**: Same source, toolchain, and configuration always produces identical binary output. Build reproducibility is verified by checksum.
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| Toolchain not available for target MCU | Build fails with toolchain-not-found error. Academy queried for alternative toolchain. |
+| Generated firmware exceeds flash budget | Optimize-for-size flag applied. If still exceeding, refactoring plan generated. |
+| Hardware probe finds unexpected MCU revision | Probe data captured as knowledge artifact. Firmware parameters adjusted for detected revision. |
+| Flash programming fails mid-write | Device may be in unknown state. Recovery procedure: re-flash with verified binary. |
+| HIL test fixture unavailable | Test queued. If fixture remains unavailable for TTL, test is skipped with warning and simulation results used. |
+
 ## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `Embedded.FirmwareGenerated` | Firmware source is generated | worker_id, target_mcu, platform, lines_of_code |
-| `Embedded.CrossCompileCompleted` | Cross-compilation finishes | build_id, target_arch, outcome, binary_size, ram_estimate |
-| `Embedded.HardwareProbed` | Hardware is detected and probed | board_id, mcu_type, peripherals_found, firmware_version |
-| `Embedded.FlashCompleted` | Firmware is flashed to device | flash_id, target_device, protocol, duration |
-| `Embedded.HILTestCompleted` | Hardware-in-the-loop test run finishes | test_id, test_suite, passed, failed, signal_quality |
-| `Embedded.ResourceReportGenerated` | Resource utilization report is produced | report_id, flash_usage, ram_usage, stack_depth, power_estimate |
+| `Embedded.FirmwareGenerated` | Firmware source is generated | worker_id, target_mcu, platform, lines_of_code, hal_version |
+| `Embedded.CrossCompileCompleted` | Cross-compilation finishes | build_id, target_arch, outcome, binary_size, ram_estimate, flash_estimate |
+| `Embedded.HardwareProbed` | Hardware is detected and probed | board_id, mcu_type, revision, peripherals_found, firmware_version |
+| `Embedded.FlashCompleted` | Firmware is flashed to device | flash_id, target_device, protocol, duration, verification_status |
+| `Embedded.HILTestCompleted` | Hardware-in-the-loop test run finishes | test_id, test_suite, passed, failed, signal_quality, duration_ms |
+| `Embedded.ResourceReportGenerated` | Resource utilization report is produced | report_id, flash_usage, ram_usage, stack_depth, power_estimate, mips_estimate |
 
 ## Cross-Cutting Concerns
 
@@ -120,6 +142,18 @@ All Embedded domain communication flows through ACF. Hardware test fixtures comm
 | R13 (Design for Failure) | HIL test failures preserve partial results; build failures return complete logs |
 | R14 (Paved Path) | Paved path: generate → cross-compile → test → flash → verify |
 
+## Performance Characteristics
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| Firmware generation (simple peripheral) | < 10 seconds | 30 seconds |
+| Firmware generation (full application) | < 60 seconds | 5 minutes |
+| Cross-compilation (small MCU) | < 30 seconds | 2 minutes |
+| Cross-compilation (large MCU) | < 5 minutes | 15 minutes |
+| Flash firmware (JTAG/SWD) | < 10 seconds | 30 seconds |
+| HIL test execution | < 2 minutes | 10 minutes |
+| Resource analysis report | < 10 seconds | 30 seconds |
+
 ## Related Documents
 
 | Document | Relationship |
@@ -131,7 +165,9 @@ All Embedded domain communication flows through ACF. Hardware test fixtures comm
 | Bible/02-Core/Sou/002-Planner.md | Planner — Sou produces firmware development plans |
 | Bible/02-Core/AGS/000-Overview.md | AGS — FirmwareWorker and BuildCross Genome templates |
 | Bible/02-Core/Academy/000-Overview.md | Academy — Board-support knowledge management |
+| Bible/02-Core/DTS/000-Overview.md | DTS — Firmware quality confidence scoring |
 | Bible/02-Core/ROS/000-Overview.md | ROS — Compute and storage budget for cross-compilation |
+| Bible/06-Services/ACF/000-Overview.md | ACF — Communication for hardware adapter control |
 | Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — Hardware adapter provider interface |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
