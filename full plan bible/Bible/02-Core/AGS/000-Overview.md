@@ -19,6 +19,57 @@ The Agent Genome System (AGS) manages entity templates — Genomes. Every Sessio
 
 AGS creates, validates, composes, signs, and versions Genomes. It does NOT execute Genomes — execution happens when a Session is instantiated from a Genome by the Security Council and Runtime.
 
+## What Is Not a Genome
+
+A Genome is NOT:
+- A Session (a Session is an instantiated Genome with identity and state)
+- A capability (Genomes *contain* capability definitions)
+- A policy (Genomes *reference* policies but do not define them)
+- An identity (Genomes define what an entity CAN be, not what it IS)
+- Executable code (Genomes are constitutional templates, not scripts)
+
+## Genome Lifecycle — AGS View
+
+Genomes follow their own lifecycle within AGS:
+
+```
+Draft → Composed → Validated → Signed → Active → Deprecated → Archived
+```
+
+| State | Description | AGS Component |
+|-------|-------------|---------------|
+| Draft | Genome specification being authored | Registry |
+| Composed | Template + overrides assembled into concrete Genome | Composer (001) |
+| Validated | Genome passes all 5 validation stages | Validator (003) |
+| Signed | Genome cryptographically signed by AGS | Signing (005) |
+| Active | Genome is available for Session instantiation | Registry |
+| Deprecated | Genome may not be used for new Sessions | Version Manager (004) |
+| Archived | Genome removed from active use, retained for audit | Version Manager (004) |
+
+## Genome Creation Flow
+
+```
+1. Genome type selected (Worker, User, Engine, Organization, Mission)
+2. Base template loaded from Registry
+3. Composition: template + overrides → Composed Genome
+4. Validation: 5-stage pipeline (AGS/003)
+5. If validation fails → return to Draft with error report
+6. If validation passes → sign Genome (AGS/005)
+7. Signed Genome registered as Active
+8. Available for Security Council to instantiate Sessions
+```
+
+## AGS Components in Detail
+
+| Component | Primary Function | Input | Output |
+|-----------|-----------------|-------|--------|
+| Genome Registry | Stores and retrieves Genome records | genome_id, query criteria | Genome record, search results |
+| Composer (001) | Composes Genomes from templates and overrides | template_id, overrides | ComposedGenome |
+| Inheritance Manager (002) | Manages parent-child Genome relationships | child_id, parent_id | inheritance chain |
+| Validator (003) | Validates Genomes through 5-stage pipeline | genome_id | ValidationResult |
+| Version Manager (004) | Manages Genome versions and lifecycle states | genome_id, version_delta | new version record |
+| Signing (005) | Cryptographically signs Genomes | genome_id | SignedGenome |
+
 ## AGS Architecture
 
 ```
