@@ -19,58 +19,91 @@ Message durability, delivery guarantees, and dead letter queues. ACF Reliability
 
 ## Durability
 
-| Type | Persistence | Description |
-|------|-------------|-------------|
-| **Persistent** | Written to disk before ack | Survives broker restart |
-| **Volatile** | Memory-only | Lost on broker restart |
+| Type | Persistence | Storage | Survival |
+|------|-------------|---------|----------|
+| **Persistent** | Written to disk before ack | Write-ahead log (WAL) | Broker restart, rack failure |
+| **Volatile** | Memory only | RAM | Broker restart |
 
 ### Persistent Messages
 
-Persistent messages are written to the broker's write-ahead log (WAL) before the sender receives acknowledgment. The WAL is replicated across the Raft cluster. A message is considered durable when it is committed to the WAL on a majority of nodes.
+Persistent messages are written to the broker's write-ahead log (WAL) before the sender receives acknowledgment. The WAL is replicated across the Raft cluster.
+
+WAL characteristics:
+
+| Aspect | Specification |
+|--------|---------------|
+| Storage | SSD/NVMe |
+| Flush interval | 5ms (or every 1000 messages) |
+| Replication | Majority of Raft nodes |
+| Compression | zstd (configurable) |
+| Segments | 64 MB each, auto-rotation |
+
+A message is considered durable when committed to the WAL on a majority of nodes. The sender receives acknowledgment only after durability is confirmed.
 
 ### Volatile Messages
 
-Volatile messages are kept in memory only. They are useful for high-throughput streaming where durability is not required. Volatile messages are lost if the broker restarts.
+Volatile messages are kept in memory. Useful for high-throughput streaming where durability is not required. If the broker restarts, volatile messages are lost.
 
 ## Delivery Retry
 
 ACF retries failed deliveries with exponential backoff:
 
-| Attempt | Backoff | Total Elapsed |
-|---------|---------|---------------|
-| 1 | 100 ms | 100 ms |
-| 2 | 1 s | 1.1 s |
-| 3 | 10 s | 11.1 s |
-| Dead letter | — | 11.1 s+ |
+| Attempt | Backoff | Jitter | Total Elapsed |
+|---------|---------|--------|---------------|
+| 1 | 100 ms | ±20 ms | 100 ms |
+| 2 | 1 s | ±200 ms | 1.1 s |
+| 3 | 10 s | ±2 s | 11.1 s |
+| Dead letter | — | — | 11.1 s+ |
 
 ### Retry Criteria
 
 Delivery is retried when:
-- Receiver does not acknowledge within timeout
-- Receiver returns a retryable error
-- Transport layer error (connection lost, timeout)
+
+- Receiver does not acknowledge within timeout (default 30s)
+- Receiver returns a retryable error (error code 5xx range)
+- Transport layer error (connection lost, TLS handshake failure, timeout)
 
 ### Non-Retryable Failures
 
 Delivery is NOT retried when:
-- Receiver returns a permanent error (invalid message, unauthorized)
+
+- Receiver returns a permanent error (4xx: invalid message, unauthorized)
 - Message TTL has expired
-- Maximum retry attempts reached
+- Maximum retry attempts reached (configurable, default 3)
+- Target entity does not exist (entity deleted before delivery)
+- Payload schema violation (receiver cannot parse the message)
+
+### Retry Policy Configuration
+
+```
+RetryPolicy {
+  max_attempts: int,              // default 3
+  initial_backoff_ms: int,        // default 100
+  backoff_multiplier: float,      // default 10.0
+  max_backoff_ms: int,            // default 10000
+  jitter_ms: int,                 // default 0.2 * backoff
+  retryable_errors: string[],     // error codes that trigger retry
+  timeout_ms: int                 // per-attempt timeout, default 30000
+}
+```
 
 ## Dead Letter Queue
 
-The dead letter queue (DLQ) stores undeliverable messages with failure metadata:
+The dead letter queue (DLQ) stores undeliverable messages with full failure metadata.
 
-### DLQ Message Schema
+### DLQ Message
 
 ```
 DeadLetterMessage {
   original_message: Message,
+  original_envelope: Envelope,
   failures: DeliveryFailure[],
   first_failed_at: timestamp,
   last_failed_at: timestamp,
   retry_count: int,
-  dead_letter_reason: string
+  dead_letter_reason: string,
+  dead_lettered_at: timestamp,
+  dead_lettered_by: string       // component that dead-lettered
 }
 
 DeliveryFailure {
@@ -78,62 +111,77 @@ DeliveryFailure {
   endpoint: Address,
   error: string,
   error_code: string,
-  timestamp: timestamp
+  timestamp: timestamp,
+  latency_ms: int
 }
 ```
 
 ### DLQ Operations
 
 ```
-configureRetry(topic, retry_policy) → void
+configureRetry(topic_pattern, retry_policy) → void
 getRetryStatus(message_id) → RetryStatus
 getDeadLetterMessages(filter?) → DeadLetterMessage[]
-replayDeadLetter(dlq_message_id) → void
+replayDeadLetter(dlq_message_id, new_target?) → message_id
+replayAllDeadLetter(filter?) → replayed_count
 purgeDeadLetter(filter?) → purged_count
 getDeadLetterStats() → DLQStats
+getDeadLetterMessage(dlq_message_id) → DeadLetterMessage
 ```
 
 ### DLQ Retention
 
-| Default TTL | Maximum TTL | Review Required |
-|-------------|-------------|-----------------|
-| 7 days | 30 days | Security Council |
+| Default TTL | Maximum TTL | After TTL |
+|-------------|-------------|-----------|
+| 7 days | 30 days | Archived (cold storage, 7 years) |
 
-After TTL expires, the dead letter message is archived. Archived DLQ messages are preserved for audit (7 years). The Security Council reviews all DLQ messages weekly.
+### DLQ Review
+
+The Security Council reviews all DLQ messages weekly:
+
+| Review Criteria | Action |
+|----------------|--------|
+| Message can be replayed | Replay to corrected target |
+| Target permanently unavailable | Archive message, notify sender |
+| Malicious message | Escalate to security investigation |
+| Configuration error | Fix config, replay batch |
 
 ## Reliability Targets
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| Delivery rate | 99.99% | Messages delivered / messages sent |
-| Median latency | <100 ms | P50 delivery time |
-| p99 latency | <1 s | P99 delivery time |
-| Durability | 99.9999% | Persistent messages acknowledged |
-| DLQ rate | <0.1% | Messages in DLQ / total messages |
+| Metric | Target | Measurement Period |
+|--------|--------|-------------------|
+| Delivery rate | 99.99% | Rolling 30 days |
+| Median latency | <100ms | Rolling 1 hour |
+| p99 latency | <1s | Rolling 1 hour |
+| Durability (persistent) | 99.9999% | Per message |
+| DLQ rate | <0.1% of total messages | Rolling 7 days |
+| Downtime | <52 minutes/year | Annual |
 
-## Reliability Operations
-
-```
-configureRetry(topic_pattern, retry_policy) → void
-getRetryStatus(message_id) → RetryStatus
-getDeadLetterMessages(filter?) → DeadLetterMessage[]
-replayDeadLetter(dlq_message_id) → void
-purgeDeadLetter(filter?) → purged_count
-getReliabilityMetrics() → ReliabilityMetrics
-```
-
-## ACF Reliability Events
+## Reliability Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `ACF.RetryPolicyConfigured` | Retry policy is set | topic, max_retries, backoff, timeout |
-| `ACF.DeliveryAttempted` | A delivery attempt is made | message_id, attempt, endpoint, result |
-| `ACF.DeliverySucceeded` | Delivery succeeds | message_id, attempt, ack_time |
-| `ACF.DeliveryFailed` | Delivery fails (retryable) | message_id, attempt, error, next_retry |
-| `ACF.MessageDeadLettered` | Message sent to DLQ | message_id, reason, attempts, original_target |
-| `ACF.DLQReplayed` | DLQ message is replayed | dlq_message_id, new_message_id, target |
-| `ACF.DLQPurged` | DLQ messages are purged | count, filter, reason |
-| `ACF.ReliabilityThresholdBreached` | A reliability target is missed | metric, actual, target, time_range |
+| `ACF.RetryPolicyConfigured` | Retry policy set | topic_pattern, max_retries, backoff_strategy |
+| `ACF.DeliveryAttempted` | Delivery attempt made | message_id, attempt, endpoint, result, latency_ms |
+| `ACF.DeliverySucceeded` | Delivery succeeds | message_id, attempt, ack_time, total_latency_ms |
+| `ACF.DeliveryFailed` | Delivery fails (retryable) | message_id, attempt, error, error_code, next_retry_at |
+| `ACF.MessageDeadLettered` | Message sent to DLQ | message_id, reason, attempts, original_target, dlq_location |
+| `ACF.DLQReplayed` | DLQ message replayed | dlq_message_id, new_message_id, replayed_by, new_target |
+| `ACF.DLQPurged` | DLQ messages purged | count, oldest_message_age, reason |
+| `ACF.ReliabilityThresholdBreached` | Target missed | metric_name, actual_value, target_value, time_range |
+| `ACF.DLQReviewed` | DLQ review completed | reviewed_by, messages_reviewed, actions_taken |
+
+## Error Codes
+
+| Code | Condition | Description |
+|------|-----------|-------------|
+| ACF-RL-001 | MaxRetriesExceeded | Message exceeded retry attempts |
+| ACF-RL-002 | TTLExpired | Message expired before delivery |
+| ACF-RL-003 | TargetUnavailable | Target entity is unavailable |
+| ACF-RL-004 | DeadLetterNotFound | DLQ message not found |
+| ACF-RL-005 | ReplayFailed | DLQ replay encountered error |
+| ACF-RL-006 | PurgeFailed | DLQ purge encountered error |
+| ACF-RL-007 | InvalidRetryPolicy | Retry policy configuration invalid |
 
 ## Cross-Cutting Concerns
 
