@@ -177,11 +177,25 @@ Capability bounds are not just permissions — they include resource consumption
 
 **Verification precedes execution for every action. No execution without verification.**
 
-Every action, before it is executed, must pass through the Security Kernel verification pipeline: Identity Check → Authentication → Authorization → Policy Evaluation → Capability Check → Risk Assessment → Execution Authorization. No action may skip any stage.
+Every action, before it is executed, must pass through the Security Kernel verification pipeline in order:
 
-*Rationale*: Execute-first, verify-later would allow damage before detection. Verification-first guarantees every action is authorized before it affects the system.
+1. Identity Check — Who is requesting?
+2. Authentication — Can they prove it?
+3. Authorization — Are they allowed to do this?
+4. Policy Evaluation — Does this comply with active policies?
+5. Capability Check — Do they have the capability?
+6. Risk Assessment — What is the risk level?
+7. Execution Authorization — Grant or deny.
 
-*Violation*: A Worker executing a resource allocation without a verified authorization token.
+No action may skip any stage. The pipeline is linear, sequential, and mandatory. Every stage produces evidence. A denial at any stage prevents execution entirely.
+
+*Rationale*: Execute-first, verify-later would allow damage before detection. Verification-first guarantees every action is authorized before it affects the system. This is the foundation of the zero-trust architecture.
+
+*Constitutional Expression*: Article IV, Part A (Security Principles) establishes the constitutional framework for verification. Article IV, Part B, Section 009 (Execution Authorization) defines the authorization stage specifically. The Security Kernel is the constitutional institution that enforces this pipeline.
+
+*Enforcement*: The Security Kernel refuses to issue execution tokens without a complete verification pipeline. Runtimes refuse to execute without a valid Execution Authorization token. Any action executed without a token is treated as a security breach and triggers immediate containment.
+
+*Violation*: A Worker executing a resource allocation without a verified authorization token. An action that skips Risk Assessment and proceeds directly to execution. A verified entity acting without going through Authorization.
 
 ---
 
