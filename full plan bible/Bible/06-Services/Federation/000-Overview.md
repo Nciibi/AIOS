@@ -62,6 +62,64 @@ Each AIOS instance is fully autonomous. No instance controls another. Instances 
 | CXP | Communication Exchange Protocol | ACF inter-instance bridge management | 011-CXP.md |
 | IXP | Identity Exchange Protocol | Cross-instance identity resolution | 012-IXP.md |
 
+## Protocol Dependency Graph
+
+Protocols depend on lower-layer protocols. CXP (bridge) and IXP (identity) are foundational.
+
+```
+        CXP (bridge)         IXP (identity)
+            │                     │
+            └─────────┬───────────┘
+                      │
+                 PXP (discovery)
+                      │
+         ┌────────────┼────────────┐
+         │            │            │
+        AIP          OXP          SXP
+      (agent)    (org partner)  (security)
+         │            │
+         ├──── RXP ───┤
+         │  (resource)│
+         │            │
+         ├──── MXP ───┤
+         │ (mission)  │
+         │            │
+         ├──── KXP ───┤
+         │(knowledge) │
+         │            │
+         ├──── GXP ───┤
+         │ (genome)   │
+         │            │
+         ├──── EXP ───┤
+         │(evidence)  │
+         │            │
+         └──── TXP ───┘
+           (trading)
+```
+
+## Trust Levels
+
+Trust between instances is established through IXP and evolves through OXP partnerships:
+
+| Level | Name | Requirements | Permissions |
+|-------|------|-------------|-------------|
+| T0 | Unknown | None | CXP handshake only |
+| T1 | Verified | Identity verified via IXP | AIP, PXP |
+| T2 | Partner | Active OXP partnership | RXP, MXP, KXP |
+| T3 | Trusted | 90+ days without incident | GXP, EXP, SXP |
+| T4 | Allied | Joint governance agreement | TXP, full trust |
+
+## Federation Events
+
+| Event Type | Produced When | Fields |
+|-----------|--------------|--------|
+| FED.InstanceDiscovered | New instance found via PXP | instance_id, trust_level, services |
+| FED.BridgeEstablished | CXP bridge created | instance_id, bridge_id, config |
+| FED.BridgeFailed | Bridge connection lost | instance_id, reason |
+| FED.TrustLevelChanged | Instance trust level changes | instance_id, old_level, new_level |
+| FED.PartnershipActivated | OXP partnership activated | instance_id, partnership_id, terms |
+| FED.ProtocolVersionNegotiated | Protocol version agreed | protocol, instance_a_version, instance_b_version, negotiated |
+
 ## Federation Invariants
 
 Stable identifiers: FED-001 through FED-005.
@@ -90,13 +148,32 @@ Federation protocols have versioned lifecycles. Instances may discover and negot
 ### Capability Bounds
 Instances advertise their capabilities through PXP. Federation operations are bounded by advertised capacity.
 
+### Security
+All federation protocols use mTLS with CSP encryption. Mutual authentication is mandatory. Rate limiting and audit logging are enabled by default. Trust levels gate protocol access; T0 instances can only perform CXP handshake.
+
+### Evidence
+Every cross-instance operation produces evidence in both source and destination instances. Events are linked through correlation IDs. Each instance maintains independent evidence chains; cross-instance evidence is verifiable through EXP.
+
+### Lifecycle
+Federation protocols have versioned lifecycles. Instances may discover and negotiate protocol versions through CXP. Protocol version mismatch results in negotiation failure; instances must agree on a mutually supported version range.
+
+### Capability Bounds
+Instances advertise their capabilities through PXP. Federation operations are bounded by advertised capacity and trust level. An instance at T1 cannot request T3-gated operations.
+
+### Communication
+All federation traffic flows through CXP bridges. Traffic is encrypted (mTLS + CSP), authenticated, and rate-limited. ACF message routing handles multi-hop federation through intermediary instances.
+
 ### Design DNA Compliance
 | Rule | Compliance |
 |------|------------|
-| R1 | Each protocol does exactly one thing. |
-| R10 | Simple request-response pattern across all protocols. |
-| R13 | Bridge failure → graceful degradation, no cascading failure. |
-| R14 | Each operation has exactly one paved path through its protocol. |
+| R1 | Each protocol does exactly one thing. No protocol overlaps. |
+| R2 | Dependency order: CXP→IXP→PXP→(AIP,OXP,SXP)→(RXP,MXP,KXP,GXP,EXP,TXP). |
+| R3 | Protocol specifications defined once in their respective documents. |
+| R4 | Federation connections built by CXP; protocols receive established bridges. |
+| R9 | All protocol operations deterministic given identical inputs. |
+| R10 | Simple request-response pattern across all 12 protocols. |
+| R13 | Bridge failure → graceful degradation, no cascading failure across protocols. |
+| R14 | Each operation has exactly one paved path through its protocol. No alternatives. |
 
 ## Related Documents
 
@@ -105,3 +182,6 @@ Instances advertise their capabilities through PXP. Federation operations are bo
 | 06-Services/ACF/007-Distributed.md | ACF inter-instance bridge is the transport layer for federation |
 | 04-Execution/Security/IDS/004-Federation.md | Identity federation for cross-instance identity |
 | 06-Services/Cryptography/000-CSP.md | CSP provides encryption and signing for federation messages |
+| 06-Services/Cryptography/001-CAM.md | CAM provides certificates for mTLS bridge authentication |
+| 00-Foundations/001-AIOS-Philosophy.md — PHI-004, PHI-005 | Identity precedes action, verification-first applied across instances |
+| 00-Foundations/003-Core-Principles.md — CPR-004, CPR-010 | Evidence immutability and privacy across instance boundaries |
