@@ -38,14 +38,14 @@ Governance contains 7 documents:
 │                    Governance Architecture                       │
 │  ┌────────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
 │  │   CLS      │  │   DGP    │  │   CRP    │  │   ADG    │   │
-│  │(Constitutn)│─►│ (Decisn  │─►│ (Change  │─►│ (Arch    │   │
+│  │(Constituti)│─►│ (Decisio │─►│ (Change  │─►│ (Arch    │   │
 │  │ Lifecycle  │  │  Gateway)│  │ Request  │  │ Decision)│   │
 │  └────────────┘  └──────────┘  └──────────┘  └──────────┘   │
 │       │                                                       │
 │       ▼                                                       │
 │  ┌────────────┐  ┌──────────┐                                 │
 │  │   CKR      │  │   AKM    │                                 │
-│  │(Knowledge  │  │(Autonom. │                                 │
+│  │(Knowledge  │  │(Autonomo │                                 │
 │  │ Repository)│  │ Knowledge│                                 │
 │  └────────────┘  └──────────┘                                 │
 └──────────────────────────────────────────────────────────────┘
@@ -63,8 +63,10 @@ Governance contains 7 documents:
 
 ## Invariants
 
-1. **Constitutional Grounding**: Every governance process is derived from the Constitution. No governance process may contradict a Constitutional Law.
-2. **Amendability**: The Constitution may be amended only through the CLS process (RFC with Security Council + Sou approval). No other process may modify the Constitution.
-3. **Evidence-Captured**: Every governance decision produces at least one Event. Decisions without evidence are not valid.
-4. **Deterministic Process**: Given the same inputs, governance processes always produce the same outputs. Process steps are defined, not discretionary.
-5. **Separation of Powers**: The entity that proposes a change (CRP) is separate from the entity that approves it (Security Council) and the entity that implements it (Implementation teams). No entity may perform more than one role in the same governance process.
+Stable identifiers: GOV-001 through GOV-005.
+
+1. **GOV-001 — Constitutional Grounding**: Every governance process is derived from the Constitution. No governance process may contradict a Constitutional Law.
+2. **GOV-002 — Amendability**: The Constitution may be amended only through the CLS process (RFC with Security Council + Sou approval). No other process may modify the Constitution.
+3. **GOV-003 — Evidence-Captured**: Every governance decision produces at least one Event. Decisions without evidence are not valid.
+4. **GOV-004 — Deterministic Process**: Given the same inputs, governance processes always produce the same outputs. Process steps are defined, not discretionary.
+5. **GOV-005 — Separation of Powers**: The entity that proposes a change (CRP) is separate from the entity that approves it (Security Council) and the entity that implements it (Implementation teams). No entity may perform more than one role in the same governance process.
