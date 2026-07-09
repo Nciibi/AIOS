@@ -120,6 +120,55 @@ Output: KeyRotationResult { old_key_id, new_key_id, rotated_at }
 Event: AGS.SigningKeyRotated
 ```
 
+## Salt Generation
+
+The salt is generated per-genome at signing time:
+
+| Property | Value |
+|----------|-------|
+| Algorithm | HSM random number generator (FIPS 140-2 compliant) |
+| Length | 64 bytes |
+| Uniqueness | No two Genomes may have the same salt |
+| Storage | Stored alongside Genome in Registry (not in the signature) |
+| Verification | Salt is loaded from Registry during verification |
+
+The salt ensures that two identical Genomes produce different signatures. This prevents signature replay attacks and provides non-repudiation.
+
+## Signature Schema
+
+The signed Genome record contains:
+
+```json
+{
+  "genome_id": "wkr-001-v2",
+  "genome": { ... },
+  "signing_metadata": {
+    "salt": "a1b2c3d4...64bytes...",
+    "hash": "e5f6a7b8...64hex...",
+    "signature": "3045022100...DER...",
+    "public_key_id": "ags-key-2026-q2",
+    "algorithm": "ECDSA-P256",
+    "signed_at": "2026-07-09T12:00:00Z",
+    "signed_by": "AGS-HSM-01"
+  }
+}
+```
+
+## Key Rotation Process
+
+AGS signing keys are rotated every 90 days or immediately on compromise:
+
+```
+1. Security Council notifies AGS of key rotation (scheduled or compromise)
+2. HSM generates new ECDSA P-256 key pair
+3. New public key registered with IDS
+4. Old public key set to "retired" status (not used for new signatures)
+5. If compromise: All Genomes MUST be re-signed with new key
+6. If scheduled rotation: New Genomes use new key, old Genomes retain old key
+7. Old public key retained for verification of existing signatures
+8. Verification uses the public_key_id stored in the Genome's signature metadata
+```
+
 ## Signature Verification for Session Instantiation
 
 The flow from signed Genome to Session instantiation:
