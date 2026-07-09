@@ -107,9 +107,15 @@ No entity — Sou, Academy, OSYS, Security Kernel, Organization, Worker, Runtime
 
 Every strategic decision (Sou), every resource allocation (ROS), every authorization (Security Kernel), every execution (Worker), every lifecycle transition (OSYS) produces an evidence record containing: what was decided, by whom, on what basis, with what authorization, at what time, with what outcome.
 
-*Rationale*: Without evidence, the system cannot be audited, cannot learn from mistakes, cannot be trusted. Evidence is the foundation of accountability.
+Evidence must be tamper-evident, immutable after recording, and traceable to the producing entity's identity. Evidence is not optional. There is no mode in which decisions are not recorded.
 
-*Violation*: A Worker completing a Mission without recording what actions it took.
+*Rationale*: Without evidence, the system cannot be audited, cannot learn from mistakes, cannot be trusted. Evidence is the foundation of accountability. An invisible decision is indistinguishable from a decision that never happened.
+
+*Constitutional Expression*: Article IV, Part B, Section 011 (Audit and Evidence) defines the constitutional framework for evidence collection, storage, and retention. The Evidence System (EVS) and Audit System (AUS) implement this law as Shared Infrastructure.
+
+*Enforcement*: The Security Kernel refuses to authorize any action whose evidence record is not pre-declared. ACF enforces evidence delivery — every message through ACF is automatically logged. The Evidence System validates evidence completeness before allowing the next action in a workflow.
+
+*Violation*: A Worker completing a Mission without recording what actions it took. An authorization decision that does not produce an evidence record. A lifecycle transition that proceeds without logging the state change.
 
 ---
 
