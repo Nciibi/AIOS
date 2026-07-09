@@ -51,7 +51,32 @@ The canonical transition function is:
 δ(current_state, event) → next_state
 ```
 
-This function is deterministic (R9): given the same current state and the same event, it always produces the same next state. The function is defined by the transition table. If no transition exists for the given (current, event) pair, δ returns an error — the transition is invalid.
+This function is deterministic (R9): given the same current state and the same event, it always produces the same next state. The function is defined by the transition table. If no transition exists for the given (current, event) pair, δ returns an error.
+
+### State Definition
+
+```
+State {
+  name: string,
+  type: initial | normal | terminal,
+  capabilities: string[],    // capabilities available in this state
+  metadata: map<string, any>
+}
+```
+
+### Transition Definition
+
+```
+Transition {
+  id: string,
+  from: string,           // source state
+  to: string,             // target state
+  event: string,          // triggering event
+  guards: string[],       // guard function IDs
+  actions: string[],      // action function IDs
+  metadata: map<string, any>
+}
+```
 
 ## State Machine Operations
 
@@ -59,65 +84,143 @@ This function is deterministic (R9): given the same current state and the same e
 defineMachine(definition) → machine_id
 getMachine(machine_id) → MachineDefinition
 getValidTransitions(state) → Transition[]
-executeTransition(entity_id, event) → Result
+executeTransition(entity_id, event, context) → Result
 getMachineVersion(machine_id) → int
-listMachines() → MachineDefinition[]
+listMachines(filter?) → MachineDefinition[]
+deleteMachine(machine_id) → void
 ```
+
+### executeTransition
+
+The heart of the engine. Steps:
+
+1. Load entity's current state
+2. Find transition matching (current_state, event)
+3. If no transition exists, return InvalidTransition error
+4. Evaluate all guards sequentially
+5. If any guard fails, return GuardFailed error with guard name
+6. Execute all actions sequentially
+7. If an action fails, roll back executed actions
+8. Commit new state
+9. Return success with new state
+
+### Guard Evaluation
+
+Each guard receives:
+
+```
+GuardInput {
+  entity_id: UUID,
+  current_state: string,
+  event: string,
+  context: ExecutionContext,    // includes requesting entity
+  machine: MachineDefinition
+}
+```
+
+Guards return `{allowed: bool, reason: string, code: string}`.
 
 ## Versioning
 
-State machines are versioned. Changing a machine definition creates a new version. Entities continue to operate under the version of the machine definition they started with. Version increment occurs when: states are added or removed, transitions are added or removed, guard conditions change, or action definitions change.
+State machines are versioned. Changing a machine definition creates a new version. Entities continue under the version they started with.
 
-Versioning ensures that existing entities are not disrupted by definition changes. Migration to a new version is optional and entity-driven. LMS may initiate migration when safe.
+### Version Increment Triggers
+
+| Change | Version Impact | Migration Required? |
+|--------|---------------|---------------------|
+| Add new state | Major | Optional |
+| Remove state | Major | Required |
+| Add transition | Minor | None |
+| Remove transition | Major | Required |
+| Change guard | Minor | None |
+| Change action | Minor | None |
+| Add terminal state | Major | Required |
+
+### Migration Process
 
 ```
-Version 1: [Created → Planned → Running → Completed]
-Version 2: [Created → Planned → Assigned → Running → Completed]
-           Entities on v1 stay on v1 until migrated
+1. New machine version is published
+2. Entities are notified of available upgrade
+3. Entity owner initiates migration at safe point
+4. Migration replays entity history through new machine
+5. If valid, entity is upgraded to new version
+6. Migration produces MigrationEvent
 ```
 
 ## Determinism Guarantees
 
 The State Machine Engine enforces determinism at every level:
 
-- Same input state + same event → same output state (transition function)
+- Same input state + same event → same output state
 - Same machine definition → same behavior across instances
 - Same guard evaluation → same authorization result
 - Same action execution → same side effects
 
-Determinism is verified by contract tests. Every machine definition includes a set of deterministic test vectors.
+### Guard Determinism
+
+Guards must be pure functions — they cannot have side effects, cannot depend on external state, and must be reproducible. Guard inputs include all context needed to make a deterministic decision.
+
+### Action Determinism
+
+Actions may have side effects (that is their purpose), but they must be idempotent. Executing an action twice must produce the same final state as executing it once.
 
 ## Guards and Actions
 
-### Guards
+### Guard Types
 
-Guards are predicate functions that evaluate whether a transition is allowed. Each guard receives the current entity state, the requested event, and the requesting entity's identity. Guards return allow or deny. All guards for a transition must pass for the transition to execute.
+| Guard Type | Purpose | Evaluation |
+|-----------|---------|------------|
+| AuthorizationGuard | Who may trigger the transition | Match requester against allowlist |
+| PreconditionGuard | Conditions that must be true | Evaluate predicate |
+| StateGuard | Entity must be in valid state | Verify current state |
+| ResourceGuard | Resources must be available | Query resource system |
+| TimeGuard | Time-based constraints | Evaluate time condition |
 
-Guard types:
-- **Authorization guards**: Does the requester have authority for this transition?
-- **Precondition guards**: Are the preconditions for this transition met?
-- **State guards**: Is the entity in a valid state for this transition?
-- **Resource guards**: Are sufficient resources available for the target state?
+### Action Types
 
-### Actions
-
-Actions are side-effect functions triggered after a successful transition. Actions execute in the order defined by the machine definition. Action failure causes the transition to roll back.
-
-Action types:
-- **Event production**: Generate a StateChanged Event
-- **Notification**: Notify relevant entities of the state change
-- **Resource management**: Freeze or release resources
-- **Cascading transitions**: Trigger child entity transitions
+| Action Type | Purpose | Idempotent? |
+|------------|---------|-------------|
+| EventAction | Produce Event | Yes |
+| NotificationAction | Notify entities | Yes |
+| ResourceAction | Freeze/release resources | Yes |
+| CascadeAction | Trigger child transitions | Yes (with idempotency) |
+| LogAction | Write to audit log | Yes |
 
 ## State Machine Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `SM.MachineDefined` | A new machine is registered | machine_id, version, states_count, transitions_count |
-| `SM.MachineVersioned` | A machine definition is updated | machine_id, old_version, new_version, changelog |
-| `SM.TransitionExecuted` | A transition completes | machine_id, entity_id, event, from_state, to_state |
-| `SM.TransitionFailed` | A transition is rejected by a guard | machine_id, entity_id, event, guard_name, reason |
-| `SM.GuardEvaluated` | A guard is evaluated (for audit) | machine_id, entity_id, guard_name, result |
+| `SM.MachineDefined` | New machine registered | machine_id, version, machine_type, states, transitions |
+| `SM.MachineVersioned` | Machine definition updated | machine_id, old_version, new_version, changes |
+| `SM.MachineDeleted` | Machine definition removed | machine_id, version, entities_affected |
+| `SM.TransitionExecuted` | Transition completes | machine_id, entity_id, event, from_state, to_state, duration_ns |
+| `SM.TransitionFailed` | Transition rejected | machine_id, entity_id, event, guard_name, reason, error_code |
+| `SM.GuardEvaluated` | Guard evaluated (audit) | machine_id, entity_id, guard_name, result, duration_ns |
+| `SM.ActionExecuted` | Action completed | machine_id, entity_id, action_name, result |
+| `SM.MigrationCompleted` | Entity migrated to new version | entity_id, old_version, new_version, transition_count |
+
+## Configuration Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| max_guards_per_transition | 10 | Maximum guards per transition |
+| max_actions_per_transition | 10 | Maximum actions per transition |
+| action_timeout_ms | 5000 | Timeout for action execution |
+| max_states | 50 | Maximum states per machine |
+| max_transitions | 200 | Maximum transitions per machine |
+
+## Error Codes
+
+| Code | Condition | Description |
+|------|-----------|-------------|
+| SM-001 | MachineNotFound | No machine with the given ID |
+| SM-002 | InvalidState | State is not defined in the machine |
+| SM-003 | InvalidTransition | No transition for (current, event) |
+| SM-004 | GuardFailed | A guard rejected the transition |
+| SM-005 | ActionFailed | An action execution failed (rolled back) |
+| SM-006 | TerminalState | Entity is in a terminal state |
+| SM-007 | VersionConflict | Concurrent machine modification detected |
+| SM-008 | EntityNotInMachine | Entity is not registered with this machine |
 
 ## Cross-Cutting Concerns
 
