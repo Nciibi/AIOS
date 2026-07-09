@@ -121,8 +121,8 @@ Forward transitions are standard operations. Backward transitions are exceptiona
 | Entity | Forward Examples | Backward Examples | Terminal |
 |--------|-----------------|-------------------|----------|
 | Session | Created → Active → Completed | Active → Paused (authorized), Paused → Active (authorized) | Destroyed |
-| Mission | Active → Completed | Active → Paused (authorized only), Completed → Active (never) | Completed, Failed, Abandoned |
-| Organization | Draft → Active | Active → Draft (never), Active → Suspended → Active (authorized) | Dissolved |
+| Mission | Created → Running → Completed | Running → Paused (authorized only), Completed → Running (never) | Archived |
+| Organization | Draft → Active | Active → Suspended → Active (authorized) | Dissolved |
 | Identity | Created → Active → Retired | Active → Suspended → Active (authorized) | Retired |
 
 *Edge Case*: A backward transition that would violate the entity's constitutional integrity (e.g., reactivating a dissolved Organization) — the transition is denied. Dissolution is a terminal state. A new Organization must be formed.
