@@ -19,6 +19,61 @@ The Organization System (OSYS) manages Organization entities — their creation,
 
 OSYS is the administrative backbone of AIOS. Every Worker, every Mission, and every resource belongs to an Organization. Without OSYS, there is no structure — only disconnected entities.
 
+## What Is an Organization?
+
+An Organization is a constitutional entity that:
+- Owns and manages Missions (work units)
+- Employs Workers (executing entities)
+- Manages resource budgets (via ROS)
+- Governs member entities through policies and oversight
+- Has a defined lifecycle (OSYS/002-Org-Lifecycle.md)
+- Has a unique identity (assigned by IDS)
+- Has a Genome that defines its capabilities (via AGS)
+
+Organizations form a hierarchy — each Organization (except root) has a parent Organization. Sub-Organizations (departments) inherit the parent's constitutional authority but may have independent policies.
+
+## What OSYS Does
+
+| Function | Description | Document |
+|----------|-------------|----------|
+| Create Organizations | Validate requests, assign identities, register | OSYS/001-Architecture.md |
+| Manage Lifecycle | Transition Organizations through constitutional states | OSYS/002-Org-Lifecycle.md |
+| Manage Departments | Create, restructure, and dissolve sub-Organizations | OSYS/001-Architecture.md |
+| Enforce Governance | Audit compliance, report violations | OSYS/001-Architecture.md |
+| Maintain Registry | Store and query Organization records | OSYS/001-Architecture.md |
+
+## What OSYS Does Not Do
+
+OSYS does NOT:
+- Run missions (Workers execute missions under Organization ownership)
+- Allocate resources (ROS manages resource allocation)
+- Make strategic decisions (Sou proposes strategy)
+- Authenticate entities (ATS handles authentication)
+- Learn from outcomes (Sou Learning and Academy learn)
+
+## Organization Types
+
+| Type | Description | Genome Source |
+|------|-------------|---------------|
+| ORG | Root Organization | AGS: Organization/ORG |
+| ODS | Department/Squad | AGS: Organization/ODS |
+| OHS | Hub/Shared Service | AGS: Organization/OHS |
+| OOM | Operational Oversight | AGS: Organization/OOM |
+| OPE | Project/Program Entity | AGS: Organization/OPE |
+| EEE | Engine Execution Environment | AGS: Organization/EEE |
+| OIS | Isolation/Sandbox | AGS: Organization/OIS |
+| DOM | Domain Organization | AGS: Organization/DOM |
+
+## Organization Hierarchy Rules
+
+| Rule | Description |
+|------|-------------|
+| Single Parent | Every Organization has exactly one parent (except root) |
+| Tree Structure | Organization hierarchy is a tree — no cycles |
+| Depth Limit | Maximum 7 levels from root to deepest leaf |
+| Parent Scope | Parent defines policy bounds for children |
+| Resource Flow | Resources flow from parent to child |
+
 ## OSYS Architecture
 
 ```
