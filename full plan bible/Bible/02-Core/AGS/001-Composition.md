@@ -41,6 +41,48 @@ Composed Genome (concrete, validated, signable)
 | Overridden Traits | Composition request | Explicit overrides provided at composition time |
 | Composed Genome | Composition result | The complete, validated Genome ready for signing |
 
+## Genome Schema for Composition
+
+A Genome at composition time has this schema:
+
+| Field | Type | Composed From |
+|-------|------|---------------|
+| genome_id | UUID | Assigned by AGS |
+| base_type | enum | Base Genome (Worker, User, Engine, Organization, Mission) |
+| template_id | UUID | Source template reference |
+| capabilities | Capability[] | Inherited from parent, possibly restricted by overrides |
+| capability_bounds | Bound[] | Inherited from parent, possibly restricted by overrides |
+| policies | PolicyRef[] | Inherited from parent, possibly overridden |
+| constraints | Constraint[] | Inherited from parent (cannot be overridden for constitutional traits) |
+| inheritance_chain | UUID[] | Complete path from base to current |
+| overrides_applied | Override[] | Record of all overrides applied during composition |
+| provenance | Provenance | Creator, timestamp, authorization proof |
+
+## Composition Example
+
+Base Worker Genome (Worker type):
+```
+capabilities: [communicate, execute, report]
+capability_bounds: { max_concurrent: 5, max_duration: 3600s }
+policies: [default_security, default_privacy]
+```
+
+Request: Compose WOM (Worker Operation Manager) with override:
+```
+overrides: {
+  capability_bounds: { max_concurrent: 3 }  // restricted from 5
+}
+```
+
+Result (Composed WOM Genome):
+```
+capabilities: [communicate, execute, report]
+capability_bounds: { max_concurrent: 3, max_duration: 3600s }  // max_concurrent restricted
+policies: [default_security, default_privacy, wom_policy]
+```
+
+The override `max_concurrent: 3` is valid because it restricts (3 < 5). An override of `max_concurrent: 10` would be invalid because it expands (10 > 5).
+
 ## Composition Rules
 
 ### Rule 1 — Override Must Not Expand
