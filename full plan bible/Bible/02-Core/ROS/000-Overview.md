@@ -73,6 +73,73 @@ Stable identifiers: ROS-001 through ROS-005.
 | 013 | Observability | Metrics, monitoring, alerting | 14 |
 | 014 | RXP | Resource Exchange Protocol for cross-instance sharing | 15 |
 
+## ROS in the Verification Pipeline
+
+ROS participates in Stage 7 (Execution Authorization) of the 7-stage verification pipeline:
+
+| Stage | Name | ROS Role |
+|-------|------|----------|
+| 1 | Identity Verification | None (handled by IDS) |
+| 2 | Authentication | None (handled by ATS) |
+| 3 | Authorization | None (handled by AZS) |
+| 4 | Policy Evaluation | RMP policies (007-RMP) are evaluated here but applied by ROS |
+| 5 | Capability Check | ROS checks capability resource bounds |
+| 6 | Risk Assessment | None (handled by Risk Engine) |
+| 7 | Execution Authorization | ROS reserves resources (009-Reservation) and issues execution token |
+
+If ROS cannot confirm resource availability at Stage 7, the execution is denied. This is a fail-closed behavior per R13.
+
+## Resource Lifecycle
+
+Every resource in ROS follows a defined lifecycle:
+
+```
+Available ──→ Reserved ──→ Allocated ──→ Consumed ──→ Released
+    │            │              │              │
+    │            ▼              ▼              ▼
+    │         Expired       Preempted       Failed
+    │            │              │              │
+    └────────────┴──────────────┴──────────────┘
+                  (returned to available pool)
+```
+
+| State | Description | Transitions |
+|-------|-------------|-------------|
+| Available | Resource is in the provider pool, unassigned | → Reserved |
+| Reserved | Resource is held for a specific entity (time-bound) | → Allocated, → Expired, → Available |
+| Allocated | Resource is assigned to an entity for active use | → Consumed, → Preempted |
+| Consumed | Resource has been used and released normally | → Available |
+| Released | Resource returned to pool after use | → Available |
+| Expired | Reservation TTL expired without consumption | → Available |
+| Preempted | Allocation terminated for higher-priority use | → Available |
+| Failed | Resource released due to error or crash | → Available |
+
+## Resource Conflicts
+
+Resource conflicts occur when demand exceeds supply. ROS resolves conflicts using a deterministic hierarchy:
+
+| Conflict Type | Resolution | Document |
+|---------------|-----------|----------|
+| Budget exhaustion vs demand | Deny allocation, produce BudgetExhausted Event | 005-Budget |
+| Quota limit vs request | Deny allocation, produce QuotaViolated Event | 006-Quota |
+| Provider capacity vs demand | Preempt lower-priority allocations | 003-Allocator |
+| Cross-entity priority conflict | Higher priority entity gets resources first | 003-Allocator |
+| Reservation vs allocation | Reservations take priority over new allocations | 009-Reservation |
+
+## Performance Characteristics
+
+ROS is designed for predictable performance under load:
+
+| Operation | Latency Target | Throughput | Consistency |
+|-----------|---------------|------------|-------------|
+| Resource allocation | < 50 ms | 10,000/s | Strong (active node) |
+| Budget query | < 10 ms | 100,000/s | Eventual (read replica) |
+| Provider registration | < 100 ms | 100/s | Strong |
+| Heartbeat processing | < 5 ms | 10,000/s | Strong |
+| Quota check | < 10 ms | 10,000/s | Strong (active node) |
+| Cost recording | < 20 ms | 10,000/s | Eventual |
+| Plan generation | < 5 seconds | On demand | Strong |
+
 ## Cross-Cutting Concerns
 
 ### Security
