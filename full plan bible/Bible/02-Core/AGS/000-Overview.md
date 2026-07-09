@@ -125,6 +125,29 @@ A Genome is a constitutional template containing:
 
 5. **Immutable After Signing**: Once a Genome is signed by AGS and verified by the Security Council, it becomes immutable. Changes require a new version through the versioning system. (CPR-004)
 
+## AGS vs Related Systems
+
+| System | Relationship | Boundary |
+|--------|-------------|----------|
+| AGS (Genome creation) | Creates entity templates | Does not instantiate Sessions |
+| IDS (Identity) | Assigns identities | Does not define entity capabilities |
+| Security Council (Verification) | Verifies Genomes before instantiation | Does not create Genomes |
+| LMS (Lifecycle) | Manages Session lifecycles | Does not define entity structure |
+| ATS (Authentication) | Authenticates Sessions | Does not define entity types |
+
+## Edge Cases — AGS Operations
+
+| Scenario | Handling |
+|----------|----------|
+| Genome composition request with no parent specified | AGS uses the base Genome for the specified type as default parent |
+| Override removes ALL capabilities | Rejected — entity must have at least minimum capabilities per type |
+| Inheritance chain exceeds 3 levels | Rejected with AGS_INH_001 |
+| Genome signing key is compromised | Emergency key rotation triggered. All Genomes re-signed with new key. |
+| Validation pipeline stage fails | Pipeline halts — no further stages run. Errors reported with stage-specific codes. |
+| Deprecated Genome still has active Sessions | Deprecation is advisory — existing Sessions continue. New Sessions blocked. |
+| Version migration fails mid-migration | Rollback to previous version. Session state preserved. Event recorded. |
+| HSM unavailable for signing | Signing queue backlogged. Verification uses cached public keys. |
+
 ## AGS Events
 
 | Event Type | Produced When | Fields |

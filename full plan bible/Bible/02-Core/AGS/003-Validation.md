@@ -123,6 +123,31 @@ ValidationResult {
 
 A Genome may pass with warnings. A Genome with any error at any stage does NOT pass.
 
+## Validation Example — Failure
+
+```
+Genome: WidgetWOM (derived from WOM)
+Stage 1 — Structure: ✓ Passed
+Stage 2 — Semantics: ✗ FAILED
+  → Check: capability "admin_access" — unknown in Capability Registry
+  → Error: AGS_VAL_010 (Unknown capability reference)
+  
+Pipeline halts. Genome not passed to stages 3-5.
+
+Result: ValidationResult {
+  passed: false,
+  errors: [AGS_VAL_010: "capability admin_access not in registry"],
+  warnings: [],
+  summary: {
+    structure: { passed: true, error_count: 0 },
+    semantics: { passed: false, error_count: 1 },
+    constitutional: { passed: false, error_count: 0 },  // not reached
+    consistency: { passed: false, error_count: 0 },      // not reached
+    provenance: { passed: false, error_count: 0 }        // not reached
+  }
+}
+```
+
 ## Validation Operations
 
 ### validateGenome(genome_id)
