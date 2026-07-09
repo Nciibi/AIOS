@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Core |
 | Document ID | AIOS-BBL-002-ROS-002 |
-| Source Laws | Law 12 — Law of Bounded Capability |
+| Source Laws | Law 7 — Law of Capability Bounds |
 | Source Physics | Physics/007-Capabilities.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
