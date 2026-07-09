@@ -82,17 +82,39 @@ FPGA toolchain operations are among the most compute-intensive in AIOS:
 | Static Timing Analysis | 1–30 minutes | 2–8 cores | 1–8 GB |
 | Formal Verification | 5–60 minutes | 4–16 cores | 2–16 GB |
 
+## Invariants
+
+1. **FPGA-I-001 — Device-Bounded**: HDL code must target a registered, verified device family. Cross-family inference without explicit porting plan is prohibited.
+
+2. **FPGA-I-002 — Simulation Before Synthesis**: No design may proceed to synthesis without passing RTL simulation. Gate-level simulation is required before bitstream generation.
+
+3. **FPGA-I-003 — Timing Closure**: No bitstream may be generated without meeting timing constraints (all setup and hold paths must have positive slack). Timing violations block bitstream generation.
+
+4. **FPGA-I-004 — Toolchain Pinned**: Every EDA tool version is pinned and verified. Toolchain updates require RFC approval and regression on existing designs.
+
+5. **FPGA-I-005 — Bitstream Integrity**: Every bitstream is cryptographically signed and checksummed before programming. Readback verification confirms programmed integrity.
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| RTL simulation fails test coverage threshold | Design returned to HDLWorker with failure report. Minimum coverage threshold enforced (80%). |
+| Synthesis maps more than 90% of device resources | Routing congestion warning. Place & Route may fail. Auto-migration to larger device suggested. |
+| Timing closure fails after 3 P&R iterations | Constraint relaxation attempted. If still failing, RTL redesign triggered with timing-critical path report. |
+| EDA license unavailable for P&R | Job queued with TTL. Alternative toolchain checked. If no toolchain available, job fails with license error. |
+| Bitstream encryption key unavailable | Bitstream generated unencrypted with warning. Security Council notified for unencrypted bitstream approval. |
+
 ## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `FPGA.RTLGenerated` | HDL code is generated | worker_id, module_name, language, lines, ports |
-| `FPGA.SimulationRun` | RTL simulation completes | sim_id, test_name, passed, coverage_pct, duration |
-| `FPGA.SynthesisCompleted` | Synthesis finishes | synth_id, device, lut_usage, ff_usage, bram_usage, freq_achieved |
-| `FPGA.PlaceRouteCompleted` | P&R finishes | par_id, cell_utilization, wire_length, congestion, duration |
-| `FPGA.TimingAnalyzed` | STA completes | sta_id, fmax, setup_slack_worst, hold_slack_worst, violating_paths |
-| `FPGA.BitstreamGenerated` | Bitstream is produced | bitstream_id, device, checksum, size_bytes |
-| `FPGA.DeviceProgrammed` | FPGA is programmed | program_id, device_id, protocol, verification_status |
+| `FPGA.RTLGenerated` | HDL code is generated | worker_id, module_name, language, lines, ports, hierarchy_depth |
+| `FPGA.SimulationRun` | RTL simulation completes | sim_id, test_name, passed, coverage_pct, duration, assertions_fired |
+| `FPGA.SynthesisCompleted` | Synthesis finishes | synth_id, device, lut_usage, ff_usage, bram_usage, dsp_usage, freq_achieved |
+| `FPGA.PlaceRouteCompleted` | P&R finishes | par_id, cell_utilization, wire_length, congestion, duration, iterations |
+| `FPGA.TimingAnalyzed` | STA completes | sta_id, fmax, setup_slack_worst, hold_slack_worst, violating_paths, total_paths |
+| `FPGA.BitstreamGenerated` | Bitstream is produced | bitstream_id, device, checksum, size_bytes, encryption_enabled |
+| `FPGA.DeviceProgrammed` | FPGA is programmed | program_id, device_id, protocol, verification_status, duration_seconds |
 
 ## Cross-Cutting Concerns
 
@@ -127,6 +149,20 @@ All FPGA domain communication flows through ACF. Synthesis and P&R jobs are subm
 | R13 (Design for Failure) | Synthesis failures return complete logs; partial P&R results preserved |
 | R14 (Paved Path) | Paved path: RTL → simulate → synthesize → P&R → analyze → program |
 
+## Performance Characteristics
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| RTL generation (single module) | < 30 seconds | 2 minutes |
+| RTL simulation (small) | < 1 minute | 5 minutes |
+| RTL simulation (large) | < 10 minutes | 60 minutes |
+| Synthesis (small device) | < 5 minutes | 15 minutes |
+| Synthesis (large device) | < 30 minutes | 120 minutes |
+| Place & Route (small) | < 10 minutes | 30 minutes |
+| Place & Route (large) | < 2 hours | 12 hours |
+| Static Timing Analysis | < 5 minutes | 30 minutes |
+| Bitstream generation | < 5 minutes | 15 minutes |
+
 ## Related Documents
 
 | Document | Relationship |
@@ -138,7 +174,9 @@ All FPGA domain communication flows through ACF. Synthesis and P&R jobs are subm
 | Bible/02-Core/Sou/002-Planner.md | Planner — Sou produces FPGA design plans |
 | Bible/02-Core/AGS/000-Overview.md | AGS — HDLWorker and SynthesisWorker Genome templates |
 | Bible/02-Core/Academy/000-Overview.md | Academy — IP core knowledge management |
+| Bible/02-Core/DTS/000-Overview.md | DTS — Design confidence scoring |
 | Bible/02-Core/ROS/000-Overview.md | ROS — Compute budgets for synthesis and P&R |
+| Bible/06-Services/ACF/000-Overview.md | ACF — Batch job queue for EDA operations |
 | Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — EDA tool adapter provider interface |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
