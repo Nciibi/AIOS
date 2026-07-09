@@ -167,6 +167,18 @@ Output: MigrationResult { session_id, from_version, to_version, success }
 Event: AGS.SessionMigrated
 ```
 
+## Version Compatibility Matrix — Detailed
+
+| Version Change | Backward Compatible | Migration | New Sessions | Existing Sessions |
+|---------------|---------------------|-----------|--------------|-------------------|
+| 1.0.0 → 1.0.1 (patch: bugfix) | Yes | None needed | Use 1.0.1 | May stay on 1.0.0 |
+| 1.0.0 → 1.1.0 (minor: optional capability) | Yes | None needed | Use 1.1.0 | May stay or upgrade |
+| 1.0.0 → 1.2.0 (minor: multiple additions) | Yes | None needed | Use 1.2.0 | May stay or upgrade |
+| 1.0.0 → 2.0.0 (major: capability removed) | No | Required for affected Sessions | Use 2.0.0 | Must migrate within window |
+| 1.0.0 → 2.0.0 (major: bound tightened) | Conditional | Required if bounds affected | Use 2.0.0 | Must accept new bounds |
+| 2.0.0 → 1.0.0 (downgrade) | No | Not supported | N/A | N/A |
+| 1.0.0 → 1.0.0 (same version) | Yes | No-op | N/A | N/A |
+
 ## Versioning Events
 
 | Event Type | Produced When | Fields |

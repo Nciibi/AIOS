@@ -160,6 +160,17 @@ Note: merge is for administrative use only — standard composition uses compose
 | Type Compatibility | Override must match trait type signature | AGS_CMP_004 |
 | Constitutional Compliance | Override must not violate Laws | AGS_CMP_005 |
 
+## Composition Performance
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| compose() execution time | < 100ms | 500ms |
+| inherit() execution time | < 50ms | 200ms |
+| merge() execution time | < 200ms | 1 second |
+| Override validation per trait | < 10ms | 50ms |
+| Maximum override count per composition | 50 traits | 200 traits |
+| Maximum inheritance chain depth for query | 3 levels | 5 levels (hard error at 4) |
+
 ## Composition Events
 
 | Event Type | Produced When | Fields |

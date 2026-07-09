@@ -172,6 +172,17 @@ Process: traverse parent references up to root Base Genome
 Output: InheritanceChain { genome_id, chain: [{ level, genome_id, name }] }
 ```
 
+## Inheritance Performance
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| getBaseGenome() | < 50ms | 200ms |
+| getDerivedGenomes() | < 100ms | 500ms |
+| getInheritanceChain() | < 50ms | 200ms |
+| Inheritance registration time | < 100ms | 500ms |
+| Maximum children per parent | 1000 | 5000 |
+| Maximum inheritance chain length | 3 levels | 3 levels (constitutional limit) |
+
 ## Inheritance Events
 
 | Event Type | Produced When | Fields |
