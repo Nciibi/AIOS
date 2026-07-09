@@ -59,6 +59,18 @@ Sou's Knowledge is distinct from the Academy's public knowledge:
 | Entity Knowledge | Performance and compliance history per entity | "Worker-X completed 95% of missions on time" |
 | Outcome Knowledge | Results of past decisions and missions | "Plan Y failed due to underestimated resource needs" |
 
+## Edge Cases — Knowledge
+
+| Scenario | Handling |
+|----------|----------|
+| Knowledge store capacity exceeded | Oldest knowledge records are pruned per retention policy. Critical records (constitutional interpretations) are never pruned. |
+| Privacy filter blocks Academy sharing attempt | Share is blocked. Privacy block Event is recorded. Knowledge remains private. |
+| Query returns too many results | Query is rejected with SOU_KNW_006. Requester must refine query. Maximum results: 1000. |
+| Knowledge record's source Events are purged from Event Store | Knowledge record becomes orphaned. It is flagged for review but not automatically deleted. |
+| Two knowledge records contradict each other | More recent record takes precedence. Both are retained for audit. Contradiction is flagged. |
+| Knowledge is queried by an unauthorized entity | Query is rejected. Security Event is produced. Attempt is logged. |
+| Knowledge store is offline | Sou operates in degraded mode. Knowledge queries return empty results. Reasoning uses only evidence-based methods. |
+
 ## Knowledge Operations
 
 ### storeKnowledge

@@ -151,6 +151,18 @@ evaluateImprovement:
 | Regression Testing | Updated models perform at least as well on historical scenarios | Historical replay |
 | Provenance Tracking | Every model version tracks which outcomes informed it | Version metadata |
 
+## Edge Cases — Learning
+
+| Scenario | Handling |
+|----------|----------|
+| Outcome evidence is partially missing | Learning uses available evidence. Missing data is noted. Update has lower confidence. |
+| Model update causes regression on historical scenarios | Update is rolled back automatically. Previous model version is restored. Regression report is stored. |
+| Privacy filter blocks all outcome data | No learning update occurs. Learning produces privacy block Event. Knowledge store is not updated. |
+| Learning rate is too fast (model oscillates) | Learning rate is capped. If oscillation detected, rate is halved automatically. |
+| Academy publishes conflicting knowledge | Sou resolves conflicts by recency — most recent Academy knowledge takes precedence. |
+| Learning from entity performance lacks sufficient data points | Minimum data points required (default: 10). Below minimum, no model update is made. |
+| Model update is interrupted mid-operation | Rollback to previous version. Interruption Event recorded. System state is preserved. |
+
 ## Learning Events
 
 | Event Type | Produced When | Fields |

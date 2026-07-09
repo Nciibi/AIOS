@@ -147,6 +147,18 @@ Mission Execution → Events → Event Store → ACF Stream → Sou Learning
 | `Sou.MissionMonitored` | Sou performs a routine monitor check | mission_id, state, health_score |
 | `Sou.MissionInterventionRequested` | Sou requests governance intervention | mission_id, reason, severity |
 
+## Edge Cases — Missions
+
+| Scenario | Handling |
+|----------|----------|
+| Mission proposal is rejected by DGP | Sou records rejection. Reasoning may adjust goal and re-propose. Rejection evidence is stored in Knowledge. |
+| Mission enters Blocked state and cannot be resolved | Sou evaluates available options: adjust mission, replace executing entity, or abort. If abort → propose new plan. |
+| Mission completes but evidence is incomplete | Sou evaluates with available evidence. Gaps are noted in outcome evaluation. Confidence is reduced. |
+| Sou proposes adjustment while mission is in Review | Adjustment is queued. Review must complete before adjustment is applied. |
+| Mission's parent Organization is dissolved | Sou is notified. Sou proposes mission transfer to another Organization or mission termination. |
+| Sou receives conflicting evidence from mission | Evidence from different sources is weighted by source trust. Higher-trust source takes precedence. |
+| Mission exceeds its planned duration significantly | Sou evaluates cause. May propose scope reduction, resource increase, or mission termination. |
+
 ## Error Codes (R12)
 
 | Code | Description |

@@ -165,6 +165,18 @@ Every plan must pass four validation gates before it can be proposed:
 | Capability Availability (CCA) | Required capabilities are granted to executing entities | Capability Registry (Physics/007) |
 | Timeline Realism | Estimated duration is consistent with historical evidence | Experience store (Physics/012) |
 
+## Edge Cases — Planner
+
+| Scenario | Handling |
+|----------|----------|
+| ROS unavailable for resource feasibility check | Planner uses cached resource data (max 5 minutes stale). If no cache, plan proceeds with conservative estimates. |
+| Goal changes after plan is created | Planner produces a new plan version. Old plan is archived. Comparison of old vs new is available. |
+| All resources are exhausted | Planner returns infeasibility. Suggests: wait for resource release, reduce scope, or request emergency allocation. |
+| Timeline estimate exceeds historical bounds | Warning produced. Planner may still create the plan but flags timeline as high-risk. |
+| Circular milestone dependency detected | Rejected with SOU_PLN_004. Planner suggests breaking the cycle by reordering or parallelizing. |
+| Constitutional constraint is ambiguous | Planner flags constraint as ambiguous. Proceeds with interpretation documented in the plan. |
+| Plan validation passes but timeline is unrealistic | Warning produced. Plan is created but tagged for monitoring. DTS simulates it at low confidence. |
+
 ## Planner Events
 
 | Event Type | Produced When | Fields |
