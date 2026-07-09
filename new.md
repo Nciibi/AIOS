@@ -357,3 +357,202 @@ Runtime Layer → [Execution Plane: Engines] → [Trust Plane: Security Kernel] 
 ---
 
 *Note: This notebook was produced by reading the full 74,817-line source via 7 parallel readers. It captures architecture, design decisions, evolution/corrections, naming, the Constitution article map, the Bible structure, and the documentation methodology (BAS/DQC/PSAP). Use it as the reference when populating the empty Constitution/Bible sections.*
+
+---
+
+## 17. Granular "little facts" sweep (second pass — exact details/numbers/examples)
+
+### 17.1 Runtimes (exact enumerations)
+- First-level: Claude Code, OpenCode, OpenClaw, Codex, Gemini CLI, Cursor, Local LLMs, Human approval.
+- Runtime Manager launches: `claude`, `codex`, `opencode`, `hermes`, `cursor`, `ollama`.
+- Universal Runtime Engine also covers: Browser Agent, Discord Bot, Telegram Bot, Custom Python Agent, "Anything".
+- Runtime categories: Coding / Chat / Browser / Trading / Vision / Voice / Simulation / Robotics Runtime.
+- OpenClaw capabilities: Read Discord, Send Discord, Join Voice, Watch Channels, Respond, Moderate.
+- Trading Runtime targets: Binance, Interactive Brokers, MetaTrader, Alpaca, Custom API.
+- Model examples per task: Rust→Claude Opus; Frontend→Claude Fable; Large Refactor/RE→Codex; Docs→Gemini; Quick Script→Qwen; Security→Codex; Research→Gemini.
+- Per-session config: Provider, Model, API key, Temperature, Max tokens, Prompt, Workspace.
+- Examples: Claude Backend=Opus 4.8; Claude UI=Fable; Claude QA=Sonnet; Codex=GPT-5.5; Hermes=Qwen3 30B.
+
+### 17.2 Capability enumerations (exact)
+- Virtual Intelligence capability API (Sou calls these, not model names): `Reason() Code() Research() Trade() Communicate() See() Listen() Plan() Test()`.
+- Runtime capability examples (OpenClaw): Chat, Voice, Images, Files, Streaming, Moderation.
+- Security Kernel strict capabilities: `fs:read`, `net:connect`, `sys:reboot`.
+- Permission Engine grants (Android-style): Filesystem, Git, Docker, SSH, Internet, Clipboard, Terminal, Camera, Microphone.
+
+### 17.3 Security Kernel Rust crates (the real implementation)
+Pipeline (unidirectional, all depend on `aios_core`):
+`aios_intent → aios_context_resolver → aios_policy → aios_execution`
+- **aios_intent**: JSON parse, schema validation, payload-size limits, JSON-injection prevention, maps strings→hardened Rust enums.
+- **aios_context_resolver**: `Action`→`ResolvedAction`; resolves paths via FDs (TOCTOU mitigation); verifies plugin signatures; scans prompt-injection; caches permissions; keeps short-term history (spam/loop detection).
+- **aios_policy**: zero-trust; rate limits, capability bounds, blacklists; emits unforgeable `VerifiedPolicyDecision` token.
+- **aios_execution**: ONLY crate that mutates host state; consumes token; applies resource locks (idempotency); executes syscall.
+- **aios_core**: domain model `Action`, `RiskLevel`, `Resource`, `TrustLevel` + crypto + shared traits.
+- Security mandate: Fail-Closed; Unforgeable Tokens; No Symlink Races (`openat`, `/proc/self/fd/N`); Stateless Verification; Strict Capabilities.
+- Build: `cargo build --workspace`, `cargo check --workspace`, `cargo test --workspace`; edition 2021; inotify/kqueue.
+- AIOS kernel objects: Mission, Organization, Agent Template, Agent Session, Runtime, Capability, Skill, Intent, Policy Decision, Knowledge, Memory Record, Event, Workflow, Interaction Session.
+
+### 17.4 Shannon (the canonical network/security worker)
+- Assigned by Sou for "scan the network". Installed via `aios agent install shannon`.
+- Flow "Scan my local network": Sou → Network Organization → Shannon (Claude Session) → Wireshark Agent → Report Writer.
+- Shannon itself CANNOT execute — it sends an Intent; Linux finally runs `nmap 192.168.1.0/24` only after Intent→Resolver→Policy→Allowed.
+- Security Org sub-tree: Director → Recon → OSINT → Network → Malware → Reverse Engineering → Reporting.
+
+### 17.5 Skills (exact YAML + catalog)
+- Skill fields: `name, description, permissions, required_tools, required_models, estimated_cost, dependencies` (+ version, capabilities, knowledge, policies, examples, benchmarks, owner, signature).
+- Catalog: Git, Docker, Rust, Nmap, Wireshark, Cargo, LLVM, Regex, Linux, Python, OpenCV.
+- Skills are INJECTED, not copied ("like mounting a filesystem"); Sou sends only skills the agent might need.
+
+### 17.6 Interaction Engine / Voice (exact)
+- Maps Voice/Terminal/GUI/API/Discord/Telegram/HTTP/Keyboard → `Mission`.
+- Responsibilities: Speech Recognition, Wake Word, Intent Extraction, Language Detection, Conversation Mgmt, Voice Synthesis, API/CLI/GUI Gateways.
+- Wake words: `Sou`, `Hey Sou`, `AIOS`, `Computer`, `Jarvis`, `Friday`, `Athena`.
+- Modes: `Off`, `Push To Talk`, `Wake Word`, `Always Listening`. Hotkey example: `CTRL+Space`.
+- Offline-first STT: Whisper.cpp, Vosk, Moonshine, NVIDIA Riva.
+- Input device abstraction: Microphone, Camera, Keyboard, Touch, Mouse, Joystick, VR, Phone, Tablet ("Interaction Engine knows Input Devices, not microphones").
+- Concurrent sessions example: headset chat + phone trading monitor + Discord moderation + desktop GUI + CLI FPGA task.
+
+### 17.7 ECC integration (concrete)
+- ECC = agent harness (hundreds of skills, dozens of agents). Decision: do NOT rewrite; treat as first runtime + compatibility layer, gradually replace JS orchestration with Rust `sou-core`.
+- Keep: agent defs/prompts, Skills library, Hooks, integrations, prompt patterns.
+- ECC becomes: `Skills Engine → ECC Skills` and `Runtime Engine → ECC Runtime Adapter`.
+- Agent Marketplace: `aios agent install shannon|backend|malware-analyst`. Agent metadata: metadata, supported runtimes, permissions, required skills, required models, versioning.
+
+### 17.8 Numeric examples / thresholds / budgets
+- Autoscaling: `Backend Queue 90%` → clone Backend Worker (#17..#20); destroy when idle.
+- "Build Firefox" → 1 Architect + 20 Backend + 10 UI + 8 QA + 5 Docs + 3 Security + 2 Perf + 1 Supervisor = **50 sessions**.
+- Observability sample: Running Sessions 361 (Claude 120, Codex 81, Hermes 53); Orgs 42; GPU 74%; Cost Today $18.41; Knowledge Added 194; Avg Success 97.2%.
+- Cost Engine: Claude $0.84, Codex $0.14, Gemini $0.03, Local Free.
+- Agent Reputation: Rust→Claude 98%, Codex 87%.
+- DTS sim "build AIOS": ~4 days, 18 workers, 4 orgs, $6.42, 97.4% success; risks: Rust version mismatch, missing FPGA experience, backend overload.
+- Complexity scoring: secure messaging app → skills Rust/UI/Crypto/Networking/Testing, 9/10, 6 subagents. "Build Linux Kernel Module" → 7 workers. 2/10 → 1 worker ("parallelism wastes resources").
+- Resource budget signals: RAM, CPU, GPU, API Credits, Latency, Bandwidth, Token Usage, Electricity, Battery.
+
+### 17.9 Config / state-machine specifics
+- Agent registry fields: Name, Runtime, Executable, Config, Models, Capabilities, Skills, Memory, Limits, Permissions, Priority, Health, Cost, Latency.
+- `Claude Backend` example: Runtime Claude Code, Executable `claude`, Config `configs/backend.json`, Model Opus 4.8, Caps Rust/Backend/API, Priority High.
+- CLI: `sou spawn backend-expert`, `sou spawn backend-expert --count 20`, `sou pause organization trading`.
+- Workspace isolation: `/tmp/agents/worker-481/` (`worker.db`, `worker.log`, `system.md`, `cache/`).
+- Memory 4 levels: Global → Organization → Agent Template → Session.
+- Earlier worker lifecycle variant: Created→Configured→Ready→Running→Paused→Sleeping→Restarting→Finished→Destroyed→Archived.
+- Versioning examples: Trading v4.2, Docker v2.1, Claude Runtime v3.0.
+- Event Bus events: Agent Started, Worker Finished, Memory Updated, Risk Detected, Model Failed, GPU Busy, Network Lost, Organization Created, Runtime Crashed, Knowledge Added.
+- Time Engine triggers: Now, Tomorrow, Every hour, When Bitcoin drops, When CPU<40%, When Discord receives message.
+- AIOS Registry (Docker Hub analog): Organizations, Skills, Templates, Prompts, Policies, Knowledge Packs, Runtime Adapters, Engines.
+
+### 17.10 DNA / Constitution enums (exact names)
+- 20 Architectural Principles (DNA-001): Human Sovereignty; Mission-Centric Computing; Organization-Centric Intelligence; Workers Are Disposable; Knowledge Belongs to AIOS; Experience Is Collective; Skills Are Modular; Capability Over Implementation; Runtime Independence; Separation of Reasoning and Execution; Zero Trust; Continuous Learning; Single Responsibility; Explainability; Deterministic Security; Permanent Assets; AIOS Learns, Workers Do Not; Layer Independence; Evolution Without Rewrite; AIOS Is an Operating System.
+- 20 Engineering Goals (DNA-005): Modularity; Runtime Independence; Scalability; Security by Design; Explainability; Reusability; Continuous Learning; Performance; Fault Tolerance; Determinism; Extensibility; Observability; Offline Capability; Vendor Neutrality; Long-Term Maintainability; Community Growth; Human Control; Intelligence Preservation; Distributed Readiness; Architectural Integrity.
+- 20 Engineering Values (DNA-007): Simplicity Over Cleverness; Composition Over Complexity; Capabilities Over Implementations; Reuse Over Duplication; Verification Over Assumption; Determinism Over Randomness; Explainability Over Mystery; Long-Term Thinking; Replaceability; Explicit Interfaces; Ownership; Single Responsibility; Security By Default; Learning Without Forgetting; Observability; Community Before Vendor; Human Authority; Continuous Improvement; Architectural Consistency; Intelligence Is Infrastructure.
+- Decision Framework order: Security → Architectural Integrity → Simplicity → Maintainability → Reusability → Performance → Extensibility → User Experience.
+
+### 17.11 Taxonomy + Constitutional Capabilities
+- 13 taxonomy categories: Actors, Strategic Objects, Structural Objects, Execution Objects, Intelligence Assets, Communication Objects, Trust Objects, Runtime Objects, System Services, System Resources, Knowledge Objects, Interaction Objects, Infrastructure.
+- **Constitutional Capabilities** (permanent, only via amendment) vs **Runtime Capabilities** ("what can a model do?" = Code/Search/Vision/Speech):
+  | Subsystem | Constitutional Capability |
+  |---|---|
+  | Sou | Plan, Recommend, Delegate |
+  | OSYS | Create Organizations, Assign Workers, Scale Organizations |
+  | Academy | Store Knowledge, Inject Skills, Verify Experience |
+  | Security Kernel | Verify, Authorize, Audit |
+  | ROS | Allocate Resources, Enforce Budgets |
+  | DTS | Simulate, Predict |
+  | AOP | Observe, Report |
+  | ACF | Route, Broadcast |
+  | IRS | Register, Resolve Identity |
+
+### 17.12 ACF specifics (addressing/channels/priorities/QoS)
+- Addressing (IP-like): `sou`, `academy.skills`, `academy.knowledge`, `organization.security`, `worker.248`, `engine.runtime`, `kernel.policy`, `kernel.execution`.
+- Channels: voice, logs, events, telemetry, metrics, notifications, chat, runtime, academy, kernel.
+- Topics (MQTT wildcards): `mission.*`, `worker.*`, `runtime.*`, `academy.*`, `knowledge.*`, `security.*`, `organization.*`, `interaction.*`.
+- Priorities: Emergency → Critical → High → Normal → Low → Background ("Kernel messages always highest").
+- QoS: Fire-and-Forget → At-Least-Once → Exactly-Once → Persistent → Reliable.
+- Every message: Signed, Encrypted, Audited, Versioned, Replay-Protected, Permission-Checked. Optionally recorded (ROS-bag style) for replay.
+
+### 17.13 Organization internals (named sub-structures)
+- Communication Org: Manager → Discord / Telegram / WhatsApp / Email / Slack / OpenClaw Workers.
+- Trading Org: Chief Trader → Market Research → News Analysis → Risk Analysis → Execution → Portfolio Monitor → Compliance.
+- Security Org: Director → Recon → OSINT → Network → Malware → Reverse Engineering → Reporting.
+- Generic spine: Director → Managers → Supervisors → Workers. Other orgs: Coding, Linux, Research, FPGA, Embedded, IoT, Cloud, Medical, Education, Legal, Finance, Marketing, Sales, Writing, Media, Translation, Customer Support, Travel.
+
+### 17.14 DTS / ROS / AGS exact internals
+- **DTS** 15 Simulation Engines: Mission, Organization, Worker, Runtime, Capability, Communication, Security, Resource, Cost, Energy, Performance, Failure, Recovery, Scalability, Learning-Impact.
+- DTS pipeline: Mission Proposal → Simulation Planning → Engine Selection → Parallel Simulation → Aggregation → Confidence Analysis → Recommendation → Report → Strategic Planning.
+- **ROS** 15 engines: Resource Registry, Allocator, Capacity Planner, Budget Manager, Quota Manager, RMP, RXP, Provider Manager, Reservation Manager, Cost Engine, Energy Manager, Optimizer, Recovery, Audit, Monitoring.
+- RMP selection: Mission → ROS → Marketplace → Discover → Evaluate → Apply Policies → Score → Reserve → Allocate → Worker. Criteria: Performance, Latency, Availability, Cost, Energy, Reliability, Security, Load, Health, Location, Carbon Footprint, Historical Success. Policies: Lowest Cost/Highest Perf/Lowest Latency/Highest Security/Lowest Energy/Lowest Carbon/Highest Availability/Balanced/Custom.
+- **AGS** Genome types: Organization, Department, Worker, Mission, Skill, Runtime.
+- Organization Genome fields: Identity, Purpose, Mission Domains, Departments, Leadership Structure, Default Skills/Workers, Quality Standards, Risk Profile, Communication Style, Decision Strategy, Scaling/Health/Growth/Learning/Collaboration/Security Policies, Preferred Runtime/Models/Providers, Budget/Resource Policies, Default Templates, Operational Intelligence Rules, Version, Genome Hash.
+- Coding Org Genome = Core + Rust Capability Module + Testing + Documentation + Security Policy + Quality Standards modules.
+- AGS engines: Genome Registry/Repository/Validator/Composer/Dependency Resolver/Compatibility/Version/Integrity/Signature/Publication/Evolution + Genome SDK + Module/Template Repositories + Observability.
+
+### 17.15 Shared Infrastructure one-liners
+- ACF: "nervous system of AIOS"; universal comms; "nothing bypasses ACF".
+- IRS: identity + discovery (global ID, registration, relationships, ownership, metadata, discovery, lifecycle).
+- AOM: common architectural semantics (object defs, relationships, inheritance, metadata, serialization, lifecycle contracts, shared interfaces).
+- AOP: platform-wide observability (metrics, logs, traces, health, diagnostics, performance, history).
+- LMS (shared lifecycle framework): State Machine Engine, Transition Validator, Event Publisher, Evidence Recorder, Recovery/Retry/Rollback, Timeout Manager, Analytics, Visualization, SDK.
+
+### 17.16 Part B Society subsystems (acronym → role)
+- OOM (Org Operating Model), OHS (Org Health: success/utilization/satisfaction/knowledge growth/security/tech-debt…), ODS (Org Decision: registry/delegation/approval/escalation/responsibility graph/history), ORG (Org Responsibility Graph: responsibility/delegation/accountability/collaboration/escalation graphs).
+- DOM (Dept Operating Model), OIS (Operational Intelligence: EEE Experience Extraction + OPE Operational Pattern engines).
+- WOM/WHS/WSS/WCS (Worker Operating/Health/Skill/Context Systems).
+- MOM/MHS/MDS/MRG (Mission Operating/Health/Decision/Responsibility Graph).
+- KMS (Knowledge Mgmt: KEE Evolution + KCE Confidence engines).
+- CMS (Cooperation Mgmt: collaboration/negotiation/conflict/resolution/dependency/coordination/shared-workspace analytics) + TRS (Trust & Reputation: "how reliable over time?" vs Security "is authorized?").
+- RAL/RHS/RCE/ROE (Runtime Abstraction/Health/Compatibility/Optimization).
+- AMS/ACE/ABE (Autonomy Mgmt / Confidence / Boundary engines).
+- EMS/ERE/EIE (Evolution Mgmt / Recommendation / Impact engines; EIE works with DTS).
+
+### 17.17 Lifecycles (exact state lists)
+- Universal: Draft → Validation → Approval → Instantiation → Initialization → Ready → Active → Paused → Resumed → Scaling → Updating → Deprecated → Retired → Archived.
+- Identity: Created → Verified → Active → Suspended → Restored → Retired → Archived.
+- Secret: Generated → Registered → Distributed → Activated → Rotated → Suspended → Revoked → Destroyed → Archived (Evidence Only).
+- Trust: Unknown → Verified → Trusted → Highly Trusted → Restricted → Suspended → Revoked → Recovered.
+- Mission: Created → Planned → Assigned → Running → Waiting → Paused → Blocked → Review → Completed → Archived.
+- Worker: Created → Initialized → Running → Blocked → Paused → Completed → Destroyed.
+
+### 17.18 Autonomy / Governance / Branches
+- Autonomy L0 Human Controlled → L1 Human Assisted → L2 Supervised → L3 Governed → L4 Constitutional. "Autonomy never expands authority; it operates within authority."
+- Escalation: Worker → Supervisor → Manager → Director → Sou → Human.
+- Four governance graphs: Authority (top-down), Reporting (bottom-up), Collaboration (via ACF, no hierarchy), Knowledge (Academy↔Org↔Worker↔experience).
+- Three Constitutional Branches: Strategic (Sou, Academy, DTS); Operational (OSYS, Orgs, Workers, Runtime, Engines, ROS); Trust (Security Kernel); Shared Infra (ACF, IRS, AOM, AOP).
+- Override Levels: L1 Advisory, L2 Operational, L3 Emergency, L4 Constitutional (Human Override = ultimate).
+- Forbidden power concentration: Planning+Authorization; Authorization+Execution; Execution+Audit; Learning+Authorization; Resource Allocation+Security Approval.
+
+### 17.19 Security subsystem specs (Bible-level; the "SSM family")
+- SSM (umbrella). IDS (Identity: registry/resolution/lifecycle/metadata/federation/provenance/analytics/SDK). ATS (AuthN: manager/providers/policies/session/continuous-reauth/reauth/analytics/SDK). AZS (AuthZ: engine/decision/delegation/permission-resolver/context-eval/cache/provenance/analytics/SDK). PS + PDG (Policy Dependency Graph) + PVE (Policy Verification Engine). CAS + CDG + CCA (Capability Certification Authority). RS + RKG + ARE (Adaptive Risk Engine). EAS + EAC (Execution Authorization Certificate) + EAL (Execution Authorization Ledger). CSP (KMS/SMS/CMS/provider-framework/HSM/agility/secure-random/signature/encryption/hashing/rotation/escrow/provenance/audit/analytics/SDK) + CAM (Cryptographic Asset Model). EVS/ AUS (Evidence/Audit, Shared Infra). EPG (Evidence Provenance Graph). EIP (Execution Isolation Platform). BG (Boundary Graph). GFW (Graph Framework). TP + TG + TPE (Trust Platform/Graph/Provenance). CP (Compliance Platform).
+- Security six pillars: Identity → Trust → Governance → Protection → Execution → Accountability.
+- Constitutional Execution Pipeline: Identity → Authentication → Authorization → Policy → Capability → Risk → Execution Authorization → Execution → Audit → Evidence. (Skip any stage = violation.)
+
+### 17.20 Bible authoring + structure (exact)
+- **PSAP** (canonical service shape): Engine / Registry / Lifecycle / Events / Evidence / Policies / Analytics / Health / APIs / SDK.
+- **BAS** 15 rules: Specification-First; one purpose; explain WHY; explain relationships; separate arch/impl; use real models (state machines, diagrams); define invariants; explain failure/recovery; explain evolution; define extension points; define interfaces; avoid repetition (cross-ref); every doc teaches; build vertically then horizontally; everything belongs to a layer.
+- **DQC** 12 checks: WHY? responsibilities? ownership? relationships? boundaries? lifecycle? extension points? invariants? failure modes? no implementation? no repetition? implementable by a new engineer? + "worthy of the Bible?" → must be 12/12.
+- 12-section spec template: Metadata, Purpose, Scope, Definitions, Responsibilities, Invariants, Relationships, Lifecycle, State Machine, Security Considerations, Examples, Cross References.
+- Layered Bible tree: 00-Foundations, 01-Governance, 02-Core, 03-Institutions, 04-Execution, 05-Platform, 06-Services, 07-Domains, 08-Interfaces, 09-Reference, 10-Research.
+- Master Architecture Plan volumes: 0000 (index), 0001 Constitution-Roadmap, 0002 Bible-Roadmap, 0003 Platform-Architecture, 0004 Service-Architecture, 0005 Domain-Architecture, 0006 Reference-Architecture, 0007 Implementation-Roadmap, 0008 Future-Research.
+- AIP protocol family (one responsibility each): AIP (Interchange), RXP (Resource), MXP (Mission), KXP (Knowledge), GXP (Genome), OXP (Organization), SXP (Skill), EXP (Event), TXP (Telemetry), PXP (Policy), CXP (Capability), IXP (Identity).
+
+### 17.21 Verbatim one-liners worth quoting
+- "Linux gave computers an operating system. AIOS gives intelligence an operating system."
+- "Operating systems were designed to manage hardware. AIOS was designed to manage intelligence."
+- "Sou reasons. Organizations organize. Workers work. Engines provide services. The Security Kernel authorizes. Linux executes."
+- "Linux schedules CPU time. AIOS schedules reasoning." / "Computers execute instructions. Operating systems schedule processes. AIOS schedules intelligence."
+- "Every autonomous action must earn execution. Nothing is trusted by default."
+- "Workers consume knowledge. They do not own it."
+- "Interpretation explains constitutional authority. It does not create constitutional authority."
+- "Governance exists to coordinate responsibility, not to centralize power."
+- "Trust is never assumed. Trust is continuously earned through verification."
+- "Verification always precedes execution."
+- "Security verifies; it never plans."
+- "Organizations endure. Workers execute."
+- "A Mission is the constitutional contract between Human Intent and AIOS execution."
+- "If every AI company disappeared tomorrow, AIOS would continue to function with new runtimes."
+- "Not even Sou can violate [the AI Constitution]."
+
+### 17.22 Document sizing / scope targets
+- DNA 250–450 lines; Constitution 150–300; Physics 150–400; Bible subsystem 500–1200; RFC 100–300.
+- Page estimate: Sou 80–120pp, Academy 80–100, Organizations 80–120, **Engines 250–400**, **Security Kernel 120–180**, Object Model 80–100, ACF new large, total ~1,500–2,000 pages.
+
+---
+
+*End of notebook. Two passes (architecture sweep + granular "little facts" sweep) over the full 74,817-line source. Use §17 for concrete details when writing Constitution/Bible sections.*
