@@ -192,6 +192,41 @@ All execution requests arrive via ACF. All execution results are returned via AC
 | R14 — Paved Path | The paved path for execution is: Token → Validate → Select → Execute → Monitor → Record → Return. No alternative paths exist. |
 | R15 — Open/Closed | New providers implement `ExecutionProvider` without modifying the Runtime Manager. New action types extend the registry. |
 
+## Performance Characteristics
+
+The Runtime Engine is designed for predictable execution latency under load:
+
+| Operation | Latency Target | Throughput | Consistency |
+|-----------|---------------|------------|-------------|
+| Token validation | < 5ms | 10,000/s | Strong |
+| Provider selection | < 2ms | 10,000/s | Strong |
+| Execution dispatch | < 10ms | 5,000/s | Strong |
+| Resource monitoring sample | < 1ms | 100,000/s | Eventual |
+| Event production | < 5ms | 10,000/s | Strong |
+| Provider health poll | < 100ms | 100/s | Strong |
+
+## Scaling Model
+
+The Runtime Engine scales horizontally by adding Runtime Manager instances behind a load balancer. Each instance maintains its own Provider Registry and connects to shared ROS and Event Store backends. Providers are instance-local — the load balancer pins execution requests to instances based on the provider's declared action types.
+
+| Scaling Dimension | Strategy | Limit |
+|-------------------|----------|-------|
+| Execution throughput | Add Runtime Manager instances | Unlimited (horizontal) |
+| Provider capacity | Add provider instances | Per-provider max_parallelism |
+| Resource monitoring | Distributed sampling to ROS cluster | Unlimited |
+| Event production | Async batch writes to Event Store | 50,000 Events/s per instance |
+
+## Runtime Manager Security Model
+
+| Principle | Implementation |
+|-----------|---------------|
+| Token verification | Cryptographic signature verification before any provider interaction |
+| Least privilege | Runtime Manager has no access to secrets; all secrets are provider-scoped |
+| Execution isolation | Each execution is sandboxed at the provider level |
+| Audit trail | Every lifecycle transition produces an Event |
+| Rate limiting | Per-entity execution rate limits enforced at the Manager level |
+| Quarantine | Executions exceeding bounds are terminated and provider health is degraded |
+
 ## Related Documents
 
 | Document | Relationship |
