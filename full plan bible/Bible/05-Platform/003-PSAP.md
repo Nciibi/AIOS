@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Platform |
 | Document ID | AIOS-BBL-005-PSAP-000 |
-| Source Laws | Law 2 — Law of Non-Execution/Autonomy, Law 3 — Law of Capability Bounds |
+| Source Laws | Law 2 — Law of Non-Execution/Autonomy, Law 7 — Law of Capability Bounds |
 | Source Physics | Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
