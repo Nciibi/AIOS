@@ -15,19 +15,21 @@
 
 ## Identity ID Format
 
-Format: `aios:{entity_type}:{sequence}:{random_suffix}`
+Format: `aios:{entity_type}:{sub_type?}:{sequence}:{random_suffix}`
 
 | Segment | Rules | Example |
 |---------|-------|---------|
 | prefix | Always `aios:` | `aios:` |
 | entity_type | Lowercase, no hyphens | `org`, `session`, `engine`, `user` |
+| sub_type | Optional hierarchical qualifier | `worker`, `sec`, `int` |
 | sequence | 3-digit zero-padded number within type | `001`, `042`, `999` |
 | random_suffix | 8-char hex (cryptographically random) | `a3f7c9d1` |
 
 Examples:
 - `aios:org:001:a3f2c9d2`
-- `aios:session:worker:004:d1e2f3a4`
-- `aios:engine:sec:irs:001`
+- `aios:session:worker:004:d1e2f3a4` — a Worker Session
+- `aios:session:user_int:005:e5f6a7b8` — a User Interaction Session
+- `aios:engine:sec:irs:001` — IDS Engine instance
 - `aios:user:008:a1b2c3d4`
 
 ## ACF Addressing

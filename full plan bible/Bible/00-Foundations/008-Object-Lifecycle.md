@@ -71,7 +71,7 @@ Completed → Archived (automatic after retention period)
 | Blocked → Running | Resolution by entity/supervisor | Yes (resolution evidence) |
 | Blocked → Review | Entity or supervisor | Yes (block details) |
 | Review → Running | Reviewer | Yes (review decision) |
-| Review → Completed | Reviewer | Yes (approval) |
+| Review → Completed | Reviewer (human operator or policy-defined reviewer) | Yes (approval) |
 | Completed → Archived | LMS (automatic, timer-based) | Yes (retention policy) |
 
 ## Lifecycle Events
@@ -102,6 +102,17 @@ Entity capabilities are lifecycle-state-dependent:
 | Review | Read-only, review actions | Budget active (limited) |
 | Completed | Read-only (evidence access) | Budget returned to pool |
 | Archived | None | Evidenced budget recorded |
+
+## Reviewer Role
+
+The "Reviewer" in the transition authorization matrix is a human operator or a policy-defined automated reviewer entity. The Reviewer is assigned at the entity's creation or by the entity's parent Organization. The Reviewer may be:
+
+- A human operator with appropriate authority (for high-impact entities)
+- An automated review Engine (for low-risk, high-volume entities)
+- The Security Council (for entities operating at autonomy level L3+)
+- A peer entity designated by the entity's parent
+
+If no Reviewer is explicitly assigned, the default Reviewer is the entity's parent Organization or the Security Council.
 
 ## Cross-Cutting Concerns
 
