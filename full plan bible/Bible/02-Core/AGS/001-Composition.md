@@ -58,6 +58,18 @@ A Genome at composition time has this schema:
 | overrides_applied | Override[] | Record of all overrides applied during composition |
 | provenance | Provenance | Creator, timestamp, authorization proof |
 
+## Composition Constraints
+
+| Constraint | Description | Enforcement |
+|------------|-------------|-------------|
+| Single Inheritance | A Genome may inherit from exactly one parent | Composition rejects multiple parents |
+| No Self-Inheritance | A Genome cannot inherit from itself | Circular dependency check |
+| Type Consistency | Child must be same base type as parent | Type field validation |
+| Constitutional Immutability | Constitutional traits cannot be overridden | Override validation (Rule 3) |
+| Capability Restriction | Capabilities can only be restricted, never expanded | Override validation (Rule 1) |
+| Complete Traits | Overrides must provide complete trait definitions | Override validation (Rule 3) |
+| Valid Sources | All source Genomes must be in Active or Deprecated state | Registry validation |
+
 ## Composition Example
 
 Base Worker Genome (Worker type):

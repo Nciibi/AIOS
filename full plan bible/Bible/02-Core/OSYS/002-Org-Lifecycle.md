@@ -17,6 +17,19 @@
 
 The Organization Lifecycle defines the constitutional state machine governing every Organization in AIOS. An Organization exists in exactly one state at all times. State transitions require authorization, produce Events, and affect the Organization's capabilities, resource access, and constitutional status.
 
+## Organization Lifecycle vs Identity Lifecycle
+
+Organizations have two parallel lifecycles:
+
+| Aspect | OSYS Lifecycle | IDS Identity Lifecycle |
+|--------|---------------|----------------------|
+| States | Created → Verified → Active → Suspended → Restored → Dissolved → Archived | Created → Verified → Active → Suspended → Restored → Retired → Archived |
+| Manager | OSYS Lifecycle Manager | IDS Lifecycle Manager |
+| Triggers | Organization operations | Identity verification events |
+| Dependency | Identity must be Active before OSYS transitions to Active | OSYS transitions are independent of identity lifecycle |
+
+An Organization's identity lifecycle and operational lifecycle converge at creation and diverge at suspension. An Organization may be identity-Active but operationally-Suspended (e.g., suspended by Security Council for violation, but identity remains valid).
+
 ## Lifecycle States
 
 ```

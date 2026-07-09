@@ -82,6 +82,18 @@ Inheritance is limited to a maximum of 3 levels:
 
 This limit ensures the inheritance tree remains manageable and auditable. Deeper customization is achieved through Genome composition (AGS/001-Composition.md) with overrides, not through inheritance.
 
+## Inheritance Constraints
+
+| Constraint | Description | Rule |
+|------------|-------------|------|
+| Depth Limit | Maximum 3 levels (Base → Domain → Specific) | Constitutional |
+| No Orphan Genomes | Every Genome (except Base) must have a parent | Structural |
+| No Circular Chains | Inheritance must be a DAG | Structural |
+| Constitutional Fixity | Constitutional traits are fixed at Base level | Constitutional |
+| Capability Narrowing | Children may only restrict parent capabilities | Constitutional |
+| Complete Inheritance | All traits must be inherited (cannot skip) | Structural |
+| Version Alignment | Child must reference specific parent version | Operational |
+
 ## Base Genome Capabilities
 
 Each base Genome defines the minimum capabilities for its type:
