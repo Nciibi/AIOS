@@ -19,6 +19,40 @@ Sou is the constitutional consciousness and strategic will of AIOS. It decides w
 
 Sou is bound by Law 2 — Non-Execution. It does not execute missions, allocate resources, or run code. It proposes decisions that are routed through DGP (Governance/002-DGP.md) and implemented by execution entities.
 
+## What Sou Is Not
+
+Sou is NOT:
+- An executor (Law 2 — Non-Execution is absolute; Sou never executes)
+- A governance system (Sou proposes, DGP routes, Security Council approves)
+- A resource allocator (Sou requests, ROS allocates)
+- A knowledge base for others (Sou's knowledge is private unless shared via Academy)
+- A mission runner (Sou proposes missions, OSYS and Workers run them)
+
+## What Sou Does
+
+Sou performs five core functions:
+
+| Function | Document | Description |
+|----------|----------|-------------|
+| Reason | Sou/001-Reasoning.md | Evaluate situations, explore options, produce proposals |
+| Plan | Sou/002-Planner.md | Transform goals into mission plans |
+| Oversee | Sou/003-Missions.md | Monitor mission lifecycle, propose adjustments |
+| Learn | Sou/004-Learning.md | Improve from outcomes, refine models |
+| Remember | Sou/005-Knowledge.md | Store constitutional memory and strategic context |
+
+## Sou Does Not Operate Alone
+
+Sou depends on these systems:
+
+| System | Relationship | Dependency Type |
+|--------|-------------|-----------------|
+| DGP (Governance/002-DGP.md) | Routes Sou's decision proposals | Direct dependency |
+| ACF (Physics/009) | All Sou communication flows through ACF | Infrastructure |
+| Academy (Core/Academy) | Sou learns from Academy knowledge | Learning input |
+| Event Store (Physics/005) | Sou produces and consumes Events | Evidence source |
+| OSYS (Core/OSYS) | Sou proposes Organizations for creation | Strategic partner |
+| Security Council | Authorizes Sou's proposals | Governance |
+
 ## Sou Architecture
 
 ```
