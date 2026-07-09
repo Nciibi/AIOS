@@ -134,6 +134,27 @@ The provider communicates with robot controllers through the HAL adapter's proto
 | R14 | Paved path: validate bounds → IK solve → safety check → execute → monitor → record |
 | R15 | New robot types implement the HAL adapter interface without modifying the provider |
 
+## Performance Characteristics
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| Motion command latency | < 20ms | Local network to robot controller |
+| Inverse kinematics solve | < 5ms | Pre-computed IK tables; analytic solver |
+| Sensor read (force/torque) | < 10ms | Real-time sensor polling |
+| Safety check evaluation | < 2ms | All safety checks before motion command |
+| Gripper actuation | < 100ms | Pneumatic or servo gripper response |
+| Program upload and execution | < 1s | URScript/Python upload + start |
+
+## Autonomy Level Behavior
+
+| Level | Behavior |
+|-------|----------|
+| L0 | Every motion, gripper, and program action requires human approval |
+| L1 | Motion executes autonomously within safety bounds; sensor readings returned for review |
+| L2 | Not supported — requires Human Override per Law 1 for physical system autonomy |
+| L3 | Not supported — physical robots cannot operate at Manage autonomy |
+| L4 | Not supported — all physical robot operations require L0 or L1 oversight |
+
 ## Related Documents
 
 | Document | Relationship |

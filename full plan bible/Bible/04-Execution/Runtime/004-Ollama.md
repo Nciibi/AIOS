@@ -127,6 +127,26 @@ The provider communicates with Ollama over localhost HTTP. No external network a
 | R14 | Paved path: validate → select model → call Ollama → stream → return |
 | R15 | New models are added via configuration without provider code changes |
 
+## Performance Characteristics
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| Time to first token | < 100ms | Local inference; no network latency |
+| Generation speed | ~30-60 tokens/s | Depends on model size and GPU capability |
+| Embedding throughput | 500 inputs/s | Full batch parallelism on local GPU |
+| Model load time | 2-10s | First-load model loading into GPU memory |
+| Concurrent model switching | < 500ms | Unload/reload time between active models |
+
+## Autonomy Level Behavior
+
+| Level | Behavior |
+|-------|----------|
+| L0 | Model selection and prompt require human approval before inference |
+| L1 | Inference proceeds autonomously with local models; results flagged for review |
+| L2 | Fully autonomous local inference within token and GPU memory bounds |
+| L3 | Provider may switch between local models based on task requirements |
+| L4 | Provider may pull new models autonomously if within storage budget |
+
 ## Related Documents
 
 | Document | Relationship |

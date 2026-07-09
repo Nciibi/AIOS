@@ -130,6 +130,27 @@ The provider communicates with the Chromium browser over the Chrome DevTools Pro
 | R14 | Paved path: validate URL → create context → execute action → extract result → destroy context |
 | R15 | New browser actions extend the action type list without modifying the core isolation logic |
 
+## Performance Characteristics
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| Page load time | < 3s | Up to networkidle wait state |
+| Screenshot capture | < 500ms | Viewport-only capture |
+| Content extraction (100 selectors) | < 200ms | Parallel selector evaluation |
+| JavaScript evaluation | < 100ms | Simple return-value scripts |
+| Browser context creation | < 300ms | New incognito context in Chromium |
+| Form submission | < 2s | Includes navigation wait after submit |
+
+## Autonomy Level Behavior
+
+| Level | Behavior |
+|-------|----------|
+| L0 | Every navigation requires human URL approval; screenshots require approval before capture |
+| L1 | Navigation auto-proceeds; extracted content is flagged for human review |
+| L2 | Navigation, extraction, and form submission are fully autonomous within URL scope bounds |
+| L3 | Not supported — browser automation requires human oversight at all levels above L2 |
+| L4 | Not supported — browser automation cannot operate at full autonomy |
+
 ## Related Documents
 
 | Document | Relationship |

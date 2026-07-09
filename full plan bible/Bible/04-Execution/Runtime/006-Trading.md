@@ -131,6 +131,26 @@ The provider communicates with broker APIs over encrypted connections (REST/HTTP
 | R14 | Paved path: validate bounds → risk check → submit → record → return. No alternative execution path |
 | R15 | New broker adapters implement the BrokerAdapter interface without modifying the provider |
 
+## Performance Characteristics
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| Order submission latency | < 500ms | REST API round-trip; FIX protocol < 50ms |
+| Market data refresh | < 100ms | WebSocket stream; quoted data |
+| Portfolio query | < 1s | Broker API aggregation time |
+| Risk check computation | < 50ms | Local computation against cached portfolio |
+| Order status polling | < 200ms | Poll interval configurable; WebSocket for real-time |
+
+## Autonomy Level Behavior
+
+| Level | Behavior |
+|-------|----------|
+| L0 | Every order requires human approval before submission; market data is read-only |
+| L1 | Orders are submitted autonomously but every fill requires human confirmation before next order |
+| L2 | Orders execute fully autonomously within hard risk boundaries; risk check is mandatory |
+| L3 | Not supported — trading cannot operate at Manage autonomy without pre-audited algorithmic strategy |
+| L4 | Not supported — autonomous trading requires explicit Human Override per Law 1 |
+
 ## Related Documents
 
 | Document | Relationship |

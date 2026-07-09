@@ -126,6 +126,26 @@ The provider communicates with the Anthropic API over HTTPS. All provider-to-Run
 | R14 | Paved path: token → validate bounds → call API → produce Event → return |
 | R15 | New Claude models are added via configuration, not code changes |
 
+## Performance Characteristics
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| Time to first token (non-streaming) | < 500ms | Dependent on Anthropic API latency |
+| Time to first token (streaming) | < 300ms | SSE connection establishment overhead |
+| Throughput per connection | 10 req/s | Limited by Anthropic rate limits |
+| Token sampling overhead | < 5ms | SDK middleware processing per token |
+| Connection reuse | Keep-alive pool | 10 pooled connections, 60s idle timeout |
+
+## Autonomy Level Behavior
+
+| Level | Behavior |
+|-------|----------|
+| L0 | Every inference requires explicit human approval of the prompt before API call |
+| L1 | Inference proceeds autonomously; responses require human confirmation before delivery |
+| L2 | Inference and response delivery are fully autonomous within token budget bounds |
+| L3 | Provider may optimise model selection based on task complexity within capability bounds |
+| L4 | Provider may initiate inference proactively based on entity's mission context |
+
 ## Related Documents
 
 | Document | Relationship |

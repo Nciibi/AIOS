@@ -127,6 +127,26 @@ The provider communicates with the OpenAI REST API over HTTPS. Streaming uses se
 | R14 | Paved path: validate model → validate schema → call API → scan code → return |
 | R15 | New models added through configuration in the provider's model registry |
 
+## Performance Characteristics
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| Time to first token | < 400ms | OpenAI API typical latency for gpt-4o |
+| Code generation speed | ~50 tokens/s | Varies by model and output complexity |
+| Structured output validation | < 10ms | JSON schema validation overhead per response |
+| Batch embedding throughput | 100 inputs/s | Dependent on input size; parallel API calls |
+| Connection pool efficiency | 20 concurrent | Pool size matches max_parallelism |
+
+## Autonomy Level Behavior
+
+| Level | Behavior |
+|-------|----------|
+| L0 | Prompt requires human approval; generated code requires human review before delivery |
+| L1 | Inference auto-proceeds; all codegen output is flagged for human review |
+| L2 | Codegen output is auto-scanned for prohibited patterns; clean output is delivered autonomously |
+| L3 | Provider may select model variant based on codegen complexity (o-series for complex, gpt-4o for standard) |
+| L4 | Provider may proactively generate code suggestions based on entity's mission state |
+
 ## Related Documents
 
 | Document | Relationship |
