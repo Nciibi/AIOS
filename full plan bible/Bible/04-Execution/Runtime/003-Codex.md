@@ -141,6 +141,7 @@ The provider communicates with the OpenAI REST API over HTTPS. Streaming uses se
 | Structured output validation | < 10ms | JSON schema validation overhead per response |
 | Batch embedding throughput | 100 inputs/s | Dependent on input size; parallel API calls |
 | Connection pool efficiency | 20 concurrent | Pool size matches max_parallelism |
+| Retry overhead per failed call | ~2s total | Cumulative with exponential backoff + jitter |
 
 ## Provider-Specific Metrics
 
