@@ -147,6 +147,18 @@ The Communication domain both consumes and provides communication services. Inte
 | R10 (Simpler Over Complex) | Conversation state machine is linear — no branching complexity |
 | R13 (Design for Failure) | Failed response generation returns graceful fallback message; conversation continues |
 
+## Performance Characteristics
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| Message processing time (simple) | < 500ms | 2 seconds |
+| Intent classification | < 200ms | 1 second |
+| Response generation (chat) | < 3 seconds | 10 seconds |
+| Sentiment analysis | < 300ms | 1 second |
+| Notification delivery | < 1 second | 5 seconds |
+| Conversation context retrieval | < 100ms | 500ms |
+| Channel adapter failover | < 5 seconds | 15 seconds |
+
 ## Related Documents
 
 | Document | Relationship |
@@ -156,9 +168,14 @@ The Communication domain both consumes and provides communication services. Inte
 | Physics/007-Capabilities.md | Capabilities — Communication capability bounds |
 | Physics/009-Interaction.md | Interaction — Communication domain implements human-AIOS interaction patterns |
 | Bible/02-Core/Sou/001-Reasoning.md | Reasoning — Intent resolution feeds Sou reasoning |
+| Bible/02-Core/Sou/002-Planner.md | Planner — Communication task planning |
 | Bible/02-Core/AGS/000-Overview.md | AGS — ChatWorker and SupportAgent Genome templates |
 | Bible/02-Core/Academy/000-Overview.md | Academy — User preference learning and conversation analytics |
+| Bible/02-Core/DTS/000-Overview.md | DTS — Intent confidence scoring |
+| Bible/02-Core/ROS/000-Overview.md | ROS — Token budget for chat responses |
 | Bible/06-Services/ACF/000-Overview.md | ACF — Communication transport for all domain operations |
 | Bible/04-Execution/Security/ATS/000-Auth-Methods.md | ATS — User authentication for message ingress |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — User identity for conversation sessions |
+| Bible/08-Interfaces/API/000-Specifications.md | API — Chat API contract specifications |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
