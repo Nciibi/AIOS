@@ -304,16 +304,19 @@ State queries are authorized (Invariant 7 — Event Access), but authorization i
 | Parent Entity State | Child Entity Allowed States |
 |--------------------|---------------------------|
 | Organization: Draft | None (children cannot exist) |
-| Organization: Active | Mission: Created, Active, Paused, Suspended; Session: any |
-| Organization: Suspended | Mission: Paused, Suspended; Session: Paused |
-| Organization: Dissolved | All children: terminal states |
+| Organization: Active | Mission: any; Session: any |
+| Organization: Suspended | Mission: Paused, Blocked; Session: Paused, Restarting |
+| Organization: Dissolved | All children: terminal states (Archived, Destroyed) |
 | Mission: Created | Session: Created |
+| Mission: Planned | Session: Created, Initialized |
 | Mission: Assigned | Session: Created, Initialized |
-| Mission: Active | Session: any non-terminal |
+| Mission: Running | Session: any non-terminal |
+| Mission: Waiting | Session: Paused, Restarting |
 | Mission: Paused | Session: Paused, Restarting |
+| Mission: Blocked | Session: Paused (resources held) |
+| Mission: Review | Session: Completed, Failed |
 | Mission: Completed | Session: Completed, Destroyed |
-| Mission: Failed | Session: Failed, Destroyed |
-| Mission: Abandoned | Session: Destroyed |
+| Mission: Archived | Session: Destroyed |
 
 ---
 
