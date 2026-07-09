@@ -113,6 +113,53 @@ OSYS does NOT:
 | Department Manager | OSYS/001-Architecture.md | Manages sub-Organization structure |
 | Governance Enforcer | OSYS/001-Architecture.md | Ensures Organizations comply with constitutional rules |
 
+## OSYS Data Flow
+
+```
+Organization Request (from Sou, Security Council, or Administrator)
+    │
+    ▼
+┌─────────────────────────────────────────┐
+│  OSYS Organization Factory               │
+│  ├── validate(request)                    │
+│  ├── request_identity(IDS)               │
+│  ├── request_budget(ROS)                 │
+│  └── create_org_record()                 │
+│         │                                │
+│         ▼                                │
+│  Created Organization (Registry)         │
+│         │                                │
+│         └──► OSYS Lifecycle Manager      │
+└─────────────────────────────────────────┘
+                     │
+                     ▼
+┌─────────────────────────────────────────┐
+│  OSYS Lifecycle Manager (002)            │
+│  ├── Created → Verified (Security Cncl)  │
+│  ├── Verified → Active (Automatic)       │
+│  ├── Active → Suspended (Security Cncl)  │
+│  ├── Suspended → Restored (Sec Cncl)    │
+│  ├── Active → Dissolved (Sec Cncl + Sou)│
+│  └── Dissolved → Archived (Automatic)   │
+│         │                                │
+│         ▼                                │
+│  Lifecycle Event → Event Store           │
+└─────────────────────────────────────────┘
+                     │
+                     ▼
+┌─────────────────────────────────────────┐
+│  OSYS Governance Enforcer                │
+│  ├── checkCompliance(org_id)             │
+│  ├── enforcePolicy(policy)              │
+│  └── reportViolation(violation)         │
+│         │                                │
+│         ▼                                │
+│  Compliance Report / Violation Event     │
+│         │                                │
+│         └──► Security Council            │
+└─────────────────────────────────────────┘
+```
+
 ## OSYS Invariants
 
 1. **Organization Is the Unit of Action**: Every mission, every Worker, every resource belongs to exactly one Organization. No orphan entities. (CPR-001)

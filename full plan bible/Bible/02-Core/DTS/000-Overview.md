@@ -158,6 +158,31 @@ DTS is NOT:
 | `DTS.ConfidenceThresholdExceeded` | Decision confidence crosses a threshold | decision_id, threshold, action_required |
 | `DTS.TrustDecayApplied` | Trust scores are decayed for inactivity | entity_id, decay_factor, time_period |
 
+## DTS vs Related Systems
+
+| System | Relationship | Boundary |
+|--------|-------------|----------|
+| DTS (Decision evaluation) | Scores decisions with confidence | Does not make or execute decisions |
+| Sou (Decision proposals) | Proposes decisions for evaluation | Does not score its own decisions |
+| DGP (Decision routing) | Routes decisions based on DTS scores | Does not evaluate confidence |
+| Trust Scorer (DTS component) | Scores entity trustworthiness | Does not authorize or authenticate |
+| Security Council (Authorization) | Authorizes decisions | Uses DTS scores but makes independent judgment |
+| Academy (Learning) | Trains ML predictor models | ML Predictor is one of four sim engines |
+
+## DTS Performance Requirements
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| Decision evaluation time (simple) | < 500ms | 2 seconds |
+| Decision evaluation time (complex, with sim) | < 5 seconds | 30 seconds |
+| Trust score query | < 100ms | 500ms |
+| Trust score update | < 200ms | 1 second |
+| Confidence calculation | < 100ms | 500ms |
+| Simulation (Monte Carlo, 1000 scenarios) | < 3 seconds | 10 seconds |
+| Simulation (Constraint Solver) | < 1 second | 5 seconds |
+| Cluster failover | < 30 seconds | 60 seconds |
+| Read replica sync lag | < 100ms | 500ms |
+
 ## Cross-Cutting Concerns
 
 ### Security
