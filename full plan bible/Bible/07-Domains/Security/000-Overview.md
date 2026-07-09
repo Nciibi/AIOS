@@ -147,6 +147,16 @@ All Security domain communication flows through ACF with high-priority classific
 | R9 (Deterministic) | Same target and toolset produces identical scan results |
 | R13 (Design for Failure) | Security operations fail closed — deny on uncertainty, preserve evidence |
 
+## Component Map
+
+| Component | Document | Function |
+|-----------|----------|----------|
+| Vulnerability Scanner | Security/001-VulnScan.md | CVE scanning, dependency checking, configuration auditing |
+| Penetration Testing Engine | Security/002-Pentest.md | Automated recon, exploit verification, privilege escalation testing |
+| Incident Response Manager | Security/003-IR.md | Incident detection, containment orchestration, evidence preservation |
+| Threat Intelligence Feeder | Security/004-ThreatIntel.md | IOC collection, TTP analysis, threat actor tracking, intel distribution |
+| Compliance Auditor | Security/005-Compliance.md | Regulatory standard checks, evidence collection, report generation |
+
 ## Performance Characteristics
 
 | Metric | Target | Hard Limit |

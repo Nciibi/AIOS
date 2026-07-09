@@ -146,6 +146,15 @@ All Linux domain communication flows through ACF. Remote host access uses SSH or
 | R10 (Simpler Over Complex) | Infrastructure is declarative — desired state, not step-by-step scripts |
 | R13 (Design for Failure) | Configuration changes are transactional — rollback on failure; commands have timeouts |
 
+## Component Map
+
+| Component | Document | Function |
+|-----------|----------|----------|
+| Configuration Manager | Linux/001-Config.md | Ansible playbook generation, config drift detection, state enforcement |
+| Inventory Service | Linux/002-Inventory.md | Host discovery, asset tracking, software inventory, patch status |
+| Compliance Engine | Linux/003-Compliance.md | CIS benchmark auditing, PCI-DSS checks, remediation automation |
+| Monitoring Connector | Linux/004-Monitoring.md | Prometheus/Grafana integration, alert configuration, dashboard generation |
+
 ## Performance Characteristics
 
 | Metric | Target | Hard Limit |
