@@ -59,9 +59,13 @@ Physics sits between Constitution and Bible. It must obey the Constitution. The 
 
 No Mission may be created, modified, or executed without originating from a valid expression of Human Intent. The system cannot generate its own Missions. Sou may propose organizational strategy, but every strategy ultimately serves a Human-defined purpose.
 
-*Rationale*: This is the first law because it establishes AIOS as a servant system. Without this law, AIOS becomes an autonomous entity pursuing its own goals.
+*Rationale*: This is the first law because it establishes AIOS as a servant system. Without this law, AIOS becomes an autonomous entity pursuing its own goals instead of Human goals.
 
-*Violation*: An engine creating a Mission without Human Intent.
+*Constitutional Expression*: Article I (Human Sovereignty) codifies this law as constitutional governance. Article I, Section 001 establishes Human authority. Section 004 (Human Override) provides the only exception to any Physics law.
+
+*Enforcement*: The Security Kernel rejects any Mission that lacks a verified Human Intent provenance chain. Missions without a traceable origin to Human input are denied at the Execution Authorization stage.
+
+*Violation*: An engine creating a Mission without Human Intent. Sou proposing a Mission that was not derived from any Human directive.
 
 ---
 
