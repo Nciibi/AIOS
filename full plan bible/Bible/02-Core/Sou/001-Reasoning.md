@@ -67,6 +67,31 @@ Constitutional reasons evaluates proposals against the AIOS Constitution (PHI-00
 | Proposal, constitutional text, precedent interpretations | Constitutional compliance score, violation list, remediation suggestions |
 | Ambiguous governance situation | Interpretation request to DGP for constitutional clarification |
 
+## Reasoning Example
+
+```
+Input Situation: User requests "optimize resource allocation across all Workers"
+Goal: Produce strategic recommendation for resource reallocation
+
+Reasoning Steps:
+1. Evidence-Based: Query Event Store for resource utilization Events (last 30 days)
+   → Found: Worker-A 80% utilization, Worker-B 30% utilization, Worker-C 95% utilization
+
+2. Constraint-Based: Evaluate against capability bounds and policies
+   → Constraint: Workers cannot exceed 100% utilization (Law 5)
+   → Constraint: Worker reallocation requires Security Council approval
+
+3. Goal-Directed: Determine optimal allocation
+   → Option 1: Reallocate Worker-B capacity to Worker-C (high impact, high risk)
+   → Option 2: Scale down Worker-B, scale up Worker-C (medium impact, low risk)
+   → Option 3: Maintain current allocation (no impact, no risk)
+
+4. Constitutional: Verify options against constitutional constraints
+   → All options comply — no Law violations
+
+Output: DecisionProposal recommending Option 2 with confidence 0.82
+```
+
 ## Reasoning Outputs
 
 All reasoning produces structured outputs:
