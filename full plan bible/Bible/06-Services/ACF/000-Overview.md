@@ -114,14 +114,98 @@ ACF derives from Physics/009-Interaction.md, which establishes the invariant tha
 | Foundations/007-Naming-Conventions.md | ACF addressing format | All ACF addresses follow the canonical naming format |
 | 05-Platform/008-BG.md | BG may bypass ACF controls in emergency | BG sessions can override ACF authorization |
 
+## ACF Component Interactions
+
+### Authentication Flow
+
+Every message goes through authentication at the ACF Gateway:
+
+1. Sender constructs message with auth_token (session token, API key, or certificate)
+2. ACF Gateway extracts auth_token and auth_type from envelope
+3. Gateway forwards token to Security Council ATS for verification
+4. ATS returns token validity and sender identity
+5. If invalid, Gateway rejects message with `ACF.AuthenticationFailed`
+6. If valid, Gateway proceeds to authorization
+
+### Authorization Flow
+
+After authentication, the Gateway authorizes the message:
+
+1. Gateway extracts sender identity (from token) and target address (from envelope)
+2. Gateway queries Security Council AZS for authorization decision
+3. AZS evaluates: does sender have permission to communicate with target?
+4. If denied, Gateway rejects with `ACF.AuthorizationDenied`
+5. If allowed, Gateway forwards to Message Broker
+
+### Message Lifecycle
+
+A complete message lifecycle:
+
+```
+1. Created by sender entity
+2. Sent via ACF Gateway (acquires message_id, timestamp)
+3. Authenticated (token verified)
+4. Authorized (route permitted)
+5. Queued in Message Broker (persisted if durable)
+6. Routed (target endpoint selected)
+7. Delivered to receiver's ACF Gateway
+8. Received by receiver entity
+9. Acknowledged by receiver
+10. Archived or purged (based on retention policy)
+```
+
+Each step produces at least one Event. The complete Event chain is queryable via AUS.
+
+## Security Model
+
+ACF's security model has three layers:
+
+| Layer | Component | Controls |
+|-------|-----------|----------|
+| **Transport** | mTLS | All ACF node-to-node communication is encrypted and mutually authenticated |
+| **Authentication** | ACF Gateway + ATS | Every message sender is verified via token validation |
+| **Authorization** | ACF Gateway + AZS | Every message target is checked against sender's permissions |
+
+### Security Events
+
+| Event | Severity | Response |
+|-------|----------|----------|
+| Authentication failure | Warning | Log, increment counter |
+| Repeated auth failure (3+) | Critical | Escalate to Security Council |
+| Authorization denial | Info | Log with sender, target, reason |
+| Unauthorized route attempt | Critical | Log, notify Security Council |
+| Malformed message | Warning | Reject, log sender |
+| Message with expired token | Info | Reject, prompt re-auth |
+
 ## Performance Targets
 
 | Metric | Target | Measurement |
 |--------|--------|-------------|
-| Message throughput | >100K msg/s per node | Continuous monitoring |
+| Message throughput | >100K msg/s per broker node | Continuous monitoring |
 | P50 latency (intra-instance) | <10ms | Rolling 1 hour |
 | P99 latency (intra-instance) | <100ms | Rolling 1 hour |
+| P50 latency (cross-instance, same region) | <100ms | Rolling 1 hour |
+| P99 latency (cross-instance, same region) | <500ms | Rolling 1 hour |
 | Delivery rate | 99.99% | Rolling 30 days |
-| Durability (persistent) | 99.9999% | Per-message |
-| DLQ rate | <0.1% | Rolling 7 days |
-| Cluster availability | 99.99% | Annual |
+| Durability (persistent messages) | 99.9999% | Per-message acknowledgment |
+| DLQ rate | <0.1% of total messages | Rolling 7 days |
+| Cluster availability | 99.99% | Annual measurement |
+| Max cluster nodes | 100 | Single ACF cluster |
+| Max connected instances | 50 | Cross-instance federation |
+
+## Error Classification
+
+ACF errors are classified into categories:
+
+| Category | Error Code Range | Description | Retryable? |
+|----------|-----------------|-------------|------------|
+| Authentication | ACF-001 — ACF-010 | Token validation failures | No |
+| Authorization | ACF-011 — ACF-020 | Permission check failures | No |
+| Message format | ACF-021 — ACF-030 | Envelope/payload validation | No |
+| Routing | ACF-031 — ACF-040 | Address resolution failures | Yes (transient) |
+| Delivery | ACF-041 — ACF-050 | Delivery attempt failures | Yes |
+| Subscription | ACF-051 — ACF-060 | Subscription management failures | No |
+| Stream | ACF-061 — ACF-070 | Stream processing failures | Yes |
+| Reliability | ACF-071 — ACF-080 | Retry/DLQ failures | Yes |
+| Distributed | ACF-081 — ACF-090 | Federation/bridge failures | Yes |
+| System | ACF-091 — ACF-100 | Internal ACF errors | Yes |
