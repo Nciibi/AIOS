@@ -141,11 +141,17 @@ Identity is not authentication, not authorization, not trust. It answers only on
 
 **Every entity follows its defined lifecycle. No orphan processes.**
 
-Every entity type has a prescribed lifecycle (Draft → Validation → Approval → Instantiation → Active → Suspended → Archived for resources; Created → Planned → Assigned → Running → Completed for Missions; and so on). Every entity must be in exactly one lifecycle state at all times. Transitions are authorized events. An entity in an undefined state is a violation.
+Every entity type has a prescribed lifecycle. Every entity must be in exactly one lifecycle state at all times. Transitions between states are authorized events that require evidence and verification. An entity in an undefined or unreachable state is a violation.
 
-*Rationale*: Lifecycles guarantee deterministic behavior, clean teardown, and resource recovery. Orphan processes would consume resources indefinitely.
+Entity types and their lifecycles include: resources (Draft → Validation → Approval → Instantiation → Active → Suspended → Archived), Missions (Created → Planned → Assigned → Running → Completed → Archived), Workers (Created → Initialized → Running → Completed → Destroyed), and identities (Created → Verified → Active → Suspended → Restored → Retired → Archived).
 
-*Violation*: A Worker that continues running after its Mission is completed.
+*Rationale*: Lifecycles guarantee deterministic behavior, clean teardown, and resource recovery. Orphan processes would consume resources indefinitely and create ungovernable entities. Every lifecycle transition is an opportunity for verification.
+
+*Constitutional Expression*: Article III, Part B, Section 006 (Lifecycles) defines the constitutional requirement that all entities have defined lifecycles. The Lifecycle Management System (LMS) in the Bible implements this as a shared framework.
+
+*Enforcement*: The Security Kernel validates every lifecycle transition against the defined state machine. Invalid transitions are denied. The LMS monitors all entities and reports state violations to OSYS. An entity stuck in an intermediate state for longer than its timeout is flagged and terminated.
+
+*Violation*: A Worker that continues running after its Mission is completed. An Organization that is deleted without going through the dissolution lifecycle. A Session that enters an undefined state from which it cannot transition.
 
 ---
 
