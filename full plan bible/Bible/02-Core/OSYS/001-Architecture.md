@@ -118,6 +118,62 @@ Departments are lightweight sub-Organizations. They share the parent Organizatio
 
 The Governance Enforcer runs continuously. It audits Organization operations against constitutional requirements and reports violations.
 
+## Organization Creation Flow — Detailed
+
+```
+1. Sou proposes "Create Research Division Organization"
+   → ACF message to DGP
+
+2. DGP routes to Security Council
+   → Security Council reviews proposal
+
+3. Security Council approves
+   → Authorization token sent to OSYS
+
+4. OSYS Factory:
+   a. Validates request: Organization type (ORG), parent (root), resource estimate (1000 CU)
+   b. Requests identity from IDS → Identity assigned: org-rsrch-001
+   c. Requests resource budget from ROS → Budget allocated: 1000 CU/month
+   d. Creates Organization record in Registry
+   e. Lifecycle Manager transitions to Verified (automatic after creation)
+
+5. Security Council authorizes Active transition
+   → Lifecycle Manager transitions to Active
+
+6. ACF notification broadcast:
+   → "Organization org-rsrch-001 is now Active"
+   → Parent Organization notified
+   → ROS activated budget
+```
+
+## Organization Department Operations
+
+### createDept(org_id, dept_spec)
+
+```
+Input:  parent_org_id, dept_spec { name, type, capabilities, policies }
+Process:
+  1. Validate dept_spec against parent's constitutional bounds
+  2. Create sub-Organization record with parent reference
+  3. Assign initial capabilities (subset of parent's)
+  4. Register with Registry
+Output: DepartmentRecord { dept_id, parent_id, name }
+Event: OSYS.DepartmentCreated
+```
+
+### assignToDept(entity_id, dept_id)
+
+```
+Input:  entity_id, dept_id
+Process:
+  1. Verify entity belongs to parent Organization
+  2. Verify dept_id is a sub-Organization of entity's Organization
+  3. Assign entity to department
+  4. Update capability scope (department capabilities apply)
+Output: AssignmentResult { entity_id, dept_id, capabilities }
+Event: OSYS.EntityAssignedToDepartment
+```
+
 ## Data Flow
 
 ```
