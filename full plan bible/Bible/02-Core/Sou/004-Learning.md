@@ -104,6 +104,31 @@ Output: ImprovementEvaluation { improved: bool, metrics, regression_check }
 Event: Sou.ImprovementEvaluated
 ```
 
+## Learning Example
+
+```
+Outcome Event: Mission "Resource-Opt-Q3" completed with 92% goal achievement
+Source: LMS (Lifecycle Event)
+
+ingestOutcome:
+  Evidence validation: All mission Events present (18 milestones, 3 deviation Events)
+  Outcome extraction: Goal achievement = 92%, key success = phased rollout
+  Classification: Positive outcome — update planning heuristic
+  → Event: Sou.LearningIngested { outcome_id, source: "mission", confidence: 0.95 }
+
+updateModel:
+  Model: PlanningHeuristic v3.2
+  Update: Increase weight of "phased rollout" in resource planning
+  Validation: All historical scenarios pass with new heuristic
+  → Event: Sou.ModelUpdated { model: "PlanningHeuristic", v3.2 → v3.3 }
+
+evaluateImprovement:
+  Test: Run 100 historical missions with old and new heuristic
+  Result: Old success rate: 73%, New success rate: 76% (+3%)
+  Regression: No scenario regresses by more than 1%
+  → Event: Sou.ImprovementEvaluated { improved: true, delta: +3% }
+```
+
 ## Learning Flow
 
 ```

@@ -19,6 +19,25 @@ Sou's Knowledge store is the constitutional memory of the AIOS will engine. It i
 
 Knowledge is private to Sou unless explicitly shared with the Academy under CPR-010 (Evidence Privacy). Sou's Knowledge is not directly accessible to other entities — it is queried through Sou's API.
 
+## Knowledge Storage Example
+
+```
+Type: Strategic Knowledge
+Payload: { context: "Q3-2026 resource optimization", 
+           decision: "phased rollout strategy",
+           outcome: "92% goal achievement",
+           confidence: 0.92 }
+Source Events: [EVT-mission-resource-opt-q3-completion, 
+                EVT-dgp-decision-approval-phased-rollout]
+Privacy Level: AcademyShareable
+Tags: ["resource-optimization", "phased-rollout", "q3-2026"]
+Expires: 2027-12-31
+
+→ Stored as: KNW-0042
+→ Later queried: "show me successful resource optimization strategies"
+→ Returned: KNW-0042 (confidence 0.92, tags: resource-optimization)
+```
+
 ## Knowledge Is Private
 
 Sou's Knowledge is distinct from the Academy's public knowledge:
