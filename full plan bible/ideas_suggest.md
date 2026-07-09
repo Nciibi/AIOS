@@ -312,3 +312,68 @@ These issues were discovered during supervisor review of 52 newly written 02-Cor
 ### Missing Dependencies
 - **No Physics/000-Laws.md reference in many files**: Several 02-Core files do not reference the foundational Laws document directly. While they reference Physics invariants, the source Law should be explicit.
 - **ACF protocol details**: Several files reference ACF stream topics (e.g., `academy.knowledge.proposed`) but no central ACF topic registry exists yet. These topic names should be consolidated in a future ACF specification.
+
+## Post-03-05-06 Audit — Issues Found
+
+These issues were discovered during supervisor review of 61 newly written files (03-Institutions: 16, 05-Platform: 14, 06-Services: 31):
+
+### Critical (Fixed)
+- **05-Platform/010-TEE.md**: Duplicate `## TEE Invariants` and `## Performance Characteristics` sections removed. The second Invariants set used `Freshness` (INV-005) vs original `No Persistence`; kept original.
+- **05-Platform/008-BG.md**: Redundant `## BG Invariant Summary` section (duplicated `## BG Invariants`) removed.
+- **06-Services/Cryptography/Random/000-Random.md**: Duplicate `## Cross-Cutting Concerns` section removed.
+- **06-Services/Cryptography/000-CSP.md**: Typo fixed (`non-sensive`→`non-sensitive`, `sensive`→`sensitive` in ASCII diagram).
+- **06-Services/Federation/000-Overview.md**: Duplicate Cross-Cutting Concerns subsections (Security, Evidence, Lifecycle, Capability Bounds appeared twice) removed.
+
+### Structural Gaps (Fixed)
+- Added missing **Events tables** and **Communication** subsections to 4 Crypto files: Certificates, HSM, KMS, Signatures.
+
+### Law Numbering — Systemic Inconsistency (Not Fully Resolved)
+The Bible has TWO conflicting law numbering conventions used interchangeably:
+
+| Law | Scheme A (Governance/Foundations) | Scheme B (02-Core, 05-Platform, 06-Services) |
+|-----|----------------------------------|----------------------------------------------|
+| 1 | **Evidence** | Origin / Identity |
+| 2 | Constitutional Supremacy | Non-Execution / Autonomy |
+| 3 | Communication | Capability Bounds |
+| 4 | *(unused)* | **Evidence** (dominant) |
+| 5 | Identity | Capability Bounds |
+| 6 | Lifecycle | Lifecycle |
+| 7 | Capability Bounds | Capability Bounds |
+| 8 | Verification-First | Verification-First |
+| 9 | Design DNA | Design DNA / Deterministic |
+| 10 | Tenure | Tenure / Execution |
+
+**Fixed**: Non-existent laws 12, 13 removed. "Law 8 — Proportionality" and "Law 12 — Bounded Capability" in ROS → canonical Law 7 — Capability Bounds. "Law 3 — Capability Bounds" across multiple files → Law 7. "Law 5 — Capability Bounds" → Law 7. "Law 1 — Identity" → Law 5.
+
+**Resolution needed**: Physics/000-Laws.md (the source of truth) doesn't exist yet. Once written, it should establish definitive Law 0-10 names, and all files should be bulk-updated to match.
+
+### Broken Cross-References (Systemic — Not Fixed)
+- **`Physics/` directory does not exist**: All ~100+ references to `Physics/XXX.md` are unresolvable. These files need to be created as the normative layer above Bible.
+- **Relative paths are wrong**: Files use absolute-style paths (e.g., `05-Platform/004-EVS.md` from `ACF/`) instead of correct relative paths (`../../05-Platform/004-EVS.md`). This applies to ~50+ cross-references across the new files.
+- **Prefix inconsistency**: Some references use `Foundations/` instead of `00-Foundations/`.
+
+### Missing Law 3 in ACF Files (Not Fixed)
+All 8 ACF files cite Law 4 (Evidence) and Law 5 (Identity) but none cite **Law 3 — Communication**, which should be the primary source law for the communication fabric itself.
+
+### Federation Files — Missing Law References (Not Fixed)
+Only 2 of 13 Federation files (000-Overview, 012-IXP) have all three expected laws (4, 5, 8). The other 11 miss Law 5 (Identity) and/or Law 8 (Verification-First).
+
+### 03-Institutions — Directory-Path Cross-References (Not Fixed)
+9 references across 6 files point to IDS/ATS directories rather than specific `.md` files (e.g., `Bible/04-Execution/Security/IDS` instead of `Bible/04-Execution/Security/IDS/000-Overview.md`).
+
+### Incomplete Design DNA (Not Fixed)
+Several Crypto files list only 3-5 of 15 Design DNA rules. Should be expanded to cover all rules:
+- Certificates: only R3, R10, R13
+- HSM: only R1, R10, R13, R14
+- KMS: only R1, R6, R10, R13, R14
+- Signatures: only R1, R9, R10, R14
+- Random: only R1, R9, R10, R13, R14 (after dedup)
+
+### ACF Overview Missing Formal Cross-Cutting Concerns (Not Fixed)
+ACF/000-Overview.md has Security Model, Design Decisions, and Performance Targets but lacks the standard `## Cross-Cutting Concerns` section with 6 subsisters found in all other ACF files (001-007). This is somewhat acceptable for an overview but should be aligned.
+
+### 05-Platform Cross-Reference Issues
+- 003-PSAP.md references `Standards/004-PSAP.md` — Standards/ directory does not exist.
+- Several files reference `Foundations/008-Object-Lifecycle.md` instead of `00-Foundations/008-Object-Lifecycle.md`.
+- 010-TEE.md references `Crypto/000-Overview.md` — actual file is `Crypto/000-CSP.md`.
+- 012-CP.md references `ATS/000-ATS.md` — actual file is `ATS/000-Auth-Methods.md`.
