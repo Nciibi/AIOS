@@ -60,6 +60,10 @@ The Ollama Provider executes model inference actions against locally hosted mode
 | Ollama service restarts during execution | Retry with exponential backoff; return Failed if unavailable |
 | Multiple concurrent embedding requests | Batch embeddings into single API call when possible |
 
+## Model Selection Strategy
+
+The provider selects models based on capability bounds and hardware availability. The selection priority is: allowed model list from capability bounds → model availability (loaded in GPU) → model size (fits within VRAM budget) → model capability (supports the requested action type). If no model satisfies all constraints, the provider returns an Unsupported error with details on which constraint was not met.
+
 ## Integration Patterns
 
 The Ollama Provider is the default provider for air-gapped deployments where external API access is restricted or prohibited. It integrates with the Academy Knowledge Graph by providing local embedding generation for document indexing without data leaving the private network. For inference, the provider is typically used alongside the Claude or Codex providers in a tiered model strategy — Ollama handles low-complexity, high-volume inference while Claude/Codex handle complex reasoning. The provider also supports fine-tuned model serving for domain-specific tasks through custom Modelfile definitions.

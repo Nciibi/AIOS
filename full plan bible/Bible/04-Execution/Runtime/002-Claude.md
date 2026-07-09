@@ -79,6 +79,10 @@ The provider tracks input tokens (system prompt + messages) and output tokens (c
 | Model returns unexpected stop_reason | Map to CLD-3002; log for analysis |
 | API version mismatch | Negotiate API version; fail closed if incompatible |
 
+## Model Selection Strategy
+
+The provider supports automatic model selection based on task complexity indicators in the execution token: token budget, required capabilities (vision, tools, structured output), and latency requirements. When a capability bound specifies multiple allowed models, the provider selects the cheapest model that satisfies all task requirements. The selection algorithm is deterministic — the same input always produces the same model choice.
+
 ## Integration Patterns
 
 The Claude Provider is typically used as the primary model provider for Sou Reasoning and Worker Session execution. It integrates with the Knowledge Graph via embedding-capable Claude models to provide semantic search over Academy knowledge. For cost-sensitive operations, the provider supports automatic fallback from Claude Opus to Claude Sonnet or Claude Haiku based on token budget thresholds declared in the capability bounds.

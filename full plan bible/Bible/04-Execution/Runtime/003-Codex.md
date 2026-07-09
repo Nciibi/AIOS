@@ -65,6 +65,10 @@ When `response_format` is `json_schema`, the provider validates the schema again
 | Vision input exceeds model's image limit | Downsample images; reject if still over limit |
 | Streaming chunk interleaving for parallel calls | Buffer by execution_id; reassemble in order |
 
+## Model Selection Strategy
+
+The provider selects the optimal model based on action type and capability bounds. For `model.inference`, it prefers gpt-4o-mini for simple tasks and gpt-4o for complex tasks. For `model.codegen`, it selects o-series models for algorithmic code generation and gpt-4o for boilerplate or configuration code. For structured output, it uses gpt-4o with `response_format: json_schema`. The selection is deterministic and logged in the InferenceStarted Event.
+
 ## Integration Patterns
 
 The Codex Provider is the primary code generation engine for Worker Sessions that write software, generate scripts, or produce structured data. It integrates with the Knowledge Graph through structured output schemas that define the data contract. For code generation workflows, the provider chains with a Security Council verification step that scans generated code for prohibited patterns before returning to the requesting entity. The provider also supports batch embedding generation through GPT-4o's embedding capabilities for downstream RAG workflows.
