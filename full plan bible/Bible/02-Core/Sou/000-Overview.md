@@ -111,6 +111,34 @@ Sou proposes decisions. DGP (Governance/002-DGP.md) routes them:
 
 5. **Learning Integrity**: Sou learns only from evidence. Learning is bounded by laws (CPR-009), evidenced (PHI-008), and privacy-preserving (CPR-010). (PHI-006)
 
+## Edge Cases — Sou Operations
+
+| Scenario | Handling |
+|----------|----------|
+| Reasoning cannot reach a conclusion | Sou produces "Inconclusive" report with evidence gaps identified. No proposal is sent to DGP. |
+| Planner cannot find a feasible plan | Sou reports infeasibility to Reasoning. Reasoning may adjust goal constraints. |
+| Learning receives conflicting evidence | Evidence is weighted by source trust score. Lower-trust evidence is deprioritized. |
+| Knowledge store is unavailable | Sou operates with degraded reasoning — no knowledge queries, only evidence-based reasoning. |
+| DGP is unavailable | Sou queues proposals. If DGP remains unavailable beyond TTL, Sou alerts Security Council. |
+| Academy is unavailable for learning | Learning continues with mission and decision outcomes only. Academy knowledge is skipped. |
+| Mission evidence is incomplete | Sou evaluates with available evidence, notes gaps, and adjusts confidence accordingly. |
+| Entity trust score is stale | DTS decays trust scores over time. Stale scores approach 0.3 (default minimum). |
+| Sovereign override in progress | All Sou operations check for Human Override status. If active, proposals are flagged accordingly. |
+
+## Sou Internal Communication Flow
+
+```
+1. External event arrives via ACF (e.g., new goal from User)
+2. Reasoning ingests event, produces analysis
+3. Reasoning passes goal to Planner
+4. Planner produces mission plan
+5. Missions component packages plan as proposal
+6. Proposal sent to DGP via ACF
+7. Outcome event arrives (decision approved/rejected)
+8. Learning ingests outcome
+9. Knowledge stores lessons learned
+```
+
 ## Sou Events
 
 | Event Type | Produced When | Fields |

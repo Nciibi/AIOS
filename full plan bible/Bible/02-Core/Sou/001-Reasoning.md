@@ -153,6 +153,30 @@ Stored: Sou Knowledge store (temporary, used by Planner)
 | `Sou.DecisionProposed` | proposeDecision succeeds | decision_id, decision_type, constitutional_score |
 | `Sou.ReasoningConstraintViolation` | A constraint blocks the proposal | reason_id, constraint_type, violation_details |
 
+## Edge Cases — Reasoning
+
+| Scenario | Handling |
+|----------|----------|
+| Conflicting evidence from equally trusted sources | Reasoning applies consistency weighting. If evidence is irreconcilable, both sides are presented with confidence reduced accordingly. |
+| Goal is underspecified | Reasoning requests clarification from goal source. If unavailable, reasoning proceeds with assumptions documented in the output. |
+| Constitutional ambiguity | Reasoning flags ambiguous constraints. Decision proposal includes request for constitutional clarification from DGP. |
+| Evidence stream interrupted mid-reasoning | Reasoning continues with available evidence. Gaps are noted in output. |
+| Reasoning takes too long | Reasoning has configurable time budget (default 30s). Exceeding budget produces partial results with reduced confidence. |
+| All reasoning methods fail | Sou produces "Unable to Reason" result with error details. No proposal is generated. |
+| Circular reasoning dependency | Dependency cycle detector (SOU_RSN_003) breaks the cycle by selecting the most authoritative source. |
+| Entity under Human Override | Reasoning checks override status. If override is active, all proposals are flagged accordingly. |
+
+## Reasoning Performance Requirements
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| Time to propose simple decision | < 1 second | 5 seconds |
+| Time to propose complex decision | < 5 seconds | 30 seconds |
+| Time to analyze situation | < 2 seconds | 10 seconds |
+| Time to evaluate options | < 3 seconds | 15 seconds |
+| Maximum reasoning depth | 10 levels | 20 levels |
+| Maximum options evaluated | 50 options | 100 options |
+
 ## Error Codes (R12)
 
 | Code | Description |
