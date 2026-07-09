@@ -38,6 +38,32 @@ The Ollama Provider executes model inference actions against locally hosted mode
 6. Provider monitors inference time and resource consumption against capability bounds
 7. On completion, provider returns the generated response with metrics
 
+## Configuration
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| endpoint | `http://localhost:11434` | Ollama service endpoint |
+| default_model | `llama3` | Default model for inference |
+| model_pull_timeout_ms | 300000 | Timeout for pulling a model before marking unavailable |
+| keep_alive_seconds | 300 | Duration to keep model loaded in GPU memory |
+| max_loaded_models | 2 | Maximum models loaded simultaneously per GPU |
+| gpu_layers | -1 | Number of layers to offload to GPU (-1 = all) |
+| num_ctx | 4096 | Context window size in tokens |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| Model not pulled but storage space insufficient | Return StorageExhausted error; suggest freeing space |
+| GPU memory fragmentation after many model loads | Periodically unload all models and reload on demand |
+| Embedding dimension mismatch between models | Normalize embeddings to maximum dimension; pad shorter vectors |
+| Ollama service restarts during execution | Retry with exponential backoff; return Failed if unavailable |
+| Multiple concurrent embedding requests | Batch embeddings into single API call when possible |
+
+## Integration Patterns
+
+The Ollama Provider is the default provider for air-gapped deployments where external API access is restricted or prohibited. It integrates with the Academy Knowledge Graph by providing local embedding generation for document indexing without data leaving the private network. For inference, the provider is typically used alongside the Claude or Codex providers in a tiered model strategy — Ollama handles low-complexity, high-volume inference while Claude/Codex handle complex reasoning. The provider also supports fine-tuned model serving for domain-specific tasks through custom Modelfile definitions.
+
 ## Embedding Support
 
 The `model.inference.embed` action type generates vector embeddings using Ollama's embedding API. Parameters include: model, input text(s), and options (truncate). This enables local embedding generation for Knowledge Graph and RAG workflows without external API calls.
