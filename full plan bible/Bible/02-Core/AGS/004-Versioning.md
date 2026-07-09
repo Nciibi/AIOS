@@ -60,6 +60,45 @@ Draft → Validated → Published → Active → Deprecated → Archived
 | Deprecated | Still usable for existing sessions, no new sessions | No (new) | Yes (active, with deprecation notice) |
 | Archived | Removed from all use | No | Must migrate before archive |
 
+## Versioning Example
+
+```
+Genome: Worker (genome_id: wkr-001)
+
+Version 1.0.0 (initial):
+  capabilities: [communicate, execute, report]
+  bounds: { max_concurrent: 5 }
+
+Version 1.1.0 (minor — added optional capability):
+  capabilities: [communicate, execute, report, preview]  // preview is optional
+  bounds: { max_concurrent: 5 }
+  ✓ Compatible — existing Sessions unaffected
+
+Version 2.0.0 (major — capability removed):
+  capabilities: [communicate, execute]  // report capability removed
+  bounds: { max_concurrent: 5 }
+  ✗ Breaking — Sessions using report must migrate or lose capability
+  Migration: Sessions using report must be notified and reassigned
+```
+
+## Migration Process
+
+When a breaking version change occurs, Sessions must migrate:
+
+```
+1. Version 2.0.0 released (breaking change)
+2. AGS identifies all Sessions using version 1.x.x
+3. AGS notifies affected Sessions and their parent Organizations
+4. Each Session has a migration window (configurable, default 30 days)
+5. Within the window, Session may:
+   a. Request migration to new version
+   b. Request exemption (requires Security Council approval)
+   c. Accept deprecation (capabilities removed)
+6. After window expires, Sessions that have not migrated are:
+   a. If compatible downgrade exists → auto-migrated
+   b. If no downgrade exists → capability revoked, Security Council notified
+```
+
 ## Version Operations
 
 ### createVersion(genome_id, version_delta, change_description)
