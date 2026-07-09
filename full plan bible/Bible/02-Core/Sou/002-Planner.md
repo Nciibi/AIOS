@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Core |
 | Document ID | AIOS-BBL-002-SOU-002 |
-| Source Laws | Law 2 — Law of Non-Execution, Law 4 — Law of Evidence, Law 5 — Law of Capability Bounds, Law 6 — Law of Lifecycle Compliance |
+| Source Laws | Law 2 — Law of Non-Execution, Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds, Law 6 — Law of Lifecycle Compliance |
 | Source Physics | Physics/005-Events.md, Physics/006-Lifecycles.md, Physics/007-Capabilities.md, Physics/004-Sessions.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
