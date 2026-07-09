@@ -51,6 +51,52 @@ CSP selects the best available source in order:
 
 UUIDs follow RFC 4122 v4 (random). Format: `xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx` where x is random and y is the variant bits (10xx). UUIDs are generated from HSM or OS entropy, never from CSPRNG.
 
+### getRandomInt
+
+Returns a uniformly distributed integer in the range [min, max] inclusive. Uses rejection sampling to avoid modulo bias. For cryptographic use (e.g., selecting a random session from a pool), the operation uses HSM or OS entropy. For non-cryptographic use (e.g., jitter calculation), CSPRNG is acceptable.
+
+### shuffle
+
+Fisher-Yates (Knuth) shuffle operating in-place on the input array. Used for load balancing, random selection, and test vector generation. Non-cryptographic only — uses CSPRNG. Entities requiring cryptographic shuffle must call getRandomBytes and implement their own protocol.
+
+## Operation Error Codes
+
+| Error Code | Condition | Recovery |
+|-----------|-----------|----------|
+| RNG_001 | count exceeds maximum (1MB) | Reduce count |
+| RNG_002 | min >= max in getRandomInt | Correct range |
+| RNG_003 | All entropy sources depleted | HSM, OS, RDRAND all failed |
+| RNG_004 | CSPRNG seed corrupted | Automatic re-seed |
+
+## Entropy Sources Detail
+
+### HSM Hardware RNG
+- True hardware entropy based on quantum or electronic noise
+- Entropy rate: 100+ Mbps
+- Compliance: FIPS 140-2 Level 3 (physical HSM), FIPS 140-2 Level 2 (cloud HSM)
+- Health test: continuous self-test per FIPS standards
+- Fallback: CPU RDRAND if HSM unavailable
+
+### CPU RDRAND
+- On-chip digital random number generator (Intel/AMD)
+- Entropy rate: 500+ Mbps
+- Compliance: NIST SP 800-90A/B/C
+- Health test: CPU status flag (CF=1 indicates valid random data)
+- Fallback: OS entropy pool if RDRAND unavailable or disabled
+
+### OS Entropy Pool
+- Kernel-collected entropy from interrupt timings, disk I/O, network events
+- Source: /dev/urandom (Windows: CryptGenRandom)
+- Entropy rate: dependent on system activity
+- Health test: available entropy count (getrandom() with GRND_NONBLOCK)
+- CSP reads 32 bytes on each cryptographic operation
+
+### CSPRNG (Deterministic)
+- Algorithm: CTR_DRBG (NIST SP 800-90A) with AES-256
+- Seeded from OS entropy pool (32 bytes) + timestamp + PID
+- Re-seed interval: 1 hour or after 10,000 output calls
+- Output limit: 2^19 bytes per seed
+
 ## Entropy Monitoring
 
 CSP monitors entropy levels continuously and alerts the Security Council if entropy drops below threshold.
