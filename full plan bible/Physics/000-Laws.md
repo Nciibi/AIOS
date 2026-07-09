@@ -20,6 +20,18 @@ Physics defines the universal system laws of AIOS. These are not rules, not guid
 
 Every engine, every institution, every line of code derives from these laws. A system that violates a Physics law is not AIOS.
 
+## What Physics Is Not
+
+- Physics is not documentation. It defines what MUST always be true, not what the system looks like.
+- Physics is not code. It defines invariants, not algorithms.
+- Physics is not governance. The Constitution decides who is allowed to do what. Physics decides what is fundamentally possible.
+- Physics is not a style guide. The Bible defines how AIOS is built.
+- Physics is not a process. RFCs define how the system changes.
+
+## What Physics Requires
+
+Every tier below Physics must reference the laws it derives from. Every Bible specification must state which Physics laws govern its subsystem. Every RFC must assess whether the proposed change is compatible with all 10 laws. Every implementation must be verifiable against the invariants.
+
 ---
 
 ## Relationship to Other Tiers
