@@ -11,244 +11,84 @@
 
 ---
 
-# 1. Purpose
+# Purpose
 
-This section establishes the constitutional principles governing the evolution of the AIOS Constitution itself.
+The AIOS Constitution is intended to govern an operating system that will evolve over time.
 
-The Constitution is designed to endure.
+To remain authoritative across changing technologies, implementations and operational models, the Constitution recognizes governed evolution as a constitutional authority.
 
-It is not designed to remain unchanged.
-
-Constitutional evolution exists to ensure that AIOS remains technically relevant, architecturally coherent and constitutionally consistent while preserving its foundational principles.
+Evolution exists to preserve the long-term relevance of the Constitution without compromising its identity.
 
 ---
 
-# 2. Constitutional Principle
+# Constitutional Principle
 
-The Constitution SHALL evolve through governed constitutional processes.
+The Constitution MAY evolve.
 
-Constitutional evolution SHALL preserve continuity.
+Its identity SHALL remain continuous.
 
-Constitutional evolution SHALL preserve constitutional identity.
+Every constitutional evolution SHALL preserve the principles upon which AIOS is founded.
 
-Constitutional evolution SHALL never compromise constitutional integrity.
-
-Evolution without governance is constitutionally prohibited.
+Evolution is recognized as a means of preserving the Constitution, not replacing it.
 
 ---
 
-# 3. Constitutional Identity
+# Constitutional Authority
 
-The Constitution possesses a permanent constitutional identity.
+The authority to evolve this Constitution exists solely within the governance established by Article V.
 
-Individual articles, sections and appendices MAY evolve.
+No constitutional provision may be modified, removed or introduced except through the constitutional processes defined herein.
 
-The constitutional identity of AIOS SHALL remain continuous across versions.
-
-Constitutional evolution SHALL preserve historical lineage.
+Any change performed outside this authority SHALL possess no constitutional validity.
 
 ---
 
-# 4. Objectives
+# Constitutional Identity
 
-Constitutional evolution exists to
+The AIOS Constitution possesses a continuous constitutional identity independent of its individual versions.
 
-• preserve architectural coherence,
+Articles, sections and provisions MAY change through governed evolution.
 
-• incorporate verified knowledge,
+The Constitution itself SHALL remain the same constitutional authority throughout its evolution.
 
-• enable long-term maintainability,
+Evolution creates new constitutional versions.
 
-• support technological advancement,
-
-• eliminate ambiguity,
-
-• improve constitutional clarity,
-
-• preserve backwards constitutional understanding.
-
-Constitutional evolution SHALL strengthen the Constitution.
-
-It SHALL NOT weaken it.
+It does not create a new Constitution.
 
 ---
 
-# 5. Governing Principles
+# Constitutional Constraints
 
-Every constitutional evolution SHALL be
+Constitutional evolution SHALL
 
-Governed.
-
-Evidence-based.
-
-Documented.
-
-Reviewable.
-
-Traceable.
-
-Versioned.
-
-Explainable.
-
-Historically preserved.
-
-Reproducible.
-
-No constitutional modification SHALL occur outside these principles.
-
----
-
-# 6. Sources of Evolution
-
-Constitutional evolution MAY originate from
-
-• architectural discoveries,
-
-• operational evidence,
-
-• implementation experience,
-
-• verified research,
-
-• security discoveries,
-
-• governance improvements,
-
-• constitutional ambiguities,
-
-• formal amendment proposals.
-
-Unverified opinion SHALL NOT constitute sufficient justification.
-
----
-
-# 7. Scope
-
-Constitutional evolution MAY
-
-clarify existing provisions,
-
-extend constitutional capabilities,
-
-introduce new constitutional concepts,
-
-remove deprecated constitutional concepts,
-
-restructure constitutional organization,
-
-improve constitutional precision.
-
-Constitutional evolution SHALL NOT invalidate constitutional history.
-
----
-
-# 8. Preservation
-
-Every constitutional revision SHALL preserve
-
-• previous versions,
-
-• amendment history,
-
-• rationale,
-
-• approval history,
-
-• affected documents,
-
-• compatibility information.
-
-Historical constitutional versions SHALL remain permanently accessible.
-
----
-
-# 9. Constraints
+- preserve constitutional continuity;
+- preserve constitutional history;
+- preserve constitutional authority;
+- preserve constitutional coherence.
 
 Constitutional evolution SHALL NOT
 
-bypass constitutional governance,
-
-erase constitutional history,
-
-introduce contradictory constitutional authority,
-
-silently modify constitutional meaning,
-
-weaken constitutional guarantees without formal amendment.
-
-These constraints are permanent.
+- invalidate previously ratified constitutional history;
+- circumvent constitutional governance;
+- silently alter constitutional meaning;
+- weaken constitutional authority through informal change.
 
 ---
 
-# 10. Constitutional Continuity
+# Relationship
 
-Every constitutional revision SHALL maintain an identifiable relationship with previous constitutional versions.
+This section establishes the constitutional authority for evolution.
 
-Evolution is continuous.
+The processes governing Amendments, Review, Ratification, Versioning, Compatibility, Migration and Interpretation derive their authority from this section.
 
-It is never replacement.
-
----
-
-# 11. Constitutional Invariants
-
-The following statements SHALL always remain true.
-
-The Constitution evolves through governance.
-
-Every constitutional revision is traceable.
-
-Every constitutional revision is versioned.
-
-Every constitutional revision preserves history.
-
-Constitutional evolution is evidence-based.
-
-The Constitution remains the supreme authority.
-
----
-
-# 12. Relationship to Other Constitutional Concepts
-
-Constitutional Evolution governs
-
-• Constitutional Amendments
-
-• Constitutional Review
-
-• Constitutional Ratification
-
-• Constitutional Versioning
-
-• Constitutional Compatibility
-
-• Constitutional Migration
-
-• Constitutional Deprecation
-
-• Constitutional Interpretation
-
-It defines the legal framework through which the Constitution changes.
-
----
-
-# 13. Rationale
-
-AIOS is intended to operate for decades across changing technologies, execution environments and operational models.
-
-A static constitution cannot support a dynamic operating system.
-
-Conversely, an uncontrolled constitution cannot preserve long-term trust.
-
-Governed constitutional evolution balances stability with progress.
+No subsequent provision of Article V may contradict the principles established herein.
 
 ---
 
 # Final Statement
 
-The AIOS Constitution is designed to evolve.
+The AIOS Constitution is designed to endure.
 
-Its evolution shall always remain governed, evidence-based, historically traceable and constitutionally consistent.
+Its continued authority depends not upon remaining unchanged, but upon evolving through governed constitutional processes while preserving its identity, integrity and continuity.
 
-The Constitution shall improve continuously without ever abandoning the principles upon which AIOS is founded.
+Constitutional evolution is therefore recognized as a permanent constitutional authority.
