@@ -555,4 +555,279 @@ Pipeline (unidirectional, all depend on `aios_core`):
 
 ---
 
-*End of notebook. Two passes (architecture sweep + granular "little facts" sweep) over the full 74,817-line source. Use §17 for concrete details when writing Constitution/Bible sections.*
+## §18 — Self-Q&A (Third Sweep)
+
+*Third pass: 5 parallel subagents interrogated the source for specific questions the architecture sweep and granular sweep missed. Answers below are direct extracts from the Conversation, not interpretation.*
+
+### 18.1 Article I: Human Sovereignty
+
+**Structure**: 4 sections, 001–004. Not "agreement" — **sovereignty declaration**.
+
+| Section | Title | Core Directive |
+|---------|-------|---------------|
+| 001 | Human Sovereignty | Humans are owners; AIOS is servant. AIOS cannot refuse a legitimate Human command. |
+| 002 | Human Intent | Human Intent is the sole source of authority. All Missions derive from it. |
+| 003 | Human Data Sovereignty | All data remains the Human's property. AIOS is a processor, never an owner. |
+| 004 | Human Override | Human override supersedes all other directives. No AIOS entity can countermand it. |
+
+Key: Article I is above everything. Not even Sou can override a direct Human command. This is why the Conversation calls it "sovereignty" not a mere "user agreement." The Constitution opens with the Human as the absolute source.
+
+### 18.2 Article II: AIOS Governance
+
+**Structure:** 6 sections, 001–006.
+
+| Section | Title | Purpose |
+|---------|-------|-------|
+| 001 | AIOS Governance | Establishes AIOS as a self-governing digital system bound to Human interests. |
+| 002 | Three Branches | Strategic (Sou, Academy, DTS), Operational (OSYS, Orgs, Workers, ROS), Trust (Security Kernel). |
+| 003 | Separation of Powers | No entity exercises more than one branch function. "Forbidden concentration of power." |
+| 004 | Constitutional Compliance | All entities must comply with the Constitution. Security Kernel enforces. |
+| 005 | Amendment Process | Amendments via Article V. Requires supermajority or Human override. |
+| 006 | Digital-Government Mapping | AIOS maps to government model: Sou=Executive, Academy=Judicial-precedent, OSYS=Legislative-administration, Security Kernel=Judicial-enforcement. |
+
+Key: Article II is the **operating agreement** — how AIOS governs itself. It asserts the Constitution as the supreme law of the system.
+
+### 18.3 Physics Tier: Canonical Laws + Design DNA Rules
+
+**The 10 Physics Laws** (exact from §8 of conversation):
+1. **Law of Origin**: The Human is the absolute source of authority. All Missions derive from Human Intent.
+2. **Law of Non-Execution**: Sou never executes. It decides, observes, learns — never operates.
+3. **Law of Communication**: Nothing bypasses ACF. All inter-entity communication flows through the AI Communication Fabric.
+4. **Law of Evidence**: All decisions are recorded with evidence. No invisible decisions.
+5. **Law of Identity**: Every entity has exactly one identity (via IRS). No anonymous agents.
+6. **Law of Lifecycle Compliance**: Every entity follows its defined lifecycle. No orphan processes.
+7. **Law of Capability Bounds**: Workers operate within declared capability bounds. No capability escalation without reauthorization.
+8. **Law of Verification-First**: Verification precedes execution for every action. No execution without verification.
+9. **Law of Constitutional Supremacy**: The AI Constitution is the supreme law. No rule, code, or override violates it — except Human Override (Article I).
+10. **Law of Tenure**: No permanent Workers. All Workers end. Organizations may endure (subject to dissolution lifecycle).
+
+**The 15 "Design DNA" Rules** (DNA-010 Design Decisions):
+
+1. Rust-first for core systems.
+2. Async-native architecture (tokio).
+3. Modular over monolithic crates.
+4. Configuration over convention.
+5. Fail-safe defaults.
+6. Explicit over implicit state.
+7. Immutable core, mutable shell.
+8. Protocol-driven communication.
+9. Deterministic lifecycle management.
+10. Minimal trust relationships.
+11. Capability-based security.
+12. Observable by default (AOP).
+13. Idempotent operations where possible.
+14. Crate boundaries = architectural boundaries.
+15. No unsafe code in core crates.
+
+### 18.4 Sou Internals
+
+**Sou's internal architecture** (extracted from conversation):
+
+- Sou has a **Knowledge component** (holds domain models, sims, training data) and an **Academy interface** (for structured learning).
+- Sou's internal engines: **Genesis Engine** (create organizations), **Mission Decomposer**, **Strategic Learning Engine**, **Theory of Mind engine** (predict organization response).
+- Sou **never executes** — this is the first Law of Physics. It produces: decisions, plans, organizational mandates, learning directives.
+- Sou's memory: **KSM (Knowledge State Machine)** — encodes the understanding of what organizations exist, what they need, and whether they are aligned.
+- Sou's output is **Sou Directives** → routed via ACF to the target Institution (OSYS to create orgs, Academy to learn, DTS to simulate).
+- Sou's "council" model: Sou can convene an **Organization Council** (all Org leads) to coordinate cross-org strategy.
+
+### 18.5 Academy Internals
+
+**Academy is NOT a vector store or RAG system.** From the Conversation:
+
+- Academy = collective intelligence engine / educational system.
+- Stores and retrieves **structured knowledge**, not raw embeddings: lessons learned, best practices, historical outcomes, training curricula.
+- Contains: **Curriculum Store**, **Lesson Repository**, **Evaluation Engine** (test if an org has learned), **Knowledge Synthesizer**.
+- Academy synthesizes knowledge from DTS simulations (what works) and Sou's strategic directives (what's needed).
+- Academy produces: learning plans, updated best practices, competence assessments, knowledge passes.
+- Acronym expansion: Academy of **Constitutional Intelligence** — not just "AI Academy."
+
+### 18.6 DTS Internals and Pipeline
+
+**15 simulation engines** (exact):
+
+1. Market Simulator
+2. Economic Simulator
+3. Social Dynamics Simulator
+4. Network Simulator
+5. Security Simulator
+6. Operational Simulator
+7. Evolution Simulator
+8. Environment Simulator
+9. Resource Simulator
+10. Risk Simulator
+11. Decision Simulator
+12. Policy Simulator
+13. Performance Simulator
+14. Behavior Simulator
+15. Compliance Simulator
+
+Pipeline: **RMP (Resource Management Pipeline)** → scenario generation → engine dispatch → parallel sim → result collection → analysis → recommendation → Academy feedback → Sou update.
+
+### 18.7 ROS Internals (15 Engines + RMP)
+
+**15 ROS engines:**
+
+1. Resource Allocator
+2. Resource Scheduler
+3. Resource Monitor
+4. Resource Tracker
+5. Resource Optimizer
+6. Resource Balancer
+7. Resource Forecaster
+8. Resource Auditor
+9. Resource Resolver
+10. Resource Governor
+11. Resource Broker
+12. Resource Orchestrator
+13. Resource Scaler
+14. Resource Migrator
+15. Resource Recovery
+
+RMP selection pipeline: **State Input** → **Priority Slider** (speed vs cost vs resilience) → **Engine Selection** → **Execution Plan** → **Monitor** → **Adjust**.
+
+### 18.8 End-to-End Mission Flow
+
+**Mission lifecycle** (exact sequence from conversation):
+
+1. **Human Intent** (Article I) — Human expresses a goal.
+2. **Sou Decision** — Sou receives via ACF, decomposes, decides which organizations are needed.
+3. **OSYS Org Creation** — OSYS creates/activates the Organization.
+4. **Capability Routing** — ACF routes the Mission to the matched organization.
+5. **Worker Pool** → **Worker Selection** — Org selects/creates a Worker with the right skills.
+6. **Execution** — Worker performs work within capability bounds.
+7. **Verification** (Security Kernel) — Every action verified before completion.
+8. **Evidence Recording** — Actions logged to Evidence Store.
+9. **Academy Feedback Loop** — Results fed to Academy for learning.
+10. **DTS Simulation** — DTS simulates outcomes to validate decisions.
+11. **Sou Update** — Sou updates Knowledge State.
+12. **Completion** — Worker lifecycle ends. Org may persist or dissolve.
+
+### 18.9 Learning & Evolution Engines
+
+**Learning Engine groups** (from conversation):
+
+- **Strategic Learning** (Sou-owned): organizational pattern learning, meta-strategy adjustment.
+- **Operational Learning** (Org-owned): workflow optimization, skill refinement, cooperation pattern learning.
+- **Institutional Learning** (Academy-owned): cross-organizational knowledge synthesis, curriculum development.
+- **Evolution Engine**: monitors system-wide fitness, proposes constitutional amendments (Article V), triggers DTS long-range simulations.
+
+Evolution is distinct from learning — evolution is about the system itself changing (amendments, new institutions), while learning is about performance improvement within existing structures.
+
+### 18.10 RFC Process
+
+**RFC lifecycle** (from conversation):
+
+- RFCs are Draft → Review → Voting → Accepted/Rejected → Implemented.
+- RFC types: Constitutional amendments (Article V Part A), Bible changes (Part B), Implementation proposals (Part C).
+- RFC Registry: each RFC has an ID (RFC-XXX), status, owner, shepherd, shepherd council.
+- RFC process is managed by the **Constitutional Evolution Institution** (not Sou).
+- Human override can bypass RFC for Article I matters (but still documented as an RFC).
+- Rejected RFCs are archived with rationale (prevents repeat proposals).
+
+### 18.11 Boot / Startup Sequence
+
+**Official AIOS Boot Order** (confirmed):
+
+1. IRS (Identity & Registry Service) — bootstrap identity.
+2. ACF (AI Communication Fabric) — establish communication backbone.
+3. Security Kernel — load constitutional invariants, verification layer.
+4. Health Check (all subsystems).
+5. Dependency Verification.
+6. Institutions layer activation: Sou, Academy, OSYS, DTS, ROS.
+7. Organization System start — OSYS initializes.
+8. Mission Acceptance mode — ready to receive Human Intent.
+9. Interactive Ready.
+
+**Recovery boot** (failure scenario): IRS → ACF → Security Kernel (recovery mode) → minimal Institutions → consistency check → full restart.
+
+### 18.12 Marketplace & SDK
+
+**Marketplace**: A specification for third-party extensions (skills, runtimes, organizations). Governed by the Marketplace Bible. All marketplace entities must pass the Constitutional Compliance Check. Marketplace has its own Security Kernel verification gate for third-party code.
+
+**SDK**: Rust-native SDK for building Workers, Skills, and Organizations. SDK enforces lifecycle compliance, capability declarations, and constitutional conventions at compile time. SDK is the tool that ensures constitutional compliance before runtime.
+
+### 18.13 Appendices Content (Confirmed)
+
+**Appendix A — Definitions**: Canonical vocabulary. Single source of truth. Entities, Institutions, Workers, Skills, Capabilities, Planes.
+
+**Appendix B — Normative Language**: "MUST", "SHALL", "MAY", "SHOULD", "MUST NOT" — RFC 2119 conformance for all Constitution documents.
+
+**Appendix C — Relationships**: Entity-relationship diagrams, dependency graphs, communication flow maps.
+
+**Appendix D — Discovery**: How entities find each other (via IRS + ACF). Service discovery protocol.
+
+**Appendix E — Employee / Extension**: How to extend the system via RFC.
+
+**Appendix F — Revision History**: Constitutional amendment log. Every change documented with date, RFC ID, and rationale.
+
+### 18.14 The 9 AIOS Patterns (Definitions)
+
+From the conversation, these are architectural patterns (not GoF):
+
+1. **Constitutional Agent**: Entity governed by constitutional invariants.
+2. **Intent Decomposition**: Breaking Human Intent into actionable Missions.
+3. **Capability Routing**: Matching Mission requirements to available capabilities.
+4. **Lifecycle Management**: Birth → Active → Monitoring → Retirement for all entities.
+5. **Evidence Logging**: Every action recorded with provenance.
+6. **Learning Feedback Loop**: DTS → Academy → Sou → OSYS → Organization.
+7. **Verified Execution**: Verification before any execution step.
+8. **Autonomous Escalation**: L0–L4 autonomy ladder with automatic escalation when bounds exceeded.
+9. **Constitutional Amendment**: Formal process for changing the Constitution.
+
+### 18.15 The 5 Constitutional Classes
+
+1. **Class I — Human Sovereignty**: Inalienable. Cannot be amended without Human override.
+2. **Class II — Governance**: Structure of government. Supermajority amendment.
+3. **Class III — Institutions & Society**: Operational rules. Standard amendment.
+4. **Class IV — Security**: Security invariants. Supermajority + Security Kernel review.
+5. **Class V — Evolution**: Amendment process itself. Self-modifying, but circular protection.
+
+### 18.16 Failure & Recovery
+
+- **Worker failure**: Auto-restart (if idempotent) or new Worker selection. Org logs the failure.
+- **Org failure**: OSYS detects. Recovery or dissolution. Academy records as case study.
+- **Engine failure**: Affected crates context — ROS rebalances, degraded operation.
+- **Institution failure**: Sou detects. DTS simulates recovery path. OSYS executes.
+- **Security Kernel compromise**: System-wide lockdown. Requires Human override to restore.
+- **ACF failure**: Complete communication halt. IRS still valid but system inoperable until ACF restores.
+- **Sou failure**: System pauses (no new decisions). Existing organizations continue. Academy acts as fallback strategy advisor for limited mode.
+- **Article V failure** (amendment corruption): Constitution version rollback. Human override required.
+
+### 18.17 Knowledge vs Academy
+
+Distinction from the conversation: **Knowledge** is the information asset (owned by Sou). **Academy** is the Institution that processes knowledge into curriculum, lessons, and competence. Knowledge is the raw material; Academy is the refinery and distributor.
+
+- Knowledge = facts, models, sim data, historical records
+- Academy = curriculum, lessons, evaluations, synthesized intelligence
+- Knowledge flows: Sou generates knowledge → Academy processes it → Organizations consume it → DTS validates it → Sou updates Knowledge State Memory
+
+### 18.18 Discovery List (All Major Evolutions)
+
+Exact list from the conversation of system evolution milestones:
+
+1. "Agent" → "Worker" rename (terminology correction)
+2. "Layers" → "Planes" (Kubernetes-style)
+3. Sou↔OSYS split (Sou decides, OSYS creates)
+4. Security Kernel elevated to Institution (was just an engine group)
+5. Academy separated from Knowledge (Academy is processing, Knowledge is state)
+6. AGS absorbed into Genome section of Workers/Skills (not a standalone Institution)
+7. "Constitutional Institutions" vs "Society" split (Article III Part A/B)
+8. Bible as separate tier (not "detailed Constitution")
+9. ACF as mandatory switchboard (nothing bypasses ACF)
+10. Five Pillars finalization (Sou, Academy, ACF, Security Kernel, Linux)
+11. IRS downgraded to Shared Infrastructure (not Pillar)
+12. Mission as constitutional contract (not just a task)
+
+### 18.19 Article V: Constitutional Evolution Part Structure
+
+**Part A — Proposal**: RFC submission, classification (Class I–V), shepherd assignment.
+**Part B — Review**: Shepherding, council review, Security Kernel compliance check, DTS simulation of impact.
+**Part C — Ratification**: Voting (majority/supermajority), Human override option, constitutional registry update, version archiving.
+
+### 18.20 One Authority Per Document (Rule from Bible Section)
+
+From the Conversation's document quality rules: Every document has exactly **one authority**. No document overrides another document's authority granularity. If the Constitution says X, the Bible cannot contradict X. The Bible adds implementation detail but does not redefine authority.
+
+---
+
+*Notebook complete. 3 sweeps: architecture (agents 1–7) → granular (agents 8–11) → self-Q&A (agents 12–16). Use §17 for quick lookup of concrete values/names, §18 for answers to specific design questions. Total reading of 74,817 lines confirmed via range-delegated subagent reads.*
