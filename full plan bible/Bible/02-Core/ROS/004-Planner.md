@@ -119,6 +119,92 @@ Plans are advisory, not binding:
 
 If actual usage diverges from the plan by more than 20% for 3 consecutive periods, the Planner produces an alert via Observability (013-Observability) and may trigger plan review.
 
+## Plan Data Structures
+
+```
+Plan {
+    plan_id: UUID
+    scope_type: Enum (mission, organization, instance)
+    scope_id: UUID
+    horizon: Enum (immediate, short_term, medium_term, long_term)
+    created_at: Timestamp
+    updated_at: Timestamp
+    status: Enum (active, archived, superseded)
+    
+    resource_projections: Map<ResourceType, Projection>
+    capacity_gaps: List<CapacityGap>
+    recommendations: List<Recommendation>
+    confidence: Float
+}
+
+Projection {
+    resource_type: ResourceType
+    period_start: Timestamp
+    period_end: Timestamp
+    projected_demand: Quantity
+    confidence_interval_low: Quantity
+    confidence_interval_high: Quantity
+    historical_baseline: Quantity
+    growth_factor: Float
+}
+
+CapacityGap {
+    resource_type: ResourceType
+    gap_quantity: Quantity
+    gap_period: TimeRange
+    severity: Enum (notice, warning, critical)
+    suggested_action: String
+}
+
+Recommendation {
+    recommendation_type: Enum (increase_budget, add_provider, optimize_usage, defer_load)
+    description: String
+    estimated_impact: String
+    priority: Int
+}
+```
+
+## Plan Integration with Missions
+
+When a Mission is created in Sou (Sou/003-Missions.md), the Planner automatically generates a medium-term plan:
+
+| Mission Phase | Planner Action | Timeline |
+|---------------|---------------|----------|
+| Mission proposed | Draft plan generated | Within 1 hour of proposal |
+| Mission approved | Formal plan activated | At mission start |
+| Mission active | Plan adjusted weekly | Every Monday |
+| Mission completing | Final plan comparison | At mission completion |
+| Mission complete | Plan archived | With mission records |
+
+Mission plans include resource projections for all participating entities, aggregated by resource type and phase.
+
+## Plan Integration with Organizations
+
+Organization-level plans aggregate all member entity and mission plans:
+
+| Organization Size | Plan Update Frequency | Review Cadence |
+|------------------|----------------------|----------------|
+| Small (< 10 entities) | Daily | Weekly |
+| Medium (10–100 entities) | Daily | Bi-weekly |
+| Large (> 100 entities) | Hourly | Weekly |
+| Enterprise (> 1000 entities) | Real-time | Daily |
+
+Organization plans produce capacity gap alerts when projected demand exceeds 80% of registered capacity for any resource type.
+
+## Scenario Planning
+
+The Planner supports scenario analysis for what-if planning:
+
+| Scenario Type | Input | Output |
+|---------------|-------|--------|
+| Growth scenario | Entity count increase by X% | Projected resource deficit/surplus |
+| Mission scenario | New mission with Y resource demand | Impact on existing plans |
+| Provider failure | Remove provider Z | Gap analysis and recommendations |
+| Seasonal variation | Historical seasonal pattern | Adjusted monthly projections |
+| Policy change | Budget reduction/increase | Reallocation recommendations |
+
+Scenario plans are created as draft plans that do not affect active plans. They are advisory only.
+
 ## Events
 
 | Event | Trigger | Payload |
