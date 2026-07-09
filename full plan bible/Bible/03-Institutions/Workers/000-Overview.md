@@ -97,6 +97,64 @@ Created → Planned → Assigned → Running → Waiting → Paused → Blocked 
 | Completed | Worker purpose fulfilled. Evidence sealed. | No |
 | Archived | Worker record preserved for audit. | No |
 
+## Worker Creation Flow
+
+The full Worker creation flow involves multiple systems coordinating through ACF:
+
+```
+1. Need identified (Org needs a Worker for a Mission task)
+2. Org Admin or Manager requests Worker creation
+   → request includes: template_id, org_id, mission_id, capability_overrides
+
+3. AGS validates template:
+   → template_id is a valid, Active Worker Genome
+   → Genome capabilities match Mission requirements
+
+4. IDS creates identity:
+   → session_id assigned (globally unique, immutable)
+   → Identity lifecycle: Created → Active
+
+5. ROS allocates budget:
+   → Resource budget assigned from Org's allocation
+   → Token budget, compute, storage allocated per Genome defaults
+
+6. ATS generates tokens:
+   → Authentication tokens for ACF communication
+   → Authorization tokens scoped to Mission + Org
+
+7. LMS registers lifecycle:
+   → Worker enters Created state
+   → Transitions to Planned (automatic if plan provided)
+
+8. Runtime binding:
+   → Runtime selected based on Genome requirements
+   → Worker sandbox initialized with isolation configuration
+
+9. Worker is ready (Assigned state):
+   → Capabilities activated
+   → Worker added to Mission's Worker pool
+   → Event broadcast: WOM.WorkerCreated
+```
+
+## Worker Lifecycle Transitions Authorization
+
+| Transition | Authorized By | Requires Evidence? |
+|-----------|--------------|-------------------|
+| Created → Planned | Org Admin or Manager | Yes (Mission assignment, resource plan) |
+| Planned → Assigned | LMS (automatic when resources ready) | Yes (resource allocation confirmation) |
+| Assigned → Running | LMS (automatic when Mission is Running) | No |
+| Running → Waiting | Worker itself | Yes (dependency identified) |
+| Running → Paused | Org Supervisor or Security Council | Yes (pause reason) |
+| Running → Blocked | Worker itself (failure detection) | Yes (error details) |
+| Running → Review | Policy trigger or Worker itself | Yes (completion claim) |
+| Waiting → Running | LMS (automatic on dependency resolution) | Yes (dependency completion) |
+| Paused → Running | Org Supervisor | No |
+| Blocked → Running | Worker or Org Supervisor | Yes (resolution evidence) |
+| Blocked → Review | Org Supervisor | Yes (block details) |
+| Review → Running | Reviewer | Yes (review decision) |
+| Review → Completed | Reviewer | Yes (approval) |
+| Completed → Archived | LMS (automatic, timer-based) | Yes (retention policy) |
+
 ## Worker Capability Sources
 
 Worker capabilities are determined by three sources (in order of precedence):
