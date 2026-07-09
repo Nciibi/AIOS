@@ -1023,4 +1023,299 @@ Priority order for filling the missing architecture:
 
 ---
 
-*Notebook complete. 4 sweeps: architecture (agents 1-7) → granular (agents 8-11) → self-Q&A (agents 12-16) → final backlog/Bible/feature inventory (agents 17-18). Total reading of all 74,817 lines confirmed via 18 parallel subagent ranges. Use §17 for values, §18 for Q&A, §19 for what's missing and where everything goes.*
+### 19.9 Missing Documents — Complete Tree Diagram
+
+*This is the definitive map of every folder and file that needs to be created. Status: ✅ exists, ❌ missing, ⚠️ thin (needs expansion).*
+
+```
+full plan bible/
+├── ADR/                              ✅ (14 docs, 000-014)
+├── DNA/                              ✅ (12 docs, 000-011)
+├── CONSTITUTION/                     ✅ (all files exist)
+│   ├── Preamble/                     ✅
+│   ├── Article-I-Human-Sovereignty/  ✅ (001-004)
+│   ├── Article-II-AIOS-Governance/   ✅ (001-006)
+│   ├── Article-III-Constitutional-Institutions-and-Society/
+│   │   ├── Part-A-Constitutional-Institutions/      ✅ (001-009)
+│   │   └── Part-B-Constitutional-Society/           ✅ (001-013)
+│   ├── Article-IV-Security/
+│   │   ├── Part-A-Security-Principles/     ✅ (001-006)
+│   │   ├── Part-B-Operational-Security/    ✅ (007-012)
+│   │   └── Part-C-Security-Guarantees/     ✅ (013-015)
+│   ├── Article-V-Constitutional-Evolution/
+│   │   ├── Part-A-Constitutional-Governance/  ⚠️ (001-005, thin ~50 lines)
+│   │   ├── Part-B-Constitutional-Continuity/  ⚠️ (006-009, thin ~50 lines)
+│   │   └── Part-C-Constitutional-Authority/   ⚠️ (010-012, thin ~50 lines)
+│   └── Appendix/                            ✅ (Definitions, References, Historical-Notes)
+│
+├── Physics/                           ❌ DOES NOT EXIST
+│   ├── 001-The-10-Physics-Laws.md     ❌
+│   ├── 002-15-Design-DNA-Rules.md     ❌
+│   ├── 003-Identity-Laws.md           ❌
+│   ├── 004-Lifecycle-Laws.md          ❌
+│   ├── 005-Execution-Laws.md          ❌
+│   └── 006-Learning-Laws.md           ❌
+│
+├── Bible/                            ❌ DOES NOT EXIST
+│   ├── 0000-Master-Architecture-Plan.md       ❌
+│   ├── 0001-Constitution-Roadmap.md           ❌
+│   ├── 0002-Bible-Roadmap.md                  ❌ (~40k-80k words)
+│   ├── 0003-Platform-Architecture.md          ❌
+│   ├── 0004-Service-Architecture.md           ❌
+│   ├── 0005-Domain-Architecture.md            ❌
+│   ├── 0006-Reference-Architecture.md         ❌
+│   ├── 0007-Implementation-Roadmap.md         ❌
+│   ├── 0008-Future-Research.md                ❌
+│   │
+│   ├── 00-Foundations/               ❌
+│   │   ├── 000-Overview.md           ❌
+│   │   ├── 001-DNA-Summary.md        ❌
+│   │   ├── 002-Preamble.md           ❌
+│   │   ├── 003-Vision.md             ❌
+│   │   ├── 004-Philosophy.md         ❌
+│   │   └── 005-Architecture-Overview.md  ❌
+│   │
+│   ├── 01-Governance/                   ❌ (Governance Bible)
+│   │   ├── 000-Overview.md            ❌
+│   │   ├── 001-CLS.md                 ❌ (Constitution Lifecycle System)
+│   │   ├── 002-DGP.md                 ❌ (Document Governance Platform)
+│   │   ├── 003-CRP.md                 ❌ (Constitutional Review Platform)
+│   │   ├── 004-CKR.md                 ❌ (Constitutional Knowledge Registry)
+│   │   ├── 005-ADG.md                 ❌ (Architecture Decision Graph)
+│   │   └── 006-AKM.md                 ❌ (Architectural Knowledge Mgmt)
+│   │
+│   ├── 02-Core-Institutions/           ❌
+│   │   ├── Sou/                        ❌
+│   │   │   ├── 000-Overview.md        ❌
+│   │   │   ├── 001-Reasoning.md       ❌
+│   │   │   ├── 002-Planner.md         ❌
+│   │   │   ├── 003-Missions.md        ❌
+│   │   │   ├── 004-Learning.md        ❌
+│   │   │   └── 005-Knowledge.md       ❌
+│   │   ├── Academy/                     ❌ (Academy Bible)
+│   │   │   ├── 000-Overview.md        ❌
+│   │   │   ├── 001-Architecture.md    ❌
+│   │   │   ├── 002-KMS.md             ❌ (Knowledge Management System)
+│   │   │   ├── 003-Knowledge-Graph.md ❌
+│   │   │   ├── 004-Knowledge-Registry.md ❌
+│   │   │   ├── 005-Knowledge-Validator.md ❌
+│   │   │   ├── 006-Knowledge-Verifier.md ❌
+│   │   │   ├── 007-Knowledge-Review.md ❌
+│   │   │   ├── 008-Knowledge-Versioning.md ❌
+│   │   │   ├── 009-Knowledge-Distribution.md ❌
+│   │   │   ├── 010-Knowledge-Search.md ❌
+│   │   │   ├── 011-Knowledge-Provenance.md ❌
+│   │   │   ├── 012-Knowledge-Analytics.md ❌
+│   │   │   ├── 013-KEE.md             ❌ (Knowledge Evolution Engine)
+│   │   │   ├── 014-KCE.md             ❌ (Knowledge Confidence Engine)
+│   │   │   ├── 015-Knowledge-SDK.md   ❌
+│   │   │   └── 016-Knowledge-API.md   ❌
+│   │   ├── OSYS/                        ❌
+│   │   │   ├── 000-Overview.md        ❌
+│   │   │   ├── 001-Architecture.md    ❌
+│   │   │   └── 002-Organization-Lifecycle.md ❌
+│   │   ├── DTS/                         ❌ (DTS Bible)
+│   │   │   ├── 000-Overview.md         ❌
+│   │   │   ├── 001-Architecture.md     ❌
+│   │   │   ├── 002-Simulation-Pipeline.md ❌
+│   │   │   ├── 003-Simulation-Engines.md ❌ (15 engines)
+│   │   │   └── 004-Confidence-Engine.md ❌
+│   │   ├── ROS/                          ❌ (ROS Bible)
+│   │   │   ├── 000-Overview.md          ❌
+│   │   │   ├── 001-Architecture.md      ❌
+│   │   │   ├── 002-Resource-Registry.md ❌
+│   │   │   ├── 003-Resource-Allocator.md ❌
+│   │   │   ├── 004-Capacity-Planner.md ❌
+│   │   │   ├── 005-Budget-Manager.md   ❌
+│   │   │   ├── 006-Quota-Manager.md    ❌
+│   │   │   ├── 007-RMP.md              ❌ (Resource Marketplace)
+│   │   │   ├── 008-Provider-SDK.md     ❌
+│   │   │   ├── 009-Reservation-System.md ❌
+│   │   │   ├── 010-Cost-Engine.md      ❌
+│   │   │   ├── 011-Energy-Manager.md   ❌
+│   │   │   ├── 012-Recovery-Engine.md  ❌
+│   │   │   ├── 013-Observability.md     ❌
+│   │   │   └── 014-RXP.md              ❌ (Resource Exchange Protocol)
+│   │   └── AGS/                          ❌ (AIOS Genome System)
+│   │       ├── 000-Overview.md          ❌
+│   │       ├── 001-Genome-Composition.md ❌
+│   │       ├── 002-Inheritance.md       ❌
+│   │       ├── 003-Validation.md        ❌
+│   │       ├── 004-Versioning.md        ❌
+│   │       └── 005-Signing.md           ❌
+│   │
+│   ├── 03-Organizations/               ❌ (Organizations Bible)
+│   │   ├── 000-Overview.md            ❌
+│   │   ├── 001-OOM.md                  ❌ (Organizational Operating Model)
+│   │   ├── 002-OHS.md                  ❌ (Org Health System)
+│   │   ├── 003-ODS.md                  ❌ (Org Decision System)
+│   │   ├── 004-ORG.md                  ❌ (Org Responsibility Graph)
+│   │   ├── 005-DOM.md                  ❌ (Department Operating Model)
+│   │   ├── 006-OIS.md                  ❌ (Operational Intelligence System)
+│   │   ├── 007-EEE.md                  ❌ (Experience Extraction Engine)
+│   │   └── 008-OPE.md                  ❌ (Operational Pattern Engine)
+│   │
+│   ├── 04-Workers/                     ❌
+│   │   ├── 000-Overview.md             ❌
+│   │   ├── 001-WOM.md                  ❌ (Worker Operating Model)
+│   │   ├── 002-WHS.md                  ❌ (Worker Health System)
+│   │   ├── 003-WSS.md                  ❌ (Worker Skill System)
+│   │   └── 004-WCS.md                  ❌ (Worker Context System)
+│   │
+│   ├── 05-Missions/                     ❌
+│   │   └── 000-Mission-Lifecycle.md    ❌
+│   │
+│   ├── 06-Runtime/                      ❌
+│   │   ├── 000-Overview.md             ❌
+│   │   ├── 001-SDK.md                  ❌
+│   │   ├── 002-Claude.md              ❌
+│   │   ├── 003-Codex.md               ❌
+│   │   ├── 004-Ollama.md              ❌
+│   │   ├── 005-Browser.md            ❌
+│   │   ├── 006-Trading.md             ❌
+│   │   └── 007-Robotics.md            ❌
+│   │
+│   ├── 07-Security/                     ❌ (Security Bible)
+│   │   ├── 000-Overview.md            ❌
+│   │   ├── 001-Architecture.md        ❌
+│   │   ├── 002-Trust-Model.md         ❌
+│   │   ├── SSM/                        ❌
+│   │   │   └── 000-SSM.md             ❌ (Security System Model)
+│   │   ├── IDS/                        ❌ (Identity System)
+│   │   │   ├── 000-Overview.md        ❌
+│   │   │   ├── 001-Registry.md        ❌
+│   │   │   ├── 002-Resolution.md      ❌
+│   │   │   ├── 003-Lifecycle.md       ❌
+│   │   │   ├── 004-Federation.md      ❌
+│   │   │   └── 005-Provenance.md      ❌
+│   │   ├── ATS/                        ❌ (Authentication System)
+│   │   │   ├── 000-Auth-Methods.md    ❌
+│   │   │   ├── 001-MFA.md             ❌
+│   │   │   └── 002-Session-Mgmt.md    ❌
+│   │   ├── AZS/                        ❌ (Authorization System)
+│   │   │   ├── 000-RBAC.md            ❌
+│   │   │   ├── 001-ABAC.md            ❌
+│   │   │   └── 002-Capability.md      ❌
+│   │   ├── Policy-System/              ❌
+│   │   │   ├── 000-PS.md              ❌ (Policy System)
+│   │   │   ├── 001-PDG.md             ❌ (Policy Dependency Graph)
+│   │   │   └── 002-PVE.md             ❌ (Policy Verification Engine)
+│   │   ├── Risk/                       ❌
+│   │   │   ├── 000-RE.md              ❌ (Risk Engine)
+│   │   │   ├── 001-RKG.md             ❌ (Risk Knowledge Graph)
+│   │   │   └── 002-ARE.md             ❌ (Automated Risk Eval)
+│   │   ├── Trust/                      ❌
+│   │   │   └── 000-TLM.md             ❌ (Trust Lifecycle Mgmt)
+│   │   ├── Crypto/                     ❌
+│   │   │   ├── 000-CSP.md             ❌ (Cryptographic Services Platform)
+│   │   │   └── 001-CAM.md             ❌ (Cryptographic Asset Model)
+│   │   ├── Audit/                      ❌
+│   │   │   └── 000-EAS.md             ❌ (Execution Authorization System)
+│   │   ├── Sandbox/                    ❌
+│   │   │   └── 000-Isolation.md       ❌
+│   │   └── Execution-Auth/            ❌
+│   │       └── 000-EAS.md             ❌
+│   │
+│   ├── 08-Shared-Infrastructure/       ❌
+│   │   ├── 000-Overview.md            ❌
+│   │   ├── 001-EVS.md                 ❌ (Evidence System)
+│   │   ├── 002-AUS.md                 ❌ (Audit System)
+│   │   ├── 003-EPG.md                 ❌ (Evidence Provenance Graph)
+│   │   ├── 004-EIP.md                 ❌ (Execution Isolation Platform)
+│   │   ├── 005-BG.md                  ❌ (Boundary Graph)
+│   │   ├── 006-TP.md                  ❌ (Trust Platform)
+│   │   ├── 007-TEE.md                 ❌ (Trust Evaluation Engine)
+│   │   ├── 008-TPE.md                 ❌ (Trust Provenance Engine)
+│   │   ├── 009-CP.md                  ❌ (Compliance Platform)
+│   │   └── 010-Graph-Framework.md     ❌
+│   │
+│   ├── 09-Communication/               ❌ (ACF Bible)
+│   │   ├── 000-Overview.md            ❌
+│   │   ├── 001-Architecture.md        ❌
+│   │   ├── 002-Message-Formats.md     ❌
+│   │   ├── 003-Routing.md             ❌
+│   │   ├── 004-Subscriptions.md      ❌
+│   │   ├── 005-Streaming.md           ❌
+│   │   ├── 006-Reliability.md          ❌
+│   │   └── 007-Distributed-Comm.md    ❌
+│   │
+│   ├── 10-Federation/                  ❌ (Networking Bible)
+│   │   ├── 000-Overview.md            ❌
+│   │   ├── 001-AIP.md                 ❌ (AIOS Interchange Protocol)
+│   │   ├── 002-RXP.md                 ❌ (Resource Exchange)
+│   │   ├── 003-MXP.md                 ❌ (Mission Exchange)
+│   │   ├── 004-KXP.md                 ❌ (Knowledge Exchange)
+│   │   ├── 005-GXP.md                 ❌ (Genome Exchange)
+│   │   ├── 006-OXP.md                 ❌ (Organization Exchange)
+│   │   ├── 007-SXP.md                 ❌ (Skill Exchange)
+│   │   ├── 008-EXP.md                 ❌ (Event Exchange)
+│   │   ├── 009-TXP.md                 ❌ (Trust Exchange)
+│   │   ├── 010-PXP.md                 ❌ (Policy Exchange)
+│   │   ├── 011-CXP.md                 ❌ (Capability Exchange)
+│   │   └── 012-IXP.md                 ❌ (Identity Exchange)
+│   │
+│   ├── 11-Intelligence/                ❌ (Autonomy Bible)
+│   │   ├── 000-Overview.md            ❌
+│   │   ├── 001-AMS.md                 ❌ (Autonomy Management System)
+│   │   ├── 002-ACE.md                 ❌ (Autonomy Control Engine)
+│   │   ├── 003-ABE.md                 ❌ (Autonomy Boundary Engine)
+│   │   ├── 004-Learning-Engine.md     ❌
+│   │   └── 005-Evolution-Engine.md    ❌
+│   │
+│   ├── 12-Resource-Mgmt/              ❌ (ROS Bible detailed)
+│   │   └── (same as ROS/ above)
+│   │
+│   ├── 13-Observability/              ❌ (AOP Bible)
+│   │   ├── 000-Overview.md            ❌
+│   │   ├── 001-Monitoring.md          ❌
+│   │   ├── 002-Explaining.md          ❌
+│   │   └── 003-Debugging.md           ❌
+│   │
+│   ├── 14-Platform/                    ❌ (Shared Frameworks)
+│   │   ├── 000-LMS.md                 ❌ (Lifecycle Management System)
+│   │   ├── 001-State-Machine-Engine.md ❌
+│   │   ├── 002-Transition-Validator.md ❌
+│   │   └── 003-PSAP.md                ❌ (Platform Service Architecture Pattern)
+│   │
+│   ├── 15-SDKs/                        ❌
+│   │   ├── 000-Runtime-SDK.md         ❌
+│   │   ├── 001-Audit-SDK.md           ❌
+│   │   ├── 002-Knowledge-SDK.md       ❌
+│   │   └── 003-Provider-SDK.md         ❌
+│   │
+│   ├── 16-APIs/                        ❌
+│   │   └── 000-API-Specifications.md    ❌
+│   │
+│   ├── 17-Ecosystem/                   ❌
+│   │   ├── 000-Marketplace.md         ❌
+│   │   ├── 001-Skills.md              ❌
+│   │   ├── 002-Templates.md           ❌
+│   │   └── 003-Plugins.md             ❌
+│   │
+│   ├── 18-Reference/                   ❌
+│   │   ├── 000-Decision-Log.md        ❌
+│   │   └── 001-ADG-Index.md           ❌
+│   │
+│   └── 19-Research/                   ❌
+│       ├── 000-Phases-2-5.md          ❌
+│       └── 001-Future-Topics.md       ❌
+│
+├── RFC/                               ❌ DOES NOT EXIST
+│   ├── 000-RFC-Process.md             ❌ (RFC lifecycle, template)
+│   ├── templates/                     ❌
+│   │   └── RFC-template.md            ❌
+│   └── 0001-XXXX/                     ❌ (placeholder for future RFCs)
+│
+└── aios/                              (Rust crate implementations — already exist)
+    ├── aios_intent/                   ✅
+    ├── aios_context_resolver/         ✅
+    ├── aios_policy/                   ✅
+    ├── aios_execution/                ✅
+    └── aios_core/                     ✅
+```
+
+**Totals**: ~0 docs exist in Physics/Bible/RFC. ~~200 files need to be created across all Bible volumes. 12 Constitution files (Article V) need ~3-7x expansion from ~50 lines to 150-300 lines each.
+
+---
+
+*Notebook complete. 4 sweeps: architecture (agents 1-7) → granular (agents 8-11) → self-Q&A (agents 12-16) → final backlog/Bible/feature/decisions/tree inventory (agents 17-18). Verified 20 "yes add" decisions, 16 "save for later" items, 24 deferred/rejected features, ~200 missing Bible doc files, 12 thin Constitution files. Use §19 as the definitive reference for what to build next.*
