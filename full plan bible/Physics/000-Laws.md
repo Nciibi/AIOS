@@ -75,9 +75,13 @@ No Mission may be created, modified, or executed without originating from a vali
 
 Sou is the strategic authority. It determines which Organizations are needed, what knowledge to acquire, and what simulations to run. It does not execute actions, does not allocate resources, does not run code. Execution is delegated through OSYS to Workers, verified by the Security Kernel.
 
-*Rationale*: Separating strategy from execution prevents concentration of power. This is the system-level equivalent of the Separation of Powers in Article II.
+*Rationale*: Separating strategy from execution prevents concentration of power. This is the system-level equivalent of the Separation of Powers in Article II. If Sou could both decide and execute, there would be no check on its authority.
 
-*Violation*: Sou directly invoking a Worker or modifying a resource.
+*Constitutional Expression*: Article II, Section 003 (Checks and Balances) assigns Sou to the Strategic Branch. Article III, Part A, Section 002 (Sou) defines Sou's non-execution mandate. The Separation of Powers principle ensures no entity spans both strategy and execution.
+
+*Enforcement*: The Security Kernel verifies that every execution originates from a Worker, not from Sou. Any execution request with Sou as the actor is denied. ACF enforces this at the message routing level — execution commands from Sou are blocked before they reach Runtime.
+
+*Violation*: Sou directly invoking a Worker. Sou modifying a resource state. Sou allocating compute capacity.
 
 ---
 
