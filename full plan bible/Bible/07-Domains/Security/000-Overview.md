@@ -147,6 +147,19 @@ All Security domain communication flows through ACF with high-priority classific
 | R9 (Deterministic) | Same target and toolset produces identical scan results |
 | R13 (Design for Failure) | Security operations fail closed — deny on uncertainty, preserve evidence |
 
+## Performance Characteristics
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| Vulnerability scan (single host) | < 2 minutes | 10 minutes |
+| Vulnerability scan (network /24) | < 15 minutes | 60 minutes |
+| Exploit verification (sandbox) | < 5 minutes | 30 minutes |
+| Incident detection to alert | < 30 seconds | 2 minutes |
+| Incident containment | < 15 minutes | 60 minutes |
+| Compliance audit (single standard) | < 10 minutes | 30 minutes |
+| Threat intel report generation | < 30 minutes | 2 hours |
+| Escalation of critical finding | < 5 minutes | 15 minutes |
+
 ## Related Documents
 
 | Document | Relationship |
@@ -155,6 +168,7 @@ All Security domain communication flows through ACF with high-priority classific
 | Physics/005-Events.md | Evidence — Security operations produce Events |
 | Physics/007-Capabilities.md | Capabilities — Security capability bounds and verification-first approach |
 | Physics/008-Security.md | Security — Security domain implements AIOS security model |
+| Bible/01-Governance/002-DGP.md | DGP — Security-related decision routing |
 | Bible/02-Core/Sou/001-Reasoning.md | Reasoning — Security findings inform Sou's risk assessment |
 | Bible/02-Core/AGS/000-Overview.md | AGS — SecurityWorker and PenTestWorker Genome templates |
 | Bible/02-Core/Academy/000-Overview.md | Academy — Vulnerability and threat intelligence knowledge management |
@@ -163,5 +177,7 @@ All Security domain communication flows through ACF with high-priority classific
 | Bible/04-Execution/Security/IDS/000-Overview.md | IDS — Identity integrity verification |
 | Bible/04-Execution/Security/ATS/000-Auth-Methods.md | ATS — Authentication security analysis |
 | Bible/04-Execution/Security/Audit/000-EAS.md | Audit — Evidence Audit Service integration |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — Identity integrity verification |
+| Bible/08-Interfaces/SDK/001-Audit-SDK.md | Audit SDK — Security evidence audit integration |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
