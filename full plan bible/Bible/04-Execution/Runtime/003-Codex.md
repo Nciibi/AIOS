@@ -42,6 +42,33 @@ The `model.codegen` action type extends chat completions with code-specific para
 
 When `response_format` is `json_schema`, the provider validates the schema against the entity's data handling capability. Schemas that request data beyond the entity's authorized scope are rejected at the provider level before any API call is made.
 
+## Configuration
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| api_endpoint | `https://api.openai.com/v1` | OpenAI API base endpoint |
+| default_model | `gpt-4o` | Default model for inference |
+| max_retries | 5 | Maximum retry attempts on rate limit errors |
+| retry_backoff_ms | 500 | Initial backoff with jitter |
+| connection_pool_size | 20 | Maximum concurrent HTTP connections |
+| streaming_chunk_size | 1 | Tokens per streaming chunk (1 = token-level) |
+| codegen_max_lines | 500 | Maximum lines per code generation action |
+| prohibited_patterns | `[eval, exec, __import__]` | Patterns blocked in codegen output |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| Tool call requested but not in capability bounds | Strip tools from request; return text-only completion |
+| JSON schema validation fails on output | Return schema_violation error with failed path |
+| Model returns refusal (content_filter) | Return filtered response; flag entity for review |
+| Vision input exceeds model's image limit | Downsample images; reject if still over limit |
+| Streaming chunk interleaving for parallel calls | Buffer by execution_id; reassemble in order |
+
+## Integration Patterns
+
+The Codex Provider is the primary code generation engine for Worker Sessions that write software, generate scripts, or produce structured data. It integrates with the Knowledge Graph through structured output schemas that define the data contract. For code generation workflows, the provider chains with a Security Council verification step that scans generated code for prohibited patterns before returning to the requesting entity. The provider also supports batch embedding generation through GPT-4o's embedding capabilities for downstream RAG workflows.
+
 ## Streaming Behavior
 
 Streaming executions emit one chunk per content delta. For code generation actions, chunks correspond to token-level deltas. The provider includes cumulative token counts and estimated progress in each chunk.
