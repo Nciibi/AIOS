@@ -169,6 +169,116 @@ Organization Total: 25,000 credits
 | Older than 12 months | Aggregated monthly | Per-month totals per organization |
 | Older than 36 months | Archived | Summary only |
 
+## Cost Data Structures
+
+```
+UsageRecord {
+    usage_id: UUID
+    entity_id: UUID
+    allocation_id: UUID
+    resource_type: ResourceType
+    amount: Quantity
+    duration_seconds: Float
+    provider_id: UUID
+    cost_rate: Float
+    total_cost: Float
+    recorded_at: Timestamp
+}
+
+CostReport {
+    report_id: UUID
+    report_type: Enum (entity, mission, organization, system)
+    scope_id: UUID
+    period_start: Timestamp
+    period_end: Timestamp
+    generated_at: Timestamp
+    total_cost: Float
+    breakdown: List<CostBreakdown>
+    trends: CostTrends
+}
+
+CostBreakdown {
+    dimension: String (e.g., "resource_type", "provider", "entity")
+    value: String
+    cost: Float
+    percentage_of_total: Float
+    usage: Quantity
+}
+
+CostTrends {
+    compared_to_previous_period: Float (percentage change)
+    projected_next_period: Float
+    average_daily_cost: Float
+    peak_daily_cost: Float
+    volatility: Float (standard deviation of daily costs)
+}
+```
+
+## Cost Allocation Models
+
+Cost can be allocated across scopes using different models:
+
+| Model | Description | Use Case |
+|-------|-------------|----------|
+| Direct allocation | Cost is charged directly to the consuming entity | Entity-level budgets |
+| Proportional split | Cost is split proportionally among entities in a mission | Mission cost sharing |
+| Fixed allocation | Fixed cost percentage assigned to each entity | Organization overhead |
+| Usage-based | Cost allocated based on actual consumption | Fair billing |
+
+### Direct Allocation
+
+```
+entity_cost = Σ(resource_amount × resource_duration × cost_rate)
+```
+
+Each entity is charged exactly for what it consumes. This is the default model.
+
+### Proportional Split
+
+```
+entity_share = entity_allocation / total_mission_allocation × total_mission_cost
+```
+
+Used when entities share resources (e.g., a shared GPU instance).
+
+### Fixed Allocation
+
+```
+entity_cost = entity_fixed_percentage × total_scope_cost
+```
+
+Used for infrastructure overhead that benefits all entities equally.
+
+## Cost Optimization Recommendations
+
+The Cost component can generate optimization recommendations based on usage patterns:
+
+| Pattern | Recommendation | Estimated Savings |
+|---------|---------------|-------------------|
+| Idle allocations | Release unused resources | 100% of idle cost |
+| Over-provisioning | Reduce allocation size | 20–50% of allocation cost |
+| Peak usage spikes | Use burst budget instead of sustained high allocation | Varies |
+| Expensive provider | Switch to lower-cost provider | 10–40% |
+| Off-peak eligible | Schedule during off-peak hours | 30–60% (if energy-based pricing) |
+| Reserved capacity | Convert to reservation for discount | 15–30% |
+
+Recommendations are advisory and are reviewed by the entity or organization administrator before implementation.
+
+## Cost Budget Integration
+
+Cost works with Budget (005-Budget) to provide real-time cost tracking:
+
+| Budget Event | Cost Action |
+|-------------|-------------|
+| Budget set | Cost records baseline rate for cost projection |
+| Budget adjusted | Cost recalculates projected spend |
+| Allocation made | Cost records estimated usage |
+| Usage recorded | Cost records actual usage |
+| Budget exhausted | Cost produces overage report |
+| Period reset | Cost generates period summary |
+
+Entities can view their current spend against budget in real time via the Cost dashboard.
+
 ## Events
 
 | Event | Trigger | Payload |
