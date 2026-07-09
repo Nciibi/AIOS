@@ -21,123 +21,184 @@ Stream processing, backpressure, and ordering guarantees for ACF messages. Strea
 
 ```
 Stream {
+  id: UUID,
   topic: string,
   partitions: Partition[],
-  config: StreamConfig
+  config: StreamConfig,
+  created_at: timestamp
 }
 
 Partition {
-  id: int,
-  messages: OrderedMessage[],
-  consumer_group: ConsumerGroup?
+  id: int,                       // 0-based partition index
+  messages: OrderedMessage[],    // ordered sequence
+  consumer_group: ConsumerGroup?,
+  leader: NodeID,                // broker node responsible
+  replicas: NodeID[]             // replica nodes
 }
 
 ConsumerGroup {
   id: string,
   consumers: Consumer[],
-  strategy: PartitionAssignment
+  strategy: PartitionAssignment,
+  state: Active | Rebalancing
+}
+
+Consumer {
+  id: string,
+  entity_id: EntityID,
+  assigned_partitions: int[],
+  position: map<int, int>,       // partition → sequence number
+  last_heartbeat: timestamp,
+  status: Connected | Disconnected
 }
 ```
 
-### Ordered Message Sequence
-
-A stream is an ordered sequence of messages on a topic. Messages within a partition are strictly ordered. Partitions allow parallel processing while maintaining per-partition ordering.
-
 ## Ordering Guarantees
 
-| Scope | Ordering Guarantee |
-|-------|-------------------|
-| **Within a partition** | Strict — messages delivered in append order |
-| **Across partitions** | Best-effort — correlate by timestamp |
-| **Cross-stream** | No ordering guarantee |
+| Scope | Guarantee | Mechanism |
+|-------|-----------|-----------|
+| Within a partition | Strict ordering | Monotonic sequence numbers |
+| Across partitions | No ordering | Timestamp correlation |
+| Cross-stream | No ordering | Application-level correlation |
 
 ### Per-Partition Ordering
 
-Messages within a partition are assigned monotonic sequence numbers. Consumers receive messages in sequence number order. If a consumer disconnects and reconnects, it resumes from the last acknowledged sequence number.
+Messages within a partition receive monotonic sequence numbers at append time:
 
-### Cross-Partition Ordering
+```
+sequence = partition.current_sequence + 1
+```
 
-Messages across partitions can be correlated using their HLC timestamps. ACF provides timestamp-based correlation but does not enforce cross-partition ordering. Applications that need global ordering use a single partition.
+Consumers receive messages in sequence number order. If a consumer disconnects and reconnects, it resumes from `last_committed_sequence + 1`.
+
+### Partition Key
+
+Messages may specify a partition key. Messages with the same key go to the same partition, preserving order within that key:
+
+```
+partition_id = hash(partition_key) % partition_count
+```
 
 ## Consumer Groups
 
-Consumer groups enable load distribution across multiple consumers:
+Consumer groups distribute partitions across multiple consumers for parallel processing:
 
-| Partition Assignment | Description | Use Case |
-|---------------------|-------------|----------|
-| **round-robin** | Partitions evenly distributed | Homogeneous consumers |
-| **hash** | Partition assigned by message key | Key-based ordering |
-| **sticky** | Consumer keeps partition on reconnect | Stateful consumers |
-| **manual** | Explicit partition assignment | Custom distribution |
+| Assignment Strategy | Description | Rebalance Cost |
+|---------------------|-------------|----------------|
+| **round-robin** | Partitions evenly distributed | Low |
+| **hash** | Partition assigned by message key hash | Low |
+| **sticky** | Consumer keeps partition on reconnect | Medium |
+| **manual** | Explicit partition assignment | None (manual) |
 
 ### Consumer Group Rebalancing
 
-When a consumer joins or leaves a group, partitions are rebalanced:
+When a consumer joins or leaves:
 
 ```
-1. Consumer joins/leaves detected
-2. Group coordinator initiates rebalance
-3. All consumers pause processing
-4. Partitions reassigned according to strategy
-5. Consumers resume with new assignments
-6. Produces ConsumerRebalanced Event
+1. Group coordinator detects change (join/leave heartbeat)
+2. Coordinator initiates rebalance
+3. State: Active → Rebalancing
+4. All consumers pause processing
+5. Revoke current partition assignments
+6. Consumers commit their current position
+7. Reassign partitions per strategy
+8. Consumers receive new assignments
+9. State: Rebalancing → Active
+10. Consumers resume from committed position
 ```
 
 ## Backpressure
 
-ACF applies backpressure when consumers cannot keep up with the publish rate:
+ACF applies backpressure when consumers cannot keep up:
 
 | Level | Condition | Action |
 |-------|-----------|--------|
-| **Normal** | Consumer lag < 10% of buffer | No action |
-| **Warning** | Consumer lag > 50% of buffer | Produce BackpressureWarning Event |
-| **Critical** | Consumer lag > 80% of buffer | Slow publisher, apply backpressure to producer |
-| **Overflow** | Buffer full | Drop oldest messages (configurable), produce BackpressureOverflow |
+| **Normal** | Lag < 10% of buffer | No action |
+| **Warning** | Lag > 50% of buffer | Produce BackpressureWarning Event |
+| **Critical** | Lag > 80% of buffer | Apply backpressure to producer |
+| **Overflow** | Buffer full | Drop oldest (volatile) or pause (durable) |
 
 ### Backpressure Mechanisms
 
-- **Producer throttling**: Publisher is slowed to match consumer rate
-- **Buffer expansion**: Buffer grows up to configurable max
-- **Message drop**: Oldest messages are dropped (only for volatile streams)
-- **Consumer scaling**: New consumer instances are suggested
+- **Producer throttling**: Reduce producer publish rate via TCP backpressure
+- **Buffer expansion**: Grow buffer up to configurable max (default 10000 messages)
+- **Message drop**: Drop oldest messages for volatile streams
+- **Consumer scaling**: Recommend adding consumers (automatic if configured)
+
+### Buffer Configuration
+
+```
+StreamBufferConfig {
+  max_buffered_messages: int,      // default 10000
+  max_buffered_bytes: int,         // default 100 MB
+  backpressure_threshold: float,   // 0.0–1.0, default 0.8
+  drop_oldest_when_full: bool,     // default false (for volatile: true)
+  consumer_notify_interval: duration // how often to check consumer lag
+}
+```
 
 ## Stream Operations
 
 ```
 createStream(topic, partitions, config) → stream_id
-publishToStream(stream_id, partition_key?, message) → sequence_number
-consumeStream(stream_id, consumer_group, consumer_id) → subscription_id
-getStreamPosition(consumer_group, consumer_id) → position
-seekStream(consumer_group, consumer_id, position) → void
-commitPosition(consumer_group, consumer_id, position) → void
-getStreamInfo(stream_id) → StreamInfo
 deleteStream(stream_id) → void
+publishToStream(topic, message, partition_key?) → sequence_number
+publishToPartition(stream_id, partition_id, message) → sequence_number
+consumeStream(stream_id, consumer_group, consumer_id) → subscription_id
+getStreamPosition(consumer_group, consumer_id, partition_id?) → position
+seekStream(consumer_group, consumer_id, position) → void
+commitPosition(consumer_group, consumer_id, partition_id, sequence) → void
+getStreamInfo(stream_id) → StreamInfo
+listStreams(filter?) → StreamInfo[]
 ```
 
 ### Consumer Position Management
 
-Consumers track their position in the stream. Positions are committed to allow resumption after restart:
+| Position Type | Description | Use Case |
+|---------------|-------------|----------|
+| **earliest** | Start from beginning | Full replay |
+| **latest** | Start from most recent | New consumer |
+| **sequence** | Start from specific sequence | Resumption |
+| **timestamp** | Start from specific time | Time-based replay |
 
-| Position Type | Description |
-|---------------|-------------|
-| **earliest** | Start from beginning of stream |
-| **latest** | Start from most recent message |
-| **sequence** | Start from specific sequence number |
-| **timestamp** | Start from specific timestamp |
+### Commit Protocol
+
+Consumers commit their position to mark messages as processed:
+
+```
+1. Consumer processes message at sequence N in partition P
+2. Consumer sends commit(P, N) to coordinator
+3. Coordinator records position
+4. If consumer crashes, new consumer resumes from last committed
+5. Uncommitted messages are redelivered
+```
 
 ## ACF Streaming Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `ACF.StreamCreated` | A new stream is created | stream_id, topic, partition_count |
-| `ACF.StreamDeleted` | A stream is deleted | stream_id, message_count, reason |
-| `ACF.PartitionReassigned` | A partition is reassigned to a consumer | partition_id, consumer_group, old_consumer, new_consumer |
-| `ACF.ConsumerAdded` | A consumer joins a group | consumer_id, consumer_group, stream_id |
-| `ACF.ConsumerRemoved` | A consumer leaves a group | consumer_id, consumer_group, reason |
-| `ACF.ConsumerRebalanced` | Consumer group is rebalanced | consumer_group, partition_assignments |
-| `ACF.StreamEnd` | A stream reaches its end | stream_id, last_sequence |
-| `ACF.BackpressureApplied` | Backpressure is applied | stream_id, level, consumer_group, buffer_usage |
-| `ACF.BackpressureOverflow` | Buffer overflow occurs | stream_id, messages_dropped, strategy |
+| `ACF.StreamCreated` | Stream created | stream_id, topic, partition_count, config |
+| `ACF.StreamDeleted` | Stream deleted | stream_id, message_count, reason |
+| `ACF.PartitionReassigned` | Partition reassigned | partition_id, consumer_group, old_consumer, new_consumer, reason |
+| `ACF.ConsumerAdded` | Consumer joins group | consumer_id, consumer_group, stream_id |
+| `ACF.ConsumerRemoved` | Consumer leaves | consumer_id, consumer_group, reason |
+| `ACF.ConsumerRebalanced` | Group rebalanced | consumer_group, previous_assignments, new_assignments |
+| `ACF.StreamEnd` | Stream reaches end | stream_id, last_sequence |
+| `ACF.BackpressureApplied` | Backpressure triggered | stream_id, level, consumer_group, buffer_usage_pct |
+| `ACF.BackpressureOverflow` | Buffer overflow | stream_id, messages_dropped, drop_strategy |
+| `ACF.PositionCommitted` | Consumer commits position | consumer_group, consumer_id, partition_id, sequence |
+
+## Error Codes
+
+| Code | Condition | Description |
+|------|-----------|-------------|
+| ACF-STR-001 | StreamNotFound | No stream with the given ID |
+| ACF-STR-002 | PartitionNotFound | Partition does not exist |
+| ACF-STR-003 | ConsumerNotFound | Consumer not in group |
+| ACF-STR-004 | ConsumerGroupNotFound | Group does not exist |
+| ACF-STR-005 | InvalidPosition | Seek position out of range |
+| ACF-STR-006 | RebalanceInProgress | Cannot consume during rebalance |
+| ACF-STR-007 | BufferFull | Stream buffer is full |
 
 ## Cross-Cutting Concerns
 
@@ -151,7 +212,7 @@ Every stream lifecycle operation produces an Event. Consumer position commits pr
 
 ### Lifecycle
 
-Streams follow: Created → Active → Rebalancing → Archived → Deleted. Consumer groups follow: Created → Active → Rebalancing → Depleted. Stream configurations are versioned.
+Streams follow: Created → Active → Rebalancing → Archived → Deleted. Consumer groups follow: Created → Active → Rebalancing → Depleted.
 
 ### Capability Bounds
 
