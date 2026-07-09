@@ -86,16 +86,38 @@ Research Workers evaluate evidence quality on multiple dimensions:
 
 Evidence with a composite quality score below 0.4 is flagged as low-confidence. Research conclusions must be accompanied by their evidence quality assessment.
 
+## Invariants
+
+1. **RES-I-001 — Evidence-Bound Conclusions**: Every research conclusion must be traceable to at least one piece of evidence. Opinions without evidence are not permitted in research artifacts.
+
+2. **RES-I-002 — Source Attribution**: Every source used in research must be attributed with full citation. Unattributed sources constitute a constitutional violation.
+
+3. **RES-I-003 — Reproducibility**: Research analysis must be reproducible. Analysis code, parameters, and input data must be preserved as part of the research artifact.
+
+4. **RES-I-004 — Bias Disclosure**: Known biases in methodology, data sources, or analytical tools must be disclosed in the research artifact. Undisclosed biases invalidate the artifact.
+
+5. **RES-I-005 — Scope Fidelity**: Research findings must not claim conclusions beyond the stated scope and methodology. Scope overreach is a validation failure.
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| Source URL is inaccessible | Retry with backoff (3 attempts). If inaccessible, log as unavailable. Alternative source searched. |
+| Dataset too large for analysis budget | Analysis scaled to representative sample. Sampling methodology documented. |
+| Conflicting evidence from multiple sources | Evidence weighted by source quality score. Conflict documented in findings with confidence adjusted. |
+| Research question is too broad for single Worker | Question decomposed into sub-questions. Multiple Research Workers assigned in parallel. |
+| Analysis produces inconclusive result | Inconclusive result is valid if properly documented. Evidence gaps identified for future research. |
+
 ## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `Research.QuestionFormulated` | Research question is defined | question_id, question_text, scope, constraints |
-| `Research.SourceRetrieved` | External source is fetched | source_id, url, content_type, size_bytes, retrieval_time |
-| `Research.AnalysisRun` | Data analysis completes | analysis_id, method, dataset_id, key_findings |
-| `Research.HypothesisTested` | Hypothesis test is evaluated | hypothesis_id, result, confidence_interval, evidence_quality |
-| `Research.ReportGenerated` | Research report is produced | report_id, title, findings_count, evidence_chain_hash |
-| `Research.KnowledgeProposed` | Research artifact submitted to Academy | artifact_id, artifact_type, evidence_hashes |
+| `Research.QuestionFormulated` | Research question is defined | question_id, question_text, scope, constraints, success_criteria |
+| `Research.SourceRetrieved` | External source is fetched | source_id, url, content_type, size_bytes, retrieval_time, source_quality |
+| `Research.AnalysisRun` | Data analysis completes | analysis_id, method, dataset_id, key_findings, compute_seconds |
+| `Research.HypothesisTested` | Hypothesis test is evaluated | hypothesis_id, result, confidence_interval, evidence_quality, methodology |
+| `Research.ReportGenerated` | Research report is produced | report_id, title, findings_count, evidence_chain_hash, pages_equivalent |
+| `Research.KnowledgeProposed` | Research artifact submitted to Academy | artifact_id, artifact_type, evidence_hashes, methodology_hash |
 
 ## Cross-Cutting Concerns
 
@@ -130,6 +152,19 @@ All Research domain communication flows through ACF. Web search results and retr
 | R10 (Simpler Over Complex) | Research methodology is linear — no unbounded exploration loops |
 | R13 (Design for Failure) | Incomplete source retrieval produces partial results with gaps noted |
 
+## Performance Characteristics
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| Web source retrieval (single page) | < 2 seconds | 10 seconds |
+| Web source retrieval (bulk, 10 pages) | < 10 seconds | 30 seconds |
+| Dataset analysis (10K rows) | < 30 seconds | 2 minutes |
+| Dataset analysis (1M rows) | < 10 minutes | 30 minutes |
+| Literature review (10 sources) | < 2 minutes | 10 minutes |
+| Report generation (short) | < 30 seconds | 2 minutes |
+| Report generation (comprehensive) | < 10 minutes | 30 minutes |
+| Hypothesis testing (statistical) | < 1 minute | 5 minutes |
+
 ## Related Documents
 
 | Document | Relationship |
@@ -139,9 +174,11 @@ All Research domain communication flows through ACF. Web search results and retr
 | Physics/007-Capabilities.md | Capabilities — Research capability bounds |
 | Physics/012-Experience.md | Experience — Research findings contribute to AIOS experience model |
 | Bible/02-Core/Sou/001-Reasoning.md | Reasoning — Sou consumes research findings for decision-making |
+| Bible/02-Core/Sou/002-Planner.md | Planner — Sou produces research plans |
 | Bible/02-Core/AGS/000-Overview.md | AGS — ResearchWorker and DataAnalyst Genome templates |
 | Bible/02-Core/Academy/000-Overview.md | Academy — Research artifact knowledge lifecycle |
 | Bible/02-Core/DTS/000-Overview.md | DTS — Evidence quality scoring for research confidence |
 | Bible/02-Core/ROS/000-Overview.md | ROS — Token and compute budget for research operations |
+| Bible/06-Services/ACF/000-Overview.md | ACF — Source retrieval transport |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
