@@ -79,17 +79,40 @@ Preparation → Detection → Analysis → Containment → Eradication → Recov
 | Recovery | Restore normal operations, verify | IncidentResponder Worker |
 | Post-Mortem | Lessons learned, evidence preserved | Knowledge artifact produced |
 
+## Invariants
+
+1. **SEC-I-001 — Verify Before Report**: No vulnerability may be reported without being verified in a sandbox environment. Unverified findings are provisional only and must be clearly marked as such.
+
+2. **SEC-I-002 — Least Privilege**: Security Workers operate with the minimum permissions necessary for their assigned task. Penetration testing capabilities are tightly scoped and time-limited.
+
+3. **SEC-I-003 — No Production Exploitation**: Exploit verification must occur exclusively in sandbox or test environments. Production exploitation is prohibited regardless of authorization level.
+
+4. **SEC-I-004 — Chain of Evidence**: Every security operation produces an immutable evidence chain. The complete investigation trail — from initial finding through verification through remediation — must be preserved.
+
+5. **SEC-I-005 — Escalation on Certainty**: Verified critical vulnerabilities must be escalated to the Security Council within 15 minutes of verification. Delayed escalation is a constitutional violation.
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| Vulnerability found in AIOS core system | Critical severity. Immediate escalation to Security Council. Core team paged. System may be isolated. |
+| Penetration test inadvertently affects production | Test immediately halted. Incident response triggered. Full forensic analysis conducted. |
+| Threat intelligence conflicts with current assessment | Conflicting intel evaluated by ThreatAnalyst. Confidence scores compared. Higher-confidence intel takes precedence. |
+| Compliance audit fails on critical control | Automated remediation triggered if available. Security Council notified. Manual remediation planned. |
+| Incident responder cannot contain within SLO | Escalation to Security Council. Broader containment authority requested. System isolation if needed. |
+
 ## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `Security.VulnerabilityFound` | Potential vulnerability identified | finding_id, target, cve, cvss_score, confidence |
-| `Security.VulnerabilityVerified` | Vulnerability confirmed in sandbox | finding_id, verification_env, exploit_result, risk_level |
-| `Security.ExploitAttempted` | Exploit verification executed | attempt_id, target_sandbox, technique, outcome |
-| `Security.IncidentDetected` | Security incident is identified | incident_id, severity, category, affected_assets |
-| `Security.IncidentContained` | Incident containment completed | incident_id, containment_action, effectiveness |
-| `Security.IntelReportGenerated` | Threat intelligence report produced | report_id, threat_actor, ttps, iocs, confidence |
-| `Security.ComplianceAuditRun` | Compliance audit completes | audit_id, standard, scope, passed, failed, score |
+| `Security.VulnerabilityFound` | Potential vulnerability identified | finding_id, target, cve, cvss_score, confidence, discovery_method |
+| `Security.VulnerabilityVerified` | Vulnerability confirmed in sandbox | finding_id, verification_env, exploit_result, risk_level, reproducibility |
+| `Security.ExploitAttempted` | Exploit verification executed | attempt_id, target_sandbox, technique, outcome, detection_bypassed |
+| `Security.IncidentDetected` | Security incident is identified | incident_id, severity, category, affected_assets, confidence |
+| `Security.IncidentContained` | Incident containment completed | incident_id, containment_action, effectiveness, duration_seconds |
+| `Security.IncidentResolved` | Incident fully resolved | incident_id, recovery_action, post_mortem_ref, lessons_learned |
+| `Security.IntelReportGenerated` | Threat intelligence report produced | report_id, threat_actor, ttps, iocs, confidence, tlp_level |
+| `Security.ComplianceAuditRun` | Compliance audit completes | audit_id, standard, scope, passed, failed, score, critical_findings |
 
 ## Cross-Cutting Concerns
 
