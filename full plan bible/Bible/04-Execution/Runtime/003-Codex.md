@@ -137,6 +137,7 @@ The provider communicates with the OpenAI REST API over HTTPS. Streaming uses se
 |--------|--------|-------|
 | Time to first token | < 400ms | OpenAI API typical latency for gpt-4o |
 | Code generation speed | ~50 tokens/s | Varies by model and output complexity |
+| Structured output latency | < 1s total | Includes inference + schema validation |
 | Structured output validation | < 10ms | JSON schema validation overhead per response |
 | Batch embedding throughput | 100 inputs/s | Dependent on input size; parallel API calls |
 | Connection pool efficiency | 20 concurrent | Pool size matches max_parallelism |
