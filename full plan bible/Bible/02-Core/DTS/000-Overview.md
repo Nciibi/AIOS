@@ -111,6 +111,42 @@ DTS is NOT:
 
 5. **Transparency**: All confidence scores and trust scores are explainable. Any score can be decomposed into its contributing factors. (PHI-001)
 
+## DTS Decision Flow — Example
+
+```
+1. Sou proposes: "Increase Worker-A memory allocation from 8GB to 16GB"
+2. DTS Decision Evaluator receives proposal
+3. Evidence check: Query Event Store for Worker-A memory utilization Events
+   → Found: Worker-A avg utilization 85%, max 97% (last 30 days)
+   → Evidence quality: 0.90 (comprehensive data)
+4. Trust check: Worker-A's trust score = 0.88
+   → Trust trend: Improving (+0.05 over 30 days)
+5. Simulation: Run Monte Carlo with 1000 scenarios
+   → 95th percentile outcome: 35% performance improvement
+   → Risk: memory contention with neighboring Workers (12% probability)
+6. Historical precedent: 23 similar memory allocation changes
+   → 19 successful (83% success rate)
+7. Confidence calculation:
+   Evidence: 0.90 × 0.40 = 0.360
+   Simulation: 0.85 × 0.30 = 0.255
+   Precedent: 0.83 × 0.20 = 0.166
+   Trust: 0.88 × 0.10 = 0.088
+   Total: 0.869 (interval: [0.819, 0.919])
+8. Threshold: 0.7 ≤ 0.869 < 0.9 → "Execute with monitoring"
+9. DTS sends confidence score to Sou and DGP
+```
+
+## Edge Cases — DTS Operations
+
+| Scenario | Handling |
+|----------|----------|
+| No simulation engine available for decision type | simulation_score = 0.0. Confidence is reduced. Warning returned. |
+| Trust Scorer data is stale (no recent Events) | Score decayed to default (0.3). Low trust weight applied. |
+| Evidence Event stream is empty | evidence_score = 0.0. Decision confidence starts at minimum. |
+| Historical precedent database has no matches | precedent_score = 0.3 (default minimum). No negative adjustment. |
+| Confidence interval calculation produces NaN | Fallback: [0.0, 0.0] with error code DTS_CON_005. |
+| Decision is in Human Override threshold | Confidence overridden to 0.0 — decision requires human confirmation regardless. |
+
 ## DTS Events
 
 | Event Type | Produced When | Fields |

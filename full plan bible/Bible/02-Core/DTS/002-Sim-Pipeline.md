@@ -149,6 +149,33 @@ Every simulation produces:
 | evidence_chain | EventRef[] | Evidence Events that informed the simulation |
 | execution_time_ms | int | Wall-clock time for the simulation |
 
+## Pipeline Example
+
+```
+Decision: "Deploy new Worker with specialized image processing capabilities"
+
+Stage 1 — Scenario Generation (type: Monte Carlo)
+  Parameters: compute_units (100-500), memory_gb (4-32), concurrent_tasks (1-10)
+  Scenarios generated: 500 random combinations
+  → Event: DTS.ScenarioGenerated { scenario_count: 500 }
+
+Stage 2 — Simulation Execution (engine: Planning Simulator)
+  Engine evaluates each scenario against resource availability and capability bounds
+  Results: 340 feasible scenarios (68%)
+  → Event: DTS.SimulationRun { feasible: 340, infeasible: 160 }
+
+Stage 3 — Outcome Prediction
+  Aggregated results:
+    Most likely outcome: "Successful deployment with moderate resource usage"
+    Distribution: 68% feasible, 23% resource contention, 9% capability gap
+  → Risk: Capability gap is high for advanced processing tasks
+
+Stage 4 — Confidence Scoring
+  Simulation evidence score: 0.78 (based on scenario coverage and convergence)
+  → Combined with other factors for final confidence interval
+  → Event: DTS.SimulationCompleted { confidence: 0.78 }
+```
+
 ## Simulation Feedback to Sou
 
 Simulation results are communicated back to Sou's Planner:
