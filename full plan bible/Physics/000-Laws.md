@@ -221,11 +221,19 @@ This creates a dependency hierarchy: Code must obey the Bible. Bible must obey P
 
 **No permanent Workers. All Workers end. Organizations may endure but are subject to dissolution lifecycle.**
 
-Workers are temporary by nature. Every Worker has a defined lifespan, mission scope, and retirement condition. When the condition is met (mission completed, time limit reached, parent organization dissolved), the Worker must terminate. Organizations may persist beyond individual Workers but may be dissolved by OSYS when their mission no longer exists.
+Workers are temporary by nature. Every Worker has a defined lifespan, maximum execution time, mission scope, and retirement condition. When the condition is met — mission completed, time limit reached, parent organization dissolved, or Human override — the Worker must terminate.
 
-*Rationale*: Permanent Workers would accumulate, consume resources, and eventually contradict their original purpose. Organizations serve strategy, and strategy evolves.
+Termination is not optional. The Worker does not decide whether to terminate. OSYS enforces termination at the platform level. A Worker that exceeds its tenure is force-terminated.
 
-*Violation*: A Worker that refuses to terminate after its Mission completes.
+Organizations may persist beyond individual Workers — this is the distinction between strategy (Organization, which endures) and execution (Worker, which is ephemeral). But Organizations themselves are not permanent: OSYS may dissolve them when their mission no longer exists.
+
+*Rationale*: Permanent Workers would accumulate, consume resources, and eventually contradict their original purpose. Tenure enforces resource discipline and prevents zombie processes. Organizations serve strategy, and strategy evolves.
+
+*Constitutional Expression*: Article III, Part B, Section 006 (Lifecycles) defines the constitutional lifecycle framework. Article III, Part B, Section 005 (Missions) defines the relationship between Missions and Workers. The OSYS Constitution document specifies organization dissolution procedures.
+
+*Enforcement*: OSYS monitors Worker tenure. When a Worker's retirement condition is met, OSYS initiates termination. The Security Kernel verifies termination. If a Worker does not terminate gracefully, OSYS force-terminates it. The system logs the termination as evidence.
+
+*Violation*: A Worker that refuses to terminate after its Mission completes. A Worker that continues beyond its configured maximum lifespan. An Organization that exists without a valid Mission for an extended period.
 
 ---
 
