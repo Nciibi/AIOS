@@ -141,6 +141,10 @@ The provider communicates with the OpenAI REST API over HTTPS. Streaming uses se
 | Batch embedding throughput | 100 inputs/s | Dependent on input size; parallel API calls |
 | Connection pool efficiency | 20 concurrent | Pool size matches max_parallelism |
 
+## Provider-Specific Metrics
+
+Each inference Event includes: `model_selection_reason`, `action_type` (inference vs. codegen vs. embedding), `output_language` (for codegen actions), `schema_validation_result` (for structured output), `api_latency_ms`, and `retry_count`. Codegen Events also include `generated_lines` and `prohibited_pattern_count` for audit.
+
 ## Autonomy Level Behavior
 
 | Level | Behavior |

@@ -141,6 +141,10 @@ The provider communicates with Ollama over localhost HTTP. No external network a
 | Model load time | 2-10s | First-load model loading into GPU memory |
 | Concurrent model switching | < 500ms | Unload/reload time between active models |
 
+## Provider-Specific Metrics
+
+Each inference Event includes: `model_selection_reason`, `gpu_memory_used_mb`, `inference_speed_tps` (tokens per second), `model_load_duration_ms` (if model was loaded fresh), `embedding_dimensions` (for embedding actions), and `quantization_level` (e.g., Q4_K_M, Q8_0) for resource accounting.
+
 ## Autonomy Level Behavior
 
 | Level | Behavior |

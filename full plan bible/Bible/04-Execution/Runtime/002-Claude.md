@@ -140,6 +140,10 @@ The provider communicates with the Anthropic API over HTTPS. All provider-to-Run
 | Token sampling overhead | < 5ms | SDK middleware processing per token |
 | Connection reuse | Keep-alive pool | 10 pooled connections, 60s idle timeout |
 
+## Provider-Specific Metrics
+
+Each inference Event includes: `model_selection_reason` (why this model was chosen), `token_breakdown` (system vs. messages vs. completion), `api_latency_ms` (Anthropic API round-trip time), and `retry_count` (number of retries if any). These metrics enable cost allocation per entity and per mission.
+
 ## Autonomy Level Behavior
 
 | Level | Behavior |
