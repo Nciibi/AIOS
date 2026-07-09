@@ -222,6 +222,37 @@ PSAP communicates through ACF. Service resolution requests arrive via ACF. Healt
 | R14 — Paved Path | PSAP is the only path for service resolution |
 | R15 — Open/Closed | New load balancing strategies extend without modifying core |
 
+## Performance Characteristics
+
+| Operation | Latency P50 | Latency P99 | Throughput |
+|-----------|-------------|-------------|------------|
+| registerService | <10ms | <50ms | >1000/s |
+| resolveService | <2ms | <10ms | >10000/s |
+| Health check (per instance) | <5ms | <20ms | >200/s |
+| listServices | <20ms | <100ms | >100/s |
+
+## Configuration Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| health_check_interval | 5s | Interval between health checks |
+| health_check_timeout | 2s | Timeout per health check |
+| unhealthy_threshold | 2 | Consecutive failures before unhealthy |
+| degraded_threshold_ms | 500 | Latency above this = degraded |
+| heartbeat_timeout | 15s | Service must heartbeat within this |
+| forced_deregistration_after | 45s | 3 missed heartbeats = deregister |
+| cache_ttl_ms | 1000 | Service resolution cache TTL |
+
+## PSAP Invariants
+
+1. **PSAP-INV-001 — Service Registry Authority**: PSAP is the single source of truth for service endpoints. No service may be addressed without PSAP resolution.
+
+2. **PSAP-INV-002 — Health-Gated Routing**: Unhealthy services are never returned by resolveService. All resolution results contain only healthy or degraded instances.
+
+3. **PSAP-INV-003 — Registration Authentication**: Every service registration must be authenticated. Unauthenticated registrations are rejected and logged as security Events.
+
+4. **PSAP-INV-004 — Graceful Degradation**: When all instances of a service are unhealthy, PSAP returns a clear ServiceUnavailable error with instance count and last healthy time.
+
 ## Related Documents
 
 | Document | Relationship |
