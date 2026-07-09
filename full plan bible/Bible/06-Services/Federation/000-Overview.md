@@ -137,18 +137,6 @@ Stable identifiers: FED-001 through FED-005.
 ## Cross-Cutting Concerns
 
 ### Security
-All federation protocols use mTLS with CSP encryption. Mutual authentication is mandatory. Rate limiting and audit logging are enabled by default.
-
-### Evidence
-Every cross-instance operation produces evidence in both source and destination instances. Events are linked through correlation IDs.
-
-### Lifecycle
-Federation protocols have versioned lifecycles. Instances may discover and negotiate protocol versions through CXP.
-
-### Capability Bounds
-Instances advertise their capabilities through PXP. Federation operations are bounded by advertised capacity.
-
-### Security
 All federation protocols use mTLS with CSP encryption. Mutual authentication is mandatory. Rate limiting and audit logging are enabled by default. Trust levels gate protocol access; T0 instances can only perform CXP handshake.
 
 ### Evidence
