@@ -159,11 +159,17 @@ Entity types and their lifecycles include: resources (Draft → Validation → A
 
 **Workers operate within declared capability bounds. No capability escalation without reauthorization.**
 
-Every Worker declares its capabilities at creation (skills, permissions, resource limits, autonomy level). The Worker may not exceed these bounds during its lifetime. If a Mission requires capabilities beyond the Worker's declared bounds, a new Worker with appropriate capabilities must be created or the existing Worker must be reauthorized.
+Every Worker declares its capabilities at creation (skills, permissions, resource limits, autonomy level). The Worker may not exceed these bounds during its lifetime. If a Mission requires capabilities beyond the Worker's declared bounds, a new Worker with appropriate capabilities must be created or the existing Worker must be reauthorized through a formal capability upgrade process.
 
-*Rationale*: Capability bounds are the fundamental security boundary. Without them, a compromised Worker could access anything.
+Capability bounds are not just permissions — they include resource consumption limits (CPU, memory, network, storage), autonomy level (L0–L4), skill set (declared skills), and scope (which domains the Worker may operate in).
 
-*Violation*: A Worker coded as a text assistant attempting to execute system administration commands.
+*Rationale*: Capability bounds are the fundamental security boundary. Without them, a compromised Worker could access anything. Bounds also prevent capability creep — the gradual expansion of what a Worker can do beyond its original purpose.
+
+*Constitutional Expression*: Article IV, Part B, Section 007 (Capability Verification) defines the constitutional requirement for capability checks before execution. The Capability Assignment System (CAS) and Capability Dependency Graph (CDG) in the Bible implement capability governance.
+
+*Enforcement*: The Security Kernel verifies that every action requested by a Worker falls within its declared capability bounds. Actions exceeding bounds are denied and logged. The Capability Certification Authority (CCA) validates capability upgrades and reauthorizations.
+
+*Violation*: A Worker coded as a text assistant attempting to execute system administration commands. A Worker consuming 10x its declared memory limit. A Worker operating in a domain it was not authorized for.
 
 ---
 
