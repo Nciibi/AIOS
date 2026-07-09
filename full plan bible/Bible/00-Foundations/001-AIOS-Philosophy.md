@@ -74,12 +74,16 @@ No action executes without verification. Every action passes through a 7-stage v
 
 ### 6. Lifecycle Compliance
 
-Every entity has a lifecycle. Every state transition is authorized, recorded, and verifiable. No entity exists outside its lifecycle.
+Every entity has two parallel lifecycles: an identity lifecycle and an operational lifecycle. Every state transition is authorized, recorded, and verifiable. No entity exists outside its lifecycles.
+
+**Identity Lifecycle** (managed by IDS): Created → Verified → Active → Suspended → Restored → Retired → Archived. Defines whether an entity *is* who it claims to be.
+
+**Operational Lifecycle** (managed by LMS): Created → Planned → Assigned → Running → Waiting → Paused → Blocked → Review → Completed → Archived. Defines what an entity *does*.
 
 **Consequences**:
-- Entities progress through defined states (Created → Verified → Active → Suspended → Retired → Archived)
+- Both lifecycles are governed by Law 6 (Lifecycle Compliance)
 - Each transition requires authorization from a specific entity type
-- State-dependent capabilities: entities may only act in certain states
+- State-dependent capabilities: entities may only act in certain states of both lifecycles
 - Lifecycle violations are constitutional violations
 
 ### 7. Capability Bounds Over Permission

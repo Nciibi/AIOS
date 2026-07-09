@@ -50,8 +50,8 @@ Waiting → Running (dependency resolved)
 Paused → Running (supervisor resumes)
 Blocked → Running (blocker resolved)
 Blocked → Review (requires human assessment)
-Review → Running (approved to continue)
-Review → Completed (approved as finished)
+Review → Running (approved to continue by reviewer)
+Review → Completed (approved as finished by reviewer)
 Completed → Archived (automatic after retention period)
 ```
 
@@ -108,8 +108,8 @@ Entity capabilities are lifecycle-state-dependent:
 ### Identity
 
 Lifecycle is parallel to identity lifecycle. An entity has both:
-- **Identity lifecycle** (Created → Verified → Active → Suspended → Retired → Archived)
-- **Operational lifecycle** (Created → Planned → Assigned → Running → ... → Archived)
+- **Identity lifecycle** (Created → Verified → Active → Suspended → Restored → Retired → Archived) — see IDS/003-Lifecycle.md
+- **Operational lifecycle** (Created → Planned → Assigned → Running → ... → Archived) — this document
 
 Identity lifecycle is managed by IDS. Operational lifecycle is managed by LMS. The two converge at identity verification (entity must have Active status in IDS before entering Running state in LMS).
 

@@ -83,7 +83,7 @@ Implementation is the code that realises the Bible specifications. This layer in
 
 ### 5. Runtime (Layer 5)
 
-Runtime is the execution environment — the providers (Claude, Codex, Ollama, Browser, Trading, Robotics) that actually execute the actions authorised by the verification pipeline. Runtime is the thinest layer; it simply executes what the layers below have authorised.
+Runtime is the execution environment — the providers (Claude, Codex, Ollama, Browser, Trading, Robotics) that actually execute the actions authorised by the verification pipeline. Runtime is the thinnest layer; it simply executes what the layers below have authorised.
 
 **Key Components**: Runtime SDK, execution providers, sandboxing
 

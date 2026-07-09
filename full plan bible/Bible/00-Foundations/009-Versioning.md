@@ -97,7 +97,7 @@ AIOS Release 1.0
 └── Runtime:
     ├── claude-provider  v2.1.0
     ├── codex-provider   v1.3.0
-    └── olama-provider    v0.9.2
+    └── ollama-provider    v0.9.2
 ```
 
 ## Bible Document Version Header
