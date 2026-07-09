@@ -121,6 +121,55 @@ Provider Created ──→ Registered (active) ──→ Deregistered (inactive)
 
 Compliant with R13 (Design for Failure): providers that fail health checks are automatically deregistered. ROS never allocates to a provider with unknown health status.
 
+## Component Responsibilities
+
+| Component | Primary Responsibility | Dependencies | Consumed By |
+|-----------|----------------------|--------------|-------------|
+| Registry | Provider registration, capacity reporting, health tracking | Providers (via SDK) | Allocator, Planner, Observability |
+| Allocator | Resource allocation decisions, strategy selection, preemption | Registry, Budget, Quota, RMP, Cost | Execution pipeline, entities |
+| Planner | Resource forecasting, plan creation, variance analysis | Registry, Cost, OSYS, Sou/Missions | Organization admins, Security Council |
+| Budget | Per-entity budget management, burst tracking | Cost (for usage data) | Allocator, entities, Observability |
+| Quota | Hard/soft limit enforcement, violation escalation | Registry (for capacity) | Allocator, Security Council |
+| RMP | Policy management, policy evaluation | None (self-contained store) | Allocator, Security Council, Organizations |
+| Cost | Usage recording, cost calculation, report generation | Allocator (for allocation data) | Budget, Planner, Organization admins |
+| Energy | Energy consumption tracking, energy-aware provider selection | Registry, Providers | Allocator (via policy) |
+| Recovery | Resource cleanup on entity/scope termination | Allocator, Registry, Providers | LMS, Security Council |
+| Reservation | Resource holding for execution authorization | Allocator, Registry, Budget | Verification pipeline (Stage 7) |
+| Observability | Metrics, monitoring, alerting | Event Store (all components) | Security Council, Organization admins |
+| RXP | Cross-instance resource sharing | ACF Bridge, Registry | Instance operators, Federation partners |
+
+## Request Routing
+
+Allocation requests follow a defined routing path through ROS:
+
+```
+Request arrives at ROS Gateway
+    │
+    ├──→ Read-only request? (budget query, cost report, plan view)
+    │       └──→ Route to read replica
+    │
+    └──→ Write request? (allocation, registration, budget change)
+            └──→ Route to active node
+                    │
+                    ├──→ Allocator path (allocation, reservation)
+                    ├──→ Registry path (provider registration, deregistration)
+                    ├──→ Budget path (budget set, adjust)
+                    ├──→ Quota path (quota set, check)
+                    └──→ RXP path (cross-instance request)
+```
+
+## Service Level Objectives
+
+| SLO | Target | Measurement |
+|-----|--------|-------------|
+| Allocation availability | 99.99% uptime | Monthly allocation success rate |
+| Allocation latency P99 | < 100 ms | End-to-end allocation latency |
+| Budget query latency P99 | < 20 ms | Budget read query latency |
+| Data consistency | < 1 second lag | Read replica staleness |
+| Provider heartbeat processing | < 5 ms per heartbeat | Heartbeat processing latency |
+| Recovery completion | < 60 seconds | Time from trigger to completion |
+| RXP transfer completion | < 30 seconds | Time from accept to transfer complete |
+
 ## Cross-Cutting Concerns
 
 ### Security
