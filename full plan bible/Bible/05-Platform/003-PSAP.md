@@ -21,79 +21,164 @@ PSAP is the service addressing and routing layer within the Platform. It maps se
 
 Every service in the Platform registers with PSAP. The registry contains:
 
-| Field | Description |
-|-------|-------------|
-| **service_name** | Canonical name (e.g., `lms`, `evs`, `aus`) |
-| **endpoint** | ACF endpoint for the service instance |
-| **health_status** | Current health: healthy, degraded, unhealthy |
-| **load** | Current load metric (0.0 – 1.0) |
-| **version** | Service version string |
-| **capabilities** | List of capability identifiers the service provides |
-| **tags** | Metadata labels for routing |
+| Field | Type | Description |
+|-------|------|-------------|
+| service_name | string | Canonical name (e.g., `lms`, `evs`, `aus`) |
+| instance_id | UUID | Unique instance identifier |
+| endpoint | ACF Address | ACF endpoint for the service instance |
+| health_status | enum | healthy, degraded, unhealthy, unknown |
+| load | float | Current load metric (0.0 – 1.0) |
+| version | string | Service version string |
+| capabilities | string[] | Capability identifiers the service provides |
+| tags | map<string, string> | Metadata labels for routing and filtering |
+| registered_at | timestamp | When the service registered |
+| last_heartbeat | timestamp | Last successful heartbeat |
 
 ## PSAP Operations
 
 ```
-registerService(service_name, endpoint, capabilities) → registration_id
+registerService(service_name, endpoint, capabilities, config) → registration_id
 deregisterService(registration_id) → void
-resolveService(service_name, capabilities?) → endpoint
-getServiceHealth(service_name) → HealthStatus
+resolveService(service_name, capabilities?, filter?) → endpoint
+resolveServiceBatch(service_name, count) → endpoint[]
+getServiceHealth(service_name) → HealthStatus[]
+getServiceHealthByInstance(registration_id) → HealthStatus
 listServices(filter?) → ServiceInfo[]
-getServiceMetrics(service_name) → Metrics
+getServiceMetrics(registration_id) → Metrics
+updateServiceCapabilities(registration_id, capabilities) → void
+updateServiceLoad(registration_id, load) → void
 ```
 
-### Resolution Flow
+### RegisterService
+
+| Parameter | Description |
+|-----------|-------------|
+| service_name | Canonical service name |
+| endpoint | ACF address for this instance |
+| capabilities | List of provided capabilities |
+| config | Health check config (interval, timeout, threshold) |
+
+Services must authenticate before registration. Registration produces a PSAP.ServiceRegistered Event.
+
+### ResolveService
+
+Resolution algorithm:
 
 ```
-1. Client requests resolveService("lms")
-2. PSAP queries registry for all "lms" instances
-3. Filters by health_status == "healthy"
-4. Applies load balancing strategy to select instance
-5. Returns endpoint to client
-6. Client sends message to resolved endpoint via ACF
+1. Query all instances matching service_name
+2. If capabilities filter provided, filter by capabilities
+3. Filter by health_status == "healthy" (or "degraded" if no healthy)
+4. Sort by load (ascending)
+5. Apply load balancing strategy to select instance
+6. Return selected endpoint
+7. If no instances match, return ServiceUnavailable error
 ```
 
 ## Health Checking
 
-PSAP pings every registered service every 5 seconds. Health check results:
+PSAP pings every registered service on a configurable interval:
 
-| Status | Meaning | Traffic? |
-|--------|---------|----------|
-| **healthy** | Service responded within threshold | Yes |
-| **degraded** | Service responded but with latency > threshold | Yes (reduced weight) |
-| **unhealthy** | Service did not respond within 2 attempts | No |
-| **unknown** | Service registration incomplete or initial check pending | No |
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| ping_interval | 5s | Time between health checks |
+| ping_timeout | 2s | Timeout per health check |
+| unhealthy_threshold | 2 | Consecutive failures before marking unhealthy |
+| degraded_threshold | 500ms | Latency above this = degraded |
+| recovery_threshold | 1 | Consecutive successes to restore |
 
-Unhealthy services are removed from the routing table. Traffic is diverted to remaining healthy instances. When all instances of a service are unhealthy, PSAP returns a ServiceUnavailable error.
+### Health Status Transitions
+
+```
+Initial → Unknown → Healthy ↔ Degraded → Unhealthy
+```
+
+| Status | Traffic | Action |
+|--------|---------|--------|
+| **healthy** | Yes | Normal routing |
+| **degraded** | Yes (reduced weight) | Service is slow but functional |
+| **unhealthy** | No | Removed from routing, alert generated |
+| **unknown** | No | Initial state, pending first check |
+
+### Health Check Protocol
+
+PSAP sends a `PSAP.HealthCheck` message to the service's ACF endpoint. The service must respond within the ping_timeout. The health check response includes:
+
+```
+HealthCheckResponse {
+  status: "healthy" | "degraded",
+  load: float,           // 0.0 – 1.0
+  version: string,
+  uptime_seconds: int,
+  capabilities: string[]
+}
+```
 
 ## Load Balancing Strategies
 
-| Strategy | Description | Use Case |
-|----------|-------------|----------|
-| **round-robin** | Distribute evenly across instances | General-purpose |
+| Strategy | Algorithm | Use Case |
+|----------|-----------|----------|
+| **round-robin** | Sequential distribution | General-purpose stateless |
 | **least-connections** | Route to instance with fewest active connections | Long-running operations |
-| **weighted** | Distribute by instance capacity | Heterogeneous instances |
+| **weighted** | Distribute by instance weight | Heterogeneous instances |
 | **random** | Random selection | Stateless services |
-| **sticky** | Route same client to same instance | Stateful services |
+| **sticky** | Hash sender → instance | Stateful services |
 
-## Service Discovery
+### Strategy Configuration
 
-PSAP supports dynamic service discovery:
+```
+LBConfig {
+  strategy: LBStrategy,
+  weights?: map<instance_id, float>,    // for weighted strategy
+  stickiness_ttl?: duration,            // for sticky strategy
+  fallback_strategy?: LBStrategy        // if primary fails
+}
+```
 
-- **Startup registration**: Service registers on startup with health check callback
-- **Heartbeat**: Service sends periodic heartbeats (default 15s)
-- **Graceful deregistration**: Service deregisters on shutdown
-- **Forced deregistration**: PSAP removes unresponsive services after 3 missed heartbeats
+## Service Discovery Mechanisms
+
+| Mechanism | Description |
+|-----------|-------------|
+| **Startup registration** | Service registers on startup with health check callback |
+| **Heartbeat** | Service sends periodic heartbeats (default 15s interval) |
+| **Graceful deregistration** | Service deregisters on shutdown via PSAP.Deregister |
+| **Forced deregistration** | PSAP removes after 3 consecutive missed heartbeats |
+| **Health check probe** | PSAP initiates health checks on registered services |
+
+## Metrics and Monitoring
+
+PSAP collects per-service metrics:
+
+| Metric | Description |
+|--------|-------------|
+| service_health_status | Current health status |
+| service_load | Current load (0.0 – 1.0) |
+| service_resolution_count | Number of resolutions per interval |
+| service_resolution_latency | Time to resolve (P50, P95, P99) |
+| service_instance_count | Number of instances per service |
+| unhealthy_instances | Count of unhealthy instances |
+
+## Error Codes
+
+| Code | Condition | Description |
+|------|-----------|-------------|
+| PSAP-001 | ServiceNotFound | No service with the given name |
+| PSAP-002 | NoHealthyInstances | All instances are unhealthy |
+| PSAP-003 | InstanceNotFound | Registration ID not found |
+| PSAP-004 | RegistrationFailed | Service could not authenticate |
+| PSAP-005 | DuplicateRegistration | Instance already registered |
+| PSAP-006 | HeartbeatMissed | Instance missed heartbeat threshold |
 
 ## PSAP Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `PSAP.ServiceRegistered` | A service registers | service_name, endpoint, version, capabilities |
-| `PSAP.ServiceDeregistered` | A service deregisters | service_name, endpoint, reason |
-| `PSAP.ServiceHealthChanged` | A service health status changes | service_name, endpoint, old_status, new_status |
-| `PSAP.ServiceUnavailable` | All instances of a service are unhealthy | service_name, instance_count, last_healthy |
-| `PSAP.RoutingUpdated` | Routing table is modified | service_name, strategy, instance_count |
+| `PSAP.ServiceRegistered` | Service registers | service_name, instance_id, endpoint, version, capabilities |
+| `PSAP.ServiceDeregistered` | Service deregisters | service_name, instance_id, reason, uptime_seconds |
+| `PSAP.ServiceHealthChanged` | Health status changes | service_name, instance_id, old_status, new_status, reason |
+| `PSAP.ServiceUnavailable` | All instances unhealthy | service_name, instance_count, last_healthy_timestamp |
+| `PSAP.HeartbeatReceived` | Heartbeat from service | service_name, instance_id, load, timestamp |
+| `PSAP.RoutingUpdated` | Routing table modified | service_name, strategy, instance_count, change_type |
+| `PSAP.LoadBalanced` | Load balancing decision | service_name, instance_id, strategy, sender |
 
 ## Cross-Cutting Concerns
 
