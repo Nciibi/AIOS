@@ -278,10 +278,10 @@ Learning that does not improve the system is not learning — it is noise. The A
 
 | State | Description | Transitions Allowed |
 |-------|-------------|-------------------|
-| Draft | Artifact is being created or refined | → Active, → Superseded |
-| Active | Artifact is in use for learning | → Review, → Superseded, → Superseded |
-| Review | Artifact is being evaluated for effectiveness | → Active, → Superseded, → Superseded |
-| Superseded | Artifact has been replaced by a better artifact | (terminal) |
+| Draft | Artifact is being created or refined | → Active, → Deprecated |
+| Active | Artifact is in use for learning | → Review, → Deprecated, → Retired |
+| Review | Artifact is being evaluated for effectiveness | → Active, → Deprecated, → Retired |
+| Deprecated | Artifact is no longer recommended for new use | → Retired |
 | Retired | Artifact is no longer in use | (terminal) |
 
 ---
