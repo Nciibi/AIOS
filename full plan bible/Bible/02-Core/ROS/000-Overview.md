@@ -140,6 +140,28 @@ ROS is designed for predictable performance under load:
 | Cost recording | < 20 ms | 10,000/s | Eventual |
 | Plan generation | < 5 seconds | On demand | Strong |
 
+## ROS Security Model
+
+ROS operates on a least-privilege security model:
+
+| Principle | Implementation |
+|-----------|---------------|
+| Authentication | Every resource operation requires a valid entity identity verified by IDS |
+| Authorization | Allocation requests are gated by the verification pipeline (Stage 7) |
+| Resource isolation | Provider-level isolation ensures one entity's allocation does not affect another's |
+| Audit | Every operation produces an Event per ROS-004 for forensic analysis |
+| Fail closed | If resource availability cannot be confirmed, allocation is denied |
+
+### Authorization Levels
+
+| Role | Can View | Can Modify |
+|------|----------|------------|
+| Entity | Own budget, own cost, own allocations | Request allocation within budget |
+| Entity supervisor | Entity budget, usage, cost | Adjust entity budget (within org limits) |
+| Organization admin | Organization budget, quotas, cost, plans | Set org budgets, quotas, RMP policies |
+| Security Council | All ROS data | Set system quotas, override budgets, set policies |
+| Provider operator | Own provider metrics | Register/deregister own provider |
+
 ## Cross-Cutting Concerns
 
 ### Security
