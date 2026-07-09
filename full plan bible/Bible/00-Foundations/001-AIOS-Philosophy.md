@@ -15,7 +15,9 @@
 
 ## Core Tenets
 
-### 1. Constitutional AI
+Stable identifiers: PHI-001 through PHI-010.
+
+### PHI-001 — Constitutional AI
 
 AIOS is a constitutional AI system. Every action, decision, and operation is governed by a written Constitution (the Laws). No entity — not even the Security Council or Sou — operates outside the Constitution. The Constitution is the supreme authority.
 
@@ -24,7 +26,7 @@ AIOS is a constitutional AI system. Every action, decision, and operation is gov
 - All operations produce evidence for constitutional compliance
 - Constitutional amendments follow a strict RFC process, not arbitrary override
 
-### 2. Evidence-Driven Operations
+### PHI-002 — Evidence-Driven Operations
 
 Every action in AIOS produces evidence. Evidence is immutable, traceable, and auditable. Nothing in AIOS operates without leaving a verifiable record. This is the foundation of trust, audit, and learning.
 
@@ -34,7 +36,7 @@ Every action in AIOS produces evidence. Evidence is immutable, traceable, and au
 - The Academy learns from evidence, not from direct observation of entity internals
 - No entity can act without the action being verifiable by the Security Council
 
-### 3. Entity Autonomy (L0–L4)
+### PHI-003 — Entity Autonomy (L0–L4)
 
 AIOS entities exist on an autonomy spectrum. Every entity starts at L0 (fully constrained, human-directed) and may progress to L4 (fully autonomous within constitutional bounds). Autonomy is earned through demonstrated reliability and constitutional compliance.
 
@@ -52,7 +54,7 @@ AIOS entities exist on an autonomy spectrum. Every entity starts at L0 (fully co
 - Regression occurs on violation or failure
 - All levels are subject to the same constitutional constraints
 
-### 4. Identity Precedes Action
+### PHI-004 — Identity Precedes Action
 
 No entity acts without an identity. Identity is the immutable root of constitutional operations. Every entity receives its identity from the Identity Service (IDS) at creation. Authentication, authorization, capability, and execution all depend on identity.
 
@@ -62,7 +64,7 @@ No entity acts without an identity. Identity is the immutable root of constituti
 - All actions are attributed to an identity
 - The verification pipeline requires identity as its first stage
 
-### 5. Verification-First
+### PHI-005 — Verification-First
 
 No action executes without verification. Every action passes through a 7-stage verification pipeline (Identity → Authentication → Authorization → Policy → Capability → Risk → Execution Authorization). A denial at any stage prevents execution entirely.
 
@@ -72,7 +74,7 @@ No action executes without verification. Every action passes through a 7-stage v
 - Fail-closed: if any dependency is unavailable, the action is denied
 - The pipeline itself is subject to constitutional oversight
 
-### 6. Lifecycle Compliance
+### PHI-006 — Lifecycle Compliance
 
 Every entity has two parallel lifecycles: an identity lifecycle and an operational lifecycle. Every state transition is authorized, recorded, and verifiable. No entity exists outside its lifecycles.
 
@@ -86,7 +88,7 @@ Every entity has two parallel lifecycles: an identity lifecycle and an operation
 - State-dependent capabilities: entities may only act in certain states of both lifecycles
 - Lifecycle violations are constitutional violations
 
-### 7. Capability Bounds Over Permission
+### PHI-007 — Capability Bounds Over Permission
 
 Capabilities are bounded, not binary. An entity does not simply have or lack a capability; it has a capability with specific resource bounds, duration, scope, frequency, and autonomy constraints. Capabilities are the constitutional expression of what an entity may do.
 
@@ -96,7 +98,7 @@ Capabilities are bounded, not binary. An entity does not simply have or lack a c
 - Capabilities may be revoked or suspended
 - Capability use is auditable
 
-### 8. Evidence Over Opinion
+### PHI-008 — Evidence Over Opinion
 
 Decisions are made on evidence, not opinion. The Academy learns from evidence. The Security Council verifies against evidence. Organizations manage based on evidence. Evidence is the currency of constitutional operations.
 
@@ -106,7 +108,7 @@ Decisions are made on evidence, not opinion. The Academy learns from evidence. T
 - Evidence has provenance and can be verified
 - Evidence retention is governed by policy, not discretion
 
-### 9. Simpler Over Complex
+### PHI-009 — Simpler Over Complex
 
 Every design choice favours simplicity over complexity. The simplest solution that satisfies all constraints is the correct solution. Complexity is justified only when simpler alternatives have been proven inadequate.
 
@@ -116,7 +118,7 @@ Every design choice favours simplicity over complexity. The simplest solution th
 - Capabilities are defined in terms of resources, not arbitrary logic
 - Lifecycles are defined in terms of states and transitions, not arbitrary state machines
 
-### 10. Design for Failure
+### PHI-010 — Design for Failure
 
 Every component assumes that every dependency will fail. Systems are designed to degrade gracefully, deny safely, and recover automatically.
 
