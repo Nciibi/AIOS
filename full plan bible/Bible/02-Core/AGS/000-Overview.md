@@ -113,6 +113,63 @@ A Genome is a constitutional template containing:
 | overrides | Overrides to inherited traits | No |
 | provenance | Source of the Genome (creator, timestamp, signature) | Yes |
 
+## AGS Data Flow
+
+```
+External Request (Security Council, Sou, Administrator)
+    │
+    ▼
+┌─────────────────────────────────────────┐
+│  AGS Composer (001)                      │
+│  ├── compose(template_id, overrides)     │
+│  ├── inherit(parent_genome_id)           │
+│  └── merge(genome_a, genome_b)           │
+│         │                                │
+│         ▼                                │
+│  Composed Genome                         │
+│         │                                │
+│         └──► AGS Validator (003)         │
+└─────────────────────────────────────────┘
+                     │
+                     ▼
+┌─────────────────────────────────────────┐
+│  AGS Validator (003)                     │
+│  ├── Stage 1: Structure                  │
+│  ├── Stage 2: Semantics                  │
+│  ├── Stage 3: Constitutional             │
+│  ├── Stage 4: Consistency                │
+│  └── Stage 5: Provenance                 │
+│         │                                │
+│         ▼                                │
+│  Validated Genome                        │
+│         │                                │
+│         └──► AGS Signing (005)           │
+└─────────────────────────────────────────┘
+                     │
+                     ▼
+┌─────────────────────────────────────────┐
+│  AGS Signing (005)                       │
+│  ├── signGenome(genome_id)               │
+│  └── (HSM: SHA256 + ECDSA)              │
+│         │                                │
+│         ▼                                │
+│  Signed Genome (Active in Registry)      │
+│         │                                │
+│         ├──► Security Council            │
+│         │   (verify before instantiation)│
+│         └──► IDS (identity assignment)   │
+└─────────────────────────────────────────┘
+                     │
+                     ▼
+┌─────────────────────────────────────────┐
+│  AGS Versioning (004)                    │
+│  ├── createVersion()                     │
+│  ├── deprecateVersion()                 │
+│  ├── archiveVersion()                    │
+│  └── migrateSession()                    │
+└─────────────────────────────────────────┘
+```
+
 ## AGS Invariants
 
 1. **Complete Definition**: Every Genome must fully define the entity's capabilities, bounds, policies, and constraints. No entity may operate without a complete Genome. (CPR-009, PHI-007)

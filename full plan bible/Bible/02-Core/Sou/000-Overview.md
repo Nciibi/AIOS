@@ -99,6 +99,68 @@ Sou proposes decisions. DGP (Governance/002-DGP.md) routes them:
 | Learning | Sou/004-Learning.md | Self-improvement from outcomes, refinement of reasoning |
 | Knowledge | Sou/005-Knowledge.md | Constitutional memory, private knowledge store |
 
+## Sou Data Flow
+
+```
+External Input (User Intent, ACF Stream, Academy Knowledge)
+    │
+    ▼
+┌─────────────────────────────────────────┐
+│  Sou Reasoning (001)                     │
+│  ├── Goal-Directed Reasoning             │
+│  ├── Constraint-Based Reasoning          │
+│  ├── Evidence-Based Reasoning            │
+│  └── Constitutional Reasoning            │
+│         │                                │
+│         ▼                                │
+│  Decision Proposal / Goal / Analysis     │
+│         │                                │
+│         ├──► DGP (via ACF)               │
+│         └──► Sou Planner (002)           │
+└─────────────────────────────────────────┘
+                     │
+                     ▼
+┌─────────────────────────────────────────┐
+│  Sou Planner (002)                       │
+│  ├── createPlan()                        │
+│  ├── refinePlan()                        │
+│  ├── validatePlan()                      │
+│  └── compareScenarios()                  │
+│         │                                │
+│         ▼                                │
+│  Mission Plan                            │
+│         │                                │
+│         ├──► DGP → OSYS (execution)      │
+│         └──► Sou Missions (003)          │
+└─────────────────────────────────────────┘
+                     │
+                     ▼
+┌─────────────────────────────────────────┐
+│  Sou Missions (003)                      │
+│  ├── proposeMission()                    │
+│  ├── approveMissionPlan()               │
+│  ├── adjustMission()                    │
+│  └── evaluateMissionOutcome()           │
+│         │                                │
+│         ▼                                │
+│  Outcome Evidence                        │
+│         │                                │
+│         └──► Sou Learning (004)          │
+└─────────────────────────────────────────┘
+                     │
+                     ▼
+┌─────────────────────────────────────────┐
+│  Sou Learning (004)                      │
+│  ├── ingestOutcome()                     │
+│  ├── updateModel()                       │
+│  └── evaluateImprovement()              │
+│         │                                │
+│         ▼                                │
+│  Updated Models → Reasoning & Planner    │
+│  Learned Patterns → Knowledge (005)      │
+└─────────────────────────────────────────┘
+```
+
 ## Invariants — Sou Operations
 
 1. **Non-Execution Invariant**: Sou never executes actions. All Sou outputs are proposals routed through DGP. Law 2 (Non-Execution) is absolute. (CPR-001, PHI-003)
