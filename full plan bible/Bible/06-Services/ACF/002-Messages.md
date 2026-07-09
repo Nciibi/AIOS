@@ -38,88 +38,163 @@ Envelope {
   ttl: duration,
   reply_to: Address?,
   priority: int,
-  flags: string[]
+  delivery_mode: string,     // at_most_once, at_least_once, exactly_once
+  flags: string[],           // durable, encrypted, audit
+  extensions: map<string, any>?  // custom extensions
 }
 ```
 
 ### Envelope Fields
 
-| Field | Required | Description |
-|-------|----------|-------------|
-| **version** | Yes | Message format version (currently 1) |
-| **message_id** | Yes | Globally unique, time-sortable ID |
-| **sender** | Yes | ACF address of the sending entity |
-| **target** | Yes | ACF address of the receiving entity |
-| **timestamp** | Yes | Hybrid Logical Clock timestamp |
-| **auth_token** | Yes | Authentication token for sender |
-| **auth_type** | Yes | Token type (session, api_key, certificate) |
-| **correlation_id** | No | Links related messages in a conversation |
-| **causation_id** | No | Links to the message that caused this one |
-| **ttl** | Yes | Time-to-live — message expires after this |
-| **reply_to** | No | Address to send replies to |
-| **priority** | Yes | 0 (lowest) to 9 (highest, security-only) |
-| **flags** | No | Delivery flags (durable, encrypted, audit) |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| version | int | Yes | Message format version (currently 1) |
+| message_id | UUIDv7 | Yes | Globally unique, time-sortable |
+| sender | Address | Yes | ACF address of sending entity |
+| target | Address | Yes | ACF address of target entity |
+| timestamp | HLC | Yes | Hybrid Logical Clock timestamp |
+| auth_token | string | Yes | Authentication token for sender |
+| auth_type | string | Yes | Token type: session, api_key, certificate |
+| correlation_id | UUID | No | Links related messages in a conversation |
+| causation_id | UUID | No | Links to message that caused this one |
+| ttl | duration | Yes | Time-to-live before message expires |
+| reply_to | Address | No | Address for replies |
+| priority | int | Yes | 0 (lowest) to 9 (highest, security-only) |
+| delivery_mode | string | Yes | Delivery semantics |
+| flags | string[] | No | Delivery flags |
+| extensions | map | No | Custom extensions (forward-compatible) |
 
 ### Envelope Requirements
 
 Every message MUST have:
-- **sender** — Valid ACF address of the sender
-- **target** — Valid ACF address of the target
+- **sender** — Valid ACF address of the sending entity
+- **target** — Valid ACF address of the receiving entity
 - **auth_token** — Cryptographic token proving sender identity
-- **timestamp** — HLC timestamp assigned by ACF Gateway
+- **auth_type** — Type of token presented
+- **timestamp** — HLC timestamp (assigned by ACF Gateway, verified on receipt)
+- **ttl** — Duration after which message expires
 
 Messages missing any required field are rejected at the ACF Gateway with `ACF.MalformedMessage`.
 
-## Message Size Limit
+## Message Size Limits
 
-| Scope | Default | Maximum | Configurable? |
-|-------|---------|---------|---------------|
-| Payload size | 10 MB | 100 MB | Per-channel |
-| Envelope size | 4 KB | 16 KB | System-wide |
-| Total message | 10 MB | 100 MB | Per-channel |
+| Measurement | Default | Maximum | Configurable |
+|-------------|---------|---------|-------------|
+| Payload | 10 MB | 100 MB | Per channel |
+| Envelope | 4 KB | 16 KB | System-wide |
+| Total message | 10 MB | 100 MB | Per channel |
+| Extension count | 10 | 50 | System-wide |
+| Flags count | 16 | 32 | System-wide |
 
-Messages exceeding the limit are rejected with `ACF.MessageTooLarge`. The sender receives the limit and suggested fragmentation strategy.
+Messages exceeding the limit are rejected with `ACF.MessageTooLarge`. The sender receives: limit that was exceeded, actual size, and fragmentation suggestion.
 
 ## Delivery Semantics
 
-| Semantics | Description | Use Case |
-|-----------|-------------|----------|
-| **at-most-once** | Message is delivered once, no retry | Streaming, metrics |
-| **at-least-once** | Message is retried until acknowledged | Default, general communication |
-| **exactly-once** | Deduplication ensures single processing | Financial/audit Events |
+| Semantics | Description | Retry | Dedup | Use Case |
+|-----------|-------------|-------|-------|----------|
+| **at-most-once** | Delivered once, no retry | None | None | Streaming metrics, logs |
+| **at-least-once** | Retry until acked | 3 attempts | Required on receiver | Default, general communication |
+| **exactly-once** | Deduplicated processing | 3 attempts | Required on ACF | Financial/audit Events |
 
 ### At-Least-Once Delivery
 
-Default delivery mode. ACF persists the message, delivers it, and waits for acknowledgment. If acknowledgment is not received within the timeout, ACF retries (up to 3 attempts). After 3 attempts, the message goes to the dead letter queue.
+Default mode. ACF persists the message, delivers it, and waits for acknowledgment:
+
+```
+1. Message persisted to WAL
+2. Delivered to receiver
+3. Receiver sends ack
+4. If no ack within timeout (configurable, default 30s):
+   a. Retry 1: 100ms backoff
+   b. Retry 2: 1s backoff
+   c. Retry 3: 10s backoff
+5. If all retries fail, message sent to dead letter queue
+```
 
 ### Exactly-Once Delivery
 
-Requires idempotent receivers and deduplication. ACF assigns a unique message_id and deduplicates on the receiver side. Receivers must implement idempotency. Exactly-once is used for financial transactions, audit Events, and lifecycle transitions.
+Requires idempotent receivers and deduplication:
+
+```
+1. ACF assigns message_id
+2. ACF persists delivery state (message_id → delivered)
+3. On delivery, receiver checks message_id against processed set
+4. If already processed, return ack without processing again
+5. If new, process and record message_id
+6. ACF maintains dedup window (configurable, default 24h)
+```
 
 ## Message Operations
 
 ```
 sendMessage(envelope, payload) → message_id
-receiveMessage(timeout?) → Message
+sendMessageWithAck(envelope, payload, timeout) → message_id, ack
+receiveMessage(entity_id, timeout?) → Message
 getMessageStatus(message_id) → DeliveryStatus
 retryMessage(message_id) → void
 deadLetterMessage(message_id, reason) → void
 acknowledgeMessage(message_id) → void
+rejectMessage(message_id, reason) → void
 ```
+
+### getMessageStatus
+
+```
+DeliveryStatus {
+  message_id: UUID,
+  status: pending | queued | delivered | acknowledged | failed | dead_lettered | expired,
+  delivery_attempts: DeliveryAttempt[],
+  queued_at: timestamp,
+  first_delivery_at?: timestamp,
+  last_delivery_at?: timestamp,
+  acknowledged_at?: timestamp,
+  dead_letter_reason?: string
+}
+
+DeliveryAttempt {
+  attempt: int,
+  endpoint: Address,
+  sent_at: timestamp,
+  result: success | timeout | error,
+  error?: string
+}
+```
+
+## Message Priority
+
+| Priority | Range | Description | Preemption |
+|----------|-------|-------------|------------|
+| Low | 0-2 | Background, analytics | None |
+| Normal | 3-5 | Standard messages | Above low |
+| High | 6-7 | Time-sensitive | Above normal |
+| Critical | 8 | System operations | Above high |
+| Emergency | 9 | Security/Breaking Glass | Highest |
+
+## Error Codes
+
+| Code | Condition | Description |
+|------|-----------|-------------|
+| ACF-MSG-001 | MalformedMessage | Required envelope field missing |
+| ACF-MSG-002 | MessageTooLarge | Message exceeds size limit |
+| ACF-MSG-003 | InvalidAddress | Sender or target address is invalid |
+| ACF-MSG-004 | TTLExpired | Message TTL expired before delivery |
+| ACF-MSG-005 | UnsupportedVersion | Envelope version not supported |
+| ACF-MSG-006 | DeliveryFailed | All delivery attempts failed |
+| ACF-MSG-007 | DuplicateMessage | Duplicate message_id detected (exactly-once) |
 
 ## ACF Message Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `ACF.MessageSent` | Sender dispatches message | message_id, sender, target, size, priority |
-| `ACF.MessageAuthenticated` | Token is verified | message_id, auth_type, auth_result |
-| `ACF.MessageAuthorized` | Route is permitted | message_id, sender, target, route_rule |
-| `ACF.MessageQueued` | Message is persisted | message_id, storage_location |
-| `ACF.MessageRouted` | Target endpoint selected | message_id, target_endpoint, lb_strategy |
-| `ACF.MessageDelivered` | Message reaches receiver | message_id, receiver, delivery_attempt |
-| `ACF.MessageAcknowledged` | Receiver confirms processing | message_id, receiver, processing_time |
-| `ACF.MessageFailed` | Delivery fails permanently | message_id, reason, attempts, dead_letter |
-| `ACF.MessageExpired` | TTL exceeded | message_id, ttl, sender_notified |
+| `ACF.MessageSent` | Sender dispatches message | message_id, sender, target, size, priority, delivery_mode |
+| `ACF.MessageAuthenticated` | Token verified | message_id, auth_type, auth_result, authentication_latency |
+| `ACF.MessageAuthorized` | Route permitted | message_id, sender, target, route_rule_id |
+| `ACF.MessageQueued` | Message persisted | message_id, storage_type (persistent/volatile), queue_position |
+| `ACF.MessageRouted` | Target endpoint selected | message_id, target_endpoint, lb_strategy, route_latency |
+| `ACF.MessageDelivered` | Message reaches receiver | message_id, receiver, delivery_attempt, delivery_latency |
+| `ACF.MessageAcknowledged` | Receiver confirms | message_id, receiver, processing_time_ms |
+| `ACF.MessageFailed` | Permanent delivery failure | message_id, reason, attempts, first_error, dead_lettered |
+| `ACF.MessageExpired` | TTL exceeded | message_id, ttl, time_since_send, sender_notified |
 
 ## Cross-Cutting Concerns
 
