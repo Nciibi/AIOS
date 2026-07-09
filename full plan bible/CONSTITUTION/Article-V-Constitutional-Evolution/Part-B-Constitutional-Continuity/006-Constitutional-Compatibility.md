@@ -1,165 +1,73 @@
 # AIOS Constitution
 ## Article V — Constitutional Evolution
-### Part A — Constitutional Governance
-#### Section 3 — Constitutional Review
+### Part B — Constitutional Continuity
+#### Section 6 — Constitutional Compatibility
 
 | Property | Value |
 |----------|-------|
 | Status | Immutable |
 | Version | 1.0 |
-| Document ID | AIOS-CON-V-A-003 |
+| Document ID | AIOS-CON-V-B-006 |
 
 ---
 
-# 1. Purpose
+# Purpose
 
-Constitutional Review establishes the formal process by which proposed constitutional changes are evaluated before they may become part of the AIOS Constitution.
+Constitutional Compatibility establishes the principle that constitutional evolution shall preserve the ability of successive constitutional versions to coexist without creating ambiguity, contradiction or fragmentation.
 
-Its purpose is not to improve writing.
-
-Its purpose is to preserve constitutional integrity.
-
-Every proposed constitutional modification SHALL undergo review before ratification.
+Compatibility preserves constitutional continuity across constitutional versions.
 
 ---
 
-# 2. Constitutional Principle
+# Constitutional Principle
 
-No constitutional proposal SHALL become authoritative until it has successfully completed Constitutional Review.
+Every Constitutional Amendment SHALL be compatible with the constitutional identity established by this Constitution.
 
-Review exists to verify consistency, correctness, necessity and long-term architectural integrity.
+Constitutional evolution SHALL strengthen the Constitution without creating incompatible constitutional authorities.
 
-Approval without review is constitutionally prohibited.
+Compatibility is the default constitutional expectation.
 
----
-
-# 3. Scope
-
-Constitutional Review applies to
-
-- New Articles
-- Amendments
-- Structural Changes
-- Constitutional Definitions
-- Constitutional Guarantees
-- Governance Changes
-- Canonical Terminology
-- Normative Requirements
-
-Editorial corrections that do not alter constitutional meaning MAY undergo an abbreviated review process.
+Incompatibility requires explicit constitutional justification.
 
 ---
 
-# 4. Objectives
+# Constitutional Authority
 
-Constitutional Review SHALL determine whether a proposal
+Constitutional Compatibility SHALL determine whether a newly ratified constitutional version remains consistent with the constitutional principles and authorities established by preceding versions.
 
-- preserves constitutional philosophy,
-- maintains architectural coherence,
-- avoids unnecessary duplication,
-- introduces clear responsibilities,
-- respects constitutional hierarchy,
-- preserves backward compatibility where applicable,
-- strengthens the Constitution.
-
-Review SHALL reject proposals that weaken constitutional integrity.
+A constitutional version SHALL NOT introduce ambiguity regarding which constitutional authority governs a given matter.
 
 ---
 
-# 5. Review Dimensions
+# Constitutional Constraints
 
-Every constitutional proposal SHALL be evaluated across the following dimensions.
+Constitutional Compatibility SHALL preserve
 
-## Constitutional Consistency
+- constitutional identity;
+- constitutional coherence;
+- constitutional authority;
+- constitutional continuity.
 
-Does the proposal contradict existing constitutional authority?
-
-## Architectural Integrity
-
-Does the proposal improve the architecture without introducing unnecessary complexity?
-
-## Conceptual Clarity
-
-Is every constitutional responsibility clearly defined and unambiguous?
-
-## Dependency Analysis
-
-Are dependencies, relationships and impacts fully identified?
-
-## Long-Term Sustainability
-
-Can the proposal remain valid across future versions of AIOS?
-
-## Implementability
-
-Can an implementation faithfully realize the constitutional requirements?
+A constitutional version SHALL NOT invalidate previously established constitutional principles unless explicitly amended through constitutional authority.
 
 ---
 
-# 6. Review Outcomes
+# Relationship
 
-A review MAY produce one of the following outcomes.
+Constitutional Compatibility derives from Constitutional Versioning.
 
-- Accepted
-- Accepted with Revisions
-- Deferred
-- Returned for Redesign
-- Rejected
+Compatibility precedes Constitutional Migration.
 
-Every outcome SHALL include documented rationale.
+Compatibility is distinct from Constitutional Deprecation.
 
----
+Compatibility evaluates coexistence.
 
-# 7. Evidence
-
-Every Constitutional Review SHALL generate immutable evidence including
-
-- proposal identifier,
-- reviewers,
-- evaluation criteria,
-- findings,
-- rationale,
-- final recommendation,
-- affected constitutional artifacts.
-
-Review evidence SHALL become part of constitutional history.
-
----
-
-# 8. Constitutional Invariants
-
-The following statements SHALL always remain true.
-
-- Every constitutional modification is reviewed.
-- Review precedes ratification.
-- Review decisions are evidence-based.
-- Review outcomes are documented.
-- Constitutional integrity takes precedence over convenience.
-
----
-
-# 9. Relationship to Other Constitutional Concepts
-
-Constitutional Review follows Constitutional Amendments.
-
-Successful review is a prerequisite for Constitutional Ratification.
-
-Review contributes to Constitutional Versioning and historical preservation.
-
----
-
-# 10. Rationale
-
-A constitution that can change without disciplined review will eventually become inconsistent.
-
-Constitutional Review ensures that AIOS evolves through deliberate engineering rather than incremental accumulation of unrelated ideas.
-
-It preserves coherence across decades of architectural evolution.
+It does not govern transition.
 
 ---
 
 # Final Statement
 
-Constitutional Review is the architectural quality gate of the AIOS Constitution.
+Constitutional Compatibility preserves the continuity of the AIOS Constitution across successive constitutional versions.
 
-Every constitutional change shall be examined, justified and validated before it may acquire constitutional authority.
+The Constitution evolves as a single coherent authority whose versions remain constitutionally consistent throughout its evolution.
