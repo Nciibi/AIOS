@@ -79,16 +79,40 @@ When a user message arrives, the Communication domain resolves intent through th
 10. Conversation state updated
 ```
 
+## Invariants
+
+1. **COM-I-001 — Every Message Is Authenticated**: Every incoming and outgoing message is authenticated per Law 5 (Identity). Anonymous messages are rejected at the gateway.
+
+2. **COM-I-002 — Context Preservation**: Conversation context is preserved across turns within a session. Context loss is a constitutional violation — the user must never need to repeat information.
+
+3. **COM-I-003 — Response Bounded**: Responses are bounded by the Worker's capability scope. A ChatWorker may not generate responses outside its authorized domain.
+
+4. **COM-I-004 — Privacy Preservation**: User conversation data is access-controlled per Organization policy. Cross-Organization conversation access requires explicit authorization.
+
+5. **COM-I-005 — Intent Routing**: Every message has exactly one resolved intent. Ambiguous intents are resolved through clarification before routing to Sou.
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| User message contains multiple intents | Primary intent selected via confidence scoring. Secondary intents queued for follow-up. |
+| Conversation context exceeds window limit | Context summarized by oldest-to-newest trimming. Key entities preserved. |
+| User is inactive beyond timeout | Session marked as Idle. Preservation timeout applied before archival. |
+| Incoming message fails moderation | Message rejected with policy violation notice. Moderation Event produced for Security Council. |
+| Response generation exceeds latency SLO | Fallback response delivered ("I'm processing your request"). Background generation continues. |
+| Channel adapter unavailable | Messages queued with TTL. If channel remains unavailable, notification sent via alternate channel. |
+
 ## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `Comm.MessageReceived` | User message arrives | message_id, user_id, channel, message_type, intent |
-| `Comm.MessageSent` | Response is delivered to user | message_id, recipient, channel, response_time_ms |
-| `Comm.IntentResolved` | User intent is classified | message_id, intent_category, confidence, entities |
-| `Comm.ConversationStarted` | New conversation session begins | session_id, user_id, channel, start_time |
-| `Comm.ConversationResolved` | Conversation goal is achieved | session_id, outcome, turns_count, satisfaction_score |
-| `Comm.NotificationSent` | Notification is dispatched | notification_id, recipient, priority, channel |
+| `Comm.MessageReceived` | User message arrives | message_id, user_id, channel, message_type, intent, timestamp |
+| `Comm.MessageSent` | Response is delivered to user | message_id, recipient, channel, response_time_ms, token_count |
+| `Comm.IntentResolved` | User intent is classified | message_id, intent_category, confidence, entities, alternatives |
+| `Comm.SentimentAnalyzed` | Sentiment analysis completes | message_id, sentiment_score, urgency_score, tone |
+| `Comm.ConversationStarted` | New conversation session begins | session_id, user_id, channel, start_time, user_preference_hash |
+| `Comm.ConversationResolved` | Conversation goal is achieved | session_id, outcome, turns_count, satisfaction_score, resolution_path |
+| `Comm.NotificationSent` | Notification is dispatched | notification_id, recipient, priority, channel, delivery_status |
 
 ## Cross-Cutting Concerns
 
