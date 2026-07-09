@@ -147,6 +147,16 @@ All Robotics domain communication flows through ACF. ROS2 DDS traffic within a r
 | R13 (Design for Failure) | All control loops have software watchdogs; simulation failures preserve state for debugging |
 | R14 (Paved Path) | Paved path: develop → simulate → verify → deploy → monitor |
 
+## Component Map
+
+| Component | Document | Function |
+|-----------|----------|----------|
+| ROS2 Node Generator | Robotics/001-ROS.md | ROS2 package, node, and interface code generation |
+| Motion Planner | Robotics/002-Motion.md | Trajectory planning, IK solvers, collision checking |
+| Controller Manager | Robotics/003-Control.md | PID tuning, MPC implementation, control loop management |
+| Simulation Manager | Robotics/004-Simulation.md | Gazebo integration, world configuration, scenario testing |
+| Perception Pipeline | Robotics/005-Perception.md | Sensor processing, object detection, localization, mapping |
+
 ## Performance Characteristics
 
 | Metric | Target | Hard Limit |

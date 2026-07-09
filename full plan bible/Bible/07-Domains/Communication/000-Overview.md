@@ -147,6 +147,16 @@ The Communication domain both consumes and provides communication services. Inte
 | R10 (Simpler Over Complex) | Conversation state machine is linear — no branching complexity |
 | R13 (Design for Failure) | Failed response generation returns graceful fallback message; conversation continues |
 
+## Component Map
+
+| Component | Document | Function |
+|-----------|----------|----------|
+| Chat Engine | Communication/001-Chat.md | Message processing, context management, response generation |
+| Intent Resolver | Communication/002-Intent.md | Intent classification, entity extraction, ambiguity resolution |
+| Channel Adapter | Communication/003-Channels.md | Platform adapters (Slack, Discord, Web, Email, Voice) |
+| Notification Service | Communication/004-Notifications.md | Notification dispatch, scheduling, priority routing |
+| Moderation Service | Communication/005-Moderation.md | Content filtering, policy enforcement, sanitization |
+
 ## Performance Characteristics
 
 | Metric | Target | Hard Limit |

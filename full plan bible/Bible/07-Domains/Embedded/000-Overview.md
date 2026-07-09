@@ -142,6 +142,15 @@ All Embedded domain communication flows through ACF. Hardware test fixtures comm
 | R13 (Design for Failure) | HIL test failures preserve partial results; build failures return complete logs |
 | R14 (Paved Path) | Paved path: generate → cross-compile → test → flash → verify |
 
+## Component Map
+
+| Component | Document | Function |
+|-----------|----------|----------|
+| Firmware Generator | Embedded/001-Firmware.md | HAL and application code generation for embedded targets |
+| Cross-Compiler Manager | Embedded/002-Compiler.md | Toolchain management, multi-arch compilation, linker scripts |
+| Hardware Interface Layer | Embedded/003-Hardware.md | Probe, flash, debug, and monitor hardware targets |
+| Board Support Registry | Embedded/004-Boards.md | Board definitions, pin mappings, peripheral configurations |
+
 ## Performance Characteristics
 
 | Metric | Target | Hard Limit |
