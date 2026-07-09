@@ -165,13 +165,16 @@ The capability-state mapping defines what an entity can do in each state. For ex
 
 | State | Assign Tasks | Execute Tasks | Accept New Instructions | Request Resources | Transition State |
 |-------|-------------|---------------|------------------------|-------------------|-----------------|
-| Created | No | No | No | No | To Assigned |
-| Assigned | Yes (Initial) | No | Yes | Yes | To Active |
-| Active | Yes | Yes | Yes | Yes | To Paused/Completed/Failed |
-| Paused | No | No | No | Yes (resources preserved) | To Active, Failed |
-| Completed | No | No | No | No | No (terminal) |
-| Failed | No | No | No | No | No (terminal) |
-| Abandoned | No | No | No | No | No (terminal) |
+| Created | No | No | No | No | To Planned |
+| Planned | Yes (Initial) | No | Yes | Yes | To Assigned |
+| Assigned | Yes | No | Yes | Yes | To Running |
+| Running | Yes | Yes | Yes | Yes | To Waiting/Paused/Blocked/Review |
+| Waiting | No | No | Yes (status only) | No | To Running (dependency resolved) |
+| Paused | No | No | No | Yes (resources preserved) | To Running, Blocked |
+| Blocked | No | No | No | Yes (resources held) | To Review (escalated), Planned (replan) |
+| Review | No | No | No | No | To Completed, Running (rework) |
+| Completed | No | No | No | No | To Archived (terminal) |
+| Archived | No | No | No | No | (terminal) |
 
 **Capability-State Matrix (Session):**
 
