@@ -178,16 +178,16 @@ The capability-state mapping defines what an entity can do in each state. For ex
 
 **Capability-State Matrix (Session):**
 
-| Entity | Execute | Receive Messages | Produce Events | Manage Resources | Transition State |
+| State | Execute | Receive Messages | Produce Events | Manage Resources | Transition State |
 |-------|---------|-----------------|---------------|------------------|-----------------|
 | Created | No | No | No | No | Yes (to Initialized) |
 | Initialized | No | No | No | Yes (pre-allocation) | Yes (to Active) |
-| Active | Yes | Yes | Yes | Yes | Yes (to Paused, Completed, Failed) |
-| Paused | No | No | No | Yes (resources held) | Yes (to Active, Restarting) |
+| Active | Yes | Yes | Yes | Yes | Yes (to Paused, Restarting, Completed, Failed) |
+| Paused | No | No | No | Yes (resources held) | Yes (to Active, Restarting, Failed) |
 | Restarting | Recovery only | No | No | Yes (restore) | Yes (to Active, Failed) |
-| Completed | No | No | No | No | No (to Destroyed only) |
+| Completed | No | No | No | No | Yes (to Destroyed) |
 | Failed | No | No | No | No | Yes (to Restarting, Destroyed) |
-| Destroyed | No | No | No | No | No (terminal) |
+| Destroyed | No | No | No | No | (terminal) |
 
 *Edge Case*: An entity that needs to perform an action in a state that normally does not allow that action (e.g., a Paused Mission receiving critical instructions) — the entity must first transition to an appropriate state. The Security Council may authorize an exceptional transition.
 
