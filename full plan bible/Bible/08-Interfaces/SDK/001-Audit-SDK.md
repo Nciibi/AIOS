@@ -217,4 +217,11 @@ All Audit SDK communication flows through ACF. Event queries are RPC-style reque
 
 | Document | Relationship |
 |---------|-------------|
-| 
+| Physics/005-Events.md | Evidence — Audit SDK consumes Events |
+| Physics/008-Security.md | Security — Audit SDK implements security audit requirements |
+| Bible/08-Interfaces/API/000-Specifications.md | API — Audit SDK uses ACF API contracts for queries |
+| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK — Runtime sessions produce Events that Audit SDK consumes |
+| Bible/04-Execution/Security/Audit/000-EAS.md | EAS — Evidence Audit Service implementation |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — Entity identity verification for audit trails |
+| Bible/00-Foundations/002-Design-DNA.md | Design DNA — R1–R15 compliance for audit tools |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |

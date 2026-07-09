@@ -129,6 +129,37 @@ Every knowledge artifact processed through the Knowledge SDK conforms to this sc
 
 Artifact types define the structure of the `content.body` field. The Knowledge SDK validates artifacts against their type schema before acceptance.
 
+## Knowledge Provider Registration
+
+Knowledge-aware tools register with the Academy through a structured registration:
+
+```
+{
+  "provider_id": "uuid-v7",
+  "provider_name": "string",
+  "version": "1.0.0",
+  "capabilities": ["search", "propose", "validate", "compose", "execute"],
+  "knowledge_types": ["insight", "model", "pattern", "procedure"],
+  "domains": ["string"],
+  "max_query_results": 100,
+  "supports_streaming": true
+}
+```
+
+Registration is validated by the Academy. Tools with unsupported capability combinations are rejected.
+
+## Knowledge Artifact Types
+
+The Knowledge SDK supports these artifact types, each with a defined schema for `content.body`:
+
+| Type | Content Body Schema | Example |
+|------|--------------------|---------|
+| `insight` | structured_observation, evidence_chain, confidence | "Token usage peaks between 2-4 PM" |
+| `model` | model_parameters, training_data_hash, performance_metrics | "Anomaly detection model v2.1" |
+| `pattern` | pattern_definition, trigger_conditions, frequency | "Three consecutive build failures → toolchain issue" |
+| `procedure` | step_list, preconditions, postconditions, risk_level | "Certificate rotation procedure" |
+| `reference` | source_url, content_hash, summary, tags | "RFC 8446 TLS 1.3 specification" |
+
 ## Knowledge Execution Protocol
 
 Knowledge execution (via KEE) follows this protocol:
@@ -148,16 +179,29 @@ Knowledge execution (via KEE) follows this protocol:
 9. Academy may learn from execution outcome
 ```
 
+## Knowledge Query Performance
+
+| Query Type | Target Latency | Max Results |
+|------------|---------------|-------------|
+| Search (text) | < 300ms | 100 |
+| Search (semantic) | < 500ms | 50 |
+| Get by ID | < 100ms | 1 |
+| Graph traversal (depth 2) | < 200ms | 1,000 |
+| Graph traversal (depth 5) | < 2 seconds | 10,000 |
+| Similarity search | < 300ms | 50 |
+| Recommendation | < 500ms | 20 |
+
 ## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `SDK.KnowledgeSearched` | Knowledge search is executed | query_id, query_hash, result_count, duration_ms |
-| `SDK.KnowledgeProposed` | Knowledge artifact is submitted | proposal_id, artifact_type, source_event_ids |
-| `SDK.KnowledgeValidated` | Knowledge validation completes | artifact_id, validator_id, passed, validation_score |
-| `SDK.KnowledgeComposed` | Knowledge composition finishes | composition_id, source_ids, result_id |
-| `SDK.KnowledgeExecuted` | Knowledge execution runs | execution_id, knowledge_id, outcome, evidence_hash |
-| `SDK.KnowledgeSubscriptionCreated` | Topic subscription is registered | subscription_id, topic, entity_id |
+| `SDK.KnowledgeSearched` | Knowledge search is executed | query_id, query_hash, result_count, duration_ms, query_type |
+| `SDK.KnowledgeProposed` | Knowledge artifact is submitted | proposal_id, artifact_type, source_event_ids, confidence |
+| `SDK.KnowledgeValidated` | Knowledge validation completes | artifact_id, validator_id, passed, validation_score, validation_detail |
+| `SDK.KnowledgeVerified` | Knowledge verification completes | artifact_id, verifier_id, confidence, evidence_match_score |
+| `SDK.KnowledgeComposed` | Knowledge composition finishes | composition_id, source_ids, result_id, composition_time_ms |
+| `SDK.KnowledgeExecuted` | Knowledge execution runs | execution_id, knowledge_id, outcome, evidence_hash, duration_ms |
+| `SDK.KnowledgeSubscriptionCreated` | Topic subscription is registered | subscription_id, topic, entity_id, filter_criteria |
 
 ## Cross-Cutting Concerns
 
