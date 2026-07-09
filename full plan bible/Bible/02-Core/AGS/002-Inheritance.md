@@ -82,6 +82,38 @@ Inheritance is limited to a maximum of 3 levels:
 
 This limit ensures the inheritance tree remains manageable and auditable. Deeper customization is achieved through Genome composition (AGS/001-Composition.md) with overrides, not through inheritance.
 
+## Base Genome Capabilities
+
+Each base Genome defines the minimum capabilities for its type:
+
+| Base Type | Minimum Capabilities | Constitutional Traits |
+|-----------|---------------------|----------------------|
+| Worker | communicate, execute, report, authenticate | source_laws = [Law5, Law7, Law8], min_autonomy = L1 |
+| User | authenticate, communicate, submit_intent | source_laws = [Law0, Law1, Law7], min_autonomy = L0 |
+| Engine | reason, learn, govern, validate, communicate | source_laws = [Law2, Law4, Law9], min_autonomy = L2 |
+| Organization | own_missions, manage_resources, govern_members, communicate | source_laws = [Law1, Law5, Law6], min_autonomy = L2 |
+| Mission | receive_intent, produce_outcome, report, communicate | source_laws = [Law1, Law6], min_autonomy = L0 |
+
+## Inheritance Example
+
+```
+Base: Worker
+  capabilities: [communicate, execute, report]
+  bounds: { max_concurrent_tasks: 5, max_duration_sec: 3600 }
+
+Domain: WOM (Worker Operations Manager) inherits Worker
+  capabilities: [communicate, execute, report]
+  + wom_capability: orchestrate
+  bounds: { max_concurrent_tasks: 3, max_duration_sec: 3600 }
+  (orchestrate is a new capability at Domain level — allowed)
+  (max_concurrent_tasks restricted from 5 to 3 — allowed, Rule 1 satisfied)
+
+Specific: WidgetWOM inherits WOM
+  capabilities: [communicate, execute, report, orchestrate]
+  bounds: { max_concurrent_tasks: 2, max_duration_sec: 1800 }
+  (both further restricted — allowed, Rule 1 satisfied)
+```
+
 ## Override Rules
 
 ### Rule 1 — Restrict, Never Expand
