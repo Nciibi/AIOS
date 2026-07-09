@@ -146,29 +146,6 @@ Entities may specify minimum RNG quality requirements. A key generation operatio
 | Random.SourceFailed | RNG source unavailable | source, reason, failover_source |
 | Random.CSPRNGReseeded | CSPRNG re-seeded | seed_source, entropy_bytes, reason |
 
-## Cross-Cutting Concerns
-
-### Security
-All cryptographic random data comes from HSM or OS entropy. CSPRNG is never used for key generation, nonces, IVs, or any operation with security implications. RNG source selection is deterministic based on availability. Side-channel hardened implementations for all entropy extraction.
-
-### Evidence
-Random generation operations are logged with source identifier. Entropy warnings are escalated to Security Council. Entropy depletion events are stored in the Event Store. UUIDs are logged for auditability.
-
-### Lifecycle
-RNG sources have a health lifecycle: healthy → degraded → failed. CSP monitors all sources and fails over automatically. HSM RNG health is checked every 5 seconds. OS entropy level is checked before each cryptographic operation.
-
-### Capability Bounds
-Entities may specify minimum RNG quality requirements. A key generation operation may require HSM RNG; CSP enforces this. Entities without HSM capability in their profile receive OS entropy, not HSM.
-
-### Design DNA Compliance
-| Rule | Compliance |
-|------|------------|
-| R1 | Random generation is a single concern with three RNG tiers. |
-| R9 | Randomness is the only non-deterministic operation; all other CSP ops are deterministic. |
-| R10 | Simple hierarchy: HSM → OS → CSPRNG. No complex selection logic. |
-| R13 | All RNG sources have fallbacks. HSM failure → OS entropy. No single point of failure. |
-| R14 | Paved path: cryptographic RNG → HSM, non-crypto RNG → CSPRNG. |
-
 ## Related Documents
 
 | Document | Relationship |
