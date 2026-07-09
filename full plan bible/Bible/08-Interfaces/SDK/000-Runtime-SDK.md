@@ -101,6 +101,47 @@ Capability invocation follows a defined protocol:
 
 Each invocation receives a unique `InvocationID` for tracing, cancellation, and audit.
 
+## Runtime Provider Registration
+
+Runtime providers register with AIOS through a structured registration:
+
+```
+{
+  "provider_id": "uuid-v7",
+  "runtime_type": "llm | sandbox | container | vm | wasm",
+  "provider_name": "string",
+  "version": "1.0.0",
+  "capabilities": ["capability_id", ...],
+  "max_sessions": 100,
+  "supported_genome_types": ["Worker", "Engine"],
+  "resource_limits": {
+    "max_tokens_per_session": 100000,
+    "max_compute_per_session": 3600,
+    "max_memory_per_session_mb": 8192
+  },
+  "endpoints": {
+    "control": "acf://runtime-provider-id/control",
+    "metrics": "acf://runtime-provider-id/metrics",
+    "events": "acf://runtime-provider-id/events"
+  }
+}
+```
+
+Registration is validated by the Execution runtime. Providers with invalid capability references or missing endpoints are rejected.
+
+## Session Isolation Model
+
+Runtime providers must implement session isolation at these levels:
+
+| Isolation Level | Guarantee | Provider Types |
+|----------------|-----------|----------------|
+| L1 — Logical | Separate process space, shared kernel | WASM, LLM (stateless) |
+| L2 — Container | Separate container per session | Container runtimes |
+| L3 — VM | Separate virtual machine per session | VM providers |
+| L4 — Hardware | Separate physical hardware | Bare metal, HSM |
+
+The minimum isolation level for a session is determined by the session's Genome security requirements. L1 is the default. L3 or L4 is required for sessions handling sensitive data or operating at high autonomy levels.
+
 ## Resource Accounting
 
 Runtime providers must report resource consumption for every session:
@@ -117,17 +158,29 @@ Runtime providers must report resource consumption for every session:
 
 Usage is reported via the `reportUsage` method and consumed by ROS for budget tracking.
 
+## Provider Health Model
+
+Runtime providers report health through a three-tier model:
+
+| Status | Description | Action |
+|--------|-------------|--------|
+| Healthy | Provider operating normally | New sessions assigned |
+| Degraded | Provider experiencing issues (high latency, partial capacity) | Existing sessions continue; new sessions deprioritized |
+| Unhealthy | Provider cannot accept or run sessions | All sessions terminated; provider removed from rotation |
+
+Health checks occur every 30 seconds. A provider that reports Unhealthy for 3 consecutive checks triggers an alert to the Execution runtime.
+
 ## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `SDK.RuntimeSessionCreated` | Runtime session is created | session_id, runtime_type, provider_id, genome_hash |
-| `SDK.RuntimeSessionStarted` | Session transitions to Running | session_id, started_at, initial_metrics |
-| `SDK.RuntimeSessionPaused` | Session is paused | session_id, pause_reason, suspended_state_ref |
-| `SDK.RuntimeSessionTerminated` | Session terminates | session_id, reason, final_usage_report |
-| `SDK.RuntimeInvocationCompleted` | Capability invocation finishes | invocation_id, session_id, capability, duration_ms, usage |
-| `SDK.RuntimeHealthChanged` | Runtime provider health status changes | provider_id, previous_status, new_status, details |
-| `SDK.RuntimeUsageReported` | Resource usage is reported | session_id, report_period, usage_metrics |
+| `SDK.RuntimeSessionCreated` | Runtime session is created | session_id, runtime_type, provider_id, genome_hash, isolation_level |
+| `SDK.RuntimeSessionStarted` | Session transitions to Running | session_id, started_at, initial_metrics, provider_health |
+| `SDK.RuntimeSessionPaused` | Session is paused | session_id, pause_reason, suspended_state_ref, memory_preserved_bytes |
+| `SDK.RuntimeSessionTerminated` | Session terminates | session_id, reason, final_usage_report, total_duration_seconds |
+| `SDK.RuntimeInvocationCompleted` | Capability invocation finishes | invocation_id, session_id, capability, duration_ms, usage_metrics, outcome |
+| `SDK.RuntimeHealthChanged` | Runtime provider health status changes | provider_id, previous_status, new_status, details, consecutive_failures |
+| `SDK.RuntimeUsageReported` | Resource usage is reported | session_id, report_period, usage_metrics, budget_remaining |
 
 ## Cross-Cutting Concerns
 
@@ -167,12 +220,4 @@ All Runtime SDK communication with AIOS core flows through ACF. Runtime provider
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/005-Events.md | Evidence — Runtime SDK operations produce Events |
-| Physics/010-Execution.md | Execution — Runtime SDK implements the execution model |
-| Bible/08-Interfaces/API/000-Specifications.md | API — Runtime SDK consumes ACF API contracts |
-| Bible/02-Core/AGS/000-Overview.md | AGS — Session genomes define runtime requirements |
-| Bible/02-Core/ROS/000-Overview.md | ROS — Resource allocation and accounting for sessions |
-| Bible/04-Execution/Runtime/000-Overview.md | Runtime — Execution runtime architecture |
-| Bible/03-Institutions/Workers/000-Overview.md | Workers — Sessions are Worker instances |
-| Bible/00-Foundations/002-Design-DNA.md | Design DNA — R1–R15 compliance |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Physics/005-Events.md | Evidence — Runtime SDK ope
