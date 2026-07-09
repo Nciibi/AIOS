@@ -57,6 +57,32 @@ The provider tracks input tokens (system prompt + messages) and output tokens (c
 | CLD-3001 | Content filter triggered | Return filtered response with filter_reason |
 | CLD-4001 | Response exceeds max_output_tokens | Truncate response; return BoundsExceeded warning |
 
+## Configuration
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| api_endpoint | `https://api.anthropic.com/v1/messages` | Anthropic API endpoint |
+| default_model | `claude-3-5-sonnet-latest` | Default model for inference |
+| max_retries | 3 | Maximum retry attempts on rate limit or transient errors |
+| retry_backoff_ms | 1000 | Initial backoff in milliseconds (doubles per retry) |
+| connection_pool_size | 10 | Maximum concurrent HTTP connections to the Anthropic API |
+| request_timeout_ms | 60000 | HTTP request timeout for individual API calls |
+| secondary_model | None | Model to fail over to when primary is unavailable |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| Empty message list | Provider returns ValidationError before API call |
+| System prompt exceeds max_input_tokens | Truncate system prompt; emit warning Event |
+| Streaming connection interrupted mid-response | Return partial completion with interrupted status |
+| Model returns unexpected stop_reason | Map to CLD-3002; log for analysis |
+| API version mismatch | Negotiate API version; fail closed if incompatible |
+
+## Integration Patterns
+
+The Claude Provider is typically used as the primary model provider for Sou Reasoning and Worker Session execution. It integrates with the Knowledge Graph via embedding-capable Claude models to provide semantic search over Academy knowledge. For cost-sensitive operations, the provider supports automatic fallback from Claude Opus to Claude Sonnet or Claude Haiku based on token budget thresholds declared in the capability bounds.
+
 ## Events
 
 | Event Type | Fields |
