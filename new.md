@@ -1352,7 +1352,7 @@ full plan bible/
 - 8 top-level folders added: Standards/, SDK/, APIs/, Reference/, Examples/, Tests/, Research/, Contributing/
 - Cryptography expanded under 06-Services/ with KMS, SMS, Certificates, etc. (from line 74602-74615)
 
-**File counts**: ~350 missing files across Physics (13), Bible (~250), RFC (~3), Standards (5), SDK (3), APIs (1), Reference (3), Examples (1), Tests (1), Research (4), Contributing (1). 12 thin Constitution files (Article V).
+***File counts**: ~350 missing files across Physics (13), Bible (~250), RFC (~3), Standards (5), SDK (3), APIs (1), Reference (3), Examples (1), Tests (1), Research (4), Contributing (1). 12 thin Constitution files (Article V).
 
 ---
 
