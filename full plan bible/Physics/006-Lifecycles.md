@@ -44,7 +44,7 @@ Entity types and their lifecycles:
 | Entity Type | Source Physics | Lifecycle States |
 |------------|---------------|-----------------|
 | Identity | 001-Identity | Created → Active → Suspended → Retired |
-| Mission | 002-Missions | Created → Assigned → Active → Paused → Completed → Failed → Abandoned |
+| Mission | 002-Missions | Created → Planned → Assigned → Running → Waiting → Paused → Blocked → Review → Completed → Archived |
 | Organization | 003-Organizations | Draft → Provisional → Active → Suspended → Dissolved |
 | Session | 004-Sessions | Created → Initialized → Active → Paused → Restarting → Completed → Failed → Destroyed |
 | Template | (Bible) | Draft → Validated → Published → Deprecated → Retired |
