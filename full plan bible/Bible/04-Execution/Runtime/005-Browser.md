@@ -38,6 +38,33 @@ The Browser Provider executes browser automation actions using Playwright (prima
 | `browser.form` | Fill and submit a form | fields (selector → value map), submit_selector, wait_for_navigation |
 | `browser.session` | Create or manage a browsing session | action (create/close/reset), cookies, localStorage |
 
+## Configuration
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| browser_engine | `playwright` | Browser automation engine (playwright or puppeteer) |
+| headless | `true` | Run browser in headless mode |
+| viewport_width | 1280 | Default viewport width in pixels |
+| viewport_height | 720 | Default viewport height in pixels |
+| max_page_size_bytes | 10485760 | Maximum page size (10 MB) |
+| max_screenshot_dimension | 4096 | Maximum screenshot dimension in pixels |
+| navigation_timeout_ms | 30000 | Default navigation timeout |
+| resource_blocklist | `[font, media, stylesheet]` | Resource types to block for performance |
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| Page redirects to a blocked domain | Terminate navigation; return RedirectBlocked error with final URL |
+| CAPTCHA or bot detection triggered | Return BotDetection error; suggest manual intervention |
+| Infinite scroll page with dynamic content | Extract visible content only; warn about truncated output |
+| WebSocket or service worker connections | Block all non-HTTP connections at the browser process level |
+| Page requires authentication (login form) | Deny; credential submission requires explicit form-fill capability |
+
+## Integration Patterns
+
+The Browser Provider is typically chained with a model provider in a perceive-reason-act loop: the entity uses a model to decide what to navigate to, then invokes the browser to navigate and extract content, then feeds extracted content back to the model for analysis. This pattern is used for web research, data extraction, and form automation workflows. The provider supports session persistence for multi-step workflows — a browser session can be created once and used across multiple executions within the same entity's mission scope, subject to capability bounds on session duration and page count.
+
 ## Isolation Model
 
 Every execution receives a fresh browser context within an isolated, headless Chromium instance. Contexts are destroyed after execution completes. Cookies, localStorage, and sessionStorage are scoped to the execution context and are not shared across executions. Screenshots and extracted data are returned through the `ExecutionResult` and are not persisted in the browser sandbox.
