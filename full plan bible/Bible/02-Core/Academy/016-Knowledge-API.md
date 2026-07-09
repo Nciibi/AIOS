@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Core / Academy |
 | Document ID | AIOS-BBL-002-ACD-016 |
-| Source Laws | Law 4 — Evidence, Law 1 — Identity |
+| Source Laws | Law 4 — Evidence, Law 5 — Identity |
 | Source Physics | Physics/009-Interaction.md |
 | Source Governance | Governance/006-AKM.md |
 | Supersedes | Nothing |

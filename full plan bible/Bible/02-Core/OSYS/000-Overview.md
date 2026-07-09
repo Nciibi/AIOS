@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Core |
 | Document ID | AIOS-BBL-002-OSYS-000 |
-| Source Laws | Law 1 — Law of Origin, Law 2 — Law of Non-Execution, Law 5 — Law of Capability Bounds, Law 6 — Law of Lifecycle Compliance |
+| Source Laws | Law 1 — Law of Origin, Law 2 — Law of Non-Execution, Law 7 — Law of Capability Bounds, Law 6 — Law of Lifecycle Compliance |
 | Source Physics | Physics/003-Organizations.md, Physics/005-Events.md, Physics/006-Lifecycles.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -168,7 +168,7 @@ Organization Request (from Sou, Security Council, or Administrator)
 
 3. **Lifecycle Compliance**: Every Organization follows the canonical lifecycle: Created → Verified → Active → Suspended → Restored → Dissolved → Archived. (PHI-006, CPR-006)
 
-4. **Resource Accountability**: Organizations manage resources through ROS. Resource allocations are tracked per Organization. No resource is unowned. (Law 5 — Capability Bounds)
+4. **Resource Accountability**: Organizations manage resources through ROS. Resource allocations are tracked per Organization. No resource is unowned. (Law 7 — Capability Bounds)
 
 5. **Constitutional Governance**: Every Organization operates within constitutional bounds. Governance Enforcer ensures compliance. Organizations that violate the Constitution are suspended or dissolved. (CPR-009)
 

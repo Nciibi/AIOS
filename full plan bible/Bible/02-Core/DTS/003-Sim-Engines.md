@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Core |
 | Document ID | AIOS-BBL-002-DTS-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 8 — Law of Verification-First, Law 5 — Law of Capability Bounds |
+| Source Laws | Law 4 — Law of Evidence, Law 8 — Law of Verification-First, Law 7 — Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
