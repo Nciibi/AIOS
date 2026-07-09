@@ -79,17 +79,39 @@ Discovered → Assessed → Provisioned → Configured → Monitored → Updated
 | Updated | Patches, upgrades, configuration changes | SysAdminWorker |
 | Decommissioned | Host retired, data migrated | InfraWorker |
 
+## Invariants
+
+1. **LNX-I-001 — Dry Run Before Apply**: Every configuration change must be previewed as a dry run before application. Direct apply without dry run is prohibited for all changes except emergency security patches.
+
+2. **LNX-I-002 — Idempotent Operations**: All configuration management operations must be idempotent. Running the same playbook twice on the same host must produce identical state.
+
+3. **LNX-I-003 — Scope-Bounded**: A SysAdminWorker operates only on hosts within its authorized scope. Cross-Organization host access is prohibited.
+
+4. **LNX-I-004 — Change Authorization**: Destructive operations (service stop, package removal, firewall change) require specific authorization beyond standard admin rights.
+
+5. **LNX-I-005 — Evidence per Change**: Every command and configuration change produces an Event capturing the full command, output, exit code, and authorization chain.
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| Host unreachable during playbook execution | Playbook paused, retry with backoff (3 attempts). If still unreachable, host marked as offline, partial results reported. |
+| Configuration drift detected between dry run and apply | Apply aborted. Drift report generated. Reassessment triggered before retry. |
+| Package repository unavailable | Package operation queued. Alternative mirror checked. If all mirrors unavailable, operation fails with repository error. |
+| Compliance scan finds critical violation | Immediate escalation to Security Council. Remediation playbook triggered automatically for known violations. |
+| Reboot required after patch | Scheduled during maintenance window. If no window available, change deferred with alert. |
+
 ## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `Linux.HostDiscovered` | New Linux host is found | host_id, hostname, distro, kernel_version, ip_address |
-| `Linux.CommandExecuted` | A command is run on a host | command_id, host_id, command, exit_code, duration |
-| `Linux.ConfigChanged` | System configuration is modified | change_id, host_id, file_path, old_hash, new_hash, approved_by |
-| `Linux.PackageInstalled` | A package is installed or removed | package_id, host_id, action, package_name, version |
-| `Linux.ComplianceScanRun` | Compliance audit completes | scan_id, host_id, standard, passed, failed, score |
-| `Linux.IncidentDetected` | Anomaly or alert is identified | incident_id, host_id, severity, category, details |
-| `Linux.PatchApplied` | Security patch is applied | patch_id, host_id, cve_list, reboot_required, outcome |
+| `Linux.HostDiscovered` | New Linux host is found | host_id, hostname, distro, kernel_version, ip_address, discovered_by |
+| `Linux.CommandExecuted` | A command is run on a host | command_id, host_id, command, exit_code, duration, output_hash |
+| `Linux.ConfigChanged` | System configuration is modified | change_id, host_id, file_path, old_hash, new_hash, approved_by, playbook_id |
+| `Linux.PackageInstalled` | A package is installed or removed | package_id, host_id, action, package_name, version, repository |
+| `Linux.ComplianceScanRun` | Compliance audit completes | scan_id, host_id, standard, passed, failed, score, critical_findings |
+| `Linux.IncidentDetected` | Anomaly or alert is identified | incident_id, host_id, severity, category, details, recommended_action |
+| `Linux.PatchApplied` | Security patch is applied | patch_id, host_id, cve_list, reboot_required, outcome, duration_seconds |
 
 ## Cross-Cutting Concerns
 
