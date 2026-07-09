@@ -148,6 +148,17 @@ Created → Active → Updated → Archived (retention expired)
 | Archived | Retained for audit, removed from active queries | No (audit only) |
 | Shared | Published to Academy, removed from private store | No (via Academy) |
 
+## Knowledge Query Types
+
+| Query Type | Description | Example |
+|------------|-------------|---------|
+| exact_match | Retrieve knowledge by ID | `getKnowledge(KNW-0042)` |
+| semantic_search | Search by meaning and context | `semanticSearch("resource optimization strategies")` |
+| tag_query | Filter by tags | `tagQuery(["resource-optimization", "q3-2026"])` |
+| time_range | Filter by creation time | `timeRange("2026-01-01", "2026-12-31")` |
+| type_filter | Filter by knowledge type | `typeFilter("Strategic Knowledge")` |
+| combined | Multiple criteria | `combined(type=Strategic, tags=[q3], min_confidence=0.8)` |
+
 ## Knowledge Events
 
 | Event Type | Produced When | Fields |

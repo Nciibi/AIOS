@@ -120,6 +120,18 @@ Output: OutcomeEvaluation { mission_id, goal_achievement, lessons }
 Event: Sou.MissionOutcomeEvaluated
 ```
 
+## Mission Monitoring
+
+Sou performs routine monitoring of active missions:
+
+| Monitor Check | Frequency | Action on Deviation |
+|---------------|-----------|---------------------|
+| Progress vs milestones | Daily | If >20% deviation → propose adjustment |
+| Resource consumption vs plan | Weekly | If >30% deviation → propose resource reallocation |
+| Timeline adherence | Per milestone | If >2 days late → assess impact |
+| Risk indicators | Continuous | If risk materializes → propose mitigation |
+| Constitutional compliance | Continuous | If violation → alert Security Council |
+
 ## Sou Evidence Consumption from Missions
 
 Sou receives evidence from completed missions through the following flow:

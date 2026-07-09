@@ -163,6 +163,20 @@ evaluateImprovement:
 | Learning from entity performance lacks sufficient data points | Minimum data points required (default: 10). Below minimum, no model update is made. |
 | Model update is interrupted mid-operation | Rollback to previous version. Interruption Event recorded. System state is preserved. |
 
+## Learning Model Types
+
+Sou maintains several learning models:
+
+| Model | Purpose | Update Source | Consumers |
+|-------|---------|---------------|-----------|
+| PlanningHeuristic | Resource estimation, milestone timing | Mission outcomes | Planner (002) |
+| ReasoningPreference | Option ranking, decision tree weights | Decision outcomes | Reasoning (001) |
+| RiskAssessment | Risk identification and probability | Mission outcomes + Security Events | Planner (002) |
+| ConfidenceCalibration | DTS confidence accuracy | Decision outcomes (fed to DTS) | DTS (004) |
+| EntityPerformance | Entity trust score refinement | Entity Events (fed to Trust Scorer) | DTS Trust Scorer |
+
+Each model is versioned independently. Models may be shared with the Academy for system-wide improvement.
+
 ## Learning Events
 
 | Event Type | Produced When | Fields |

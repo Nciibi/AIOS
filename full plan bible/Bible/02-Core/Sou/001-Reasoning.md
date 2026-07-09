@@ -143,6 +143,30 @@ Output: EvaluatedOptions { evaluation_id, ranked_options, scores, tradeoffs }
 Stored: Sou Knowledge store (temporary, used by Planner)
 ```
 
+## Reasoning Selection Algorithm
+
+```
+function selectReasoningMethod(problem, evidence, constraints):
+  // Constitutional reasoning is ALWAYS applied
+  // Other methods are selected based on problem type
+
+  methods = []
+  
+  if problem has clear goal state:
+    methods.append(GoalDirected)
+  
+  if problem has well-defined constraints with options:
+    methods.append(ConstraintBased)
+  
+  if sufficient evidence Events exist (>10 relevant):
+    methods.append(EvidenceBased)
+  
+  // Always apply constitutional reasoning
+  methods.append(Constitutional)
+  
+  return methods
+```
+
 ## Reasoning Events
 
 | Event Type | Produced When | Fields |
