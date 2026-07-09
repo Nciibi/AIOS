@@ -128,6 +128,32 @@ Process:
 Output: ScenarioComparison { recommended: plan_id, matrix, rationale }
 ```
 
+## Planning Example
+
+```
+Input:   "Reduce average mission completion time by 20% within 30 days"
+Resources: Available: 10 Workers, 500 compute hours, 1TB storage
+Constraints: No Worker may exceed 40h/week (constitutional policy)
+Current State: Average completion: 48h, Resource utilization: 60%
+Evidence: Historical 15% reduction achieved in Q2 with resource optimization
+
+Planner Output:
+  Goal: Reduce avg completion from 48h to 38.4h
+  Milestones:
+    M1: Resource audit and optimization (Days 1-5)
+    M2: Worker retraining on optimized workflows (Days 6-10)
+    M3: Parallel execution rollout (Days 11-20)
+    M4: Monitoring and adjustment (Days 21-30)
+  Resources: 8 Workers (M1-M2), 10 Workers (M3-M4), 300 compute hours
+  Risks:
+    - Worker burnout if optimization is too aggressive → Mitigation: phased rollout
+    - Underestimated training time → Mitigation: buffer 2 days
+  Validation:
+    - Constitutional: ✓ (Law 5 compliance)
+    - Resource feasibility: ✓ (resource plan within limits)
+    - Timeline realism: ✓ (similar to Q2 improvement)
+```
+
 ## Plan Validation
 
 Every plan must pass four validation gates before it can be proposed:

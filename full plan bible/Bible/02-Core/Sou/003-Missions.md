@@ -63,6 +63,25 @@ Sou (Reasoning) ──► Sou (Planner) ──► Sou (Missions propose)
   Sou (Learning) ◄────── Evidence ◄────────┘
 ```
 
+## Example — Mission Lifecycle from Sou's View
+
+```
+1. Created: Sou proposes "Resource Optimization Q3" mission (via Plannner → DGP)
+   → DGP routes to Security Council → Security Council approves
+2. Planned: Organization develops detailed plan → Sou approves plan
+   → Sou: "Plan approved. Conditions: weekly check-ins required."
+3. Assigned: Organization assigns Workers → Sou monitors assignment
+   → Sou: "All Workers assigned. Proceeding."
+4. Running: Workers execute → Sou monitors progress
+   → Monitor check: "Progress at 35%, on track."
+5. Running → Review: Check-in triggered (per condition)
+   → Sou evaluates: "37% done, resources used: 33%. Acceptable variance."
+   → Sou: "Approved to continue."
+6. Completed: Mission finishes → Sou evaluates outcome
+   → Sou: "Goal: optimize resources. Achievement: 92%. Lessons: phased rollout works."
+7. Archived: Sou archives learnings → Knowledge: "Q3 optimization lessons"
+```
+
 ## Sou's Mission Operations
 
 ### proposeMission
