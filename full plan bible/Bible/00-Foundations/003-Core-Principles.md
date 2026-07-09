@@ -52,7 +52,7 @@ Given the same inputs and the same state, AIOS always produces the same outputs.
 
 **Exceptions**: Identity ID suffix generation, token nonce generation. All other operations are deterministic.
 
-## 4. Evidence Is Immutable
+## CPR-004 — Evidence Is Immutable
 
 Evidence (Events) cannot be modified, deleted, or reordered. The Event Store is an append-only log. Tampering with evidence is a constitutional violation.
 
