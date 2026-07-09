@@ -83,18 +83,41 @@ The Trading domain enforces multi-layer risk controls:
 
 All risk limits are enforced by ROS budget allocation. A trade that would violate a limit is rejected before reaching the exchange.
 
+## Invariants
+
+1. **TRD-I-001 — Simulation Before Capital**: No strategy may trade with real capital without passing backtest AND paper trading phases. Backtest-only strategies are research artifacts, not deployable strategies.
+
+2. **TRD-I-002 — Hard Risk Limits**: Risk limits are enforced at the ROS allocation level. A trade that would violate a position, drawdown, or concentration limit is rejected before reaching the exchange. Software overrides are prohibited.
+
+3. **TRD-I-003 — Complete Audit Trail**: Every order, fill, rejection, and risk event is recorded in the Event Store. The complete trade lifecycle for every order must be reconstructable from Events.
+
+4. **TRD-I-004 — Market Data Integrity**: All market data used for decision-making must be validated before use. Stale, missing, or obviously erroneous data must be handled through defined degraded modes.
+
+5. **TRD-I-005 — Best Execution**: Orders must be routed to achieve best execution considering price, speed, and likelihood of execution. Order routing decisions are recorded and auditable.
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| Exchange API is unreachable | Orders queued locally with TTL. If exchange remains unreachable, orders expire and risk positions are reconciled. |
+| Market data feed is delayed | Timestamp comparison against expected latency threshold. If delay exceeds threshold, trading paused until feed validated. |
+| Backtest shows overfitting indicators | DTS confidence reduced. Walk-forward analysis triggered. If overfitting confirmed, strategy returned to research. |
+| Order partially filled | Remaining quantity re-priced and re-submitted. Fill record captures partial fill details. |
+| Strategy P&L exceeds daily drawdown limit | Automatic position liquidation. Trading halted for the day. Security Council notified. |
+
 ## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `Trading.StrategyResearched` | Strategy research completes | strategy_id, hypothesis, instruments, time_horizon, confidence |
-| `Trading.BacktestRun` | Backtest execution finishes | backtest_id, strategy_id, start_date, end_date, sharpe, max_drawdown, total_return |
-| `Trading.PaperTradeCompleted` | Paper trading phase finishes | paper_id, strategy_id, trades_executed, pnl, fill_quality |
-| `Trading.StrategyDeployed` | Strategy is deployed to live trading | strategy_id, capital_allocated, risk_limits, deployed_at |
-| `Trading.OrderPlaced` | Order is submitted to exchange | order_id, instrument, side, quantity, order_type, limit_price |
-| `Trading.OrderFilled` | Order execution confirmed | order_id, fill_price, fill_quantity, fees, timestamp |
-| `Trading.RiskLimitBreached` | A risk limit is approached or breached | limit_type, current_value, limit_value, action_taken |
-| `Trading.StrategyRetired` | Strategy is decommissioned | strategy_id, reason, final_pnl, lessons_learned |
+| `Trading.StrategyResearched` | Strategy research completes | strategy_id, hypothesis, instruments, time_horizon, confidence, methodology |
+| `Trading.BacktestRun` | Backtest execution finishes | backtest_id, strategy_id, start_date, end_date, sharpe, max_drawdown, total_return, trades_count |
+| `Trading.PaperTradeCompleted` | Paper trading phase finishes | paper_id, strategy_id, trades_executed, pnl, fill_quality, slippage_analysis |
+| `Trading.StrategyDeployed` | Strategy is deployed to live trading | strategy_id, capital_allocated, risk_limits, deployed_at, dts_confidence |
+| `Trading.OrderPlaced` | Order is submitted to exchange | order_id, instrument, side, quantity, order_type, limit_price, exchange_route |
+| `Trading.OrderFilled` | Order execution confirmed | order_id, fill_price, fill_quantity, fees, timestamp, liquidity_taker |
+| `Trading.OrderRejected` | Order is rejected by exchange or risk | order_id, reason, rejection_source, suggested_action |
+| `Trading.RiskLimitBreached` | A risk limit is approached or breached | limit_type, current_value, limit_value, action_taken, strategy_id |
+| `Trading.StrategyRetired` | Strategy is decommissioned | strategy_id, reason, final_pnl, lessons_learned, total_trades |
 
 ## Cross-Cutting Concerns
 
