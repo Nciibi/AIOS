@@ -107,6 +107,45 @@ DTS NEVER returns a point estimate. It always returns a confidence interval.
 | 0.5 – 0.7 | **Require human confirmation** | Decision must be reviewed by a human operator before execution |
 | 0.0 – 0.5 | **Do not execute** | Decision confidence is too low — requires re-evaluation |
 
+## Confidence Decomposition
+
+When asked "Why is confidence at [interval]?", DTS returns:
+
+```
+{ decision_id: "dec-0042",
+  confidence_interval: [0.72, 0.86],
+  components: {
+    evidence_quality: {
+      score: 0.85,
+      weight: 0.40,
+      contribution: 0.340,
+      factors: { completeness: 0.90, recency: 0.82, source_reliability: 0.85, consistency: 0.80 }
+    },
+    simulation_accuracy: {
+      score: 0.72,
+      weight: 0.30,
+      contribution: 0.216,
+      factors: { engine_accuracy: 0.78, convergence: 0.70, coverage: 0.65 }
+    },
+    historical_precedent: {
+      score: 0.68,
+      weight: 0.20,
+      contribution: 0.136,
+      factors: { match_quality: 0.65, success_rate: 0.72, recency: 0.60 }
+    },
+    entity_trustworthiness: {
+      score: 0.82,
+      weight: 0.10,
+      contribution: 0.082,
+      factors: { trust_score: 0.85, trust_trend: 0.78, decision_history: 0.80 }
+    }
+  },
+  raw_total: 0.774,
+  uncertainty_margin: 0.07,
+  final_interval: [0.704, 0.844]
+}
+```
+
 ## Edge Cases
 
 | Scenario | Handling |

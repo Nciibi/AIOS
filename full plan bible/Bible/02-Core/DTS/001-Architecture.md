@@ -134,6 +134,53 @@ DTS uses an active-passive clustering topology:
 
 If the primary fails, a replica is promoted to primary. The new primary replays Event Store to reconstruct state. During failover, DTS returns cached confidence scores (with a warning header).
 
+## DTS Component Interfaces
+
+### Decision Evaluator Interface
+
+```
+interface DecisionEvaluator {
+  evaluate(decision: DecisionProposal): EvaluationResult;
+  validate(decision: DecisionProposal): ValidationReport;
+  categorize(decision: DecisionProposal): DecisionCategory;
+}
+
+interface EvaluationResult {
+  decision_id: UUID;
+  category: DecisionCategory;
+  confidence_interval: [float, float];
+  risk_level: RiskLevel;
+  recommendations: Recommendation[];
+  simulation_id: UUID | null;
+  evaluated_at: Timestamp;
+  components: ConfidenceComponents;  // for decomposition
+}
+```
+
+### Trust Scorer Interface
+
+```
+interface TrustScorer {
+  getScore(entity_id: UUID): TrustScore;
+  updateScore(entity_id: UUID, event: EvidenceEvent): ScoreDelta;
+  decayScores(): DecayReport;
+  getScoreHistory(entity_id: UUID, time_range: DateRange): ScoreEntry[];
+}
+
+interface TrustScore {
+  entity_id: UUID;
+  score: float;           // 0.0-1.0
+  components: {            // weighted contributions
+    constitutional_compliance: float;
+    mission_completion: float;
+    evidence_accuracy: float;
+    response_reliability: float;
+  };
+  last_updated: Timestamp;
+  data_points: int;       // number of evidence Events contributing
+}
+```
+
 ## DTS Integrations
 
 | System | Integration | Protocol |
