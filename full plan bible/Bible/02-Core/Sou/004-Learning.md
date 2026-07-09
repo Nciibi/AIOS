@@ -163,6 +163,15 @@ evaluateImprovement:
 | Learning from entity performance lacks sufficient data points | Minimum data points required (default: 10). Below minimum, no model update is made. |
 | Model update is interrupted mid-operation | Rollback to previous version. Interruption Event recorded. System state is preserved. |
 
+## Learning — Relationship to DTS and Academy
+
+| System | Sou Learning Relationship |
+|--------|--------------------------|
+| DTS (Confidence Engine) | Sou Learning updates ConfidenceCalibration model based on decision outcome accuracy |
+| DTS (Trust Scorer) | Sou Learning updates EntityPerformance model based on entity behavior |
+| Academy (KMS) | Sou shares learned patterns with Academy for system-wide improvement (CPR-010) |
+| Academy (ML Models) | Sou may request ML predictions from Academy-trained models |
+
 ## Learning Model Types
 
 Sou maintains several learning models:

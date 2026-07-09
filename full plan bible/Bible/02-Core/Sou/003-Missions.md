@@ -145,6 +145,19 @@ Sou performs routine monitoring of active missions:
 | Risk indicators | Continuous | If risk materializes → propose mitigation |
 | Constitutional compliance | Continuous | If violation → alert Security Council |
 
+## Mission Adjustment Criteria
+
+Sou may propose adjustments to missions when specific criteria are met:
+
+| Criterion | Threshold | Adjustment Type |
+|-----------|-----------|-----------------|
+| Timeline deviation | >20% behind schedule | Extend timeline or reduce scope |
+| Resource overconsumption | >30% over budget | Increase budget or reduce scope |
+| Risk materialization | New risk probability >60% | Add mitigation milestone |
+| Goal change | External change in priority | Re-scope mission objectives |
+| Entity failure | Executing entity fails >3 times | Replace executing entity |
+| Constitutional violation | Any violation detected | Pause mission, alert Security Council |
+
 ## Sou Evidence Consumption from Missions
 
 Sou receives evidence from completed missions through the following flow:
