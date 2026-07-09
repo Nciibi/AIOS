@@ -220,4 +220,12 @@ All Runtime SDK communication with AIOS core flows through ACF. Runtime provider
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/005-Events.md | Evidence — Runtime SDK ope
+| Physics/005-Events.md | Evidence — Runtime SDK operations produce Events |
+| Physics/010-Execution.md | Execution — Runtime SDK implements the execution model |
+| Bible/08-Interfaces/API/000-Specifications.md | API — Runtime SDK consumes ACF API contracts |
+| Bible/02-Core/AGS/000-Overview.md | AGS — Session genomes define runtime requirements |
+| Bible/02-Core/ROS/000-Overview.md | ROS — Resource allocation and accounting for sessions |
+| Bible/04-Execution/Runtime/000-Overview.md | Runtime — Execution runtime architecture |
+| Bible/03-Institutions/Workers/000-Overview.md | Workers — Sessions are Worker instances |
+| Bible/00-Foundations/002-Design-DNA.md | Design DNA — R1–R15 compliance |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |

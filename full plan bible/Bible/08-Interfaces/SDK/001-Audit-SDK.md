@@ -98,6 +98,41 @@ Event queries use a standardized filter:
 | `offset` | Pagination offset | No |
 | `order_by` | Sort order (timestamp_desc or timestamp_asc) | No |
 
+## Audit Provider Registration
+
+Audit tools register with the Event Store through a structured registration:
+
+```
+{
+  "provider_id": "uuid-v7",
+  "provider_name": "string",
+  "version": "1.0.0",
+  "capabilities": ["query", "verify", "analyze", "compliance", "stream"],
+  "scopes": ["organization_id", "global"],
+  "retention_supported": {
+    "min_days": 30,
+    "max_days": 3650
+  },
+  "compliance_standards": ["SOC2", "ISO27001", "PCI-DSS", "GDPR"]
+}
+```
+
+Registration is validated by the Audit Service. Providers with unsupported scopes or invalid compliance standards are rejected.
+
+## Query Performance
+
+The Audit SDK must meet these query performance targets:
+
+| Query Type | Target Latency | Max Results |
+|------------|---------------|-------------|
+| Single Event by ID | < 50ms | 1 |
+| Time-range query (1 hour) | < 200ms | 10,000 |
+| Time-range query (1 day) | < 1 second | 100,000 |
+| Full-text search (indexed) | < 500ms | 1,000 |
+| Full-text search (unindexed) | < 5 seconds | 100 |
+| Aggregation query | < 2 seconds | N/A |
+| Stream subscription | < 100ms to first event | Unlimited |
+
 ## Evidence Chain Verification
 
 The Audit SDK supports cryptographic verification of Event chains:
@@ -120,16 +155,29 @@ Each Event includes:
 | L3 — Full Chain | All links from start to end verify | Complete chain integrity |
 | L4 — Signature | Provider signature on chain checkpoints | Non-repudiation |
 
+## Retention Policies
+
+Audit providers must support configurable retention policies:
+
+| Policy | Description | Default |
+|--------|-------------|---------|
+| Time-based | Events retained for N days | 365 days |
+| Size-based | Events retained up to N GB | 100 GB per Organization |
+| Tiered | Hot (30 days, fast access) → Warm (1 year, standard) → Cold (archive, slow) | Configured |
+| Compliance-based | Minimum retention per compliance standard | Varies (e.g., PCI-DSS: 365 days) |
+| Legal hold | Events preserved regardless of other policies | On-demand |
+
 ## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `Audit.EvidenceQueried` | Audit query is executed | query_id, filter_hash, result_count, duration_ms |
-| `Audit.ChainVerified` | Event chain verification completes | chain_id, start_event, end_event, is_valid, broken_links |
-| `Audit.AnomalyDetected` | Anomaly detection triggers | anomaly_id, pattern, severity, affected_events_count |
-| `Audit.ComplianceReportGenerated` | Compliance report is produced | report_id, standard, scope, passed_checks, failed_checks |
-| `Audit.EvidencePackageSealed` | Evidence package is created and sealed | package_id, case_id, event_count, seal_hash |
-| `Audit.RetentionPolicyChanged` | Retention policy is modified | policy_id, previous_policy, new_policy, changed_by |
+| `Audit.EvidenceQueried` | Audit query is executed | query_id, filter_hash, result_count, duration_ms, query_type |
+| `Audit.ChainVerified` | Event chain verification completes | chain_id, start_event, end_event, is_valid, broken_links, verification_level |
+| `Audit.AnomalyDetected` | Anomaly detection triggers | anomaly_id, pattern, severity, affected_events_count, confidence |
+| `Audit.ComplianceReportGenerated` | Compliance report is produced | report_id, standard, scope, passed_checks, failed_checks, score_pct |
+| `Audit.EvidencePackageSealed` | Evidence package is created and sealed | package_id, case_id, event_count, seal_hash, retention_days |
+| `Audit.EvidencePackageAccessed` | Sealed evidence package is accessed | package_id, accessed_by, access_reason, timestamp |
+| `Audit.RetentionPolicyChanged` | Retention policy is modified | policy_id, previous_policy, new_policy, changed_by, reason |
 
 ## Cross-Cutting Concerns
 
@@ -169,11 +217,4 @@ All Audit SDK communication flows through ACF. Event queries are RPC-style reque
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/005-Events.md | Evidence — Audit SDK consumes Events |
-| Physics/008-Security.md | Security — Audit SDK implements security audit requirements |
-| Bible/08-Interfaces/API/000-Specifications.md | API — Audit SDK uses ACF API contracts for queries |
-| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK — Runtime sessions produce Events that Audit SDK consumes |
-| Bible/04-Execution/Security/Audit/000-EAS.md | EAS — Evidence Audit Service implementation |
-| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — Entity identity verification for audit trails |
-| Bible/00-Foundations/002-Design-DNA.md | Design DNA — R1–R15 compliance for audit tools |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| 
