@@ -17,7 +17,52 @@
 
 Organizations are the constitutional units of collective action in AIOS. An Organization transforms strategic intent into coordinated execution by owning Missions, employing Workers, managing resources, and governing member entities. Unlike Workers (temporary) and Missions (finite), Organizations endure — they are the permanent operational fabric of AIOS.
 
-This volume defines the Organization architecture: how Organizations are structured, how they stay healthy, how they are discovered, how they make decisions, how they compose sub-units, how they interact, how they employ Engines, and how they are evaluated.
+This volume defines the Organization architecture: how Organizations are structured (OOM), how they stay healthy (OHS), how they are discovered (ODS), how they make decisions (ORG), how they compose sub-units (DOM), how they interact (OIS), how they employ Engines (EEE), and how they are evaluated (OPE).
+
+## Organization Lifecycle (from Core/OSYS)
+
+Organizations follow a 7-state lifecycle managed by OSYS (Core/OSYS/002-Org-Lifecycle.md):
+
+```
+Created → Verified → Active → Suspended → Restored → Dissolved → Archived
+```
+
+| State | Description | Operational Capability |
+|-------|-------------|----------------------|
+| **Created** | Organization record exists. Identity assigned by IDS. Not yet operational. | None |
+| **Verified** | Structure and constitutional compliance verified. Ready for activation. | Read-only (self-structure query) |
+| **Active** | Fully operational. Owns Missions, employs Workers, manages resources. | Full capability scope per Genome |
+| **Suspended** | Operations suspended due to violation or Security Council order. | None (except compliance reporting) |
+| **Restored** | Organization is restored from Suspended. Returning to Active. | Read-only (remediation actions) |
+| **Dissolved** | Permanently dissolved. Missions terminated or transferred. Resources returned. | None |
+| **Archived** | Record preserved for constitutional audit. Terminal state. | None |
+
+## Organization Types
+
+Organizations are categorized by type (from Core/OSYS/000-Overview.md):
+
+| Type | Description | Can Own Missions? | Can Employ Workers? |
+|------|-------------|-------------------|---------------------|
+| **ORG** — Root Organization | Top-level strategic entity | Yes | Yes |
+| **ODS** — Department/Squad | Functional sub-Organization | Yes (within parent bounds) | Yes (within parent bounds) |
+| **OHS** — Hub/Shared Service | Shared capability center | Limited | Yes |
+| **OOM** — Operational Oversight | Monitoring and governance body | No | Yes (limited) |
+| **OPE** — Project/Program Entity | Temporary project structure | Yes | Yes (temporary) |
+| **EEE** — Engine Execution Environment | Engine hosting entity | No | Yes (engines only) |
+| **OIS** — Isolation/Sandbox | Sandboxed execution environment | No | Yes (sandboxed) |
+| **DOM** — Domain Organization | Domain-specific operational unit | Yes | Yes |
+
+## Hierarchy Rules
+
+The Organization hierarchy enforces strict structural rules:
+
+| Rule | Constraint | Violation Consequence |
+|------|-----------|----------------------|
+| Single Parent | Every Organization has exactly one parent (except root) | OOM_HIE_002 — creation denied |
+| Tree Structure | No cycles or cross-links between branches | OOM_HIE_003 — move denied |
+| Depth Limit | Maximum 7 levels from root to deepest leaf | OOM_HIE_001 — creation denied |
+| Parent Scope | Parent defines policy bounds for children | ORG_GOV_005 — policy rejected |
+| Resource Flow | Resources flow from parent to child | ROS allocation enforced |
 
 ## Organization Architecture
 
@@ -93,6 +138,44 @@ OSYS (Core/OSYS) manages the Organization lifecycle — creation, verification, 
 | 006-OIS.md | Organization Interaction Service | Cross-Org communication, cooperation |
 | 007-EEE.md | Engine Employment Exchange | Engine assignment, employment lifecycle |
 | 008-OPE.md | Organization Performance Evaluator | Metrics, reporting, improvement |
+
+## Organization Data Flow
+
+The following describes how data flows through the Organization components during a typical operation:
+
+```
+                     ┌─────────────┐
+                     │  External   │
+                     │  Request    │
+                     └──────┬──────┘
+                            │ ACF
+                            ▼
+               ┌───────────────────────┐
+               │   ODS (Directory)     │
+               │   resolveOrg()        │
+               └──────┬────────────────┘
+                      │
+                      ▼
+               ┌───────────────────────┐
+               │   OOM (Object Model)  │
+               │   validate + update   │
+               └──────┬────────────────┘
+                      │
+              ┌───────┼───────┐
+              ▼       ▼       ▼
+       ┌────────┐ ┌────────┐ ┌────────┐
+       │ OHS    │ │ ORG    │ │ DOM    │
+       │ Health │ │Governan│ │Dept    │
+       │ Check  │ │ Auth   │ │ Update │
+       └────┬───┘ └────┬───┘ └────┬───┘
+            │          │          │
+            └──────────┼──────────┘
+                       ▼
+               ┌───────────────────────┐
+               │   OIS / EEE / OPE     │
+               │   cross-cutting ops   │
+               └───────────────────────┘
+```
 
 ## Organization Events
 
