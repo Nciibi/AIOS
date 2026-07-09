@@ -22,6 +22,43 @@ The Decision & Trust System (DTS) evaluates decisions and assesses trust within 
 
 DTS enables informed governance. It ensures that decisions are made with appropriate caution and that entities are trusted proportional to their demonstrated reliability.
 
+## What DTS Is Not
+
+DTS is NOT:
+- A decision-maker (DTS scores decisions, it does not make them)
+- A governance system (DTS informs governance, it does not govern)
+- An execution engine (DTS evaluates decisions before execution, it does not execute)
+- A learning system (DTS produces learning inputs, but Sou's Learning engine does the learning)
+- A security system (DTS evaluates trust, but the Security Council authorizes)
+
+## DTS Core Questions
+
+| Question | Answer | Consumer |
+|----------|--------|----------|
+| Is this decision correct? | Confidence interval (0.0–1.0) | Sou, DGP |
+| Can we trust this entity? | Trust score (0.0–1.0) | Security Council |
+| Should we simulate this decision? | Simulation recommendation (yes/no/partial) | Sim Pipeline |
+| What would happen if we execute? | Predicted outcome with risks | Sou Planner |
+| Why is confidence at this level? | Decomposed score with component contributions | All consumers |
+
+## DTS Inputs and Outputs
+
+| Input | Source | Description |
+|-------|--------|-------------|
+| Decision Proposal | Sou (Reasoning) | The decision to evaluate |
+| Evidence Events | Event Store (Physics/005) | Evidence supporting or contradicting the decision |
+| Entity Identity | IDS | Identity of the entity proposing the decision |
+| Current Trust Score | DTS Trust Scorer | Trustworthiness of the proposer |
+| Historical Precedent | Event Store | Outcomes of similar past decisions |
+
+| Output | Destination | Description |
+|--------|-------------|-------------|
+| Confidence Interval | Sou, DGP, Security Council | How confident DTS is in the decision |
+| Trust Score | Security Council, Sou | Trustworthiness of an entity |
+| Risk Assessment | Sou, DGP | Potential risks of executing the decision |
+| Simulation Results | Sou Planner | Outcome predictions to refine planning |
+| Confidence Decomposition | Any requester | Breakdown of confidence into components |
+
 ## DTS Architecture
 
 ```
