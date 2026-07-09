@@ -205,9 +205,15 @@ No action may skip any stage. The pipeline is linear, sequential, and mandatory.
 
 Every document in Physics, every specification in the Bible, every RFC, every line of implementation must be compatible with the Constitution. If any lower-tier document conflicts with the Constitution, the Constitution prevails.
 
-*Rationale*: The Constitution defines governance, rights, obligations, and the separation of powers. It is the system's highest authority after Human Sovereignty. Without this law, lower tiers could contradict the fundamental governance model.
+This creates a dependency hierarchy: Code must obey the Bible. Bible must obey Physics. Physics must obey the Constitution. Constitution must preserve the DNA. Each layer is bound by the layer above it.
 
-*Violation*: A Bible specification that grants an Organization authority that the Constitution assigns to the Security Kernel.
+*Rationale*: The Constitution defines governance, rights, obligations, and the separation of powers. It is the system's highest authority after Human Sovereignty. Without this law, lower tiers could contradict the fundamental governance model. A Bible that contradicts the Constitution would produce an implementation that violates constitutional principles.
+
+*Constitutional Expression*: Article V, Part C, Section 010 (Constitutional Supremacy) explicitly establishes that the Constitution is the supreme law. Article II, Section 004 (Constitutional Compliance) requires all entities to comply. The Security Kernel's constitutional compliance checking is the enforcement mechanism.
+
+*Enforcement*: The Security Kernel maintains a constitutional invariant registry. Before any RFC is ratified, it is checked against the Constitution for compatibility. Before any Bible specification is finalized, it is checked against the Constitution. At runtime, the Security Kernel verifies that every execution complies with constitutional constraints.
+
+*Violation*: A Bible specification that grants an Organization authority that the Constitution assigns to the Security Kernel. An RFC that proposes a change violating Article I's Human Sovereignty. An implementation that bypasses ACF despite the Constitution mandating ACF as the sole communication channel.
 
 ---
 
