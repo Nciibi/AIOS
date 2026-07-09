@@ -1,0 +1,142 @@
+# AIOS Bible — Domains
+## Linux — 000: Overview
+
+| Property | Value |
+|----------|-------|
+| Status | Active |
+| Version | 1.0 |
+| Category | Bible — Domains |
+| Document ID | AIOS-BBL-007-LNX-000 |
+| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
+
+## Purpose
+
+The Linux domain enables AIOS to manage, configure, secure, and monitor Linux systems — from single nodes to large fleets of servers. It provides the capability set for system administration, infrastructure automation, configuration management, performance tuning, troubleshooting, and compliance auditing across Linux distributions.
+
+Linux system administration is a domain with high consequence: misconfiguration can cause outages, security breaches, or data loss. The Linux domain therefore emphasizes safety through capability bounds, dry-run verification, change approval workflows, and comprehensive evidence capture. Every command is verified before execution, and every change is reversible where possible.
+
+## Domain Entities
+
+The Linux domain defines the following entity types:
+
+| Entity | Description | Genome Source |
+|--------|-------------|---------------|
+| SysAdminWorker | A Worker specialized for Linux system administration | AGS: Linux/SysAdminWorker |
+| InfraWorker | A Worker specialized for infrastructure-as-code management | AGS: Linux/InfraWorker |
+| ComplianceWorker | A Worker specialized for compliance auditing and reporting | AGS: Linux/ComplianceWorker |
+| InventorySnapshot | A knowledge artifact capturing system inventory | Academy: Knowledge |
+| RunbookRecord | A knowledge artifact for automated runbook execution | Academy: Knowledge |
+
+## Capabilities
+
+The Linux domain provides the following capability groups:
+
+| Capability Group | Capabilities | Resource Profile |
+|-----------------|--------------|-----------------|
+| System Administration | `manage_users`, `configure_services`, `manage_packages`, `edit_config` | Low token, low compute |
+| Infrastructure as Code | `write_ansible`, `write_terraform`, `write_dockerfile`, `manage_k8s` | Medium token, low compute |
+| Monitoring | `check_health`, `analyze_logs`, `monitor_performance`, `set_up_alerts` | Low token, low compute |
+| Security Hardening | `audit_ssh`, `configure_firewall`, `apply_cis_benchmark`, `check_selinux` | Medium token, low compute |
+| Troubleshooting | `diagnose_failure`, `analyze_crash`, `debug_network`, `inspect_process` | Low token, medium compute |
+| Backup & Recovery | `configure_backup`, `test_restore`, `manage_snapshots`, `dr_test` | Low token, variable I/O |
+| Compliance | `run_cis_audit`, `check_pci_compliance`, `generate_report`, `remediate` | Medium token, low compute |
+
+## Command Execution Safety
+
+The Linux domain enforces a multi-stage verification pipeline for every command:
+
+| Stage | Check | Enforced By |
+|-------|-------|-------------|
+| 1. Intent Validation | Command matches approved task | SysAdminWorker capabilities |
+| 2. Scope Check | Target host is within authorized scope | Organization policy |
+| 3. Dry Run | Preview of changes before execution | Playbook Manager (005) |
+| 4. Permission Check | Worker has authorization for this operation | AZS |
+| 5. Impact Analysis | Potential side effects assessed | DTS |
+| 6. Rate Limit | Command frequency within policy | ROS budget |
+| 7. Execution | Command sent with timeout and logging | Runtime |
+| 8. Verification | Expected outcome confirmed | SysAdminWorker |
+| 9. Evidence Capture | Full command, output, and outcome recorded | Academy Evidence Ingestor |
+
+## Infrastructure Lifecycle
+
+Linux infrastructure managed by AIOS follows this lifecycle:
+
+```
+Discovered → Assessed → Provisioned → Configured → Monitored → Updated → Decommissioned
+```
+
+| Phase | Description | Domain Activity |
+|-------|-------------|-----------------|
+| Discovered | New host detected or reported | Inventory scanning |
+| Assessed | Baseline inventory and compliance captured | ComplianceWorker audit |
+| Provisioned | OS installed, network configured | InfraWorker (Terraform) |
+| Configured | Packages, services, users, security set | SysAdminWorker (Ansible) |
+| Monitored | Health and performance tracking active | Monitoring capability |
+| Updated | Patches, upgrades, configuration changes | SysAdminWorker |
+| Decommissioned | Host retired, data migrated | InfraWorker |
+
+## Events
+
+| Event Type | Produced When | Fields |
+|-----------|--------------|--------|
+| `Linux.HostDiscovered` | New Linux host is found | host_id, hostname, distro, kernel_version, ip_address |
+| `Linux.CommandExecuted` | A command is run on a host | command_id, host_id, command, exit_code, duration |
+| `Linux.ConfigChanged` | System configuration is modified | change_id, host_id, file_path, old_hash, new_hash, approved_by |
+| `Linux.PackageInstalled` | A package is installed or removed | package_id, host_id, action, package_name, version |
+| `Linux.ComplianceScanRun` | Compliance audit completes | scan_id, host_id, standard, passed, failed, score |
+| `Linux.IncidentDetected` | Anomaly or alert is identified | incident_id, host_id, severity, category, details |
+| `Linux.PatchApplied` | Security patch is applied | patch_id, host_id, cve_list, reboot_required, outcome |
+
+## Cross-Cutting Concerns
+
+### Security
+
+Linux Workers operate under least-privilege access. Every command is authenticated via SSH keys or API tokens managed by ATS. Destructive operations (package removal, service stop, firewall changes) require explicit authorization from Security Council or delegated authority. All remote access is logged and auditable. (Physics/008-Security.md)
+
+### Evidence
+
+Every command, configuration change, and compliance scan produces an Event. The complete command history per host is stored in the Event Store. Configuration drift is detected by comparing current state against the last known-good snapshot. (PHI-008)
+
+### Lifecycle
+
+SysAdmin Workers follow the canonical Worker lifecycle. Infrastructure hosts follow the infrastructure lifecycle (Discovered → Decommissioned). Configuration management runs follow a plan-apply-verify lifecycle. Compliance scans are periodic batch operations with their own job lifecycle. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Linux capabilities are bounded by the authorized host scope, command whitelist, and resource budgets. A SysAdminWorker may only operate on hosts within its Organization's authorization scope. Destructive capabilities require elevated authorization. Command execution is bounded by timeout and rate limits. (Physics/007-Capabilities.md)
+
+### Communication
+
+All Linux domain communication flows through ACF. Remote host access uses SSH or API transport abstracted through resource providers. Playbooks and runbooks are distributed through ACF topics. Host discovery events broadcast through ACF for other systems to consume. (Law 3 — Communication)
+
+### Design DNA
+
+| Rule | Compliance |
+|------|-----------|
+| R1 (Modulsingularity) | Each Linux capability (admin, infra, compliance, monitoring) is a separate concern |
+| R3 (DRY) | Infrastructure configuration is defined once in playbooks, not per-host |
+| R4 (Builder) | Provisioning (InfraWorker) is separate from configuration (SysAdminWorker) |
+| R9 (Deterministic) | Same playbook and inventory produces identical host state |
+| R10 (Simpler Over Complex) | Infrastructure is declarative — desired state, not step-by-step scripts |
+| R13 (Design for Failure) | Configuration changes are transactional — rollback on failure; commands have timeouts |
+
+## Related Documents
+
+| Document | Relationship |
+|---------|-------------|
+| Bible/0005-Domain-Architecture.md | Domain Architecture — Linux domain structure |
+| Physics/005-Events.md | Evidence — Linux operations produce Events |
+| Physics/007-Capabilities.md | Capabilities — Linux capability bounds and command safety |
+| Physics/010-Execution.md | Execution — Command execution model and verification pipeline |
+| Bible/02-Core/Sou/002-Planner.md | Planner — Sou produces infrastructure plans |
+| Bible/02-Core/AGS/000-Overview.md | AGS — SysAdminWorker and ComplianceWorker Genome templates |
+| Bible/02-Core/Academy/000-Overview.md | Academy — Inventory and runbook knowledge management |
+| Bible/02-Core/DTS/000-Overview.md | DTS — Change impact assessment |
+| Bible/02-Core/ROS/000-Overview.md | ROS — Compute budgets for monitoring and compliance |
+| Bible/03-Institutions/Workers/005-Playbook-Manager.md | Playbook Manager — Automated runbook execution |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
