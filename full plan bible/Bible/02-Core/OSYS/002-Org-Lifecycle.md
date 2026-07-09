@@ -163,6 +163,19 @@ Each transition affects the Organization's resource budget:
 | `OSYS.TransitionDenied` | A transition is denied | org_id, from_state, target_state, reason, denied_by |
 | `OSYS.OrgSuspensionWarning` | Organization receives suspension warning | org_id, warning_type, compliance_deadline |
 
+## Edge Cases — Organization Lifecycle
+
+| Scenario | Handling |
+|----------|----------|
+| Organization has active missions when dissolution requested | Dissolution is rejected with OSYS_LIF_003. All missions must be completed or transferred first. |
+| Security Council denies transition authorization | Organization remains in current state. Denial Event is recorded. Denial reason is notified to Organization. |
+| Organization is Suspended but cannot remediate violation | Organization may request Dissolution directly from Suspended state (requires Security Council + Sou). |
+| Retention period expires before all audits complete | Archive is postponed. Security Council may extend retention period. Maximum extension: 90 days. |
+| Organization's parent Organization is dissolved | Sub-Organizations are reassigned to the dissolved parent's parent. If no parent exists, they become root Organizations. |
+| Resource budget cannot be reclaimed during dissolution | OSYS_LIF_007. ROS is notified. Manual intervention required. Organization remains in Dissolved state. |
+| Organization is accidentally created with wrong type | Organization must be dissolved and re-created. Type cannot be modified after creation. |
+| Automated transition (Verified → Active) fails | Transition is retried with exponential backoff (max 3 retries). After 3 failures, Security Council is notified. |
+
 ## Error Codes (R12)
 
 | Code | Description |

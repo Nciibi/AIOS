@@ -183,6 +183,25 @@ DTS is NOT:
 | Cluster failover | < 30 seconds | 60 seconds |
 | Read replica sync lag | < 100ms | 500ms |
 
+## DTS Component Interfaces — High Level
+
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│ Sou         │────▶│ DTS         │────▶│ DGP         │
+│ (proposes)  │     │ (evaluates) │     │ (routes)    │
+└─────────────┘     └──────┬──────┘     └─────────────┘
+                           │
+              ┌────────────┼────────────┐
+              ▼            ▼            ▼
+       ┌──────────┐ ┌──────────┐ ┌──────────┐
+       │ Security │ │   Sou    │ │ Academy  │
+       │ Council  │ │ (Planner)│ │ (ML mod.)│
+       └──────────┘ └──────────┘ └──────────┘
+
+Input:  DecisionProposal + EvidenceEvents
+Output: EvaluationResult { confidence_interval, risk_level, recommendations }
+```
+
 ## Cross-Cutting Concerns
 
 ### Security
