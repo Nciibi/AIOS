@@ -143,6 +143,20 @@ Output: EvaluatedOptions { evaluation_id, ranked_options, scores, tradeoffs }
 Stored: Sou Knowledge store (temporary, used by Planner)
 ```
 
+## Reasoning — Relationship to DTS
+
+Sou's Reasoning engine works closely with DTS:
+
+| Step | Sou Reasoning | DTS (Confidence) |
+|------|---------------|-------------------|
+| Evaluate options | Produces option set with pros/cons | Scores each option with confidence interval |
+| Constitutional check | Flags potential violations | Confirms constitutional compliance score |
+| Risk assessment | Identifies qualitative risks | Quantifies risk probabilities via simulation |
+| Proposal confidence | Internal confidence estimate | Produces evidence-based confidence interval |
+| Final recommendation | Ranks options by Sou's judgment | Provides independent confidence score for each option |
+
+Sou Reasoning's output is always combined with DTS confidence before submission to DGP.
+
 ## Reasoning Selection Algorithm
 
 ```

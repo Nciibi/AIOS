@@ -148,6 +148,19 @@ Created → Active → Updated → Archived (retention expired)
 | Archived | Retained for audit, removed from active queries | No (audit only) |
 | Shared | Published to Academy, removed from private store | No (via Academy) |
 
+## Knowledge Performance Requirements
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| storeKnowledge() latency | < 100ms | 500ms |
+| retrieveKnowledge() latency | < 50ms | 200ms |
+| queryKnowledge() latency (simple) | < 200ms | 1 second |
+| queryKnowledge() latency (semantic) | < 1 second | 5 seconds |
+| Maximum knowledge records | 100000 | 500000 |
+| Maximum query results | 100 | 1000 |
+| Knowledge record max size | 1 MB | 10 MB |
+| Privacy filter application | < 50ms | 200ms |
+
 ## Knowledge Query Types
 
 | Query Type | Description | Example |

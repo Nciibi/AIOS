@@ -120,6 +120,19 @@ Output: OutcomeEvaluation { mission_id, goal_achievement, lessons }
 Event: Sou.MissionOutcomeEvaluated
 ```
 
+## Missions — Relationship to DTS
+
+DTS provides confidence scoring for Sou's mission proposals:
+
+| Sou Mission Action | DTS Input | DTS Output |
+|-------------------|-----------|-------------|
+| proposeMission | Mission proposal + evidence | Confidence interval for mission success |
+| adjustMission | Adjustment proposal + rationale | Confidence that adjustment improves outcome |
+| evaluateMissionOutcome | Outcome evidence | Outcome validation (actual vs predicted) |
+| monitorMission | Current mission state | Risk score (probability of mission failure) |
+
+Sou uses DTS confidence to decide whether to proceed with a mission proposal or refine it.
+
 ## Mission Monitoring
 
 Sou performs routine monitoring of active missions:
