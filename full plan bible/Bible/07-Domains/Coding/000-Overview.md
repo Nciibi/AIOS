@@ -156,6 +156,20 @@ All Coding domain communication flows through ACF. Code plan proposals travel fr
 | R13 (Design for Failure) | Build failures return partial results; review proceeds on available artifacts |
 | R14 (Paved Path) | Single paved path: plan → generate → build → review → commit |
 
+## Integration with Execution Pipeline
+
+Coding operations participate in Stage 7 (Execution Authorization) of the verification pipeline:
+
+| Stage | Name | Coding Domain Role |
+|-------|------|-------------------|
+| 1 | Identity Verification | IDS validates CodeWorker identity |
+| 2 | Authentication | ATS validates CodeWorker session token |
+| 3 | Authorization | AZS checks repository write permissions |
+| 4 | Policy Evaluation | Repository policy, language policy, license check |
+| 5 | Capability Check | CodeWorker capabilities validated via Genome |
+| 6 | Risk Assessment | DTS scores confidence in generated code |
+| 7 | Execution Authorization | ROS reserves token budget for generation |
+
 ## Related Documents
 
 | Document | Relationship |
@@ -163,11 +177,15 @@ All Coding domain communication flows through ACF. Code plan proposals travel fr
 | Bible/0005-Domain-Architecture.md | Domain Architecture — Coding domain structure and taxonomy |
 | Physics/005-Events.md | Evidence — Coding operations produce Events |
 | Physics/007-Capabilities.md | Capabilities — Coding capability bounds and resource profiles |
+| Physics/010-Execution.md | Execution — Coding verification pipeline stage |
 | Physics/012-Experience.md | Experience — Coding outcomes drive Sou learning |
 | Bible/02-Core/Sou/002-Planner.md | Planner — Sou produces code plans |
 | Bible/02-Core/AGS/000-Overview.md | AGS — CodeWorker Genome templates |
 | Bible/02-Core/Academy/000-Overview.md | Academy — Codebase knowledge indexing |
 | Bible/02-Core/DTS/000-Overview.md | DTS — Code quality confidence scoring |
 | Bible/02-Core/ROS/000-Overview.md | ROS — Token and compute budget allocation |
+| Bible/03-Institutions/Workers/005-Playbook-Manager.md | Playbook Manager — Automated code review playbooks |
+| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK — CodeWorker runtime execution |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — LLM provider integration |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
