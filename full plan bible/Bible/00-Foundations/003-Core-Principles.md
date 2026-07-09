@@ -13,7 +13,9 @@
 | Superseded By | Nothing |
 | Amended By | RFC |
 
-## 1. Separation of Concerns
+Stable identifiers: CPR-001 through CPR-010.
+
+## CPR-001 — Separation of Concerns
 
 Every concern belongs to exactly one system:
 
@@ -38,13 +40,13 @@ Every concern belongs to exactly one system:
 
 **Principle**: No concern is owned by more than one system. No system owns more than one concern.
 
-## 2. Law-Driven Design
+## CPR-002 — Law-Driven Design
 
 Every feature, every module, every operation is derived from a constitutional law. If a feature cannot be traced to a specific law, it must go through the constitutional amendment process before it can be implemented.
 
 **Hierarchy**: Law → Physics (invariants) → Bible (specification) → Implementation → Runtime
 
-## 3. Deterministic Execution
+## CPR-003 — Deterministic Execution
 
 Given the same inputs and the same state, AIOS always produces the same outputs. Nondeterminism is explicitly bounded to specific, documented locations (e.g., random ID generation).
 
@@ -56,37 +58,37 @@ Evidence (Events) cannot be modified, deleted, or reordered. The Event Store is 
 
 **Corollary**: Evidence may be redacted (by Security Council order) but never deleted. Redaction preserves the original evidence plus the redaction record.
 
-## 5. Verify Every Action
+## CPR-005 — Verify Every Action
 
 No action executes without passing through the full 7-stage verification pipeline. This applies to every entity, including the Security Council itself.
 
 **Corollary**: The Security Council does not skip stages for itself. If the Security Council authenticates, it must pass through the authentication stage.
 
-## 6. Capabilities Bound by Constitution
+## CPR-006 — Capabilities Bound by Constitution
 
 An entity's capabilities are limited by its constitutional authority, not by its technical capabilities. An engine may be technically capable of executing arbitrary code, but its constitutional capability may limit it to read-only operations.
 
 **Corollary**: Capability grants must be traceable to a constitutional source (e.g., a template genome, an organization policy, a direct grant from the Security Council).
 
-## 7. Evidence Over Authority
+## CPR-007 — Evidence Over Authority
 
 When evidence and authority conflict, evidence wins. If an authority claims an action was permitted, but the evidence shows the verification pipeline denied it, the evidence is correct.
 
 **Corollary**: All authority must be evidenced. An authority's claim is only as good as the evidence supporting it.
 
-## 8. Graduated Autonomy
+## CPR-008 — Graduated Autonomy
 
 Autonomy is earned, not granted. Entities start at L0 (fully directed) and may progress to higher levels through demonstrated constitutional compliance. Autonomy may be revoked on violation.
 
 **Corollary**: Higher autonomy levels require more evidence, stricter verification, and more comprehensive audit trails.
 
-## 9. Constitutional Supremacy
+## CPR-009 — Constitutional Supremacy
 
 The Constitution (Laws of AIOS) is the supreme authority. No entity, no Engine, no Institution may violate the Constitution. Constitutional amendments require a rigorous RFC process.
 
 **Corollary**: If a design choice cannot be justified by the Constitution, it must go through the constitutional amendment process before implementation.
 
-## 10. Evidence Privacy
+## CPR-010 — Evidence Privacy
 
 Evidence is private to the entity and organization that produced it, unless:
 - The evidence is required for constitutional processes (Security Council audit)
