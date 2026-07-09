@@ -134,6 +134,67 @@ All AIOS APIs must implement these security controls:
 | Input Validation | Schema validation | Schema + sanitization | Schema validation |
 | Audit Logging | Every message | Every request | Every event |
 
+## API Lifecycle
+
+Every API follows a defined lifecycle from design through retirement:
+
+| Phase | Description | Gate |
+|-------|-------------|------|
+| **Designed** | API contract drafted, schema defined | Architecture review |
+| **Contract Drafted** | Full specification including examples, errors, SLOs | Team review |
+| **Reviewed** | Contract reviewed by API governance board | Approval |
+| **Published** | Contract registered in Knowledge Registry | Automated validation |
+| **Active** | API available for consumption | Monitoring |
+| **Deprecated** | API marked for retirement; consumers notified | Migration period |
+| **Retired** | API removed from service | Final archive |
+
+An API spends a minimum of 6 months in Deprecated state before retirement. Exceptions require Security Council approval.
+
+## API Rate Limiting
+
+Rate limits are enforced per entity, per API:
+
+| Limit Type | Scope | Default | Enforced By |
+|------------|-------|---------|-------------|
+| Requests per second | Per entity, per API | 100 | ACF Gateway / API Gateway |
+| Requests per minute | Per entity, per API | 5,000 | ROS budget |
+| Concurrent requests | Per entity | 10 | ACF Gateway |
+| Daily quota | Per entity, per API | Varies by budget | ROS budget |
+| Burst allowance | Per entity | 2x RPS for 5 seconds | ACF Gateway |
+
+Rate limit violations produce an `API.RateLimitExceeded` Event and return error code API-301.
+
+## API Documentation Requirements
+
+Every API contract must include the following documentation:
+
+| Section | Content | Format |
+|---------|---------|--------|
+| Overview | Purpose, intended consumers, category | Markdown |
+| Authentication | Token type, claims required, example | Markdown + schema |
+| Endpoints | For each: purpose, method, path, parameters | Structured |
+| Schemas | Request and response payloads | JSON Schema (Draft 2020-12) |
+| Error Codes | All possible errors with descriptions | Table |
+| Examples | Minimum 2 complete request/response examples | JSON |
+| Rate Limits | Per-entity limits, quota, burst allowance | Table |
+| Latency SLOs | P50, P95, P99 targets | Table |
+| Version History | Changelog for all versions | Table |
+| Migration Guide | Breaking changes and migration path | Markdown |
+
+## API Testing Requirements
+
+Every API must have automated conformance tests:
+
+| Test Type | Scope | Required? | Tooling |
+|-----------|-------|-----------|---------|
+| Schema validation | All request/response payloads | Yes | JSON Schema validator |
+| Authentication | Valid, invalid, expired tokens | Yes | ACF test framework |
+| Authorization | All permission levels | Yes | ACF test framework |
+| Error handling | All defined error codes | Yes | Integration test |
+| Rate limiting | Burst and sustained | Yes | Load test |
+| Latency | P50 and P99 compliance | Yes | Performance test |
+| Contract conformance | Full contract compliance | Yes | Contract test suite |
+
 ## Events
 
 | Event Type | Produced When | Fields |
@@ -143,6 +204,18 @@ All AIOS APIs must implement these security controls:
 | `API.RequestProcessed` | API request completes (all categories) | message_id, api_name, duration_ms, status_code |
 | `API.RateLimitExceeded` | Entity exceeds API rate limit | entity_id, api_name, limit, period, retry_after |
 | `API.SchemaValidationFailed` | Request payload fails schema validation | message_id, api_name, validation_errors |
+
+## API Governance
+
+API governance is enforced through the ADG (Architectural Decision Gateway):
+
+| Principle | Enforcement | Escalation |
+|-----------|-------------|------------|
+| No shadow APIs | All APIs must be registered in the Knowledge Registry | Security Council |
+| No breaking changes without RFC | Backward-incompatible changes require RFC approval | ADG |
+| Schema-first design | All API contracts must include JSON Schema | Architecture review |
+| Authentication required | No unauthenticated APIs (except public health endpoints) | Security Council |
+| Rate limits mandatory | Every API must define rate limits | ROS |
 
 ## Cross-Cutting Concerns
 
