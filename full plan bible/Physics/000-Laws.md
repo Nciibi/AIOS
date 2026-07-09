@@ -91,9 +91,13 @@ Sou is the strategic authority. It determines which Organizations are needed, wh
 
 No entity — Sou, Academy, OSYS, Security Kernel, Organization, Worker, Runtime — may communicate with another entity through any channel other than ACF. No direct IPC, no shared memory, no side channels. ACF is the only medium.
 
-*Rationale*: All communication must be observable, routable, auditable, and controllable. ACF is the universal switchboard. Bypassing it breaks the entire security and observability model.
+*Rationale*: All communication must be observable, routable, auditable, and controllable. ACF is the universal switchboard. Bypassing it breaks the entire security and observability model because the Security Kernel cannot verify what it cannot observe.
 
-*Violation*: Two Workers communicating via Unix domain sockets instead of ACF messages.
+*Constitutional Expression*: ACF is defined as a permanent pillar of Shared Infrastructure under Article III, Part A, Section 009 (Shared Infrastructure). The Constitution mandates that ACF is the exclusive communication channel for all constitutional entities.
+
+*Enforcement*: ACF validates every message against the identity and authorization of the sender. Messages without an ACF envelope are treated as unauthorized. Runtime implementations must use the ACF SDK — any Runtime that attempts direct communication is denied connection to the platform.
+
+*Violation*: Two Workers communicating via Unix domain sockets instead of ACF messages. An Organization reading shared memory written by another Organization. A Runtime plugin using HTTP directly to another Runtime plugin.
 
 ---
 
