@@ -95,7 +95,7 @@ Capability bounds include:
 | Bound Type | Description | Examples |
 |-----------|-------------|---------|
 | Resource | Maximum consumption per action or per session | Max tokens: 100k, Max memory: 512MB, Max compute: 30s |
- | Duration | Maximum lifetime of the capability | Expires: 24h from grant, Expires: mission_end |
+| Duration | Maximum lifetime of the capability | Expires: 24h from grant, Expires: mission_end |
 | Scope | What actions the capability authorizes | Read file only, Write file only, Execute specific command |
 | Frequency | How often the capability can be used | Max 10 calls/min, Max 100 calls/session |
 | Conditions | Under what circumstances the capability applies | User-approved actions only, Audit-required actions |
