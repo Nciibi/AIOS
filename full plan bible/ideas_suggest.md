@@ -283,3 +283,32 @@ Each domain needs a specification document covering:
 ---
 
 *This document is a living suggestion. Priority may change based on implementation needs. Files marked High in this document should be written before implementation begins on related Components.*
+
+---
+
+## Post-02-Core Audit — Issues Found
+
+These issues were discovered during supervisor review of 52 newly written 02-Core files:
+
+### Incorrect Law References in ROS
+- ROS files (000-014) use `Law 8 — Law of Proportionality` and `Law 12 — Law of Bounded Capability` as Source Laws. There are only 10 constitutional laws (0-9) and Law 8 is canonically `Law 8 — Law of Verification-First` across all other Bible volumes. These references must be aligned to actual Law names from Physics/000-Laws.md.
+- **Affected files**: All 15 ROS/*.md files.
+
+### Aspirational Cross-References
+- **Academy/000-Overview.md**: References `Physics/012-Experience.md` — this Physics document exists in the `physics/` directory but the cross-reference format in Bible docs should be verified.
+- **ROS/014-RXP.md**: References `IDS/003-PKI.md` — this file does not exist. The PKI/certificate authority specification lives in `06-Services/Cryptography/Certificates/`.
+- **AGS/001-Composition.md**: References `merge()` operation without specifying authorization model (who may merge Genomes).
+
+### Design Considerations
+- **DTS/004-Confidence.md**: Confidence weights are hardcoded (evidence 40%, simulation 30%, precedent 20%, trust 10%). Consider making these configurable per-decision-type or learnable through the Academy.
+- **OSYS/002-Org-Lifecycle.md**: Organization hierarchy depth limit of 7 levels is stated without rationale. Should be justified with capacity/performance reasoning.
+- **Academy/016-Knowledge-API.md**: At 423 lines, this file exceeds the 200-400 line target. Consider splitting into API specification + rate limiting/authorization as a separate doc.
+- **ROS/000-006**: Several ROS overview files (000-Overview, 001-Architecture, 002-Registry, 003-Allocator) are 153-189 lines, slightly below the 200-line guideline. Content is substantively complete — may warrant a guideline relaxation for overview documents.
+
+### Knowledge Boundary Clarifications
+- **Sou Knowledge vs Academy Knowledge**: The handoff protocol for Sou sharing private knowledge with Academy (ACF stream types, privacy filter specifics) is referenced as TBD across both Sou/005-Knowledge.md and Academy docs. Needs alignment during implementation.
+- **Identity Lifecycle Alignment**: OSYS/002-Org-Lifecycle.md defines 7 states (Created → Verified → Active → Suspended → Restored → Dissolved → Archived). This matches the canonical identity lifecycle in IDS/003-Lifecycle.md except `Dissolved` replaces `Retired`. Verify this is intentional (organizations dissolve rather than retire).
+
+### Missing Dependencies
+- **No Physics/000-Laws.md reference in many files**: Several 02-Core files do not reference the foundational Laws document directly. While they reference Physics invariants, the source Law should be explicit.
+- **ACF protocol details**: Several files reference ACF stream topics (e.g., `academy.knowledge.proposed`) but no central ACF topic registry exists yet. These topic names should be consolidated in a future ACF specification.
