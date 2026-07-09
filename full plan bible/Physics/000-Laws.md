@@ -125,9 +125,15 @@ Evidence must be tamper-evident, immutable after recording, and traceable to the
 
 Every Sou, every Organization, every Department, every Worker, every Session, every Runtime, every Engine has exactly one immutable identity. Identity is established at creation, verified before every action, and preserved for the lifetime of the entity. Anonymous participation is impossible.
 
-*Rationale*: Accountability requires identity. Without identity, you cannot attribute actions, enforce policies, or audit behavior.
+Identity is not authentication, not authorization, not trust. It answers only one question: *Who or what is this constitutional entity?* Identity must exist before authentication can occur, before authorization can be granted, before trust can be evaluated.
 
-*Violation*: A Worker executing without a registered identity.
+*Rationale*: Accountability requires identity. Without identity, you cannot attribute actions, enforce policies, or audit behavior. A system without identity is a system without responsibility.
+
+*Constitutional Expression*: Article IV, Part A, Section 003 (Identity) establishes identity as a constitutional principle. The Identity and Registry Service (IRS) is the sole authority for identity under Article III, Part A, Section 009 (Shared Infrastructure).
+
+*Enforcement*: The Security Kernel verifies identity as the first stage of the execution pipeline (Identity → Authentication → Authorization → Policy → Capability → Risk → Authorization). No action proceeds without a verified identity. IRS validates that every identity is unique and that no duplicate identities exist.
+
+*Violation*: A Worker executing without a registered identity. Two entities sharing the same identity. An entity operating after its identity has been retired.
 
 ---
 
