@@ -180,6 +180,19 @@ Note: merge is for administrative use only — standard composition uses compose
 | AGS_CMP_005 | Override fails constitutional compliance check |
 | AGS_CMP_006 | Template not found in Registry |
 
+## Edge Cases — Composition
+
+| Scenario | Handling |
+|----------|----------|
+| Override specifies a capability not in parent's capability registry | Rejected — AGS_CMP_001 (capability expansion). Only registered capabilities may be specified. |
+| Template not found in Registry | Rejected — AGS_CMP_006. Composition cannot proceed. |
+| Multiple inheritance (two parents) | Not supported in v1. Use merge() for administrative combination. |
+| Override is identical to inherited trait | Accepted — treated as explicit confirmation. No error, no change. |
+| Empty overrides dict | Composition proceeds with pure inheritance — no changes applied. |
+| Parent Genome is in Deprecated state | Warning returned. Composition proceeds. New Sessions will use deprecated Genome until a replacement is created. |
+| Parent Genome is in Archived state | Rejected — cannot compose from an archived Genome. Use the last Active version. |
+| Override specifies a capability that conflicts with another inherited capability | Consistency check (Stage 4 of Validation) catches this during validation. |
+
 ## Cross-Cutting Concerns
 
 ### Security

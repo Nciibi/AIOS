@@ -134,6 +134,18 @@ A derived Genome inherits ALL traits from its parent. It may override some of th
 
 Constitutional traits (source_laws, min_autonomy_level, required_policies) may not be overridden in Domain-level or Specific-level Genomes. They are fixed at the Base level.
 
+## Edge Cases — Inheritance
+
+| Scenario | Handling |
+|----------|----------|
+| Circular inheritance (A inherits B, B inherits A) | Detected at registration time. Rejected with AGS_INH_006. |
+| Child inherits from parent at Level 2 | Allowed — depth = 3 (Base → Domain → Specific → child is Level 3 → limit reached). |
+| Child attempts to inherit from two parents at different levels | Not supported — single inheritance only. Use merge() for administrative scenarios. |
+| Parent Genome is updated after child is created | Child is NOT automatically updated. Child remains at the version it was composed from. |
+| Override of a trait that was added in a minor version of the parent | Allowed — child may override any non-constitutional trait. |
+| Base Genome is modified (constitutional amendment) | All derived Genomes must be re-validated. Existing Sessions may require migration. |
+| Attempt to inherit from a Genome at Level 2 (Specific) | Allowed — but resulting Genome would be at Level 3 (max). Further inheritance prohibited. |
+
 ## Inheritance Operations
 
 ### getBaseGenome(genome_type)

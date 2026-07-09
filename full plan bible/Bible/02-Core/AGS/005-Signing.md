@@ -203,6 +203,18 @@ The flow from signed Genome to Session instantiation:
 | AGS_SIG_005 | Signing key expired or compromised |
 | AGS_SIG_006 | Salt generation failed — HSM RNG error |
 
+## Edge Cases — Signing
+
+| Scenario | Handling |
+|----------|----------|
+| HSM is unavailable during signing | Signing request is queued. Queue has TTL (default: 5 minutes). If HSM not restored, request expires and is reported. |
+| Signature verification fails for a Genome | Session instantiation is blocked. Security Event produced. Security Council investigates tampering. |
+| Public key is rotated while Sessions are running | Existing Sessions continue with their current signed Genome. New Sessions use the new public key. |
+| Salt collision (extremely unlikely with 64 bytes) | If detected, second Genome's salt is regenerated. Collision probability is negligible (2^-512). |
+| Genome JSON is modified after signing (tampering) | Signature verification detects tampering — hash mismatch. Genome is rejected. |
+| Signing key compromised | Immediate rotation. All Genomes must be re-signed. Sessions using compromised Genomes are notified. |
+| Verification is requested with wrong public_key_id | Verification fails — key_id not found in IDS registry. |
+
 ## Cross-Cutting Concerns
 
 ### Security

@@ -189,6 +189,18 @@ Event: AGS.SessionMigrated
 | AGS_VER_005 | Version not found in Registry |
 | AGS_VER_006 | Cannot modify Archived version |
 
+## Edge Cases — Versioning
+
+| Scenario | Handling |
+|----------|----------|
+| Session migration fails mid-transition | Full rollback to original version. Session state is preserved. Error event produced. |
+| Breaking change announced but no Sessions can migrate | Extension granted by Security Council. Manual migration path created. |
+| Version is deprecated but critical bug found | Emergency patch release on deprecated version. Bugfix increments patch regardless of deprecation state. |
+| Two versions published simultaneously (race condition) | Last write wins. Version with higher semver precedence is authoritative. |
+| Session requests migration to incompatible version | Rejected with AGS_VER_004. Compatibility matrix must allow the migration. |
+| Genome is archived but referenced by historical Events | Archive preserves the Genome record as read-only. Events can still reference it. |
+| Patch version contains breaking change (incorrect classification) | Correction: new minor version created. Patch version marked as erroneous (not retracted). |
+
 ## Cross-Cutting Concerns
 
 ### Security
