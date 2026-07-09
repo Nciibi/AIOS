@@ -25,11 +25,13 @@ These invariants extend Law 5 of Physics/000-Laws.md. Every entity, every intera
 
 ## The Identity Invariants
 
-### Invariant 1 — Entity Precedes Identity Assignment
+### Invariant 1 — Identity Precedes Implementation
 
 **Every entity SHALL receive its constitutional identity before it exists as an implementation.**
 
-Implementation follows constitutional identity. Never the reverse. An entity that exists without an assigned identity is not a constitutional participant — it is an unauthorized process.
+The identity is assigned first by IRS — the entity becomes a constitutional participant the moment its identity is registered. Implementation (process creation, memory allocation, Runtime binding) follows identity assignment. An entity that exists as a running process without an assigned identity is an unauthorized process.
+
+The reverse ordering is also possible: a newly created identity may briefly precede the entity's physical implementation. Identity can exist in "Created" state before the entity is fully instantiated. But identity must be established before any constitutional operation.
 
 *Violation*: A Worker spawned without first being registered with IRS.
 
