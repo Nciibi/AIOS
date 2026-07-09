@@ -237,14 +237,65 @@ Organizations may persist beyond individual Workers — this is the distinction 
 
 ---
 
+## How the Laws Interact
+
+The 10 laws are not isolated. They form a dependency graph:
+
+| Law | Depends On | Enables |
+|-----|-----------|---------|
+| 1 — Origin | Nothing (root) | Missions, governance, purpose |
+| 2 — Non-Execution | Law 1 (strategy serves Human) | Separation of Powers |
+| 3 — Communication | Nothing (root) | Observability, routing, audit |
+| 4 — Evidence | Law 5 (identity attribution), Law 3 (evidence transmission) | Accountability, learning, audit |
+| 5 — Identity | Nothing (root) | Authentication, authorization, trust, audit |
+| 6 — Lifecycle | Law 5 (identity persists), Law 10 (tenure ends) | Resource management, determinism |
+| 7 — Capability Bounds | Law 5 (identity ownership), Law 6 (lifecycle) | Security, zero trust, resource limits |
+| 8 — Verification-First | Law 5 (identity check), Law 7 (capability check), Law 4 (evidence) | Zero trust, execution safety |
+| 9 — Constitutional Supremacy | Law 1 (Human supremacy) | Tier hierarchy, governance stability |
+| 10 — Tenure | Law 6 (lifecycle), Law 1 (mission purpose) | Resource discipline, ephemeral workers |
+
+Enforcement dependency: Law 8 (Verification-First) cannot function without Law 5 (Identity) and Law 7 (Capability Bounds). Law 4 (Evidence) cannot function without Law 5 (Identity attribution). Law 6 (Lifecycle) cannot function without Law 10 (Tenure). The Security Kernel enforces the chain from Law 5 through Law 8 as a single verification pipeline.
+
+---
+
+## Enforcement Overview
+
+Physics laws are enforced at multiple levels:
+
+### Level 1 — Specification (Constitutional Compliance)
+Every Bible specification must declare which Physics laws it derives from. Before ratification, every RFC is checked against the 10 laws. Any proposed change that violates a Physics law is rejected unless accompanied by a Human Override.
+
+### Level 2 — Security Kernel (Runtime Enforcement)
+The Security Kernel maintains an immutable registry of Physics invariants. Every action passes through the verification pipeline (Law 8), which checks identity (Law 5), capability bounds (Law 7), lifecycle state (Law 6), and produces evidence (Law 4). Actions that violate invariants are denied before execution.
+
+### Level 3 — ACF (Communication Enforcement)
+ACF enforces Law 3 by refusing to route messages from unauthorized channels. It also enforces Law 2 by blocking execution commands from Sou.
+
+### Level 4 — OSYS (Lifecycle Enforcement)
+OSYS enforces Law 6 (Lifecycle Compliance) and Law 10 (Tenure) by monitoring entity states, enforcing lifecycle transitions, and terminating over-tenure Workers.
+
+### Level 5 — IRS (Identity Enforcement)
+IRS enforces Law 5 by ensuring every entity has exactly one unique identity, preventing identity collisions, and maintaining the immutable identity registry.
+
+## Classification of Laws by Stability
+
+| Class | Laws | Amendment Requirement |
+|-------|------|----------------------|
+| Class 0 — Absolute | Law 1 (Origin), Law 9 (Supremacy) | Human Override required. System cannot reduce Human authority. |
+| Class 1 — Structural | Law 2 (Non-Execution), Law 3 (Communication) | Article V supermajority. Changes affect the separation of powers. |
+| Class 2 — Invariant | Laws 4-8 (Evidence, Identity, Lifecycle, Capability, Verification) | Article V standard majority. Changes affect security and determinism. |
+| Class 3 — Operational | Law 10 (Tenure) | Article V standard majority. Changes affect resource management. |
+
+---
+
 ## Immutability and Amendment
 
 These 10 Laws are immutable under normal operation. They may only be changed through:
 
-1. **Constitutional Amendment (Article V)**: A properly ratified amendment that explicitly cites the Physics law being modified and provides the rationale.
-2. **Human Override (Article I, Section 004)**: A direct Human command that temporarily suspends a specific law for a specific operation. The override is recorded as evidence and subject to post-hoc audit.
+1. **Constitutional Amendment (Article V)**: A properly ratified amendment that explicitly cites the Physics law being modified and provides the rationale. The amendment must pass through Constitutional Review, which verifies compatibility with all other Physics laws and the Constitution.
+2. **Human Override (Article I, Section 004)**: A direct Human command that temporarily suspends a specific law for a specific operation. The override is time-bound, scope-bound, and recorded as evidence. It is subject to post-hoc audit and must be explicitly renewed for continued suspension.
 
-Any amendment that weakens Law 1 (Origin) or Law 9 (Constitutional Supremacy) requires Human override — the system cannot reduce Human authority on its own.
+Any amendment that weakens Law 1 (Origin) or Law 9 (Constitutional Supremacy) requires Human override — the system cannot reduce Human authority on its own. All amendments are versioned and archived. The amendment history is maintained in the Constitutional Knowledge Registry (CKR).
 
 ---
 
