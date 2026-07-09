@@ -80,17 +80,39 @@ Robotics software development in AIOS:
 14. Academy indexes new control models and calibration data
 ```
 
+## Invariants
+
+1. **ROB-I-001 — Simulation Before Hardware**: No robotics software may be deployed to physical hardware without passing simulation verification. Simulation bypass is prohibited except in emergency scenarios authorized by Security Council.
+
+2. **ROB-I-002 — Safety Layer Independence**: Each safety layer (L1–L5) operates independently. Failure of any software layer (L3–L5) must not prevent hardware safety layers (L1–L2) from functioning.
+
+3. **ROB-I-003 — Real-Time Guarantee**: Real-time control loops must meet their timing deadlines. Deadline misses are safety events and must be reported within 100ms.
+
+4. **ROB-I-004 — Deterministic Planning**: Same motion plan input must produce identical trajectory output. Non-deterministic planning is prohibited for safety-critical operations.
+
+5. **ROB-I-005 — Sensor Validity**: Control software must verify sensor data validity before use. Stale or invalid sensor data must be handled through defined degraded modes.
+
+## Edge Cases
+
+| Scenario | Handling |
+|----------|----------|
+| Simulation diverges from real-world behavior | Drift detected and logged. Calibration update triggered. Manual review if drift exceeds threshold. |
+| Control loop misses deadline | Safety event at L3. Default to safe-state controller. Root-cause analysis triggered. |
+| Motion plan reaches joint limit | Trajectory adjusted within limits. If infeasible, alternative plan generated. |
+| Sensor provides no data | Degraded mode activated. Control uses last valid reading with uncertainty bounds. |
+| Emergency stop triggered | All control software halts. Hardware L1/L2 manages safe stop. Post-event analysis required before restart. |
+
 ## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `Robotics.ROSNodeGenerated` | ROS2 node code is generated | worker_id, node_name, topics_published, topics_subscribed, services |
-| `Robotics.MotionPlanComputed` | Motion plan is calculated | plan_id, robot_id, start_state, goal_state, trajectory_length, collision_free |
-| `Robotics.SimulationRun` | Robot simulation executes | sim_id, world_config, duration, metrics, outcome |
-| `Robotics.ControlLoopStarted` | Real-time control loop activates | loop_id, robot_id, frequency_hz, controller_type |
-| `Robotics.SensorCalibrated` | Sensor calibration completes | calibration_id, sensor_type, parameters, accuracy |
-| `Robotics.SafetyEvent` | Safety layer triggers | event_id, layer (L1–L5), reason, robot_state_at_event |
-| `Robotics.HardwareDeployed` | Software is deployed to robot hardware | deploy_id, robot_id, software_version, safety_check_result |
+| `Robotics.ROSNodeGenerated` | ROS2 node code is generated | worker_id, node_name, topics_published, topics_subscribed, services, interfaces_used |
+| `Robotics.MotionPlanComputed` | Motion plan is calculated | plan_id, robot_id, start_state, goal_state, trajectory_length, collision_free, computation_time_ms |
+| `Robotics.SimulationRun` | Robot simulation executes | sim_id, world_config, duration_simulated, metrics, outcome, physics_fidelity |
+| `Robotics.ControlLoopStarted` | Real-time control loop activates | loop_id, robot_id, frequency_hz, controller_type, deadline_us |
+| `Robotics.SensorCalibrated` | Sensor calibration completes | calibration_id, sensor_type, parameters, accuracy, calibration_time |
+| `Robotics.SafetyEvent` | Safety layer triggers | event_id, layer (L1–L5), reason, robot_state_at_event, recovery_action |
+| `Robotics.HardwareDeployed` | Software is deployed to robot hardware | deploy_id, robot_id, software_version, safety_check_result, deployment_time |
 
 ## Cross-Cutting Concerns
 
@@ -125,6 +147,18 @@ All Robotics domain communication flows through ACF. ROS2 DDS traffic within a r
 | R13 (Design for Failure) | All control loops have software watchdogs; simulation failures preserve state for debugging |
 | R14 (Paved Path) | Paved path: develop → simulate → verify → deploy → monitor |
 
+## Performance Characteristics
+
+| Metric | Target | Hard Limit |
+|--------|--------|------------|
+| ROS2 node generation | < 30 seconds | 2 minutes |
+| Motion planning (simple) | < 1 second | 5 seconds |
+| Motion planning (complex, 6-DOF) | < 10 seconds | 30 seconds |
+| Simulation (real-time, 1 minute sim) | < 2 minutes | 5 minutes |
+| Control loop latency | < 1ms | 10ms |
+| Sensor calibration | < 30 seconds | 5 minutes |
+| Safety check (pre-deployment) | < 10 seconds | 30 seconds |
+
 ## Related Documents
 
 | Document | Relationship |
@@ -138,5 +172,7 @@ All Robotics domain communication flows through ACF. ROS2 DDS traffic within a r
 | Bible/02-Core/Academy/000-Overview.md | Academy — Robot model and calibration knowledge management |
 | Bible/02-Core/DTS/000-Overview.md | DTS — Simulation outcome confidence scoring |
 | Bible/02-Core/ROS/000-Overview.md | ROS — Compute and GPU budget allocation for simulation and perception |
+| Bible/06-Services/ACF/000-Overview.md | ACF — Real-time control communication transport |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — Hardware interface provider |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
