@@ -294,11 +294,6 @@
   ┌──────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │                                  ENTITY HIERARCHY                                                        │
   │                                                                                                          │
-  │  SOU (Strategic Authority) ──────────────────────────────────────────────────────────────┐               │
-  │   ├── Proposes Missions ──────────────────────────────────────────────────────────┐      │               │
-  │   ├── Directs Organizations ───────────────────────────────────────────┐          │      │               │
-  │   └── Consults Academy ─────────────────────────────┐                 │          │      │               │
-  │                                                      │                 │          │      │               │
   │  SECURITY COUNCIL (Verification Authority)           │                 │          │      │               │
   │   ├── Verifies all actions ──────┐                   │                 │          │      │               │
   │   ├── Certifies capabilities     │                   │                 │          │      │               │
@@ -336,7 +331,7 @@
 
 | Integrating Component | Interface | Purpose |
 |----------------------|-----------|---------|
-| Workers | acf://llmos/inference | Request AI inference through LLMOS |
+| Sou (via Brain) | acf://llmos/inference | Request AI inference through LLMOS |
 | ROS | TokenBudget API | Budget check and reconciliation |
 | Security Council | ExecutionToken | Verify execution authorization |
 | EVS | Event stream | All LLMOS pipeline events |
@@ -363,8 +358,9 @@
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/04-Execution/LLMOS/000-Overview.md | LLMOS architecture and pipeline reference |
-| Bible/04-Execution/Runtime/001-SDK.md | ExecutionProvider interface (dual-interface providers) |
-| Bible/04-Execution/Runtime/002-Claude.md | Claude provider |
-| Bible/04-Execution/Runtime/004-Ollama.md | Ollama provider |
-| APIs/000-Master-API-Spec.md | API registry with LLMOS entries |
+| Bible/02-Core/Brain/LLMOS/000-Overview.md | LLMOS architecture and pipeline reference |
+| Bible/02-Core/Brain/LLMOS/013-Provider-SDK.md | ModelProvider interface for AI inference |
+| Bible/04-Execution/Runtime/002-Claude.md | Claude provider (ModelProvider + ExecutionProvider) |
+| Bible/04-Execution/Runtime/004-Ollama.md | Ollama provider (ModelProvider + ExecutionProvider) |
+| APIs/000-Master-API-Spec.md | API registry with Brain and LLMOS entries |
+| Bible/02-Core/Brain/000-Overview.md | Brain — cognitive container overview |
