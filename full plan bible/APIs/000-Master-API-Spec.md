@@ -514,7 +514,7 @@
 
 ## 5. Institutions
 
-### 8.1 WCS — Worker Communication Service
+### 5.1 WCS — Worker Communication Service
 
 **Source:** `Bible/03-Institutions/Workers/004-WCS.md`
 
@@ -548,7 +548,7 @@
 
 ---
 
-### 8.2 WSS — Worker Security Service
+### 5.2 WSS — Worker Security Service
 
 **Source:** `Bible/03-Institutions/Workers/003-WSS.md`
 
@@ -565,7 +565,7 @@
 
 ---
 
-### 6.3 Playbook Manager
+### 5.3 Playbook Manager
 
 **Source:** `Bible/03-Institutions/Workers/005-Playbook-Manager.md`
 
@@ -589,7 +589,7 @@
 
 ---
 
-### 6.4 OIS — Organization Interaction Service
+### 5.4 OIS — Organization Interaction Service
 
 **Source:** `Bible/03-Institutions/Organizations/006-OIS.md`
 
@@ -617,7 +617,7 @@
 
 ## 6. Runtime
 
-### 8.1 Execution Runtime SDK
+### 6.1 Execution Runtime SDK
 
 **Source:** `Bible/04-Execution/Runtime/001-SDK.md`
 
@@ -657,7 +657,7 @@
 
 ---
 
-### 8.2 Ollama Integration
+### 6.2 Ollama Integration
 
 **Source:** `Bible/04-Execution/Runtime/004-Ollama.md`
 
@@ -841,7 +841,7 @@
 
 ## 7. Domains
 
-### 8.1 Trading
+### 7.1 Trading
 
 **Source:** `Bible/07-Domains/Trading/000-Overview.md`
 
@@ -859,7 +859,7 @@
 
 ---
 
-### 8.2 Security Domain
+### 7.2 Security Domain
 
 **Source:** `Bible/07-Domains/Security/000-Overview.md`
 
