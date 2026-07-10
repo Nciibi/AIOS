@@ -335,8 +335,8 @@ SOU-007: All cognitive services live inside the Brain.
 | Document | Relationship |
 |----------|-------------|
 | `sou new idea.md` | Original insight — Sou is the only intelligence, Brain is the container |
-| `Bible/02-Core/Sou/000-Overview.md` | Current Sou specification (to be rewritten) |
-| `Bible/04-Execution/LLMOS/000-Overview.md` | LLMOS specification (to be moved) |
+| `Bible/02-Core/Brain/Sou/000-Overview.md` | New Sou specification (rewritten as executive intelligence) |
+| `Bible/02-Core/Brain/LLMOS/000-Overview.md` | LLMOS specification (moved to Brain) |
 | `APIs/AIOS-Architecture-Diagram.md` | Architecture diagram (to be updated with Brain) |
 | `APIs/000-Master-API-Spec.md` | API registry (to be updated with Brain section) |
 | `Bible/0000-Master-Architecture-Plan.md` | Master architecture plan (to reference Brain) |
