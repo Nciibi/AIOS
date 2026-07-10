@@ -133,7 +133,7 @@ interface CompiledPrompt {
   compile_duration_us: u64;              // Compilation duration
   template_used: string | null;          // Template ID if resolved
   optimization_applied: string[];        // List of optimizations applied
-  sections: PropmptSection[];            // Breakdown of prompt sections
+  sections: PromptSection[];            // Breakdown of prompt sections
 }
 
 interface ProviderRequest {
@@ -150,7 +150,7 @@ interface ProviderRequest {
   metadata: Map<string, string>;
 }
 
-interface PropmptSection {
+interface PromptSection {
   name: string;     // "system", "messages", "tools", "context", "memory", "schema"
   token_count: u64;
   source: string;   // origin of this section
