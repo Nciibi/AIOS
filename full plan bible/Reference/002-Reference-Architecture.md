@@ -17,6 +17,24 @@
 
 This document provides the high-level reference architecture for AIOS. It describes the system's layered structure, key components, data flows, and architectural patterns. This is the entry point for understanding how AIOS fits together — the Bible contains the detailed specification; this document provides the map.
 
+## How to Navigate the Bible
+
+The Bible is organized into numbered directories. This map shows where to find what:
+
+| Directory | Content | Entry Point |
+|-----------|---------|-------------|
+| 00-Foundations | System philosophy, design rules, naming conventions | 000-Overview.md |
+| 01-Governance | Constitution, RFC process, decision gateway | 000-Overview.md |
+| 02-Core | Sou, OSYS, ROS, Academy, AGS, DTS | Each has 000-Overview.md |
+| 03-Institutions | Organizations, Workers, Missions | 000-Overview.md per subdir |
+| 04-Execution | Runtime providers, Security Council | Security/000-Overview.md |
+| 05-Platform | LMS, EVS, PSAP, BG, TEE | 000-LMS.md |
+| 06-Services | ACF, Cryptography, Federation | Each has 000-Overview.md |
+| 07-Domains | Coding, Linux, Trading, Robotics, etc. | 000-Overview.md per domain |
+| 08-Interfaces | API spec, SDK definitions | API/000-Specifications.md |
+| 09-Reference | Glossary, ADG index, migration guide | 000-Decision-Log.md |
+| 10-Research | Future phases, autonomy evolution | 000-Phases-2-5.md |
+
 ---
 
 ## System Layering
