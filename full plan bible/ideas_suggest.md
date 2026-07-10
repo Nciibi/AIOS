@@ -650,6 +650,18 @@ Written and audited. 536 entries across 9 service groups covering every concrete
 - Ollama auth corrected from `API Key` to `Network-bound (localhost/private)`
 - PSAP methods corrected from ACF routing operations to actual PSAP service registry operations
 
+### Phase 6 Recheck Findings (from comprehensive sweep of Hardening, Pentest, Verification)
+
+**Fixed in Phase 6 docs (9 edits applied):**
+- Hardening: Added `Law 9 — Law of Constitutional Supremacy` to Source Laws header (was cited in SHD-002 body but missing from header)
+- Hardening: Added missing `ComplianceReport` type to Data Model (used by BaselineManager.validate)
+- Pentest: Added missing `Observation`, `EngagementParams`, `ValidationResult`, `SimulatedOutcome` types to Data Model
+- Verification: Added missing `VerifiedTarget`, `CheckResult`, `StateSpace`, `FormalSpec`, `ProofResult` types to Data Model
+
+**Pre-existing issues (not in my files, for awareness):**
+- `Physics/011-Design-DNA.md` (lines 11, 22, 403) incorrectly names Law 9 as "Law of Design DNA" — should be "Law of Constitutional Supremacy". My Security docs correctly use the valid name. This upstream Physics doc should be reconciled.
+- Physics/011 spells R1 as "Modulsingularization" in section headings but "Modulsingularity" in the enforcement table; my docs follow the enforcement-table spelling. Minor.
+
 ### Phase 4-5 Recheck Findings (from comprehensive sweep of Economic, Console, UI, Dashboard)
 
 **Fixed in Phase 4-5 docs (4 edits applied):**
