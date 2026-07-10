@@ -253,7 +253,7 @@ interface ResourceEstimator {
 | Brain/Context/000-Overview.md | Progress events pushed to Context System |
 | Brain/Tools/000-Overview.md | Tool System provides capabilities estimated during planning |
 | Institution OS | Milestones delegated as missions for execution |
-| Bible/05-Platform/ROS/ | Resource estimation uses ROS for cost projection |
+| Bible/02-Core/ROS/ | Resource estimation uses ROS for cost projection |
 
 ## Error Cases
 

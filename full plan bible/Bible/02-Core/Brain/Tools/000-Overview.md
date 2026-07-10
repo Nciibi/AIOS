@@ -282,8 +282,8 @@ interface ResultParser {
 | Brain/Context/000-Overview.md | Tool results are pushed to the Context Window |
 | Brain/Decision/000-Overview.md | Tool selection is a decision the Decision System supports |
 | Brain/Planning/000-Overview.md | Plan milestones may require specific tools |
-| Security/Execution-Auth/000-EAS.md | Tool invocations pass through the 7-stage pipeline |
-| Runtime/001-SDK.md | Runtime SDK executes tool calls |
+| Bible/04-Execution/Security/Execution-Auth/000-EAS.md | Tool invocations pass through the 7-stage pipeline |
+| Bible/04-Execution/Runtime/001-SDK.md | Runtime SDK executes tool calls |
 
 ## Error Cases
 
