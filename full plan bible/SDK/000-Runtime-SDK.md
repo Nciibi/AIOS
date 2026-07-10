@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | SDK |
 | Document ID | SDK-RUNTIME-000 |
-| Source Laws | Law 3 — Communication, Law 4 — Evidence, Law 10 — Execution |
+| Source Laws | Law 3 — Communication, Law 4 — Evidence, Law 9 — Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
