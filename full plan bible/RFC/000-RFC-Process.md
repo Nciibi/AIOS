@@ -81,6 +81,7 @@ The Council may:
 
 ### Before Submitting
 - [ ] RFC number assigned and unique
+- [ ] RFC filed in correct directory: `RFC/NNNN-Short-Name/RFC-NNNN.md`
 - [ ] All sections filled (no TBD/TODO)
 - [ ] Problem statement backed by evidence
 - [ ] Proposed solution with alternatives considered (R10)
