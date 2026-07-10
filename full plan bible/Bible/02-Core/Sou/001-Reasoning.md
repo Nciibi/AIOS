@@ -267,10 +267,11 @@ Reasoning outputs are communicated via ACF. DGP receives decision proposals. Aca
 | Physics/007-Capabilities.md | Capability bounds — reasoning constrained by capabilities |
 | Physics/012-Experience.md | Experience — reasoning learns from past outcomes |
 | Bible/01-Governance/002-DGP.md | DGP — reasoning proposals are routed through DGP |
-| Bible/02-Core/Sou/000-Overview.md | Sou overview — reasoning is the front door of Sou |
-| Bible/02-Core/Sou/002-Planner.md | Planner — reasoning feeds planning |
-| Bible/02-Core/Sou/004-Learning.md | Learning — reasoning improves from learning |
-| Bible/02-Core/Sou/005-Knowledge.md | Knowledge — reasoning reads and writes knowledge |
+| Bible/02-Core/Brain/Sou/000-Overview.md | Sou overview — reasoning is a capability of the executive intelligence |
+| Bible/02-Core/Brain/Sou/002-Planner.md | Planner — reasoning feeds planning |
+| Bible/02-Core/Brain/Sou/004-Learning.md | Learning — reasoning improves from learning |
+| Bible/02-Core/Brain/Sou/005-Knowledge.md | Knowledge — reasoning reads and writes knowledge |
+| Bible/02-Core/Brain/Context/000-Overview.md | Context System — provides context for reasoning |
 | Bible/02-Core/DTS/004-Confidence.md | Confidence scoring — reasoning produces confidence estimates |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
