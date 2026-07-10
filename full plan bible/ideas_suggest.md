@@ -650,6 +650,13 @@ Written and audited. 536 entries across 9 service groups covering every concrete
 - Ollama auth corrected from `API Key` to `Network-bound (localhost/private)`
 - PSAP methods corrected from ACF routing operations to actual PSAP service registry operations
 
+### Phase 3 Bug Fixes Applied During Audit
+
+- **SIM**: Source Laws incorrectly referenced Law 9 (Constitutional Supremacy) as "Deterministic" — no such Physics Law exists. Replaced with Law 6 (Lifecycle Compliance).
+- **SIM**: Core Concept 1's embedded `Scenario` interface snippet was out of sync with the authoritative Data Model definition. Replaced with a cross-reference pointer.
+- **SIM**: Added missing internal interfaces for `ScenarioBuilder`, `EvidenceRecorder`, `ReplayEngine`, and `HypothesisManager` (referenced in Component Map but missing from Internal Interfaces section).
+- **SIM**: Data flow diagram had ambiguous indentation — "Sandbox destroyed" appeared to belong only to the failure branch. Clarified with "(both paths)" annotation.
+
 ### Phase 2 Suggestions (non-critical, additive)
 
 These were identified during the Phase 2 audit but are enhancements, not bugs:
