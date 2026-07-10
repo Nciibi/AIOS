@@ -24,9 +24,11 @@ interface CostEstimate {
   estimated_input_tokens: u64;
   estimated_output_tokens: u64;
   estimated_cached_input_tokens: u64;
+  estimated_cached_output_tokens: u64;
   input_cost: f64;
   cached_input_cost: f64;
   output_cost: f64;
+  cached_output_cost: f64;
   fixed_cost: f64;
   total_cost: f64;
   provider_discount: f64;
