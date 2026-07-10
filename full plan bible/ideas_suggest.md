@@ -650,6 +650,18 @@ Written and audited. 536 entries across 9 service groups covering every concrete
 - Ollama auth corrected from `API Key` to `Network-bound (localhost/private)`
 - PSAP methods corrected from ACF routing operations to actual PSAP service registry operations
 
+### Phase 4-5 Recheck Findings (from comprehensive sweep of Economic, Console, UI, Dashboard)
+
+**Fixed in Phase 4-5 docs (4 edits applied):**
+- Economic: Events `ECN.overageAllowed` / `ECN.overageDenied` were camelCase — corrected to PascalCase to match convention
+- Economic: Typo `overageAlways` in ECN-008 invariant text → corrected to `overageAllowed`
+- Economic: Added missing `OveragePolicy` type to Data Model (was referenced in `Budget` interface but undefined)
+- Console: Added missing reciprocal cross-reference to Dashboard (`Bible/08-Interfaces/Dashboard/000-Overview.md`) — the UI↔Console↔Dashboard triangle is now complete
+
+**Pre-existing upstream inconsistency (not in my files, for awareness):**
+- `Physics/011-Design-DNA.md` (line 11, 22) labels Law 9 as "Law of Design DNA" while `Physics/000-Laws.md` defines Law 9 as "Law of Constitutional Supremacy". My docs correctly use "Law of Constitutional Supremacy". The upstream Physics doc should be reconciled.
+- `Bible/01-Governance/000-Overview.md` and `Bible/08-Interfaces/API/000-Specifications.md` use "Law 0 — Law of Constitutional Supremacy" and "Law 9 — Law of Design DNA" respectively — both invalid per Physics. These are pre-existing, not in my files.
+
 ### Cross-Phase Audit Findings (from comprehensive sweep of all 13 docs)
 
 **Fixed in my files (5 edits applied):**
