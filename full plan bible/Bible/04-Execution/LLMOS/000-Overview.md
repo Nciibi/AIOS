@@ -95,7 +95,7 @@ Every inference request passes through LLMOS in order:
 | 11 | Guardrail Check | Scan prompt for policy violations | `LLMOS.GuardrailChecked` |
 | 12 | Retry Engine | Send to provider, handle failures with retry/fallback | `LLMOS.ProviderCalled` |
 | 13 | Streaming Manager | Manage streaming response, assemble chunks | `LLMOS.StreamChunk` |
-| 14 | Guardrail Check (output) | Scan response for policy violations | `LLMOS.OutputChecked` |
+| 14 | Guardrail Check (output) | Scan response for policy violations | `LLMOS.GuardrailChecked` (direction=output) |
 | 15 | Response Validator | Validate structured output against schema | `LLMOS.ResponseValidated` |
 | 16 | Cache Store | Store response in cache | `LLMOS.CacheStored` |
 | 17 | Post-Processing | Update budgets, record metrics, produce final Event | `LLMOS.RequestCompleted` |
