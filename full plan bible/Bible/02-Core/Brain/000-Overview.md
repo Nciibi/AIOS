@@ -100,15 +100,13 @@ User Input
     │
     ▼
 ┌─────────────────────────────────────────────┐
-│  Brain Gateway (via ACF)                     │
-│  ├── Authenticate request (Security Council) │
-│  ├── Route to appropriate Brain service     │
-│  └── Log to Event Store                     │
+│  Sou via ACF (authenticated by Security      │
+│  Council, logged to Event Store)             │
 └─────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────┐
-│  Sou (Executive Intelligence)                │
+│  Sou — Receives & Processes Input           │
 │  ├── Identify self + check personality      │
 │  ├── Reason about input (Cognitive OS)      │
 │  ├── Plan response (Planning System)        │
