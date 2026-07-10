@@ -255,7 +255,7 @@ Hardening Engine scans for compliance
 | Bible/04-Execution/Security/Policy-System/000-PS.md | Policy-System — default-deny policy enforcement |
 | Bible/04-Execution/Security/Pentest/000-Overview.md | Pentest — validates hardening via offensive testing |
 | Bible/04-Execution/Security/Verification/000-Overview.md | Verification — proves hardening properties formally |
-| Bible/06-Services/Cryptography/000-Overview.md | Crypto — seals, signing, encryption controls |
+| Bible/06-Services/Cryptography/000-CSP.md | Crypto — seals, signing, encryption controls |
 | Bible/05-Platform/005-AUS.md | AUS — immutable audit of hardening status |
 | Bible/05-Platform/004-EVS.md | EVS — evidence for all hardening findings |
 | Physics/008-Security.md | Security invariants — hardening enforces these |

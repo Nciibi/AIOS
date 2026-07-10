@@ -261,7 +261,7 @@ On system change: re-verify affected properties (continuous)
 | Bible/04-Execution/Security/IDS/001-Registry.md | IDS — identity uniqueness property proven here |
 | Bible/04-Execution/Security/CCA/000-CCA.md | CCA — capability integrity property proven here |
 | Bible/06-Services/ACF/000-Overview.md | ACF — confidentiality property proven here |
-| Bible/06-Services/Cryptography/000-Overview.md | Crypto — cryptographic primitives underpin proofs |
+| Bible/06-Services/Cryptography/000-CSP.md | Crypto — cryptographic primitives underpin proofs |
 | Bible/05-Platform/004-EVS.md | EVS — evidence for all verification runs |
 | Bible/08-Interfaces/Console/000-Overview.md | Console — critical regressions escalate here |
 | Physics/008-Security.md | Security invariants — properties formalized from these |
