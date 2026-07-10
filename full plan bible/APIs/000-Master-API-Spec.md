@@ -17,7 +17,7 @@
 7. [Federation](#7-federation)
 8. [Governance](#8-governance)
 9. [Cross-Cutting](#9-cross-cutting)
-10. [Appendix: Event Index](#10-appendix-event-index)
+10. [Appendix: Schema Index](#10-appendix-schema-index)
 
 ---
 
@@ -46,16 +46,16 @@
 
 | # | Message | Auth | Description |
 |---|---------|------|-------------|
-| 8 | `PSAP.HealthCheck` | mTLS | Health check ping |
+| 11 | `PSAP.HealthCheck` | mTLS | Health check ping |
 
 #### Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 9 | `PSAP.HeartbeatReceived` | Heartbeat received from service |
-| 10 | `PSAP.ServiceRegistered` | Service registered |
-| 11 | `PSAP.ServiceDeregistered` | Service deregistered |
-| 12 | `PSAP.ServiceHealthChanged` | Service health status changed |
+| 12 | `PSAP.HeartbeatReceived` | Heartbeat received from service |
+| 13 | `PSAP.ServiceRegistered` | Service registered |
+| 14 | `PSAP.ServiceDeregistered` | Service deregistered |
+| 15 | `PSAP.ServiceHealthChanged` | Service health status changed |
 
 ---
 
@@ -67,23 +67,23 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 13 | `appendEvent(stream_id, event_type, data, metadata)` | ACF token | Append event to stream |
-| 14 | `readStream(stream_id, from_version?, to_version?)` | ACF token | Read events from stream |
-| 15 | `readStreamByTime(stream_id, from_time, to_time)` | ACF token | Read events by time range |
-| 16 | `readEventByVersion(stream_id, version)` | ACF token | Read specific event version |
-| 17 | `subscribeStream(stream_id, subscriber)` | ACF token | Subscribe to event stream |
-| 18 | `getEventCount(stream_id)` | ACF token | Get event count |
-| 19 | `getStreamInfo(stream_id)` | ACF token | Get stream info |
+| 16 | `appendEvent(stream_id, event_type, data, metadata)` | ACF token | Append event to stream |
+| 17 | `readStream(stream_id, from_version?, to_version?)` | ACF token | Read events from stream |
+| 18 | `readStreamByTime(stream_id, from_time, to_time)` | ACF token | Read events by time range |
+| 19 | `readEventByVersion(stream_id, version)` | ACF token | Read specific event version |
+| 20 | `subscribeStream(stream_id, subscriber)` | ACF token | Subscribe to event stream |
+| 21 | `getEventCount(stream_id)` | ACF token | Get event count |
+| 22 | `getStreamInfo(stream_id)` | ACF token | Get stream info |
 
 #### Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 20 | `EVS.EventAppended` | Event written to stream |
-| 21 | `EVS.StreamCreated` | Event stream initialized |
-| 22 | `EVS.SnapshotCreated` | Snapshot taken |
-| 23 | `EVS.SubscriptionActivated` | Subscriber subscribed to stream |
-| 24 | `EVS.ReadReplicaAdded` | Read replica came online |
+| 23 | `EVS.EventAppended` | Event written to stream |
+| 24 | `EVS.StreamCreated` | Event stream initialized |
+| 25 | `EVS.SnapshotCreated` | Snapshot taken |
+| 26 | `EVS.SubscriptionActivated` | Subscriber subscribed to stream |
+| 27 | `EVS.ReadReplicaAdded` | Read replica came online |
 
 ---
 
@@ -93,19 +93,19 @@
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 25 | Stream | Event Processing Graph (EPG) | ACF-level | DAG-based event stream processing (filter, transform, enrich, aggregate, route) |
+| 28 | Stream | Event Processing Graph (EPG) | ACF-level | DAG-based event stream processing (filter, transform, enrich, aggregate, route) |
 
 #### Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 26 | `EPG.GraphDefined` | New processing graph defined |
-| 27 | `EPG.GraphDeployed` | Processing graph deployed |
-| 28 | `EPG.GraphUndeployed` | Processing graph undeployed |
-| 29 | `EPG.NodeProcessed` | Graph node completed processing |
-| 30 | `EPG.PipelineStarted` | Pipeline execution started |
-| 31 | `EPG.PipelineCompleted` | Pipeline execution completed |
-| 32 | `EPG.PipelineFailed` | Pipeline execution failed |
+| 29 | `EPG.GraphDefined` | New processing graph defined |
+| 30 | `EPG.GraphDeployed` | Processing graph deployed |
+| 31 | `EPG.GraphUndeployed` | Processing graph undeployed |
+| 32 | `EPG.NodeProcessed` | Graph node completed processing |
+| 33 | `EPG.PipelineStarted` | Pipeline execution started |
+| 34 | `EPG.PipelineCompleted` | Pipeline execution completed |
+| 35 | `EPG.PipelineFailed` | Pipeline execution failed |
 
 ---
 
@@ -115,14 +115,14 @@
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 33 | Interface | `Connector` | N/A | All EIP connectors implement this interface |
-| 34 | REST/gRPC/AMQP/MQTT | External Integration Protocol | mTLS (varies) | Protocol for webhook, Kafka, MQTT, AMQP, REST, gRPC connectors |
+| 36 | Interface | `Connector` | N/A | All EIP connectors implement this interface |
+| 37 | REST/gRPC/AMQP/MQTT | External Integration Protocol | mTLS (varies) | Protocol for webhook, Kafka, MQTT, AMQP, REST, gRPC connectors |
 
 #### Messages
 
 | # | Message | Description |
 |---|---------|-------------|
-| 35 | `ConnectorConfig` | Protocol, endpoint, format, authentication config |
+| 38 | `ConnectorConfig` | Protocol, endpoint, format, authentication config |
 
 ---
 
@@ -132,13 +132,13 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 36 | Interface | `Credential` | All credential types implement this |
+| 39 | Interface | `Credential` | All credential types implement this |
 
 #### Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 37 | `CP.CredentialIssued` | Credential generated |
+| 40 | `CP.CredentialIssued` | Credential generated |
 
 ---
 
@@ -148,8 +148,8 @@
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 38 | Interface | `GraphStore` | N/A | All graph storage backends implement this |
-| 39 | RPC (ACF) | Graph Framework operations | ACF-level | Graph queries via ACF |
+| 41 | Interface | `GraphStore` | N/A | All graph storage backends implement this |
+| 42 | RPC (ACF) | Graph Framework operations | ACF-level | Graph queries via ACF |
 
 ---
 
@@ -159,17 +159,17 @@
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 40 | RPC (ACF) | LMS transition requests | ACF token | Entity lifecycle state transitions via ACF |
+| 43 | RPC (ACF) | LMS transition requests | ACF token | Entity lifecycle state transitions via ACF |
 
 #### Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 41 | `LMS.EntityCreated` | Entity created |
-| 42 | `LMS.EntityStateChanged` | Entity state transitioned |
-| 43 | `LMS.EntityCompleted` | Entity lifecycle completed |
-| 44 | `LMS.EntityArchived` | Entity archived |
-| 45 | `LMS.TransitionRejected` | State transition rejected |
+| 44 | `LMS.EntityCreated` | Entity created |
+| 45 | `LMS.EntityStateChanged` | Entity state transitioned |
+| 46 | `LMS.EntityCompleted` | Entity lifecycle completed |
+| 47 | `LMS.EntityArchived` | Entity archived |
+| 48 | `LMS.TransitionRejected` | State transition rejected |
 
 ---
 
@@ -183,34 +183,34 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 46 | `academy.knowledge.create` | `knowledge.propose` | Propose a new knowledge artifact |
-| 47 | `academy.knowledge.validate` | `knowledge.validate` | Trigger validation of knowledge artifact |
-| 48 | `academy.knowledge.accept` | `knowledge.accept` | Accept validated knowledge into Registry |
-| 49 | `academy.knowledge.query` | `knowledge.query` | Query knowledge artifacts by graph traversal |
-| 50 | `academy.knowledge.search` | `knowledge.query` | Full-text, semantic, or faceted search |
-| 51 | `academy.knowledge.get` | `knowledge.query` | Retrieve specific knowledge artifact by ID |
-| 52 | `academy.knowledge.provenance` | `knowledge.query` | Get full provenance chain for artifact |
-| 53 | `academy.knowledge.list` | `knowledge.query` | List knowledge artifacts with filters |
-| 54 | `academy.knowledge.deprecate` | `knowledge.deprecate` | Deprecate a knowledge artifact |
-| 55 | `academy.knowledge.compose` | `knowledge.compose.{method}` | Request KCE knowledge composition |
-| 56 | `academy.knowledge.execute` | `knowledge.execute.{type}` | Request KEE knowledge execution |
+| 49 | `academy.knowledge.create` | `knowledge.propose` | Propose a new knowledge artifact |
+| 50 | `academy.knowledge.validate` | `knowledge.validate` | Trigger validation of knowledge artifact |
+| 51 | `academy.knowledge.accept` | `knowledge.accept` | Accept validated knowledge into Registry |
+| 52 | `academy.knowledge.query` | `knowledge.query` | Query knowledge artifacts by graph traversal |
+| 53 | `academy.knowledge.search` | `knowledge.query` | Full-text, semantic, or faceted search |
+| 54 | `academy.knowledge.get` | `knowledge.query` | Retrieve specific knowledge artifact by ID |
+| 55 | `academy.knowledge.provenance` | `knowledge.query` | Get full provenance chain for artifact |
+| 56 | `academy.knowledge.list` | `knowledge.query` | List knowledge artifacts with filters |
+| 57 | `academy.knowledge.deprecate` | `knowledge.deprecate` | Deprecate a knowledge artifact |
+| 58 | `academy.knowledge.compose` | `knowledge.compose.{method}` | Request KCE knowledge composition |
+| 59 | `academy.knowledge.execute` | `knowledge.execute.{type}` | Request KEE knowledge execution |
 
 #### Pub-Sub (ACF)
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 57 | `academy.knowledge.subscribe` | `knowledge.subscribe` | Subscribe to knowledge lifecycle events |
+| 60 | `academy.knowledge.subscribe` | `knowledge.subscribe` | Subscribe to knowledge lifecycle events |
 
 #### Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 58 | `API.RequestReceived` | API received a request |
-| 59 | `API.RequestCompleted` | API completed processing |
-| 60 | `API.RequestFailed` | API encountered an error |
-| 61 | `API.RateLimitExceeded` | Rate limit exceeded |
-| 62 | `API.SubscriptionCreated` | Subscription created |
-| 63 | `API.SubscriptionRemoved` | Subscription removed |
+| 61 | `API.RequestReceived` | API received a request |
+| 62 | `API.RequestCompleted` | API completed processing |
+| 63 | `API.RequestFailed` | API encountered an error |
+| 64 | `API.RateLimitExceeded` | Rate limit exceeded |
+| 65 | `API.SubscriptionCreated` | Subscription created |
+| 66 | `API.SubscriptionRemoved` | Subscription removed |
 
 ---
 
@@ -220,10 +220,10 @@
 
 | # | Endpoint | Auth | Description |
 |---|----------|------|-------------|
-| 64 | `GET /search?q=...&fields=...&operator=...` | JWT | Full-text knowledge search |
-| 65 | `GET /search?q=...&type=semantic&top_k=...` | JWT | Semantic knowledge search |
-| 66 | `GET /search?type=graph&start_node_id=...&edge_types=...&max_depth=...` | JWT | Graph-based knowledge search |
-| 67 | `GET /search?type=operational&organization_id=...&tags=...&confidence_min=...` | JWT | Faceted/operational knowledge search |
+| 67 | `GET /search?q=...&fields=...&operator=...` | JWT | Full-text knowledge search |
+| 68 | `GET /search?q=...&type=semantic&top_k=...` | JWT | Semantic knowledge search |
+| 69 | `GET /search?type=graph&start_node_id=...&edge_types=...&max_depth=...` | JWT | Graph-based knowledge search |
+| 70 | `GET /search?type=operational&organization_id=...&tags=...&confidence_min=...` | JWT | Faceted/operational knowledge search |
 
 ---
 
@@ -233,7 +233,7 @@
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 68 | RPC (ACF) | KMS query interface | ACF-level | Knowledge management storage and retrieval queries |
+| 71 | RPC (ACF) | KMS query interface | ACF-level | Knowledge management storage and retrieval queries |
 
 ---
 
@@ -243,44 +243,44 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 69 | `authenticate(entity_id, credentials)` | ACF token | Authenticate with ATS and obtain session token |
-| 70 | `setIdentity(identity)` | ACF token | Set identity for subsequent operations |
-| 71 | `getCurrentEntity()` | ACF token | Returns authenticated entity info |
-| 72 | `hasCapability(capability)` | ACF token | Check if entity has a specific capability |
-| 73 | `search(query, options)` | ACF token | Full-text and semantic search |
-| 74 | `getKnowledge(id)` | ACF token | Retrieve artifact by ID |
-| 75 | `listKnowledge(filters)` | ACF token | List artifacts matching filters |
-| 76 | `getProvenance(id, options)` | ACF token | Get provenance chain |
-| 77 | `queryGraph(query)` | ACF token | Graph traversal query |
-| 78 | `subscribe(topic, callback)` | ACF token | Subscribe to knowledge events |
-| 79 | `unsubscribe(subscriptionId)` | ACF token | Unsubscribe from events |
-| 80 | `onKnowledgeAccepted(callback)` | ACF token | Convenience subscription for accepted events |
-| 81 | `onKnowledgeDeprecated(callback)` | ACF token | Convenience subscription for deprecation events |
-| 82 | `proposeKnowledge(artifact)` | ACF token | Submit knowledge for validation |
-| 83 | `getProposalStatus(proposalId)` | ACF token | Check proposal status |
-| 84 | `withdrawProposal(proposalId)` | ACF token | Withdraw a pending proposal |
-| 85 | `resubmitKnowledge(proposalId, updatedArtifact)` | ACF token | Resubmit with revisions |
-| 86 | `composeUnion(artifactIds)` | ACF token | Union composition |
-| 87 | `composeIntersection(artifactIds)` | ACF token | Intersection composition |
-| 88 | `composeAnalogy(sourceId, targetDomain)` | ACF token | Analogy composition |
-| 89 | `composeInduction(artifactIds)` | ACF token | Induction composition |
-| 90 | `composeDeduction(principleId, context)` | ACF token | Deduction composition |
-| 91 | `getCompositionStatus(requestId)` | ACF token | Check composition request status |
-| 92 | `executeKnowledge(knowledgeId, context)` | ACF token | Execute a knowledge artifact |
-| 93 | `getExecutionStatus(executionId)` | ACF token | Check execution status |
-| 94 | `cancelExecution(executionId)` | ACF token | Cancel a pending execution |
-| 95 | `getExecutionResult(executionId)` | ACF token | Get execution result |
+| 72 | `authenticate(entity_id, credentials)` | ACF token | Authenticate with ATS and obtain session token |
+| 73 | `setIdentity(identity)` | ACF token | Set identity for subsequent operations |
+| 74 | `getCurrentEntity()` | ACF token | Returns authenticated entity info |
+| 75 | `hasCapability(capability)` | ACF token | Check if entity has a specific capability |
+| 76 | `search(query, options)` | ACF token | Full-text and semantic search |
+| 77 | `getKnowledge(id)` | ACF token | Retrieve artifact by ID |
+| 78 | `listKnowledge(filters)` | ACF token | List artifacts matching filters |
+| 79 | `getProvenance(id, options)` | ACF token | Get provenance chain |
+| 80 | `queryGraph(query)` | ACF token | Graph traversal query |
+| 81 | `subscribe(topic, callback)` | ACF token | Subscribe to knowledge events |
+| 82 | `unsubscribe(subscriptionId)` | ACF token | Unsubscribe from events |
+| 83 | `onKnowledgeAccepted(callback)` | ACF token | Convenience subscription for accepted events |
+| 84 | `onKnowledgeDeprecated(callback)` | ACF token | Convenience subscription for deprecation events |
+| 85 | `proposeKnowledge(artifact)` | ACF token | Submit knowledge for validation |
+| 86 | `getProposalStatus(proposalId)` | ACF token | Check proposal status |
+| 87 | `withdrawProposal(proposalId)` | ACF token | Withdraw a pending proposal |
+| 88 | `resubmitKnowledge(proposalId, updatedArtifact)` | ACF token | Resubmit with revisions |
+| 89 | `composeUnion(artifactIds)` | ACF token | Union composition |
+| 90 | `composeIntersection(artifactIds)` | ACF token | Intersection composition |
+| 91 | `composeAnalogy(sourceId, targetDomain)` | ACF token | Analogy composition |
+| 92 | `composeInduction(artifactIds)` | ACF token | Induction composition |
+| 93 | `composeDeduction(principleId, context)` | ACF token | Deduction composition |
+| 94 | `getCompositionStatus(requestId)` | ACF token | Check composition request status |
+| 95 | `executeKnowledge(knowledgeId, context)` | ACF token | Execute a knowledge artifact |
+| 96 | `getExecutionStatus(executionId)` | ACF token | Check execution status |
+| 97 | `cancelExecution(executionId)` | ACF token | Cancel a pending execution |
+| 98 | `getExecutionResult(executionId)` | ACF token | Get execution result |
 
 #### SDK Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 96 | `SDK.Authenticated` | SDK successfully authenticates |
-| 97 | `SDK.QueryExecuted` | SDK executes a query |
-| 98 | `SDK.KnowledgeProposed` | SDK proposes knowledge |
-| 99 | `SDK.EventSubscribed` | SDK subscribes to a topic |
-| 100 | `SDK.EventReceived` | SDK receives an event |
-| 101 | `SDK.ErrorEncountered` | SDK encounters an error |
+| 99 | `SDK.Authenticated` | SDK successfully authenticates |
+| 100 | `SDK.QueryExecuted` | SDK executes a query |
+| 101 | `SDK.KnowledgeProposed` | SDK proposes knowledge |
+| 102 | `SDK.EventSubscribed` | SDK subscribes to a topic |
+| 103 | `SDK.EventReceived` | SDK receives an event |
+| 104 | `SDK.ErrorEncountered` | SDK encounters an error |
 
 ---
 
@@ -290,14 +290,14 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 102 | Interface | `Reasoner` | All reasoning methods implement this |
-| 103 | Interface | `SouEngine` | Common interface for Planner, Reasoning, Missions, Learning, Knowledge |
+| 105 | Interface | `Reasoner` | All reasoning methods implement this |
+| 106 | Interface | `SouEngine` | Common interface for Planner, Reasoning, Missions, Learning, Knowledge |
 
 #### Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 104 | `Sou.ReasoningFailed` | Reasoning encountered an error |
+| 107 | `Sou.ReasoningFailed` | Reasoning encountered an error |
 
 ---
 
@@ -307,11 +307,11 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 105 | Interface | `DecisionEvaluator` | Interface for evaluating decisions |
-| 106 | Interface | `EvaluationResult` | Interface for evaluation results |
-| 107 | Interface | `TrustScorer` | Interface for trust scoring |
-| 108 | Interface | `TrustScore` | Interface for trust score data |
-| 109 | Interface | `SimEngine` | All simulation engines implement this |
+| 108 | Interface | `DecisionEvaluator` | Interface for evaluating decisions |
+| 109 | Interface | `EvaluationResult` | Interface for evaluation results |
+| 110 | Interface | `TrustScorer` | Interface for trust scoring |
+| 111 | Interface | `TrustScore` | Interface for trust score data |
+| 112 | Interface | `SimEngine` | All simulation engines implement this |
 
 ---
 
@@ -321,7 +321,7 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 110 | Interface | `ResourceProvider` | SDK interface that all resource providers must implement |
+| 113 | Interface | `ResourceProvider` | SDK interface that all resource providers must implement |
 
 ---
 
@@ -335,168 +335,168 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 111 | `sendMessage(envelope, payload)` | auth_token | Send a message |
-| 112 | `sendMessageWithAck(envelope, payload, timeout)` | auth_token | Send with acknowledgement |
-| 113 | `receiveMessage(entity_id, timeout?)` | auth_token | Receive a message |
-| 114 | `getMessageStatus(message_id)` | auth_token | Get message delivery status |
-| 115 | `retryMessage(message_id)` | auth_token | Retry failed message |
-| 116 | `deadLetterMessage(message_id, reason)` | auth_token | Move to dead letter queue |
-| 117 | `acknowledgeMessage(message_id)` | auth_token | Acknowledge message |
-| 118 | `rejectMessage(message_id, reason)` | auth_token | Reject message |
+| 114 | `sendMessage(envelope, payload)` | auth_token | Send a message |
+| 115 | `sendMessageWithAck(envelope, payload, timeout)` | auth_token | Send with acknowledgement |
+| 116 | `receiveMessage(entity_id, timeout?)` | auth_token | Receive a message |
+| 117 | `getMessageStatus(message_id)` | auth_token | Get message delivery status |
+| 118 | `retryMessage(message_id)` | auth_token | Retry failed message |
+| 119 | `deadLetterMessage(message_id, reason)` | auth_token | Move to dead letter queue |
+| 120 | `acknowledgeMessage(message_id)` | auth_token | Acknowledge message |
+| 121 | `rejectMessage(message_id, reason)` | auth_token | Reject message |
 
 #### 3.1.2 Routing (`003-Routing.md`)
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 119 | `defineRoute(target_pattern, endpoints, config)` | Security Council | Define routing rule |
-| 120 | `updateRoute(route_id, updates)` | Security Council | Update routing rule |
-| 121 | `removeRoute(route_id)` | Security Council | Remove routing rule |
-| 122 | `resolveRoute(target, sender?)` | ACF-level | Resolve target to endpoint |
-| 123 | `getRoute(route_id)` | ACF-level | Get route entry |
-| 124 | `listRoutes(filter?)` | ACF-level | List routing entries |
-| 125 | `testRoute(target, message?)` | ACF-level | Test route resolution |
+| 122 | `defineRoute(target_pattern, endpoints, config)` | Security Council | Define routing rule |
+| 123 | `updateRoute(route_id, updates)` | Security Council | Update routing rule |
+| 124 | `removeRoute(route_id)` | Security Council | Remove routing rule |
+| 125 | `resolveRoute(target, sender?)` | ACF-level | Resolve target to endpoint |
+| 126 | `getRoute(route_id)` | ACF-level | Get route entry |
+| 127 | `listRoutes(filter?)` | ACF-level | List routing entries |
+| 128 | `testRoute(target, message?)` | ACF-level | Test route resolution |
 
 #### 3.1.3 Subscriptions (`004-Subscriptions.md`)
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 126 | `subscribe(entity_id, topic_pattern, subscription_type, config)` | ACF-level | Subscribe to topic |
-| 127 | `unsubscribe(subscription_id)` | ACF-level | Unsubscribe from topic |
-| 128 | `publish(topic, message)` | ACF-level | Publish message to topic |
-| 129 | `listSubscriptions(entity_id)` | ACF-level | List subscriptions |
-| 130 | `listSubscribers(topic)` | ACF-level | List subscribers of topic |
-| 131 | `getSubscriptionStatus(subscription_id)` | ACF-level | Get subscription status |
-| 132 | `updateSubscription(subscription_id, updates)` | ACF-level | Update subscription configuration |
+| 129 | `subscribe(entity_id, topic_pattern, subscription_type, config)` | ACF-level | Subscribe to topic |
+| 130 | `unsubscribe(subscription_id)` | ACF-level | Unsubscribe from topic |
+| 131 | `publish(topic, message)` | ACF-level | Publish message to topic |
+| 132 | `listSubscriptions(entity_id)` | ACF-level | List subscriptions |
+| 133 | `listSubscribers(topic)` | ACF-level | List subscribers of topic |
+| 134 | `getSubscriptionStatus(subscription_id)` | ACF-level | Get subscription status |
+| 135 | `updateSubscription(subscription_id, updates)` | ACF-level | Update subscription configuration |
 
 #### Canonical ACF Topic Names
 
 | # | Topic Pattern | Description |
 |---|--------------|-------------|
-| 133 | `academy.knowledge.accepted` | Knowledge accepted events |
-| 134 | `academy.knowledge.rejected` | Knowledge rejected events |
-| 135 | `academy.knowledge.revised` | Knowledge revised events |
-| 136 | `lifecycle.state.changed` | Lifecycle state changes |
-| 137 | `lifecycle.entity.created` | Entity created |
-| 138 | `lifecycle.entity.completed` | Entity completed |
-| 139 | `security.auth.authenticated` | Auth success events |
-| 140 | `security.auth.authorized` | Auth authorized events |
-| 141 | `security.auth.denied` | Auth denied events |
-| 142 | `system.session.created` | Session created |
-| 143 | `system.session.destroyed` | Session destroyed |
-| 144 | `aios/{domain}/{service}/{instance}/health` | Health check topic for all services |
+| 136 | `academy.knowledge.accepted` | Knowledge accepted events |
+| 137 | `academy.knowledge.rejected` | Knowledge rejected events |
+| 138 | `academy.knowledge.revised` | Knowledge revised events |
+| 139 | `lifecycle.state.changed` | Lifecycle state changes |
+| 140 | `lifecycle.entity.created` | Entity created |
+| 141 | `lifecycle.entity.completed` | Entity completed |
+| 142 | `security.auth.authenticated` | Auth success events |
+| 143 | `security.auth.authorized` | Auth authorized events |
+| 144 | `security.auth.denied` | Auth denied events |
+| 145 | `system.session.created` | Session created |
+| 146 | `system.session.destroyed` | Session destroyed |
+| 147 | `aios/{domain}/{service}/{instance}/health` | Health check topic for all services |
 
 #### 3.1.4 Streaming (`005-Streaming.md`)
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 145 | `createStream(topic, partitions, config)` | ACF-level | Create a stream |
-| 146 | `deleteStream(stream_id)` | ACF-level | Delete a stream |
-| 147 | `publishToStream(topic, message, partition_key?)` | ACF-level | Publish to stream |
-| 148 | `publishToPartition(stream_id, partition_id, message)` | ACF-level | Publish to specific partition |
-| 149 | `consumeStream(stream_id, consumer_group, consumer_id)` | ACF-level | Consume from stream |
-| 150 | `getStreamPosition(consumer_group, consumer_id, partition_id?)` | ACF-level | Get stream position |
-| 151 | `seekStream(consumer_group, consumer_id, position)` | ACF-level | Seek to position |
-| 152 | `commitPosition(consumer_group, consumer_id, partition_id, sequence)` | ACF-level | Commit consumer position |
-| 153 | `getStreamInfo(stream_id)` | ACF-level | Get stream info |
-| 154 | `listStreams(filter?)` | ACF-level | List streams |
+| 148 | `createStream(topic, partitions, config)` | ACF-level | Create a stream |
+| 149 | `deleteStream(stream_id)` | ACF-level | Delete a stream |
+| 150 | `publishToStream(topic, message, partition_key?)` | ACF-level | Publish to stream |
+| 151 | `publishToPartition(stream_id, partition_id, message)` | ACF-level | Publish to specific partition |
+| 152 | `consumeStream(stream_id, consumer_group, consumer_id)` | ACF-level | Consume from stream |
+| 153 | `getStreamPosition(consumer_group, consumer_id, partition_id?)` | ACF-level | Get stream position |
+| 154 | `seekStream(consumer_group, consumer_id, position)` | ACF-level | Seek to position |
+| 155 | `commitPosition(consumer_group, consumer_id, partition_id, sequence)` | ACF-level | Commit consumer position |
+| 156 | `getStreamInfo(stream_id)` | ACF-level | Get stream info |
+| 157 | `listStreams(filter?)` | ACF-level | List streams |
 
 #### 3.1.5 Reliability / DLQ (`006-Reliability.md`)
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 155 | `configureRetry(topic_pattern, retry_policy)` | Security Council | Configure retry policy |
-| 156 | `getRetryStatus(message_id)` | ACF-level | Get retry status |
-| 157 | `getDeadLetterMessages(filter?)` | Security Council | List DLQ messages |
-| 158 | `replayDeadLetter(dlq_message_id, new_target?)` | Security Council | Replay DLQ message |
-| 159 | `replayAllDeadLetter(filter?)` | Security Council | Replay all DLQ messages |
-| 160 | `purgeDeadLetter(filter?)` | Security Council | Purge DLQ messages |
-| 161 | `getDeadLetterStats()` | Security Council | Get DLQ statistics |
-| 162 | `getDeadLetterMessage(dlq_message_id)` | Security Council | Get specific DLQ message |
+| 158 | `configureRetry(topic_pattern, retry_policy)` | Security Council | Configure retry policy |
+| 159 | `getRetryStatus(message_id)` | ACF-level | Get retry status |
+| 160 | `getDeadLetterMessages(filter?)` | Security Council | List DLQ messages |
+| 161 | `replayDeadLetter(dlq_message_id, new_target?)` | Security Council | Replay DLQ message |
+| 162 | `replayAllDeadLetter(filter?)` | Security Council | Replay all DLQ messages |
+| 163 | `purgeDeadLetter(filter?)` | Security Council | Purge DLQ messages |
+| 164 | `getDeadLetterStats()` | Security Council | Get DLQ statistics |
+| 165 | `getDeadLetterMessage(dlq_message_id)` | Security Council | Get specific DLQ message |
 
-#### 3.1.6 Distributed / Federation (`007-Distributed.md`)
+#### 3.1.6 Distributed / Instance Federation (`007-Distributed.md`)
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 163 | `connectInstance(instance_url, credentials, config)` | mTLS X.509 | Connect to remote ACF instance |
-| 164 | `disconnectInstance(bridge_id)` | mTLS | Disconnect remote instance |
-| 165 | `syncRoutingTable(bridge_id)` | mTLS | Sync routing tables |
-| 166 | `getInstanceStatus(instance_id)` | mTLS | Get remote instance status |
-| 167 | `listConnectedInstances()` | mTLS | List all connected instances |
-| 168 | `updateBandwidth(bridge_id, bandwidth_bps)` | Security Council | Update bridge bandwidth |
-| 169 | `updateExportPolicy(bridge_id, policy)` | Security Council | Update route export policy |
+| 166 | `connectInstance(instance_url, credentials, config)` | mTLS X.509 | Connect to remote ACF instance |
+| 167 | `disconnectInstance(bridge_id)` | mTLS | Disconnect remote instance |
+| 168 | `syncRoutingTable(bridge_id)` | mTLS | Sync routing tables |
+| 169 | `getInstanceStatus(instance_id)` | mTLS | Get remote instance status |
+| 170 | `listConnectedInstances()` | mTLS | List all connected instances |
+| 171 | `updateBandwidth(bridge_id, bandwidth_bps)` | Security Council | Update bridge bandwidth |
+| 172 | `updateExportPolicy(bridge_id, policy)` | Security Council | Update route export policy |
 
 #### ACF Messages
 
 | # | Message | Description |
 |---|---------|-------------|
-| 170 | `Message` (envelope + payload) | Fundamental unit of communication |
-| 171 | `Envelope` | Routing and metadata (version, message_id, sender, target, timestamp, ttl, priority, delivery_mode) |
-| 172 | `DeliveryStatus` | Message delivery status tracking |
-| 173 | `DeliveryAttempt` | Delivery attempt record |
-| 174 | `DeadLetterMessage` | Undeliverable message with failure metadata |
-| 175 | `DeliveryFailure` | Delivery failure details |
-| 176 | `RetryPolicy` | Retry policy configuration |
+| 173 | `Message` (envelope + payload) | Fundamental unit of communication |
+| 174 | `Envelope` | Routing and metadata (version, message_id, sender, target, timestamp, ttl, priority, delivery_mode) |
+| 175 | `DeliveryStatus` | Message delivery status tracking |
+| 176 | `DeliveryAttempt` | Delivery attempt record |
+| 177 | `DeadLetterMessage` | Undeliverable message with failure metadata |
+| 178 | `DeliveryFailure` | Delivery failure details |
+| 179 | `RetryPolicy` | Retry policy configuration |
 
 #### ACF Events
 
-| # | Event | Source | Description |
-|---|-------|--------|-------------|
-| 177 | `ACF.MessageSent` | 002-Messages | Sender dispatches message |
-| 178 | `ACF.MessageAuthenticated` | 002-Messages | Token verified |
-| 179 | `ACF.MessageAuthorized` | 002-Messages | Route permitted |
-| 180 | `ACF.MessageQueued` | 002-Messages | Message persisted |
-| 181 | `ACF.MessageRouted` | 002-Messages | Target endpoint selected |
-| 182 | `ACF.MessageDelivered` | 002-Messages | Message reaches receiver |
-| 183 | `ACF.MessageAcknowledged` | 002-Messages | Receiver confirms |
-| 184 | `ACF.MessageFailed` | 002-Messages | Permanent delivery failure |
-| 185 | `ACF.MessageExpired` | 002-Messages | TTL exceeded |
-| 186 | `ACF.RouteDefined` | 003-Routing | Route created |
-| 187 | `ACF.RouteUpdated` | 003-Routing | Route modified |
-| 188 | `ACF.RouteRemoved` | 003-Routing | Route deleted |
-| 189 | `ACF.EndpointUnavailable` | 003-Routing | Endpoint becomes unhealthy |
-| 190 | `ACF.EndpointRestored` | 003-Routing | Endpoint becomes healthy |
-| 191 | `ACF.RouteUnresolvable` | 003-Routing | No route matches |
-| 192 | `ACF.RoutingTableSynced` | 003-Routing | Routing table synchronized |
-| 193 | `ACF.SubscriptionCreated` | 004-Subscriptions | Subscription created |
-| 194 | `ACF.SubscriptionActivated` | 004-Subscriptions | Subscription activated |
-| 195 | `ACF.SubscriptionPaused` | 004-Subscriptions | Subscription paused |
-| 196 | `ACF.SubscriptionResumed` | 004-Subscriptions | Subscription resumed |
-| 197 | `ACF.SubscriptionUnsubscribed` | 004-Subscriptions | Subscription ended |
-| 198 | `ACF.MessagePublished` | 004-Subscriptions | Message published to topic |
-| 199 | `ACF.SubscriptionDelivered` | 004-Subscriptions | Message delivered to subscriber |
-| 200 | `ACF.BackpressureApplied` | 004-Subscriptions | Slow subscriber throttled |
-| 201 | `ACF.FilterEvaluated` | 004-Subscriptions | Filter predicate evaluated |
-| 202 | `ACF.StreamCreated` | 005-Streaming | Stream created |
-| 203 | `ACF.StreamDeleted` | 005-Streaming | Stream deleted |
-| 204 | `ACF.PartitionReassigned` | 005-Streaming | Partition reassigned |
-| 205 | `ACF.ConsumerAdded` | 005-Streaming | Consumer joins group |
-| 206 | `ACF.ConsumerRemoved` | 005-Streaming | Consumer leaves |
-| 207 | `ACF.ConsumerRebalanced` | 005-Streaming | Group rebalanced |
-| 208 | `ACF.StreamEnd` | 005-Streaming | Stream reaches end |
-| 209 | `ACF.PositionCommitted` | 005-Streaming | Consumer commits position |
-| 210 | `ACF.RetryPolicyConfigured` | 006-Reliability | Retry policy set |
-| 211 | `ACF.DeliveryAttempted` | 006-Reliability | Delivery attempt made |
-| 212 | `ACF.DeliverySucceeded` | 006-Reliability | Delivery succeeds |
-| 213 | `ACF.DeliveryFailed` | 006-Reliability | Delivery fails |
-| 214 | `ACF.MessageDeadLettered` | 006-Reliability | Message sent to DLQ |
-| 215 | `ACF.DLQReplayed` | 006-Reliability | DLQ message replayed |
-| 216 | `ACF.DLQPurged` | 006-Reliability | DLQ messages purged |
-| 217 | `ACF.ReliabilityThresholdBreached` | 006-Reliability | Reliability target missed |
-| 218 | `ACF.DLQReviewed` | 006-Reliability | DLQ review completed |
-| 219 | `ACF.InstanceConnected` | 007-Distributed | ACF bridge established |
-| 220 | `ACF.InstanceDisconnected` | 007-Distributed | Bridge torn down |
-| 221 | `ACF.InstancePartitioned` | 007-Distributed | Network partition detected |
-| 222 | `ACF.InstanceReconnected` | 007-Distributed | Partition healed |
-| 223 | `ACF.RoutingTableSynced` | 007-Distributed | Routing tables synchronized |
-| 224 | `ACF.CrossInstanceMessageSent` | 007-Distributed | Message crosses instance boundary |
-| 225 | `ACF.CrossInstanceMessageReceived` | 007-Distributed | Message received from remote |
-| 226 | `ACF.HopLimitExceeded` | 007-Distributed | Message exceeds max hops |
-| 227 | `ACF.BandwidthExceeded` | 007-Distributed | Bandwidth limit hit |
-| 228 | `ACF.ClusterNodeJoined` | 001-Architecture | New node joins ACF cluster |
-| 229 | `ACF.ClusterNodeLeft` | 001-Architecture | Node leaves cluster |
-| 230 | `ACF.ClusterLeaderElected` | 001-Architecture | New Raft leader elected |
-| 231 | `ACF.TopicPartitionCreated` | 001-Architecture | Topic partition created |
-| 232 | `ACF.TopicPartitionReassigned` | 001-Architecture | Partition reassigned |
+| # | Event | Source File | Description |
+|---|-------|-------------|-------------|
+| 180 | `ACF.MessageSent` | 002-Messages | Sender dispatches message |
+| 181 | `ACF.MessageAuthenticated` | 002-Messages | Token verified |
+| 182 | `ACF.MessageAuthorized` | 002-Messages | Route permitted |
+| 183 | `ACF.MessageQueued` | 002-Messages | Message persisted |
+| 184 | `ACF.MessageRouted` | 002-Messages | Target endpoint selected |
+| 185 | `ACF.MessageDelivered` | 002-Messages | Message reaches receiver |
+| 186 | `ACF.MessageAcknowledged` | 002-Messages | Receiver confirms |
+| 187 | `ACF.MessageFailed` | 002-Messages | Permanent delivery failure |
+| 188 | `ACF.MessageExpired` | 002-Messages | TTL exceeded |
+| 189 | `ACF.RouteDefined` | 003-Routing | Route created |
+| 190 | `ACF.RouteUpdated` | 003-Routing | Route modified |
+| 191 | `ACF.RouteRemoved` | 003-Routing | Route deleted |
+| 192 | `ACF.EndpointUnavailable` | 003-Routing | Endpoint becomes unhealthy |
+| 193 | `ACF.EndpointRestored` | 003-Routing | Endpoint becomes healthy |
+| 194 | `ACF.RouteUnresolvable` | 003-Routing | No route matches |
+| 195 | `ACF.RoutingTableSynced` | 003-Routing | Routing table synchronized |
+| 196 | `ACF.SubscriptionCreated` | 004-Subscriptions | Subscription created |
+| 197 | `ACF.SubscriptionActivated` | 004-Subscriptions | Subscription activated |
+| 198 | `ACF.SubscriptionPaused` | 004-Subscriptions | Subscription paused |
+| 199 | `ACF.SubscriptionResumed` | 004-Subscriptions | Subscription resumed |
+| 200 | `ACF.SubscriptionUnsubscribed` | 004-Subscriptions | Subscription ended |
+| 201 | `ACF.MessagePublished` | 004-Subscriptions | Message published to topic |
+| 202 | `ACF.SubscriptionDelivered` | 004-Subscriptions | Message delivered to subscriber |
+| 203 | `ACF.BackpressureApplied` | 004-Subscriptions | Slow subscriber throttled |
+| 204 | `ACF.FilterEvaluated` | 004-Subscriptions | Filter predicate evaluated |
+| 205 | `ACF.StreamCreated` | 005-Streaming | Stream created |
+| 206 | `ACF.StreamDeleted` | 005-Streaming | Stream deleted |
+| 207 | `ACF.PartitionReassigned` | 005-Streaming | Partition reassigned |
+| 208 | `ACF.ConsumerAdded` | 005-Streaming | Consumer joins group |
+| 209 | `ACF.ConsumerRemoved` | 005-Streaming | Consumer leaves |
+| 210 | `ACF.ConsumerRebalanced` | 005-Streaming | Group rebalanced |
+| 211 | `ACF.StreamEnd` | 005-Streaming | Stream reaches end |
+| 212 | `ACF.PositionCommitted` | 005-Streaming | Consumer commits position |
+| 213 | `ACF.RetryPolicyConfigured` | 006-Reliability | Retry policy set |
+| 214 | `ACF.DeliveryAttempted` | 006-Reliability | Delivery attempt made |
+| 215 | `ACF.DeliverySucceeded` | 006-Reliability | Delivery succeeds |
+| 216 | `ACF.DeliveryFailed` | 006-Reliability | Delivery fails |
+| 217 | `ACF.MessageDeadLettered` | 006-Reliability | Message sent to DLQ |
+| 218 | `ACF.DLQReplayed` | 006-Reliability | DLQ message replayed |
+| 219 | `ACF.DLQPurged` | 006-Reliability | DLQ messages purged |
+| 220 | `ACF.ReliabilityThresholdBreached` | 006-Reliability | Reliability target missed |
+| 221 | `ACF.DLQReviewed` | 006-Reliability | DLQ review completed |
+| 222 | `ACF.InstanceConnected` | 007-Distributed | ACF bridge established |
+| 223 | `ACF.InstanceDisconnected` | 007-Distributed | Bridge torn down |
+| 224 | `ACF.InstancePartitioned` | 007-Distributed | Network partition detected |
+| 225 | `ACF.InstanceReconnected` | 007-Distributed | Partition healed |
+| 226 | `ACF.RoutingTableSynced` | 007-Distributed | Routing tables synchronized |
+| 227 | `ACF.CrossInstanceMessageSent` | 007-Distributed | Message crosses instance boundary |
+| 228 | `ACF.CrossInstanceMessageReceived` | 007-Distributed | Message received from remote |
+| 229 | `ACF.HopLimitExceeded` | 007-Distributed | Message exceeds max hops |
+| 230 | `ACF.BandwidthExceeded` | 007-Distributed | Bandwidth limit hit |
+| 231 | `ACF.ClusterNodeJoined` | 001-Architecture | New node joins ACF cluster |
+| 232 | `ACF.ClusterNodeLeft` | 001-Architecture | Node leaves cluster |
+| 233 | `ACF.ClusterLeaderElected` | 001-Architecture | New Raft leader elected |
+| 234 | `ACF.TopicPartitionCreated` | 001-Architecture | Topic partition created |
+| 235 | `ACF.TopicPartitionReassigned` | 001-Architecture | Partition reassigned |
 
 ---
 
@@ -506,22 +506,22 @@
 
 | # | Type | Name | Source | Description |
 |---|------|------|--------|-------------|
-| 233 | Interface | `Permission` | 000-RBAC.md | Permission definition interface |
-| 234 | Interface | `ABACPolicy` | 001-ABAC.md | Attribute-based access control policy interface |
-| 235 | Interface | `Capability` | 002-Capability.md | Capability token interface |
+| 236 | Interface | `Permission` | 000-RBAC.md | Permission definition interface |
+| 237 | Interface | `ABACPolicy` | 001-ABAC.md | Attribute-based access control policy interface |
+| 238 | Interface | `Capability` | 002-Capability.md | Capability token interface |
 
 #### AZS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 236 | `AZS.CapabilityIssued` | Capability created |
-| 237 | `AZS.CapabilityPresented` | Capability presented for verification |
-| 238 | `AZS.CapabilityVerified` | Capability passes verification |
-| 239 | `AZS.CapabilityDenied` | Capability fails verification |
-| 240 | `AZS.CapabilityRevoked` | Capability revoked |
-| 241 | `AZS.CapabilityExpired` | Capability expired |
-| 242 | `AZS.DelegationExtended` | Delegation extended |
-| 243 | `AZS.CapabilityConsumed` | One-time capability consumed |
+| 239 | `AZS.CapabilityIssued` | Capability created |
+| 240 | `AZS.CapabilityPresented` | Capability presented for verification |
+| 241 | `AZS.CapabilityVerified` | Capability passes verification |
+| 242 | `AZS.CapabilityDenied` | Capability fails verification |
+| 243 | `AZS.CapabilityRevoked` | Capability revoked |
+| 244 | `AZS.CapabilityExpired` | Capability expired |
+| 245 | `AZS.DelegationExtended` | Delegation extended |
+| 246 | `AZS.CapabilityConsumed` | One-time capability consumed |
 
 ---
 
@@ -531,26 +531,26 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 244 | Interface | `Session` | Session model interface |
-| 245 | Interface | `SessionToken` | Session token interface |
-| 246 | Interface | `Secret` | Secret model interface |
+| 247 | Interface | `Session` | Session model interface |
+| 248 | Interface | `SessionToken` | Session token interface |
+| 249 | Interface | `Secret` | Secret model interface |
 
 #### SSM Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 247 | `SSM.SessionCreated` | New session created |
-| 248 | `SSM.SessionAuthenticated` | Session authenticated |
-| 249 | `SSM.SessionTerminated` | Session terminated |
-| 250 | `SSM.SessionSuspended` | Session suspended |
-| 251 | `SSM.SessionRestored` | Session restored |
-| 252 | `SSM.SessionTokenRefreshed` | Session token refreshed |
-| 253 | `SSM.SecretGenerated` | New secret generated |
-| 254 | `SSM.SecretRotated` | Secret rotated |
-| 255 | `SSM.SecretRevoked` | Secret revoked |
-| 256 | `SSM.SecretCompromised` | Secret compromised |
-| 257 | `SSM.SecretDestroyed` | Secret destroyed |
-| 258 | `SSM.SecretAccessDenied` | Secret access denied |
+| 250 | `SSM.SessionCreated` | New session created |
+| 251 | `SSM.SessionAuthenticated` | Session authenticated |
+| 252 | `SSM.SessionTerminated` | Session terminated |
+| 253 | `SSM.SessionSuspended` | Session suspended |
+| 254 | `SSM.SessionRestored` | Session restored |
+| 255 | `SSM.SessionTokenRefreshed` | Session token refreshed |
+| 256 | `SSM.SecretGenerated` | New secret generated |
+| 257 | `SSM.SecretRotated` | Secret rotated |
+| 258 | `SSM.SecretRevoked` | Secret revoked |
+| 259 | `SSM.SecretCompromised` | Secret compromised |
+| 260 | `SSM.SecretDestroyed` | Secret destroyed |
+| 261 | `SSM.SecretAccessDenied` | Secret access denied |
 
 ---
 
@@ -560,21 +560,21 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 259 | Interface | `EvidenceRecord` | Evidence record structure |
-| 260 | Interface | `EvidenceQuery` | Evidence query interface |
-| 261 | Interface | `ChainVerificationResult` | Chain verification result |
+| 262 | Interface | `EvidenceRecord` | Evidence record structure |
+| 263 | Interface | `EvidenceQuery` | Evidence query interface |
+| 264 | Interface | `ChainVerificationResult` | Chain verification result |
 
 #### EAS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 262 | `EAS.EvidenceSealed` | Evidence record sealed |
-| 263 | `EAS.ChainExtended` | Merkle-DAG chain extended |
-| 264 | `EAS.ChainVerified` | Chain verification completed |
-| 265 | `EAS.RetentionApplied` | Evidence archived per retention |
-| 266 | `EAS.IntegrityAlert` | Chain integrity check fails |
-| 267 | `EAS.BulkExportInitiated` | Bulk evidence export begins |
-| 268 | `EAS.EvidenceArchived` | Evidence archived to cold storage |
+| 265 | `EAS.EvidenceSealed` | Evidence record sealed |
+| 266 | `EAS.ChainExtended` | Merkle-DAG chain extended |
+| 267 | `EAS.ChainVerified` | Chain verification completed |
+| 268 | `EAS.RetentionApplied` | Evidence archived per retention |
+| 269 | `EAS.IntegrityAlert` | Chain integrity check fails |
+| 270 | `EAS.BulkExportInitiated` | Bulk evidence export begins |
+| 271 | `EAS.EvidenceArchived` | Evidence archived to cold storage |
 
 ---
 
@@ -584,11 +584,11 @@
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 269 | Interface | `SigningRequest` | N/A | CSP signing request |
-| 270 | Interface | `SigningResult` | N/A | CSP signing result |
-| 271 | Interface | `VerificationRequest` | N/A | CSP verification request |
-| 272 | Interface | `VerificationResult` | N/A | CSP verification result |
-| 273 | RPC (ACF) | CSP operations | mTLS | All cryptographic operations via ACF |
+| 272 | Interface | `SigningRequest` | N/A | CSP signing request |
+| 273 | Interface | `SigningResult` | N/A | CSP signing result |
+| 274 | Interface | `VerificationRequest` | N/A | CSP verification request |
+| 275 | Interface | `VerificationResult` | N/A | CSP verification result |
+| 276 | RPC (ACF) | CSP operations | mTLS | All cryptographic operations via ACF |
 
 ---
 
@@ -598,7 +598,7 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 274 | Interface | `TrustScore` | Trust score model |
+| 277 | Interface | `TrustScore` | Trust score model |
 
 ---
 
@@ -608,8 +608,8 @@
 
 | # | Type | Name | Source | Description |
 |---|------|------|--------|-------------|
-| 275 | Interface | `Policy` | 000-PS.md | Policy definition interface |
-| 276 | Interface | `ValidationReport` | 002-PVE.md | Policy validation report |
+| 278 | Interface | `Policy` | 000-PS.md | Policy definition interface |
+| 279 | Interface | `ValidationReport` | 002-PVE.md | Policy validation report |
 
 ---
 
@@ -619,8 +619,8 @@
 
 | # | Type | Name | Source | Description |
 |---|------|------|--------|-------------|
-| 277 | Interface | `RiskScore` | 000-RE.md | Risk score model |
-| 278 | Interface | `AREAttribution` | 002-ARE.md | Advanced risk engine attribution |
+| 280 | Interface | `RiskScore` | 000-RE.md | Risk score model |
+| 281 | Interface | `AREAttribution` | 002-ARE.md | Advanced risk engine attribution |
 
 ---
 
@@ -630,7 +630,7 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 279 | Interface | `PipelineContext` | Verification pipeline context |
+| 282 | Interface | `PipelineContext` | Verification pipeline context |
 
 ---
 
@@ -640,7 +640,7 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 280 | Interface | `SandboxLimits` | Sandbox resource limits |
+| 283 | Interface | `SandboxLimits` | Sandbox resource limits |
 
 ---
 
@@ -650,7 +650,7 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 281 | Interface | `ProvenanceChain` | Identity provenance chain |
+| 284 | Interface | `ProvenanceChain` | Identity provenance chain |
 
 ---
 
@@ -662,23 +662,23 @@
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 282 | RPC | `sendMessage(sender_id, target_id, message_type, payload)` | Capability-based | Send message from one Worker to another |
-| 283 | RPC | `broadcastMessage(sender_id, mission_id, message_type, payload)` | Capability-based | Broadcast message to all Workers in mission |
-| 284 | RPC | `publishMessage(sender_id, topic, payload)` | Capability-based | Publish message to topic |
-| 285 | RPC | `sendMessageWithResponse(...)` | Capability-based | Send message and wait for response |
-| 286 | Interface | `MessageChannel` | N/A | All communication patterns implement this |
-| 287 | Message | `WorkerMessage` | N/A | message_id, sender_id, target_id, message_type, payload, ttl |
+| 285 | RPC | `sendMessage(sender_id, target_id, message_type, payload)` | Capability-based | Send message from one Worker to another |
+| 286 | RPC | `broadcastMessage(sender_id, mission_id, message_type, payload)` | Capability-based | Broadcast message to all Workers in mission |
+| 287 | RPC | `publishMessage(sender_id, topic, payload)` | Capability-based | Publish message to topic |
+| 288 | RPC | `sendMessageWithResponse(...)` | Capability-based | Send message and wait for response |
+| 289 | Interface | `MessageChannel` | N/A | All communication patterns implement this |
+| 290 | Message | `WorkerMessage` | N/A | message_id, sender_id, target_id, message_type, payload, ttl |
 
 #### WCS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 288 | `WCS.MessageSent` | Worker sends a message |
-| 289 | `WCS.MessageDelivered` | Message reaches target |
-| 290 | `WCS.MessageFailed` | Message delivery fails |
-| 291 | `WCS.MessageExpired` | Message TTL exceeded |
-| 292 | `WCS.MessageDropped` | Queue overflow message dropped |
-| 293 | `WCS.MessageAuthorizationDenied` | Cross-scope message denied |
+| 291 | `WCS.MessageSent` | Worker sends a message |
+| 292 | `WCS.MessageDelivered` | Message reaches target |
+| 293 | `WCS.MessageFailed` | Message delivery fails |
+| 294 | `WCS.MessageExpired` | Message TTL exceeded |
+| 295 | `WCS.MessageDropped` | Queue overflow message dropped |
+| 296 | `WCS.MessageAuthorizationDenied` | Cross-scope message denied |
 
 ---
 
@@ -688,7 +688,7 @@
 
 | # | Event | Description |
 |---|-------|-------------|
-| 294 | `WSS.CommunicationSpoofAttempt` | Worker attempts to spoof another Worker's identity |
+| 297 | `WSS.CommunicationSpoofAttempt` | Worker attempts to spoof another Worker's identity |
 
 ---
 
@@ -698,11 +698,11 @@
 
 | # | Event | Description |
 |---|-------|-------------|
-| 295 | `Playbook.Created` | Playbook created |
-| 296 | `Playbook.Activated` | Playbook activated |
-| 297 | `Playbook.Completed` | Playbook completed |
-| 298 | `Playbook.Failed` | Playbook execution failed |
-| 299 | `Playbook.StepCompleted` | Playbook step completed |
+| 298 | `Playbook.Created` | Playbook created |
+| 299 | `Playbook.Activated` | Playbook activated |
+| 300 | `Playbook.Completed` | Playbook completed |
+| 301 | `Playbook.Failed` | Playbook execution failed |
+| 302 | `Playbook.StepCompleted` | Playbook step completed |
 
 ---
 
@@ -712,9 +712,9 @@
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 300 | Interface | `InteractionChannel` | N/A | All communication patterns implement this |
-| 301 | ACF Topic | `org.research.findings` | ACF | Cross-Organization research findings subscription |
-| 302 | ACF Topic | Org-wide broadcast topic | ACF | Cross-Organization broadcast |
+| 303 | Interface | `InteractionChannel` | N/A | All communication patterns implement this |
+| 304 | ACF Topic | `org.research.findings` | ACF | Cross-Organization research findings subscription |
+| 305 | ACF Topic | Org-wide broadcast topic | ACF | Cross-Organization broadcast |
 
 ---
 
@@ -726,37 +726,37 @@
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 303 | Interface | `ExecutionProvider` | Execution token | Interface all execution providers implement |
-| 304 | Method | `providerId()` | N/A | Returns provider identity |
-| 305 | Method | `providerVersion()` | N/A | Returns provider version |
-| 306 | Method | `supportedActionTypes()` | N/A | Returns supported action types |
-| 307 | Method | `capabilityDeclaration()` | N/A | Returns capability declaration |
-| 308 | Method | `initialize(config)` | N/A | Initialize provider with configuration |
-| 309 | Method | `health()` | N/A | Returns provider health status |
-| 310 | Method | `shutdown()` | N/A | Graceful shutdown |
-| 311 | Method | `execute(context)` | VerificationToken | Execute an action (core contract) |
-| 312 | Method | `executeStream(context)` | VerificationToken | Streaming execution |
+| 306 | Interface | `ExecutionProvider` | Execution token | Interface all execution providers implement |
+| 307 | Method | `providerId()` | N/A | Returns provider identity |
+| 308 | Method | `providerVersion()` | N/A | Returns provider version |
+| 309 | Method | `supportedActionTypes()` | N/A | Returns supported action types |
+| 310 | Method | `capabilityDeclaration()` | N/A | Returns capability declaration |
+| 311 | Method | `initialize(config)` | N/A | Initialize provider with configuration |
+| 312 | Method | `health()` | N/A | Returns provider health status |
+| 313 | Method | `shutdown()` | N/A | Graceful shutdown |
+| 314 | Method | `execute(context)` | VerificationToken | Execute an action (core contract) |
+| 315 | Method | `executeStream(context)` | VerificationToken | Streaming execution |
 
 #### Runtime Messages / Types
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 313 | Message | `ExecutionContext` | execution_id, token, action, capability_bounds, autonomy_level, parent_entity_id, deadline |
-| 314 | Message | `ExecutionResult` | execution_id, status, output, metrics, error, events |
-| 315 | Stream Chunk | `ExecutionChunk` | sequence, data, progress, is_final, metrics |
+| 316 | Message | `ExecutionContext` | execution_id, token, action, capability_bounds, autonomy_level, parent_entity_id, deadline |
+| 317 | Message | `ExecutionResult` | execution_id, status, output, metrics, error, events |
+| 318 | Stream Chunk | `ExecutionChunk` | sequence, data, progress, is_final, metrics |
 
 #### Runtime Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 316 | `Runtime.ProviderRegistered` | Provider registered with Runtime Manager |
-| 317 | `Runtime.ProviderHealthChanged` | Provider health status changes |
-| 318 | `Runtime.ProviderExecutionStarted` | Provider execution starts |
-| 319 | `Runtime.ProviderResourceWarning` | Provider resource warning |
-| 320 | `Runtime.ProviderExecutionCompleted` | Provider execution completed |
-| 321 | `Runtime.ProviderExecutionFailed` | Provider execution failed |
-| 322 | `Runtime.ProviderBoundsExceeded` | Provider bounds exceeded |
-| 323 | `Runtime.ProviderShutdown` | Provider shutdown |
+| 319 | `Runtime.ProviderRegistered` | Provider registered with Runtime Manager |
+| 320 | `Runtime.ProviderHealthChanged` | Provider health status changes |
+| 321 | `Runtime.ProviderExecutionStarted` | Provider execution starts |
+| 322 | `Runtime.ProviderResourceWarning` | Provider resource warning |
+| 323 | `Runtime.ProviderExecutionCompleted` | Provider execution completed |
+| 324 | `Runtime.ProviderExecutionFailed` | Provider execution failed |
+| 325 | `Runtime.ProviderBoundsExceeded` | Provider bounds exceeded |
+| 326 | `Runtime.ProviderShutdown` | Provider shutdown |
 
 ---
 
@@ -766,8 +766,8 @@
 
 | # | Type | Endpoint | Auth | Description |
 |---|------|----------|------|-------------|
-| 324 | REST | `POST {endpoint}/api/generate` | Network-bound (localhost/private) | Ollama model generation endpoint |
-| 325 | REST | `POST {endpoint}/api/chat` | Network-bound (localhost/private) | Ollama chat endpoint |
+| 327 | REST | `POST {endpoint}/api/generate` | Network-bound (localhost/private) | Ollama model generation endpoint |
+| 328 | REST | `POST {endpoint}/api/chat` | Network-bound (localhost/private) | Ollama chat endpoint |
 
 ---
 
@@ -777,38 +777,38 @@
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 326 | Interface | `RuntimeProvider` | mTLS | Interface for runtime execution providers |
-| 327 | Method | `createSession(genome, allocation)` | Execution token | Create Worker session |
-| 328 | Method | `startSession(sessionId)` | Execution token | Start session |
-| 329 | Method | `pauseSession(sessionId)` | Execution token | Pause session |
-| 330 | Method | `resumeSession(sessionId)` | Execution token | Resume session |
-| 331 | Method | `terminateSession(sessionId)` | Execution token | Terminate session |
-| 332 | Method | `invokeCapability(sessionId, capability, input)` | Execution token | Execute capability |
-| 333 | Method | `cancelInvocation(sessionId, invocationId)` | Execution token | Cancel invocation |
-| 334 | Method | `getSessionStatus(sessionId)` | Execution token | Query session state |
-| 335 | Method | `streamMetrics(sessionId)` | Execution token | Subscribe to metrics |
-| 336 | Method | `healthCheck()` | N/A | Report provider health |
-| 337 | Method | `reportUsage(sessionId)` | Execution token | Report resource usage |
+| 329 | Interface | `RuntimeProvider` | mTLS | Interface for runtime execution providers |
+| 330 | Method | `createSession(genome, allocation)` | Execution token | Create Worker session |
+| 331 | Method | `startSession(sessionId)` | Execution token | Start session |
+| 332 | Method | `pauseSession(sessionId)` | Execution token | Pause session |
+| 333 | Method | `resumeSession(sessionId)` | Execution token | Resume session |
+| 334 | Method | `terminateSession(sessionId)` | Execution token | Terminate session |
+| 335 | Method | `invokeCapability(sessionId, capability, input)` | Execution token | Execute capability |
+| 336 | Method | `cancelInvocation(sessionId, invocationId)` | Execution token | Cancel invocation |
+| 337 | Method | `getSessionStatus(sessionId)` | Execution token | Query session state |
+| 338 | Method | `streamMetrics(sessionId)` | Execution token | Subscribe to metrics |
+| 339 | Method | `healthCheck()` | N/A | Report provider health |
+| 340 | Method | `reportUsage(sessionId)` | Execution token | Report resource usage |
 
 #### ACF Endpoints
 
 | # | Endpoint | Auth | Description |
 |---|----------|------|-------------|
-| 338 | `acf://runtime-provider-id/control` | ACF | Runtime provider control endpoint |
-| 339 | `acf://runtime-provider-id/metrics` | ACF | Runtime provider metrics endpoint |
-| 340 | `acf://runtime-provider-id/events` | ACF | Runtime provider events endpoint |
+| 341 | `acf://runtime-provider-id/control` | ACF | Runtime provider control endpoint |
+| 342 | `acf://runtime-provider-id/metrics` | ACF | Runtime provider metrics endpoint |
+| 343 | `acf://runtime-provider-id/events` | ACF | Runtime provider events endpoint |
 
 #### Runtime SDK Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 341 | `SDK.RuntimeSessionCreated` | Runtime session created |
-| 342 | `SDK.RuntimeSessionStarted` | Session transitions to Running |
-| 343 | `SDK.RuntimeSessionPaused` | Session paused |
-| 344 | `SDK.RuntimeSessionTerminated` | Session terminates |
-| 345 | `SDK.RuntimeInvocationCompleted` | Capability invocation finishes |
-| 346 | `SDK.RuntimeHealthChanged` | Provider health changes |
-| 347 | `SDK.RuntimeUsageReported` | Resource usage reported |
+| 344 | `SDK.RuntimeSessionCreated` | Runtime session created |
+| 345 | `SDK.RuntimeSessionStarted` | Session transitions to Running |
+| 346 | `SDK.RuntimeSessionPaused` | Session paused |
+| 347 | `SDK.RuntimeSessionTerminated` | Session terminates |
+| 348 | `SDK.RuntimeInvocationCompleted` | Capability invocation finishes |
+| 349 | `SDK.RuntimeHealthChanged` | Provider health changes |
+| 350 | `SDK.RuntimeUsageReported` | Resource usage reported |
 
 ---
 
@@ -818,16 +818,16 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 348 | `queryEvents(filter)` | audit scope | Query Events by filter criteria |
-| 349 | `getEventById(eventId)` | audit scope | Retrieve single Event |
-| 350 | `streamEvents(filter)` | audit scope | Subscribe to Event stream |
-| 351 | `verifyChain(eventId)` | audit scope | Verify Event chain integrity |
-| 352 | `verifyIntegrity(eventRange)` | audit scope | Verify Event range integrity |
-| 353 | `computeHash(eventId)` | audit scope | Compute cryptographic hash |
-| 354 | `analyzePattern(filter, pattern)` | audit scope | Detect patterns across Events |
-| 355 | `computeAggregation(filter, metric)` | audit scope | Aggregate metrics |
-| 356 | `detectAnomaly(filter, baseline)` | audit scope | Detect anomalous patterns |
-| 357 | `checkCompliance(filter, standard)` | audit scope | Check compliance |
+| 351 | `queryEvents(filter)` | audit scope | Query Events by filter criteria |
+| 352 | `getEventById(eventId)` | audit scope | Retrieve single Event |
+| 353 | `streamEvents(filter)` | audit scope | Subscribe to Event stream |
+| 354 | `verifyChain(eventId)` | audit scope | Verify Event chain integrity |
+| 355 | `verifyIntegrity(eventRange)` | audit scope | Verify Event range integrity |
+| 356 | `computeHash(eventId)` | audit scope | Compute cryptographic hash |
+| 357 | `analyzePattern(filter, pattern)` | audit scope | Detect patterns across Events |
+| 358 | `computeAggregation(filter, metric)` | audit scope | Aggregate metrics |
+| 359 | `detectAnomaly(filter, baseline)` | audit scope | Detect anomalous patterns |
+| 360 | `checkCompliance(filter, standard)` | audit scope | Check compliance |
 
 ---
 
@@ -839,7 +839,7 @@
 
 | # | Event | Description |
 |---|-------|-------------|
-| 358 | `Trading.OrderPlaced` | Order submitted to exchange |
+| 361 | `Trading.OrderPlaced` | Order submitted to exchange |
 
 ---
 
@@ -849,10 +849,10 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 359 | RPC | `monitor_endpoints` | Security domain worker capability — monitor endpoints |
-| 360 | RPC | `analyze_network` | Security domain worker capability — analyze network traffic |
-| 361 | RPC | `detect_intrusion` | Security domain worker capability — detect intrusion |
-| 362 | RPC | `alert_triage` | Security domain worker capability — triage alerts |
+| 362 | RPC | `monitor_endpoints` | Security domain worker capability — monitor endpoints |
+| 363 | RPC | `analyze_network` | Security domain worker capability — analyze network traffic |
+| 364 | RPC | `detect_intrusion` | Security domain worker capability — detect intrusion |
+| 365 | RPC | `alert_triage` | Security domain worker capability — triage alerts |
 
 ---
 
@@ -864,20 +864,20 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 363 | `connectToRemoteAgent(remote_session_id, instance_id)` | mTLS + identity | Initiate cross-instance session |
-| 364 | `sendAgentMessage(session_id, message)` | mTLS + identity | Send message to remote session |
-| 365 | `disconnectAgent(session_id)` | mTLS | Terminate cross-instance session |
-| 366 | `getAgentStatus(session_id)` | mTLS | Check remote session status |
+| 366 | `connectToRemoteAgent(remote_session_id, instance_id)` | mTLS + identity | Initiate cross-instance session |
+| 367 | `sendAgentMessage(session_id, message)` | mTLS + identity | Send message to remote session |
+| 368 | `disconnectAgent(session_id)` | mTLS | Terminate cross-instance session |
+| 369 | `getAgentStatus(session_id)` | mTLS | Check remote session status |
 
 #### AIP Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 367 | `AIP.AgentConnected` | Remote session connected |
-| 368 | `AIP.AgentDisconnected` | Remote session disconnected |
-| 369 | `AIP.MessageSent` | Message transmitted |
-| 370 | `AIP.MessageReceived` | Message received |
-| 371 | `AIP.ConnectionFailed` | Connection attempt failed |
+| 370 | `AIP.AgentConnected` | Remote session connected |
+| 371 | `AIP.AgentDisconnected` | Remote session disconnected |
+| 372 | `AIP.MessageSent` | Message transmitted |
+| 373 | `AIP.MessageReceived` | Message received |
+| 374 | `AIP.ConnectionFailed` | Connection attempt failed |
 
 ---
 
@@ -887,21 +887,21 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 372 | `shareThreat(threat_data, severity)` | mTLS + signature | Share threat intelligence |
-| 373 | `subscribeThreats(filter, callback_endpoint)` | mTLS | Subscribe to threat feed |
-| 374 | `acknowledgeThreat(threat_id, action_taken)` | mTLS | Acknowledge receipt of threat |
-| 375 | `escalateThreat(threat_id, escalation_reason)` | Security Council | Request coordinated response |
-| 376 | `getThreatStatus(threat_id)` | mTLS | Query threat resolution status |
+| 375 | `shareThreat(threat_data, severity)` | mTLS + signature | Share threat intelligence |
+| 376 | `subscribeThreats(filter, callback_endpoint)` | mTLS | Subscribe to threat feed |
+| 377 | `acknowledgeThreat(threat_id, action_taken)` | mTLS | Acknowledge receipt of threat |
+| 378 | `escalateThreat(threat_id, escalation_reason)` | Security Council | Request coordinated response |
+| 379 | `getThreatStatus(threat_id)` | mTLS | Query threat resolution status |
 
 #### SXP Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 377 | `SXP.ThreatShared` | Threat intelligence shared |
-| 378 | `SXP.ThreatAcknowledged` | Receipt acknowledged |
-| 379 | `SXP.ThreatEscalated` | Threat escalated |
-| 380 | `SXP.ThreatResolved` | Threat resolved |
-| 381 | `SXP.SubscriptionCreated` | Threat feed subscription |
+| 380 | `SXP.ThreatShared` | Threat intelligence shared |
+| 381 | `SXP.ThreatAcknowledged` | Receipt acknowledged |
+| 382 | `SXP.ThreatEscalated` | Threat escalated |
+| 383 | `SXP.ThreatResolved` | Threat resolved |
+| 384 | `SXP.SubscriptionCreated` | Threat feed subscription |
 
 ---
 
@@ -909,13 +909,13 @@
 
 | # | Type | Source | Description |
 |---|------|--------|-------------|
-| 382 | Event | `Bible/01-Governance/001-CLS.md` | CLS constitutional amendment lifecycle events |
-| 383 | Event | `Bible/01-Governance/002-DGP.md` | DGP decision assessed events |
-| 384 | Event | `Bible/01-Governance/003-CRP.md` | CRP constitutional review proposal events |
-| 385 | RPC (ACF) | `Bible/01-Governance/004-CKR.md` | CKR constitutional knowledge registry query interface |
-| 386 | Event | `Bible/01-Governance/004-CKR.md` | CKR knowledge registry lifecycle events |
-| 387 | Event | `Bible/01-Governance/005-ADG.md` | ADG architecture decision events |
-| 388 | Event | `Bible/01-Governance/006-AKM.md` | AKM knowledge management lifecycle events |
+| 385 | Event | `Bible/01-Governance/001-CLS.md` | CLS constitutional amendment lifecycle events |
+| 386 | Event | `Bible/01-Governance/002-DGP.md` | DGP decision assessed events |
+| 387 | Event | `Bible/01-Governance/003-CRP.md` | CRP constitutional review proposal events |
+| 388 | RPC (ACF) | `Bible/01-Governance/004-CKR.md` | CKR constitutional knowledge registry query interface |
+| 389 | Event | `Bible/01-Governance/004-CKR.md` | CKR knowledge registry lifecycle events |
+| 390 | Event | `Bible/01-Governance/005-ADG.md` | ADG architecture decision events |
+| 391 | Event | `Bible/01-Governance/006-AKM.md` | AKM knowledge management lifecycle events |
 
 ---
 
@@ -923,20 +923,20 @@
 
 | # | Type | Name | Source | Description |
 |---|------|------|--------|-------------|
-| 389 | Interface | `AuthMethod` | `00-Foundations/002-Design-DNA.md` | Interface for implementing new authentication methods |
-| 390 | Event | `Lifecycle.EntityArchived` | `00-Foundations/008-Object-Lifecycle.md` | Entity archived event |
-| 391 | Schema | Canonical API Envelope | `08-Interfaces/API/000-Specifications.md` | Standard envelope: api_version, message_id, correlation_id, timestamp, source_entity_id, target_entity_id, auth_token, payload |
-| 392 | Schema | Error Response Schema | `08-Interfaces/API/000-Specifications.md` | Standard error: code, message, details, correlation_id |
+| 392 | Interface | `AuthMethod` | `00-Foundations/002-Design-DNA.md` | Interface for implementing new authentication methods |
+| 393 | Event | `Lifecycle.EntityArchived` | `00-Foundations/008-Object-Lifecycle.md` | Entity archived event |
+| 394 | Schema | Canonical API Envelope | `08-Interfaces/API/000-Specifications.md` | Standard envelope: api_version, message_id, correlation_id, timestamp, source_entity_id, target_entity_id, auth_token, payload |
+| 395 | Schema | Error Response Schema | `08-Interfaces/API/000-Specifications.md` | Standard error: code, message, details, correlation_id |
 
 #### Framework API Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 393 | `API.ContractPublished` | New API contract registered |
-| 394 | `API.ContractDeprecated` | API version deprecated |
-| 395 | `API.RequestProcessed` | API request completes |
-| 396 | `API.RateLimitExceeded` | Rate limit exceeded |
-| 397 | `API.SchemaValidationFailed` | Schema validation failed |
+| 396 | `API.ContractPublished` | New API contract registered |
+| 397 | `API.ContractDeprecated` | API version deprecated |
+| 398 | `API.RequestProcessed` | API request completes |
+| 399 | `API.RateLimitExceeded` | Rate limit exceeded |
+| 400 | `API.SchemaValidationFailed` | Schema validation failed |
 
 ---
 
