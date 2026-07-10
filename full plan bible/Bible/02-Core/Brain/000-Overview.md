@@ -173,6 +173,11 @@ Brain service specifications have been created across three phases:
 | Bible/02-Core/Brain/Decision/000-Overview.md | Decision System — multi-factor scoring and trade-off analysis |
 | Bible/02-Core/Brain/Planning/000-Overview.md | Planning System — goal decomposition and milestone tracking |
 | Bible/02-Core/Brain/Tools/000-Overview.md | Tool System — tool registry, discovery, and invocation |
+| Bible/02-Core/Brain/Attention/000-Overview.md | Attention System — priority and focus management |
+| Bible/02-Core/Brain/Personality/000-Overview.md | Personality System — identity, values, behavior patterns |
+| Bible/02-Core/Brain/Cognitive/000-Overview.md | Cognitive OS — reasoning, reflection, metacognition |
+| Bible/02-Core/Brain/Conversation/000-Overview.md | Conversation OS — dialogue management, session lifecycle |
+| Bible/02-Core/Brain/Memory/000-Overview.md | Memory OS — persistent memory, working memory, vector store |
 | Bible/02-Core/Academy/000-Overview.md | Academy — learning infrastructure (outside Brain) |
 | Bible/04-Execution/Security/000-Overview.md | Security Council — verification infrastructure |
 | Bible/03-Institutions/000-Overview.md | Institutions — execution infrastructure |

@@ -341,9 +341,18 @@ SOU-007: All cognitive services live inside the Brain.
 | `sou new idea.md` | Original insight — Sou is the only intelligence, Brain is the container |
 | `Bible/02-Core/Brain/Sou/000-Overview.md` | New Sou specification (rewritten as executive intelligence) |
 | `Bible/02-Core/Brain/LLMOS/000-Overview.md` | LLMOS specification (moved to Brain) |
-| `APIs/AIOS-Architecture-Diagram.md` | Architecture diagram (to be updated with Brain) |
-| `APIs/000-Master-API-Spec.md` | API registry (to be updated with Brain section) |
-| `Bible/0000-Master-Architecture-Plan.md` | Master architecture plan (to reference Brain) |
+| `Bible/02-Core/Brain/Context/000-Overview.md` | Context System — global context window management |
+| `Bible/02-Core/Brain/Decision/000-Overview.md` | Decision System — multi-factor scoring |
+| `Bible/02-Core/Brain/Planning/000-Overview.md` | Planning System — goal decomposition |
+| `Bible/02-Core/Brain/Tools/000-Overview.md` | Tool System — tool registry and invocation |
+| `Bible/02-Core/Brain/Attention/000-Overview.md` | Attention System — priority and focus |
+| `Bible/02-Core/Brain/Personality/000-Overview.md` | Personality System — identity and values |
+| `Bible/02-Core/Brain/Cognitive/000-Overview.md` | Cognitive OS — reasoning and reflection |
+| `Bible/02-Core/Brain/Conversation/000-Overview.md` | Conversation OS — dialogue management |
+| `Bible/02-Core/Brain/Memory/000-Overview.md` | Memory OS — persistent storage backbone |
+| `APIs/AIOS-Architecture-Diagram.md` | Architecture diagram (updated with Brain layer) |
+| `APIs/000-Master-API-Spec.md` | API registry (updated with Brain section 3.1–3.13) |
+| `Bible/0000-Master-Architecture-Plan.md` | Master architecture plan |
 
 ---
 
