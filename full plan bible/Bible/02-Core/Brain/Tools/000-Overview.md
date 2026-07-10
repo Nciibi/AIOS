@@ -185,9 +185,13 @@ InvocationRequest {
 
 InvocationResult {
   invocation_id: string
-  status: InvocationStatus
-  result: ToolResult
-  events: InvocationEvent[]
+  status: "pending" | "running" | "completed" | "failed" | "cancelled"
+  result?: ToolResult
+  events: {
+    event_type: string
+    timestamp: timestamp
+    data?: unknown
+  }[]
 }
 ```
 
