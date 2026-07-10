@@ -115,7 +115,11 @@ See `Bible/00-Foundations/007-Naming-Conventions.md` for the complete identity I
 
 ## Event Types
 
-Format: `{Category}.{Action}` in PascalCase
+Two formats exist for different contexts:
+- **API/ACF Events** (published to ACF topics): `{Category}.{Action}` in PascalCase — e.g., `Session.Created`, `Auth.Succeeded`
+- **Database Events** (stored in Event Store schema): PascalCase, no dots — e.g., `SessionCreated`, `AuthFailed`
+
+API/ACF event format: `{Category}.{Action}` in PascalCase
 
 | Category | Convention | Examples |
 |----------|-----------|---------|
