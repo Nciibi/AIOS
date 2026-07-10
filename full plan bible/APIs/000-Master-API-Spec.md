@@ -511,6 +511,255 @@
 
 ## 4. Security Council
 
+The Security Council is the constitutional authority for all security operations. It operates the 7-stage verification pipeline that gates every action before execution. See `Bible/04-Execution/Security/` for full specifications.
+
+### 4.1 Verification Pipeline (Execution-Auth)
+
+**Source:** `Bible/04-Execution/Security/Execution-Auth/000-EAS.md`
+
+The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes through all stages before receiving an execution token.
+
+| # | Stage | Service | Function |
+|---|-------|---------|----------|
+| 166 | 1 — Identity | IDS | Verify actor identity exists and is active |
+| 167 | 2 — Authentication | ATS | Verify authentication token is valid |
+| 168 | 3 — Authorization | AZS | Verify actor is authorized for this action |
+| 169 | 4 — Policy | Policy System | Verify action complies with active policies |
+| 170 | 5 — Capability | CCA | Verify actor has required capabilities |
+| 171 | 6 — Risk | Risk Engine | Evaluate risk level; escalate if above threshold |
+| 172 | 7 — Execution Auth | Execution-Auth | Issue execution token; reserve resources via ROS |
+
+#### Pipeline Events
+
+| # | Event | Description |
+|---|-------|-------------|
+| 173 | `SC.PipelineStarted` | Action entered verification pipeline |
+| 174 | `SC.StagePassed` | Individual pipeline stage passed |
+| 175 | `SC.StageFailed` | Individual pipeline stage failed |
+| 176 | `SC.PipelineCompleted` | All 7 stages passed, execution token issued |
+| 177 | `SC.PipelineDenied` | Action denied at a pipeline stage |
+| 178 | `SC.ExecutionTokenIssued` | Execution authorization token created |
+| 179 | `SC.ExecutionTokenRevoked` | Execution token revoked before use |
+
+---
+
+### 4.2 IDS — Identity Service
+
+**Source:** `Bible/04-Execution/Security/IDS/`
+
+| # | Type | Name | Auth | Description |
+|---|------|------|------|-------------|
+| 180 | Interface | `IdentityFactory` | Security Council | Create new identities |
+| 181 | Interface | `IdentityRegistry` | Security Council | Register, resolve, and manage identity records |
+| 182 | RPC | `createIdentity(entity_type, attributes)` | Security Council | Create a new constitutional identity |
+| 183 | RPC | `resolveIdentity(entity_id)` | ACF-level | Resolve identity to its current attributes |
+| 184 | RPC | `validateIdentity(entity_id)` | ACF-level | Verify identity is active and valid |
+| 185 | RPC | `deprecateIdentity(entity_id, reason)` | Security Council | Deprecate an identity |
+
+#### IDS Events
+
+| # | Event | Description |
+|---|-------|-------------|
+| 186 | `IDS.IdentityCreated` | New identity registered |
+| 187 | `IDS.IdentityResolved` | Identity resolution completed |
+| 188 | `IDS.IdentityDeprecated` | Identity deprecated |
+| 189 | `IDS.IdentitySuspended` | Identity temporarily suspended |
+
+---
+
+### 4.3 ATS — Authentication Token Service
+
+**Source:** `Bible/04-Execution/Security/ATS/`
+
+| # | Type | Name | Auth | Description |
+|---|------|------|------|-------------|
+| 190 | Interface | `AuthProvider` | Security Council | All authentication methods implement this |
+| 191 | RPC | `authenticate(entity_id, credentials)` | None (pre-auth) | Authenticate entity; return session token |
+| 192 | RPC | `validateToken(token)` | ACF-level | Validate existing authentication token |
+| 193 | RPC | `revokeToken(token)` | Security Council | Revoke an authentication token |
+| 194 | RPC | `requestMFA(entity_id, method)` | ACF-level | Request multi-factor authentication |
+| 195 | RPC | `verifyMFA(entity_id, challenge_response)` | ACF-level | Verify MFA challenge response |
+
+#### ATS Events
+
+| # | Event | Description |
+|---|-------|-------------|
+| 196 | `ATS.Authenticated` | Entity authenticated successfully |
+| 197 | `ATS.AuthenticationFailed` | Authentication attempt failed |
+| 198 | `ATS.MFARequired` | MFA challenge issued |
+| 199 | `ATS.MFAVerified` | MFA challenge passed |
+| 200 | `ATS.TokenIssued` | Authentication token issued |
+| 201 | `ATS.TokenRevoked` | Token revoked |
+| 202 | `ATS.TokenExpired` | Token expired naturally |
+
+---
+
+### 4.4 AZS — Authorization Service
+
+**Source:** `Bible/04-Execution/Security/AZS/`
+
+| # | Type | Name | Auth | Description |
+|---|------|------|------|-------------|
+| 203 | Interface | `AuthorizationProvider` | Security Council | All authorization methods implement this |
+| 204 | RPC | `checkPermission(entity_id, action, resource)` | Pipeline | Check RBAC permission |
+| 205 | RPC | `checkABAC(entity_id, action, resource, context)` | Pipeline | Check attribute-based access control |
+| 206 | RPC | `checkCapability(entity_id, capability_id)` | Pipeline | Check capability-based authorization |
+| 207 | RPC | `assignRole(entity_id, role)` | Security Council | Assign a role to an entity |
+| 208 | RPC | `revokeRole(entity_id, role)` | Security Council | Revoke a role from an entity |
+
+#### AZS Events
+
+| # | Event | Description |
+|---|-------|-------------|
+| 209 | `AZS.Authorized` | Authorization check passed |
+| 210 | `AZS.Denied` | Authorization check denied |
+| 211 | `AZS.RoleAssigned` | Role assigned to entity |
+| 212 | `AZS.RoleRevoked` | Role revoked from entity |
+
+---
+
+### 4.5 Policy System
+
+**Source:** `Bible/04-Execution/Security/Policy-System/`
+
+| # | Type | Name | Auth | Description |
+|---|------|------|------|-------------|
+| 213 | Interface | `PolicyEngine` | Security Council | Policy definition and evaluation engine |
+| 214 | RPC | `createPolicy(policy_def)` | Security Council | Create a new policy |
+| 215 | RPC | `evaluatePolicy(policy_id, context)` | Pipeline | Evaluate action against policy |
+| 216 | RPC | `activatePolicy(policy_id)` | Security Council | Activate a policy |
+| 217 | RPC | `deactivatePolicy(policy_id)` | Security Council | Deactivate a policy |
+| 218 | RPC | `listPolicies(filter?)` | ACF-level | List policies matching filter |
+
+#### Policy Events
+
+| # | Event | Description |
+|---|-------|-------------|
+| 219 | `POL.PolicyCreated` | New policy defined |
+| 220 | `POL.PolicyActivated` | Policy activated |
+| 221 | `POL.PolicyDeactivated` | Policy deactivated |
+| 222 | `POL.PolicyEvaluated` | Policy evaluation completed |
+| 223 | `POL.PolicyViolation` | Action violates a policy |
+
+---
+
+### 4.6 Risk Engine
+
+**Source:** `Bible/04-Execution/Security/Risk/`
+
+| # | Type | Name | Auth | Description |
+|---|------|------|------|-------------|
+| 224 | Interface | `RiskScorer` | Security Council | Risk scoring interface |
+| 225 | RPC | `evaluateRisk(entity_id, action, context)` | Pipeline | Compute risk score for action |
+| 226 | RPC | `getRiskProfile(entity_id)` | Security Council | Get entity's current risk profile |
+| 227 | RPC | `escalateRisk(action_id, reason)` | Security Council | Escalate a high-risk action |
+
+#### Risk Events
+
+| # | Event | Description |
+|---|-------|-------------|
+| 228 | `RSK.RiskScored` | Risk score computed for action |
+| 229 | `RSK.ThresholdExceeded` | Risk score exceeded configured threshold |
+| 230 | `RSK.RiskEscalated` | Action escalated for manual review |
+
+---
+
+### 4.7 EAS — Evidence Audit Service
+
+**Source:** `Bible/04-Execution/Security/Audit/000-EAS.md`
+
+| # | Type | Name | Auth | Description |
+|---|------|------|------|-------------|
+| 231 | Interface | `EvidenceStore` | Security Council | Immutable evidence storage backend |
+| 232 | Interface | `EvidenceQuery` | Security Council | Evidence query interface |
+| 233 | RPC | `sealEvidence(record)` | Pipeline | Seal an evidence record |
+| 234 | RPC | `queryEvidence(query)` | Auditor | Query evidence records |
+| 235 | RPC | `exportEvidence(query, format)` | Auditor | Export evidence for external audit |
+
+#### EAS Events
+
+| # | Event | Description |
+|---|-------|-------------|
+| 236 | `EAS.EvidenceSealed` | New evidence record sealed |
+| 237 | `EAS.EvidenceQueried` | Evidence query executed |
+| 238 | `EAS.EvidenceExported` | Evidence export completed |
+
+---
+
+### 4.8 CSP — Cryptographic Service Provider
+
+**Source:** `Bible/04-Execution/Security/Crypto/`
+
+| # | Type | Name | Auth | Description |
+|---|------|------|------|-------------|
+| 239 | Interface | `CryptoProvider` | Security Council | Cryptographic operations interface |
+| 240 | RPC | `generateKey(algorithm, purpose)` | Security Council | Generate cryptographic key pair |
+| 241 | RPC | `sign(entity_id, payload)` | Security Council | Sign payload with entity key |
+| 242 | RPC | `verify(entity_id, payload, signature)` | ACF-level | Verify signature |
+| 243 | RPC | `encrypt(payload, recipient_id)` | ACF-level | Encrypt payload for recipient |
+| 244 | RPC | `decrypt(ciphertext)` | Security Council | Decrypt ciphertext |
+| 245 | RPC | `hash(payload, algorithm)` | ACF-level | Compute cryptographic hash |
+
+#### CSP Events
+
+| # | Event | Description |
+|---|-------|-------------|
+| 246 | `CSP.KeyGenerated` | New key pair generated |
+| 247 | `CSP.KeyRotated` | Key rotated |
+| 248 | `CSP.KeyCompromised` | Key reported compromised |
+| 249 | `CSP.SignatureVerified` | Signature verification completed |
+| 250 | `CSP.EncryptionPerformed` | Encryption operation completed |
+
+---
+
+### 4.9 SSM — Session & Secret Management
+
+**Source:** `Bible/04-Execution/Security/SSM/000-SSM.md`
+
+| # | Type | Name | Auth | Description |
+|---|------|------|------|-------------|
+| 251 | Interface | `SessionManager` | Security Council | Session lifecycle management |
+| 252 | Interface | `SecretStore` | Security Council | Encrypted secret storage |
+| 253 | RPC | `createSession(entity_id, ttl)` | ACF-level | Create new session |
+| 254 | RPC | `validateSession(session_id)` | ACF-level | Validate session is active |
+| 255 | RPC | `terminateSession(session_id)` | Security Council | Terminate a session |
+| 256 | RPC | `storeSecret(name, value, ttl)` | Security Council | Store an encrypted secret |
+| 257 | RPC | `resolveSecret(name)` | Security Council | Resolve a secret (for authorized callers) |
+| 258 | RPC | `rotateSecret(name)` | Security Council | Rotate a secret |
+| 259 | RPC | `revokeSecret(name)` | Security Council | Revoke a secret |
+
+#### SSM Events
+
+| # | Event | Description |
+|---|-------|-------------|
+| 260 | `SSM.SessionCreated` | New session created |
+| 261 | `SSM.SessionTerminated` | Session terminated |
+| 262 | `SSM.SessionExpired` | Session TTL exceeded |
+| 263 | `SSM.SecretStored` | Secret encrypted and stored |
+| 264 | `SSM.SecretRotated` | Secret rotated |
+| 265 | `SSM.SecretRevoked` | Secret revoked |
+
+---
+
+### 4.10 Sandbox — Execution Isolation
+
+**Source:** `Bible/04-Execution/Security/Sandbox/000-Isolation.md`
+
+| # | Type | Name | Auth | Description |
+|---|------|------|------|-------------|
+| 266 | Interface | `SandboxProvider` | Security Council | Execution isolation interface |
+| 267 | RPC | `createSandbox(worker_id, resource_limits)` | Pipeline | Create isolated execution environment |
+| 268 | RPC | `destroySandbox(sandbox_id)` | Security Council | Destroy sandbox environment |
+
+#### Sandbox Events
+
+| # | Event | Description |
+|---|-------|-------------|
+| 269 | `SANDBOX.Created` | Sandbox created for worker |
+| 270 | `SANDBOX.Destroyed` | Sandbox destroyed |
+| 271 | `SANDBOX.IsolationViolation` | Isolation boundary violated |
+
+---
 
 ## 5. Institutions
 
