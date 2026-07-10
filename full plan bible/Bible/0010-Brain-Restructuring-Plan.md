@@ -235,30 +235,30 @@ SOU-007: All cognitive services live inside the Brain.
 
 ## 6. Implementation Phases
 
-### Phase A: Restructure (P0 — immediate)
-1. Create `Bible/03-OS/Brain/` directory structure
-2. Create `Bible/03-OS/Brain/000-Overview.md` — Brain architecture, invariants, subsystem layout
-3. Rewrite Sou: `Bible/03-OS/Brain/Sou/000-Overview.md` as executive intelligence
-4. Move LLMOS: `Bible/03-OS/Brain/LLMOS/` (update cross-references)
-5. Update Architecture Diagram to show Brain as top layer
-6. Update Master API Spec to reflect Brain hierarchy
+### Phase A: Restructure (P0 — immediate) ✅ COMPLETE
+1. ✅ Create `Bible/02-Core/Brain/` directory structure
+2. ✅ Create `Bible/02-Core/Brain/000-Overview.md` — Brain architecture, invariants, subsystem layout
+3. ✅ Rewrite Sou: `Bible/02-Core/Brain/Sou/000-Overview.md` as executive intelligence
+4. ✅ Move LLMOS: `Bible/02-Core/Brain/LLMOS/` (update cross-references)
+5. ✅ Update Architecture Diagram to show Brain as top layer
+6. ✅ Update Master API Spec to reflect Brain hierarchy
 
 ### Phase B: Core Systems (P0 — next)
-1. Create `Bible/03-OS/Brain/Context/000-Overview.md` — Context System
-2. Create `Bible/03-OS/Brain/Decision/000-Overview.md` — Decision System
-3. Create `Bible/03-OS/Brain/Planning/000-Overview.md` — Planning System
-4. Create `Bible/03-OS/Brain/Tools/000-Overview.md` — Tool System
+1. Create `Bible/02-Core/Brain/Context/000-Overview.md` — Context System
+2. Create `Bible/02-Core/Brain/Decision/000-Overview.md` — Decision System
+3. Create `Bible/02-Core/Brain/Planning/000-Overview.md` — Planning System
+4. Create `Bible/02-Core/Brain/Tools/000-Overview.md` — Tool System
 
 ### Phase C: Advanced Systems (P1)
-1. Create `Bible/03-OS/Brain/Attention/000-Overview.md` — Attention System
-2. Create `Bible/03-OS/Brain/Personality/000-Overview.md` — Personality System
+1. Create `Bible/02-Core/Brain/Attention/000-Overview.md` — Attention System
+2. Create `Bible/02-Core/Brain/Personality/000-Overview.md` — Personality System
 3. Refine Cognitive OS integration
 4. Refine Conversation OS integration
 5. Refine Memory OS integration
 
 ### Phase D: Sensory Systems (P2)
-1. Create `Bible/03-OS/Brain/Voice/000-Overview.md` — Voice System
-2. Create `Bible/03-OS/Brain/Vision/000-Overview.md` — Vision System
+1. Create `Bible/02-Core/Brain/Voice/000-Overview.md` — Voice System
+2. Create `Bible/02-Core/Brain/Vision/000-Overview.md` — Vision System
 
 ---
 
