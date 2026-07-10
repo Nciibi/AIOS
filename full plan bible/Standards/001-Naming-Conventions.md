@@ -21,7 +21,7 @@ This standard defines naming conventions for all AIOS code, files, APIs, events,
 
 ### Bible Documents
 ```
-NNN-<Kebab-Case-Name>.md
+NNN-<kebab-case-name>.md
 ```
 - 3-digit zero-padded sequence number prefix
 - Kebab-case descriptive name
@@ -29,7 +29,7 @@ NNN-<Kebab-Case-Name>.md
 
 ### Service Documents
 ```
-NNN-<Abbreviation>.md
+NNN-<uppercase-abbreviation>.md
 ```
 - 3-digit sequence number
 - Service abbreviation in uppercase
@@ -37,7 +37,7 @@ NNN-<Abbreviation>.md
 
 ### Standards, Reference, SDK
 ```
-NNN-<Kebab-Case-Name>.md
+NNN-<kebab-case-name>.md
 ```
 - Same pattern as Bible
 - Example: `000-Design-Language.md`, `001-Audit-SDK.md`
