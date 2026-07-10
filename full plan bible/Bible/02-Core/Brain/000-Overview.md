@@ -113,8 +113,8 @@ User Input
 │  ├── Consult memory (Memory OS)             │
 │  ├── Decide action (Decision System)        │
 │  ├── Create mission (delegate to Institution OS)  │
-│  └── Delegate to worker via Institution OS   │
-│  └── Compose final response                │
+│  ├── Delegate to worker via Institution OS   │
+│  └── Compose final response                  │
 └─────────────────────────────────────────────┘
     │
     ▼
