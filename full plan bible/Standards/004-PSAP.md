@@ -121,12 +121,29 @@ Services declare their preferred strategy at registration. Default is `round-rob
 
 | Code | Description |
 |------|-------------|
-| PSAP-001 | Service not found |
-| PSAP-002 | No healthy instances available |
-| PSAP-003 | Instance not found |
-| PSAP-004 | Registration authentication failed |
-| PSAP-005 | Duplicate registration |
-| PSAP-006 | Heartbeat threshold exceeded |
+| PSAP_001 | Service not found |
+| PSAP_002 | No healthy instances available |
+| PSAP_003 | Instance not found |
+| PSAP_004 | Registration authentication failed |
+| PSAP_005 | Duplicate registration |
+| PSAP_006 | Heartbeat threshold exceeded |
+
+## Cross-Cutting Concerns
+
+### Security
+Service registration requires authentication. Impersonating a service or registering under a false name is a security violation. Deregistration is verified to prevent rogue instance removal.
+
+### Evidence
+Every registration, deregistration, and health state change produces an Event. PSAP events are part of the system evidence chain.
+
+### Lifecycle
+Services follow: Registered → Active ↔ Degraded → Unhealthy → Deregistered. Lifecycle managed by PSAP with heartbeat monitoring.
+
+### Capability Bounds
+Services declare their capabilities at registration. PSAP enforces capability-based routing — services only receive requests for declared capabilities.
+
+### Interoperability
+PSAP is the universal addressing layer. All services must register. No service may communicate outside PSAP resolution. Cross-instance PSAP is handled through Federation.
 
 ## Related Documents
 
