@@ -209,11 +209,16 @@ Controls what memory LLMOS injects into the context:
 | `LLMOS.MemoryInjected` | Memory Injection | request_id, memory_sources, total_memory_tokens, sources_count |
 | `LLMOS.PromptCompiled` | Prompt Compiler | request_id, template_used, compiled_length_tokens, compile_duration_us |
 | `LLMOS.GuardrailChecked` | Guardrails | request_id, direction(input/output), rules_evaluated, blocked, matched_rules |
-| `LLMOS.ProviderCalled` | Retry Engine | request_id, provider, model, attempt, is_fallback, latency_ms |
+| `LLMOS.ProviderCalled` | Retry Engine | request_id, provider, model, attempt, is_fallback, latency_ms, tokens_consumed |
 | `LLMOS.ProviderRetry` | Retry Engine | request_id, attempt, error, backoff_ms, fallback_activated |
+| `LLMOS.CircuitBreakerOpened` | Retry Engine | model_id, provider, failure_count, opened_at |
+| `LLMOS.CircuitBreakerClosed` | Retry Engine | model_id, provider, recovery_success_count, closed_at |
 | `LLMOS.StreamChunk` | Streaming Manager | request_id, sequence, cumulative_tokens, streaming_latency_ms |
+| `LLMOS.StreamCompleted` | Streaming Manager | request_id, total_chunks, total_tokens, time_to_first_token_ms, tokens_per_second |
+| `LLMOS.StreamError` | Streaming Manager | request_id, sequence_at_error, error_code, was_resumed |
 | `LLMOS.ResponseValidated` | Response Validator | request_id, schema_name, valid, errors |
-| `LLMOS.CacheStored` | Cache | request_id, cache_key, ttl, storage_size_bytes |
+| `LLMOS.ResponseValidationFailed` | Response Validator | request_id, validation_types, errors, retry_strategy |
+| `LLMOS.ResponseValidationRetry` | Response Validator | request_id, retry_number, strategy, adjusted_parameters |
 | `LLMOS.RequestCompleted` | Pipeline | request_id, total_duration_ms, total_cost, total_tokens, cache_hit |
 | `LLMOS.RequestFailed` | Pipeline | request_id, stage, error_code, error_message, recovery_attempted |
 
