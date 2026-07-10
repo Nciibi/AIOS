@@ -28,7 +28,7 @@ Sou learns from four categories of evidence:
 | Mission Outcomes | Mission completion events, milestone achievements, failure Events | LMS, Workers |
 | Decision Outcomes | Decision approval/rejection, implementation results | DGP, Security Council |
 | Entity Performance | Capability usage, error rates, compliance history | Workers, Security Council |
-| Academy Knowledge | Published knowledge artifacts, pattern extractions | Academy (Core/002-KMS.md) |
+| Academy Knowledge | Published knowledge artifacts, pattern extractions | Academy (Bible/02-Core/Academy/002-KMS.md) |
 
 ```
 Evidence Sources

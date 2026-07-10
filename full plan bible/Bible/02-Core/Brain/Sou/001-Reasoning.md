@@ -17,7 +17,7 @@
 
 Sou reasons about situations, goals, and strategies by delegating to the **Cognitive OS** — a Brain service that implements reasoning, reflection, and metacognition. Sou frames the problem, Cognitive OS executes the reasoning methods, and Sou evaluates the output.
 
-Reasoning does not execute — it proposes. All reasoning outputs are routed through DGP (Governance/002-DGP.md) for approval and routing.
+Reasoning does not execute — it proposes. All reasoning outputs are routed through DGP (Bible/01-Governance/002-DGP.md) for approval and routing.
 
 In the new paradigm, reasoning is a **capability** Sou exercises through Cognitive OS, not a module Sou implements internally. This separation keeps Sou focused on identity, goals, and decisions while Cognitive OS provides the reasoning infrastructure.
 
@@ -100,7 +100,7 @@ All reasoning produces structured outputs:
 
 | Output | Description | Routed To |
 |--------|-------------|-----------|
-| Decision Proposal | A strategic decision with evidence chain, constitutional analysis, and confidence score | DGP (Governance/002-DGP.md) |
+| Decision Proposal | A strategic decision with evidence chain, constitutional analysis, and confidence score | DGP (Bible/01-Governance/002-DGP.md) |
 | Mission Proposal | A proposed mission with goal, milestones, resource estimates, and constitutional check | DGP → OSYS |
 | Strategic Recommendation | Advisory output for existing missions or organizations | Sou Knowledge store, ACF to OSYS |
 | Analysis Report | Situation analysis, option evaluation, risk assessment | Sou Knowledge store |
@@ -266,7 +266,7 @@ Reasoning outputs are communicated via ACF. DGP receives decision proposals. Aca
 | Physics/005-Events.md | Evidence — reasoning consumes and produces Events |
 | Physics/007-Capabilities.md | Capability bounds — reasoning constrained by capabilities |
 | Physics/012-Experience.md | Experience — reasoning learns from past outcomes |
-| Bible/01-Governance/002-DGP.md | DGP — reasoning proposals are routed through DGP |
+| Bible/01-Bible/01-Governance/002-DGP.md | DGP — reasoning proposals are routed through DGP |
 | Bible/02-Core/Brain/Sou/000-Overview.md | Sou overview — reasoning is a capability of the executive intelligence |
 | Bible/02-Core/Brain/Sou/002-Planner.md | Planner — reasoning feeds planning |
 | Bible/02-Core/Brain/Sou/004-Learning.md | Learning — reasoning improves from learning |
