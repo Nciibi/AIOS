@@ -196,6 +196,7 @@ Brain service specifications have been created across three phases:
 | Bible/02-Core/Brain/Memory/000-Overview.md | Memory OS — persistent memory, working memory, vector store |
 | Bible/02-Core/Brain/Voice/000-Overview.md | Voice System — speech-to-text and text-to-speech |
 | Bible/02-Core/Brain/Vision/000-Overview.md | Vision System — image and video processing |
+| Bible/02-Core/Brain/Autonomy/000-Overview.md | Autonomy System — L0-L4 autonomy levels, progression, escalation |
 | Bible/02-Core/Academy/000-Overview.md | Academy — learning infrastructure (outside Brain) |
 | Bible/04-Execution/Security/000-Overview.md | Security Council — verification infrastructure |
 | Bible/03-Institutions/000-Overview.md | Institutions — execution infrastructure |
