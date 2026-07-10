@@ -70,7 +70,7 @@ Stage N: Abbreviation │ Description
 ## Vocabulary Standard
 
 ### Acronyms
-- Define every acronym on first use in each document: `EAS (Evidence Audit Service)`
+- Define every acronym on first use in each document: `IDS (Identity Service)`
 - Use the canonical acronym consistently across all docs
 - Maintain a registry of all acronyms in Bible/09-Reference/001-Glossary.md
 
