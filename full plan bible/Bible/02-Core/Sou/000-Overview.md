@@ -1,16 +1,18 @@
-# AIOS Bible — Core
+# AIOS Bible — Core (DEPRECATED)
 ## Sou 000 — Overview (The Will Engine)
+
+> **DEPRECATED:** This file is preserved for reference only. The new Sou specification has been rewritten as executive intelligence at `Bible/02-Core/Brain/Sou/000-Overview.md`. See `Bible/0010-Brain-Restructuring-Plan.md` for context.
 
 | Property | Value |
 |----------|-------|
-| Status | Active |
-| Version | 1.0 |
+| Status | Deprecated — see Brain/Sou/ |
+| Version | 1.0 (last) |
 | Category | Bible — Core |
 | Document ID | AIOS-BBL-002-SOU-000 |
 | Source Laws | Law 2 — Law of Non-Execution, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/006-Lifecycles.md, Physics/012-Experience.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
-| Superseded By | Nothing |
+| Superseded By | Bible/02-Core/Brain/Sou/000-Overview.md v2.0 |
 | Amended By | RFC |
 
 ## Purpose
