@@ -270,6 +270,15 @@ All inter-entity communication flows through ACF. Cross-instance communication u
 | Bible/01-Governance/002-DGP.md | Decision Gateway Process |
 | Bible/04-Execution/Security/000-Overview.md | Security architecture overview |
 | Bible/04-Execution/Security/001-Architecture.md | Security Council architecture |
+| Bible/04-Execution/Runtime/000-Overview.md | Runtime execution layer |
+| Bible/03-Institutions/Organizations/000-Overview.md | Organizational hierarchy |
+| Bible/03-Institutions/Workers/000-Overview.md | Worker sessions |
+| Bible/02-Core/Sou/000-Overview.md | Strategic branch — Sou |
+| Bible/02-Core/OSYS/000-Overview.md | Executive branch — OSYS |
+| Bible/02-Core/Academy/000-Overview.md | Judicial branch — Academy |
+| Bible/06-Services/ACF/000-Overview.md | Communication fabric |
+| Bible/05-Platform/LMS/000-LMS.md | State machine lifecycle framework |
+| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | SDK interface for providers |
 | Physics/000-Laws.md | The 10 Universal Laws |
 | Physics/011-Design-DNA.md | Design DNA physics |
 | 000-Architecture-Decision-Log.md | ADR log — key architectural decisions |
