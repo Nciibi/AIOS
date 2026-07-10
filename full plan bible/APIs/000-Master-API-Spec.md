@@ -10,8 +10,9 @@
 
 1. [Platform Services](#1-platform-services)
 2. [Core Engines](#2-core-engines)
-3. [Security Council](#3-security-council)
-4. [Institutions](#4-institutions)
+3. [Brain](#3-brain)
+4. [Security Council](#4-security-council)
+5. [Institutions](#5-institutions)
 5. [Runtime](#5-runtime)
 6. [Domains](#6-domains)
 7. [Federation](#7-federation)
