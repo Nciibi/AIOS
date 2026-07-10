@@ -292,7 +292,7 @@ Simulation executes in virtual time through actions
                         Error returned to caller
         │
         ▼
-Sandbox destroyed; no live state affected
+Sandbox destroyed (both paths); no live state affected
 ```
 
 ## Events
