@@ -101,7 +101,6 @@ interface CacheResponse {
 ```typescript
 async function lookupCache(
   request: InferenceRequest,
-  compiledPrompt: CompiledPrompt,
   model: ModelEntry
 ): Promise<CacheLookupResult>
 
