@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Core/Agents |
 | Document ID | AIOS-BBL-002-AGX-000 |
-| Source Laws | Law 6 — Lifecycle Compliance, Law 7 — Capability Bounds, Law 10 — Tenure |
+| Source Laws | Law 6 — Law of Lifecycle Compliance, Law 7 — Law of Capability Bounds, Law 10 — Law of Tenure |
 | Source Physics | Physics/007-Capabilities.md, Physics/006-Lifecycles.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |

@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Execution/Workflow |
 | Document ID | AIOS-BBL-004-WFE-000 |
-| Source Laws | Law 8 — Verification-First, Law 6 — Lifecycle Compliance, Law 4 — Evidence |
+| Source Laws | Law 8 — Law of Verification-First, Law 6 — Law of Lifecycle Compliance, Law 4 — Law of Evidence |
 | Source Physics | Physics/010-Execution.md, Physics/006-Lifecycles.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |

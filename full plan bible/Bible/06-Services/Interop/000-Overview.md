@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Services/Interop |
 | Document ID | AIOS-BBL-006-IOP-000 |
-| Source Laws | Law 3 — Communication, Law 5 — Identity, Law 4 — Evidence |
+| Source Laws | Law 3 — Law of Communication, Law 5 — Law of Identity, Law 4 — Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/008-Security.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
