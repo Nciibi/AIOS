@@ -209,6 +209,7 @@ interface CompressionStrategy {
 | Brain/LLMOS/004-Context-Builder.md | Consumes context window for LLMOS prompt assembly |
 | Brain/Memory/ | Persists context data (stateless design) |
 | Brain/Decision/000-Overview.md | Decision System consumes context for trade-off analysis |
+| Brain/Tools/000-Overview.md | Tool results are pushed into the context window |
 
 ## Error Cases
 
