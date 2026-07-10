@@ -1,12 +1,12 @@
-# AIOS Bible — Execution/LLMOS
+# AIOS Bible — Brain/LLMOS
 ## 005 — Memory Injection
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
 | Version | 1.0 |
-| Category | Bible — Execution/LLMOS |
-| Document ID | AIOS-BBL-004-LLM-005 |
+| Category | Bible — Brain/LLMOS |
+| Document ID | AIOS-BBL-002-LLM-005 |
 | Source Laws | Law 3 — Law of Communication (conversation memory) |
 | Pipeline Stage | 9 — Memory Injection |
 
@@ -16,7 +16,7 @@ Memory Injection retrieves relevant memories from the Memory OS and inserts them
 
 ## Memory Sources
 
-The Memory OS (Bible/03-OS/Memory) manages four types of memory:
+The Memory OS (Bible/02-Core/Brain/Memory/) manages four types of memory:
 
 | Source | Type | Description | Retrieval Method |
 |--------|------|-------------|------------------|
@@ -154,7 +154,7 @@ interface MemoryOperation {
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/03-OS/Memory/* | Memory OS provides the storage and retrieval APIs consumed by this component |
+| Bible/02-Core/Brain/Memory/ | Memory OS provides the storage and retrieval APIs consumed by this component |
 | LLMOS/004-Context-Builder.md | Defines the token budget that constrains memory injection |
 | LLMOS/003-Prompt-Compiler.md | Consumes the injected memory blocks for prompt assembly |
 | Bible/05-Platform/ROS/000-Overview.md | Memory retrieval is tracked as a ROS resource usage |
