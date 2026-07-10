@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Execution/Simulation |
 | Document ID | AIOS-BBL-004-SIM-000 |
-| Source Laws | Law 8 — Verification-First, Law 4 — Evidence, Law 9 — Deterministic |
+| Source Laws | Law 8 — Verification-First, Law 4 — Evidence, Law 6 — Lifecycle Compliance |
 | Source Physics | Physics/010-Execution.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -57,19 +57,7 @@ SIM is not a testing framework. It is a constitutional verification mechanism un
 
 A scenario is a complete description of a "what if" question: initial state, parameters, actions to simulate, simulation domain, duration, and success criteria. Scenarios are expressed as typed, versioned definitions that can be stored, shared, and replayed.
 
-```typescript
-interface Scenario {
-  scenarioId: string;
-  name: string;
-  domain: SimulationDomain;
-  initialState: SimulationState;
-  actions: SimulatedAction[];
-  parameters: Record<string, unknown>;
-  duration: Duration;
-  successCriteria: Criterion[];
-  version: number;
-}
-```
+See [Data Model](#data-model) for the full `Scenario` type definition including multi-domain support and evidence references.
 
 ### 2. Simulation Domains
 
@@ -115,7 +103,7 @@ Every simulation run produces an evidence record stored in EVS: scenario ID, dom
 
 ### 8. Replay
 
-Simulations can be replayed with the same parameters to verify reproducibility (Law 9 — Deterministic). The Replay Engine loads the original scenario, re-runs it, and compares results. Discrepancies indicate either a non-deterministic component (bug) or a change in system behavior that invalidates the original simulation.
+Simulations can be replayed with the same parameters to verify reproducibility. The Replay Engine loads the original scenario, re-runs it, and compares results. Discrepancies indicate either a non-deterministic component (bug) or a change in system behavior that invalidates the original simulation. Replay also validates Law 6 (Lifecycle Compliance) — a completed simulation is in a terminal state and its sandbox cannot be re-entered; replay creates a fresh sandbox.
 
 ### 9. Hypothesis Testing
 
