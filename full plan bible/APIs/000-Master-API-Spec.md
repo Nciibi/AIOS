@@ -357,9 +357,11 @@
 
 ---
 
-### 2.5 Sou — Reasoning Engine
+## 3. Brain
 
-**Source:** `Bible/02-Core/Sou/001-Reasoning.md`, `Bible/02-Core/Sou/000-Overview.md`
+### 3.1 Sou — Executive Intelligence
+
+**Source:** `Bible/02-Core/Brain/Sou/000-Overview.md`
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
@@ -373,6 +375,114 @@
 | 159 | `Sou.ReasoningFailed` | Reasoning encountered an error |
 
 ---
+
+### 3.2 LLMOS — AI Inference Pipeline
+
+**Source:** `Bible/02-Core/Brain/LLMOS/`
+
+#### RPC Methods (via ACF — `acf://llmos/inference`)
+
+| # | Method | Auth | Description |
+|---|--------|------|-------------|
+| 537 | `inference(request)` | Execution token | Full pipeline inference — non-streaming |
+| 538 | `inferenceStream(request)` | Execution token | Full pipeline inference — streaming |
+| 539 | `embed(inputs, model)` | Execution token | Generate embeddings |
+| 540 | `countTokens(content, model)` | Execution token | Count tokens for content on specific model |
+| 541 | `getModelStatus()` | ACF-level | Get status of all registered models |
+
+#### Pipeline Events (Gateway)
+
+| # | Event | Source | Description |
+|---|-------|--------|-------------|
+| 542 | `LLMOS.RequestReceived` | 000-Overview.md | Request entered pipeline |
+| 543 | `LLMOS.SecurityChecked` | 000-Overview.md | Security Council verification passed |
+| 544 | `LLMOS.RateChecked` | 000-Overview.md | Rate limit check passed |
+| 545 | `LLMOS.BudgetChecked` | 006-Token-Budget-Manager.md | Token budget verified |
+| 546 | `LLMOS.BudgetReconciled` | 006-Token-Budget-Manager.md | Budget reconciled after request |
+| 547 | `LLMOS.RequestCompleted` | 000-Overview.md | Pipeline completed successfully |
+| 548 | `LLMOS.RequestFailed` | 000-Overview.md | Pipeline failed |
+
+#### Pipeline Events (Pre-Processing)
+
+| # | Event | Source | Description |
+|---|-------|--------|-------------|
+| 549 | `LLMOS.ModelsResolved` | 001-Model-Registry.md | Model candidates matched requirements |
+| 550 | `LLMOS.ModelSelected` | 002-Router.md | Router selected optimal model |
+| 551 | `LLMOS.ModelRegistered` | 001-Model-Registry.md | New model registered |
+| 552 | `LLMOS.ModelDeregistered` | 001-Model-Registry.md | Model deregistered |
+| 553 | `LLMOS.ModelUpdated` | 001-Model-Registry.md | Model health/metrics updated |
+| 554 | `LLMOS.ProviderRegistered` | 013-Provider-SDK.md | Provider initialized |
+| 555 | `LLMOS.ProviderDeregistered` | 013-Provider-SDK.md | Provider shut down |
+| 556 | `LLMOS.ProviderHealthChanged` | 001-Model-Registry.md | Provider health transitioned |
+| 557 | `LLMOS.CostOptimized` | 007-Cost-Optimizer.md | Cost estimation and optimization complete |
+| 558 | `LLMOS.CacheHit` | 011-Cache.md | Cache lookup hit |
+| 559 | `LLMOS.CacheMiss` | 011-Cache.md | Cache lookup miss |
+| 560 | `LLMOS.CacheStored` | 011-Cache.md | Response cached |
+| 561 | `LLMOS.CacheEvicted` | 011-Cache.md | Cache entry evicted |
+| 562 | `LLMOS.ContextBuilt` | 004-Context-Builder.md | Context window assembled |
+| 563 | `LLMOS.MemoryInjected` | 005-Memory-Injection.md | Memories injected into context |
+| 564 | `LLMOS.PromptCompiled` | 003-Prompt-Compiler.md | Prompt compiled from template |
+| 565 | `LLMOS.GuardrailChecked` | 010-Guardrails.md | Guardrail evaluation (input or output) |
+
+#### Pipeline Events (Execution)
+
+| # | Event | Source | Description |
+|---|-------|--------|-------------|
+| 566 | `LLMOS.ProviderCalled` | 009-Retry-Engine.md | Provider API call made |
+| 567 | `LLMOS.ProviderRetry` | 009-Retry-Engine.md | Retry triggered on provider error |
+| 568 | `LLMOS.CircuitBreakerOpened` | 009-Retry-Engine.md | Circuit breaker opened for model |
+| 569 | `LLMOS.CircuitBreakerClosed` | 009-Retry-Engine.md | Circuit breaker closed for model |
+| 570 | `LLMOS.StreamChunk` | 008-Streaming-Manager.md | Stream chunk emitted |
+| 571 | `LLMOS.StreamCompleted` | 008-Streaming-Manager.md | Stream terminated |
+| 572 | `LLMOS.StreamError` | 008-Streaming-Manager.md | Mid-stream error occurred |
+
+#### Pipeline Events (Post-Processing)
+
+| # | Event | Source | Description |
+|---|-------|--------|-------------|
+| 573 | `LLMOS.ResponseValidated` | 012-Response-Validator.md | Response passed validation |
+| 574 | `LLMOS.ResponseValidationFailed` | 012-Response-Validator.md | Response failed validation |
+| 575 | `LLMOS.ResponseValidationRetry` | 012-Response-Validator.md | Validation retry triggered |
+
+#### Model Provider Interfaces (SDK)
+
+| # | Type | Name | Source | Description |
+|---|------|------|--------|-------------|
+| 576 | Interface | `ModelProvider` | 013-Provider-SDK.md | Interface for AI model providers |
+| 577 | Method | `initialize(config)` | 013-Provider-SDK.md | Initialize provider with config |
+| 578 | Method | `healthCheck()` | 013-Provider-SDK.md | Report provider health |
+| 579 | Method | `shutdown()` | 013-Provider-SDK.md | Graceful shutdown |
+| 580 | Method | `listModels()` | 013-Provider-SDK.md | List available models |
+| 581 | Method | `execute(request)` | 013-Provider-SDK.md | Execute model inference |
+| 582 | Method | `executeStream(request)` | 013-Provider-SDK.md | Execute streaming inference |
+| 583 | Method | `embed(inputs, model)` | 013-Provider-SDK.md | Generate embeddings |
+| 584 | Method | `countTokens(content, model)` | 013-Provider-SDK.md | Count tokens for content |
+
+#### Schemas
+
+| # | Schema | Source | Description |
+|---|--------|--------|-------------|
+| 585 | `InferenceRequest` | 000-Overview.md | Full LLMOS request envelope |
+| 586 | `InferenceResponse` | 000-Overview.md | Full LLMOS response envelope |
+| 587 | `LLMOSChunk` | 008-Streaming-Manager.md | Streaming chunk schema |
+| 588 | `ModelRequirements` | 000-Overview.md | Model selection constraints |
+| 589 | `MemoryConfig` | 000-Overview.md | Memory retrieval configuration |
+| 590 | `CachePolicy` | 011-Cache.md | Cache read/write behavior |
+| 591 | `ModelEntry` | 001-Model-Registry.md | Registered model record |
+| 592 | `CompiledPrompt` | 003-Prompt-Compiler.md | Compiled prompt structure |
+| 593 | `ContextPayload` | 004-Context-Builder.md | Context window payload |
+| 594 | `RetryConfig` | 009-Retry-Engine.md | Retry and fallback configuration |
+| 595 | `GuardrailRule` | 010-Guardrails.md | Guardrail rule definition |
+| 596 | `ProviderRequest` | 013-Provider-SDK.md | Provider-level request format |
+| 597 | `ProviderResponse` | 013-Provider-SDK.md | Provider-level response format |
+| 598 | `ProviderError` | 013-Provider-SDK.md | Provider error structure |
+| 599 | `EntityTokenBudget` | 006-Token-Budget-Manager.md | Entity token budget structure |
+| 600 | `CostEstimate` | 007-Cost-Optimizer.md | Cost estimation structure |
+| 601 | `PromptTemplate` | 003-Prompt-Compiler.md | Prompt template definition |
+
+---
+
+### 3.3 DTS — Decision & Trust Scoring
 
 ### 2.6 DTS — Decision & Trust Scoring
 
@@ -398,9 +508,9 @@
 
 ---
 
-## 3. Security Council
+## 4. Security Council
 
-### 3.1 ACF — Anticipatory Communication Fabric
+### 8.1 ACF — Anticipatory Communication Fabric
 
 **Source:** `Bible/06-Services/ACF/`
 
@@ -574,7 +684,7 @@
 
 ---
 
-### 3.2 AZS — Authorization Services
+### 8.2 AZS — Authorization Services
 
 **Source:** `Bible/04-Execution/Security/AZS/`
 
@@ -613,7 +723,7 @@
 
 ---
 
-### 3.3 SSM — Session & Secret Management
+### 8.3 SSM — Session & Secret Management
 
 **Source:** `Bible/04-Execution/Security/SSM/000-SSM.md`
 
@@ -642,7 +752,7 @@
 
 ---
 
-### 3.4 EAS — Evidence & Audit Service
+### 8.4 EAS — Evidence & Audit Service
 
 **Source:** `Bible/04-Execution/Security/Audit/000-EAS.md`
 
@@ -666,7 +776,7 @@
 
 ---
 
-### 3.5 CSP — Cryptography Service Provider
+### 8.5 CSP — Cryptography Service Provider
 
 **Source:** `Bible/04-Execution/Security/Crypto/000-CSP.md`, `Bible/06-Services/Cryptography/000-CSP.md`
 
@@ -695,7 +805,7 @@
 
 ---
 
-### 3.6 TLM — Trust Level Manager
+### 8.6 TLM — Trust Level Manager
 
 **Source:** `Bible/04-Execution/Security/Trust/000-TLM.md`
 
@@ -705,7 +815,7 @@
 
 ---
 
-### 3.7 Policy System
+### 8.7 Policy System
 
 **Source:** `Bible/04-Execution/Security/Policy-System/`
 
@@ -716,7 +826,7 @@
 
 ---
 
-### 3.8 Risk Engine
+### 8.8 Risk Engine
 
 **Source:** `Bible/04-Execution/Security/Risk/`
 
@@ -727,7 +837,7 @@
 
 ---
 
-### 3.9 Execution Auth Pipeline
+### 8.9 Execution Auth Pipeline
 
 **Source:** `Bible/04-Execution/Security/Execution-Auth/000-EAS.md`
 
@@ -737,7 +847,7 @@
 
 ---
 
-### 3.10 Sandbox / Isolation
+### 4.10 Sandbox / Isolation
 
 **Source:** `Bible/04-Execution/Security/Sandbox/000-Isolation.md`
 
@@ -747,7 +857,7 @@
 
 ---
 
-### 3.11 IDS — Identity Provenance
+### 4.11 IDS — Identity Provenance
 
 **Source:** `Bible/04-Execution/Security/IDS/005-Provenance.md`
 
@@ -757,9 +867,9 @@
 
 ---
 
-## 4. Institutions
+## 5. Institutions
 
-### 4.1 WCS — Worker Communication Service
+### 8.1 WCS — Worker Communication Service
 
 **Source:** `Bible/03-Institutions/Workers/004-WCS.md`
 
@@ -793,7 +903,7 @@
 
 ---
 
-### 4.2 WSS — Worker Security Service
+### 8.2 WSS — Worker Security Service
 
 **Source:** `Bible/03-Institutions/Workers/003-WSS.md`
 
@@ -810,7 +920,7 @@
 
 ---
 
-### 4.3 Playbook Manager
+### 8.3 Playbook Manager
 
 **Source:** `Bible/03-Institutions/Workers/005-Playbook-Manager.md`
 
@@ -834,7 +944,7 @@
 
 ---
 
-### 4.4 OIS — Organization Interaction Service
+### 8.4 OIS — Organization Interaction Service
 
 **Source:** `Bible/03-Institutions/Organizations/006-OIS.md`
 
@@ -860,9 +970,9 @@
 
 ---
 
-## 5. Runtime
+## 6. Runtime
 
-### 5.1 Execution Runtime SDK
+### 8.1 Execution Runtime SDK
 
 **Source:** `Bible/04-Execution/Runtime/001-SDK.md`
 
@@ -902,7 +1012,7 @@
 
 ---
 
-### 5.2 Ollama Integration
+### 8.2 Ollama Integration
 
 **Source:** `Bible/04-Execution/Runtime/004-Ollama.md`
 
@@ -913,7 +1023,7 @@
 
 ---
 
-### 5.3 Runtime SDK (Interface Layer)
+### 8.3 Runtime SDK (Interface Layer)
 
 **Source:** `Bible/08-Interfaces/SDK/000-Runtime-SDK.md`
 
@@ -954,7 +1064,7 @@
 
 ---
 
-### 5.4 Audit SDK
+### 8.4 Audit SDK
 
 **Source:** `Bible/08-Interfaces/SDK/001-Audit-SDK.md`
 
@@ -978,7 +1088,7 @@
 
 ---
 
-### 5.5 LLMOS — LLM Operating System
+### 8.5 LLMOS — LLM Operating System
 
 **Source:** `Bible/04-Execution/LLMOS/`
 
@@ -1084,9 +1194,9 @@
 
 ---
 
-## 6. Domains
+## 7. Domains
 
-### 6.1 Trading
+### 8.1 Trading
 
 **Source:** `Bible/07-Domains/Trading/000-Overview.md`
 
@@ -1104,7 +1214,7 @@
 
 ---
 
-### 6.2 Security Domain
+### 8.2 Security Domain
 
 **Source:** `Bible/07-Domains/Security/000-Overview.md`
 
@@ -1130,9 +1240,9 @@
 
 ---
 
-## 7. Federation
+## 8. Federation
 
-### 7.1 AIP — Agent Interoperability Protocol
+### 8.1 AIP — Agent Interoperability Protocol
 
 **Source:** `Bible/06-Services/Federation/001-AIP.md`
 
@@ -1155,7 +1265,7 @@
 
 ---
 
-### 7.2 SXP — Security Exchange Protocol
+### 8.2 SXP — Security Exchange Protocol
 
 **Source:** `Bible/06-Services/Federation/007-SXP.md`
 
@@ -1179,7 +1289,7 @@
 
 ---
 
-## 8. Governance
+## 9. Governance
 
 | # | Type | Source | Description |
 |---|------|--------|-------------|
@@ -1193,7 +1303,7 @@
 
 ---
 
-## 9. Cross-Cutting
+## 10. Cross-Cutting
 
 | # | Type | Name | Source | Description |
 |---|------|------|--------|-------------|
@@ -1218,7 +1328,7 @@
 
 ---
 
-## 10. Appendix: Schema Index
+## 11. Appendix: Schema Index
 
 Key schemas referenced by API entries:
 
