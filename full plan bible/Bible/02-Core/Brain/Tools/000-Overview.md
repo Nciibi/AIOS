@@ -94,6 +94,12 @@ ParameterProperty {
   }
 }
 
+ReturnSchema {
+  type: string               // "string" | "number" | "boolean" | "array" | "object" | "binary"
+  description: string
+  is_stream: boolean
+}
+
 ToolResult {
   tool_id: string
   invocation_id: string
