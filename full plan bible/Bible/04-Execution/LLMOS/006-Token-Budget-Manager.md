@@ -73,7 +73,7 @@ interface BudgetCheckResult {
 4. Check each window:
    - If `current_usage + estimated_tokens > limit`: deny with `budget_exceeded` for this window
 5. If all windows pass: approve and reserve estimated tokens (optimistic reservation)
-6. Update `current_usage` optimistically — actual count is reconciled at end
+6. Reserve estimated tokens in an in-memory pending ledger (not persisted to ROS) — this prevents concurrent requests from the same entity from over-subscribing within the same process. The persistent ROS record is only updated at reconciliation (Stage 17).
 
 ## Post-Request Reconciliation (Stage 17)
 
