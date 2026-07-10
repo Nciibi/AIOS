@@ -81,16 +81,18 @@ This log records every significant architectural decision made during the design
 
 **Bible Reference**: `Bible/05-Platform/000-LMS.md`
 
-### ADR-005: Identity and Registry Service (IRS) as Single Identity Authority
+### ADR-005: Identity Service (IDS) as Single Identity Authority
 
 | Property | Value |
 |----------|-------|
 | Date | 2026-02-15 |
 | Status | Approved |
 
-**Decision**: IRS is the sole authority for identity issuance, verification, and retirement. Identities are UUID-based, immutable, and never reused.
+**Decision**: IDS is the sole authority for identity issuance, verification, and retirement. Identities are UUID-based, immutable, and never reused.
 
 **Rationale**: A single authority prevents collisions and ensures uniqueness (Law 5). UUIDs provide collision-free generation without coordination.
+
+**Alternatives Considered**: Decentralized identity (rejected — cannot guarantee uniqueness), sequential IDs (rejected — reveals system information).
 
 **Bible Reference**: `Bible/04-Execution/Security/IDS/000-Overview.md`
 
