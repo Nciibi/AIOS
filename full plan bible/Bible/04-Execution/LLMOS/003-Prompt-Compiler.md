@@ -142,6 +142,7 @@ interface ProviderRequest {
   messages: { role: string; content: any }[];
   max_tokens: u64;
   temperature: f64;
+  top_p: f64;
   stop_sequences: string[];
   tools: ToolBlock[] | null;
   tool_choice: ToolChoice | null;
