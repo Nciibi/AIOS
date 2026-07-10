@@ -15,7 +15,9 @@
 
 ## Purpose
 
-The Ollama Provider executes model inference actions against locally hosted models through the Ollama API. It provides access to open-weight models (Llama 3, Mistral, Qwen, DeepSeek, Gemma, Phi) running on local or private infrastructure, enabling air-gapped and low-latency inference within AIOS capability bounds.
+The Ollama Provider implements both the `ExecutionProvider` interface (Runtime SDK) and the `ModelProvider` interface (LLMOS Provider SDK). Under the canonical LLMOS architecture, all AI inference requests route through the LLMOS pipeline (`Bible/04-Execution/LLMOS/`) which handles routing, prompt compilation, context management, memory injection, guardrails, retry, and caching before calling this provider through the `ModelProvider` interface. The `ExecutionProvider` path is deprecated for AI inference and maintained only for backward compatibility during migration.
+
+The provider executes model inference actions against locally hosted models through the Ollama API. It provides access to open-weight models (Llama 3, Mistral, Qwen, DeepSeek, Gemma, Phi) running on local or private infrastructure, enabling air-gapped and low-latency inference within AIOS capability bounds.
 
 ## Capability Declaration
 

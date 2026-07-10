@@ -15,7 +15,9 @@
 
 ## Purpose
 
-The Claude Provider is an Execution Provider that executes model inference actions against Anthropic's Claude API (Claude 3.5 Sonnet, Claude 3 Opus, Claude 3 Haiku). It receives verified execution tokens from the Runtime Manager, calls the Anthropic API within declared capability bounds, streams responses where requested, and produces execution Events.
+The Claude Provider implements both the `ExecutionProvider` interface (Runtime SDK) and the `ModelProvider` interface (LLMOS Provider SDK). Under the canonical LLMOS architecture, all AI inference requests route through the LLMOS pipeline (`Bible/04-Execution/LLMOS/`) which handles routing, prompt compilation, context management, memory injection, guardrails, retry, and caching before calling this provider through the `ModelProvider` interface. The `ExecutionProvider` path is deprecated for AI inference and maintained only for backward compatibility during migration.
+
+The provider executes model inference actions against Anthropic's Claude API (Claude 3.5 Sonnet, Claude 3 Opus, Claude 3 Haiku). It receives verified execution tokens from the Runtime Manager (legacy path) or LLMOS (canonical path), calls the Anthropic API within declared capability bounds, streams responses where requested, and produces execution Events.
 
 ## Capability Declaration
 
