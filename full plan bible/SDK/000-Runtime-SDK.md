@@ -56,6 +56,9 @@ A Worker execution context. Created from a Genome, bounded by a ResourceAllocati
 ### Capability
 An executable action within a session. Must be declared in the session's capability bounds. Verified by the Security Council before execution.
 
+### Execution Token
+A signed authorization from the Security Council allowing a specific capability invocation. The provider must validate this token before executing. No capability runs without a valid token.
+
 ## Usage Guide
 
 ### 1. Implement the Provider
