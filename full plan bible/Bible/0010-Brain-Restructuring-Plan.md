@@ -2,8 +2,7 @@
 
 > **Purpose:** Define the new "Brain" subsystem — a cognitive container that houses Sou (the single executive intelligence) and all cognitive services. This plan restructures the top of the AIOS architecture based on the insight that Sou is not a wrapper around an agent but IS the agent, and every other component is infrastructure that extends Sou's ability to perceive, decide, organize, and execute.
 > **Source:** `sou new idea.md` (ChatGPT conversation 7/10/2026)
-> **Status:** Phase A complete — directory created, Brain overview written, Sou rewritten, LLMOS moved, cross-references updated, numbering fixed, all old `Execution/LLMOS` headers purged, deprecation notices added, `03-OS` refs cleaned
-> **Remaining Issues:** (1) Architecture Diagram LAYER 5 box is missing its opening `┌───` line due to Python surgery — cosmetic only, content correct. (2) API Spec sections 4 (Security Council) and 5 (Institutions) lost their subsection header detail during renumbering (e.g., `### 4.1 IDS`, `### 4.2 ATS` etc. were collapsed to just `## 4. Security Council`) — the conceptual structure is correct, but subsection granularity needs restoration.
+> **Status:** Phase A complete — all known issues fixed, numbering clean, Security Council subsection headers restored
 
 ---
 
