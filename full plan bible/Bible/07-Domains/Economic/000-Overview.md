@@ -142,6 +142,13 @@ interface CategoryLimit {
   maxPercentage: number;  // percentage of total budget
 }
 
+interface OveragePolicy {
+  strategy: 'deny' | 'warn' | 'allow-with-approval' | 'auto-reallocate';
+  thresholdPercentage: number;  // when overage logic kicks in (e.g., 90%)
+  approverId?: string;  // required if strategy is 'allow-with-approval'
+  escalationTarget?: string;  // Sou or Organization to notify
+}
+
 interface CostReport {
   reportId: string;
   period: { start: Timestamp; end: Timestamp };
@@ -249,8 +256,8 @@ Enforcement Gateway checks budget via checkBudget()
 | `ECN.BudgetFrozen` | budgetId, reason | Budget suspended pending review |
 | `ECN.BudgetClosed` | budgetId, finalReport | Budget period ended, final report generated |
 | `ECN.PriceSheetUpdated` | priceSheetId, effectiveFrom, changes | Resource prices changed |
-| `ECN.overageAllowed` | budgetId, amount | Overage policy triggered |
-| `ECN.overageDenied` | budgetId, amount, consumerId | Spend denied due to insufficient budget |
+| `ECN.OverageAllowed` | budgetId, amount | Overage policy triggered |
+| `ECN.OverageDenied` | budgetId, amount, consumerId | Spend denied due to insufficient budget |
 | `ECN.CostReportGenerated` | reportId, period, totalSpend | Periodic cost report ready |
 
 ## Error Cases
@@ -278,7 +285,7 @@ Enforcement Gateway checks budget via checkBudget()
 | ECN-005 | Unused reserved funds are released when the reservation expires | Algorithmic — reservation TTL triggers automatic release |
 | ECN-006 | Price sheets in the same scope cannot have overlapping effective periods | Algorithmic — validation on PriceSheet creation |
 | ECN-007 | Total spending across all Organizations never exceeds platform-wide resource capacity | Constitutional — enforced by ROS at allocation time |
-| ECN-008 | Overage decisions are always recorded as evidence | Architectural — overageAlways/Denied events emitted |
+| ECN-008 | Overage decisions are always recorded as evidence | Architectural — OverageAllowed/OverageDenied events emitted |
 
 ## Design DNA
 
