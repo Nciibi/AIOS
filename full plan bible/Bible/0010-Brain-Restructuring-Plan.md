@@ -2,7 +2,7 @@
 
 > **Purpose:** Define the new "Brain" subsystem — a cognitive container that houses Sou (the single executive intelligence) and all cognitive services. This plan restructures the top of the AIOS architecture based on the insight that Sou is not a wrapper around an agent but IS the agent, and every other component is infrastructure that extends Sou's ability to perceive, decide, organize, and execute.
 > **Source:** `sou new idea.md` (ChatGPT conversation 7/10/2026)
-> **Status:** Phase A + B + C complete — all 12 Brain services specified (Sou, LLMOS, Context, Decision, Planning, Tools, Attention, Personality, Cognitive OS, Conversation OS, Memory OS), all cross-references fixed, Master API Spec updated
+> **Status:** Phase A + B + C + D complete — all 14 Brain services specified (Sou, LLMOS, Context, Decision, Planning, Tools, Attention, Personality, Cognitive OS, Conversation OS, Memory OS, Voice, Vision), all cross-references fixed, Master API Spec updated
 
 ---
 
@@ -260,9 +260,12 @@ SOU-007: All cognitive services live inside the Brain.
 6. ✅ Updated Brain overview services table (5 services → Active)
 7. ✅ Updated Forward References to reflect Phase C completion
 
-### Phase D: Sensory Systems (P2) — PENDING
-1. Create `Bible/02-Core/Brain/Voice/000-Overview.md` — Voice System
-2. Create `Bible/02-Core/Brain/Vision/000-Overview.md` — Vision System
+### Phase D: Sensory Systems (P2) ✅ COMPLETE
+1. ✅ Created `Bible/02-Core/Brain/Voice/000-Overview.md` — Voice System (STT/TTS, voice profiles, streaming)
+2. ✅ Created `Bible/02-Core/Brain/Vision/000-Overview.md` — Vision System (image analysis, OCR, scene description, video processing, document parsing)
+3. ✅ Updated Brain overview services table (2 services → Active)
+4. ✅ Updated Forward References to reflect Phase D completion
+5. ✅ Added 3.14 Voice + 3.15 Vision to Master API Spec
 
 ---
 
