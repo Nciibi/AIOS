@@ -103,7 +103,25 @@ Every Standards document follows:
 2. Metadata table
 3. Purpose section
 4. Body content organized by topic
-5. Related Documents section
+5. Cross-Cutting Concerns section (Security, Evidence, Lifecycle, Capability Bounds, Interoperability)
+6. Related Documents section
+
+## Cross-Cutting Concerns
+
+### Security
+Standards define conventions that affect system security. Naming, addressing, and registration standards must prevent spoofing, injection, and misdirection.
+
+### Evidence
+Standards documents are versioned and amended through RFC. Changes to standards produce Events tracked in the evidence chain.
+
+### Lifecycle
+Standards follow the governance lifecycle defined in Bible/01-Governance. Standards may be Deprecated or Superseded as the system evolves.
+
+### Capability Bounds
+Standards define the boundaries of what is allowed. Deviations require RFC approval.
+
+### Interoperability
+Standards exist to ensure interoperability. Every standard must consider backward compatibility and migration paths.
 
 ## Related Documents
 
