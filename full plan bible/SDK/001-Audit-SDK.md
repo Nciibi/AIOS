@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | SDK |
 | Document ID | SDK-AUDIT-001 |
-| Source Laws | Law 4 — Evidence, Law 8 — Verification-First |
+| Source Laws | Law 3 — Communication, Law 4 — Evidence, Law 8 — Verification-First |
 | Source Physics | Physics/005-Events.md, Physics/008-Security.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
