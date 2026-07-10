@@ -117,6 +117,8 @@ interface WorkflowDef {
   steps: WorkflowStep[];
   edges: DependencyEdge[];
   checkpointConfig: CheckpointConfig;
+  createdAt: Timestamp;
+  evidenceRef: string;
 }
 
 interface WorkflowStep {
@@ -135,14 +137,14 @@ interface WorkflowState {
   completedSteps: string[];
   failedSteps: string[];
   stepResults: Record<string, StepResult>;
-  checkpointRefs: string[];
+  previousCheckpointIds: string[];  // refs to prior checkpoints (historical, never self-referencing)
   error: WorkflowError | null;
 }
 
 interface Checkpoint {
   checkpointId: string;
   workflowId: string;
-  state: WorkflowState;
+  stateSnapshot: WorkflowState;  // frozen state at checkpoint time; checkpoint is appended to previousCheckpointIds
   timestamp: Timestamp;
   evidenceRef: string;
 }
