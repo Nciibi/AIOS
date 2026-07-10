@@ -35,18 +35,17 @@ The RFC (Request for Comments) process is how changes to AIOS are proposed, revi
 
 ### Step 1: Draft Your RFC
 
-1. Copy `Templates/RFC-template.md` to a new file: `RFC-NNNN-Short-Name.md`
-2. Replace the next available RFC number (start from `0001`)
-3. Fill in all sections — Problem Statement, Proposed Solution, Impact Analysis, Evidence, Constitutional Review, Design DNA Compliance, Migration Plan
-4. File goes in the `RFC/` directory (create a subdirectory like `0001-Short-Name/`)
+1. Create an RFC directory: `RFC/NNNN-Short-Name/` (e.g., `RFC/0001-ACF-Topic-Naming/`)
+2. Copy `Templates/RFC-template.md` into that directory as `RFC-NNNN.md`
+3. Replace the next available RFC number (start from `0001`)
+4. Fill in all sections — Problem Statement, Proposed Solution, Impact Analysis, Evidence, Constitutional Review, Design DNA Compliance, Migration Plan
 
 ### Step 2: Submit for Review
 
-1. Create an RFC directory: `RFC/NNNN-Short-Name/`
-2. Place your RFC file inside
-3. Submit through the CRP by tagging the Security Council
-4. Your RFC status changes to **Submitted** — it is now immutable
-5. CRP assigns the RFC to the appropriate review queue
+1. Ensure your RFC directory is `RFC/NNNN-Short-Name/` containing `RFC-NNNN.md`
+2. Submit through the CRP by tagging the Security Council
+3. Your RFC status changes to **Submitted** — it is now immutable
+4. CRP assigns the RFC to the appropriate review queue
 
 ### Step 3: Review
 
