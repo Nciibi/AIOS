@@ -653,25 +653,25 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Stage | Service | Function |
 |---|-------|---------|----------|
-| 234 | 1 â€” Identity | IDS | Verify actor identity exists and is active |
-| 235 | 2 â€” Authentication | ATS | Verify authentication token is valid |
-| 236 | 3 â€” Authorization | AZS | Verify actor is authorized for this action |
-| 237 | 4 â€” Policy | Policy System | Verify action complies with active policies |
-| 238 | 5 â€” Capability | CCA | Verify actor has required capabilities |
-| 239 | 6 â€” Risk | Risk Engine | Evaluate risk level; escalate if above threshold |
-| 240 | 7 â€” Execution Auth | Execution-Auth | Issue execution token; reserve resources via ROS |
+| 302 | 1 â€” Identity | IDS | Verify actor identity exists and is active |
+| 303 | 2 â€” Authentication | ATS | Verify authentication token is valid |
+| 304 | 3 â€” Authorization | AZS | Verify actor is authorized for this action |
+| 305 | 4 â€” Policy | Policy System | Verify action complies with active policies |
+| 306 | 5 â€” Capability | CCA | Verify actor has required capabilities |
+| 307 | 6 â€” Risk | Risk Engine | Evaluate risk level; escalate if above threshold |
+| 308 | 7 â€” Execution Auth | Execution-Auth | Issue execution token; reserve resources via ROS |
 
 #### Pipeline Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 241 | `SC.PipelineStarted` | Action entered verification pipeline |
-| 242 | `SC.StagePassed` | Individual pipeline stage passed |
-| 243 | `SC.StageFailed` | Individual pipeline stage failed |
-| 244 | `SC.PipelineCompleted` | All 7 stages passed, execution token issued |
-| 245 | `SC.PipelineDenied` | Action denied at a pipeline stage |
-| 246 | `SC.ExecutionTokenIssued` | Execution authorization token created |
-| 247 | `SC.ExecutionTokenRevoked` | Execution token revoked before use |
+| 309 | `SC.PipelineStarted` | Action entered verification pipeline |
+| 310 | `SC.StagePassed` | Individual pipeline stage passed |
+| 311 | `SC.StageFailed` | Individual pipeline stage failed |
+| 312 | `SC.PipelineCompleted` | All 7 stages passed, execution token issued |
+| 313 | `SC.PipelineDenied` | Action denied at a pipeline stage |
+| 314 | `SC.ExecutionTokenIssued` | Execution authorization token created |
+| 315 | `SC.ExecutionTokenRevoked` | Execution token revoked before use |
 
 ---
 
@@ -681,21 +681,21 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 248 | Interface | `IdentityFactory` | Security Council | Create new identities |
-| 249 | Interface | `IdentityRegistry` | Security Council | Register, resolve, and manage identity records |
-| 250 | RPC | `createIdentity(entity_type, attributes)` | Security Council | Create a new constitutional identity |
-| 251 | RPC | `resolveIdentity(entity_id)` | ACF-level | Resolve identity to its current attributes |
-| 252 | RPC | `validateIdentity(entity_id)` | ACF-level | Verify identity is active and valid |
-| 253 | RPC | `deprecateIdentity(entity_id, reason)` | Security Council | Deprecate an identity |
+| 316 | Interface | `IdentityFactory` | Security Council | Create new identities |
+| 317 | Interface | `IdentityRegistry` | Security Council | Register, resolve, and manage identity records |
+| 318 | RPC | `createIdentity(entity_type, attributes)` | Security Council | Create a new constitutional identity |
+| 319 | RPC | `resolveIdentity(entity_id)` | ACF-level | Resolve identity to its current attributes |
+| 320 | RPC | `validateIdentity(entity_id)` | ACF-level | Verify identity is active and valid |
+| 321 | RPC | `deprecateIdentity(entity_id, reason)` | Security Council | Deprecate an identity |
 
 #### IDS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 254 | `IDS.IdentityCreated` | New identity registered |
-| 255 | `IDS.IdentityResolved` | Identity resolution completed |
-| 256 | `IDS.IdentityDeprecated` | Identity deprecated |
-| 257 | `IDS.IdentitySuspended` | Identity temporarily suspended |
+| 322 | `IDS.IdentityCreated` | New identity registered |
+| 323 | `IDS.IdentityResolved` | Identity resolution completed |
+| 324 | `IDS.IdentityDeprecated` | Identity deprecated |
+| 325 | `IDS.IdentitySuspended` | Identity temporarily suspended |
 
 ---
 
@@ -705,24 +705,24 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 258 | Interface | `AuthProvider` | Security Council | All authentication methods implement this |
-| 259 | RPC | `authenticate(entity_id, credentials)` | None (pre-auth) | Authenticate entity; return session token |
-| 260 | RPC | `validateToken(token)` | ACF-level | Validate existing authentication token |
-| 261 | RPC | `revokeToken(token)` | Security Council | Revoke an authentication token |
-| 262 | RPC | `requestMFA(entity_id, method)` | ACF-level | Request multi-factor authentication |
-| 263 | RPC | `verifyMFA(entity_id, challenge_response)` | ACF-level | Verify MFA challenge response |
+| 326 | Interface | `AuthProvider` | Security Council | All authentication methods implement this |
+| 327 | RPC | `authenticate(entity_id, credentials)` | None (pre-auth) | Authenticate entity; return session token |
+| 328 | RPC | `validateToken(token)` | ACF-level | Validate existing authentication token |
+| 329 | RPC | `revokeToken(token)` | Security Council | Revoke an authentication token |
+| 330 | RPC | `requestMFA(entity_id, method)` | ACF-level | Request multi-factor authentication |
+| 331 | RPC | `verifyMFA(entity_id, challenge_response)` | ACF-level | Verify MFA challenge response |
 
 #### ATS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 264 | `ATS.Authenticated` | Entity authenticated successfully |
-| 265 | `ATS.AuthenticationFailed` | Authentication attempt failed |
-| 266 | `ATS.MFARequired` | MFA challenge issued |
-| 267 | `ATS.MFAVerified` | MFA challenge passed |
-| 268 | `ATS.TokenIssued` | Authentication token issued |
-| 269 | `ATS.TokenRevoked` | Token revoked |
-| 270 | `ATS.TokenExpired` | Token expired naturally |
+| 332 | `ATS.Authenticated` | Entity authenticated successfully |
+| 333 | `ATS.AuthenticationFailed` | Authentication attempt failed |
+| 334 | `ATS.MFARequired` | MFA challenge issued |
+| 335 | `ATS.MFAVerified` | MFA challenge passed |
+| 336 | `ATS.TokenIssued` | Authentication token issued |
+| 337 | `ATS.TokenRevoked` | Token revoked |
+| 338 | `ATS.TokenExpired` | Token expired naturally |
 
 ---
 
@@ -732,21 +732,21 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 271 | Interface | `AuthorizationProvider` | Security Council | All authorization methods implement this |
-| 272 | RPC | `checkPermission(entity_id, action, resource)` | Pipeline | Check RBAC permission |
-| 273 | RPC | `checkABAC(entity_id, action, resource, context)` | Pipeline | Check attribute-based access control |
-| 274 | RPC | `checkCapability(entity_id, capability_id)` | Pipeline | Check capability-based authorization |
-| 275 | RPC | `assignRole(entity_id, role)` | Security Council | Assign a role to an entity |
-| 276 | RPC | `revokeRole(entity_id, role)` | Security Council | Revoke a role from an entity |
+| 339 | Interface | `AuthorizationProvider` | Security Council | All authorization methods implement this |
+| 340 | RPC | `checkPermission(entity_id, action, resource)` | Pipeline | Check RBAC permission |
+| 341 | RPC | `checkABAC(entity_id, action, resource, context)` | Pipeline | Check attribute-based access control |
+| 342 | RPC | `checkCapability(entity_id, capability_id)` | Pipeline | Check capability-based authorization |
+| 343 | RPC | `assignRole(entity_id, role)` | Security Council | Assign a role to an entity |
+| 344 | RPC | `revokeRole(entity_id, role)` | Security Council | Revoke a role from an entity |
 
 #### AZS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 277 | `AZS.Authorized` | Authorization check passed |
-| 278 | `AZS.Denied` | Authorization check denied |
-| 279 | `AZS.RoleAssigned` | Role assigned to entity |
-| 280 | `AZS.RoleRevoked` | Role revoked from entity |
+| 345 | `AZS.Authorized` | Authorization check passed |
+| 346 | `AZS.Denied` | Authorization check denied |
+| 347 | `AZS.RoleAssigned` | Role assigned to entity |
+| 348 | `AZS.RoleRevoked` | Role revoked from entity |
 
 ---
 
@@ -756,22 +756,22 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 281 | Interface | `PolicyEngine` | Security Council | Policy definition and evaluation engine |
-| 282 | RPC | `createPolicy(policy_def)` | Security Council | Create a new policy |
-| 283 | RPC | `evaluatePolicy(policy_id, context)` | Pipeline | Evaluate action against policy |
-| 284 | RPC | `activatePolicy(policy_id)` | Security Council | Activate a policy |
-| 285 | RPC | `deactivatePolicy(policy_id)` | Security Council | Deactivate a policy |
-| 286 | RPC | `listPolicies(filter?)` | ACF-level | List policies matching filter |
+| 349 | Interface | `PolicyEngine` | Security Council | Policy definition and evaluation engine |
+| 350 | RPC | `createPolicy(policy_def)` | Security Council | Create a new policy |
+| 351 | RPC | `evaluatePolicy(policy_id, context)` | Pipeline | Evaluate action against policy |
+| 352 | RPC | `activatePolicy(policy_id)` | Security Council | Activate a policy |
+| 353 | RPC | `deactivatePolicy(policy_id)` | Security Council | Deactivate a policy |
+| 354 | RPC | `listPolicies(filter?)` | ACF-level | List policies matching filter |
 
 #### Policy Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 287 | `POL.PolicyCreated` | New policy defined |
-| 288 | `POL.PolicyActivated` | Policy activated |
-| 289 | `POL.PolicyDeactivated` | Policy deactivated |
-| 290 | `POL.PolicyEvaluated` | Policy evaluation completed |
-| 291 | `POL.PolicyViolation` | Action violates a policy |
+| 355 | `POL.PolicyCreated` | New policy defined |
+| 356 | `POL.PolicyActivated` | Policy activated |
+| 357 | `POL.PolicyDeactivated` | Policy deactivated |
+| 358 | `POL.PolicyEvaluated` | Policy evaluation completed |
+| 359 | `POL.PolicyViolation` | Action violates a policy |
 
 ---
 
@@ -781,18 +781,18 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 292 | Interface | `RiskScorer` | Security Council | Risk scoring interface |
-| 293 | RPC | `evaluateRisk(entity_id, action, context)` | Pipeline | Compute risk score for action |
-| 294 | RPC | `getRiskProfile(entity_id)` | Security Council | Get entity's current risk profile |
-| 295 | RPC | `escalateRisk(action_id, reason)` | Security Council | Escalate a high-risk action |
+| 360 | Interface | `RiskScorer` | Security Council | Risk scoring interface |
+| 361 | RPC | `evaluateRisk(entity_id, action, context)` | Pipeline | Compute risk score for action |
+| 362 | RPC | `getRiskProfile(entity_id)` | Security Council | Get entity's current risk profile |
+| 363 | RPC | `escalateRisk(action_id, reason)` | Security Council | Escalate a high-risk action |
 
 #### Risk Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 296 | `RSK.RiskScored` | Risk score computed for action |
-| 297 | `RSK.ThresholdExceeded` | Risk score exceeded configured threshold |
-| 298 | `RSK.RiskEscalated` | Action escalated for manual review |
+| 364 | `RSK.RiskScored` | Risk score computed for action |
+| 365 | `RSK.ThresholdExceeded` | Risk score exceeded configured threshold |
+| 366 | `RSK.RiskEscalated` | Action escalated for manual review |
 
 ---
 
@@ -802,19 +802,19 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 299 | Interface | `EvidenceStore` | Security Council | Immutable evidence storage backend |
-| 300 | Interface | `EvidenceQuery` | Security Council | Evidence query interface |
-| 301 | RPC | `sealEvidence(record)` | Pipeline | Seal an evidence record |
-| 302 | RPC | `queryEvidence(query)` | Auditor | Query evidence records |
-| 303 | RPC | `exportEvidence(query, format)` | Auditor | Export evidence for external audit |
+| 367 | Interface | `EvidenceStore` | Security Council | Immutable evidence storage backend |
+| 368 | Interface | `EvidenceQuery` | Security Council | Evidence query interface |
+| 369 | RPC | `sealEvidence(record)` | Pipeline | Seal an evidence record |
+| 370 | RPC | `queryEvidence(query)` | Auditor | Query evidence records |
+| 371 | RPC | `exportEvidence(query, format)` | Auditor | Export evidence for external audit |
 
 #### EAS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 304 | `EAS.EvidenceSealed` | New evidence record sealed |
-| 305 | `EAS.EvidenceQueried` | Evidence query executed |
-| 306 | `EAS.EvidenceExported` | Evidence export completed |
+| 372 | `EAS.EvidenceSealed` | New evidence record sealed |
+| 373 | `EAS.EvidenceQueried` | Evidence query executed |
+| 374 | `EAS.EvidenceExported` | Evidence export completed |
 
 ---
 
@@ -824,23 +824,23 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 307 | Interface | `CryptoProvider` | Security Council | Cryptographic operations interface |
-| 308 | RPC | `generateKey(algorithm, purpose)` | Security Council | Generate cryptographic key pair |
-| 309 | RPC | `sign(entity_id, payload)` | Security Council | Sign payload with entity key |
-| 310 | RPC | `verify(entity_id, payload, signature)` | ACF-level | Verify signature |
-| 311 | RPC | `encrypt(payload, recipient_id)` | ACF-level | Encrypt payload for recipient |
-| 312 | RPC | `decrypt(ciphertext)` | Security Council | Decrypt ciphertext |
-| 313 | RPC | `hash(payload, algorithm)` | ACF-level | Compute cryptographic hash |
+| 375 | Interface | `CryptoProvider` | Security Council | Cryptographic operations interface |
+| 376 | RPC | `generateKey(algorithm, purpose)` | Security Council | Generate cryptographic key pair |
+| 377 | RPC | `sign(entity_id, payload)` | Security Council | Sign payload with entity key |
+| 378 | RPC | `verify(entity_id, payload, signature)` | ACF-level | Verify signature |
+| 379 | RPC | `encrypt(payload, recipient_id)` | ACF-level | Encrypt payload for recipient |
+| 380 | RPC | `decrypt(ciphertext)` | Security Council | Decrypt ciphertext |
+| 381 | RPC | `hash(payload, algorithm)` | ACF-level | Compute cryptographic hash |
 
 #### CSP Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 314 | `CSP.KeyGenerated` | New key pair generated |
-| 315 | `CSP.KeyRotated` | Key rotated |
-| 316 | `CSP.KeyCompromised` | Key reported compromised |
-| 317 | `CSP.SignatureVerified` | Signature verification completed |
-| 318 | `CSP.EncryptionPerformed` | Encryption operation completed |
+| 382 | `CSP.KeyGenerated` | New key pair generated |
+| 383 | `CSP.KeyRotated` | Key rotated |
+| 384 | `CSP.KeyCompromised` | Key reported compromised |
+| 385 | `CSP.SignatureVerified` | Signature verification completed |
+| 386 | `CSP.EncryptionPerformed` | Encryption operation completed |
 
 ---
 
@@ -850,26 +850,26 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 319 | Interface | `SessionManager` | Security Council | Session lifecycle management |
-| 320 | Interface | `SecretStore` | Security Council | Encrypted secret storage |
-| 321 | RPC | `createSession(entity_id, ttl)` | ACF-level | Create new session |
-| 322 | RPC | `validateSession(session_id)` | ACF-level | Validate session is active |
-| 323 | RPC | `terminateSession(session_id)` | Security Council | Terminate a session |
-| 324 | RPC | `storeSecret(name, value, ttl)` | Security Council | Store an encrypted secret |
-| 325 | RPC | `resolveSecret(name)` | Security Council | Resolve a secret (for authorized callers) |
-| 326 | RPC | `rotateSecret(name)` | Security Council | Rotate a secret |
-| 327 | RPC | `revokeSecret(name)` | Security Council | Revoke a secret |
+| 387 | Interface | `SessionManager` | Security Council | Session lifecycle management |
+| 388 | Interface | `SecretStore` | Security Council | Encrypted secret storage |
+| 389 | RPC | `createSession(entity_id, ttl)` | ACF-level | Create new session |
+| 390 | RPC | `validateSession(session_id)` | ACF-level | Validate session is active |
+| 391 | RPC | `terminateSession(session_id)` | Security Council | Terminate a session |
+| 392 | RPC | `storeSecret(name, value, ttl)` | Security Council | Store an encrypted secret |
+| 393 | RPC | `resolveSecret(name)` | Security Council | Resolve a secret (for authorized callers) |
+| 394 | RPC | `rotateSecret(name)` | Security Council | Rotate a secret |
+| 395 | RPC | `revokeSecret(name)` | Security Council | Revoke a secret |
 
 #### SSM Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 328 | `SSM.SessionCreated` | New session created |
-| 329 | `SSM.SessionTerminated` | Session terminated |
-| 330 | `SSM.SessionExpired` | Session TTL exceeded |
-| 331 | `SSM.SecretStored` | Secret encrypted and stored |
-| 332 | `SSM.SecretRotated` | Secret rotated |
-| 333 | `SSM.SecretRevoked` | Secret revoked |
+| 396 | `SSM.SessionCreated` | New session created |
+| 397 | `SSM.SessionTerminated` | Session terminated |
+| 398 | `SSM.SessionExpired` | Session TTL exceeded |
+| 399 | `SSM.SecretStored` | Secret encrypted and stored |
+| 400 | `SSM.SecretRotated` | Secret rotated |
+| 401 | `SSM.SecretRevoked` | Secret revoked |
 
 ---
 
@@ -879,17 +879,17 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 334 | Interface | `SandboxProvider` | Security Council | Execution isolation interface |
-| 335 | RPC | `createSandbox(worker_id, resource_limits)` | Pipeline | Create isolated execution environment |
-| 336 | RPC | `destroySandbox(sandbox_id)` | Security Council | Destroy sandbox environment |
+| 402 | Interface | `SandboxProvider` | Security Council | Execution isolation interface |
+| 403 | RPC | `createSandbox(worker_id, resource_limits)` | Pipeline | Create isolated execution environment |
+| 404 | RPC | `destroySandbox(sandbox_id)` | Security Council | Destroy sandbox environment |
 
 #### Sandbox Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 337 | `SANDBOX.Created` | Sandbox created for worker |
-| 338 | `SANDBOX.Destroyed` | Sandbox destroyed |
-| 339 | `SANDBOX.IsolationViolation` | Isolation boundary violated |
+| 405 | `SANDBOX.Created` | Sandbox created for worker |
+| 406 | `SANDBOX.Destroyed` | Sandbox destroyed |
+| 407 | `SANDBOX.IsolationViolation` | Isolation boundary violated |
 
 ---
 
@@ -901,31 +901,31 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 340 | RPC | `sendMessage(sender_id, target_id, message_type, payload)` | Capability-based | Send message from one Worker to another |
-| 341 | RPC | `broadcastMessage(sender_id, mission_id, message_type, payload)` | Capability-based | Broadcast message to all Workers in mission |
-| 342 | RPC | `publishMessage(sender_id, topic, payload)` | Capability-based | Publish message to topic |
-| 343 | RPC | `sendMessageWithResponse(...)` | Capability-based | Send message and wait for response |
-| 344 | RPC | `receiveMessage(session_id, message_id?)` | Capability-based | Dequeue next message |
-| 345 | RPC | `subscribeTopic(session_id, topic, filter_criteria?)` | Capability-based | Subscribe to a topic |
-| 346 | RPC | `unsubscribeTopic(subscription_id)` | Capability-based | Unsubscribe from a topic |
-| 347 | RPC | `getMessageHistory(session_id, time_range, filters?)` | Capability-based | Query message history |
-| 348 | RPC | `getPendingMessages(session_id)` | Capability-based | List undelivered messages |
-| 349 | Interface | `MessageChannel` | N/A | All communication patterns implement this |
-| 350 | Message | `WorkerMessage` | N/A | message_id, sender_id, target_id, message_type, payload, ttl |
+| 408 | RPC | `sendMessage(sender_id, target_id, message_type, payload)` | Capability-based | Send message from one Worker to another |
+| 409 | RPC | `broadcastMessage(sender_id, mission_id, message_type, payload)` | Capability-based | Broadcast message to all Workers in mission |
+| 410 | RPC | `publishMessage(sender_id, topic, payload)` | Capability-based | Publish message to topic |
+| 411 | RPC | `sendMessageWithResponse(...)` | Capability-based | Send message and wait for response |
+| 412 | RPC | `receiveMessage(session_id, message_id?)` | Capability-based | Dequeue next message |
+| 413 | RPC | `subscribeTopic(session_id, topic, filter_criteria?)` | Capability-based | Subscribe to a topic |
+| 414 | RPC | `unsubscribeTopic(subscription_id)` | Capability-based | Unsubscribe from a topic |
+| 415 | RPC | `getMessageHistory(session_id, time_range, filters?)` | Capability-based | Query message history |
+| 416 | RPC | `getPendingMessages(session_id)` | Capability-based | List undelivered messages |
+| 417 | Interface | `MessageChannel` | N/A | All communication patterns implement this |
+| 418 | Message | `WorkerMessage` | N/A | message_id, sender_id, target_id, message_type, payload, ttl |
 
 #### WCS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 351 | `WCS.MessageSent` | Worker sends a message |
-| 352 | `WCS.MessageDelivered` | Message reaches target |
-| 353 | `WCS.MessageFailed` | Message delivery fails |
-| 354 | `WCS.MessageExpired` | Message TTL exceeded |
-| 355 | `WCS.MessageDropped` | Queue overflow message dropped |
-| 356 | `WCS.MessageAuthorizationDenied` | Cross-scope message denied |
-| 357 | `WCS.SubscriptionCreated` | Worker subscribes to a topic |
-| 358 | `WCS.SubscriptionRemoved` | Worker unsubscribes |
-| 359 | `WCS.BroadcastSent` | Broadcast message transmitted |
+| 419 | `WCS.MessageSent` | Worker sends a message |
+| 420 | `WCS.MessageDelivered` | Message reaches target |
+| 421 | `WCS.MessageFailed` | Message delivery fails |
+| 422 | `WCS.MessageExpired` | Message TTL exceeded |
+| 423 | `WCS.MessageDropped` | Queue overflow message dropped |
+| 424 | `WCS.MessageAuthorizationDenied` | Cross-scope message denied |
+| 425 | `WCS.SubscriptionCreated` | Worker subscribes to a topic |
+| 426 | `WCS.SubscriptionRemoved` | Worker unsubscribes |
+| 427 | `WCS.BroadcastSent` | Broadcast message transmitted |
 
 ---
 
@@ -935,14 +935,14 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Event | Description |
 |---|-------|-------------|
-| 360 | `WSS.IsolationViolation` | Worker violates isolation boundary |
-| 361 | `WSS.BoundaryCrossingAttempt` | Worker attempts cross-boundary access |
-| 362 | `WSS.ResourceExhaustion` | Worker exceeds resource quota |
-| 363 | `WSS.CapabilityViolation` | Worker attempts action outside capability scope |
-| 364 | `WSS.IsolationConfigured` | Worker isolation configuration changed |
-| 365 | `WSS.IsolationValidated` | Isolation layers are verified |
-| 366 | `WSS.BoundaryEnforced` | Enforcement action taken on boundary violation |
-| 367 | `WSS.CommunicationSpoofAttempt` | Worker attempts to spoof another Worker's identity |
+| 428 | `WSS.IsolationViolation` | Worker violates isolation boundary |
+| 429 | `WSS.BoundaryCrossingAttempt` | Worker attempts cross-boundary access |
+| 430 | `WSS.ResourceExhaustion` | Worker exceeds resource quota |
+| 431 | `WSS.CapabilityViolation` | Worker attempts action outside capability scope |
+| 432 | `WSS.IsolationConfigured` | Worker isolation configuration changed |
+| 433 | `WSS.IsolationValidated` | Isolation layers are verified |
+| 434 | `WSS.BoundaryEnforced` | Enforcement action taken on boundary violation |
+| 435 | `WSS.CommunicationSpoofAttempt` | Worker attempts to spoof another Worker's identity |
 
 ---
 
@@ -952,21 +952,21 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Event | Description |
 |---|-------|-------------|
-| 368 | `PLAYBOOK.Created` | New playbook is created |
-| 369 | `PLAYBOOK.Validated` | Playbook passes validation |
-| 370 | `PLAYBOOK.Published` | Playbook is published |
-| 371 | `PLAYBOOK.Deprecated` | Playbook is deprecated |
-| 372 | `PLAYBOOK.Archived` | Playbook is archived |
-| 373 | `PLAYBOOK.ExecutionStarted` | Playbook execution begins |
-| 374 | `PLAYBOOK.ExecutionApproved` | Execution request is approved |
-| 375 | `PLAYBOOK.ExecutionRejected` | Execution request is denied |
-| 376 | `PLAYBOOK.StepCompleted` | Individual step finishes |
-| 377 | `PLAYBOOK.StepFailed` | Step encounters error |
-| 378 | `PLAYBOOK.RollbackInitiated` | Rollback plan begins execution |
-| 379 | `PLAYBOOK.RollbackCompleted` | Rollback finishes |
-| 380 | `PLAYBOOK.ExecutionCompleted` | Playbook execution finishes successfully |
-| 381 | `PLAYBOOK.ExecutionFailed` | Execution fails (unrecoverable) |
-| 382 | `PLAYBOOK.ExecutionCancelled` | Execution is cancelled mid-run |
+| 436 | `PLAYBOOK.Created` | New playbook is created |
+| 437 | `PLAYBOOK.Validated` | Playbook passes validation |
+| 438 | `PLAYBOOK.Published` | Playbook is published |
+| 439 | `PLAYBOOK.Deprecated` | Playbook is deprecated |
+| 440 | `PLAYBOOK.Archived` | Playbook is archived |
+| 441 | `PLAYBOOK.ExecutionStarted` | Playbook execution begins |
+| 442 | `PLAYBOOK.ExecutionApproved` | Execution request is approved |
+| 443 | `PLAYBOOK.ExecutionRejected` | Execution request is denied |
+| 444 | `PLAYBOOK.StepCompleted` | Individual step finishes |
+| 445 | `PLAYBOOK.StepFailed` | Step encounters error |
+| 446 | `PLAYBOOK.RollbackInitiated` | Rollback plan begins execution |
+| 447 | `PLAYBOOK.RollbackCompleted` | Rollback finishes |
+| 448 | `PLAYBOOK.ExecutionCompleted` | Playbook execution finishes successfully |
+| 449 | `PLAYBOOK.ExecutionFailed` | Execution fails (unrecoverable) |
+| 450 | `PLAYBOOK.ExecutionCancelled` | Execution is cancelled mid-run |
 
 ---
 
@@ -976,23 +976,23 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 383 | Interface | `InteractionChannel` | N/A | All communication patterns implement this |
-| 384 | ACF Topic | `org.research.findings` | ACF | Cross-Organization research findings subscription |
-| 385 | ACF Topic | Org-wide broadcast topic | ACF | Cross-Organization broadcast |
+| 451 | Interface | `InteractionChannel` | N/A | All communication patterns implement this |
+| 452 | ACF Topic | `org.research.findings` | ACF | Cross-Organization research findings subscription |
+| 453 | ACF Topic | Org-wide broadcast topic | ACF | Cross-Organization broadcast |
 
 #### OIS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 386 | `OIS.RequestSent` | Cross-Org request is sent |
-| 387 | `OIS.RequestResponded` | Request receives response |
-| 388 | `OIS.RequestDeclined` | Request is declined |
-| 389 | `OIS.SubscriptionCreated` | Org subscribes to a topic |
-| 390 | `OIS.SubscriptionRemoved` | Org unsubscribes |
-| 391 | `OIS.AgreementReached` | Cross-Org agreement is finalized |
-| 392 | `OIS.AgreementExpired` | Cross-Org agreement expires |
-| 393 | `OIS.KnowledgeShared` | Knowledge is shared between Orgs |
-| 394 | `OIS.AuthorizationDenied` | Cross-Org message authorization fails |
+| 454 | `OIS.RequestSent` | Cross-Org request is sent |
+| 455 | `OIS.RequestResponded` | Request receives response |
+| 456 | `OIS.RequestDeclined` | Request is declined |
+| 457 | `OIS.SubscriptionCreated` | Org subscribes to a topic |
+| 458 | `OIS.SubscriptionRemoved` | Org unsubscribes |
+| 459 | `OIS.AgreementReached` | Cross-Org agreement is finalized |
+| 460 | `OIS.AgreementExpired` | Cross-Org agreement expires |
+| 461 | `OIS.KnowledgeShared` | Knowledge is shared between Orgs |
+| 462 | `OIS.AuthorizationDenied` | Cross-Org message authorization fails |
 
 ---
 
@@ -1004,37 +1004,37 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 395 | Interface | `ExecutionProvider` | Execution token | Interface all execution providers implement |
-| 396 | Method | `providerId()` | N/A | Returns provider identity |
-| 397 | Method | `providerVersion()` | N/A | Returns provider version |
-| 398 | Method | `supportedActionTypes()` | N/A | Returns supported action types |
-| 399 | Method | `capabilityDeclaration()` | N/A | Returns capability declaration |
-| 400 | Method | `initialize(config)` | N/A | Initialize provider with configuration |
-| 401 | Method | `health()` | N/A | Returns provider health status |
-| 402 | Method | `shutdown()` | N/A | Graceful shutdown |
-| 403 | Method | `execute(context)` | VerificationToken | Execute an action (core contract) |
-| 404 | Method | `executeStream(context)` | VerificationToken | Streaming execution |
+| 463 | Interface | `ExecutionProvider` | Execution token | Interface all execution providers implement |
+| 464 | Method | `providerId()` | N/A | Returns provider identity |
+| 465 | Method | `providerVersion()` | N/A | Returns provider version |
+| 466 | Method | `supportedActionTypes()` | N/A | Returns supported action types |
+| 467 | Method | `capabilityDeclaration()` | N/A | Returns capability declaration |
+| 468 | Method | `initialize(config)` | N/A | Initialize provider with configuration |
+| 469 | Method | `health()` | N/A | Returns provider health status |
+| 470 | Method | `shutdown()` | N/A | Graceful shutdown |
+| 471 | Method | `execute(context)` | VerificationToken | Execute an action (core contract) |
+| 472 | Method | `executeStream(context)` | VerificationToken | Streaming execution |
 
 #### Runtime Messages / Types
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 405 | Message | `ExecutionContext` | execution_id, token, action, capability_bounds, autonomy_level, parent_entity_id, deadline |
-| 406 | Message | `ExecutionResult` | execution_id, status, output, metrics, error, events |
-| 407 | Stream Chunk | `ExecutionChunk` | sequence, data, progress, is_final, metrics |
+| 473 | Message | `ExecutionContext` | execution_id, token, action, capability_bounds, autonomy_level, parent_entity_id, deadline |
+| 474 | Message | `ExecutionResult` | execution_id, status, output, metrics, error, events |
+| 475 | Stream Chunk | `ExecutionChunk` | sequence, data, progress, is_final, metrics |
 
 #### Runtime Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 408 | `Runtime.ProviderRegistered` | Provider registered with Runtime Manager |
-| 409 | `Runtime.ProviderHealthChanged` | Provider health status changes |
-| 410 | `Runtime.ProviderExecutionStarted` | Provider execution starts |
-| 411 | `Runtime.ProviderResourceWarning` | Provider resource warning |
-| 412 | `Runtime.ProviderExecutionCompleted` | Provider execution completed |
-| 413 | `Runtime.ProviderExecutionFailed` | Provider execution failed |
-| 414 | `Runtime.ProviderBoundsExceeded` | Provider bounds exceeded |
-| 415 | `Runtime.ProviderShutdown` | Provider shutdown |
+| 476 | `Runtime.ProviderRegistered` | Provider registered with Runtime Manager |
+| 477 | `Runtime.ProviderHealthChanged` | Provider health status changes |
+| 478 | `Runtime.ProviderExecutionStarted` | Provider execution starts |
+| 479 | `Runtime.ProviderResourceWarning` | Provider resource warning |
+| 480 | `Runtime.ProviderExecutionCompleted` | Provider execution completed |
+| 481 | `Runtime.ProviderExecutionFailed` | Provider execution failed |
+| 482 | `Runtime.ProviderBoundsExceeded` | Provider bounds exceeded |
+| 483 | `Runtime.ProviderShutdown` | Provider shutdown |
 
 ---
 
@@ -1044,8 +1044,8 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Endpoint | Auth | Description |
 |---|------|----------|------|-------------|
-| 416 | REST | `POST {endpoint}/api/generate` | Network-bound (localhost/private) | Ollama model generation endpoint |
-| 417 | REST | `POST {endpoint}/api/chat` | Network-bound (localhost/private) | Ollama chat endpoint |
+| 484 | REST | `POST {endpoint}/api/generate` | Network-bound (localhost/private) | Ollama model generation endpoint |
+| 485 | REST | `POST {endpoint}/api/chat` | Network-bound (localhost/private) | Ollama chat endpoint |
 
 ---
 
@@ -1055,38 +1055,38 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 418 | Interface | `RuntimeProvider` | mTLS | Interface for runtime execution providers |
-| 419 | Method | `createSession(genome, allocation)` | Execution token | Create Worker session |
-| 420 | Method | `startSession(sessionId)` | Execution token | Start session |
-| 421 | Method | `pauseSession(sessionId)` | Execution token | Pause session |
-| 422 | Method | `resumeSession(sessionId)` | Execution token | Resume session |
-| 423 | Method | `terminateSession(sessionId)` | Execution token | Terminate session |
-| 424 | Method | `invokeCapability(sessionId, capability, input)` | Execution token | Execute capability |
-| 425 | Method | `cancelInvocation(sessionId, invocationId)` | Execution token | Cancel invocation |
-| 426 | Method | `getSessionStatus(sessionId)` | Execution token | Query session state |
-| 427 | Method | `streamMetrics(sessionId)` | Execution token | Subscribe to metrics |
-| 428 | Method | `healthCheck()` | N/A | Report provider health |
-| 429 | Method | `reportUsage(sessionId)` | Execution token | Report resource usage |
+| 486 | Interface | `RuntimeProvider` | mTLS | Interface for runtime execution providers |
+| 487 | Method | `createSession(genome, allocation)` | Execution token | Create Worker session |
+| 488 | Method | `startSession(sessionId)` | Execution token | Start session |
+| 489 | Method | `pauseSession(sessionId)` | Execution token | Pause session |
+| 490 | Method | `resumeSession(sessionId)` | Execution token | Resume session |
+| 491 | Method | `terminateSession(sessionId)` | Execution token | Terminate session |
+| 492 | Method | `invokeCapability(sessionId, capability, input)` | Execution token | Execute capability |
+| 493 | Method | `cancelInvocation(sessionId, invocationId)` | Execution token | Cancel invocation |
+| 494 | Method | `getSessionStatus(sessionId)` | Execution token | Query session state |
+| 495 | Method | `streamMetrics(sessionId)` | Execution token | Subscribe to metrics |
+| 496 | Method | `healthCheck()` | N/A | Report provider health |
+| 497 | Method | `reportUsage(sessionId)` | Execution token | Report resource usage |
 
 #### ACF Endpoints
 
 | # | Endpoint | Auth | Description |
 |---|----------|------|-------------|
-| 430 | `acf://runtime-provider-id/control` | ACF | Runtime provider control endpoint |
-| 431 | `acf://runtime-provider-id/metrics` | ACF | Runtime provider metrics endpoint |
-| 432 | `acf://runtime-provider-id/events` | ACF | Runtime provider events endpoint |
+| 498 | `acf://runtime-provider-id/control` | ACF | Runtime provider control endpoint |
+| 499 | `acf://runtime-provider-id/metrics` | ACF | Runtime provider metrics endpoint |
+| 500 | `acf://runtime-provider-id/events` | ACF | Runtime provider events endpoint |
 
 #### Runtime SDK Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 433 | `SDK.RuntimeSessionCreated` | Runtime session created |
-| 434 | `SDK.RuntimeSessionStarted` | Session transitions to Running |
-| 435 | `SDK.RuntimeSessionPaused` | Session paused |
-| 436 | `SDK.RuntimeSessionTerminated` | Session terminates |
-| 437 | `SDK.RuntimeInvocationCompleted` | Capability invocation finishes |
-| 438 | `SDK.RuntimeHealthChanged` | Provider health changes |
-| 439 | `SDK.RuntimeUsageReported` | Resource usage reported |
+| 501 | `SDK.RuntimeSessionCreated` | Runtime session created |
+| 502 | `SDK.RuntimeSessionStarted` | Session transitions to Running |
+| 503 | `SDK.RuntimeSessionPaused` | Session paused |
+| 504 | `SDK.RuntimeSessionTerminated` | Session terminates |
+| 505 | `SDK.RuntimeInvocationCompleted` | Capability invocation finishes |
+| 506 | `SDK.RuntimeHealthChanged` | Provider health changes |
+| 507 | `SDK.RuntimeUsageReported` | Resource usage reported |
 
 ---
 
@@ -1096,21 +1096,21 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 440 | `queryEvents(filter)` | audit scope | Query Events by filter criteria |
-| 441 | `getEventById(eventId)` | audit scope | Retrieve single Event |
-| 442 | `streamEvents(filter)` | audit scope | Subscribe to Event stream |
-| 443 | `verifyChain(eventId)` | audit scope | Verify Event chain integrity |
-| 444 | `verifyIntegrity(eventRange)` | audit scope | Verify Event range integrity |
-| 445 | `computeHash(eventId)` | audit scope | Compute cryptographic hash |
-| 446 | `analyzePattern(filter, pattern)` | audit scope | Detect patterns across Events |
-| 447 | `computeAggregation(filter, metric)` | audit scope | Aggregate metrics |
-| 448 | `detectAnomaly(filter, baseline)` | audit scope | Detect anomalous patterns |
-| 449 | `checkCompliance(filter, standard)` | audit scope | Check compliance |
-| 450 | `generateEvidencePackage(caseId, filter)` | audit scope | Generate evidence package |
-| 451 | `produceReport(template, filter)` | audit scope | Produce audit report |
-| 452 | `registerAsObserver()` | audit scope | Register as event observer |
-| 453 | `setRetentionPolicy(policy)` | audit scope | Set retention policy |
-| 454 | `getRetentionPolicy()` | audit scope | Get current retention policy |
+| 508 | `queryEvents(filter)` | audit scope | Query Events by filter criteria |
+| 509 | `getEventById(eventId)` | audit scope | Retrieve single Event |
+| 510 | `streamEvents(filter)` | audit scope | Subscribe to Event stream |
+| 511 | `verifyChain(eventId)` | audit scope | Verify Event chain integrity |
+| 512 | `verifyIntegrity(eventRange)` | audit scope | Verify Event range integrity |
+| 513 | `computeHash(eventId)` | audit scope | Compute cryptographic hash |
+| 514 | `analyzePattern(filter, pattern)` | audit scope | Detect patterns across Events |
+| 515 | `computeAggregation(filter, metric)` | audit scope | Aggregate metrics |
+| 516 | `detectAnomaly(filter, baseline)` | audit scope | Detect anomalous patterns |
+| 517 | `checkCompliance(filter, standard)` | audit scope | Check compliance |
+| 518 | `generateEvidencePackage(caseId, filter)` | audit scope | Generate evidence package |
+| 519 | `produceReport(template, filter)` | audit scope | Produce audit report |
+| 520 | `registerAsObserver()` | audit scope | Register as event observer |
+| 521 | `setRetentionPolicy(policy)` | audit scope | Set retention policy |
+| 522 | `getRetentionPolicy()` | audit scope | Get current retention policy |
 
 ---
 
@@ -1123,15 +1123,15 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Event | Description |
 |---|-------|-------------|
-| 455 | `Trading.StrategyResearched` | Strategy research completes |
-| 456 | `Trading.BacktestRun` | Backtest execution finishes |
-| 457 | `Trading.PaperTradeCompleted` | Paper trading phase finishes |
-| 458 | `Trading.StrategyDeployed` | Strategy is deployed to live trading |
-| 459 | `Trading.OrderPlaced` | Order is submitted to exchange |
-| 460 | `Trading.OrderFilled` | Order execution confirmed |
-| 461 | `Trading.OrderRejected` | Order is rejected by exchange or risk |
-| 462 | `Trading.RiskLimitBreached` | A risk limit is approached or breached |
-| 463 | `Trading.StrategyRetired` | Strategy is decommissioned |
+| 523 | `Trading.StrategyResearched` | Strategy research completes |
+| 524 | `Trading.BacktestRun` | Backtest execution finishes |
+| 525 | `Trading.PaperTradeCompleted` | Paper trading phase finishes |
+| 526 | `Trading.StrategyDeployed` | Strategy is deployed to live trading |
+| 527 | `Trading.OrderPlaced` | Order is submitted to exchange |
+| 528 | `Trading.OrderFilled` | Order execution confirmed |
+| 529 | `Trading.OrderRejected` | Order is rejected by exchange or risk |
+| 530 | `Trading.RiskLimitBreached` | A risk limit is approached or breached |
+| 531 | `Trading.StrategyRetired` | Strategy is decommissioned |
 
 ---
 
@@ -1141,23 +1141,23 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 464 | Capability | `monitor_endpoints` | Security domain worker capability â€” monitor endpoints |
-| 465 | Capability | `analyze_network` | Security domain worker capability â€” analyze network traffic |
-| 466 | Capability | `detect_intrusion` | Security domain worker capability â€” detect intrusion |
-| 467 | Capability | `alert_triage` | Security domain worker capability â€” triage alerts |
+| 532 | Capability | `monitor_endpoints` | Security domain worker capability â€” monitor endpoints |
+| 533 | Capability | `analyze_network` | Security domain worker capability â€” analyze network traffic |
+| 534 | Capability | `detect_intrusion` | Security domain worker capability â€” detect intrusion |
+| 535 | Capability | `alert_triage` | Security domain worker capability â€” triage alerts |
 
 #### Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 468 | `Security.VulnerabilityFound` | Potential vulnerability identified |
-| 469 | `Security.VulnerabilityVerified` | Vulnerability confirmed in sandbox |
-| 470 | `Security.ExploitAttempted` | Exploit verification executed |
-| 471 | `Security.IncidentDetected` | Security incident is identified |
-| 472 | `Security.IncidentContained` | Incident containment completed |
-| 473 | `Security.IncidentResolved` | Incident fully resolved |
-| 474 | `Security.IntelReportGenerated` | Threat intelligence report produced |
-| 475 | `Security.ComplianceAuditRun` | Compliance audit completes |
+| 536 | `Security.VulnerabilityFound` | Potential vulnerability identified |
+| 537 | `Security.VulnerabilityVerified` | Vulnerability confirmed in sandbox |
+| 538 | `Security.ExploitAttempted` | Exploit verification executed |
+| 539 | `Security.IncidentDetected` | Security incident is identified |
+| 540 | `Security.IncidentContained` | Incident containment completed |
+| 541 | `Security.IncidentResolved` | Incident fully resolved |
+| 542 | `Security.IntelReportGenerated` | Threat intelligence report produced |
+| 543 | `Security.ComplianceAuditRun` | Compliance audit completes |
 
 ---
 
@@ -1169,20 +1169,20 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 476 | `connectToRemoteAgent(remote_session_id, instance_id)` | mTLS + identity | Initiate cross-instance session |
-| 477 | `sendAgentMessage(session_id, message)` | mTLS + identity | Send message to remote session |
-| 478 | `disconnectAgent(session_id)` | mTLS | Terminate cross-instance session |
-| 479 | `getAgentStatus(session_id)` | mTLS | Check remote session status |
+| 544 | `connectToRemoteAgent(remote_session_id, instance_id)` | mTLS + identity | Initiate cross-instance session |
+| 545 | `sendAgentMessage(session_id, message)` | mTLS + identity | Send message to remote session |
+| 546 | `disconnectAgent(session_id)` | mTLS | Terminate cross-instance session |
+| 547 | `getAgentStatus(session_id)` | mTLS | Check remote session status |
 
 #### AIP Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 480 | `AIP.AgentConnected` | Remote session connected |
-| 481 | `AIP.AgentDisconnected` | Remote session disconnected |
-| 482 | `AIP.MessageSent` | Message transmitted |
-| 483 | `AIP.MessageReceived` | Message received |
-| 484 | `AIP.ConnectionFailed` | Connection attempt failed |
+| 548 | `AIP.AgentConnected` | Remote session connected |
+| 549 | `AIP.AgentDisconnected` | Remote session disconnected |
+| 550 | `AIP.MessageSent` | Message transmitted |
+| 551 | `AIP.MessageReceived` | Message received |
+| 552 | `AIP.ConnectionFailed` | Connection attempt failed |
 
 ---
 
@@ -1192,21 +1192,21 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 485 | `shareThreat(threat_data, severity)` | mTLS + signature | Share threat intelligence |
-| 486 | `subscribeThreats(filter, callback_endpoint)` | mTLS | Subscribe to threat feed |
-| 487 | `acknowledgeThreat(threat_id, action_taken)` | mTLS | Acknowledge receipt of threat |
-| 488 | `escalateThreat(threat_id, escalation_reason)` | Security Council | Request coordinated response |
-| 489 | `getThreatStatus(threat_id)` | mTLS | Query threat resolution status |
+| 553 | `shareThreat(threat_data, severity)` | mTLS + signature | Share threat intelligence |
+| 554 | `subscribeThreats(filter, callback_endpoint)` | mTLS | Subscribe to threat feed |
+| 555 | `acknowledgeThreat(threat_id, action_taken)` | mTLS | Acknowledge receipt of threat |
+| 556 | `escalateThreat(threat_id, escalation_reason)` | Security Council | Request coordinated response |
+| 557 | `getThreatStatus(threat_id)` | mTLS | Query threat resolution status |
 
 #### SXP Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 490 | `SXP.ThreatShared` | Threat intelligence shared |
-| 491 | `SXP.ThreatAcknowledged` | Receipt acknowledged |
-| 492 | `SXP.ThreatEscalated` | Threat escalated |
-| 493 | `SXP.ThreatResolved` | Threat resolved |
-| 494 | `SXP.SubscriptionCreated` | Threat feed subscription |
+| 558 | `SXP.ThreatShared` | Threat intelligence shared |
+| 559 | `SXP.ThreatAcknowledged` | Receipt acknowledged |
+| 560 | `SXP.ThreatEscalated` | Threat escalated |
+| 561 | `SXP.ThreatResolved` | Threat resolved |
+| 562 | `SXP.SubscriptionCreated` | Threat feed subscription |
 
 ---
 
@@ -1214,13 +1214,13 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Source | Description |
 |---|------|--------|-------------|
-| 495 | Event | `Bible/01-Governance/001-CLS.md` | CLS constitutional amendment lifecycle events |
-| 496 | Event | `Bible/01-Governance/002-DGP.md` | DGP decision assessed events |
-| 497 | Event | `Bible/01-Governance/003-CRP.md` | CRP constitutional review proposal events |
-| 498 | RPC (ACF) | `Bible/01-Governance/004-CKR.md` | CKR constitutional knowledge registry query interface |
-| 499 | Event | `Bible/01-Governance/004-CKR.md` | CKR knowledge registry lifecycle events |
-| 500 | Event | `Bible/01-Governance/005-ADG.md` | ADG architecture decision events |
-| 501 | Event | `Bible/01-Governance/006-AKM.md` | AKM knowledge management lifecycle events |
+| 563 | Event | `Bible/01-Governance/001-CLS.md` | CLS constitutional amendment lifecycle events |
+| 564 | Event | `Bible/01-Governance/002-DGP.md` | DGP decision assessed events |
+| 565 | Event | `Bible/01-Governance/003-CRP.md` | CRP constitutional review proposal events |
+| 566 | RPC (ACF) | `Bible/01-Governance/004-CKR.md` | CKR constitutional knowledge registry query interface |
+| 567 | Event | `Bible/01-Governance/004-CKR.md` | CKR knowledge registry lifecycle events |
+| 568 | Event | `Bible/01-Governance/005-ADG.md` | ADG architecture decision events |
+| 569 | Event | `Bible/01-Governance/006-AKM.md` | AKM knowledge management lifecycle events |
 
 ---
 
@@ -1228,24 +1228,24 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Source | Description |
 |---|------|------|--------|-------------|
-| 502 | Interface | `AuthMethod` | `Bible/00-Foundations/002-Design-DNA.md` | Interface for implementing new authentication methods |
-| 503 | Event | `Lifecycle.StateChanged` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity state transitioned |
-| 504 | Event | `Lifecycle.TransitionDenied` | `Bible/00-Foundations/008-Object-Lifecycle.md` | State transition denied |
-| 505 | Event | `Lifecycle.EntityCreated` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity created |
-| 506 | Event | `Lifecycle.EntityCompleted` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity lifecycle completed |
-| 507 | Event | `Lifecycle.EntityArchived` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity archived |
-| 508 | Schema | Canonical API Envelope | `Bible/08-Interfaces/API/000-Specifications.md` | Standard envelope: api_version, message_id, correlation_id, timestamp, source_entity_id, target_entity_id, auth_token, payload |
-| 509 | Schema | Error Response Schema | `Bible/08-Interfaces/API/000-Specifications.md` | Standard error: code, message, details, correlation_id |
+| 570 | Interface | `AuthMethod` | `Bible/00-Foundations/002-Design-DNA.md` | Interface for implementing new authentication methods |
+| 571 | Event | `Lifecycle.StateChanged` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity state transitioned |
+| 572 | Event | `Lifecycle.TransitionDenied` | `Bible/00-Foundations/008-Object-Lifecycle.md` | State transition denied |
+| 573 | Event | `Lifecycle.EntityCreated` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity created |
+| 574 | Event | `Lifecycle.EntityCompleted` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity lifecycle completed |
+| 575 | Event | `Lifecycle.EntityArchived` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity archived |
+| 576 | Schema | Canonical API Envelope | `Bible/08-Interfaces/API/000-Specifications.md` | Standard envelope: api_version, message_id, correlation_id, timestamp, source_entity_id, target_entity_id, auth_token, payload |
+| 577 | Schema | Error Response Schema | `Bible/08-Interfaces/API/000-Specifications.md` | Standard error: code, message, details, correlation_id |
 
 #### Framework API Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 510 | `API.ContractPublished` | New API contract registered |
-| 511 | `API.ContractDeprecated` | API version deprecated |
-| 512 | `API.RequestProcessed` | API request completes |
-| 513 | `API.RateLimitExceeded` | Rate limit exceeded |
-| 514 | `API.SchemaValidationFailed` | Schema validation failed |
+| 578 | `API.ContractPublished` | New API contract registered |
+| 579 | `API.ContractDeprecated` | API version deprecated |
+| 580 | `API.RequestProcessed` | API request completes |
+| 581 | `API.RateLimitExceeded` | Rate limit exceeded |
+| 582 | `API.SchemaValidationFailed` | Schema validation failed |
 
 ---
 
