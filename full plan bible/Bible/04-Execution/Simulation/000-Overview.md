@@ -332,7 +332,7 @@ Sandbox destroyed (both paths); no live state affected
 |----|-----------|-------------|
 | SIM-001 | Simulations never modify live system state | Architectural — Sandbox Manager enforces write isolation |
 | SIM-002 | Every simulation produces an evidence record (Law 4) | Architectural — Evidence Recorder runs on every completion/failure |
-| SIM-003 | Given the same scenario and snapshot, two simulations produce identical results (Law 9) | Algorithmic — Replay Engine verifies reproducibility |
+| SIM-003 | Given the same scenario and snapshot, two simulations produce identical results | Algorithmic — Replay Engine verifies reproducibility; governed by Design DNA R9 (Deterministic) |
 | SIM-004 | Sandboxes have bounded resource consumption | Architectural — Sandbox Manager enforces configurable limits |
 | SIM-005 | A simulation in a terminal state cannot be re-run | Algorithmic — completed sandboxes are immutable |
 | SIM-006 | Scenario definitions are immutable once a simulation run references them | Architectural — versioned; edits create new version |
