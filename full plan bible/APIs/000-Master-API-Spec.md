@@ -499,7 +499,7 @@
 
 ---
 
-### 2.7 ROS — Resource Orchestration
+### 3.4 ROS — Resource Orchestration
 
 **Source:** `Bible/02-Core/ROS/008-Provider-SDK.md`
 
