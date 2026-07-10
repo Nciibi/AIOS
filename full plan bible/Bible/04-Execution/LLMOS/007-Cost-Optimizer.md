@@ -8,11 +8,11 @@
 | Category | Bible — Execution/LLMOS |
 | Document ID | AIOS-BBL-004-LLM-007 |
 | Source Laws | Law 7 — Law of Capability Bounds (cost constraints) |
-| Pipeline Stage | 6 — Cost Optimization |
+| Pipeline Stage | 5 — Cost Optimization |
 
 ## Purpose
 
-The Cost Optimizer estimates request cost across candidate models and applies cost-optimization strategies. It runs after the Model Registry resolves candidates but before the Router selects a model. The optimizer's cost estimates feed into the Router's scoring function to enable cost-aware routing.
+The Cost Optimizer estimates request cost across candidate models and applies cost-optimization strategies. It runs after the Model Registry resolves candidates (Stage 4) and before the Router selects a model (Stage 6). The optimizer produces per-model cost estimates that feed directly into the Router's scoring function, enabling cost-aware routing decisions.
 
 ## Cost Estimation
 
