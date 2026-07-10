@@ -270,6 +270,15 @@ SOU-007: All cognitive services live inside the Brain.
 4. ✅ Updated Forward References to reflect Phase D completion
 5. ✅ Added 3.14 Voice + 3.15 Vision to Master API Spec
 
+### Phase 1: Post-Restructuring — Accepted Features (P0) ✅ COMPLETE
+1. ✅ Created `Bible/05-Platform/Observability/000-AOP.md` — AOP (AIOS Observability Platform)
+2. ✅ Created `Bible/02-Core/Brain/Autonomy/000-Overview.md` — Autonomy System (AMS/ACE/ABE)
+3. ✅ Created `Bible/04-Execution/Security/CCA/000-CCA.md` — CCA (Capability Certification Authority)
+4. ✅ Created `Bible/04-Execution/Security/CCA/001-CAS.md` — CAS (Capability Assignment System)
+5. ✅ Created `Bible/04-Execution/Security/CCA/002-CDG.md` — CDG (Capability Dependency Graph)
+6. ✅ Updated Brain overview services table (Autonomy → Active)
+7. ✅ Updated cross-references: CCA path in Execution-Auth/EAS, ROS/RMP
+
 ---
 
 ## 7. Architecture Diagram (New Top)
