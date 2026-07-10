@@ -365,7 +365,7 @@ SOU-007: All cognitive services live inside the Brain.
 | 14 | Tools cross-references used relative paths | `Tools/000-Overview.md` | Changed to absolute paths (Bible/04-Execution/...) |
 | 15 | Planning ROS cross-reference wrong path | `Planning/000-Overview.md` | Changed from Bible/05-Platform/ROS/ to Bible/02-Core/ROS/ |
 | 16 | Master API Spec missing Phase B service entries | `000-Master-API-Spec.md` | Added 3.5 Context, 3.6 Decision, 3.7 Planning, 3.8 Tool — 68 new catalog entries, renumbered to 582 |
-| 17 | Architecture Diagram LAYER 5 box alignment | `AIOS-Architecture-Diagram.md` | Fixed indentation mismatch (box-top and body now aligned) |
+| 17 | Architecture Diagram LAYER 5 box alignment | `AIOS-Architecture-Diagram.md` | Fixed indentation: all box lines (┌, │, └) now start at column 2 |
 | 18 | Brain overview Source Laws format inconsistent | `Brain/000-Overview.md` | Changed parenthetical format to em-dash format |
 | 19 | Brain/Memory/ directory didn't exist | Filesystem | Created empty placeholder directory |
 | 20 | Context TTL table naming mismatch | `Context/000-Overview.md` | "Conversation turn" → "Conversation history" |
