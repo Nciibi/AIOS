@@ -380,3 +380,12 @@ SOU-007: All cognitive services live inside the Brain.
 | 18 | Brain overview Source Laws format inconsistent | `Brain/000-Overview.md` | Changed parenthetical format to em-dash format |
 | 19 | Brain/Memory/ directory didn't exist | Filesystem | Created empty placeholder directory |
 | 20 | Context TTL table naming mismatch | `Context/000-Overview.md` | "Conversation turn" → "Conversation history" |
+| 21 | Brain overview services table showed Phase C services as TBD | `Brain/000-Overview.md` | Changed 5 services (Cognitive, Conversation, Memory, Attention, Personality) from TBD→Active |
+| 22 | Brain overview Forward References said Phase C services "planned or in development" | `Brain/000-Overview.md` | Rewritten to describe Phases B/C/D as completed stages |
+| 23 | Brain overview Related Documents missing Phase C services | `Brain/000-Overview.md` | Added 5 Phase C service entries to Related Documents |
+| 24 | Master API Spec Security Council+ sections (4–10) had overlapping numbers with Phase C entries (302–391) | `000-Master-API-Spec.md` | Renumbered sections 4–10 by +90 (302–582 → 392–672); clean sequence 100–672 |
+| 25 | Sou/001-Reasoning.md used relative paths for DGP reference | `Sou/001-Reasoning.md` | `Governance/002-DGP.md` → `Bible/01-Governance/002-DGP.md` (2 occurrences) |
+| 26 | Sou/004-Learning.md used relative path for Academy KMS | `Sou/004-Learning.md` | `Core/002-KMS.md` → `Bible/02-Core/Academy/002-KMS.md` |
+| 27 | Plan document Related Documents stale — still said "to be updated" | `0010-Brain-Restructuring-Plan.md` | Updated all 12 Brain service refs and completed status markers |
+| 28 | Plan document status line only mentioned Phase A+B | `0010-Brain-Restructuring-Plan.md` | Updated to "Phase A + B + C complete — all 12 Brain services specified" |
+| 29 | Plan document Phase C section unmarked | `0010-Brain-Restructuring-Plan.md` | Added ✅ markers to all 7 Phase C items, added "PENDING" to Phase D |
