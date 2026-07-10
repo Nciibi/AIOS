@@ -824,29 +824,29 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 302 | `injectSignal(signal, source)` | Any Brain Service | Inject an attention signal for Sou |
-| 303 | `getFocusState()` | Sou only | Get current focus state |
-| 304 | `setFocus(task, goal_id?)` | Sou only | Manually set focus |
-| 305 | `acknowledgeInterrupt(interrupt_id)` | Sou only | Acknowledge an interrupt |
-| 306 | `snoozeSignal(signal_id, condition, duration)` | Sou only | Defer a signal |
-| 307 | `dismissSignal(signal_id)` | Sou only | Discard a signal |
-| 308 | `getSnoozeQueue()` | Sou only | List snoozed signals |
-| 309 | `setSalienceOverride(source, override_score)` | Sou only | Set salience override |
+| 392 | `injectSignal(signal, source)` | Any Brain Service | Inject an attention signal for Sou |
+| 393 | `getFocusState()` | Sou only | Get current focus state |
+| 394 | `setFocus(task, goal_id?)` | Sou only | Manually set focus |
+| 395 | `acknowledgeInterrupt(interrupt_id)` | Sou only | Acknowledge an interrupt |
+| 396 | `snoozeSignal(signal_id, condition, duration)` | Sou only | Defer a signal |
+| 397 | `dismissSignal(signal_id)` | Sou only | Discard a signal |
+| 398 | `getSnoozeQueue()` | Sou only | List snoozed signals |
+| 399 | `setSalienceOverride(source, override_score)` | Sou only | Set salience override |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 310 | `ATT.SignalReceived` | signal_id, source, type, salience | Signal entered Attention System |
-| 311 | `ATT.SignalFocused` | signal_id, salience, focus_state | Signal promoted to Sou's focus |
-| 312 | `ATT.SignalSnoozed` | signal_id, condition, duration | Signal deferred |
-| 313 | `ATT.SignalDropped` | signal_id, reason, snooze_count | Signal dropped (budget exceeded) |
-| 314 | `ATT.SignalDismissed` | signal_id | Sou explicitly dismissed signal |
-| 315 | `ATT.InterruptTriggered` | interrupt_id, priority, reason | High-priority interrupt fired |
-| 316 | `ATT.InterruptAcknowledged` | interrupt_id, latency_ms | Sou acknowledged interrupt |
-| 317 | `ATT.FocusChanged` | from_state, to_state, task | Focus state transitioned |
-| 318 | `ATT.BudgetExceeded` | resource, current_usage, limit | Attention budget exceeded |
-| 319 | `ATT.OverloadEscalation` | switch_rate, consecutive_interrupts | Sou overwhelmed, escalating |
+| 400 | `ATT.SignalReceived` | signal_id, source, type, salience | Signal entered Attention System |
+| 401 | `ATT.SignalFocused` | signal_id, salience, focus_state | Signal promoted to Sou's focus |
+| 402 | `ATT.SignalSnoozed` | signal_id, condition, duration | Signal deferred |
+| 403 | `ATT.SignalDropped` | signal_id, reason, snooze_count | Signal dropped (budget exceeded) |
+| 404 | `ATT.SignalDismissed` | signal_id | Sou explicitly dismissed signal |
+| 405 | `ATT.InterruptTriggered` | interrupt_id, priority, reason | High-priority interrupt fired |
+| 406 | `ATT.InterruptAcknowledged` | interrupt_id, latency_ms | Sou acknowledged interrupt |
+| 407 | `ATT.FocusChanged` | from_state, to_state, task | Focus state transitioned |
+| 408 | `ATT.BudgetExceeded` | resource, current_usage, limit | Attention budget exceeded |
+| 409 | `ATT.OverloadEscalation` | switch_rate, consecutive_interrupts | Sou overwhelmed, escalating |
 
 ---
 
@@ -858,26 +858,26 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 320 | `getProfile()` | Sou only | Get full personality profile |
-| 321 | `getIdentity()` | Sou only | Get immutable identity core |
-| 322 | `getTraits(category?)` | Sou only | Get traits filtered by category |
-| 323 | `getValues()` | Sou only | Get value matrix |
-| 324 | `getStyle(context?)` | Sou only | Get communication style for given context |
-| 325 | `getMood()` | Sou only | Get current mood state |
-| 326 | `setMood(mood, trigger?)` | Sou only | Manually set mood |
-| 327 | `updateTrait(trait_id, delta, reason)` | Sou, Academy | Adjust a trait score |
-| 328 | `getPersonalitySummary()` | Sou only | Get condensed personality for LLMOS prompt injection |
+| 410 | `getProfile()` | Sou only | Get full personality profile |
+| 411 | `getIdentity()` | Sou only | Get immutable identity core |
+| 412 | `getTraits(category?)` | Sou only | Get traits filtered by category |
+| 413 | `getValues()` | Sou only | Get value matrix |
+| 414 | `getStyle(context?)` | Sou only | Get communication style for given context |
+| 415 | `getMood()` | Sou only | Get current mood state |
+| 416 | `setMood(mood, trigger?)` | Sou only | Manually set mood |
+| 417 | `updateTrait(trait_id, delta, reason)` | Sou, Academy | Adjust a trait score |
+| 418 | `getPersonalitySummary()` | Sou only | Get condensed personality for LLMOS prompt injection |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 329 | `PER.ProfileLoaded` | instance_id, trait_count, value_count | Personality loaded on startup |
-| 330 | `PER.TraitAdjusted` | trait_id, old_score, new_score, reason | Trait score changed |
-| 331 | `PER.MoodChanged` | old_mood, new_mood, intensity, trigger | Mood state transitioned |
-| 332 | `PER.ValueConflict` | value_a, value_b, context | Two values came into conflict |
-| 333 | `PER.StyleAdapted` | style_dimension, old_value, new_value, context | Communication style adapted |
-| 334 | `PER.IdentityAccessed` | field, caller | Identity read by authorized component |
+| 419 | `PER.ProfileLoaded` | instance_id, trait_count, value_count | Personality loaded on startup |
+| 420 | `PER.TraitAdjusted` | trait_id, old_score, new_score, reason | Trait score changed |
+| 421 | `PER.MoodChanged` | old_mood, new_mood, intensity, trigger | Mood state transitioned |
+| 422 | `PER.ValueConflict` | value_a, value_b, context | Two values came into conflict |
+| 423 | `PER.StyleAdapted` | style_dimension, old_value, new_value, context | Communication style adapted |
+| 424 | `PER.IdentityAccessed` | field, caller | Identity read by authorized component |
 
 ---
 
@@ -889,27 +889,27 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 335 | `reason(request)` | Sou only | Execute chain-of-thought reasoning |
-| 336 | `reflect(experience_id, type)` | Sou only | Reflect on a past experience |
-| 337 | `metacognize(request)` | Sou only | Perform metacognitive analysis |
-| 338 | `synthesize(inputs, mode)` | Sou only | Combine multiple reasoning outputs |
-| 339 | `evaluateEvidence(evidence_refs)` | Sou only | Assess evidence quality |
-| 340 | `selectStrategy(goal, context)` | Sou only | Recommend optimal reasoning strategy |
-| 341 | `getReasoningHistory(session_id, limit?)` | Sou only | Retrieve past reasoning chains |
+| 425 | `reason(request)` | Sou only | Execute chain-of-thought reasoning |
+| 426 | `reflect(experience_id, type)` | Sou only | Reflect on a past experience |
+| 427 | `metacognize(request)` | Sou only | Perform metacognitive analysis |
+| 428 | `synthesize(inputs, mode)` | Sou only | Combine multiple reasoning outputs |
+| 429 | `evaluateEvidence(evidence_refs)` | Sou only | Assess evidence quality |
+| 430 | `selectStrategy(goal, context)` | Sou only | Recommend optimal reasoning strategy |
+| 431 | `getReasoningHistory(session_id, limit?)` | Sou only | Retrieve past reasoning chains |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 342 | `COG.ReasoningStarted` | request_id, type, strategy | Reasoning process began |
-| 343 | `COG.ReasoningCompleted` | request_id, confidence, token_cost | Reasoning finished |
-| 344 | `COG.ThoughtStepGenerated` | request_id, step_number, type | Individual thought step produced |
-| 345 | `COG.ReflectionCompleted` | request_id, type, lessons | Reflection finished |
-| 346 | `COG.MetacognitionUpdate` | request_id, function, result | Metacognitive insight produced |
-| 347 | `COG.SynthesisCompleted` | request_id, mode, source_count | Synthesis finished |
-| 348 | `COG.LowConfidenceDetected` | request_id, confidence, reason | Confidence below threshold |
-| 349 | `COG.StrategySelected` | request_id, strategy, rationale | Reasoning strategy chosen |
-| 350 | `COG.EvidenceEvaluated` | request_id, evidence_count, avg_reliability | Evidence quality assessed |
+| 432 | `COG.ReasoningStarted` | request_id, type, strategy | Reasoning process began |
+| 433 | `COG.ReasoningCompleted` | request_id, confidence, token_cost | Reasoning finished |
+| 434 | `COG.ThoughtStepGenerated` | request_id, step_number, type | Individual thought step produced |
+| 435 | `COG.ReflectionCompleted` | request_id, type, lessons | Reflection finished |
+| 436 | `COG.MetacognitionUpdate` | request_id, function, result | Metacognitive insight produced |
+| 437 | `COG.SynthesisCompleted` | request_id, mode, source_count | Synthesis finished |
+| 438 | `COG.LowConfidenceDetected` | request_id, confidence, reason | Confidence below threshold |
+| 439 | `COG.StrategySelected` | request_id, strategy, rationale | Reasoning strategy chosen |
+| 440 | `COG.EvidenceEvaluated` | request_id, evidence_count, avg_reliability | Evidence quality assessed |
 
 ---
 
@@ -921,38 +921,38 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 351 | `receiveMessage(session_id, content, modality)` | User token | Receive user input |
-| 352 | `sendMessage(session_id, content, modality)` | Sou | Deliver response to user |
-| 353 | `createSession(user_id, modality, preferences?)` | User token | Start a conversation session |
-| 354 | `endSession(session_id)` | User or Sou | End a conversation session |
-| 355 | `getSession(session_id)` | User or Sou | Get session state |
-| 356 | `pauseSession(session_id)` | User or Sou | Pause conversation |
+| 441 | `receiveMessage(session_id, content, modality)` | User token | Receive user input |
+| 442 | `sendMessage(session_id, content, modality)` | Sou | Deliver response to user |
+| 443 | `createSession(user_id, modality, preferences?)` | User token | Start a conversation session |
+| 444 | `endSession(session_id)` | User or Sou | End a conversation session |
+| 445 | `getSession(session_id)` | User or Sou | Get session state |
+| 446 | `pauseSession(session_id)` | User or Sou | Pause conversation |
 
 #### RPC Methods (via ACF) — Brain-Facing
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 357 | `deliverInput(session_id, turn)` | Conversation OS → Sou | Deliver parsed user input to Sou |
-| 358 | `receiveResponse(session_id, response)` | Sou → Conversation OS | Receive Sou's response |
-| 359 | `getTurnHistory(session_id, limit?)` | Sou only | Get recent turn history |
-| 360 | `injectSystemMessage(session_id, content)` | Sou only | Inject system message |
-| 361 | `updatePreferences(session_id, updates)` | Sou only | Update user preferences |
+| 447 | `deliverInput(session_id, turn)` | Conversation OS → Sou | Deliver parsed user input to Sou |
+| 448 | `receiveResponse(session_id, response)` | Sou → Conversation OS | Receive Sou's response |
+| 449 | `getTurnHistory(session_id, limit?)` | Sou only | Get recent turn history |
+| 450 | `injectSystemMessage(session_id, content)` | Sou only | Inject system message |
+| 451 | `updatePreferences(session_id, updates)` | Sou only | Update user preferences |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 362 | `CONV.SessionCreated` | session_id, user_id, modality | Conversation session started |
-| 363 | `CONV.SessionEnded` | session_id, turn_count, duration | Session ended |
-| 364 | `CONV.SessionPaused` | session_id, reason | Session paused |
-| 365 | `CONV.UserInputReceived` | turn_id, session_id, modality | User input accepted |
-| 366 | `CONV.UserInputDelivered` | turn_id, session_id, latency_ms | Input delivered to Sou |
-| 367 | `CONV.ResponseBuilt` | turn_id, session_id, response_length | Response packaged |
-| 368 | `CONV.ResponseDelivered` | turn_id, session_id, modality, latency_ms | Response sent to user |
-| 369 | `CONV.TurnTimeout` | turn_id, session_id | Sou took too long to respond |
-| 370 | `CONV.IntentDetected` | turn_id, intent, confidence | Intent classified |
-| 371 | `CONV.ModalityAdapted` | from_modality, to_modality, turn_id | Modality conversion occurred |
-| 372 | `CONV.SouInterrupted` | turn_id, reason | Sou interrupted during processing |
+| 452 | `CONV.SessionCreated` | session_id, user_id, modality | Conversation session started |
+| 453 | `CONV.SessionEnded` | session_id, turn_count, duration | Session ended |
+| 454 | `CONV.SessionPaused` | session_id, reason | Session paused |
+| 455 | `CONV.UserInputReceived` | turn_id, session_id, modality | User input accepted |
+| 456 | `CONV.UserInputDelivered` | turn_id, session_id, latency_ms | Input delivered to Sou |
+| 457 | `CONV.ResponseBuilt` | turn_id, session_id, response_length | Response packaged |
+| 458 | `CONV.ResponseDelivered` | turn_id, session_id, modality, latency_ms | Response sent to user |
+| 459 | `CONV.TurnTimeout` | turn_id, session_id | Sou took too long to respond |
+| 460 | `CONV.IntentDetected` | turn_id, intent, confidence | Intent classified |
+| 461 | `CONV.ModalityAdapted` | from_modality, to_modality, turn_id | Modality conversion occurred |
+| 462 | `CONV.SouInterrupted` | turn_id, reason | Sou interrupted during processing |
 
 ---
 
@@ -964,30 +964,30 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 373 | `store(item, memory_type)` | Any Brain Service | Store a memory item |
-| 374 | `storeBatch(items)` | Any Brain Service | Batch store multiple items |
-| 375 | `query(query)` | Any Brain Service | Query memory items |
-| 376 | `get(item_id)` | Any Brain Service | Get single item by ID |
-| 377 | `update(item_id, updates)` | Sou, Context | Update item fields |
-| 378 | `delete(item_id)` | Sou, Context | Delete an item |
-| 379 | `search(text, memory_types, limit)` | Any Brain Service | Semantic search |
-| 380 | `getSessionMemory(session_id, memory_type?)` | Sou, Context | Get all session memories |
-| 381 | `prune(memory_type, older_than)` | Sou, Context | Manually trigger pruning |
-| 382 | `getStats()` | Sou only | Get memory usage statistics |
+| 463 | `store(item, memory_type)` | Any Brain Service | Store a memory item |
+| 464 | `storeBatch(items)` | Any Brain Service | Batch store multiple items |
+| 465 | `query(query)` | Any Brain Service | Query memory items |
+| 466 | `get(item_id)` | Any Brain Service | Get single item by ID |
+| 467 | `update(item_id, updates)` | Sou, Context | Update item fields |
+| 468 | `delete(item_id)` | Sou, Context | Delete an item |
+| 469 | `search(text, memory_types, limit)` | Any Brain Service | Semantic search |
+| 470 | `getSessionMemory(session_id, memory_type?)` | Sou, Context | Get all session memories |
+| 471 | `prune(memory_type, older_than)` | Sou, Context | Manually trigger pruning |
+| 472 | `getStats()` | Sou only | Get memory usage statistics |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 383 | `MEM.ItemStored` | item_id, memory_type, source, importance | Memory item created |
-| 384 | `MEM.ItemUpdated` | item_id, memory_type, updated_fields | Item updated |
-| 385 | `MEM.ItemDeleted` | item_id, memory_type | Item deleted |
-| 386 | `MEM.ItemExpired` | item_id, memory_type, ttl_policy | Item TTL expired |
-| 387 | `MEM.QueryExecuted` | query_id, memory_types, result_count, latency | Query completed |
-| 388 | `MEM.SearchExecuted` | query_id, memory_types, result_count, avg_score | Semantic search completed |
-| 389 | `MEM.SessionMemoryCleared` | session_id, item_count | Session ended, memory pruned |
-| 390 | `MEM.TTLSweepCompleted` | expired_count, total_scanned | TTL sweep finished |
-| 391 | `MEM.ImportancePromoted` | item_id, old_importance, new_importance | Item importance auto-adjusted |
+| 473 | `MEM.ItemStored` | item_id, memory_type, source, importance | Memory item created |
+| 474 | `MEM.ItemUpdated` | item_id, memory_type, updated_fields | Item updated |
+| 475 | `MEM.ItemDeleted` | item_id, memory_type | Item deleted |
+| 476 | `MEM.ItemExpired` | item_id, memory_type, ttl_policy | Item TTL expired |
+| 477 | `MEM.QueryExecuted` | query_id, memory_types, result_count, latency | Query completed |
+| 478 | `MEM.SearchExecuted` | query_id, memory_types, result_count, avg_score | Semantic search completed |
+| 479 | `MEM.SessionMemoryCleared` | session_id, item_count | Session ended, memory pruned |
+| 480 | `MEM.TTLSweepCompleted` | expired_count, total_scanned | TTL sweep finished |
+| 481 | `MEM.ImportancePromoted` | item_id, old_importance, new_importance | Item importance auto-adjusted |
 
 ---
 
