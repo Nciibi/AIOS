@@ -125,8 +125,8 @@ Algorithm:
 4. Filter by allow/block lists
 5. Filter by health: only online models (degraded models are included but flagged)
 6. Filter by context window: context_window >= required_context_window
-7. Sort by: [entity_discount, price, latency, quality] where entity_discount is applied first
-8. Return top N (default 10) candidates sorted by composite score
+7. Apply preliminary sort: [cost_efficiency, latency, quality_tier] — this is a heuristic pre-sort to limit candidate count; the Router (Stage 6) performs the final composite scoring with entity-specific weights
+8. Return top N (default 10) candidates
 
 Returns `ModelResolveResult`:
 
