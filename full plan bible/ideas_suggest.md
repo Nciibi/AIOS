@@ -555,3 +555,36 @@ ACF/000-Overview.md has Security Model, Design Decisions, and Performance Target
 - Several files reference `Foundations/008-Object-Lifecycle.md` instead of `00-Foundations/008-Object-Lifecycle.md`.
 - 010-TEE.md references `Crypto/000-Overview.md` — actual file is `Crypto/000-CSP.md`.
 - 012-CP.md references `ATS/000-ATS.md` — actual file is `ATS/000-Auth-Methods.md`.
+
+## Reference/ — New Files Written
+
+Three files were created in the root `Reference/` directory (previously empty stubs):
+
+### 000-Architecture-Decision-Log.md (169 lines)
+Master log of 15 key architectural decisions (ADR-001 through ADR-015). Each entry has context, rationale, alternatives considered, and Bible references.
+
+**Suggestions for future**:
+- Add an "Author" field to each ADR entry to match the Bible's detailed log
+- Mark which ADRs correspond to constitutional amendments vs. architectural decisions
+- Consider adding a "Consequences" field per entry (what changes were required)
+
+### 001-ADG.md (123 lines)
+Quick-reference guide for the Architectural Decision Gateway — when ADG is needed, entry format, lifecycle, review criteria, ADG→RFC handoff, and summary index of all 13 ADG entries.
+
+**Suggestions for future**:
+- Add a decision tree or flowchart (text-based) for "Do I need an ADG?"
+- Link each ADG entry in the summary table to its detailed Bible doc
+- Add typical review timeline expectations (how long does ADG review take?)
+
+### 002-Reference-Architecture.md (268 lines)
+High-level architecture map including system layering, constitutional 4-branch diagram, full ASCII component map, 7-stage security pipeline, key data flows (Identity, Execution, Knowledge, Security/Auth), Design DNA table (R1–R15), and Bible navigation guide.
+
+**Issues to resolve** (mirrored from Bible audit):
+- **EAS acronym collision**: Pipeline Stage 7 (Execution Authorization Service) and the Audit service (Evidence Audit Service) both use "EAS". The Reference Architecture explicitly documents this collision but the Bible documents still need resolution.
+- **CCA missing**: Stage 5 (CCA — Capability Certification Authority) is shown in the pipeline but the CCA document doesn't exist in `Bible/04-Execution/Security/`. Either create it or document where CCA responsibilities live.
+- **IRS/IDS naming**: ADR-005 was renamed from "IRS" to "IDS" in the log, but the Bible still mixes both names.
+
+### Remaining work after Reference/:
+- **SDK/** (3 files): Runtime SDK, Audit SDK, Knowledge SDK — these are the last high-priority remaining docs
+- **Standards/** (5 files): Next tier — design language, naming conventions, BAS, DQC, PSAP
+- **APIs/**, **RFC/**, **Research/**: Lower priority
