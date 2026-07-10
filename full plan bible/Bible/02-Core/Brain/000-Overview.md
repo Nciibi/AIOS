@@ -100,6 +100,18 @@ User Input
     │
     ▼
 ┌─────────────────────────────────────────────┐
+│  Conversation OS (entry point for all        │
+│  user interactions, regardless of modality)  │
+└─────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────┐
+│  Attention System (filter signals,           │
+│  manage focus, route to Sou)                │
+└─────────────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────────────┐
 │  Sou via ACF (authenticated by Security      │
 │  Council, logged to Event Store)             │
 └─────────────────────────────────────────────┘
@@ -108,10 +120,12 @@ User Input
 ┌─────────────────────────────────────────────┐
 │  Sou — Receives & Processes Input           │
 │  ├── Identify self + check personality      │
+│  ├── Consult context (Context System)       │
 │  ├── Reason about input (Cognitive OS)      │
 │  ├── Plan response (Planning System)        │
 │  ├── Consult memory (Memory OS)             │
 │  ├── Decide action (Decision System)        │
+│  ├── Invoke tools if needed (Tool System)   │
 │  ├── Create mission (delegate to Institution OS)  │
 │  ├── Delegate to worker via Institution OS   │
 │  └── Compose final response                  │
@@ -128,7 +142,7 @@ User Input
 └─────────────────────────────────────────────┘
     │
     ▼
-User Response (via Sou → ACF → Conversation OS)
+User Response (via Sou → Conversation OS → User)
 ```
 
 ## Relationship to Non-Brain Components
