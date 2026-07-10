@@ -22,7 +22,7 @@ LLMOS transforms AI inference from a direct provider call into a managed, observ
 ## Architecture
 
 ```
-Worker / Engine / Service
+Sou / Brain Service
          │
          ▼  (via ACF — acf://llmos/inference)
 ┌────────────────────────────────────────────────────────────────┐
