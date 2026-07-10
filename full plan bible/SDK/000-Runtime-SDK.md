@@ -125,8 +125,9 @@ def terminate_session(self, session_id):
 
 ## Implementation Checklist
 
-- [ ] Implement all `RuntimeProvider` interface methods
+- [ ] Implement all `RuntimeProvider` interface methods (including `pauseSession`/`resumeSession`)
 - [ ] Handle session lifecycle states correctly (Created → Starting → Running ↔ Paused → Terminating → Terminated)
+- [ ] Validate execution token from Security Council before invoking capabilities
 - [ ] Emit Events for every lifecycle transition
 - [ ] Enforce resource allocation limits (CPU, memory, disk, network)
 - [ ] Support capability bounds checking before execution
