@@ -52,6 +52,15 @@ Sou (consumes recommendation, makes decision)
 ### Decision Model
 
 ```
+DecisionContext {
+  session_id: string
+  goal: string
+  constraints: string[]
+  relevant_history: string[]       // Decision IDs from past similar choices
+  context_window_snapshot: string  // Hash of context at decision time
+  metadata: Record<string, unknown>
+}
+
 DecisionRequest {
   request_id: string
   context: DecisionContext

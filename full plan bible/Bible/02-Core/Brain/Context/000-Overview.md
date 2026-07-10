@@ -8,7 +8,7 @@
 | Category | Bible — Brain/Context |
 | Document ID | AIOS-BBL-002-CTX-000 |
 | Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
-| Source Physics | Physics/003-Communication.md, Physics/005-Events.md |
+| Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
@@ -56,6 +56,49 @@ The Context System is stateless (per BRAIN-007). All context data is persisted t
 The context window is a structured representation of everything Sou is aware of:
 
 ```
+InputMessage {
+  text: string
+  modality: "text" | "voice" | "image"
+  metadata: {
+    timestamp: timestamp
+    source: string
+    session_id: string
+  }
+}
+
+WorkingMemory {
+  item_id: string
+  content: string
+  category: "goal" | "task" | "note" | "reference"
+  priority: number      // 0.0–1.0, pinned items maintain priority
+  created_at: timestamp
+}
+
+ConversationTurn {
+  turn_number: number
+  role: "user" | "sou" | "system"
+  content: string
+  timestamp: timestamp
+  token_count: number
+}
+
+MissionState {
+  mission_id: string
+  status: "active" | "pending" | "completed" | "failed"
+  goal: string
+  milestones: MilestoneSummary[]
+  progress: number      // 0.0–1.0
+}
+
+SystemSignal {
+  signal_id: string
+  type: "alert" | "notification" | "state_change"
+  source: string
+  severity: "info" | "warning" | "critical"
+  message: string
+  timestamp: timestamp
+}
+
 ContextWindow {
   session_id: string
   turn_count: number
@@ -171,6 +214,29 @@ interface CompressionStrategy {
   name: string
   compress(window: ContextWindow, budget: number): CompressedWindow
   estimatedSavings(window: ContextWindow): number
+}
+
+CompressedWindow {
+  items: ContextItem[]
+  total_tokens: number
+  original_tokens: number
+  compression_ratio: number
+  strategy_applied: string
+  metadata: {
+    items_dropped: number
+    items_summarized: number
+    items_deduplicated: number
+  }
+}
+
+ContextItem {
+  item_id: string
+  item_type: string
+  content: unknown
+  priority: number
+  token_count: number
+  pinned: boolean
+  source: string
 }
 ```
 

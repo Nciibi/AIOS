@@ -8,7 +8,7 @@
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-000 |
 | Source Laws | Law 2 — Law of Non-Execution, Law 3 — Law of Communication, Law 7 — Law of Capability Bounds, Law 8 — Law of Verification-First |
-| Source Physics | Physics/010-Execution.md, Physics/007-Capabilities.md, Physics/003-Communication.md |
+| Source Physics | Physics/010-Execution.md, Physics/007-Capabilities.md, Physics/009-Interaction.md |
 | Supersedes | Bible/04-Execution/LLMOS/000-Overview.md (moved to Brain) |
 | Superseded By | Nothing |
 | Amended By | RFC |

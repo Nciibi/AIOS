@@ -194,6 +194,21 @@ interface DecompositionStrategy {
   decompose(goal: string, context: DecisionContext): Milestone[]
 }
 
+ExecutionGraph {
+  nodes: ExecutionNode[]
+  edges: Dependency[]
+  entry_nodes: string[]            // Milestone IDs with no prerequisites
+  critical_path: string[]          // Longest dependency chain
+  estimated_total_duration_ms: number
+}
+
+ExecutionNode {
+  milestone_id: string
+  name: string
+  estimated_duration_ms: number
+  level: number                    // Depth in dependency tree (0 = root)
+}
+
 interface DependencyResolver {
   resolve(milestones: Milestone[]): ExecutionGraph
 }
