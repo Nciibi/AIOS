@@ -650,6 +650,17 @@ Written and audited. 536 entries across 9 service groups covering every concrete
 - Ollama auth corrected from `API Key` to `Network-bound (localhost/private)`
 - PSAP methods corrected from ACF routing operations to actual PSAP service registry operations
 
+### Phase 2 Suggestions (non-critical, additive)
+
+These were identified during the Phase 2 audit but are enhancements, not bugs:
+
+- **WFE**: The state machine ASCII diagram (`Bible/04-Execution/Workflow/000-Overview.md:70-77`) has ambiguous arrow alignment — the Running→Failed transition path overlaps visually with the Ready→Completed path. Worth redrawing for clarity.
+- **Cross-references**: No existing docs currently reference WFE or IOP in their Related Documents tables. Candidate files that could benefit:
+  - `Bible/02-Core/Brain/000-Overview.md` — add WFE and IOP as related external systems
+  - `Bible/04-Execution/Security/000-Overview.md` — WFE uses EAS for step authorization
+  - `Bible/06-Services/ACF/000-Overview.md` — IOP builds on top of ACF transport
+- **AGX**: Consider splitting into sub-docs (like CCA has 000-CCA.md, 001-CAS.md, 002-CDG.md) once the system matures — e.g., separate docs for the Evolution Engine, Genome Repository, and Competency Registry specifications.
+
 ### Remaining work:
 - **Research/** (4 files): Phases 2-5 roadmap
 - **Contributing/**, **Examples/**, **Tests/**: Lower priority
