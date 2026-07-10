@@ -8,11 +8,11 @@
 | Category | Bible — Execution/LLMOS |
 | Document ID | AIOS-BBL-004-LLM-002 |
 | Source Laws | Law 7 — Law of Capability Bounds |
-| Pipeline Stage | 5 — Model Selection |
+| Pipeline Stage | 6 — Model Selection |
 
 ## Purpose
 
-The Router selects the optimal model for a given request from the candidate list produced by the Model Registry (Stage 4). Selection decisions balance cost, latency, capability, and entity-specific preferences. The Router is the central intelligence for model routing — it is the only component that decides which model serves which request.
+The Router selects the optimal model for a given request from the candidate list produced by the Model Registry (Stage 4) with cost estimates from the Cost Optimizer (Stage 5). Selection decisions balance cost, latency, capability, and entity-specific preferences. The Router is the central intelligence for model routing — it is the only component that decides which model serves which request.
 
 ## Selection Algorithm
 
