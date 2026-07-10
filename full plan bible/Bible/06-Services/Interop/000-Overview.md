@@ -289,7 +289,7 @@ Both sides emit evidence records (Law 4)
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| IOP-001 | Every message references a valid published contract (Law 3) | Architectural — ACF validates contract ID before routing |
+| IOP-001 | Every message references a valid published contract (Law 3) | Architectural — IOP Contract Registry validates contract ID before message dispatch |
 | IOP-002 | Published contracts are immutable — no field modification, no deletion | Architectural — Contract Registry rejects mutation requests |
 | IOP-003 | A deprecated contract retains full functionality for existing consumers | Algorithmic — Deprecation only adds metadata; schema and endpoints unchanged |
 | IOP-004 | Message routing is deterministic given the same contract, payload, and target | Algorithmic — subscription matching produces stable ordering |
