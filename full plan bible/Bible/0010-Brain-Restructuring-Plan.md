@@ -358,3 +358,14 @@ SOU-007: All cognitive services live inside the Brain.
 | 7 | Phase B review: missing type definitions | `Decision/000-Overview.md`, `Planning/000-Overview.md`, `Tools/000-Overview.md` | Added `RankedOption`, `ViolatedConstraint` (Decision); `ResourceEstimate` (Planning); `ReturnSchema`, inline types for `rate_limits`, `cost`, `error`, `resource_usage`, `status` (Tools) |
 | 8 | Phase B review: Context System missing cross-reference | `Context/000-Overview.md` | Added `Brain/Tools/` to Related Documents |
 | 9 | Phase B review: Brain overview missing Phase B entries | `Brain/000-Overview.md` | Added 4 Phase B services to Related Documents |
+| 10 | Physics/003-Communication.md doesn't exist (referenced by 3 files) | `Context/000-Overview.md`, `Tools/000-Overview.md`, `LLMOS/000-Overview.md` | Changed to Physics/009-Interaction.md (correct file for Law 3) |
+| 11 | 6 undefined types in Context data model | `Context/000-Overview.md` | Added inline definitions for InputMessage, WorkingMemory, ConversationTurn, MissionState, SystemSignal, CompressedWindow, ContextItem |
+| 12 | DecisionContext undefined in Decision/Planning | `Decision/000-Overview.md` | Added DecisionContext type definition |
+| 13 | ExecutionGraph undefined in Planning | `Planning/000-Overview.md` | Added ExecutionGraph + ExecutionNode type definitions |
+| 14 | Tools cross-references used relative paths | `Tools/000-Overview.md` | Changed to absolute paths (Bible/04-Execution/...) |
+| 15 | Planning ROS cross-reference wrong path | `Planning/000-Overview.md` | Changed from Bible/05-Platform/ROS/ to Bible/02-Core/ROS/ |
+| 16 | Master API Spec missing Phase B service entries | `000-Master-API-Spec.md` | Added 3.5 Context, 3.6 Decision, 3.7 Planning, 3.8 Tool — 68 new catalog entries, renumbered to 582 |
+| 17 | Architecture Diagram LAYER 5 box alignment | `AIOS-Architecture-Diagram.md` | Fixed indentation mismatch (box-top and body now aligned) |
+| 18 | Brain overview Source Laws format inconsistent | `Brain/000-Overview.md` | Changed parenthetical format to em-dash format |
+| 19 | Brain/Memory/ directory didn't exist | Filesystem | Created empty placeholder directory |
+| 20 | Context TTL table naming mismatch | `Context/000-Overview.md` | "Conversation turn" → "Conversation history" |
