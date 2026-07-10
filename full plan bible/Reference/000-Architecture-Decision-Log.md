@@ -66,6 +66,8 @@ This log records every significant architectural decision made during the design
 
 **Rationale**: Sequential verification ensures each stage builds on the previous. Each stage produces evidence (Law 4).
 
+**Alternatives Considered**: Parallel verification (rejected — stages are dependent), two-stage pipeline (rejected — insufficient granularity for audit).
+
 **Bible Reference**: `Bible/04-Execution/Security/001-Architecture.md`
 
 ### ADR-004: State Machine as Universal Lifecycle Model
