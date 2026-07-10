@@ -111,7 +111,7 @@ type CacheLookupResult =
 
 ### Exact Match
 
-- Build `CacheKey` from compiled prompt and request parameters
+- Build `CacheKey` from raw request input (messages + system prompt + tools + schema)
 - Query cache by full key
 - On match: return entry, increment hit count, update `last_accessed_at`
 - On miss: proceed to semantic match
@@ -120,7 +120,7 @@ type CacheLookupResult =
 
 Enabled when `cache_policy.semantic_match` is true:
 
-- Build embedding vector for the compiled prompt
+- Build embedding vector for the raw request input (messages concatenated as text)
 - Query cache by vector similarity (cosine distance) within same `model_id` and `entity_id`
 - Threshold: similarity > 0.95 (configurable via `cache_policy.semantic_threshold`)
 - Return top 1 match above threshold
