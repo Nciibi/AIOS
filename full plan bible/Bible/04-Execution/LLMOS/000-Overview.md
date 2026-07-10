@@ -197,6 +197,7 @@ Controls what memory LLMOS injects into the context:
 | `LLMOS.SecurityChecked` | Gateway | request_id, entity_id, pipeline_result |
 | `LLMOS.RateChecked` | Gateway | request_id, entity_id, remaining, limit, reset_at |
 | `LLMOS.BudgetChecked` | Gateway | request_id, entity_id, budget_before, budget_after |
+| `LLMOS.BudgetReconciled` | Token Budget Manager | request_id, actual_tokens, estimated_tokens, difference, adjusted_cost |
 | `LLMOS.ModelsResolved` | Model Registry | request_id, matched_model_count, model_list |
 | `LLMOS.ModelSelected` | Router | request_id, model_selected, selection_reason, alternatives_considered |
 | `LLMOS.CostOptimized` | Cost Optimizer | request_id, estimated_cost, optimization_strategy, savings |
