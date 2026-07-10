@@ -230,6 +230,15 @@ Knowledge Graph Updated → Patterns Extracted → Knowledge Distributed
 to Entities → Entities Act on Knowledge → New Events Produced
 ```
 
+### Security/Auth Flow
+```
+Action Requested → IDS Verifies Identity (Stage 1) → ATS Authenticates
+(Stage 2) → AZS Authorizes via RBAC + ABAC (Stage 3) → PS Evaluates
+Policy (Stage 4) → CCA Verifies Capability (Stage 5) → RE Scores Risk
+(Stage 6) → EAS Issues or Denies Execution Token (Stage 7) →
+Token Presented to Runtime → Action Executes or is Rejected
+```
+
 ---
 
 ## Design DNA (R1–R15)
