@@ -509,6 +509,138 @@
 
 ---
 
+### 3.5 Context System
+
+**Source:** `Bible/02-Core/Brain/Context/000-Overview.md`
+
+#### RPC Methods (via ACF)
+
+| # | Method | Auth | Description |
+|---|--------|------|-------------|
+| 234 | `pushItem(item, source, priority?)` | Brain Service | Push an item into the context window |
+| 235 | `pullWindow(session_id)` | Sou only | Get the current context window |
+| 236 | `pinItem(item_id, priority)` | Sou only | Pin an item at a specific priority |
+| 237 | `unpinItem(item_id)` | Sou only | Remove a pin from an item |
+| 238 | `compressWindow(session_id, target_tokens)` | Brain Service | Trigger manual compression |
+| 239 | `clearWindow(session_id)` | Sou only | Clear the context window |
+| 240 | `getRegistry(session_id, filter?)` | Sou only | Query context registry |
+| 241 | `setBudget(session_id, max_tokens)` | LLMOS | Set token budget for current window |
+
+#### Events
+
+| # | Event | Fields | Description |
+|---|-------|--------|-------------|
+| 242 | `CTX.ItemPushed` | item_id, source, item_type, priority | Item added to context window |
+| 243 | `CTX.ItemExpired` | item_id, item_type, reason | Item evicted due to TTL |
+| 244 | `CTX.WindowPulled` | session_id, item_count, total_tokens | Context window read by Sou |
+| 245 | `CTX.WindowCompressed` | session_id, before_tokens, after_tokens, strategy | Compression triggered |
+| 246 | `CTX.ItemPinned` | item_id, priority | Item pinned by Sou |
+| 247 | `CTX.ItemUnpinned` | item_id | Pin removed |
+| 248 | `CTX.BudgetUpdated` | session_id, new_budget | Token budget changed by LLMOS |
+| 249 | `CTX.PriorityOverride` | item_id, old_priority, new_priority | Priority manually adjusted |
+| 250 | `CTX.Deduplicated` | item_id, duplicate_of | Duplicate item removed |
+
+---
+
+### 3.6 Decision System
+
+**Source:** `Bible/02-Core/Brain/Decision/000-Overview.md`
+
+#### RPC Methods (via ACF)
+
+| # | Method | Auth | Description |
+|---|--------|------|-------------|
+| 251 | `evaluateOptions(request)` | Sou only | Evaluate multiple options against criteria |
+| 252 | `scoreOption(option, criteria)` | Sou only | Score a single option against criteria |
+| 253 | `analyzeTradeOffs(options, criteria)` | Sou only | Surface trade-offs between options |
+| 254 | `checkConstraints(options, constraints)` | Sou only | Check hard/soft constraints for options |
+| 255 | `getRegistry(criteria_filter?)` | Sou only | List available criteria from Criteria Registry |
+| 256 | `registerCriterion(criterion)` | Sou only | Register a new criterion |
+| 257 | `getDecisionHistory(session_id, limit?)` | Sou only | Retrieve past decisions |
+
+#### Events
+
+| # | Event | Fields | Description |
+|---|-------|--------|-------------|
+| 258 | `DEC.EvaluationRequested` | request_id, option_count, criteria_count | Decision evaluation started |
+| 259 | `DEC.EvaluationCompleted` | request_id, recommendation | Evaluation finished |
+| 260 | `DEC.DecisionMade` | request_id, final_choice | Sou made the final decision |
+| 261 | `DEC.ConstraintViolated` | constraint_id, option_id, detail | Hard constraint violated |
+| 262 | `DEC.TradeOffIdentified` | criteria_pair, options, magnitude | Trade-off surfaced |
+| 263 | `DEC.CriterionRegistered` | criterion_id, name, weight | New criterion added |
+| 264 | `DEC.PreferenceOverridden` | criterion_id, old_weight, new_weight | Criterion weight changed |
+
+---
+
+### 3.7 Planning System
+
+**Source:** `Bible/02-Core/Brain/Planning/000-Overview.md`
+
+#### RPC Methods (via ACF)
+
+| # | Method | Auth | Description |
+|---|--------|------|-------------|
+| 265 | `createPlan(goal, context)` | Sou only | Decompose a goal into a plan |
+| 266 | `approvePlan(plan_id)` | Sou only | Approve a plan for execution |
+| 267 | `getPlan(plan_id)` | Sou only | Retrieve a plan by ID |
+| 268 | `listPlans(session_id, status?)` | Sou only | List plans for a session |
+| 269 | `updateMilestoneStatus(milestone_id, status, result?)` | Institution OS | Report milestone completion |
+| 270 | `cancelPlan(plan_id)` | Sou only | Cancel an active plan |
+| 271 | `getProgress(plan_id)` | Sou only | Get execution progress |
+| 272 | `estimateResources(goal, context)` | Sou only | Estimate resources without creating a plan |
+
+#### Events
+
+| # | Event | Fields | Description |
+|---|-------|--------|-------------|
+| 273 | `PLN.PlanCreated` | plan_id, goal, milestone_count | Plan created but not yet approved |
+| 274 | `PLN.PlanApproved` | plan_id, resource_estimate | Sou approved the plan |
+| 275 | `PLN.PlanCancelled` | plan_id, reason | Plan cancelled before/during execution |
+| 276 | `PLN.PlanCompleted` | plan_id, duration_ms | All milestones completed |
+| 277 | `PLN.PlanFailed` | plan_id, failed_milestone, reason | Plan failed at a milestone |
+| 278 | `PLN.MilestoneStarted` | milestone_id, plan_id | Milestone execution began |
+| 279 | `PLN.MilestoneCompleted` | milestone_id, plan_id, result | Milestone finished |
+| 280 | `PLN.MilestoneBlocked` | milestone_id, blocking_dependency | Milestone waiting on dependency |
+| 281 | `PLN.MilestoneFailed` | milestone_id, error | Milestone failed |
+| 282 | `PLN.DependencyCycleDetected` | cycle_nodes | Dependency cycle prevented |
+
+---
+
+### 3.8 Tool System
+
+**Source:** `Bible/02-Core/Brain/Tools/000-Overview.md`
+
+#### RPC Methods (via ACF)
+
+| # | Method | Auth | Description |
+|---|--------|------|-------------|
+| 283 | `listTools(category?, capability?)` | Sou only | List available tools matching filter |
+| 284 | `getTool(tool_id)` | Sou only | Get tool definition by ID |
+| 285 | `searchTools(query)` | Sou only | Semantic search for tools |
+| 286 | `invokeTool(tool_id, parameters)` | Sou only | Invoke a tool (goes through Security Council) |
+| 287 | `getInvocationResult(invocation_id)` | Sou only | Poll for result (async invocations) |
+| 288 | `cancelInvocation(invocation_id)` | Sou only | Cancel a running invocation |
+| 289 | `registerTool(definition, provider)` | Runtime SDK | Register a new tool |
+| 290 | `deregisterTool(tool_id)` | Runtime SDK | Remove a tool from registry |
+| 291 | `reportToolHealth(tool_id, status)` | Runtime SDK | Update tool health status |
+
+#### Events
+
+| # | Event | Fields | Description |
+|---|-------|--------|-------------|
+| 292 | `TLS.ToolInvoked` | invocation_id, tool_id, parameter_summary | Tool invocation started |
+| 293 | `TLS.ToolCompleted` | invocation_id, status, duration_ms | Tool execution completed |
+| 294 | `TLS.ToolFailed` | invocation_id, error_code, error_message | Tool execution failed |
+| 295 | `TLS.ToolTimeout` | invocation_id, deadline | Tool exceeded deadline |
+| 296 | `TLS.ToolRegistered` | tool_id, provider, category | New tool registered |
+| 297 | `TLS.ToolDeregistered` | tool_id, provider | Tool removed from registry |
+| 298 | `TLS.ToolHealthChanged` | tool_id, old_status, new_status | Tool health transitioned |
+| 299 | `TLS.ValidationFailed` | invocation_id, field, reason | Parameter validation failed |
+| 300 | `TLS.CapabilityDenied` | invocation_id, tool_id, required_cap | Sou lacks required capability |
+| 301 | `TLS.RateLimitExceeded` | tool_id, current_usage, limit | Tool rate limit hit |
+
+---
+
 ## 4. Security Council
 
 The Security Council is the constitutional authority for all security operations. It operates the 7-stage verification pipeline that gates every action before execution. See `Bible/04-Execution/Security/` for full specifications.
