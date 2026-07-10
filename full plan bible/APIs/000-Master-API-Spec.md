@@ -487,8 +487,6 @@
 
 ### 3.3 DTS — Decision & Trust Scoring
 
-### 2.6 DTS — Decision & Trust Scoring
-
 **Source:** `Bible/02-Core/DTS/001-Architecture.md`, `Bible/02-Core/DTS/003-Sim-Engines.md`
 
 | # | Type | Name | Description |
