@@ -1,23 +1,25 @@
-# AIOS Bible — Core
-## Sou 001 — Reasoning Engine
+# AIOS Bible — Brain
+## Sou 001 — Reasoning (Delegated to Cognitive OS)
 
 | Property | Value |
 |----------|-------|
-| Status | Active |
-| Version | 1.0 |
-| Category | Bible — Core |
+| Status | Active — updated for new paradigm |
+| Version | 2.0 |
+| Category | Bible — Brain |
 | Document ID | AIOS-BBL-002-SOU-001 |
 | Source Laws | Law 2 — Law of Non-Execution, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
-| Supersedes | Nothing |
+| Supersedes | Bible/02-Core/Sou/001-Reasoning.md v1.0 |
 | Superseded By | Nothing |
 | Amended By | RFC |
 
 ## Purpose
 
-Sou's Reasoning engine is the constitutional decision-making core of AIOS. It evaluates situations, explores decision trees, searches configuration spaces, and produces reasoned proposals. Reasoning transforms evidence and goals into actionable strategic recommendations bounded by constitutional constraints.
+Sou reasons about situations, goals, and strategies by delegating to the **Cognitive OS** — a Brain service that implements reasoning, reflection, and metacognition. Sou frames the problem, Cognitive OS executes the reasoning methods, and Sou evaluates the output.
 
 Reasoning does not execute — it proposes. All reasoning outputs are routed through DGP (Governance/002-DGP.md) for approval and routing.
+
+In the new paradigm, reasoning is a **capability** Sou exercises through Cognitive OS, not a module Sou implements internally. This separation keeps Sou focused on identity, goals, and decisions while Cognitive OS provides the reasoning infrastructure.
 
 ## Reasoning Methods
 
