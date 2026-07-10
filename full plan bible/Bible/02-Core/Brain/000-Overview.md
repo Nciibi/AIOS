@@ -167,6 +167,10 @@ Several Brain services (Cognitive OS, Conversation OS, Memory OS, Attention Syst
 | Bible/0010-Brain-Restructuring-Plan.md | Plan document for this restructuring |
 | Bible/02-Core/Brain/Sou/000-Overview.md | Sou — the executive intelligence |
 | Bible/02-Core/Brain/LLMOS/000-Overview.md | LLMOS — AI inference pipeline (moved from Bible/04-Execution/) |
+| Bible/02-Core/Brain/Context/000-Overview.md | Context System — global context window management |
+| Bible/02-Core/Brain/Decision/000-Overview.md | Decision System — multi-factor scoring and trade-off analysis |
+| Bible/02-Core/Brain/Planning/000-Overview.md | Planning System — goal decomposition and milestone tracking |
+| Bible/02-Core/Brain/Tools/000-Overview.md | Tool System — tool registry, discovery, and invocation |
 | Bible/02-Core/Academy/000-Overview.md | Academy — learning infrastructure (outside Brain) |
 | Bible/04-Execution/Security/000-Overview.md | Security Council — verification infrastructure |
 | Bible/03-Institutions/000-Overview.md | Institutions — execution infrastructure |
