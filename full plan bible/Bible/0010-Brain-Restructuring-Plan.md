@@ -351,3 +351,5 @@ SOU-007: All cognitive services live inside the Brain.
 | 2 | Old `Sou/000-Overview.md` lacked deprecation notice | `Bible/02-Core/Sou/000-Overview.md` | Added `DEPRECATED` banner, updated `Superseded By` |
 | 3 | `LLMOS/005-Memory-Injection.md` referenced `Bible/03-OS/Memory` (never-built path) | `005-Memory-Injection.md:19,157` | Updated to `Bible/02-Core/Brain/Memory/` |
 | 4 | 12 LLMOS files retained `Execution/LLMOS` headers, old Doc IDs (`AIOS-BBL-004-*`) | `001`–`013` (excl. `000`, `005`) | Headers → `Brain/LLMOS`, IDs → `AIOS-BBL-002-*` |
+| 5 | Architecture Diagram LAYER 5 missing box-top `┌───┐` line | `AIOS-Architecture-Diagram.md:118` | Added box-top border |
+| 6 | API Spec Security Council Section 4 was empty (no subsections) | `000-Master-API-Spec.md` | Added 10 subsections (4.1–4.10) with 106 catalog entries, full renumbering to 514 items |
