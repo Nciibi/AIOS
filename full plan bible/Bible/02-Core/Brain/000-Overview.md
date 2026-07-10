@@ -174,6 +174,7 @@ Brain service specifications have been created across three phases:
 - **Phase B** (Context System, Planning System, Decision System, Tool System) — see `Brain/Context/`, `Brain/Planning/`, `Brain/Decision/`, and `Brain/Tools/`.
 - **Phase C** (Cognitive OS, Conversation OS, Memory OS, Attention System, Personality System) — see `Brain/Cognitive/`, `Brain/Conversation/`, `Brain/Memory/`, `Brain/Attention/`, and `Brain/Personality/`.
 - **Phase D** (Voice System, Vision System) — see `Brain/Voice/` and `Brain/Vision/`.
+- **Phase 1** (Autonomy System) — see `Brain/Autonomy/`.
 
 **Sou's sub-files** (`Sou/001-Reasoning.md` through `005-Knowledge.md`) contain the detailed technical content from the old Sou engine, adapted for the new paradigm. They serve as the detailed specification for how Sou interacts with each Brain service.
 
