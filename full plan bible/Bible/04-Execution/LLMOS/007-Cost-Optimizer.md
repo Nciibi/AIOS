@@ -101,6 +101,7 @@ interface ModelPricing {
   per_input_token: f64;
   per_output_token: f64;
   per_cached_input_token: f64;
+  per_cached_output_token: f64;
   per_request: f64;
   currency: string;
   effective_date: DateTime;
