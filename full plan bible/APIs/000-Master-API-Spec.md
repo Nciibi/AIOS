@@ -649,29 +649,29 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 662 | `injectSignal(signal, source)` | Any Brain Service | Inject an attention signal for Sou |
-| 663 | `getFocusState()` | Sou only | Get current focus state |
-| 664 | `setFocus(task, goal_id?)` | Sou only | Manually set focus |
-| 665 | `acknowledgeInterrupt(interrupt_id)` | Sou only | Acknowledge an interrupt |
-| 666 | `snoozeSignal(signal_id, condition, duration)` | Sou only | Defer a signal |
-| 667 | `dismissSignal(signal_id)` | Sou only | Discard a signal |
-| 668 | `getSnoozeQueue()` | Sou only | List snoozed signals |
-| 669 | `setSalienceOverride(source, override_score)` | Sou only | Set salience override |
+| 752 | `injectSignal(signal, source)` | Any Brain Service | Inject an attention signal for Sou |
+| 753 | `getFocusState()` | Sou only | Get current focus state |
+| 754 | `setFocus(task, goal_id?)` | Sou only | Manually set focus |
+| 755 | `acknowledgeInterrupt(interrupt_id)` | Sou only | Acknowledge an interrupt |
+| 756 | `snoozeSignal(signal_id, condition, duration)` | Sou only | Defer a signal |
+| 757 | `dismissSignal(signal_id)` | Sou only | Discard a signal |
+| 758 | `getSnoozeQueue()` | Sou only | List snoozed signals |
+| 759 | `setSalienceOverride(source, override_score)` | Sou only | Set salience override |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 670 | `ATT.SignalReceived` | signal_id, source, type, salience | Signal entered Attention System |
-| 671 | `ATT.SignalFocused` | signal_id, salience, focus_state | Signal promoted to Sou's focus |
-| 672 | `ATT.SignalSnoozed` | signal_id, condition, duration | Signal deferred |
-| 583 | `ATT.SignalDropped` | signal_id, reason, snooze_count | Signal dropped (budget exceeded) |
-| 584 | `ATT.SignalDismissed` | signal_id | Sou explicitly dismissed signal |
-| 585 | `ATT.InterruptTriggered` | interrupt_id, priority, reason | High-priority interrupt fired |
-| 586 | `ATT.InterruptAcknowledged` | interrupt_id, latency_ms | Sou acknowledged interrupt |
-| 587 | `ATT.FocusChanged` | from_state, to_state, task | Focus state transitioned |
-| 588 | `ATT.BudgetExceeded` | resource, current_usage, limit | Attention budget exceeded |
-| 589 | `ATT.OverloadEscalation` | switch_rate, consecutive_interrupts | Sou overwhelmed, escalating |
+| 760 | `ATT.SignalReceived` | signal_id, source, type, salience | Signal entered Attention System |
+| 761 | `ATT.SignalFocused` | signal_id, salience, focus_state | Signal promoted to Sou's focus |
+| 762 | `ATT.SignalSnoozed` | signal_id, condition, duration | Signal deferred |
+| 673 | `ATT.SignalDropped` | signal_id, reason, snooze_count | Signal dropped (budget exceeded) |
+| 674 | `ATT.SignalDismissed` | signal_id | Sou explicitly dismissed signal |
+| 675 | `ATT.InterruptTriggered` | interrupt_id, priority, reason | High-priority interrupt fired |
+| 676 | `ATT.InterruptAcknowledged` | interrupt_id, latency_ms | Sou acknowledged interrupt |
+| 677 | `ATT.FocusChanged` | from_state, to_state, task | Focus state transitioned |
+| 678 | `ATT.BudgetExceeded` | resource, current_usage, limit | Attention budget exceeded |
+| 679 | `ATT.OverloadEscalation` | switch_rate, consecutive_interrupts | Sou overwhelmed, escalating |
 
 ---
 
@@ -683,26 +683,26 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 590 | `getProfile()` | Sou only | Get full personality profile |
-| 591 | `getIdentity()` | Sou only | Get immutable identity core |
-| 592 | `getTraits(category?)` | Sou only | Get traits filtered by category |
-| 593 | `getValues()` | Sou only | Get value matrix |
-| 594 | `getStyle(context?)` | Sou only | Get communication style for given context |
-| 595 | `getMood()` | Sou only | Get current mood state |
-| 596 | `setMood(mood, trigger?)` | Sou only | Manually set mood |
-| 597 | `updateTrait(trait_id, delta, reason)` | Sou, Academy | Adjust a trait score |
-| 598 | `getPersonalitySummary()` | Sou only | Get condensed personality for LLMOS prompt injection |
+| 680 | `getProfile()` | Sou only | Get full personality profile |
+| 681 | `getIdentity()` | Sou only | Get immutable identity core |
+| 682 | `getTraits(category?)` | Sou only | Get traits filtered by category |
+| 683 | `getValues()` | Sou only | Get value matrix |
+| 684 | `getStyle(context?)` | Sou only | Get communication style for given context |
+| 685 | `getMood()` | Sou only | Get current mood state |
+| 686 | `setMood(mood, trigger?)` | Sou only | Manually set mood |
+| 687 | `updateTrait(trait_id, delta, reason)` | Sou, Academy | Adjust a trait score |
+| 688 | `getPersonalitySummary()` | Sou only | Get condensed personality for LLMOS prompt injection |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 599 | `PER.ProfileLoaded` | instance_id, trait_count, value_count | Personality loaded on startup |
-| 600 | `PER.TraitAdjusted` | trait_id, old_score, new_score, reason | Trait score changed |
-| 601 | `PER.MoodChanged` | old_mood, new_mood, intensity, trigger | Mood state transitioned |
-| 602 | `PER.ValueConflict` | value_a, value_b, context | Two values came into conflict |
-| 603 | `PER.StyleAdapted` | style_dimension, old_value, new_value, context | Communication style adapted |
-| 604 | `PER.IdentityAccessed` | field, caller | Identity read by authorized component |
+| 689 | `PER.ProfileLoaded` | instance_id, trait_count, value_count | Personality loaded on startup |
+| 690 | `PER.TraitAdjusted` | trait_id, old_score, new_score, reason | Trait score changed |
+| 691 | `PER.MoodChanged` | old_mood, new_mood, intensity, trigger | Mood state transitioned |
+| 692 | `PER.ValueConflict` | value_a, value_b, context | Two values came into conflict |
+| 693 | `PER.StyleAdapted` | style_dimension, old_value, new_value, context | Communication style adapted |
+| 694 | `PER.IdentityAccessed` | field, caller | Identity read by authorized component |
 
 ---
 
@@ -714,27 +714,27 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 605 | `reason(request)` | Sou only | Execute chain-of-thought reasoning |
-| 606 | `reflect(experience_id, type)` | Sou only | Reflect on a past experience |
-| 607 | `metacognize(request)` | Sou only | Perform metacognitive analysis |
-| 608 | `synthesize(inputs, mode)` | Sou only | Combine multiple reasoning outputs |
-| 609 | `evaluateEvidence(evidence_refs)` | Sou only | Assess evidence quality |
-| 610 | `selectStrategy(goal, context)` | Sou only | Recommend optimal reasoning strategy |
-| 611 | `getReasoningHistory(session_id, limit?)` | Sou only | Retrieve past reasoning chains |
+| 695 | `reason(request)` | Sou only | Execute chain-of-thought reasoning |
+| 696 | `reflect(experience_id, type)` | Sou only | Reflect on a past experience |
+| 697 | `metacognize(request)` | Sou only | Perform metacognitive analysis |
+| 698 | `synthesize(inputs, mode)` | Sou only | Combine multiple reasoning outputs |
+| 699 | `evaluateEvidence(evidence_refs)` | Sou only | Assess evidence quality |
+| 700 | `selectStrategy(goal, context)` | Sou only | Recommend optimal reasoning strategy |
+| 701 | `getReasoningHistory(session_id, limit?)` | Sou only | Retrieve past reasoning chains |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 612 | `COG.ReasoningStarted` | request_id, type, strategy | Reasoning process began |
-| 613 | `COG.ReasoningCompleted` | request_id, confidence, token_cost | Reasoning finished |
-| 614 | `COG.ThoughtStepGenerated` | request_id, step_number, type | Individual thought step produced |
-| 615 | `COG.ReflectionCompleted` | request_id, type, lessons | Reflection finished |
-| 616 | `COG.MetacognitionUpdate` | request_id, function, result | Metacognitive insight produced |
-| 617 | `COG.SynthesisCompleted` | request_id, mode, source_count | Synthesis finished |
-| 618 | `COG.LowConfidenceDetected` | request_id, confidence, reason | Confidence below threshold |
-| 619 | `COG.StrategySelected` | request_id, strategy, rationale | Reasoning strategy chosen |
-| 620 | `COG.EvidenceEvaluated` | request_id, evidence_count, avg_reliability | Evidence quality assessed |
+| 702 | `COG.ReasoningStarted` | request_id, type, strategy | Reasoning process began |
+| 703 | `COG.ReasoningCompleted` | request_id, confidence, token_cost | Reasoning finished |
+| 704 | `COG.ThoughtStepGenerated` | request_id, step_number, type | Individual thought step produced |
+| 705 | `COG.ReflectionCompleted` | request_id, type, lessons | Reflection finished |
+| 706 | `COG.MetacognitionUpdate` | request_id, function, result | Metacognitive insight produced |
+| 707 | `COG.SynthesisCompleted` | request_id, mode, source_count | Synthesis finished |
+| 708 | `COG.LowConfidenceDetected` | request_id, confidence, reason | Confidence below threshold |
+| 709 | `COG.StrategySelected` | request_id, strategy, rationale | Reasoning strategy chosen |
+| 710 | `COG.EvidenceEvaluated` | request_id, evidence_count, avg_reliability | Evidence quality assessed |
 
 ---
 
@@ -746,38 +746,38 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 621 | `receiveMessage(session_id, content, modality)` | User token | Receive user input |
-| 622 | `sendMessage(session_id, content, modality)` | Sou | Deliver response to user |
-| 623 | `createSession(user_id, modality, preferences?)` | User token | Start a conversation session |
-| 624 | `endSession(session_id)` | User or Sou | End a conversation session |
-| 625 | `getSession(session_id)` | User or Sou | Get session state |
-| 626 | `pauseSession(session_id)` | User or Sou | Pause conversation |
+| 711 | `receiveMessage(session_id, content, modality)` | User token | Receive user input |
+| 712 | `sendMessage(session_id, content, modality)` | Sou | Deliver response to user |
+| 713 | `createSession(user_id, modality, preferences?)` | User token | Start a conversation session |
+| 714 | `endSession(session_id)` | User or Sou | End a conversation session |
+| 715 | `getSession(session_id)` | User or Sou | Get session state |
+| 716 | `pauseSession(session_id)` | User or Sou | Pause conversation |
 
 #### RPC Methods (via ACF) — Brain-Facing
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 627 | `deliverInput(session_id, turn)` | Conversation OS → Sou | Deliver parsed user input to Sou |
-| 628 | `receiveResponse(session_id, response)` | Sou → Conversation OS | Receive Sou's response |
-| 629 | `getTurnHistory(session_id, limit?)` | Sou only | Get recent turn history |
-| 630 | `injectSystemMessage(session_id, content)` | Sou only | Inject system message |
-| 631 | `updatePreferences(session_id, updates)` | Sou only | Update user preferences |
+| 717 | `deliverInput(session_id, turn)` | Conversation OS → Sou | Deliver parsed user input to Sou |
+| 718 | `receiveResponse(session_id, response)` | Sou → Conversation OS | Receive Sou's response |
+| 719 | `getTurnHistory(session_id, limit?)` | Sou only | Get recent turn history |
+| 720 | `injectSystemMessage(session_id, content)` | Sou only | Inject system message |
+| 721 | `updatePreferences(session_id, updates)` | Sou only | Update user preferences |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 632 | `CONV.SessionCreated` | session_id, user_id, modality | Conversation session started |
-| 633 | `CONV.SessionEnded` | session_id, turn_count, duration | Session ended |
-| 634 | `CONV.SessionPaused` | session_id, reason | Session paused |
-| 635 | `CONV.UserInputReceived` | turn_id, session_id, modality | User input accepted |
-| 636 | `CONV.UserInputDelivered` | turn_id, session_id, latency_ms | Input delivered to Sou |
-| 637 | `CONV.ResponseBuilt` | turn_id, session_id, response_length | Response packaged |
-| 638 | `CONV.ResponseDelivered` | turn_id, session_id, modality, latency_ms | Response sent to user |
-| 639 | `CONV.TurnTimeout` | turn_id, session_id | Sou took too long to respond |
-| 640 | `CONV.IntentDetected` | turn_id, intent, confidence | Intent classified |
-| 641 | `CONV.ModalityAdapted` | from_modality, to_modality, turn_id | Modality conversion occurred |
-| 642 | `CONV.SouInterrupted` | turn_id, reason | Sou interrupted during processing |
+| 722 | `CONV.SessionCreated` | session_id, user_id, modality | Conversation session started |
+| 723 | `CONV.SessionEnded` | session_id, turn_count, duration | Session ended |
+| 724 | `CONV.SessionPaused` | session_id, reason | Session paused |
+| 725 | `CONV.UserInputReceived` | turn_id, session_id, modality | User input accepted |
+| 726 | `CONV.UserInputDelivered` | turn_id, session_id, latency_ms | Input delivered to Sou |
+| 727 | `CONV.ResponseBuilt` | turn_id, session_id, response_length | Response packaged |
+| 728 | `CONV.ResponseDelivered` | turn_id, session_id, modality, latency_ms | Response sent to user |
+| 729 | `CONV.TurnTimeout` | turn_id, session_id | Sou took too long to respond |
+| 730 | `CONV.IntentDetected` | turn_id, intent, confidence | Intent classified |
+| 731 | `CONV.ModalityAdapted` | from_modality, to_modality, turn_id | Modality conversion occurred |
+| 732 | `CONV.SouInterrupted` | turn_id, reason | Sou interrupted during processing |
 
 ---
 
@@ -789,30 +789,30 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 643 | `store(item, memory_type)` | Any Brain Service | Store a memory item |
-| 644 | `storeBatch(items)` | Any Brain Service | Batch store multiple items |
-| 645 | `query(query)` | Any Brain Service | Query memory items |
-| 646 | `get(item_id)` | Any Brain Service | Get single item by ID |
-| 647 | `update(item_id, updates)` | Sou, Context | Update item fields |
-| 648 | `delete(item_id)` | Sou, Context | Delete an item |
-| 649 | `search(text, memory_types, limit)` | Any Brain Service | Semantic search |
-| 650 | `getSessionMemory(session_id, memory_type?)` | Sou, Context | Get all session memories |
-| 651 | `prune(memory_type, older_than)` | Sou, Context | Manually trigger pruning |
-| 652 | `getStats()` | Sou only | Get memory usage statistics |
+| 733 | `store(item, memory_type)` | Any Brain Service | Store a memory item |
+| 734 | `storeBatch(items)` | Any Brain Service | Batch store multiple items |
+| 735 | `query(query)` | Any Brain Service | Query memory items |
+| 736 | `get(item_id)` | Any Brain Service | Get single item by ID |
+| 737 | `update(item_id, updates)` | Sou, Context | Update item fields |
+| 738 | `delete(item_id)` | Sou, Context | Delete an item |
+| 739 | `search(text, memory_types, limit)` | Any Brain Service | Semantic search |
+| 740 | `getSessionMemory(session_id, memory_type?)` | Sou, Context | Get all session memories |
+| 741 | `prune(memory_type, older_than)` | Sou, Context | Manually trigger pruning |
+| 742 | `getStats()` | Sou only | Get memory usage statistics |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 653 | `MEM.ItemStored` | item_id, memory_type, source, importance | Memory item created |
-| 654 | `MEM.ItemUpdated` | item_id, memory_type, updated_fields | Item updated |
-| 655 | `MEM.ItemDeleted` | item_id, memory_type | Item deleted |
-| 656 | `MEM.ItemExpired` | item_id, memory_type, ttl_policy | Item TTL expired |
-| 657 | `MEM.QueryExecuted` | query_id, memory_types, result_count, latency | Query completed |
-| 658 | `MEM.SearchExecuted` | query_id, memory_types, result_count, avg_score | Semantic search completed |
-| 659 | `MEM.SessionMemoryCleared` | session_id, item_count | Session ended, memory pruned |
-| 660 | `MEM.TTLSweepCompleted` | expired_count, total_scanned | TTL sweep finished |
-| 661 | `MEM.ImportancePromoted` | item_id, old_importance, new_importance | Item importance auto-adjusted |
+| 743 | `MEM.ItemStored` | item_id, memory_type, source, importance | Memory item created |
+| 744 | `MEM.ItemUpdated` | item_id, memory_type, updated_fields | Item updated |
+| 745 | `MEM.ItemDeleted` | item_id, memory_type | Item deleted |
+| 746 | `MEM.ItemExpired` | item_id, memory_type, ttl_policy | Item TTL expired |
+| 747 | `MEM.QueryExecuted` | query_id, memory_types, result_count, latency | Query completed |
+| 748 | `MEM.SearchExecuted` | query_id, memory_types, result_count, avg_score | Semantic search completed |
+| 749 | `MEM.SessionMemoryCleared` | session_id, item_count | Session ended, memory pruned |
+| 750 | `MEM.TTLSweepCompleted` | expired_count, total_scanned | TTL sweep finished |
+| 751 | `MEM.ImportancePromoted` | item_id, old_importance, new_importance | Item importance auto-adjusted |
 
 ---
 
@@ -824,29 +824,29 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 392 | `injectSignal(signal, source)` | Any Brain Service | Inject an attention signal for Sou |
-| 393 | `getFocusState()` | Sou only | Get current focus state |
-| 394 | `setFocus(task, goal_id?)` | Sou only | Manually set focus |
-| 395 | `acknowledgeInterrupt(interrupt_id)` | Sou only | Acknowledge an interrupt |
-| 396 | `snoozeSignal(signal_id, condition, duration)` | Sou only | Defer a signal |
-| 397 | `dismissSignal(signal_id)` | Sou only | Discard a signal |
-| 398 | `getSnoozeQueue()` | Sou only | List snoozed signals |
-| 399 | `setSalienceOverride(source, override_score)` | Sou only | Set salience override |
+| 482 | `injectSignal(signal, source)` | Any Brain Service | Inject an attention signal for Sou |
+| 483 | `getFocusState()` | Sou only | Get current focus state |
+| 484 | `setFocus(task, goal_id?)` | Sou only | Manually set focus |
+| 485 | `acknowledgeInterrupt(interrupt_id)` | Sou only | Acknowledge an interrupt |
+| 486 | `snoozeSignal(signal_id, condition, duration)` | Sou only | Defer a signal |
+| 487 | `dismissSignal(signal_id)` | Sou only | Discard a signal |
+| 488 | `getSnoozeQueue()` | Sou only | List snoozed signals |
+| 489 | `setSalienceOverride(source, override_score)` | Sou only | Set salience override |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 400 | `ATT.SignalReceived` | signal_id, source, type, salience | Signal entered Attention System |
-| 401 | `ATT.SignalFocused` | signal_id, salience, focus_state | Signal promoted to Sou's focus |
-| 402 | `ATT.SignalSnoozed` | signal_id, condition, duration | Signal deferred |
-| 403 | `ATT.SignalDropped` | signal_id, reason, snooze_count | Signal dropped (budget exceeded) |
-| 404 | `ATT.SignalDismissed` | signal_id | Sou explicitly dismissed signal |
-| 405 | `ATT.InterruptTriggered` | interrupt_id, priority, reason | High-priority interrupt fired |
-| 406 | `ATT.InterruptAcknowledged` | interrupt_id, latency_ms | Sou acknowledged interrupt |
-| 407 | `ATT.FocusChanged` | from_state, to_state, task | Focus state transitioned |
-| 408 | `ATT.BudgetExceeded` | resource, current_usage, limit | Attention budget exceeded |
-| 409 | `ATT.OverloadEscalation` | switch_rate, consecutive_interrupts | Sou overwhelmed, escalating |
+| 490 | `ATT.SignalReceived` | signal_id, source, type, salience | Signal entered Attention System |
+| 491 | `ATT.SignalFocused` | signal_id, salience, focus_state | Signal promoted to Sou's focus |
+| 492 | `ATT.SignalSnoozed` | signal_id, condition, duration | Signal deferred |
+| 493 | `ATT.SignalDropped` | signal_id, reason, snooze_count | Signal dropped (budget exceeded) |
+| 494 | `ATT.SignalDismissed` | signal_id | Sou explicitly dismissed signal |
+| 495 | `ATT.InterruptTriggered` | interrupt_id, priority, reason | High-priority interrupt fired |
+| 496 | `ATT.InterruptAcknowledged` | interrupt_id, latency_ms | Sou acknowledged interrupt |
+| 497 | `ATT.FocusChanged` | from_state, to_state, task | Focus state transitioned |
+| 498 | `ATT.BudgetExceeded` | resource, current_usage, limit | Attention budget exceeded |
+| 499 | `ATT.OverloadEscalation` | switch_rate, consecutive_interrupts | Sou overwhelmed, escalating |
 
 ---
 
@@ -858,26 +858,26 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 410 | `getProfile()` | Sou only | Get full personality profile |
-| 411 | `getIdentity()` | Sou only | Get immutable identity core |
-| 412 | `getTraits(category?)` | Sou only | Get traits filtered by category |
-| 413 | `getValues()` | Sou only | Get value matrix |
-| 414 | `getStyle(context?)` | Sou only | Get communication style for given context |
-| 415 | `getMood()` | Sou only | Get current mood state |
-| 416 | `setMood(mood, trigger?)` | Sou only | Manually set mood |
-| 417 | `updateTrait(trait_id, delta, reason)` | Sou, Academy | Adjust a trait score |
-| 418 | `getPersonalitySummary()` | Sou only | Get condensed personality for LLMOS prompt injection |
+| 500 | `getProfile()` | Sou only | Get full personality profile |
+| 501 | `getIdentity()` | Sou only | Get immutable identity core |
+| 502 | `getTraits(category?)` | Sou only | Get traits filtered by category |
+| 503 | `getValues()` | Sou only | Get value matrix |
+| 504 | `getStyle(context?)` | Sou only | Get communication style for given context |
+| 505 | `getMood()` | Sou only | Get current mood state |
+| 506 | `setMood(mood, trigger?)` | Sou only | Manually set mood |
+| 507 | `updateTrait(trait_id, delta, reason)` | Sou, Academy | Adjust a trait score |
+| 508 | `getPersonalitySummary()` | Sou only | Get condensed personality for LLMOS prompt injection |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 419 | `PER.ProfileLoaded` | instance_id, trait_count, value_count | Personality loaded on startup |
-| 420 | `PER.TraitAdjusted` | trait_id, old_score, new_score, reason | Trait score changed |
-| 421 | `PER.MoodChanged` | old_mood, new_mood, intensity, trigger | Mood state transitioned |
-| 422 | `PER.ValueConflict` | value_a, value_b, context | Two values came into conflict |
-| 423 | `PER.StyleAdapted` | style_dimension, old_value, new_value, context | Communication style adapted |
-| 424 | `PER.IdentityAccessed` | field, caller | Identity read by authorized component |
+| 509 | `PER.ProfileLoaded` | instance_id, trait_count, value_count | Personality loaded on startup |
+| 510 | `PER.TraitAdjusted` | trait_id, old_score, new_score, reason | Trait score changed |
+| 511 | `PER.MoodChanged` | old_mood, new_mood, intensity, trigger | Mood state transitioned |
+| 512 | `PER.ValueConflict` | value_a, value_b, context | Two values came into conflict |
+| 513 | `PER.StyleAdapted` | style_dimension, old_value, new_value, context | Communication style adapted |
+| 514 | `PER.IdentityAccessed` | field, caller | Identity read by authorized component |
 
 ---
 
@@ -889,27 +889,27 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 425 | `reason(request)` | Sou only | Execute chain-of-thought reasoning |
-| 426 | `reflect(experience_id, type)` | Sou only | Reflect on a past experience |
-| 427 | `metacognize(request)` | Sou only | Perform metacognitive analysis |
-| 428 | `synthesize(inputs, mode)` | Sou only | Combine multiple reasoning outputs |
-| 429 | `evaluateEvidence(evidence_refs)` | Sou only | Assess evidence quality |
-| 430 | `selectStrategy(goal, context)` | Sou only | Recommend optimal reasoning strategy |
-| 431 | `getReasoningHistory(session_id, limit?)` | Sou only | Retrieve past reasoning chains |
+| 515 | `reason(request)` | Sou only | Execute chain-of-thought reasoning |
+| 516 | `reflect(experience_id, type)` | Sou only | Reflect on a past experience |
+| 517 | `metacognize(request)` | Sou only | Perform metacognitive analysis |
+| 518 | `synthesize(inputs, mode)` | Sou only | Combine multiple reasoning outputs |
+| 519 | `evaluateEvidence(evidence_refs)` | Sou only | Assess evidence quality |
+| 520 | `selectStrategy(goal, context)` | Sou only | Recommend optimal reasoning strategy |
+| 521 | `getReasoningHistory(session_id, limit?)` | Sou only | Retrieve past reasoning chains |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 432 | `COG.ReasoningStarted` | request_id, type, strategy | Reasoning process began |
-| 433 | `COG.ReasoningCompleted` | request_id, confidence, token_cost | Reasoning finished |
-| 434 | `COG.ThoughtStepGenerated` | request_id, step_number, type | Individual thought step produced |
-| 435 | `COG.ReflectionCompleted` | request_id, type, lessons | Reflection finished |
-| 436 | `COG.MetacognitionUpdate` | request_id, function, result | Metacognitive insight produced |
-| 437 | `COG.SynthesisCompleted` | request_id, mode, source_count | Synthesis finished |
-| 438 | `COG.LowConfidenceDetected` | request_id, confidence, reason | Confidence below threshold |
-| 439 | `COG.StrategySelected` | request_id, strategy, rationale | Reasoning strategy chosen |
-| 440 | `COG.EvidenceEvaluated` | request_id, evidence_count, avg_reliability | Evidence quality assessed |
+| 522 | `COG.ReasoningStarted` | request_id, type, strategy | Reasoning process began |
+| 523 | `COG.ReasoningCompleted` | request_id, confidence, token_cost | Reasoning finished |
+| 524 | `COG.ThoughtStepGenerated` | request_id, step_number, type | Individual thought step produced |
+| 525 | `COG.ReflectionCompleted` | request_id, type, lessons | Reflection finished |
+| 526 | `COG.MetacognitionUpdate` | request_id, function, result | Metacognitive insight produced |
+| 527 | `COG.SynthesisCompleted` | request_id, mode, source_count | Synthesis finished |
+| 528 | `COG.LowConfidenceDetected` | request_id, confidence, reason | Confidence below threshold |
+| 529 | `COG.StrategySelected` | request_id, strategy, rationale | Reasoning strategy chosen |
+| 530 | `COG.EvidenceEvaluated` | request_id, evidence_count, avg_reliability | Evidence quality assessed |
 
 ---
 
@@ -921,38 +921,38 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 441 | `receiveMessage(session_id, content, modality)` | User token | Receive user input |
-| 442 | `sendMessage(session_id, content, modality)` | Sou | Deliver response to user |
-| 443 | `createSession(user_id, modality, preferences?)` | User token | Start a conversation session |
-| 444 | `endSession(session_id)` | User or Sou | End a conversation session |
-| 445 | `getSession(session_id)` | User or Sou | Get session state |
-| 446 | `pauseSession(session_id)` | User or Sou | Pause conversation |
+| 531 | `receiveMessage(session_id, content, modality)` | User token | Receive user input |
+| 532 | `sendMessage(session_id, content, modality)` | Sou | Deliver response to user |
+| 533 | `createSession(user_id, modality, preferences?)` | User token | Start a conversation session |
+| 534 | `endSession(session_id)` | User or Sou | End a conversation session |
+| 535 | `getSession(session_id)` | User or Sou | Get session state |
+| 536 | `pauseSession(session_id)` | User or Sou | Pause conversation |
 
 #### RPC Methods (via ACF) — Brain-Facing
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 447 | `deliverInput(session_id, turn)` | Conversation OS → Sou | Deliver parsed user input to Sou |
-| 448 | `receiveResponse(session_id, response)` | Sou → Conversation OS | Receive Sou's response |
-| 449 | `getTurnHistory(session_id, limit?)` | Sou only | Get recent turn history |
-| 450 | `injectSystemMessage(session_id, content)` | Sou only | Inject system message |
-| 451 | `updatePreferences(session_id, updates)` | Sou only | Update user preferences |
+| 537 | `deliverInput(session_id, turn)` | Conversation OS → Sou | Deliver parsed user input to Sou |
+| 538 | `receiveResponse(session_id, response)` | Sou → Conversation OS | Receive Sou's response |
+| 539 | `getTurnHistory(session_id, limit?)` | Sou only | Get recent turn history |
+| 540 | `injectSystemMessage(session_id, content)` | Sou only | Inject system message |
+| 541 | `updatePreferences(session_id, updates)` | Sou only | Update user preferences |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 452 | `CONV.SessionCreated` | session_id, user_id, modality | Conversation session started |
-| 453 | `CONV.SessionEnded` | session_id, turn_count, duration | Session ended |
-| 454 | `CONV.SessionPaused` | session_id, reason | Session paused |
-| 455 | `CONV.UserInputReceived` | turn_id, session_id, modality | User input accepted |
-| 456 | `CONV.UserInputDelivered` | turn_id, session_id, latency_ms | Input delivered to Sou |
-| 457 | `CONV.ResponseBuilt` | turn_id, session_id, response_length | Response packaged |
-| 458 | `CONV.ResponseDelivered` | turn_id, session_id, modality, latency_ms | Response sent to user |
-| 459 | `CONV.TurnTimeout` | turn_id, session_id | Sou took too long to respond |
-| 460 | `CONV.IntentDetected` | turn_id, intent, confidence | Intent classified |
-| 461 | `CONV.ModalityAdapted` | from_modality, to_modality, turn_id | Modality conversion occurred |
-| 462 | `CONV.SouInterrupted` | turn_id, reason | Sou interrupted during processing |
+| 542 | `CONV.SessionCreated` | session_id, user_id, modality | Conversation session started |
+| 543 | `CONV.SessionEnded` | session_id, turn_count, duration | Session ended |
+| 544 | `CONV.SessionPaused` | session_id, reason | Session paused |
+| 545 | `CONV.UserInputReceived` | turn_id, session_id, modality | User input accepted |
+| 546 | `CONV.UserInputDelivered` | turn_id, session_id, latency_ms | Input delivered to Sou |
+| 547 | `CONV.ResponseBuilt` | turn_id, session_id, response_length | Response packaged |
+| 548 | `CONV.ResponseDelivered` | turn_id, session_id, modality, latency_ms | Response sent to user |
+| 549 | `CONV.TurnTimeout` | turn_id, session_id | Sou took too long to respond |
+| 550 | `CONV.IntentDetected` | turn_id, intent, confidence | Intent classified |
+| 551 | `CONV.ModalityAdapted` | from_modality, to_modality, turn_id | Modality conversion occurred |
+| 552 | `CONV.SouInterrupted` | turn_id, reason | Sou interrupted during processing |
 
 ---
 
@@ -964,30 +964,30 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 463 | `store(item, memory_type)` | Any Brain Service | Store a memory item |
-| 464 | `storeBatch(items)` | Any Brain Service | Batch store multiple items |
-| 465 | `query(query)` | Any Brain Service | Query memory items |
-| 466 | `get(item_id)` | Any Brain Service | Get single item by ID |
-| 467 | `update(item_id, updates)` | Sou, Context | Update item fields |
-| 468 | `delete(item_id)` | Sou, Context | Delete an item |
-| 469 | `search(text, memory_types, limit)` | Any Brain Service | Semantic search |
-| 470 | `getSessionMemory(session_id, memory_type?)` | Sou, Context | Get all session memories |
-| 471 | `prune(memory_type, older_than)` | Sou, Context | Manually trigger pruning |
-| 472 | `getStats()` | Sou only | Get memory usage statistics |
+| 553 | `store(item, memory_type)` | Any Brain Service | Store a memory item |
+| 554 | `storeBatch(items)` | Any Brain Service | Batch store multiple items |
+| 555 | `query(query)` | Any Brain Service | Query memory items |
+| 556 | `get(item_id)` | Any Brain Service | Get single item by ID |
+| 557 | `update(item_id, updates)` | Sou, Context | Update item fields |
+| 558 | `delete(item_id)` | Sou, Context | Delete an item |
+| 559 | `search(text, memory_types, limit)` | Any Brain Service | Semantic search |
+| 560 | `getSessionMemory(session_id, memory_type?)` | Sou, Context | Get all session memories |
+| 561 | `prune(memory_type, older_than)` | Sou, Context | Manually trigger pruning |
+| 562 | `getStats()` | Sou only | Get memory usage statistics |
 
 #### Events
 
 | # | Event | Fields | Description |
 |---|-------|--------|-------------|
-| 473 | `MEM.ItemStored` | item_id, memory_type, source, importance | Memory item created |
-| 474 | `MEM.ItemUpdated` | item_id, memory_type, updated_fields | Item updated |
-| 475 | `MEM.ItemDeleted` | item_id, memory_type | Item deleted |
-| 476 | `MEM.ItemExpired` | item_id, memory_type, ttl_policy | Item TTL expired |
-| 477 | `MEM.QueryExecuted` | query_id, memory_types, result_count, latency | Query completed |
-| 478 | `MEM.SearchExecuted` | query_id, memory_types, result_count, avg_score | Semantic search completed |
-| 479 | `MEM.SessionMemoryCleared` | session_id, item_count | Session ended, memory pruned |
-| 480 | `MEM.TTLSweepCompleted` | expired_count, total_scanned | TTL sweep finished |
-| 481 | `MEM.ImportancePromoted` | item_id, old_importance, new_importance | Item importance auto-adjusted |
+| 563 | `MEM.ItemStored` | item_id, memory_type, source, importance | Memory item created |
+| 564 | `MEM.ItemUpdated` | item_id, memory_type, updated_fields | Item updated |
+| 565 | `MEM.ItemDeleted` | item_id, memory_type | Item deleted |
+| 566 | `MEM.ItemExpired` | item_id, memory_type, ttl_policy | Item TTL expired |
+| 567 | `MEM.QueryExecuted` | query_id, memory_types, result_count, latency | Query completed |
+| 568 | `MEM.SearchExecuted` | query_id, memory_types, result_count, avg_score | Semantic search completed |
+| 569 | `MEM.SessionMemoryCleared` | session_id, item_count | Session ended, memory pruned |
+| 570 | `MEM.TTLSweepCompleted` | expired_count, total_scanned | TTL sweep finished |
+| 571 | `MEM.ImportancePromoted` | item_id, old_importance, new_importance | Item importance auto-adjusted |
 
 ---
 
@@ -1003,25 +1003,25 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Stage | Service | Function |
 |---|-------|---------|----------|
-| 662 | 1 â€” Identity | IDS | Verify actor identity exists and is active |
-| 663 | 2 â€” Authentication | ATS | Verify authentication token is valid |
-| 664 | 3 â€” Authorization | AZS | Verify actor is authorized for this action |
-| 665 | 4 â€” Policy | Policy System | Verify action complies with active policies |
-| 666 | 5 â€” Capability | CCA | Verify actor has required capabilities |
-| 667 | 6 â€” Risk | Risk Engine | Evaluate risk level; escalate if above threshold |
-| 668 | 7 â€” Execution Auth | Execution-Auth | Issue execution token; reserve resources via ROS |
+| 752 | 1 â€” Identity | IDS | Verify actor identity exists and is active |
+| 753 | 2 â€” Authentication | ATS | Verify authentication token is valid |
+| 754 | 3 â€” Authorization | AZS | Verify actor is authorized for this action |
+| 755 | 4 â€” Policy | Policy System | Verify action complies with active policies |
+| 756 | 5 â€” Capability | CCA | Verify actor has required capabilities |
+| 757 | 6 â€” Risk | Risk Engine | Evaluate risk level; escalate if above threshold |
+| 758 | 7 â€” Execution Auth | Execution-Auth | Issue execution token; reserve resources via ROS |
 
 #### Pipeline Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 669 | `SC.PipelineStarted` | Action entered verification pipeline |
-| 670 | `SC.StagePassed` | Individual pipeline stage passed |
-| 671 | `SC.StageFailed` | Individual pipeline stage failed |
-| 672 | `SC.PipelineCompleted` | All 7 stages passed, execution token issued |
-| 583 | `SC.PipelineDenied` | Action denied at a pipeline stage |
-| 584 | `SC.ExecutionTokenIssued` | Execution authorization token created |
-| 585 | `SC.ExecutionTokenRevoked` | Execution token revoked before use |
+| 759 | `SC.PipelineStarted` | Action entered verification pipeline |
+| 760 | `SC.StagePassed` | Individual pipeline stage passed |
+| 761 | `SC.StageFailed` | Individual pipeline stage failed |
+| 762 | `SC.PipelineCompleted` | All 7 stages passed, execution token issued |
+| 673 | `SC.PipelineDenied` | Action denied at a pipeline stage |
+| 674 | `SC.ExecutionTokenIssued` | Execution authorization token created |
+| 675 | `SC.ExecutionTokenRevoked` | Execution token revoked before use |
 
 ---
 
@@ -1031,21 +1031,21 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 586 | Interface | `IdentityFactory` | Security Council | Create new identities |
-| 587 | Interface | `IdentityRegistry` | Security Council | Register, resolve, and manage identity records |
-| 588 | RPC | `createIdentity(entity_type, attributes)` | Security Council | Create a new constitutional identity |
-| 589 | RPC | `resolveIdentity(entity_id)` | ACF-level | Resolve identity to its current attributes |
-| 590 | RPC | `validateIdentity(entity_id)` | ACF-level | Verify identity is active and valid |
-| 591 | RPC | `deprecateIdentity(entity_id, reason)` | Security Council | Deprecate an identity |
+| 676 | Interface | `IdentityFactory` | Security Council | Create new identities |
+| 677 | Interface | `IdentityRegistry` | Security Council | Register, resolve, and manage identity records |
+| 678 | RPC | `createIdentity(entity_type, attributes)` | Security Council | Create a new constitutional identity |
+| 679 | RPC | `resolveIdentity(entity_id)` | ACF-level | Resolve identity to its current attributes |
+| 680 | RPC | `validateIdentity(entity_id)` | ACF-level | Verify identity is active and valid |
+| 681 | RPC | `deprecateIdentity(entity_id, reason)` | Security Council | Deprecate an identity |
 
 #### IDS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 592 | `IDS.IdentityCreated` | New identity registered |
-| 593 | `IDS.IdentityResolved` | Identity resolution completed |
-| 594 | `IDS.IdentityDeprecated` | Identity deprecated |
-| 595 | `IDS.IdentitySuspended` | Identity temporarily suspended |
+| 682 | `IDS.IdentityCreated` | New identity registered |
+| 683 | `IDS.IdentityResolved` | Identity resolution completed |
+| 684 | `IDS.IdentityDeprecated` | Identity deprecated |
+| 685 | `IDS.IdentitySuspended` | Identity temporarily suspended |
 
 ---
 
@@ -1055,24 +1055,24 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 596 | Interface | `AuthProvider` | Security Council | All authentication methods implement this |
-| 597 | RPC | `authenticate(entity_id, credentials)` | None (pre-auth) | Authenticate entity; return session token |
-| 598 | RPC | `validateToken(token)` | ACF-level | Validate existing authentication token |
-| 599 | RPC | `revokeToken(token)` | Security Council | Revoke an authentication token |
-| 600 | RPC | `requestMFA(entity_id, method)` | ACF-level | Request multi-factor authentication |
-| 601 | RPC | `verifyMFA(entity_id, challenge_response)` | ACF-level | Verify MFA challenge response |
+| 686 | Interface | `AuthProvider` | Security Council | All authentication methods implement this |
+| 687 | RPC | `authenticate(entity_id, credentials)` | None (pre-auth) | Authenticate entity; return session token |
+| 688 | RPC | `validateToken(token)` | ACF-level | Validate existing authentication token |
+| 689 | RPC | `revokeToken(token)` | Security Council | Revoke an authentication token |
+| 690 | RPC | `requestMFA(entity_id, method)` | ACF-level | Request multi-factor authentication |
+| 691 | RPC | `verifyMFA(entity_id, challenge_response)` | ACF-level | Verify MFA challenge response |
 
 #### ATS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 602 | `ATS.Authenticated` | Entity authenticated successfully |
-| 603 | `ATS.AuthenticationFailed` | Authentication attempt failed |
-| 604 | `ATS.MFARequired` | MFA challenge issued |
-| 605 | `ATS.MFAVerified` | MFA challenge passed |
-| 606 | `ATS.TokenIssued` | Authentication token issued |
-| 607 | `ATS.TokenRevoked` | Token revoked |
-| 608 | `ATS.TokenExpired` | Token expired naturally |
+| 692 | `ATS.Authenticated` | Entity authenticated successfully |
+| 693 | `ATS.AuthenticationFailed` | Authentication attempt failed |
+| 694 | `ATS.MFARequired` | MFA challenge issued |
+| 695 | `ATS.MFAVerified` | MFA challenge passed |
+| 696 | `ATS.TokenIssued` | Authentication token issued |
+| 697 | `ATS.TokenRevoked` | Token revoked |
+| 698 | `ATS.TokenExpired` | Token expired naturally |
 
 ---
 
@@ -1082,21 +1082,21 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 609 | Interface | `AuthorizationProvider` | Security Council | All authorization methods implement this |
-| 610 | RPC | `checkPermission(entity_id, action, resource)` | Pipeline | Check RBAC permission |
-| 611 | RPC | `checkABAC(entity_id, action, resource, context)` | Pipeline | Check attribute-based access control |
-| 612 | RPC | `checkCapability(entity_id, capability_id)` | Pipeline | Check capability-based authorization |
-| 613 | RPC | `assignRole(entity_id, role)` | Security Council | Assign a role to an entity |
-| 614 | RPC | `revokeRole(entity_id, role)` | Security Council | Revoke a role from an entity |
+| 699 | Interface | `AuthorizationProvider` | Security Council | All authorization methods implement this |
+| 700 | RPC | `checkPermission(entity_id, action, resource)` | Pipeline | Check RBAC permission |
+| 701 | RPC | `checkABAC(entity_id, action, resource, context)` | Pipeline | Check attribute-based access control |
+| 702 | RPC | `checkCapability(entity_id, capability_id)` | Pipeline | Check capability-based authorization |
+| 703 | RPC | `assignRole(entity_id, role)` | Security Council | Assign a role to an entity |
+| 704 | RPC | `revokeRole(entity_id, role)` | Security Council | Revoke a role from an entity |
 
 #### AZS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 615 | `AZS.Authorized` | Authorization check passed |
-| 616 | `AZS.Denied` | Authorization check denied |
-| 617 | `AZS.RoleAssigned` | Role assigned to entity |
-| 618 | `AZS.RoleRevoked` | Role revoked from entity |
+| 705 | `AZS.Authorized` | Authorization check passed |
+| 706 | `AZS.Denied` | Authorization check denied |
+| 707 | `AZS.RoleAssigned` | Role assigned to entity |
+| 708 | `AZS.RoleRevoked` | Role revoked from entity |
 
 ---
 
@@ -1106,22 +1106,22 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 619 | Interface | `PolicyEngine` | Security Council | Policy definition and evaluation engine |
-| 620 | RPC | `createPolicy(policy_def)` | Security Council | Create a new policy |
-| 621 | RPC | `evaluatePolicy(policy_id, context)` | Pipeline | Evaluate action against policy |
-| 622 | RPC | `activatePolicy(policy_id)` | Security Council | Activate a policy |
-| 623 | RPC | `deactivatePolicy(policy_id)` | Security Council | Deactivate a policy |
-| 624 | RPC | `listPolicies(filter?)` | ACF-level | List policies matching filter |
+| 709 | Interface | `PolicyEngine` | Security Council | Policy definition and evaluation engine |
+| 710 | RPC | `createPolicy(policy_def)` | Security Council | Create a new policy |
+| 711 | RPC | `evaluatePolicy(policy_id, context)` | Pipeline | Evaluate action against policy |
+| 712 | RPC | `activatePolicy(policy_id)` | Security Council | Activate a policy |
+| 713 | RPC | `deactivatePolicy(policy_id)` | Security Council | Deactivate a policy |
+| 714 | RPC | `listPolicies(filter?)` | ACF-level | List policies matching filter |
 
 #### Policy Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 625 | `POL.PolicyCreated` | New policy defined |
-| 626 | `POL.PolicyActivated` | Policy activated |
-| 627 | `POL.PolicyDeactivated` | Policy deactivated |
-| 628 | `POL.PolicyEvaluated` | Policy evaluation completed |
-| 629 | `POL.PolicyViolation` | Action violates a policy |
+| 715 | `POL.PolicyCreated` | New policy defined |
+| 716 | `POL.PolicyActivated` | Policy activated |
+| 717 | `POL.PolicyDeactivated` | Policy deactivated |
+| 718 | `POL.PolicyEvaluated` | Policy evaluation completed |
+| 719 | `POL.PolicyViolation` | Action violates a policy |
 
 ---
 
@@ -1131,18 +1131,18 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 630 | Interface | `RiskScorer` | Security Council | Risk scoring interface |
-| 631 | RPC | `evaluateRisk(entity_id, action, context)` | Pipeline | Compute risk score for action |
-| 632 | RPC | `getRiskProfile(entity_id)` | Security Council | Get entity's current risk profile |
-| 633 | RPC | `escalateRisk(action_id, reason)` | Security Council | Escalate a high-risk action |
+| 720 | Interface | `RiskScorer` | Security Council | Risk scoring interface |
+| 721 | RPC | `evaluateRisk(entity_id, action, context)` | Pipeline | Compute risk score for action |
+| 722 | RPC | `getRiskProfile(entity_id)` | Security Council | Get entity's current risk profile |
+| 723 | RPC | `escalateRisk(action_id, reason)` | Security Council | Escalate a high-risk action |
 
 #### Risk Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 634 | `RSK.RiskScored` | Risk score computed for action |
-| 635 | `RSK.ThresholdExceeded` | Risk score exceeded configured threshold |
-| 636 | `RSK.RiskEscalated` | Action escalated for manual review |
+| 724 | `RSK.RiskScored` | Risk score computed for action |
+| 725 | `RSK.ThresholdExceeded` | Risk score exceeded configured threshold |
+| 726 | `RSK.RiskEscalated` | Action escalated for manual review |
 
 ---
 
@@ -1152,19 +1152,19 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 637 | Interface | `EvidenceStore` | Security Council | Immutable evidence storage backend |
-| 638 | Interface | `EvidenceQuery` | Security Council | Evidence query interface |
-| 639 | RPC | `sealEvidence(record)` | Pipeline | Seal an evidence record |
-| 640 | RPC | `queryEvidence(query)` | Auditor | Query evidence records |
-| 641 | RPC | `exportEvidence(query, format)` | Auditor | Export evidence for external audit |
+| 727 | Interface | `EvidenceStore` | Security Council | Immutable evidence storage backend |
+| 728 | Interface | `EvidenceQuery` | Security Council | Evidence query interface |
+| 729 | RPC | `sealEvidence(record)` | Pipeline | Seal an evidence record |
+| 730 | RPC | `queryEvidence(query)` | Auditor | Query evidence records |
+| 731 | RPC | `exportEvidence(query, format)` | Auditor | Export evidence for external audit |
 
 #### EAS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 642 | `EAS.EvidenceSealed` | New evidence record sealed |
-| 643 | `EAS.EvidenceQueried` | Evidence query executed |
-| 644 | `EAS.EvidenceExported` | Evidence export completed |
+| 732 | `EAS.EvidenceSealed` | New evidence record sealed |
+| 733 | `EAS.EvidenceQueried` | Evidence query executed |
+| 734 | `EAS.EvidenceExported` | Evidence export completed |
 
 ---
 
@@ -1174,23 +1174,23 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 645 | Interface | `CryptoProvider` | Security Council | Cryptographic operations interface |
-| 646 | RPC | `generateKey(algorithm, purpose)` | Security Council | Generate cryptographic key pair |
-| 647 | RPC | `sign(entity_id, payload)` | Security Council | Sign payload with entity key |
-| 648 | RPC | `verify(entity_id, payload, signature)` | ACF-level | Verify signature |
-| 649 | RPC | `encrypt(payload, recipient_id)` | ACF-level | Encrypt payload for recipient |
-| 650 | RPC | `decrypt(ciphertext)` | Security Council | Decrypt ciphertext |
-| 651 | RPC | `hash(payload, algorithm)` | ACF-level | Compute cryptographic hash |
+| 735 | Interface | `CryptoProvider` | Security Council | Cryptographic operations interface |
+| 736 | RPC | `generateKey(algorithm, purpose)` | Security Council | Generate cryptographic key pair |
+| 737 | RPC | `sign(entity_id, payload)` | Security Council | Sign payload with entity key |
+| 738 | RPC | `verify(entity_id, payload, signature)` | ACF-level | Verify signature |
+| 739 | RPC | `encrypt(payload, recipient_id)` | ACF-level | Encrypt payload for recipient |
+| 740 | RPC | `decrypt(ciphertext)` | Security Council | Decrypt ciphertext |
+| 741 | RPC | `hash(payload, algorithm)` | ACF-level | Compute cryptographic hash |
 
 #### CSP Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 652 | `CSP.KeyGenerated` | New key pair generated |
-| 653 | `CSP.KeyRotated` | Key rotated |
-| 654 | `CSP.KeyCompromised` | Key reported compromised |
-| 655 | `CSP.SignatureVerified` | Signature verification completed |
-| 656 | `CSP.EncryptionPerformed` | Encryption operation completed |
+| 742 | `CSP.KeyGenerated` | New key pair generated |
+| 743 | `CSP.KeyRotated` | Key rotated |
+| 744 | `CSP.KeyCompromised` | Key reported compromised |
+| 745 | `CSP.SignatureVerified` | Signature verification completed |
+| 746 | `CSP.EncryptionPerformed` | Encryption operation completed |
 
 ---
 
@@ -1200,26 +1200,26 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 657 | Interface | `SessionManager` | Security Council | Session lifecycle management |
-| 658 | Interface | `SecretStore` | Security Council | Encrypted secret storage |
-| 659 | RPC | `createSession(entity_id, ttl)` | ACF-level | Create new session |
-| 660 | RPC | `validateSession(session_id)` | ACF-level | Validate session is active |
-| 661 | RPC | `terminateSession(session_id)` | Security Council | Terminate a session |
-| 662 | RPC | `storeSecret(name, value, ttl)` | Security Council | Store an encrypted secret |
-| 663 | RPC | `resolveSecret(name)` | Security Council | Resolve a secret (for authorized callers) |
-| 664 | RPC | `rotateSecret(name)` | Security Council | Rotate a secret |
-| 665 | RPC | `revokeSecret(name)` | Security Council | Revoke a secret |
+| 747 | Interface | `SessionManager` | Security Council | Session lifecycle management |
+| 748 | Interface | `SecretStore` | Security Council | Encrypted secret storage |
+| 749 | RPC | `createSession(entity_id, ttl)` | ACF-level | Create new session |
+| 750 | RPC | `validateSession(session_id)` | ACF-level | Validate session is active |
+| 751 | RPC | `terminateSession(session_id)` | Security Council | Terminate a session |
+| 752 | RPC | `storeSecret(name, value, ttl)` | Security Council | Store an encrypted secret |
+| 753 | RPC | `resolveSecret(name)` | Security Council | Resolve a secret (for authorized callers) |
+| 754 | RPC | `rotateSecret(name)` | Security Council | Rotate a secret |
+| 755 | RPC | `revokeSecret(name)` | Security Council | Revoke a secret |
 
 #### SSM Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 666 | `SSM.SessionCreated` | New session created |
-| 667 | `SSM.SessionTerminated` | Session terminated |
-| 668 | `SSM.SessionExpired` | Session TTL exceeded |
-| 669 | `SSM.SecretStored` | Secret encrypted and stored |
-| 670 | `SSM.SecretRotated` | Secret rotated |
-| 671 | `SSM.SecretRevoked` | Secret revoked |
+| 756 | `SSM.SessionCreated` | New session created |
+| 757 | `SSM.SessionTerminated` | Session terminated |
+| 758 | `SSM.SessionExpired` | Session TTL exceeded |
+| 759 | `SSM.SecretStored` | Secret encrypted and stored |
+| 760 | `SSM.SecretRotated` | Secret rotated |
+| 761 | `SSM.SecretRevoked` | Secret revoked |
 
 ---
 
@@ -1229,17 +1229,17 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 672 | Interface | `SandboxProvider` | Security Council | Execution isolation interface |
-| 583 | RPC | `createSandbox(worker_id, resource_limits)` | Pipeline | Create isolated execution environment |
-| 584 | RPC | `destroySandbox(sandbox_id)` | Security Council | Destroy sandbox environment |
+| 762 | Interface | `SandboxProvider` | Security Council | Execution isolation interface |
+| 673 | RPC | `createSandbox(worker_id, resource_limits)` | Pipeline | Create isolated execution environment |
+| 674 | RPC | `destroySandbox(sandbox_id)` | Security Council | Destroy sandbox environment |
 
 #### Sandbox Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 585 | `SANDBOX.Created` | Sandbox created for worker |
-| 586 | `SANDBOX.Destroyed` | Sandbox destroyed |
-| 587 | `SANDBOX.IsolationViolation` | Isolation boundary violated |
+| 675 | `SANDBOX.Created` | Sandbox created for worker |
+| 676 | `SANDBOX.Destroyed` | Sandbox destroyed |
+| 677 | `SANDBOX.IsolationViolation` | Isolation boundary violated |
 
 ---
 
@@ -1251,31 +1251,31 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 588 | RPC | `sendMessage(sender_id, target_id, message_type, payload)` | Capability-based | Send message from one Worker to another |
-| 589 | RPC | `broadcastMessage(sender_id, mission_id, message_type, payload)` | Capability-based | Broadcast message to all Workers in mission |
-| 590 | RPC | `publishMessage(sender_id, topic, payload)` | Capability-based | Publish message to topic |
-| 591 | RPC | `sendMessageWithResponse(...)` | Capability-based | Send message and wait for response |
-| 592 | RPC | `receiveMessage(session_id, message_id?)` | Capability-based | Dequeue next message |
-| 593 | RPC | `subscribeTopic(session_id, topic, filter_criteria?)` | Capability-based | Subscribe to a topic |
-| 594 | RPC | `unsubscribeTopic(subscription_id)` | Capability-based | Unsubscribe from a topic |
-| 595 | RPC | `getMessageHistory(session_id, time_range, filters?)` | Capability-based | Query message history |
-| 596 | RPC | `getPendingMessages(session_id)` | Capability-based | List undelivered messages |
-| 597 | Interface | `MessageChannel` | N/A | All communication patterns implement this |
-| 598 | Message | `WorkerMessage` | N/A | message_id, sender_id, target_id, message_type, payload, ttl |
+| 678 | RPC | `sendMessage(sender_id, target_id, message_type, payload)` | Capability-based | Send message from one Worker to another |
+| 679 | RPC | `broadcastMessage(sender_id, mission_id, message_type, payload)` | Capability-based | Broadcast message to all Workers in mission |
+| 680 | RPC | `publishMessage(sender_id, topic, payload)` | Capability-based | Publish message to topic |
+| 681 | RPC | `sendMessageWithResponse(...)` | Capability-based | Send message and wait for response |
+| 682 | RPC | `receiveMessage(session_id, message_id?)` | Capability-based | Dequeue next message |
+| 683 | RPC | `subscribeTopic(session_id, topic, filter_criteria?)` | Capability-based | Subscribe to a topic |
+| 684 | RPC | `unsubscribeTopic(subscription_id)` | Capability-based | Unsubscribe from a topic |
+| 685 | RPC | `getMessageHistory(session_id, time_range, filters?)` | Capability-based | Query message history |
+| 686 | RPC | `getPendingMessages(session_id)` | Capability-based | List undelivered messages |
+| 687 | Interface | `MessageChannel` | N/A | All communication patterns implement this |
+| 688 | Message | `WorkerMessage` | N/A | message_id, sender_id, target_id, message_type, payload, ttl |
 
 #### WCS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 599 | `WCS.MessageSent` | Worker sends a message |
-| 600 | `WCS.MessageDelivered` | Message reaches target |
-| 601 | `WCS.MessageFailed` | Message delivery fails |
-| 602 | `WCS.MessageExpired` | Message TTL exceeded |
-| 603 | `WCS.MessageDropped` | Queue overflow message dropped |
-| 604 | `WCS.MessageAuthorizationDenied` | Cross-scope message denied |
-| 605 | `WCS.SubscriptionCreated` | Worker subscribes to a topic |
-| 606 | `WCS.SubscriptionRemoved` | Worker unsubscribes |
-| 607 | `WCS.BroadcastSent` | Broadcast message transmitted |
+| 689 | `WCS.MessageSent` | Worker sends a message |
+| 690 | `WCS.MessageDelivered` | Message reaches target |
+| 691 | `WCS.MessageFailed` | Message delivery fails |
+| 692 | `WCS.MessageExpired` | Message TTL exceeded |
+| 693 | `WCS.MessageDropped` | Queue overflow message dropped |
+| 694 | `WCS.MessageAuthorizationDenied` | Cross-scope message denied |
+| 695 | `WCS.SubscriptionCreated` | Worker subscribes to a topic |
+| 696 | `WCS.SubscriptionRemoved` | Worker unsubscribes |
+| 697 | `WCS.BroadcastSent` | Broadcast message transmitted |
 
 ---
 
@@ -1285,14 +1285,14 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Event | Description |
 |---|-------|-------------|
-| 608 | `WSS.IsolationViolation` | Worker violates isolation boundary |
-| 609 | `WSS.BoundaryCrossingAttempt` | Worker attempts cross-boundary access |
-| 610 | `WSS.ResourceExhaustion` | Worker exceeds resource quota |
-| 611 | `WSS.CapabilityViolation` | Worker attempts action outside capability scope |
-| 612 | `WSS.IsolationConfigured` | Worker isolation configuration changed |
-| 613 | `WSS.IsolationValidated` | Isolation layers are verified |
-| 614 | `WSS.BoundaryEnforced` | Enforcement action taken on boundary violation |
-| 615 | `WSS.CommunicationSpoofAttempt` | Worker attempts to spoof another Worker's identity |
+| 698 | `WSS.IsolationViolation` | Worker violates isolation boundary |
+| 699 | `WSS.BoundaryCrossingAttempt` | Worker attempts cross-boundary access |
+| 700 | `WSS.ResourceExhaustion` | Worker exceeds resource quota |
+| 701 | `WSS.CapabilityViolation` | Worker attempts action outside capability scope |
+| 702 | `WSS.IsolationConfigured` | Worker isolation configuration changed |
+| 703 | `WSS.IsolationValidated` | Isolation layers are verified |
+| 704 | `WSS.BoundaryEnforced` | Enforcement action taken on boundary violation |
+| 705 | `WSS.CommunicationSpoofAttempt` | Worker attempts to spoof another Worker's identity |
 
 ---
 
@@ -1302,21 +1302,21 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Event | Description |
 |---|-------|-------------|
-| 616 | `PLAYBOOK.Created` | New playbook is created |
-| 617 | `PLAYBOOK.Validated` | Playbook passes validation |
-| 618 | `PLAYBOOK.Published` | Playbook is published |
-| 619 | `PLAYBOOK.Deprecated` | Playbook is deprecated |
-| 620 | `PLAYBOOK.Archived` | Playbook is archived |
-| 621 | `PLAYBOOK.ExecutionStarted` | Playbook execution begins |
-| 622 | `PLAYBOOK.ExecutionApproved` | Execution request is approved |
-| 623 | `PLAYBOOK.ExecutionRejected` | Execution request is denied |
-| 624 | `PLAYBOOK.StepCompleted` | Individual step finishes |
-| 625 | `PLAYBOOK.StepFailed` | Step encounters error |
-| 626 | `PLAYBOOK.RollbackInitiated` | Rollback plan begins execution |
-| 627 | `PLAYBOOK.RollbackCompleted` | Rollback finishes |
-| 628 | `PLAYBOOK.ExecutionCompleted` | Playbook execution finishes successfully |
-| 629 | `PLAYBOOK.ExecutionFailed` | Execution fails (unrecoverable) |
-| 630 | `PLAYBOOK.ExecutionCancelled` | Execution is cancelled mid-run |
+| 706 | `PLAYBOOK.Created` | New playbook is created |
+| 707 | `PLAYBOOK.Validated` | Playbook passes validation |
+| 708 | `PLAYBOOK.Published` | Playbook is published |
+| 709 | `PLAYBOOK.Deprecated` | Playbook is deprecated |
+| 710 | `PLAYBOOK.Archived` | Playbook is archived |
+| 711 | `PLAYBOOK.ExecutionStarted` | Playbook execution begins |
+| 712 | `PLAYBOOK.ExecutionApproved` | Execution request is approved |
+| 713 | `PLAYBOOK.ExecutionRejected` | Execution request is denied |
+| 714 | `PLAYBOOK.StepCompleted` | Individual step finishes |
+| 715 | `PLAYBOOK.StepFailed` | Step encounters error |
+| 716 | `PLAYBOOK.RollbackInitiated` | Rollback plan begins execution |
+| 717 | `PLAYBOOK.RollbackCompleted` | Rollback finishes |
+| 718 | `PLAYBOOK.ExecutionCompleted` | Playbook execution finishes successfully |
+| 719 | `PLAYBOOK.ExecutionFailed` | Execution fails (unrecoverable) |
+| 720 | `PLAYBOOK.ExecutionCancelled` | Execution is cancelled mid-run |
 
 ---
 
@@ -1326,23 +1326,23 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 631 | Interface | `InteractionChannel` | N/A | All communication patterns implement this |
-| 632 | ACF Topic | `org.research.findings` | ACF | Cross-Organization research findings subscription |
-| 633 | ACF Topic | Org-wide broadcast topic | ACF | Cross-Organization broadcast |
+| 721 | Interface | `InteractionChannel` | N/A | All communication patterns implement this |
+| 722 | ACF Topic | `org.research.findings` | ACF | Cross-Organization research findings subscription |
+| 723 | ACF Topic | Org-wide broadcast topic | ACF | Cross-Organization broadcast |
 
 #### OIS Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 634 | `OIS.RequestSent` | Cross-Org request is sent |
-| 635 | `OIS.RequestResponded` | Request receives response |
-| 636 | `OIS.RequestDeclined` | Request is declined |
-| 637 | `OIS.SubscriptionCreated` | Org subscribes to a topic |
-| 638 | `OIS.SubscriptionRemoved` | Org unsubscribes |
-| 639 | `OIS.AgreementReached` | Cross-Org agreement is finalized |
-| 640 | `OIS.AgreementExpired` | Cross-Org agreement expires |
-| 641 | `OIS.KnowledgeShared` | Knowledge is shared between Orgs |
-| 642 | `OIS.AuthorizationDenied` | Cross-Org message authorization fails |
+| 724 | `OIS.RequestSent` | Cross-Org request is sent |
+| 725 | `OIS.RequestResponded` | Request receives response |
+| 726 | `OIS.RequestDeclined` | Request is declined |
+| 727 | `OIS.SubscriptionCreated` | Org subscribes to a topic |
+| 728 | `OIS.SubscriptionRemoved` | Org unsubscribes |
+| 729 | `OIS.AgreementReached` | Cross-Org agreement is finalized |
+| 730 | `OIS.AgreementExpired` | Cross-Org agreement expires |
+| 731 | `OIS.KnowledgeShared` | Knowledge is shared between Orgs |
+| 732 | `OIS.AuthorizationDenied` | Cross-Org message authorization fails |
 
 ---
 
@@ -1354,37 +1354,37 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 643 | Interface | `ExecutionProvider` | Execution token | Interface all execution providers implement |
-| 644 | Method | `providerId()` | N/A | Returns provider identity |
-| 645 | Method | `providerVersion()` | N/A | Returns provider version |
-| 646 | Method | `supportedActionTypes()` | N/A | Returns supported action types |
-| 647 | Method | `capabilityDeclaration()` | N/A | Returns capability declaration |
-| 648 | Method | `initialize(config)` | N/A | Initialize provider with configuration |
-| 649 | Method | `health()` | N/A | Returns provider health status |
-| 650 | Method | `shutdown()` | N/A | Graceful shutdown |
-| 651 | Method | `execute(context)` | VerificationToken | Execute an action (core contract) |
-| 652 | Method | `executeStream(context)` | VerificationToken | Streaming execution |
+| 733 | Interface | `ExecutionProvider` | Execution token | Interface all execution providers implement |
+| 734 | Method | `providerId()` | N/A | Returns provider identity |
+| 735 | Method | `providerVersion()` | N/A | Returns provider version |
+| 736 | Method | `supportedActionTypes()` | N/A | Returns supported action types |
+| 737 | Method | `capabilityDeclaration()` | N/A | Returns capability declaration |
+| 738 | Method | `initialize(config)` | N/A | Initialize provider with configuration |
+| 739 | Method | `health()` | N/A | Returns provider health status |
+| 740 | Method | `shutdown()` | N/A | Graceful shutdown |
+| 741 | Method | `execute(context)` | VerificationToken | Execute an action (core contract) |
+| 742 | Method | `executeStream(context)` | VerificationToken | Streaming execution |
 
 #### Runtime Messages / Types
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 653 | Message | `ExecutionContext` | execution_id, token, action, capability_bounds, autonomy_level, parent_entity_id, deadline |
-| 654 | Message | `ExecutionResult` | execution_id, status, output, metrics, error, events |
-| 655 | Stream Chunk | `ExecutionChunk` | sequence, data, progress, is_final, metrics |
+| 743 | Message | `ExecutionContext` | execution_id, token, action, capability_bounds, autonomy_level, parent_entity_id, deadline |
+| 744 | Message | `ExecutionResult` | execution_id, status, output, metrics, error, events |
+| 745 | Stream Chunk | `ExecutionChunk` | sequence, data, progress, is_final, metrics |
 
 #### Runtime Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 656 | `Runtime.ProviderRegistered` | Provider registered with Runtime Manager |
-| 657 | `Runtime.ProviderHealthChanged` | Provider health status changes |
-| 658 | `Runtime.ProviderExecutionStarted` | Provider execution starts |
-| 659 | `Runtime.ProviderResourceWarning` | Provider resource warning |
-| 660 | `Runtime.ProviderExecutionCompleted` | Provider execution completed |
-| 661 | `Runtime.ProviderExecutionFailed` | Provider execution failed |
-| 662 | `Runtime.ProviderBoundsExceeded` | Provider bounds exceeded |
-| 663 | `Runtime.ProviderShutdown` | Provider shutdown |
+| 746 | `Runtime.ProviderRegistered` | Provider registered with Runtime Manager |
+| 747 | `Runtime.ProviderHealthChanged` | Provider health status changes |
+| 748 | `Runtime.ProviderExecutionStarted` | Provider execution starts |
+| 749 | `Runtime.ProviderResourceWarning` | Provider resource warning |
+| 750 | `Runtime.ProviderExecutionCompleted` | Provider execution completed |
+| 751 | `Runtime.ProviderExecutionFailed` | Provider execution failed |
+| 752 | `Runtime.ProviderBoundsExceeded` | Provider bounds exceeded |
+| 753 | `Runtime.ProviderShutdown` | Provider shutdown |
 
 ---
 
@@ -1394,8 +1394,8 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Endpoint | Auth | Description |
 |---|------|----------|------|-------------|
-| 664 | REST | `POST {endpoint}/api/generate` | Network-bound (localhost/private) | Ollama model generation endpoint |
-| 665 | REST | `POST {endpoint}/api/chat` | Network-bound (localhost/private) | Ollama chat endpoint |
+| 754 | REST | `POST {endpoint}/api/generate` | Network-bound (localhost/private) | Ollama model generation endpoint |
+| 755 | REST | `POST {endpoint}/api/chat` | Network-bound (localhost/private) | Ollama chat endpoint |
 
 ---
 
@@ -1405,38 +1405,38 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Auth | Description |
 |---|------|------|------|-------------|
-| 666 | Interface | `RuntimeProvider` | mTLS | Interface for runtime execution providers |
-| 667 | Method | `createSession(genome, allocation)` | Execution token | Create Worker session |
-| 668 | Method | `startSession(sessionId)` | Execution token | Start session |
-| 669 | Method | `pauseSession(sessionId)` | Execution token | Pause session |
-| 670 | Method | `resumeSession(sessionId)` | Execution token | Resume session |
-| 671 | Method | `terminateSession(sessionId)` | Execution token | Terminate session |
-| 672 | Method | `invokeCapability(sessionId, capability, input)` | Execution token | Execute capability |
-| 583 | Method | `cancelInvocation(sessionId, invocationId)` | Execution token | Cancel invocation |
-| 584 | Method | `getSessionStatus(sessionId)` | Execution token | Query session state |
-| 585 | Method | `streamMetrics(sessionId)` | Execution token | Subscribe to metrics |
-| 586 | Method | `healthCheck()` | N/A | Report provider health |
-| 587 | Method | `reportUsage(sessionId)` | Execution token | Report resource usage |
+| 756 | Interface | `RuntimeProvider` | mTLS | Interface for runtime execution providers |
+| 757 | Method | `createSession(genome, allocation)` | Execution token | Create Worker session |
+| 758 | Method | `startSession(sessionId)` | Execution token | Start session |
+| 759 | Method | `pauseSession(sessionId)` | Execution token | Pause session |
+| 760 | Method | `resumeSession(sessionId)` | Execution token | Resume session |
+| 761 | Method | `terminateSession(sessionId)` | Execution token | Terminate session |
+| 762 | Method | `invokeCapability(sessionId, capability, input)` | Execution token | Execute capability |
+| 673 | Method | `cancelInvocation(sessionId, invocationId)` | Execution token | Cancel invocation |
+| 674 | Method | `getSessionStatus(sessionId)` | Execution token | Query session state |
+| 675 | Method | `streamMetrics(sessionId)` | Execution token | Subscribe to metrics |
+| 676 | Method | `healthCheck()` | N/A | Report provider health |
+| 677 | Method | `reportUsage(sessionId)` | Execution token | Report resource usage |
 
 #### ACF Endpoints
 
 | # | Endpoint | Auth | Description |
 |---|----------|------|-------------|
-| 588 | `acf://runtime-provider-id/control` | ACF | Runtime provider control endpoint |
-| 589 | `acf://runtime-provider-id/metrics` | ACF | Runtime provider metrics endpoint |
-| 590 | `acf://runtime-provider-id/events` | ACF | Runtime provider events endpoint |
+| 678 | `acf://runtime-provider-id/control` | ACF | Runtime provider control endpoint |
+| 679 | `acf://runtime-provider-id/metrics` | ACF | Runtime provider metrics endpoint |
+| 680 | `acf://runtime-provider-id/events` | ACF | Runtime provider events endpoint |
 
 #### Runtime SDK Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 591 | `SDK.RuntimeSessionCreated` | Runtime session created |
-| 592 | `SDK.RuntimeSessionStarted` | Session transitions to Running |
-| 593 | `SDK.RuntimeSessionPaused` | Session paused |
-| 594 | `SDK.RuntimeSessionTerminated` | Session terminates |
-| 595 | `SDK.RuntimeInvocationCompleted` | Capability invocation finishes |
-| 596 | `SDK.RuntimeHealthChanged` | Provider health changes |
-| 597 | `SDK.RuntimeUsageReported` | Resource usage reported |
+| 681 | `SDK.RuntimeSessionCreated` | Runtime session created |
+| 682 | `SDK.RuntimeSessionStarted` | Session transitions to Running |
+| 683 | `SDK.RuntimeSessionPaused` | Session paused |
+| 684 | `SDK.RuntimeSessionTerminated` | Session terminates |
+| 685 | `SDK.RuntimeInvocationCompleted` | Capability invocation finishes |
+| 686 | `SDK.RuntimeHealthChanged` | Provider health changes |
+| 687 | `SDK.RuntimeUsageReported` | Resource usage reported |
 
 ---
 
@@ -1446,21 +1446,21 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 598 | `queryEvents(filter)` | audit scope | Query Events by filter criteria |
-| 599 | `getEventById(eventId)` | audit scope | Retrieve single Event |
-| 600 | `streamEvents(filter)` | audit scope | Subscribe to Event stream |
-| 601 | `verifyChain(eventId)` | audit scope | Verify Event chain integrity |
-| 602 | `verifyIntegrity(eventRange)` | audit scope | Verify Event range integrity |
-| 603 | `computeHash(eventId)` | audit scope | Compute cryptographic hash |
-| 604 | `analyzePattern(filter, pattern)` | audit scope | Detect patterns across Events |
-| 605 | `computeAggregation(filter, metric)` | audit scope | Aggregate metrics |
-| 606 | `detectAnomaly(filter, baseline)` | audit scope | Detect anomalous patterns |
-| 607 | `checkCompliance(filter, standard)` | audit scope | Check compliance |
-| 608 | `generateEvidencePackage(caseId, filter)` | audit scope | Generate evidence package |
-| 609 | `produceReport(template, filter)` | audit scope | Produce audit report |
-| 610 | `registerAsObserver()` | audit scope | Register as event observer |
-| 611 | `setRetentionPolicy(policy)` | audit scope | Set retention policy |
-| 612 | `getRetentionPolicy()` | audit scope | Get current retention policy |
+| 688 | `queryEvents(filter)` | audit scope | Query Events by filter criteria |
+| 689 | `getEventById(eventId)` | audit scope | Retrieve single Event |
+| 690 | `streamEvents(filter)` | audit scope | Subscribe to Event stream |
+| 691 | `verifyChain(eventId)` | audit scope | Verify Event chain integrity |
+| 692 | `verifyIntegrity(eventRange)` | audit scope | Verify Event range integrity |
+| 693 | `computeHash(eventId)` | audit scope | Compute cryptographic hash |
+| 694 | `analyzePattern(filter, pattern)` | audit scope | Detect patterns across Events |
+| 695 | `computeAggregation(filter, metric)` | audit scope | Aggregate metrics |
+| 696 | `detectAnomaly(filter, baseline)` | audit scope | Detect anomalous patterns |
+| 697 | `checkCompliance(filter, standard)` | audit scope | Check compliance |
+| 698 | `generateEvidencePackage(caseId, filter)` | audit scope | Generate evidence package |
+| 699 | `produceReport(template, filter)` | audit scope | Produce audit report |
+| 700 | `registerAsObserver()` | audit scope | Register as event observer |
+| 701 | `setRetentionPolicy(policy)` | audit scope | Set retention policy |
+| 702 | `getRetentionPolicy()` | audit scope | Get current retention policy |
 
 ---
 
@@ -1473,15 +1473,15 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Event | Description |
 |---|-------|-------------|
-| 613 | `Trading.StrategyResearched` | Strategy research completes |
-| 614 | `Trading.BacktestRun` | Backtest execution finishes |
-| 615 | `Trading.PaperTradeCompleted` | Paper trading phase finishes |
-| 616 | `Trading.StrategyDeployed` | Strategy is deployed to live trading |
-| 617 | `Trading.OrderPlaced` | Order is submitted to exchange |
-| 618 | `Trading.OrderFilled` | Order execution confirmed |
-| 619 | `Trading.OrderRejected` | Order is rejected by exchange or risk |
-| 620 | `Trading.RiskLimitBreached` | A risk limit is approached or breached |
-| 621 | `Trading.StrategyRetired` | Strategy is decommissioned |
+| 703 | `Trading.StrategyResearched` | Strategy research completes |
+| 704 | `Trading.BacktestRun` | Backtest execution finishes |
+| 705 | `Trading.PaperTradeCompleted` | Paper trading phase finishes |
+| 706 | `Trading.StrategyDeployed` | Strategy is deployed to live trading |
+| 707 | `Trading.OrderPlaced` | Order is submitted to exchange |
+| 708 | `Trading.OrderFilled` | Order execution confirmed |
+| 709 | `Trading.OrderRejected` | Order is rejected by exchange or risk |
+| 710 | `Trading.RiskLimitBreached` | A risk limit is approached or breached |
+| 711 | `Trading.StrategyRetired` | Strategy is decommissioned |
 
 ---
 
@@ -1491,23 +1491,23 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 622 | Capability | `monitor_endpoints` | Security domain worker capability â€” monitor endpoints |
-| 623 | Capability | `analyze_network` | Security domain worker capability â€” analyze network traffic |
-| 624 | Capability | `detect_intrusion` | Security domain worker capability â€” detect intrusion |
-| 625 | Capability | `alert_triage` | Security domain worker capability â€” triage alerts |
+| 712 | Capability | `monitor_endpoints` | Security domain worker capability â€” monitor endpoints |
+| 713 | Capability | `analyze_network` | Security domain worker capability â€” analyze network traffic |
+| 714 | Capability | `detect_intrusion` | Security domain worker capability â€” detect intrusion |
+| 715 | Capability | `alert_triage` | Security domain worker capability â€” triage alerts |
 
 #### Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 626 | `Security.VulnerabilityFound` | Potential vulnerability identified |
-| 627 | `Security.VulnerabilityVerified` | Vulnerability confirmed in sandbox |
-| 628 | `Security.ExploitAttempted` | Exploit verification executed |
-| 629 | `Security.IncidentDetected` | Security incident is identified |
-| 630 | `Security.IncidentContained` | Incident containment completed |
-| 631 | `Security.IncidentResolved` | Incident fully resolved |
-| 632 | `Security.IntelReportGenerated` | Threat intelligence report produced |
-| 633 | `Security.ComplianceAuditRun` | Compliance audit completes |
+| 716 | `Security.VulnerabilityFound` | Potential vulnerability identified |
+| 717 | `Security.VulnerabilityVerified` | Vulnerability confirmed in sandbox |
+| 718 | `Security.ExploitAttempted` | Exploit verification executed |
+| 719 | `Security.IncidentDetected` | Security incident is identified |
+| 720 | `Security.IncidentContained` | Incident containment completed |
+| 721 | `Security.IncidentResolved` | Incident fully resolved |
+| 722 | `Security.IntelReportGenerated` | Threat intelligence report produced |
+| 723 | `Security.ComplianceAuditRun` | Compliance audit completes |
 
 ---
 
@@ -1519,20 +1519,20 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 634 | `connectToRemoteAgent(remote_session_id, instance_id)` | mTLS + identity | Initiate cross-instance session |
-| 635 | `sendAgentMessage(session_id, message)` | mTLS + identity | Send message to remote session |
-| 636 | `disconnectAgent(session_id)` | mTLS | Terminate cross-instance session |
-| 637 | `getAgentStatus(session_id)` | mTLS | Check remote session status |
+| 724 | `connectToRemoteAgent(remote_session_id, instance_id)` | mTLS + identity | Initiate cross-instance session |
+| 725 | `sendAgentMessage(session_id, message)` | mTLS + identity | Send message to remote session |
+| 726 | `disconnectAgent(session_id)` | mTLS | Terminate cross-instance session |
+| 727 | `getAgentStatus(session_id)` | mTLS | Check remote session status |
 
 #### AIP Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 638 | `AIP.AgentConnected` | Remote session connected |
-| 639 | `AIP.AgentDisconnected` | Remote session disconnected |
-| 640 | `AIP.MessageSent` | Message transmitted |
-| 641 | `AIP.MessageReceived` | Message received |
-| 642 | `AIP.ConnectionFailed` | Connection attempt failed |
+| 728 | `AIP.AgentConnected` | Remote session connected |
+| 729 | `AIP.AgentDisconnected` | Remote session disconnected |
+| 730 | `AIP.MessageSent` | Message transmitted |
+| 731 | `AIP.MessageReceived` | Message received |
+| 732 | `AIP.ConnectionFailed` | Connection attempt failed |
 
 ---
 
@@ -1542,21 +1542,21 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 643 | `shareThreat(threat_data, severity)` | mTLS + signature | Share threat intelligence |
-| 644 | `subscribeThreats(filter, callback_endpoint)` | mTLS | Subscribe to threat feed |
-| 645 | `acknowledgeThreat(threat_id, action_taken)` | mTLS | Acknowledge receipt of threat |
-| 646 | `escalateThreat(threat_id, escalation_reason)` | Security Council | Request coordinated response |
-| 647 | `getThreatStatus(threat_id)` | mTLS | Query threat resolution status |
+| 733 | `shareThreat(threat_data, severity)` | mTLS + signature | Share threat intelligence |
+| 734 | `subscribeThreats(filter, callback_endpoint)` | mTLS | Subscribe to threat feed |
+| 735 | `acknowledgeThreat(threat_id, action_taken)` | mTLS | Acknowledge receipt of threat |
+| 736 | `escalateThreat(threat_id, escalation_reason)` | Security Council | Request coordinated response |
+| 737 | `getThreatStatus(threat_id)` | mTLS | Query threat resolution status |
 
 #### SXP Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 648 | `SXP.ThreatShared` | Threat intelligence shared |
-| 649 | `SXP.ThreatAcknowledged` | Receipt acknowledged |
-| 650 | `SXP.ThreatEscalated` | Threat escalated |
-| 651 | `SXP.ThreatResolved` | Threat resolved |
-| 652 | `SXP.SubscriptionCreated` | Threat feed subscription |
+| 738 | `SXP.ThreatShared` | Threat intelligence shared |
+| 739 | `SXP.ThreatAcknowledged` | Receipt acknowledged |
+| 740 | `SXP.ThreatEscalated` | Threat escalated |
+| 741 | `SXP.ThreatResolved` | Threat resolved |
+| 742 | `SXP.SubscriptionCreated` | Threat feed subscription |
 
 ---
 
@@ -1564,13 +1564,13 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Source | Description |
 |---|------|--------|-------------|
-| 653 | Event | `Bible/01-Governance/001-CLS.md` | CLS constitutional amendment lifecycle events |
-| 654 | Event | `Bible/01-Governance/002-DGP.md` | DGP decision assessed events |
-| 655 | Event | `Bible/01-Governance/003-CRP.md` | CRP constitutional review proposal events |
-| 656 | RPC (ACF) | `Bible/01-Governance/004-CKR.md` | CKR constitutional knowledge registry query interface |
-| 657 | Event | `Bible/01-Governance/004-CKR.md` | CKR knowledge registry lifecycle events |
-| 658 | Event | `Bible/01-Governance/005-ADG.md` | ADG architecture decision events |
-| 659 | Event | `Bible/01-Governance/006-AKM.md` | AKM knowledge management lifecycle events |
+| 743 | Event | `Bible/01-Governance/001-CLS.md` | CLS constitutional amendment lifecycle events |
+| 744 | Event | `Bible/01-Governance/002-DGP.md` | DGP decision assessed events |
+| 745 | Event | `Bible/01-Governance/003-CRP.md` | CRP constitutional review proposal events |
+| 746 | RPC (ACF) | `Bible/01-Governance/004-CKR.md` | CKR constitutional knowledge registry query interface |
+| 747 | Event | `Bible/01-Governance/004-CKR.md` | CKR knowledge registry lifecycle events |
+| 748 | Event | `Bible/01-Governance/005-ADG.md` | ADG architecture decision events |
+| 749 | Event | `Bible/01-Governance/006-AKM.md` | AKM knowledge management lifecycle events |
 
 ---
 
@@ -1578,24 +1578,24 @@ The 7-stage pipeline enforces Law 8 (Verification-First). Every action passes th
 
 | # | Type | Name | Source | Description |
 |---|------|------|--------|-------------|
-| 660 | Interface | `AuthMethod` | `Bible/00-Foundations/002-Design-DNA.md` | Interface for implementing new authentication methods |
-| 661 | Event | `Lifecycle.StateChanged` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity state transitioned |
-| 662 | Event | `Lifecycle.TransitionDenied` | `Bible/00-Foundations/008-Object-Lifecycle.md` | State transition denied |
-| 663 | Event | `Lifecycle.EntityCreated` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity created |
-| 664 | Event | `Lifecycle.EntityCompleted` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity lifecycle completed |
-| 665 | Event | `Lifecycle.EntityArchived` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity archived |
-| 666 | Schema | Canonical API Envelope | `Bible/08-Interfaces/API/000-Specifications.md` | Standard envelope: api_version, message_id, correlation_id, timestamp, source_entity_id, target_entity_id, auth_token, payload |
-| 667 | Schema | Error Response Schema | `Bible/08-Interfaces/API/000-Specifications.md` | Standard error: code, message, details, correlation_id |
+| 750 | Interface | `AuthMethod` | `Bible/00-Foundations/002-Design-DNA.md` | Interface for implementing new authentication methods |
+| 751 | Event | `Lifecycle.StateChanged` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity state transitioned |
+| 752 | Event | `Lifecycle.TransitionDenied` | `Bible/00-Foundations/008-Object-Lifecycle.md` | State transition denied |
+| 753 | Event | `Lifecycle.EntityCreated` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity created |
+| 754 | Event | `Lifecycle.EntityCompleted` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity lifecycle completed |
+| 755 | Event | `Lifecycle.EntityArchived` | `Bible/00-Foundations/008-Object-Lifecycle.md` | Entity archived |
+| 756 | Schema | Canonical API Envelope | `Bible/08-Interfaces/API/000-Specifications.md` | Standard envelope: api_version, message_id, correlation_id, timestamp, source_entity_id, target_entity_id, auth_token, payload |
+| 757 | Schema | Error Response Schema | `Bible/08-Interfaces/API/000-Specifications.md` | Standard error: code, message, details, correlation_id |
 
 #### Framework API Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 668 | `API.ContractPublished` | New API contract registered |
-| 669 | `API.ContractDeprecated` | API version deprecated |
-| 670 | `API.RequestProcessed` | API request completes |
-| 671 | `API.RateLimitExceeded` | Rate limit exceeded |
-| 672 | `API.SchemaValidationFailed` | Schema validation failed |
+| 758 | `API.ContractPublished` | New API contract registered |
+| 759 | `API.ContractDeprecated` | API version deprecated |
+| 760 | `API.RequestProcessed` | API request completes |
+| 761 | `API.RateLimitExceeded` | Rate limit exceeded |
+| 762 | `API.SchemaValidationFailed` | Schema validation failed |
 
 ---
 
