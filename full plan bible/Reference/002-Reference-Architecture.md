@@ -177,7 +177,7 @@ Action Request
 └──────┬──────┘
        ▼
 ┌─────────────┐
-│ Stage 7: EAZ │  Execution token issued or denied
+│ Stage 7: EAS │  Execution token issued or denied
 └──────┬──────┘
        │
        ▼
