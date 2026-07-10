@@ -157,11 +157,29 @@ Each inference Event includes: `model_selection_reason`, `gpu_memory_used_mb`, `
 | L3 | Provider may switch between local models based on task requirements |
 | L4 | Provider may pull new models autonomously if within storage budget |
 
+## LLMOS Integration
+
+This provider implements the `ModelProvider` interface (LLMOS/013-Provider-SDK.md) with the following mapping:
+
+| ModelProvider Method | Execution | Notes |
+|---------------------|-----------|-------|
+| `initialize(config)` | Resolves endpoint from config | Credential path: `/aios/providers/ollama/` |
+| `healthCheck()` | GET /api/tags | < 5s timeout |
+| `listModels()` | GET /api/tags | Returns all local model tags |
+| `execute(request)` | POST /api/chat | Non-streaming inference |
+| `executeStream(request)` | POST /api/chat (stream: true) | SSE streaming |
+| `embed(inputs, model)` | POST /api/embed | Native Ollama embedding |
+| `countTokens(content, model)` | POST /api/tokenize | Ollama tokenizer |
+
+All LLMOS pipeline stages (routing, guardrails, caching) run before this provider is called.
+
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
 | Bible/04-Execution/Runtime/000-Overview.md | Runtime Engine architecture |
 | Bible/04-Execution/Runtime/001-SDK.md | Provider SDK used to build this provider |
+| Bible/04-Execution/LLMOS/013-Provider-SDK.md | LLMOS ModelProvider interface (canonical path) |
+| Bible/04-Execution/LLMOS/000-Overview.md | LLMOS pipeline overview |
 | Physics/010-Execution.md | Execution invariants for local model inference |
 | Physics/007-Capabilities.md | Capability bounds for GPU memory and model selection |

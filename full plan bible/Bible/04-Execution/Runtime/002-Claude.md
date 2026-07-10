@@ -156,11 +156,29 @@ Each inference Event includes: `model_selection_reason` (why this model was chos
 | L3 | Provider may optimise model selection based on task complexity within capability bounds |
 | L4 | Provider may initiate inference proactively based on entity's mission context |
 
+## LLMOS Integration
+
+This provider implements the `ModelProvider` interface (LLMOS/013-Provider-SDK.md) with the following mapping:
+
+| ModelProvider Method | Execution | Notes |
+|---------------------|-----------|-------|
+| `initialize(config)` | Resolves API key from SSM | Credential path: `/aios/providers/claude/api_key` |
+| `healthCheck()` | List models API call | < 5s timeout |
+| `listModels()` | Returns configured Claude models | claude-3-5-sonnet-latest, claude-3-opus-latest, claude-3-haiku-latest |
+| `execute(request)` | POST /v1/messages | Non-streaming inference |
+| `executeStream(request)` | POST /v1/messages (stream: true) | SSE streaming |
+| `embed(inputs, model)` | Not supported | Returns empty result |
+| `countTokens(content, model)` | POST /v1/messages/count_tokens | Anthropic tokenizer |
+
+All LLMOS pipeline stages (routing, guardrails, caching) run before this provider is called.
+
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
 | Bible/04-Execution/Runtime/000-Overview.md | Runtime Engine architecture |
 | Bible/04-Execution/Runtime/001-SDK.md | Provider SDK used to build this provider |
+| Bible/04-Execution/LLMOS/013-Provider-SDK.md | LLMOS ModelProvider interface (canonical path) |
+| Bible/04-Execution/LLMOS/000-Overview.md | LLMOS pipeline overview |
 | Physics/010-Execution.md | Execution invariants for model inference |
 | Physics/007-Capabilities.md | Capability bounds for token budgets |
