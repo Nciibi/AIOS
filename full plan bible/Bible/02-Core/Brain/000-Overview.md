@@ -76,8 +76,8 @@ Only the Brain contains intelligence.
 | Tool System | Brain/Tools/ | Active | Tool registry, capability discovery, tool call management |
 | Attention System | Brain/Attention/ | Active | Priority and focus management |
 | Personality System | Brain/Personality/ | Active | Identity, values, behavior patterns, communication style |
-| Voice System | (planned) | TBD | Speech-to-text, text-to-speech |
-| Vision System | (planned) | TBD | Image/video input processing |
+| Voice System | Brain/Voice/ | Active | Speech-to-text, text-to-speech |
+| Vision System | Brain/Vision/ | Active | Image/video input processing |
 
 ## Brain Invariants (BRAIN-001–009)
 
@@ -172,7 +172,7 @@ Brain service specifications have been created across three phases:
 
 - **Phase B** (Context System, Planning System, Decision System, Tool System) — see `Brain/Context/`, `Brain/Planning/`, `Brain/Decision/`, and `Brain/Tools/`.
 - **Phase C** (Cognitive OS, Conversation OS, Memory OS, Attention System, Personality System) — see `Brain/Cognitive/`, `Brain/Conversation/`, `Brain/Memory/`, `Brain/Attention/`, and `Brain/Personality/`.
-- **Phase D** (Voice System, Vision System) — planned for future specification.
+- **Phase D** (Voice System, Vision System) — see `Brain/Voice/` and `Brain/Vision/`.
 
 **Sou's sub-files** (`Sou/001-Reasoning.md` through `005-Knowledge.md`) contain the detailed technical content from the old Sou engine, adapted for the new paradigm. They serve as the detailed specification for how Sou interacts with each Brain service.
 
@@ -192,6 +192,8 @@ Brain service specifications have been created across three phases:
 | Bible/02-Core/Brain/Cognitive/000-Overview.md | Cognitive OS — reasoning, reflection, metacognition |
 | Bible/02-Core/Brain/Conversation/000-Overview.md | Conversation OS — dialogue management, session lifecycle |
 | Bible/02-Core/Brain/Memory/000-Overview.md | Memory OS — persistent memory, working memory, vector store |
+| Bible/02-Core/Brain/Voice/000-Overview.md | Voice System — speech-to-text and text-to-speech |
+| Bible/02-Core/Brain/Vision/000-Overview.md | Vision System — image and video processing |
 | Bible/02-Core/Academy/000-Overview.md | Academy — learning infrastructure (outside Brain) |
 | Bible/04-Execution/Security/000-Overview.md | Security Council — verification infrastructure |
 | Bible/03-Institutions/000-Overview.md | Institutions — execution infrastructure |
