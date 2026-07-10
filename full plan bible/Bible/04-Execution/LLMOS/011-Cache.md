@@ -152,13 +152,12 @@ interface CachePolicy {
 ```typescript
 async function storeCache(
   request: InferenceRequest,
-  compiledPrompt: CompiledPrompt,
   response: ValidatedResponse,
   model: ModelEntry
 ): Promise<void>
 ```
 
-1. Build `CacheKey` from compiled prompt
+1. Build `CacheKey` from original request
 2. Check if entry already exists for same key (deduplication)
 3. If exists: update access count, skip write
 4. If not: create new `CacheEntry` with response data
