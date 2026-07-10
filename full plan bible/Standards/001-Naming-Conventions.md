@@ -86,10 +86,12 @@ Format: `{prefix}-{section}-{subcategory}-{sequence}`
 
 | Component | Convention | Example |
 |-----------|-----------|---------|
-| Prefix | AIOS (system), STD (standards), REF (reference), SDK | `AIOS`, `STD`, `REF` |
-| Section | BBL (Bible), PHY (Physics), SDK, REF | `BBL`, `PHY` |
-| Subcategory | Section number or abbreviation | `008`, `SDK`, `NC` |
+| Prefix | AIOS (Bible), PHY (Physics), STD (standards), REF (reference), SDK | `AIOS`, `STD`, `REF`, `SDK` |
+| Section | BBL (Bible), PHY (Physics), or prefix repeats for top-level dirs | `BBL`, `PHY`, `REF`, `STD`, `SDK` |
+| Subcategory | Section number or abbreviation | `008`, `SDK`, `NC`, `RUNTIME` |
 | Sequence | 3-digit zero-padded | `000`, `001` |
+
+Top-level directories use their own prefix and section: `STD-NC-001`, `REF-ADL-000`, `SDK-RUNTIME-000`.
 
 Examples: `AIOS-BBL-008-SDK-000`, `STD-NC-001`, `SDK-RUNTIME-000`
 
