@@ -584,7 +584,7 @@ High-level architecture map including system layering, constitutional 4-branch d
 - **CCA missing**: Stage 5 (CCA — Capability Certification Authority) is shown in the pipeline but the CCA document doesn't exist in `Bible/04-Execution/Security/`. Either create it or document where CCA responsibilities live.
 - **IRS/IDS naming**: ADR-005 was renamed from "IRS" to "IDS" in the log, but the Bible still mixes both names.
 
-### SDK/ — All 3 Files Written (202 + 196 + 216 lines)
+### SDK/ — All 3 Files Written
 
 All three developer quick-start docs are complete with installation, code examples, implementation checklists, common patterns, and conformance testing instructions.
 
@@ -594,8 +594,29 @@ All three developer quick-start docs are complete with installation, code exampl
 - Add **Cross-Cutting Concerns** section (Security, Evidence, Lifecycle, Capability Bounds) to match Reference files
 - **Missing Provider-SDK stub**: The Bible has `003-Provider-SDK.md` but the root SDK/ directory doesn't have a corresponding file. Consider adding it for developers building resource providers (ROS integration). The Bible file exists at `Bible/08-Interfaces/SDK/003-Provider-SDK.md`.
 
-### Remaining work after SDK/:
-- **Standards/** (5 files): Design Language, Naming Conventions, BAS, DQC, PSAP — next priority tier
+### Standards/ — All 5 Files Written
+
+| File | Lines | Content |
+|------|-------|---------|
+| 000-Design-Language.md | 104 | Typography, diagram conventions, vocabulary, color/style, document structure |
+| 001-Naming-Conventions.md | 114 | File/code/DB/API/ACF naming, document IDs, error codes, event types, versioning |
+| 002-BAS.md | 132 | Document template, metadata rules, required sections, cross-reference format, length guidelines, status lifecycle, Design DNA compliance |
+| 003-DQC.md | 96 | 40-item mandatory checklist across 8 categories, quality levels L0-L3, automation candidates |
+| 004-PSAP.md | 116 | Service naming, registration fields, endpoint format, health check contract, heartbeat requirements, load balancing, error codes |
+
+**Issues found and fixed during review**:
+- Design Language: Fixed broken code block example (nested backtick fences), replaced ambiguous EAS acronym example with IDS, added missing Cross-Cutting Concerns section
+- Naming Conventions: Fixed angle bracket casing (`<Kebab-Case>` → `<kebab-case>`), clarified document ID table with top-level dirs, added dual event type format note (DB vs ACF), added SDK/REF/STD prefix docs
+- BAS: Added document status lifecycle (Draft→Active→Deprecated→Superseded) with TBD/TODO handling rules, clarified cross-reference paths (absolute from project root, not relative)
+- DQC: Added self-consistency check for Standards documents, fixed document ID format check to cover non-Bible docs (STD-, SDK-), added "all 6 CCC subsections" check
+- PSAP: Fixed "no hyphens" contradiction with naming patterns (hyphens allowed in compound names), fixed error codes to use underscores (`PSAP_001` not `PSAP-001`) matching naming convention, added Cross-Cutting Concerns section
+
+**Suggestions for future**:
+- Align the Bible's PSAP error codes (`PSAP-001` with hyphens) with the naming convention (`PSAP_001` with underscores) — the Standards now say underscore but the Bible uses hyphen
+- Consider moving the ACF topic naming patterns from Naming-Conventions into a dedicated ACF standards doc under Standards/
+- The BAS template lengths (150-500 lines) may be tight for comprehensive specification documents; consider periodic review
+
+### Remaining work:
 - **APIs/000-Master-API-Spec.md**: Single source of truth for all API interfaces
 - **RFC/** (2 files): RFC Process + Template
 - **Research/** (4 files): Phases 2-5 roadmap
