@@ -1,21 +1,21 @@
-# AIOS Bible — Core
-## Sou 004 — Learning
+# AIOS Bible — Brain
+## Sou 004 — Learning (Integration and Adaptation)
 
 | Property | Value |
 |----------|-------|
-| Status | Active |
-| Version | 1.0 |
-| Category | Bible — Core |
+| Status | Active — updated for new paradigm |
+| Version | 2.0 |
+| Category | Bible — Brain |
 | Document ID | AIOS-BBL-002-SOU-004 |
 | Source Laws | Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
-| Supersedes | Nothing |
+| Supersedes | Bible/02-Core/Sou/004-Learning.md v1.0 |
 | Superseded By | Nothing |
 | Amended By | RFC |
 
 ## Purpose
 
-Sou's Learning engine is the self-improvement mechanism of AIOS constitutional consciousness. It ingests outcomes from missions, decisions, and entity performance, and uses them to refine reasoning models, improve planning heuristics, and update decision criteria.
+Sou learns from every outcome — every mission completion, every decision, every interaction. Learning is how Sou improves its reasoning, planning, and decision-making over time. Sou integrates evidence from the **Academy** (outside the Brain) and stores learned patterns in **Memory OS** (inside the Brain).
 
 Learning is evidence-driven (PHI-008), constitutionally bounded (CPR-009), and privacy-preserving (CPR-010). Sou learns only from recorded Events — never from intuition, speculation, or unverified sources.
 
@@ -246,11 +246,13 @@ Learning communicates via ACF. Academy knowledge is received as evidence. Update
 |---------|-------------|
 | Physics/005-Events.md | Evidence — learning consumes Event store |
 | Physics/012-Experience.md | Experience — learning is Sou's experience mechanism |
-| Bible/02-Core/Sou/001-Reasoning.md | Reasoning — learning improves reasoning models |
-| Bible/02-Core/Sou/002-Planner.md | Planner — learning improves planning heuristics |
-| Bible/02-Core/Sou/003-Missions.md | Missions — learning from mission outcomes |
-| Bible/02-Core/Sou/005-Knowledge.md | Knowledge — learning stores patterns in Knowledge |
-| Bible/02-Core/Academy | Academy — Sou shares learned patterns via Academy |
+| Bible/02-Core/Brain/Sou/000-Overview.md | Sou overview — learning is a capability of the executive intelligence |
+| Bible/02-Core/Brain/Sou/001-Reasoning.md | Reasoning — learning improves reasoning models |
+| Bible/02-Core/Brain/Sou/002-Planner.md | Planning — learning improves planning heuristics |
+| Bible/02-Core/Brain/Sou/003-Missions.md | Missions — learning from mission outcomes |
+| Bible/02-Core/Brain/Sou/005-Knowledge.md | Knowledge — learning stores patterns in Memory OS |
+| Bible/02-Core/Brain/Memory/000-Overview.md | Memory OS — stores learned patterns |
+| Bible/02-Core/Academy | Academy — Sou consumes evidence from Academy |
 | Bible/02-Core/DTS/004-Confidence.md | Confidence — learning updates confidence models |
 | Bible/01-Governance/002-DGP.md | DGP — learning from decision outcomes |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |

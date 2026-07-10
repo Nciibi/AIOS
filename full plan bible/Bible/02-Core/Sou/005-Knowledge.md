@@ -1,23 +1,23 @@
-# AIOS Bible — Core
-## Sou 005 — Knowledge
+# AIOS Bible — Brain
+## Sou 005 — Memory and Knowledge (Delegated to Memory OS)
 
 | Property | Value |
 |----------|-------|
-| Status | Active |
-| Version | 1.0 |
-| Category | Bible — Core |
+| Status | Active — updated for new paradigm |
+| Version | 2.0 |
+| Category | Bible — Brain |
 | Document ID | AIOS-BBL-002-SOU-005 |
 | Source Laws | Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
-| Supersedes | Nothing |
+| Supersedes | Bible/02-Core/Sou/005-Knowledge.md v1.0 |
 | Superseded By | Nothing |
 | Amended By | RFC |
 
 ## Purpose
 
-Sou's Knowledge store is the constitutional memory of the AIOS will engine. It is Sou's private knowledge base — distinct from the Academy (public knowledge). Knowledge stores constitutional interpretations, strategic context, entity performance history, and decision precedents.
+Sou accesses memory and knowledge through the **Memory OS** — a Brain service that manages persistent memory, working memory, and knowledge retrieval. Sou has read access to ALL memories (BRAIN-008), unlike other Brain services which have scoped access.
 
-Knowledge is private to Sou unless explicitly shared with the Academy under CPR-010 (Evidence Privacy). Sou's Knowledge is not directly accessible to other entities — it is queried through Sou's API.
+Memory OS stores Sou's private knowledge — constitutional interpretations, strategic context, entity performance history, and decision precedents. This is distinct from the Academy (public knowledge).
 
 ## Knowledge Storage Example
 
@@ -233,15 +233,16 @@ Knowledge operations communicate via ACF internally. Academy sharing uses ACF st
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/005-Events.md | Evidence — knowledge stores evidence chains |
-| Physics/012-Experience.md | Experience — knowledge is Sou's experience repository |
-| Bible/02-Core/Sou/000-Overview.md | Sou overview — knowledge is a core Sou component |
-| Bible/02-Core/Sou/001-Reasoning.md | Reasoning — knowledge informs reasoning |
-| Bible/02-Core/Sou/002-Planner.md | Planner — knowledge informs planning estimates |
-| Bible/02-Core/Sou/003-Missions.md | Missions — knowledge stores mission outcomes |
-| Bible/02-Core/Sou/004-Learning.md | Learning — knowledge stores learned patterns |
+| Physics/005-Events.md | Evidence — memory stores evidence chains |
+| Physics/012-Experience.md | Experience — memory is Sou's experience repository |
+| Bible/02-Core/Brain/Sou/000-Overview.md | Sou overview — memory access is a capability of the executive intelligence |
+| Bible/02-Core/Brain/Sou/001-Reasoning.md | Reasoning — memory informs reasoning |
+| Bible/02-Core/Brain/Sou/002-Planner.md | Planning — memory informs planning estimates |
+| Bible/02-Core/Brain/Sou/003-Missions.md | Missions — memory stores mission outcomes |
+| Bible/02-Core/Brain/Sou/004-Learning.md | Learning — memory stores learned patterns |
+| Bible/02-Core/Brain/Memory/000-Overview.md | Memory OS — Brain service that manages all memory types |
 | Bible/02-Core/Academy/002-KMS.md | KMS — Academy knowledge management, distinct from Sou's private store |
 | Bible/02-Core/Academy/003-Knowledge-Graph.md | Knowledge Graph — Academy's public knowledge graph |
-| Bible/01-Governance/002-DGP.md | DGP — knowledge informs decision proposals |
+| Bible/01-Governance/002-DGP.md | DGP — memory informs decision proposals |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles (esp. CPR-010) |

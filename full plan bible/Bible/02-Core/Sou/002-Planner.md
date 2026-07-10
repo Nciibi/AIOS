@@ -1,23 +1,23 @@
-# AIOS Bible — Core
-## Sou 002 — Planner
+# AIOS Bible — Brain
+## Sou 002 — Planning (Delegated to Planning System)
 
 | Property | Value |
 |----------|-------|
-| Status | Active |
-| Version | 1.0 |
-| Category | Bible — Core |
+| Status | Active — updated for new paradigm |
+| Version | 2.0 |
+| Category | Bible — Brain |
 | Document ID | AIOS-BBL-002-SOU-002 |
 | Source Laws | Law 2 — Law of Non-Execution, Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds, Law 6 — Law of Lifecycle Compliance |
 | Source Physics | Physics/005-Events.md, Physics/006-Lifecycles.md, Physics/007-Capabilities.md, Physics/004-Sessions.md |
-| Supersedes | Nothing |
+| Supersedes | Bible/02-Core/Sou/002-Planner.md v1.0 |
 | Superseded By | Nothing |
 | Amended By | RFC |
 
 ## Purpose
 
-Sou's Planner transforms goals into actionable mission plans. It takes a goal from Reasoning, evaluates available resources, checks constitutional constraints, assesses the current state, and produces a mission plan ready for proposal to DGP.
+Sou plans by framing goals and delegating decomposition to the **Planning System** — a Brain service that handles strategic and tactical planning, goal decomposition, and milestone tracking. Sou defines what success looks like; the Planning System produces the how.
 
-The Planner is resource-aware, constitutionally-compliant, and evidence-driven. It does not execute — it plans. Execution is delegated through OSYS to Workers.
+Planning is resource-aware, constitutionally-compliant, and evidence-driven. Sou retains approval authority over all plans. Execution is delegated through OSYS to Workers.
 
 ## Planning Inputs and Outputs
 
@@ -241,9 +241,11 @@ Plans are communicated via ACF. ROS is queried for resource availability. DGP re
 | Physics/006-Lifecycles.md | Lifecycles — plans are lifecycle-aware |
 | Physics/007-Capabilities.md | Capabilities — plans require capability checks |
 | Bible/01-Governance/002-DGP.md | DGP — plans are submitted as proposals through DGP |
-| Bible/02-Core/Sou/001-Reasoning.md | Reasoning — Planner consumes Reasoning outputs |
-| Bible/02-Core/Sou/003-Missions.md | Missions — Planner produces mission proposals |
-| Bible/02-Core/Sou/004-Learning.md | Learning — Planner improves from learning |
+| Bible/02-Core/Brain/Sou/000-Overview.md | Sou overview — planning is a capability of the executive intelligence |
+| Bible/02-Core/Brain/Sou/001-Reasoning.md | Reasoning — Planning consumes Reasoning outputs |
+| Bible/02-Core/Brain/Sou/003-Missions.md | Missions — Planning produces mission proposals |
+| Bible/02-Core/Brain/Sou/004-Learning.md | Learning — Planning improves from learning |
+| Bible/02-Core/Brain/Planning/000-Overview.md | Planning System — handles goal decomposition and milestone tracking |
 | Bible/02-Core/OSYS | OSYS — plans are executed by Organizations |
 | Bible/02-Core/DTS/002-Sim-Pipeline.md | Simulation — plans can be simulated before execution |
 | Bible/02-Core/ROS | ROS — resource queries for feasibility checks |

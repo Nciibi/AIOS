@@ -1,23 +1,23 @@
-# AIOS Bible — Core
-## Sou 003 — Missions
+# AIOS Bible — Brain
+## Sou 003 — Missions (Creation and Oversight)
 
 | Property | Value |
 |----------|-------|
-| Status | Active |
-| Version | 1.0 |
-| Category | Bible — Core |
+| Status | Active — updated for new paradigm |
+| Version | 2.0 |
+| Category | Bible — Brain |
 | Document ID | AIOS-BBL-002-SOU-003 |
 | Source Laws | Law 1 — Law of Origin, Law 2 — Law of Non-Execution, Law 4 — Law of Evidence, Law 6 — Law of Lifecycle Compliance |
 | Source Physics | Physics/002-Missions.md, Physics/005-Events.md, Physics/006-Lifecycles.md, Physics/012-Experience.md |
-| Supersedes | Nothing |
+| Supersedes | Bible/02-Core/Sou/003-Missions.md v1.0 |
 | Superseded By | Nothing |
 | Amended By | RFC |
 
 ## Purpose
 
-Sou's Missions component oversees the mission lifecycle from Sou's constitutional perspective. Sou proposes missions, monitors their progress, adjusts them as needed, and learns from their outcomes. Missions are the mechanism through which Sou's strategic plans become operational reality.
+Sou is the **sole creator of missions** in AIOS. No component outside the Brain can create missions (SOU-002). Sou defines what work needs to be done, frames success criteria, creates the mission, and delegates execution to Institutions (Organizations → Workers).
 
-Sou does not execute missions. It proposes them (DGP routes), Organization approves and owns them, LMS manages their lifecycle, and Workers execute them. Sou observes and learns.
+Sou does not execute missions. It creates them, monitors progress, adjusts scope as needed, and learns from outcomes. Missions are the mechanism through which Sou's strategic intent becomes operational reality.
 
 ## Mission Lifecycle — Sou's Perspective
 
@@ -249,9 +249,10 @@ All mission-related communication flows through ACF. DGP receives proposals. OSY
 | Physics/006-Lifecycles.md | Lifecycle — mission lifecycle states and transitions |
 | Physics/012-Experience.md | Experience — Sou learns from mission outcomes |
 | Bible/01-Governance/002-DGP.md | DGP — Sou submits mission proposals through DGP |
-| Bible/02-Core/Sou/001-Reasoning.md | Reasoning — Sou reasons about mission adjustments |
-| Bible/02-Core/Sou/002-Planner.md | Planner — Sou produces mission plans |
-| Bible/02-Core/Sou/004-Learning.md | Learning — Sou learns from completed missions |
+| Bible/02-Core/Brain/Sou/000-Overview.md | Sou overview — mission creation is exclusive to Sou |
+| Bible/02-Core/Brain/Sou/001-Reasoning.md | Reasoning — Sou reasons about mission adjustments |
+| Bible/02-Core/Brain/Sou/002-Planner.md | Planning — Sou produces mission plans via Planning System |
+| Bible/02-Core/Brain/Sou/004-Learning.md | Learning — Sou learns from completed missions |
 | Bible/02-Core/OSYS | OSYS — Organizations own and execute missions |
 | Bible/02-Core/DTS | DTS — confidence scoring for mission proposals |
 | Bible/03-Institutions/Missions/000-Lifecycle.md | Mission lifecycle — detailed mission state machine |
