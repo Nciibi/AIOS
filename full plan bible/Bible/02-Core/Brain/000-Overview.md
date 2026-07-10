@@ -152,6 +152,13 @@ User Response (via Sou → ACF → Conversation OS)
 | `Brain.ResponseReady` | Brain produced a response for the user |
 | `Brain.AuthorizationRequired` | Brain action requires Security Council verification |
 
+## Forward References
+
+Several Brain services (Cognitive OS, Conversation OS, Memory OS, Context System, Planning System, Decision System, Tool System, Attention System, Personality System, Voice System, Vision System) are currently planned or in development. Their specifications will be created in subsequent phases (B–D). Until then:
+
+- **Sou's sub-files** (`Sou/001-Reasoning.md` through `005-Knowledge.md`) contain the detailed technical content from the old Sou engine, adapted for the new paradigm. They serve as interim reference material.
+- **Cross-references** to `Brain/Memory/`, `Brain/Planning/`, `Brain/Context/`, `Brain/Cognitive/`, `Brain/Conversation/`, `Brain/Decision/`, `Brain/Tools/`, `Brain/Attention/`, `Brain/Personality/`, `Brain/Voice/`, and `Brain/Vision/` are forward references that will resolve when those services are specified.
+
 ## Related Documents
 
 | Document | Relationship |
