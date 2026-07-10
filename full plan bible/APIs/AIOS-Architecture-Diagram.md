@@ -117,7 +117,7 @@
                                            ▼
   ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
   │  LAYER 5: DOMAINS ──── Specialized application domains built on core infrastructure                         │
- │                                                                                                             │
+  │                                                                                                             │
  │  ┌─────────┐  ┌──────────┐  ┌─────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐  ┌─────────┐  ┌──────────┐ │
  │  │ TRADING │  │ SECURITY │  │ CODING  │  │  LINUX   │  │ RESEARCH │  │ COMMS  │  │ ROBOTICS│  │ EMBEDDED │ │
  │  │ Domain  │  │  Domain  │  │ Domain  │  │  Domain  │  │  Domain  │  │ Domain │  │ Domain  │  │  Domain  │ │
