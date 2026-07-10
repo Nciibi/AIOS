@@ -616,8 +616,16 @@ All three developer quick-start docs are complete with installation, code exampl
 - Consider moving the ACF topic naming patterns from Naming-Conventions into a dedicated ACF standards doc under Standards/
 - The BAS template lengths (150-500 lines) may be tight for comprehensive specification documents; consider periodic review
 
+### RFC/ — All 2 Files Written
+
+| File | Lines | Content |
+|------|-------|---------|
+| 000-RFC-Process.md | 104 | Step-by-step RFC lifecycle guide: when RFC is required, 5-step process (Draft→Submit→Review→Implement→Verify), review SLAs by type (24h to 14d), pre-submit/implementation/activation checklists |
+| Templates/RFC-template.md | 78 | Complete RFC template with Problem Statement, Proposed Solution, Impact Analysis, Evidence, Constitutional Review, Design DNA (R1-R15), Migration Plan, Review Notes sections |
+
+Also created `0001-XXXX/README.md` as a placeholder guide for the first RFC.
+
 ### Remaining work:
 - **APIs/000-Master-API-Spec.md**: Single source of truth for all API interfaces
-- **RFC/** (2 files): RFC Process + Template
 - **Research/** (4 files): Phases 2-5 roadmap
 - **Contributing/**, **Examples/**, **Tests/**: Lower priority
