@@ -220,21 +220,21 @@ The architecture is governed by 15 design rules defined in Physics/011-Design-DN
 
 | Rule | Principle | Architectural Expression |
 |------|-----------|-------------------------|
-| R1 | Modulsingularity | Each component has exactly one responsibility |
-| R2 | Acyclic Dependencies | Dependency graph is a directed acyclic graph |
-| R3 | DRY | Every concept defined once; reference by ID |
-| R4 | Builder-Supplier | Components build things; components use things |
-| R5 | Interface-Implementation | Interfaces are stable; implementations evolve |
-| R6 | Abstract-Implement | Depend on interfaces, not implementations |
-| R7 | Testability by Contract | Every module must be testable in isolation |
-| R8 | Performance by Design | Performance targets defined at design time |
-| R9 | Deterministic by Default | Same inputs always produce same outputs |
-| R10 | Minimalism | Simplest solution that satisfies requirements |
-| R11 | Fail-Fast | Errors detected as early as possible |
-| R12 | Transparency | All state changes visible and auditable |
-| R13 | Graceful Failure | Failure of one component does not cascade |
-| R14 | Paved Path | Preferred approach is the easiest approach |
-| R15 | Open-Closed | Open for extension, closed for modification |
+| R1 | Modulsingularity | Every module does exactly one thing |
+| R2 | Dependency Order | Layers depend on layers below; no cycles |
+| R3 | DRY | Every concept defined once — law definitions in Physics, entity models in Bible |
+| R4 | Builder Pattern | Complex objects built by factories (e.g., Identity Factory builds identity records) |
+| R5 | Liskov Substitution | Runtime providers are interchangeable through the SDK interface |
+| R6 | Dependency Injection | Pipeline receives its dependencies (IDS, ATS, AZS) through injection, not statics |
+| R7 | Tests Exist | Every module has unit, integration, and contract tests |
+| R8 | Fast Tests | Unit tests in milliseconds; integration tests in seconds |
+| R9 | Deterministic | Same inputs always produce same outputs |
+| R10 | Simpler Over Complex | Linear 7-stage pipeline over branching verification |
+| R11 | Refactor over Rewrite | System evolves through refactoring, not rewriting |
+| R12 | Embrace Errors | Every error has a unique code, context, and escalation path |
+| R13 | Design for Failure | Every component assumes dependencies will fail; systems fail closed |
+| R14 | Paved Path | Exactly one paved path for every operation (the Security Pipeline) |
+| R15 | Open/Closed | New providers implement the SDK interface without modifying the Runtime |
 
 ---
 
