@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | SDK |
 | Document ID | SDK-KNOWLEDGE-002 |
-| Source Laws | Law 4 — Evidence, Law 9 — Constitutional Supremacy |
+| Source Laws | Law 3 — Communication, Law 4 — Evidence, Law 9 — Constitutional Supremacy |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
