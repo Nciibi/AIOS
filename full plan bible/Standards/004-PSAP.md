@@ -19,7 +19,7 @@ PSAP (Platform Service Access Point) is the service addressing and routing layer
 
 ## Service Naming
 
-Every service must have a canonical name registered in PSAP. Names are lowercase, no hyphens, max 16 characters.
+Every service must have a canonical name registered in PSAP. Names are lowercase, max 16 characters, using hyphens only for compound names.
 
 | Naming Pattern | Example | Service Type |
 |---------------|---------|-------------|
