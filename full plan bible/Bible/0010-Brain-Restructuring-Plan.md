@@ -58,7 +58,8 @@ AIOS
 │     ├── Voice System       ← Speech I/O
 │     ├── Vision System      ← Image/video processing
 │     ├── Attention System   ← Priority and focus management
-│     └── Personality System ← Identity, values, behavior patterns
+│     ├── Personality System ← Identity, values, behavior patterns
+│     └── Autonomy System    ← L0-L4 autonomy, progression, escalation
 │
 ├── Academy                  ← Learning from evidence, knowledge management
 ├── Security Council          ← Identity, authorization, audit, verification
