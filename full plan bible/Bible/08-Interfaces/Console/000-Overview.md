@@ -260,5 +260,6 @@ All actions recorded as evidence (Law 4)
 | Bible/05-Platform/004-EVS.md | Evidence System — source of audit data |
 | Bible/06-Services/ACF/000-Overview.md | ACF transports all console actions |
 | Bible/08-Interfaces/UI/000-Overview.md | General human interface — console is governance-specific |
+| Bible/08-Interfaces/Dashboard/000-Overview.md | Dashboard surfaces governance alerts for human action |
 | Physics/006-Lifecycles.md | Lifecycle state machine invariants |
 | Physics/005-Events.md | Evidence invariants — every console action is logged |
