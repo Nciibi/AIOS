@@ -258,6 +258,7 @@ All AGS operations communicate through ACF. Genomes are requested by Security Co
 | Physics/001-Identity.md | Identity — Sessions are instantiated with identities derived from Genomes |
 | Physics/004-Sessions.md | Sessions — instantiated from Genomes |
 | Physics/007-Capabilities.md | Capabilities — Genomes define capability bounds |
+| Bible/02-Core/Agents/000-Overview.md | AGX — genome evolution and agent lifecycle management |
 | Bible/02-Core/AGS/001-Composition.md | Composition — how Genomes are composed |
 | Bible/02-Core/AGS/002-Inheritance.md | Inheritance — Genome hierarchy |
 | Bible/02-Core/AGS/003-Validation.md | Validation — Genome validation rules |
