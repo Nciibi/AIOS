@@ -89,6 +89,7 @@ AIOS
 | (new) | Vision System | Bible/02-Core/Brain/Vision/ |
 | (new) | Attention System | Bible/02-Core/Brain/Attention/ |
 | (new) | Personality System | Bible/02-Core/Brain/Personality/ |
+| (new) | Autonomy System | Bible/02-Core/Brain/Autonomy/ |
 
 ### What stays in its current location
 
