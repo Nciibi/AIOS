@@ -86,7 +86,23 @@ DecisionRecommendation {
   explanation: string      // Human-readable justification
   created_at: timestamp
 }
-```
+
+RankedOption {
+  option_id: string
+  option: DecisionOption
+  weighted_score: number   // 0.0–1.0
+  rank: number             // 1-based ranking
+  criterion_scores: Record<criterion_id, number>
+  strength: string         // "strong" | "moderate" | "weak"
+  weakness: string         // Key area where this option falls short
+}
+
+ViolatedConstraint {
+  constraint_id: string
+  option_id: string
+  type: "hard" | "soft"
+  detail: string           // Human-readable explanation
+}
 
 ### 1. Scoring Engine
 
