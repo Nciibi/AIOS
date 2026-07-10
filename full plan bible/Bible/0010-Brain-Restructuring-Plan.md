@@ -75,19 +75,19 @@ AIOS
 
 | Current Location | Component | New Home |
 |-----------------|-----------|----------|
-| Bible/02-Core/Sou/ | Sou engine modules | Bible/03-OS/Brain/Sou/ |
-| (planned) | Cognitive OS | Bible/03-OS/Brain/Cognitive/ |
-| (planned) | Conversation OS | Bible/03-OS/Brain/Conversation/ |
-| (planned) | Memory OS | Bible/03-OS/Brain/Memory/ |
-| Bible/04-Execution/LLMOS/ | LLMOS | Bible/03-OS/Brain/LLMOS/ |
-| (new) | Context System | Bible/03-OS/Brain/Context/ |
-| (new) | Planning System | Bible/03-OS/Brain/Planning/ |
-| (new) | Decision System | Bible/03-OS/Brain/Decision/ |
-| (new) | Tool System | Bible/03-OS/Brain/Tools/ |
-| (new) | Voice System | Bible/03-OS/Brain/Voice/ |
-| (new) | Vision System | Bible/03-OS/Brain/Vision/ |
-| (new) | Attention System | Bible/03-OS/Brain/Attention/ |
-| (new) | Personality System | Bible/03-OS/Brain/Personality/ |
+| Bible/02-Core/Sou/ | Sou engine modules | Bible/02-Core/Brain/Sou/ |
+| (planned) | Cognitive OS | Bible/02-Core/Brain/Cognitive/ |
+| (planned) | Conversation OS | Bible/02-Core/Brain/Conversation/ |
+| (planned) | Memory OS | Bible/02-Core/Brain/Memory/ |
+| Bible/04-Execution/LLMOS/ | LLMOS | Bible/02-Core/Brain/LLMOS/ |
+| (new) | Context System | Bible/02-Core/Brain/Context/ |
+| (new) | Planning System | Bible/02-Core/Brain/Planning/ |
+| (new) | Decision System | Bible/02-Core/Brain/Decision/ |
+| (new) | Tool System | Bible/02-Core/Brain/Tools/ |
+| (new) | Voice System | Bible/02-Core/Brain/Voice/ |
+| (new) | Vision System | Bible/02-Core/Brain/Vision/ |
+| (new) | Attention System | Bible/02-Core/Brain/Attention/ |
+| (new) | Personality System | Bible/02-Core/Brain/Personality/ |
 
 ### What stays in its current location
 
