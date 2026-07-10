@@ -341,3 +341,14 @@ SOU-007: All cognitive services live inside the Brain.
 | `APIs/AIOS-Architecture-Diagram.md` | Architecture diagram (to be updated with Brain) |
 | `APIs/000-Master-API-Spec.md` | API registry (to be updated with Brain section) |
 | `Bible/0000-Master-Architecture-Plan.md` | Master architecture plan (to reference Brain) |
+
+---
+
+## 11. Phase A Fix Log (post-completion audit)
+
+| # | Issue | File(s) | Fix |
+|---|-------|---------|-----|
+| 1 | Brain data flow box had two `└──` lines (should be `├──` then `└──`) | `Brain/000-Overview.md:115-117` | Corrected box-drawing characters |
+| 2 | Old `Sou/000-Overview.md` lacked deprecation notice | `Bible/02-Core/Sou/000-Overview.md` | Added `DEPRECATED` banner, updated `Superseded By` |
+| 3 | `LLMOS/005-Memory-Injection.md` referenced `Bible/03-OS/Memory` (never-built path) | `005-Memory-Injection.md:19,157` | Updated to `Bible/02-Core/Brain/Memory/` |
+| 4 | 12 LLMOS files retained `Execution/LLMOS` headers, old Doc IDs (`AIOS-BBL-004-*`) | `001`–`013` (excl. `000`, `005`) | Headers → `Brain/LLMOS`, IDs → `AIOS-BBL-002-*` |
