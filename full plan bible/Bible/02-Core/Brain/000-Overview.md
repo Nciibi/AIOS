@@ -114,8 +114,8 @@ User Input
 │  ├── Plan response (Planning System)        │
 │  ├── Consult memory (Memory OS)             │
 │  ├── Decide action (Decision System)        │
-│  ├── Create mission if needed (Mission OS)  │
-│  ├── Delegate to worker if needed (Inst.)   │
+│  ├── Create mission (delegate to Institution OS)  │
+│  └── Delegate to worker via Institution OS   │
 │  └── Compose final response                │
 └─────────────────────────────────────────────┘
     │
