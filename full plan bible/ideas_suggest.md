@@ -282,6 +282,184 @@ Each domain needs a specification document covering:
 
 ---
 
+## Post-03-04 Deep Audit — New Issues Found
+
+These issues were discovered during the comprehensive subagent scan of all 53 files in 03-Institutions (16 files) and 04-Execution (37 files: 8 Runtime + 29 Security):
+
+### Critical Issues
+
+#### 1. EAS Acronym Collision
+`Execution-Auth/000-EAS.md` (Execution Authorization Service) and `Audit/000-EAS.md` (Evidence Audit Service) share the same "EAS" acronym. Throughout the Security volume, both are referenced simply as "EAS" with no disambiguation. Prose like "recorded by EAS" is ambiguous — which EAS?
+
+**Suggested fix**: Rename one. Options: Execution-Auth → `EAZ` / `EZS` / `EPA`, or Audit → `AUD` (Audit doc already uses document ID `AIOS-BBL-AUD-000`).
+
+**Affected files**: 7+ Security files reference both without disambiguation.
+
+#### 2. Missing CCA Documentation
+The "CCA" (Capability Certification Authority) is referenced as a core Security Council component — it owns pipeline Stage 5 (capability verification), is listed in the Overview and Architecture service tables, and is referenced by `AZS/002-Capability.md`. Yet no `CCA/` directory or `CCA` document exists anywhere.
+
+**Suggested fix**: Create `CCA/000-CCA.md` documenting the Capability Certification Authority, its role in Stage 5, its interface with AZS (Stages 3-4), and its capability verification algorithm. Alternatively, merge CCA responsibilities into `AZS/002-Capability.md`.
+
+#### 3. Runtime Siloed from Security & Institutions
+All 8 Runtime files (`000-Overview.md` through `007-Robotics.md`) discuss Security Kernel, execution tokens, secret stores, entity sessions, and mission scopes extensively — but **zero** cross-references to any Security doc (`Execution-Auth/`, `SSM/`, `Sandbox/`, `AZS/`) or any 03-Institutions doc (`Workers/`, `Organizations/`, `Missions/`). A reader cannot trace the verification→execution pipeline or identify which entities invoke which providers.
+
+**Suggested fix**: Add cross-references from `Runtime/000-Overview.md` to `Security/Execution-Auth/000-EAS.md`, `Security/SSM/000-SSM.md`, `Security/Sandbox/000-Isolation.md`, and `03-Institutions/Workers/000-Overview.md`. Each provider doc should link to its relevant Security components.
+
+**Affected files**: All 8 Runtime/*.md files.
+
+#### 4. IRS/IDS Naming Inconsistency (Not Just Paths)
+The identity authority is called "IRS" (Identity Registration Service — the constitutional authority) in some places and "IDS" (Identity Service — the implementation) in others, even within the same document. Documents in 03-Institutions mix these interchangeably:
+
+| File | Line(s) | IRS | IDS |
+|------|---------|-----|-----|
+| Missions/000-Lifecycle.md | 30, 45, 77 | Line 45 | Lines 30, 77 |
+| Organizations/000-Overview.md | 32, 119 | Line 119 | Line 32 |
+| Workers/000-Overview.md | 50, 71 | Line 71 | Line 50 |
+| Workers/001-WOM.md | 24, 81 | Line 24 | Line 81 |
+
+**Suggested fix**: Standardize: use "IRS" for constitutional/architectural references (invariants, source laws), add a note that "IDS" is the implementation service that realizes IRS. Align all docs.
+
+#### 5. Broken Links in 002-Trust-Model.md
+- `TLM/000-TLM.md` → directory is `Trust/`, not `TLM/`
+- `Cryptography/000-CSP.md` + `Cryptography/001-CAM.md` → directory is `Crypto/`, not `Cryptography/`
+- `Federation/000-Overview.md` → no Federation/ dir under Security. Actual file at `06-Services/Federation/000-Overview.md`
+- `00-Foundations/001-AIOS-Philosophy.md` → relative path from Security/ resolves incorrectly (should be `../../00-Foundations/...`)
+
+**Affected files**: `Security/002-Trust-Model.md`
+
+#### 6. Broken Links in Execution-Auth/000-EAS.md
+References three non-existent files:
+- `Bible/0270-CCA.md` ← doesn't exist (CCA has no docs)
+- `Bible/0260-ROS.md` ← doesn't exist
+- `Bible/0430-Execution-Engine.md` ← doesn't exist
+
+Also missing `Supersedes`, `Superseded By`, `Amended By` metadata rows.
+
+### Medium Issues
+
+#### 7. Acronym Overload in Organizations/000-Overview.md
+The "Organization Types" table uses acronyms (OOM, OHS, ODS, OPE, etc.) that match document filenames but with **different semantic meanings**:
+- `OOM` in type table = "Operational Oversight — monitoring and governance body"
+- `001-OOM.md` document = "Organization Object Model" (canonical schema)
+- `OPE` in type table = "Project/Program Entity"
+- `008-OPE.md` document = "Organization Performance Evaluator"
+
+This creates confusion when reading cross-references.
+
+**Suggested fix**: Either rename the type table entries to use different acronyms, or add a clarifying footnote explaining the dual usage.
+
+#### 8. ID Format Contradiction (IDS-000 vs IDS-001)
+- `IDS/000-Overview.md` line 76: `aios:${entity_type}:${random_suffix}`
+- `IDS/001-Registry.md` line 57: `aios:{entity_type}:{entity_id_hash}:{random_suffix}`
+
+Two different ID formats in sibling documents. The second includes an `entity_id_hash` segment not present in the first.
+
+#### 9. entity_type Enum vs Entity Types Table (IDS-001)
+`IDS/001-Registry.md` line 20: `Enum entity_type { Sou, Organization, Department, Mission, Session, Template, Runtime, Engine, User, Credential }`
+Entity Types table (lines 33-44): uses lowercase abbreviations (`org`, `dept`, `mission`) and includes `entity` and `capability` not in the enum.
+
+#### 10. Document ID Format Inconsistency
+- `AIOS-BBL-XXX-NNN` (used by IDS-000, Audit, AZS)
+- `AIOS-BIBLE-XXX-NNN` (used by IDS-001 through IDS-005)
+
+Same group, two different formats.
+
+#### 11. Category Naming Inconsistency
+Two conventions used across Security docs:
+- `"Bible — Execution/Security / <subcategory>"` — CSP, CAM, Audit
+- `"Bible — Security / <subcategory>"` — EAS (Execution-Auth), all IDS docs
+
+Should be unified.
+
+#### 12. Law Numbering Format Inconsistency
+- `"Law N — Name"` (no slash) — CSP, CAM, IDS-000, IDS-001, IDS-002
+- `"Law/N — Name"` (with slash) — EAS (Execution-Auth), IDS-003, IDS-004, IDS-005
+
+Some files (e.g., `Execution-Auth/000-EAS.md`) mix both formats within the same document.
+
+#### 13. ATS Sub-Docs Missing Related Documents Sections
+`ATS/000-Auth-Methods.md`, `ATS/001-MFA.md`, `ATS/002-Session-Mgmt.md` lack the `## Related Documents` section that every other Security doc has. This is a structural inconsistency.
+
+#### 14. IDS Inter-Doc Relative Paths Broken
+`IDS/000-Overview.md` references sibling docs as `IDS/001-Registry.md`, `IDS/002-Resolution.md`, etc. — but from within the `IDS/` directory, this doubles the path to `IDS/IDS/001-Registry.md`. Should be simply `001-Registry.md`.
+
+#### 15. IDS-002 Misleading Heading
+Section titled "REST (over ACF)" but operations use method `"RPC"` with dot-notation endpoints. This is RPC, not REST.
+
+#### 16. Duplicated Content in IDS
+- `IDS/004-Federation.md` lines 46-56 are nearly verbatim from `IDS/002-Resolution.md` lines 42-51 ("Pipeline Integration")
+- `IDS/005-Provenance.md` lines 67-81 largely duplicate `IDS-001-Registry.md` lines 71-83 ("Audit Trail")
+
+#### 17. Incomplete IDS Documents
+`IDS/002-Resolution.md`, `IDS/004-Federation.md`, `IDS/005-Provenance.md` are missing standard sections:
+- `## Events` table
+- `## Cross-Cutting Concerns`
+- `## Design DNA` (R1-R15 assessment)
+- `## Related Documents`
+
+They end abruptly or lack these sections present in all other IDS docs.
+
+#### 18. OrgType Enum Mismatch
+`Organizations/001-OOM.md` defines a 4-type `OrgType` enum (`root`, `department`, `team`, `committee`) while `Organizations/000-Overview.md` defines an 8-type organization taxonomy. No explanation of the relationship between the two.
+
+#### 19. Missing Metadata Rows
+- `Execution-Auth/000-EAS.md`: missing `Supersedes`, `Superseded By`, `Amended By`
+- `IDS/003-Lifecycle.md`: missing same rows
+- `IDS/005-Provenance.md`: missing same rows
+
+#### 20. Source Laws Missing Documented Dependencies
+- `Sandbox/000-Isolation.md`: body references Law 6 (Lifecycle) and Law 10 (Tenure), but neither is listed in Source Laws front matter
+- `SSM/000-SSM.md`: body discusses Law 6 (Lifecycle Compliance) extensively but it's missing from Source Laws
+
+#### 21. PVE Related Documents Description Inverted
+`Policy-System/002-PVE.md`: Related Documents entry for `../Execution-Auth/000-EAS.md` says "Stage 4 evaluation depends on PVE-validated policies" — dependency direction is inverted. Should read "PVE provides validated policies consumed by Stage 4".
+
+#### 22. WSS Security Escalation Codes Not Listed
+`Workers/003-WSS.md` defines security escalation codes `WSS_SEC_001` through `WSS_SEC_005` in the Security Escalation Levels table, but the R12 Error Codes section only lists `WSS_001` through `WSS_006`. The security codes appear to belong to a different namespace with no explanation.
+
+### Systemic Gaps
+
+#### A. No Cross-References from Security to 03-Institutions
+Zero documents in `04-Execution/Security/` reference any document in `03-Institutions/`. Security docs discuss Workers (autonomy levels, sandbox types, risk weights), Organizations (org policies, trust), and Missions (mission policies, risk) extensively — but never link to the documents that define those entities. This means readers of the Security docs cannot navigate to the entity definitions they reference.
+
+**Affected files**: All 29 Security/*.md files.
+
+#### B. No Cross-References from Runtime to 03-Institutions
+Same gap for Runtime: all 8 providers discuss entities, Worker Sessions, missions, and organizations but never link to their definitions.
+
+**Affected files**: All 8 Runtime/*.md files.
+
+#### C. All Physics Links Still Broken
+All 53 files reference `Physics/XXX.md` with deep relative paths from within `Bible/03-Institutions/` or `Bible/04-Execution/`. The `Physics/` directory is at the project root (`full plan bible/Physics/`), not inside `Bible/`. Every single one of these ~100+ references is a dead link. This was flagged in the previous audit and remains unresolved.
+
+#### D. No ACF Cross-References
+Both Runtime and Security docs reference ACF (Agent Communication Framework) as the communication substrate — "ACF stream", "ACF/RPC" — but never link to the ACF documentation (`06-Services/ACF/`). No central ACF topic registry exists.
+
+### Quick-Fix Items (Low Effort, High Impact)
+
+1. Fix `IDS/000-Overview.md` self-references: remove `IDS/` prefix from `IDS/001-Registry.md` etc.
+2. Add `## Related Documents` sections to ATS/000, ATS/001, ATS/002 (model on sibling docs)
+3. Add missing metadata rows to EAS (Execution-Auth), IDS-003, IDS-005
+4. Fix `002-Trust-Model.md` directory names: `TLM/`→`Trust/`, `Cryptography/`→`Crypto/`, `Federation/`→ correct path
+5. Fix `002-Trust-Model.md` `00-Foundations/` relative path
+6. Remove or fix non-existent `Bible/0270-CCA.md`, `Bible/0260-ROS.md`, `Bible/0430-Execution-Engine.md` references in EAS
+7. Fix `PVE/002-PVE.md` inverted dependency description
+8. Fix IDS-002 heading "REST"→"RPC"
+9. Remove duplicated content in IDS-004 and IDS-005
+
+### Needs Discussion (Architecture Decisions)
+
+1. **EAS acronym**: Which service gets renamed?
+2. **CCA**: New document or merge into AZS/002-Capability.md?
+3. **Physics/ vs Bible/00-Physics**: Should Physics live alongside Bible or inside it?
+4. **OrgType relationship**: Are the 8-type and 4-type taxonomies orthogonal (structural vs functional) or do they need reconciliation?
+5. **ID format**: `aios:{entity_type}:{random_suffix}` or `aios:{entity_type}:{entity_id_hash}:{random_suffix}`?
+6. **Document ID prefix**: `BBL` or `BIBLE`?
+7. **Category prefix**: `Execution/Security` or just `Security`?
+8. **Law format**: `Law N` or `Law/N`?
+
+---
+
 *This document is a living suggestion. Priority may change based on implementation needs. Files marked High in this document should be written before implementation begins on related Components.*
 
 ---
