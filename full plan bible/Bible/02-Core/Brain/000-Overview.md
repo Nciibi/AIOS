@@ -66,16 +66,16 @@ Only the Brain contains intelligence.
 | Service | Document | Status | Description |
 |---------|----------|--------|-------------|
 | Sou | Brain/Sou/ | Active | Executive intelligence — identity, goals, decisions, delegation |
-| Cognitive OS | (planned) | TBD | Reasoning, reflection, metacognition |
-| Conversation OS | (planned) | TBD | Dialogue management, multi-turn context |
-| Memory OS | (planned) | TBD | Persistent memory, working memory retrieval |
+| Cognitive OS | Brain/Cognitive/ | Active | Reasoning, reflection, metacognition |
+| Conversation OS | Brain/Conversation/ | Active | Dialogue management, multi-turn context |
+| Memory OS | Brain/Memory/ | Active | Persistent memory, working memory retrieval |
 | LLMOS | Brain/LLMOS/ | Active | AI inference pipeline (model routing, prompt compilation, streaming) |
 | Context System | Brain/Context/ | Active | Global context window management, priority, compression |
 | Planning System | Brain/Planning/ | Active | Strategic + tactical planning, goal decomposition |
 | Decision System | Brain/Decision/ | Active | Multi-factor decision making, trade-off analysis |
 | Tool System | Brain/Tools/ | Active | Tool registry, capability discovery, tool call management |
-| Attention System | (planned) | TBD | Priority and focus management |
-| Personality System | (planned) | TBD | Identity, values, behavior patterns, communication style |
+| Attention System | Brain/Attention/ | Active | Priority and focus management |
+| Personality System | Brain/Personality/ | Active | Identity, values, behavior patterns, communication style |
 | Voice System | (planned) | TBD | Speech-to-text, text-to-speech |
 | Vision System | (planned) | TBD | Image/video input processing |
 
@@ -154,11 +154,13 @@ User Response (via Sou → ACF → Conversation OS)
 
 ## Forward References
 
-Several Brain services (Cognitive OS, Conversation OS, Memory OS, Attention System, Personality System, Voice System, Vision System) are currently planned or in development. Their specifications will be created in subsequent phases (C–D). Until then:
+Brain service specifications have been created across three phases:
 
-- **Sou's sub-files** (`Sou/001-Reasoning.md` through `005-Knowledge.md`) contain the detailed technical content from the old Sou engine, adapted for the new paradigm. They serve as interim reference material.
-- **Phase B services** (Context System, Planning System, Decision System, Tool System) are now specified — see `Brain/Context/`, `Brain/Planning/`, `Brain/Decision/`, and `Brain/Tools/`.
-- **Cross-references** to `Brain/Memory/`, `Brain/Cognitive/`, `Brain/Conversation/`, `Brain/Attention/`, `Brain/Personality/`, `Brain/Voice/`, and `Brain/Vision/` are forward references that will resolve when those services are specified.
+- **Phase B** (Context System, Planning System, Decision System, Tool System) — see `Brain/Context/`, `Brain/Planning/`, `Brain/Decision/`, and `Brain/Tools/`.
+- **Phase C** (Cognitive OS, Conversation OS, Memory OS, Attention System, Personality System) — see `Brain/Cognitive/`, `Brain/Conversation/`, `Brain/Memory/`, `Brain/Attention/`, and `Brain/Personality/`.
+- **Phase D** (Voice System, Vision System) — planned for future specification.
+
+**Sou's sub-files** (`Sou/001-Reasoning.md` through `005-Knowledge.md`) contain the detailed technical content from the old Sou engine, adapted for the new paradigm. They serve as the detailed specification for how Sou interacts with each Brain service.
 
 ## Related Documents
 
