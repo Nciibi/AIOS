@@ -117,7 +117,6 @@ interface WorkflowDef {
   steps: WorkflowStep[];
   edges: DependencyEdge[];
   checkpointConfig: CheckpointConfig;
-  version: number;
 }
 
 interface WorkflowStep {
