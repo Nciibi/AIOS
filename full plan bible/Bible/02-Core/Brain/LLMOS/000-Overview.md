@@ -1,15 +1,15 @@
-# AIOS Bible — Execution
+# AIOS Bible — Brain
 ## 000 — LLMOS: Large Language Model Operating System
 
 | Property | Value |
 |----------|-------|
-| Status | Active |
+| Status | Active — moved to Brain |
 | Version | 1.0 |
-| Category | Bible — Execution/LLMOS |
-| Document ID | AIOS-BBL-004-LLM-000 |
+| Category | Bible — Brain/LLMOS |
+| Document ID | AIOS-BBL-002-LLM-000 |
 | Source Laws | Law 2 — Law of Non-Execution, Law 3 — Law of Communication, Law 7 — Law of Capability Bounds, Law 8 — Law of Verification-First |
 | Source Physics | Physics/010-Execution.md, Physics/007-Capabilities.md, Physics/003-Communication.md |
-| Supersedes | Nothing |
+| Supersedes | Bible/04-Execution/LLMOS/000-Overview.md (moved to Brain) |
 | Superseded By | Nothing |
 | Amended By | RFC |
 
