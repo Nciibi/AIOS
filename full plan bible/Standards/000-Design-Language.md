@@ -36,12 +36,13 @@ This standard defines the visual and verbal design language for AIOS documentati
 
 ### Code Blocks
 Use fenced code blocks with language tag for code examples:
-```
+
 ```python
 def example():
     pass
 ```
-For configuration, command output, and diagrams, use plain fenced blocks.
+
+For configuration, command output, and diagrams, use plain fenced blocks without a language tag.
 
 ## Diagram Conventions
 
