@@ -565,7 +565,7 @@
 
 ---
 
-### 8.3 Playbook Manager
+### 6.3 Playbook Manager
 
 **Source:** `Bible/03-Institutions/Workers/005-Playbook-Manager.md`
 
@@ -589,7 +589,7 @@
 
 ---
 
-### 8.4 OIS — Organization Interaction Service
+### 6.4 OIS — Organization Interaction Service
 
 **Source:** `Bible/03-Institutions/Organizations/006-OIS.md`
 
@@ -668,7 +668,7 @@
 
 ---
 
-### 8.3 Runtime SDK (Interface Layer)
+### 6.3 Runtime SDK (Interface Layer)
 
 **Source:** `Bible/08-Interfaces/SDK/000-Runtime-SDK.md`
 
@@ -709,7 +709,7 @@
 
 ---
 
-### 8.4 Audit SDK
+### 6.4 Audit SDK
 
 **Source:** `Bible/08-Interfaces/SDK/001-Audit-SDK.md`
 
@@ -733,7 +733,7 @@
 
 ---
 
-### 8.5 LLMOS — LLM Operating System
+### 6.5 LLMOS — LLM Operating System
 
 **Source:** `Bible/04-Execution/LLMOS/`
 
