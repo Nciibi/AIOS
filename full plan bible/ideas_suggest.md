@@ -616,14 +616,22 @@ All three developer quick-start docs are complete with installation, code exampl
 - Consider moving the ACF topic naming patterns from Naming-Conventions into a dedicated ACF standards doc under Standards/
 - The BAS template lengths (150-500 lines) may be tight for comprehensive specification documents; consider periodic review
 
-### RFC/ — All 2 Files Written
+### RFC/ — All Files Written
 
 | File | Lines | Content |
 |------|-------|---------|
-| 000-RFC-Process.md | 104 | Step-by-step RFC lifecycle guide: when RFC is required, 5-step process (Draft→Submit→Review→Implement→Verify), review SLAs by type (24h to 14d), pre-submit/implementation/activation checklists |
-| Templates/RFC-template.md | 78 | Complete RFC template with Problem Statement, Proposed Solution, Impact Analysis, Evidence, Constitutional Review, Design DNA (R1-R15), Migration Plan, Review Notes sections |
+| 000-RFC-Process.md | 105 | Step-by-step RFC lifecycle guide: when RFC is required, 5-step process (Draft→Submit→Review→Implement→Verify), review SLAs by type (24h to 14d), 3 checklists (pre-submit/implementation/activation) |
+| Templates/RFC-template.md | 86 | RFC template with Problem Statement, Proposed Solution, Impact Analysis, Evidence, Constitutional Review, Design DNA (R1-R15), Migration Plan, Review Notes, Priority field, Changelog |
+| 0001-XXXX/README.md | 7 | Placeholder guide for creating the first RFC |
 
-Also created `0001-XXXX/README.md` as a placeholder guide for the first RFC.
+**Issues found and fixed during review**:
+- Fixed contradictory instructions in Step 1 vs Step 2: unified directory creation flow (create dir first, then copy template into it)
+- Added missing pre-submit checklist item for directory structure
+- Added `Bible/00-Foundations/002-Design-DNA.md` to Related Documents
+- Added **Priority** field (Standard/Critical) to template — expedited reviews use `Priority: Critical`
+- Added default `Nothing` to template's `Amended By` field
+- Added **Changelog** section to template for tracking revisions during review
+- Fixed README.md instructions to match the corrected process flow
 
 ### Remaining work:
 - **APIs/000-Master-API-Spec.md**: Single source of truth for all API interfaces
