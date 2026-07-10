@@ -207,11 +207,11 @@ SOU-007: All cognitive services live inside the Brain.
 
 | Change | Effort | Description |
 |--------|--------|-------------|
-| Rename | Low | `Bible/02-Core/Sou/` → `Bible/03-OS/Brain/Sou/` |
+| Rename | Low | `Bible/02-Core/Sou/` → `Bible/02-Core/Brain/Sou/` |
 | Rewrite | Medium | Sou specification from "engine" to "executive intelligence" |
-| Move | Low | LLMOS moves from `Bible/04-Execution/LLMOS/` to `Bible/03-OS/Brain/LLMOS/` |
-| Move | Low | Memory OS moves from planned OS location to `Bible/03-OS/Brain/Memory/` |
-| Move | Low | Conversation OS moves from planned OS location to `Bible/03-OS/Brain/Conversation/` |
+| Move | Low | LLMOS moves from `Bible/04-Execution/LLMOS/` to `Bible/02-Core/Brain/LLMOS/` |
+| Move | Low | Memory OS moves from planned OS location to `Bible/02-Core/Brain/Memory/` |
+| Move | Low | Conversation OS moves from planned OS location to `Bible/02-Core/Brain/Conversation/` |
 | Create | High | New Brain overview + 6 new subsystems (Context, Planning, Decision, Tools, Voice, Vision, Attention, Personality) |
 | Update | Medium | Architecture diagram: new Brain layer at top |
 | Update | Medium | Master API Spec: new Brain section + reclassify LLMOS/Memory/Conversation under Brain |
