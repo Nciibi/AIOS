@@ -203,6 +203,8 @@ Controls what memory LLMOS injects into the context:
 | `LLMOS.CostOptimized` | Cost Optimizer | request_id, estimated_cost, optimization_strategy, savings |
 | `LLMOS.CacheHit` | Cache | request_id, cache_key, age, similarity_score |
 | `LLMOS.CacheMiss` | Cache | request_id, cache_key, reason |
+| `LLMOS.CacheStored` | Cache | request_id, cache_key, ttl, storage_size_bytes |
+| `LLMOS.CacheEvicted` | Cache | cache_key, reason, age, access_count, saved_cost_total |
 | `LLMOS.ContextBuilt` | Context Builder | request_id, total_tokens, input_tokens, truncated_sections |
 | `LLMOS.MemoryInjected` | Memory Injection | request_id, memory_sources, total_memory_tokens, sources_count |
 | `LLMOS.PromptCompiled` | Prompt Compiler | request_id, template_used, compiled_length_tokens, compile_duration_us |
