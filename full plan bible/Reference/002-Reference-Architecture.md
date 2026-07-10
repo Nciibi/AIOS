@@ -184,7 +184,7 @@ Action Request
   Action Executed
 ```
 
-Each stage produces evidence recorded by the Audit EAS (Evidence Audit Service). The pipeline is linear and mandatory — no stage may be skipped.
+Each stage produces evidence recorded by the Audit service (Evidence Audit — `Bible/04-Execution/Security/Audit/000-EAS.md`). Stage 7 is the Execution Authorization Service (`Bible/04-Execution/Security/Execution-Auth/000-EAS.md`) — note that both use "EAS" as their acronym, which is a known naming collision to be resolved. The pipeline is linear and mandatory — no stage may be skipped.
 
 ---
 
