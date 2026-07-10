@@ -2,7 +2,7 @@
 
 > **Purpose:** Define the new "Brain" subsystem — a cognitive container that houses Sou (the single executive intelligence) and all cognitive services. This plan restructures the top of the AIOS architecture based on the insight that Sou is not a wrapper around an agent but IS the agent, and every other component is infrastructure that extends Sou's ability to perceive, decide, organize, and execute.
 > **Source:** `sou new idea.md` (ChatGPT conversation 7/10/2026)
-> **Status:** Phase A + B + C + D complete — all 14 Brain services specified (Sou, LLMOS, Context, Decision, Planning, Tools, Attention, Personality, Cognitive OS, Conversation OS, Memory OS, Voice, Vision), all cross-references fixed, Master API Spec updated
+> **Status:** Phase A + B + C + D complete — all 13 Brain services specified (Sou, LLMOS, Context, Decision, Planning, Tools, Attention, Personality, Cognitive OS, Conversation OS, Memory OS, Voice, Vision), all cross-references fixed, Master API Spec updated
 
 ---
 
