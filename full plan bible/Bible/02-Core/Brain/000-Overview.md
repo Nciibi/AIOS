@@ -78,6 +78,7 @@ Only the Brain contains intelligence.
 | Personality System | Brain/Personality/ | Active | Identity, values, behavior patterns, communication style |
 | Voice System | Brain/Voice/ | Active | Speech-to-text, text-to-speech |
 | Vision System | Brain/Vision/ | Active | Image/video input processing |
+| Autonomy System | Brain/Autonomy/ | Active | Autonomy levels L0-L4, progression, escalation, override |
 
 ## Brain Invariants (BRAIN-001–009)
 
