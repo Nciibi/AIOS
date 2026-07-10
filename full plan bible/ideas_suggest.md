@@ -650,6 +650,27 @@ Written and audited. 536 entries across 9 service groups covering every concrete
 - Ollama auth corrected from `API Key` to `Network-bound (localhost/private)`
 - PSAP methods corrected from ACF routing operations to actual PSAP service registry operations
 
+### Cross-Phase Audit Findings (from comprehensive sweep of all 13 docs)
+
+**Fixed in my files (5 edits applied):**
+- CAS: Broken `../AGS/` relative path → fixed to `Bible/02-Core/AGS/000-Overview.md` (absolute path)
+- AGX, WFE, IOP, SIM: Source Law names were truncated (e.g. `Law 6 — Lifecycle Compliance`) — added missing `Law of` prefix to match canonical form from Physics/000-Laws.md
+
+**Pre-existing issues found in files I didn't create (not fixed, reported for awareness):**
+
+| File | Issue | Severity |
+|------|-------|----------|
+| Bible/02-Core/Brain/000-Overview.md:10 | Source Laws reference "Law 0 — Law of Supremacy" — no such law exists in Physics (only Laws 1-10) | Medium |
+| Bible/02-Core/Brain/000-Overview.md:202 | Broken ref: `Bible/03-Institutions/000-Overview.md` doesn't exist | Low |
+| Bible/02-Core/AGS/000-Overview.md:10 | Law 5 called "Capability Bounds" and Law 7 called "Identity" — names are swapped | Medium |
+| Bible/02-Core/AGS/000-Overview.md:174-183 | Invariants use free-form numbered list instead of standard `AGS-00N` table format | Low |
+| Bible/04-Execution/Security/Execution-Auth/000-EAS.md:1 | H1 uses service name instead of `# AIOS Bible — Security` | Medium |
+| Bible/04-Execution/Security/Execution-Auth/000-EAS.md:9 | Doc ID missing section number: `AIOS-BBL-EAS-000` (should be `AIOS-BBL-004-EAS-000`) | Medium |
+| Bible/04-Execution/Security/Execution-Auth/000-EAS.md:10 | "Law/7" typo (forward slash instead of space) | Low |
+| Bible/04-Execution/Security/Execution-Auth/000-EAS.md | Missing Supersedes/Superseded By/Amended By metadata rows | Low |
+| Bible/04-Execution/Security/Execution-Auth/000-EAS.md:358-363 | 5 broken cross-refs (IDS, ATS use relative paths incorrectly; Bible/0260-ROS.md and Bible/0430-Execution-Engine.md don't exist) | High |
+| Bible/04-Execution/Security/Execution-Auth/000-EAS.md | Invariants use numbered list instead of standard `EAS-00N` table format | Low |
+
 ### Phase 3 Bug Fixes Applied During Audit
 
 - **SIM**: Source Laws incorrectly referenced Law 9 (Constitutional Supremacy) as "Deterministic" — no such Physics Law exists. Replaced with Law 6 (Lifecycle Compliance). Also fixed SIM-003 invariant which also referenced "(Law 9)" incorrectly.
