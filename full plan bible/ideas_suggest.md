@@ -633,7 +633,23 @@ All three developer quick-start docs are complete with installation, code exampl
 - Added **Changelog** section to template for tracking revisions during review
 - Fixed README.md instructions to match the corrected process flow
 
+### APIs/000-Master-API-Spec.md — Complete
+
+Written and audited. 536 entries across 9 service groups covering every concrete API endpoint, ACF topic, RPC method, streaming channel, interface, event, and message type.
+
+**Issues found and fixed during audit:**
+- 3 fabricated EPG events removed (`PipelineStarted`, `PipelineCompleted`, `PipelineFailed`)
+- 1 fabricated ACF topic removed (`aios/{domain}/{service}/{instance}/health`)
+- 130+ missing events added across PSAP, EVS, EPG, EIP, CP, Graph Framework, LMS, Knowledge Search, KMS, AZS, CSP, WCS, WSS, Playbook, OIS, Trading, Security Domain
+- 9 missing RPC methods added (EVS: 4, WCS: 5)
+- 5 missing Audit SDK methods added
+- 4 wrong event names corrected (EPG: `GraphDeployed`→`GraphActivated`, `GraphUndeployed`→`GraphDeactivated`; LMS: `EntityStateChanged`→`StateChanged`, `TransitionRejected`→`TransitionDenied`)
+- 15 Playbook events: corrected case (`Playbook.`→`PLAYBOOK.`), removed 1 fabricated event, added 10 missing events
+- 4 source paths fixed to include `Bible/` prefix
+- 4 Security domain entries reclassified from `RPC` to `Capability`
+- Ollama auth corrected from `API Key` to `Network-bound (localhost/private)`
+- PSAP methods corrected from ACF routing operations to actual PSAP service registry operations
+
 ### Remaining work:
-- **APIs/000-Master-API-Spec.md**: Single source of truth for all API interfaces
 - **Research/** (4 files): Phases 2-5 roadmap
 - **Contributing/**, **Examples/**, **Tests/**: Lower priority
