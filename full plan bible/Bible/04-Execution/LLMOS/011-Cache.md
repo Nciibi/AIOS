@@ -16,12 +16,13 @@ The Cache stores AI model responses for reuse, reducing latency, cost, and provi
 
 ## Cache Key Model
 
+The cache runs at Stage 7, before prompt compilation (Stage 10) and context building (Stage 8). The cache key is derived from the raw request input — not the compiled prompt — to enable early cache lookup without costly pre-processing.
+
 ```typescript
 interface CacheKey {
   model_id: string;
-  prompt_hash: string;              // SHA-256 of the compiled prompt text
-  system_hash: string;              // SHA-256 of the system prompt
-  tools_hash: string;               // SHA-256 of tool definitions
+  input_hash: string;               // SHA-256 of serialized messages + system prompt from raw request
+  tools_hash: string;               // SHA-256 of tool definitions from raw request
   schema_hash: string;              // SHA-256 of response schema
   temperature: f64;                 // Rounded to 1 decimal for cache matching
   max_tokens: u64;
@@ -33,23 +34,28 @@ interface CacheKey {
 Cache key construction:
 ```typescript
 function buildCacheKey(
-  compiledPrompt: CompiledPrompt,
-  entity_id: UUIDv7,
+  request: InferenceRequest,
   model_id: string
 ): CacheKey {
+  const rawInput = {
+    messages: request.messages,
+    system_prompt: request.system_prompt,
+    tools: request.tools,
+  };
   return {
     model_id,
-    prompt_hash: sha256(compiledPrompt.provider_request.messages),
-    system_hash: sha256(compiledPrompt.provider_request.system || ""),
-    tools_hash: sha256(JSON.stringify(compiledPrompt.provider_request.tools || [])),
-    schema_hash: sha256(JSON.stringify(compiledPrompt.provider_request.response_format || {})),
-    temperature: round(compiledPrompt.provider_request.temperature, 1),
-    max_tokens: compiledPrompt.provider_request.max_tokens,
-    entity_id,
+    input_hash: sha256(JSON.stringify(rawInput)),
+    tools_hash: sha256(JSON.stringify(request.tools || [])),
+    schema_hash: sha256(JSON.stringify(request.response_schema || {})),
+    temperature: round(request.temperature ?? 0.7, 1),
+    max_tokens: request.max_tokens ?? 4096,
+    entity_id: request.entity_id,
     cache_version: CURRENT_CACHE_VERSION,
   };
 }
 ```
+
+The cache hit returns a complete `CacheEntry` with the stored response, bypassing Stages 8-16 entirely. Cache miss proceeds to Stage 8 (Context Builder) for full pipeline processing.
 
 ## Cache Storage Schema
 
