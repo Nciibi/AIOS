@@ -125,7 +125,7 @@ Final chunk contains:
 - LLM-STR-003: In `buffered` mode, assembled response is equivalent to non-streamed response.
 - LLM-STR-004: Tool call arguments are accumulated correctly across chunks.
 - LLM-STR-005: Backpressure never causes data loss — only delays.
-- LLM-STR-006: Every chunk delivered to caller passes through output guardrails (Stage 14) before delivery.
+- LLM-STR-006: Every chunk delivered to caller passes through output guardrails (Stage 14 — `LLMOS.GuardrailChecked` with direction=output) before delivery.
 
 ## Events
 
