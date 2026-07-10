@@ -355,3 +355,6 @@ SOU-007: All cognitive services live inside the Brain.
 | 4 | 12 LLMOS files retained `Execution/LLMOS` headers, old Doc IDs (`AIOS-BBL-004-*`) | `001`–`013` (excl. `000`, `005`) | Headers → `Brain/LLMOS`, IDs → `AIOS-BBL-002-*` |
 | 5 | Architecture Diagram LAYER 5 missing box-top `┌───┐` line | `AIOS-Architecture-Diagram.md:118` | Added box-top border |
 | 6 | API Spec Security Council Section 4 was empty (no subsections) | `000-Master-API-Spec.md` | Added 10 subsections (4.1–4.10) with 106 catalog entries, full renumbering to 514 items |
+| 7 | Phase B review: missing type definitions | `Decision/000-Overview.md`, `Planning/000-Overview.md`, `Tools/000-Overview.md` | Added `RankedOption`, `ViolatedConstraint` (Decision); `ResourceEstimate` (Planning); `ReturnSchema`, inline types for `rate_limits`, `cost`, `error`, `resource_usage`, `status` (Tools) |
+| 8 | Phase B review: Context System missing cross-reference | `Context/000-Overview.md` | Added `Brain/Tools/` to Related Documents |
+| 9 | Phase B review: Brain overview missing Phase B entries | `Brain/000-Overview.md` | Added 4 Phase B services to Related Documents |
