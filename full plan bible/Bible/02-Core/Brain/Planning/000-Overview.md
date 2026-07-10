@@ -73,7 +73,7 @@ Milestone {
   order: number                    // Sequential position in plan
   parent_milestone?: string        // For hierarchical decomposition
   dependencies: string[]           // Milestone IDs that must complete first
-  estimated_effort: EffortEstimate
+  estimated_effort: ResourceEstimate
   status: "pending" | "in_progress" | "completed" | "blocked" | "failed"
   assigned_mission_id?: string     // Set when delegated to Institution OS
 }
