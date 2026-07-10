@@ -8,7 +8,7 @@
 | Category | Physics |
 | Document ID | AIOS-PHY-011 |
 | Applies To | All System Design, Engineering, Architecture, Code Structure, Libraries, Components, Tests, Documentation |
-| Source Laws | Law 9 — Law of Design DNA |
+| Source Laws | Law 9 — Law of Constitutional Supremacy |
 | Supersedes | All earlier "Design DNA" formulations in the Constitution corpus |
 | Superseded By | Nothing |
 | Amended By | None |
@@ -19,7 +19,7 @@
 
 This document defines the 15 Design DNA invariants governing all AIOS system design. Design DNA is the constitutional engineering framework — the foundational rules for how AIOS is built, structured, and evolved. Every line of code, every component, every test, every document reflects Design DNA.
 
-These invariants extend Law 9 (Design DNA) of Physics/000-Laws.md. Design DNA is the operational expression of the Constitution in code.
+These invariants extend Law 9 (Constitutional Supremacy) of Physics/000-Laws.md. Design DNA is the operational expression of the Constitution in code.
 
 ---
 
@@ -400,7 +400,7 @@ The Open/Closed Principle ensures that modules are stable. The system grows thro
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/000-Laws.md | Law 9 (Design DNA) — source law |
+| Physics/000-Laws.md | Law 9 (Constitutional Supremacy) — source law |
 | Constitution, Article VIII (Design DNA) | Formal Design DNA definition in the Constitution |
 | Bible/08-Standards/Design-DNA/ | Detailed implementation of each rule |
 | Bible/08-Standards/Coding-Standards/ | Code-level implementation of Design DNA |
