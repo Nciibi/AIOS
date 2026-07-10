@@ -4,13 +4,14 @@
 |----------|-------|
 | Type | [Constitutional \| Bible \| Architecture \| Feature \| Bugfix \| Clerical] |
 | Status | Draft |
+| Priority | [Standard \| Critical] |
 | Author | [your_identity_id] |
 | Source Law(s) | [Law(s) this RFC derives from] |
 | Source Physics | [Physics document(s) affected] |
 | Supersedes | [RFC-NNNN if applicable, or Nothing] |
 | Superseded By | [RFC-NNNN if applicable, or Nothing] |
 | Created | [YYYY-MM-DD] |
-| Amended By | [RFC-NNNN] |
+| Amended By | [RFC-NNNN if applicable, or Nothing] |
 
 ## Problem Statement
 
