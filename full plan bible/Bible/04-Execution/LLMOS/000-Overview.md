@@ -209,6 +209,11 @@ Controls what memory LLMOS injects into the context:
 | `LLMOS.MemoryInjected` | Memory Injection | request_id, memory_sources, total_memory_tokens, sources_count |
 | `LLMOS.PromptCompiled` | Prompt Compiler | request_id, template_used, compiled_length_tokens, compile_duration_us |
 | `LLMOS.GuardrailChecked` | Guardrails | request_id, direction(input/output), rules_evaluated, blocked, matched_rules |
+| `LLMOS.ModelRegistered` | Model Registry | model_id, provider, capabilities, quality_tier |
+| `LLMOS.ModelDeregistered` | Model Registry | model_id, provider, reason |
+| `LLMOS.ProviderRegistered` | Provider SDK | provider_name, version, model_count, registered_at |
+| `LLMOS.ProviderDeregistered` | Provider SDK | provider_name, reason, uptime_seconds |
+| `LLMOS.ProviderHealthChanged` | Model Registry | provider, old_state, new_state, reason, failure_count |
 | `LLMOS.ProviderCalled` | Retry Engine | request_id, provider, model, attempt, is_fallback, latency_ms, tokens_consumed |
 | `LLMOS.ProviderRetry` | Retry Engine | request_id, attempt, error, backoff_ms, fallback_activated |
 | `LLMOS.CircuitBreakerOpened` | Retry Engine | model_id, provider, failure_count, opened_at |
