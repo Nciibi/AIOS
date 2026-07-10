@@ -70,10 +70,10 @@ Only the Brain contains intelligence.
 | Conversation OS | (planned) | TBD | Dialogue management, multi-turn context |
 | Memory OS | (planned) | TBD | Persistent memory, working memory retrieval |
 | LLMOS | Brain/LLMOS/ | Active | AI inference pipeline (model routing, prompt compilation, streaming) |
-| Context System | (planned) | TBD | Global context window management, priority, compression |
-| Planning System | (planned) | TBD | Strategic + tactical planning, goal decomposition |
-| Decision System | (planned) | TBD | Multi-factor decision making, trade-off analysis |
-| Tool System | (planned) | TBD | Tool registry, capability discovery, tool call management |
+| Context System | Brain/Context/ | Active | Global context window management, priority, compression |
+| Planning System | Brain/Planning/ | Active | Strategic + tactical planning, goal decomposition |
+| Decision System | Brain/Decision/ | Active | Multi-factor decision making, trade-off analysis |
+| Tool System | Brain/Tools/ | Active | Tool registry, capability discovery, tool call management |
 | Attention System | (planned) | TBD | Priority and focus management |
 | Personality System | (planned) | TBD | Identity, values, behavior patterns, communication style |
 | Voice System | (planned) | TBD | Speech-to-text, text-to-speech |
