@@ -122,6 +122,41 @@ interface RegressionAlert {
   severity: 'high' | 'critical';
   evidenceRef: string;
 }
+
+interface VerifiedTarget {
+  targetId: string;
+  targetType: 'security-kernel' | 'ids' | 'cca' | 'acf' | 'subsystem';
+  version: string;
+  formalModel: string;  // reference to the target's formal model
+}
+
+interface CheckResult {
+  propertyId: string;
+  holds: boolean;
+  exploredStates: number;
+  counterexample: string | null;
+}
+
+interface StateSpace {
+  targetId: string;
+  stateCount: number;
+  reachableStates: number;
+  exploredAt: Timestamp;
+}
+
+interface FormalSpec {
+  specId: string;
+  propertyId: string;
+  logic: 'first-order' | 'temporal' | 'propositional';
+  formula: string;
+}
+
+interface ProofResult {
+  propertyId: string;
+  proved: boolean;
+  proofScriptRef: string;
+  assumptions: string[];
+}
 ```
 
 ## Interfaces

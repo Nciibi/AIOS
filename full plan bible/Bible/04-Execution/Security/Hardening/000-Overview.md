@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Execution/Security / Hardening |
 | Document ID | AIOS-BBL-004-SHD-000 |
-| Source Laws | Law 8 — Law of Verification-First, Law 5 — Law of Identity, Law 4 — Law of Evidence |
+| Source Laws | Law 8 — Law of Verification-First, Law 5 — Law of Identity, Law 4 — Law of Evidence, Law 9 — Law of Constitutional Supremacy |
 | Source Physics | Physics/008-Security.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -117,6 +117,14 @@ interface HardeningFinding {
   remediation: string;
   status: 'open' | 'in-progress' | 'resolved';
   evidenceRef: string;
+}
+
+interface ComplianceReport {
+  targetId: string;
+  baselineId: string;
+  compliant: boolean;
+  driftedControls: HardeningControl[];
+  checkedAt: Timestamp;
 }
 ```
 
