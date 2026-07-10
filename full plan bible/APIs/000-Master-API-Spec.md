@@ -31,13 +31,16 @@
 
 | # | Method | Auth | Description |
 |---|--------|------|-------------|
-| 1 | `defineRoute(target_pattern, endpoints, config)` | Security Council | Define a routing rule |
-| 2 | `updateRoute(route_id, updates)` | Security Council | Update a routing rule |
-| 3 | `removeRoute(route_id)` | Security Council | Remove a routing rule |
-| 4 | `resolveRoute(target, sender?)` | ACF-level | Resolve target to endpoint |
-| 5 | `getRoute(route_id)` | ACF-level | Get route details |
-| 6 | `listRoutes(filter?)` | ACF-level | List all routes |
-| 7 | `testRoute(target, message?)` | ACF-level | Test route resolution |
+| 1 | `registerService(service_name, endpoint, capabilities, config)` | Service token | Register a service with the platform |
+| 2 | `deregisterService(registration_id)` | Service token | Deregister a service |
+| 3 | `resolveService(service_name, capabilities?, filter?)` | ACF-level | Resolve service name to endpoint |
+| 4 | `resolveServiceBatch(service_name, count)` | ACF-level | Resolve multiple service instances |
+| 5 | `getServiceHealth(service_name)` | ACF-level | Get health status for all instances of a service |
+| 6 | `getServiceHealthByInstance(registration_id)` | ACF-level | Get health for a specific instance |
+| 7 | `listServices(filter?)` | ACF-level | List all registered services |
+| 8 | `getServiceMetrics(registration_id)` | ACF-level | Get metrics for a service instance |
+| 9 | `updateServiceCapabilities(registration_id, capabilities)` | Service token | Update declared capabilities |
+| 10 | `updateServiceLoad(registration_id, load)` | Service token | Update current load metric |
 
 #### Messages
 
@@ -763,8 +766,8 @@
 
 | # | Type | Endpoint | Auth | Description |
 |---|------|----------|------|-------------|
-| 324 | REST | `POST {endpoint}/api/generate` | API Key | Ollama model generation endpoint |
-| 325 | REST | `POST {endpoint}/api/chat` | API Key | Ollama chat endpoint |
+| 324 | REST | `POST {endpoint}/api/generate` | Network-bound (localhost/private) | Ollama model generation endpoint |
+| 325 | REST | `POST {endpoint}/api/chat` | Network-bound (localhost/private) | Ollama chat endpoint |
 
 ---
 
