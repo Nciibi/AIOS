@@ -315,19 +315,19 @@ The existing Runtime SDK (`Bible/04-Execution/Runtime/001-SDK.md`) defines the `
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/04-Execution/LLMOS/001-Model-Registry.md | Model registration and discovery |
-| Bible/04-Execution/LLMOS/002-Router.md | Request routing and model selection |
-| Bible/04-Execution/LLMOS/003-Prompt-Compiler.md | Prompt construction from templates |
-| Bible/04-Execution/LLMOS/004-Context-Builder.md | Context window management |
-| Bible/04-Execution/LLMOS/005-Memory-Injection.md | Memory retrieval and injection |
-| Bible/04-Execution/LLMOS/006-Token-Budget-Manager.md | Token budget tracking and enforcement |
-| Bible/04-Execution/LLMOS/007-Cost-Optimizer.md | Cost estimation and optimization |
-| Bible/04-Execution/LLMOS/008-Streaming-Manager.md | Streaming response management |
-| Bible/04-Execution/LLMOS/009-Retry-Engine.md | Retry logic and fallback chains |
-| Bible/04-Execution/LLMOS/010-Guardrails.md | Content filtering and constitutional bounds |
-| Bible/04-Execution/LLMOS/011-Cache.md | Response caching |
-| Bible/04-Execution/LLMOS/012-Response-Validator.md | Structured output validation |
-| Bible/04-Execution/LLMOS/013-Provider-SDK.md | Model provider implementation interface |
+| Bible/02-Core/Brain/LLMOS/001-Model-Registry.md | Model registration and discovery |
+| Bible/02-Core/Brain/LLMOS/002-Router.md | Request routing and model selection |
+| Bible/02-Core/Brain/LLMOS/003-Prompt-Compiler.md | Prompt construction from templates |
+| Bible/02-Core/Brain/LLMOS/004-Context-Builder.md | Context window management |
+| Bible/02-Core/Brain/LLMOS/005-Memory-Injection.md | Memory retrieval and injection |
+| Bible/02-Core/Brain/LLMOS/006-Token-Budget-Manager.md | Token budget tracking and enforcement |
+| Bible/02-Core/Brain/LLMOS/007-Cost-Optimizer.md | Cost estimation and optimization |
+| Bible/02-Core/Brain/LLMOS/008-Streaming-Manager.md | Streaming response management |
+| Bible/02-Core/Brain/LLMOS/009-Retry-Engine.md | Retry logic and fallback chains |
+| Bible/02-Core/Brain/LLMOS/010-Guardrails.md | Content filtering and constitutional bounds |
+| Bible/02-Core/Brain/LLMOS/011-Cache.md | Response caching |
+| Bible/02-Core/Brain/LLMOS/012-Response-Validator.md | Structured output validation |
+| Bible/02-Core/Brain/LLMOS/013-Provider-SDK.md | Model provider implementation interface |
 | Bible/04-Execution/Runtime/001-SDK.md | Existing Execution Provider SDK (dual-interface providers) |
 | Bible/04-Execution/Runtime/002-Claude.md | Claude provider (LLMOS model provider) |
 | Bible/04-Execution/Runtime/004-Ollama.md | Ollama provider (LLMOS model provider) |
