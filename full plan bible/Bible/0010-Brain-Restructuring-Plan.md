@@ -243,11 +243,13 @@ SOU-007: All cognitive services live inside the Brain.
 5. ✅ Update Architecture Diagram to show Brain as top layer
 6. ✅ Update Master API Spec to reflect Brain hierarchy
 
-### Phase B: Core Systems (P0 — next)
-1. Create `Bible/02-Core/Brain/Context/000-Overview.md` — Context System
-2. Create `Bible/02-Core/Brain/Decision/000-Overview.md` — Decision System
-3. Create `Bible/02-Core/Brain/Planning/000-Overview.md` — Planning System
-4. Create `Bible/02-Core/Brain/Tools/000-Overview.md` — Tool System
+### Phase B: Core Systems (P0) ✅ COMPLETE
+1. ✅ Created `Bible/02-Core/Brain/Context/000-Overview.md` — Context System (window management, priority, compression, TTL, registry)
+2. ✅ Created `Bible/02-Core/Brain/Decision/000-Overview.md` — Decision System (scoring, trade-offs, constraints, criteria registry)
+3. ✅ Created `Bible/02-Core/Brain/Planning/000-Overview.md` — Planning System (goal decomposition, milestones, dependencies, progress tracking)
+4. ✅ Created `Bible/02-Core/Brain/Tools/000-Overview.md` — Tool System (registry, discovery, invocation, validation)
+5. ✅ Updated Brain overview services table (Context, Planning, Decision, Tools → Active)
+6. ✅ Updated Forward References to reflect Phase B completion
 
 ### Phase C: Advanced Systems (P1)
 1. Create `Bible/02-Core/Brain/Attention/000-Overview.md` — Attention System
