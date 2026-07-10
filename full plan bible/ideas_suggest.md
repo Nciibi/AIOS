@@ -652,6 +652,10 @@ Written and audited. 536 entries across 9 service groups covering every concrete
 
 ### Phase 3 Bug Fixes Applied During Audit
 
+- **SIM**: Invariant SIM-003 referenced "(Law 9)" — wrong, Law 9 is Constitutional Supremacy, not determinism. Changed to reference Design DNA R9 (Deterministic) instead.
+
+### Phase 3 Bug Fixes Applied During Audit
+
 - **SIM**: Source Laws incorrectly referenced Law 9 (Constitutional Supremacy) as "Deterministic" — no such Physics Law exists. Replaced with Law 6 (Lifecycle Compliance).
 - **SIM**: Core Concept 1's embedded `Scenario` interface snippet was out of sync with the authoritative Data Model definition. Replaced with a cross-reference pointer.
 - **SIM**: Added missing internal interfaces for `ScenarioBuilder`, `EvidenceRecorder`, `ReplayEngine`, and `HypothesisManager` (referenced in Component Map but missing from Internal Interfaces section).
