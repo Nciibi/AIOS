@@ -61,7 +61,7 @@ NNN-<kebab-case-name>.md
 | Entity type | snake_case | `organization`, `worker_session` |
 | Field name | snake_case | `entity_id`, `created_at` |
 | Index name | idx_{table}_{field} | `idx_sessions_status` |
-| Event type | PascalCase | `SessionCreated`, `AuthFailed` |
+| Event type (DB) | PascalCase, no dots | `SessionCreated`, `AuthFailed` |
 
 ### API / ACF
 | Construct | Style | Example |
