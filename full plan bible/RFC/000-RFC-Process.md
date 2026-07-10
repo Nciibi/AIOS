@@ -124,6 +124,7 @@ Draft → Submitted → Review → Approved → Implemented → Verified → Act
 | Bible/01-Governance/005-ADG.md | ADG process — architecture RFCs require ADG review |
 | Bible/01-Governance/001-CLS.md | Constitutional amendments |
 | Templates/RFC-template.md | RFC template — copy this to start a new RFC |
+| Bible/00-Foundations/002-Design-DNA.md | Design DNA rules — RFCs must comply with R1–R15 |
 | Standards/002-BAS.md | Bible Authoring Standards — document format |
 | Standards/003-DQC.md | Document Quality Checklist — quality criteria |
 | Reference/002-Reference-Architecture.md | System architecture overview |
