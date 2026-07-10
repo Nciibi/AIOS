@@ -84,8 +84,8 @@ Every inference request passes through LLMOS in order:
 | 2 | Rate Limiter | Enforce per-entity rate limits | `LLMOS.RateChecked` |
 | 3 | Token Budget Check | Verify entity has sufficient token budget | `LLMOS.BudgetChecked` |
 | 4 | Model Registry | Resolve available models matching request requirements | `LLMOS.ModelsResolved` |
-| 5 | Router | Select optimal model based on cost, capability, latency | `LLMOS.ModelSelected` |
-| 6 | Cost Optimizer | Estimate cost, apply cost optimization strategies | `LLMOS.CostOptimized` |
+| 5 | Cost Optimizer | Estimate cost, apply cost optimization strategies for all candidates | `LLMOS.CostOptimized` |
+| 6 | Router | Select optimal model using cost estimates + capability + latency scoring | `LLMOS.ModelSelected` |
 | 7 | Cache Lookup | Check for cached response (exact or semantic match) | `LLMOS.CacheHit` / `LLMOS.CacheMiss` |
 | 8 | Context Builder | Manage context window, truncate, prioritize content | `LLMOS.ContextBuilt` |
 | 9 | Memory Injection | Retrieve and inject relevant memories | `LLMOS.MemoryInjected` |
