@@ -126,7 +126,7 @@ interface AgentGenome {
 interface EvolutionState {
   agentId: string;
   currentStage: EvolutionStage;
-  genomeVersion: number;
+  activeGenomeVersion: number;
   certifications: Certification[];
   performanceHistory: PerformanceReport[];
   retirementDate: Timestamp | null;
@@ -278,7 +278,7 @@ Evolution Engine evaluates: promote / mutate / retire / noop
 | AGX-004 | Retirement is permanent — retired agents cannot be reactivated | Architectural — retired genomes are immutable; new agent must be created |
 | AGX-005 | Every genome mutation produces a versioned, auditable record | Architectural — Genome Repository creates new version on every mutation |
 | AGX-006 | Competency trees form a directed acyclic graph | Algorithmic — cycle detection on tree registration |
-| AGX-007 | No agent may be promoted beyond L4 (Master) | Constitutional — Law 10 ensures all agents are bounded |
+| AGX-007 | No agent may be promoted beyond L4 (Master) | Constitutional — Law 7 (Capability Bounds) caps agents at Master stage |
 
 ## Design DNA
 
@@ -305,6 +305,6 @@ Evolution Engine evaluates: promote / mutate / retire / noop
 | Bible/04-Execution/Security/CCA/000-CCA.md | CCA certifies capability upgrades for evolved agents |
 | Bible/03-Institutions/Workers/000-Overview.md | Workers are the agents that evolve |
 | Bible/05-Platform/004-EVS.md | EVS stores performance and failure evidence |
-| Bible/00-Foundations/008-Object-Lifecycle.md | Lifecycle lifecycle governs agent stage transitions |
+| Bible/00-Foundations/008-Object-Lifecycle.md | Object Lifecycle governs agent stage transitions |
 | Physics/007-Capabilities.md | Capability Bound invariants |
 | Physics/006-Lifecycles.md | Lifecycle state machine invariants |
