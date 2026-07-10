@@ -114,8 +114,9 @@
  │  All Brain ↔ external communication flows through ACF                                                      │
  └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
                                           │
-                                          ▼
- │  LAYER 5: DOMAINS ──── Specialized application domains built on core infrastructure                         │
+                                           ▼
+  ┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │  LAYER 5: DOMAINS ──── Specialized application domains built on core infrastructure                         │
  │                                                                                                             │
  │  ┌─────────┐  ┌──────────┐  ┌─────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐  ┌─────────┐  ┌──────────┐ │
  │  │ TRADING │  │ SECURITY │  │ CODING  │  │  LINUX   │  │ RESEARCH │  │ COMMS  │  │ ROBOTICS│  │ EMBEDDED │ │
