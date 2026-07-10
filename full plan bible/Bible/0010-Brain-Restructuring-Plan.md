@@ -232,6 +232,7 @@ SOU-007: All cognitive services live inside the Brain.
 | Personality System | P2 | Identity, values, behavior patterns, communication style |
 | Voice System | P3 | Speech-to-text, text-to-speech interfaces |
 | Vision System | P3 | Image/video input processing |
+| Autonomy System | P0 | L0-L4 autonomy levels, AMS/ACE/ABE engines, escalation chain |
 
 ---
 
