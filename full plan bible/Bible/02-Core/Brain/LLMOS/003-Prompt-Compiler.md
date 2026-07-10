@@ -1,12 +1,12 @@
-# AIOS Bible — Execution/LLMOS
+# AIOS Bible — Brain/LLMOS
 ## 003 — Prompt Compiler
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
 | Version | 1.0 |
-| Category | Bible — Execution/LLMOS |
-| Document ID | AIOS-BBL-004-LLM-003 |
+| Category | Bible — Brain/LLMOS |
+| Document ID | AIOS-BBL-002-LLM-003 |
 | Source Laws | Law 3 — Law of Communication |
 | Pipeline Stage | 10 — Prompt Compilation |
 

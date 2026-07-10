@@ -1,12 +1,12 @@
-# AIOS Bible — Execution/LLMOS
+# AIOS Bible — Brain/LLMOS
 ## 011 — Cache
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
 | Version | 1.0 |
-| Category | Bible — Execution/LLMOS |
-| Document ID | AIOS-BBL-004-LLM-011 |
+| Category | Bible — Brain/LLMOS |
+| Document ID | AIOS-BBL-002-LLM-011 |
 | Source Laws | Law 13 — Design for Failure, Law 14 — Paved Path |
 | Pipeline Stage | 7 — Cache Lookup, Stage 16 — Cache Store |
 

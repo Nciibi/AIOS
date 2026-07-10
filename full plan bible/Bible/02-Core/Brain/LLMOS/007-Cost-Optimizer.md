@@ -1,12 +1,12 @@
-# AIOS Bible — Execution/LLMOS
+# AIOS Bible — Brain/LLMOS
 ## 007 — Cost Optimizer
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
 | Version | 1.0 |
-| Category | Bible — Execution/LLMOS |
-| Document ID | AIOS-BBL-004-LLM-007 |
+| Category | Bible — Brain/LLMOS |
+| Document ID | AIOS-BBL-002-LLM-007 |
 | Source Laws | Law 7 — Law of Capability Bounds (cost constraints) |
 | Pipeline Stage | 5 — Cost Optimization |
 

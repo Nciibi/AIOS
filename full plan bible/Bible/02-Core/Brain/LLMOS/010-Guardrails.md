@@ -1,12 +1,12 @@
-# AIOS Bible — Execution/LLMOS
+# AIOS Bible — Brain/LLMOS
 ## 010 — Guardrails
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
 | Version | 1.0 |
-| Category | Bible — Execution/LLMOS |
-| Document ID | AIOS-BBL-004-LLM-010 |
+| Category | Bible — Brain/LLMOS |
+| Document ID | AIOS-BBL-002-LLM-010 |
 | Source Laws | Law 2 — Law of Non-Execution (safety), Law 8 — Law of Verification-First |
 | Pipeline Stage | 11 — Input Guardrail Check and 14 — Output Guardrail Check |
 

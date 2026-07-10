@@ -1,12 +1,12 @@
-# AIOS Bible — Execution/LLMOS
+# AIOS Bible — Brain/LLMOS
 ## 001 — Model Registry
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
 | Version | 1.0 |
-| Category | Bible — Execution/LLMOS |
-| Document ID | AIOS-BBL-004-LLM-001 |
+| Category | Bible — Brain/LLMOS |
+| Document ID | AIOS-BBL-002-LLM-001 |
 | Source Laws | Law 7 — Law of Capability Bounds |
 | Pipeline Stage | 4 — Model Resolution |
 

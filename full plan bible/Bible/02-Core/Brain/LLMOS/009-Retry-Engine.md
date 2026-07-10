@@ -1,12 +1,12 @@
-# AIOS Bible — Execution/LLMOS
+# AIOS Bible — Brain/LLMOS
 ## 009 — Retry Engine
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
 | Version | 1.0 |
-| Category | Bible — Execution/LLMOS |
-| Document ID | AIOS-BBL-004-LLM-009 |
+| Category | Bible — Brain/LLMOS |
+| Document ID | AIOS-BBL-002-LLM-009 |
 | Source Laws | Law 8 — Law of Verification-First (reliability), Law 13 — Design for Failure |
 | Pipeline Stage | 12 — Provider Call with Retry |
 
