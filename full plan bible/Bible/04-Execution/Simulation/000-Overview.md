@@ -221,6 +221,28 @@ interface ResultAnalyzer {
   detectAnomalies(trajectory: StatePoint[]): Anomaly[];
   computeConfidence(result: SimulationResult): { low: number; high: number };
 }
+
+interface ScenarioBuilder {
+  create(params: ScenarioParams): Promise<Scenario>;
+  validate(scenario: Scenario): ValidationResult;
+  createVariant(baseScenarioId: string, changes: ScenarioChange[]): Promise<Scenario>;
+}
+
+interface EvidenceRecorder {
+  recordSimulationRun(result: SimulationResult): Promise<string>;  // returns evidenceRef
+  recordReplay(originalRunId: string, replayResult: SimulationResult): Promise<string>;
+}
+
+interface ReplayEngine {
+  replay(runId: string): Promise<SimulationResult>;
+  compare(original: SimulationResult, replay: SimulationResult): ReplayComparison;
+}
+
+interface HypothesisManager {
+  propose(baseScenarioId: string, changes: ScenarioChange[]): Promise<Scenario>;
+  chain(baseScenarioId: string, variants: ScenarioChange[][]): Promise<Scenario[]>;
+  evaluateChain(scenarios: Scenario[]): Promise<HypothesisChainResult>;
+}
 ```
 
 ## Component Map
