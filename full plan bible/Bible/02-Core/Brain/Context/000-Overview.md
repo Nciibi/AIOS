@@ -166,7 +166,7 @@ Every item in the context window has a time-to-live. Expired items are automatic
 |-----------|-------------|-------------|------------|
 | User input | Current turn | Current turn | No |
 | Working memory | Session lifetime | Session lifetime | Yes (explicit pin) |
-| Conversation turn | 20 turns | 50 turns | Yes |
+| Conversation history | 20 turns | 50 turns | Yes |
 | Tool result | 3 turns | 10 turns | Yes |
 | System signal | 5 turns | 20 turns | No |
 
