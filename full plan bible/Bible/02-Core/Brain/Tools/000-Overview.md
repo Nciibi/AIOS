@@ -105,11 +105,19 @@ ToolResult {
   invocation_id: string
   status: "success" | "error" | "timeout" | "cancelled"
   data: unknown              // Parsed result data
-  error?: ToolError
+  error?: {
+    code: string
+    message: string
+    details?: unknown
+  }
   metadata: {
     duration_ms: number
     token_cost: number
-    resource_usage: ResourceUsage
+    resource_usage: {
+      cpu_ms?: number
+      memory_bytes?: number
+      network_bytes?: number
+    }
   }
 }
 ```
