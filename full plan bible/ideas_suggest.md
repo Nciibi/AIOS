@@ -584,7 +584,19 @@ High-level architecture map including system layering, constitutional 4-branch d
 - **CCA missing**: Stage 5 (CCA — Capability Certification Authority) is shown in the pipeline but the CCA document doesn't exist in `Bible/04-Execution/Security/`. Either create it or document where CCA responsibilities live.
 - **IRS/IDS naming**: ADR-005 was renamed from "IRS" to "IDS" in the log, but the Bible still mixes both names.
 
-### Remaining work after Reference/:
-- **SDK/** (3 files): Runtime SDK, Audit SDK, Knowledge SDK — these are the last high-priority remaining docs
-- **Standards/** (5 files): Next tier — design language, naming conventions, BAS, DQC, PSAP
-- **APIs/**, **RFC/**, **Research/**: Lower priority
+### SDK/ — All 3 Files Written (202 + 196 + 216 lines)
+
+All three developer quick-start docs are complete with installation, code examples, implementation checklists, common patterns, and conformance testing instructions.
+
+**Suggestions for future**:
+- Add a **Events** section to each SDK file listing the specific Events each provider must emit, matching the Bible specs
+- Add **Design DNA compliance** table to each SDK file for consistency with Bible format
+- Add **Cross-Cutting Concerns** section (Security, Evidence, Lifecycle, Capability Bounds) to match Reference files
+- **Missing Provider-SDK stub**: The Bible has `003-Provider-SDK.md` but the root SDK/ directory doesn't have a corresponding file. Consider adding it for developers building resource providers (ROS integration). The Bible file exists at `Bible/08-Interfaces/SDK/003-Provider-SDK.md`.
+
+### Remaining work after SDK/:
+- **Standards/** (5 files): Design Language, Naming Conventions, BAS, DQC, PSAP — next priority tier
+- **APIs/000-Master-API-Spec.md**: Single source of truth for all API interfaces
+- **RFC/** (2 files): RFC Process + Template
+- **Research/** (4 files): Phases 2-5 roadmap
+- **Contributing/**, **Examples/**, **Tests/**: Lower priority
