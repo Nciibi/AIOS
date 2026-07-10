@@ -62,9 +62,16 @@ ToolDefinition {
   capability_bounds: string[] // Required capabilities for invocation
   parameters: ParameterSchema
   returns: ReturnSchema
-  execution_type: ExecutionType
-  rate_limits: RateLimit
-  cost: ToolCost
+  execution_type: "sync" | "async" | "stream"
+  rate_limits: {
+    max_calls_per_minute: number
+    max_concurrent: number
+    max_tokens_per_call?: number
+  }
+  cost: {
+    tokens_per_call: number
+    credits_per_call?: number
+  }
   status: "active" | "deprecated" | "experimental"
 }
 
