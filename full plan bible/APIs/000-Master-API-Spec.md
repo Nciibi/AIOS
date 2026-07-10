@@ -365,14 +365,17 @@
 
 | # | Type | Name | Description |
 |---|------|------|-------------|
-| 157 | Interface | `Reasoner` | All reasoning methods implement this |
-| 158 | Interface | `SouEngine` | Common interface for Planner, Reasoning, Missions, Learning, Knowledge |
+| 157 | Interface | `SouIdentity` | Sou's persistent identity — name, purpose, history |
+| 158 | Interface | `SouPersonality` | Sou's behavioral traits, values, communication style |
 
 #### Events
 
 | # | Event | Description |
 |---|-------|-------------|
-| 159 | `Sou.ReasoningFailed` | Reasoning encountered an error |
+| 159 | `Sou.InputReceived` | Input entered Sou's processing |
+| 160 | `Sou.DecisionMade` | Sou made a strategic decision |
+| 161 | `Sou.MissionCreated` | Sou created a mission |
+| 162 | `Sou.ResponseSent` | Sou sent a user-facing response |
 
 ---
 
