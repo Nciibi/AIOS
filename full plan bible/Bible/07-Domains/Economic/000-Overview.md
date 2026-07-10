@@ -298,7 +298,7 @@ Enforcement Gateway checks budget via checkBudget()
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/05-Platform/002-ROS.md | ROS allocates resources; Economic System prices and budgets that allocation |
+| Bible/02-Core/ROS/000-Overview.md | ROS allocates resources; Economic System prices and budgets that allocation |
 | Bible/05-Platform/004-EVS.md | EVS stores cost records as evidence |
 | Bible/04-Execution/Runtime/000-Overview.md | Runtime enforces resource consumption limits that tie to budgets |
 | Bible/04-Execution/Workflow/000-Overview.md | WFE can include budget checks as workflow approval gates |
