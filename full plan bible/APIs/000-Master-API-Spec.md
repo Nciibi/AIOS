@@ -13,12 +13,12 @@
 3. [Brain](#3-brain)
 4. [Security Council](#4-security-council)
 5. [Institutions](#5-institutions)
-5. [Runtime](#5-runtime)
-6. [Domains](#6-domains)
-7. [Federation](#7-federation)
-8. [Governance](#8-governance)
-9. [Cross-Cutting](#9-cross-cutting)
-10. [Appendix: Schema Index](#10-appendix-schema-index)
+6. [Runtime](#6-runtime)
+7. [Domains](#7-domains)
+8. [Federation](#8-federation)
+9. [Governance](#9-governance)
+10. [Cross-Cutting](#10-cross-cutting)
+11. [Appendix: Schema Index](#11-appendix-schema-index)
 
 ---
 
