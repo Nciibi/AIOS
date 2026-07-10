@@ -102,4 +102,14 @@ List the evidence supporting this RFC:
 
 ---
 
+## Changelog
+
+| Version | Date | Author | Change Description |
+|---------|------|--------|-------------------|
+| 1.0 | [YYYY-MM-DD] | [Author] | Initial submission |
+| | | | |
+| | | | |
+
+---
+
 *This template follows the format defined in Bible/01-Governance/003-CRP.md.*
