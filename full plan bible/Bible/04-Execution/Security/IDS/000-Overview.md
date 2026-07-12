@@ -101,8 +101,8 @@ Identities are chained: `Event N: data = { ..., prev_hash = SHA256(Event N-1) }`
 | Physics/001-Identity.md | 10 Identity invariants — IDS implements them |
 | Physics/005-Events.md | Event schema — IDS produces identity Events |
 | Physics/008-Security.md | Security framework — identity is the first stage |
-| IDS/001-Registry.md | Registry Store specification |
-| IDS/002-Resolution.md | Identity resolution API |
-| IDS/003-Lifecycle.md | Identity lifecycle management |
-| IDS/004-Federation.md | Cross-instance identity federation |
-| IDS/005-Provenance.md | Identity provenance and audit trails |
+| 001-Registry.md | Registry Store specification |
+| 002-Resolution.md | Identity resolution API |
+| 003-Lifecycle.md | Identity lifecycle management |
+| 004-Federation.md | Cross-instance identity federation |
+| 005-Provenance.md | Identity provenance and audit trails |
