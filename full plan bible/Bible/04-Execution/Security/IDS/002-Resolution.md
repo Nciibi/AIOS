@@ -52,7 +52,7 @@ The verification result is cached for the identity's verification TTL (default: 
 
 ## Resolution API
 
-### REST (over ACF)
+### RPC (over ACF)
 
 | Operation | ACF Endpoint | Method | Request | Response |
 |-----------|-------------|--------|---------|----------|
