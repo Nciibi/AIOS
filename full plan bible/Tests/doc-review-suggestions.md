@@ -79,6 +79,16 @@ The 24 former FAILs were forward-references to P3 (Execution-tier) components
   (R1-R6,R9,R10,R13-R15)` heading. This was normalized to `## Design DNA`. If the parenthetical
   rule-range is useful, keep it as a comment/`### Rule Coverage` note rather than in the heading.
 
+### S5. Deeper semantic checks (invariant + rule resolution) — **[DONE, 0 defects]**
+- Beyond structural verification, checked semantic reference integrity:
+  - **Foundation invariant IDs** (`BRAIN-001..009`, `PHI-001..010`, `CPR-001..010`,
+    `GOV-001..005`, `SOU-001..007`): every reference must fall in range. Result: **0 out of range**
+    (2 initial hits were false positives from Document IDs `AIOS-BBL-002-SOU-000`, excluded).
+  - **Physics invariant references** (`Physics/NNN Invariant M`): every `M` must be defined in that
+    Physics doc. Result: **0 unresolved**.
+  - **Design DNA rule references** (`R<n>` in prose): must be `R1`–`R15`. Result: **0 outside range**.
+- Script: `semcheck.ps1` (under temp). No doc changes required — corpus is semantically consistent.
+
 ## How to reproduce
 - Structural: `verify_docs.ps1`
 - Reference / placeholder / empty-section recheck: `recheck.ps1`
