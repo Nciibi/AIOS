@@ -84,5 +84,20 @@ The 24 former FAILs were forward-references to P3 (Execution-tier) components
 - Design DNA / Cross-Cutting / Invariants remediation: `remediate.ps1`
 - (All under `C:\Users\ncibi\AppData\Local\Temp\opencode\`.)
 
+## P3 forward-references resolved
+- The 24 `DOC-REF-001` FAILs were directory-level references (and one wrong filename) in 20 P0/P1/P2
+  docs pointing at P3 targets. Resolution:
+  - Created `Bible/04-Execution/Security/ATS/000-Overview.md` (the only P3 target genuinely missing an
+    overview doc). All other targets (`Security`, `Security/IDS`, `Runtime`, `ROS`, `OSYS`, `DTS`,
+    `Academy`) already had `000-Overview.md` files.
+  - Repointed all 24 refs from directory form (`Bible/04-Execution/Security/`, `Bible/02-Core/ROS`,
+    `Bible/02-Core/OSYS`, `Bible/02-Core/DTS`, `Bible/02-Core/Academy`, `Bible/04-Execution/Runtime`,
+    `Bible/04-Execution/Security/IDS`, `Bible/04-Execution/Security/ATS`) to the specific `000-Overview.md`.
+  - Repointed the single file ref `Bible/04-Execution/Security/Risk/000-Overview.md` →
+    `Bible/04-Execution/Security/Risk/000-RE.md` (the Risk overview already exists as `000-RE.md`).
+- Re-verified: `verify_docs.ps1` → FAIL=0 WARN=0; `recheck.ps1` → 0 broken / 0 empty; `eventcheck.ps1`
+  → 0 undefined events / 0 out-of-range Law.
+
 ## Remaining out-of-scope work
-- Author P3 (Execution-tier) docs to clear the 24 `DOC-REF-001` forward-reference FAILs.
+- None outstanding from the doc-integration effort. Optional deeper checks: S3 (producer→consumer
+  event traceability) and S4 (Design DNA rule-range comment preservation).
