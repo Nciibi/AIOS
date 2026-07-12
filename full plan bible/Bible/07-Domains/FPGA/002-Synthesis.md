@@ -147,15 +147,15 @@ interface CongestionReport {
 
 ## Events
 
-| Event | Producer | Payload | Description |
-|-------|----------|---------|-------------|
-| FPGA.SynthesisStarted | SynthesisEngine | synth_id, device, goal, frequency | Fired when synthesis job begins |
-| FPGA.SynthesisCompleted | SynthesisEngine | synth_id, tech_map, utilization, duration | Fired after synthesis finishes |
-| FPGA.MappingDone | Mapper | synth_id, lut_type, dsp, bram, util | Fired when technology mapping completes |
-| FPGA.PlacementDone | Placer | placement_id, cell_util, congestion, iter | Fired when placement finishes |
-| FPGA.RoutingDone | Router | routing_id, wires_routed, unrouted, slack | Fired when routing completes |
-| FPGA.TimingAnalyzed | TimingAnalyzer | timing_id, fmax, violators, paths | Fired after timing analysis |
-| FPGA.TimingClosed | Optimizer | closure_id, iterations, final_slack, status | Fired when timing closure is achieved or abandoned |
+| Event Type | Produced When | Fields |
+|-------|----------|---------|
+| FPGA.SynthesisStarted | SynthesisEngine: synth_id, device, goal, frequency | Fired when synthesis job begins |
+| FPGA.SynthesisCompleted | SynthesisEngine: synth_id, tech_map, utilization, duration | Fired after synthesis finishes |
+| FPGA.MappingDone | Mapper: synth_id, lut_type, dsp, bram, util | Fired when technology mapping completes |
+| FPGA.PlacementDone | Placer: placement_id, cell_util, congestion, iter | Fired when placement finishes |
+| FPGA.RoutingDone | Router: routing_id, wires_routed, unrouted, slack | Fired when routing completes |
+| FPGA.TimingAnalyzed | TimingAnalyzer: timing_id, fmax, violators, paths | Fired after timing analysis |
+| FPGA.TimingClosed | Optimizer: closure_id, iterations, final_slack, status | Fired when timing closure is achieved or abandoned |
 
 ## Error Cases
 

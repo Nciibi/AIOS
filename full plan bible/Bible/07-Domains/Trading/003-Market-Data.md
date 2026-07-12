@@ -137,16 +137,16 @@ interface FeedStatus {
 
 ## Events
 
-| Event | Producer | Payload | Description |
-|-------|----------|---------|-------------|
-| Trading.FeedConnected | FeedManager | feedId, exchange, symbols | Fired when a feed establishes connection |
-| Trading.TickProcessed | Normalizer | tickId, symbol, exchange | Published for every normalized tick |
-| Trading.BarClosed | OHLCVBuilder | symbol, timeframe, bar | Emitted when a bar period closes |
-| Trading.DataQualityAlert | Validator | feedId, symbol, failedChecks[] | Fired when validation rules fail |
-| Trading.FeedDegraded | FeedManager | feedId, reason, latencyMs | Published on latency or reliability degradation |
-| Trading.FeedDisconnected | FeedManager | feedId, reason, lastSequence | Fired on unexpected disconnection |
-| Trading.GapDetected | DataStore | symbol, fromTimestamp, toTimestamp, gapDuration | Emitted when a data gap is found |
-| Trading.OrderBookUpdated | OrderBookManager | symbol, exchange, sequence, depth | Published on significant order book change |
+| Event Type | Produced When | Fields |
+|-------|----------|---------|
+| Trading.FeedConnected | FeedManager: feedId, exchange, symbols | Fired when a feed establishes connection |
+| Trading.TickProcessed | Normalizer: tickId, symbol, exchange | Published for every normalized tick |
+| Trading.BarClosed | OHLCVBuilder: symbol, timeframe, bar | Emitted when a bar period closes |
+| Trading.DataQualityAlert | Validator: feedId, symbol, failedChecks[] | Fired when validation rules fail |
+| Trading.FeedDegraded | FeedManager: feedId, reason, latencyMs | Published on latency or reliability degradation |
+| Trading.FeedDisconnected | FeedManager: feedId, reason, lastSequence | Fired on unexpected disconnection |
+| Trading.GapDetected | DataStore: symbol, fromTimestamp, toTimestamp, gapDuration | Emitted when a data gap is found |
+| Trading.OrderBookUpdated | OrderBookManager: symbol, exchange, sequence, depth | Published on significant order book change |
 
 ## Error Cases
 

@@ -21,6 +21,31 @@ Enable AIOS to configure, compile, load, and tune the Linux kernel across a flee
 
 Kernel configuration follows a lifecycle: baseline profile is selected → config is generated from fragments → optionally compiled → modules loaded → runtime parameters applied → boot entry updated. The lifecycle is driven by a KernelConfigurator agent that reconciles desired state against live kernel state. Compilation runs in isolated build contexts; artifacts are signed and versioned. Boot entries are managed via bootloader abstraction (GRUB, systemd-boot).
 
+### Architecture Flow
+
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                    KernelConfigurator Agent                      │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
+│  │ Config    │  │ Build    │  │ Module   │  │ Sysctl   │        │
+│  │ Resolver  │  │ Executor │  │ Manager  │  │ Manager  │        │
+│  └─────┬────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘        │
+│        │             │             │             │              │
+│  ┌─────▼─────────────▼─────────────▼─────────────▼─────┐       │
+│  │              Desired State Reconciliation             │       │
+│  │  ┌────────────┐  ┌────────────┐  ┌───────────────┐  │       │
+│  │  │ KernelConfig│  │ Modules    │  │ BootEntry     │  │       │
+│  │  │ Resource    │  │ Resource   │  │ Resource      │  │       │
+│  │  └────────────┘  └────────────┘  └───────────────┘  │       │
+│  └───────────────────────┬──────────────────────────────┘       │
+│                          │                                      │
+│  ┌───────────────────────▼──────────────────────────────┐       │
+│  │              Live Kernel State                        │       │
+│  │  /proc/sys   /sys/module   /boot/   /lib/modules/    │       │
+│  └──────────────────────────────────────────────────────┘       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
 ## Data Model (TypeScript interfaces)
 
 ```typescript
@@ -68,6 +93,38 @@ interface BootEntry {
   default: boolean;
   timeout: number;
 }
+
+interface KernelBuildArtifact {
+  id: string;
+  configId: string;
+  version: string;
+  hash: string;
+  signature?: string;
+  path: string;
+  buildLogRef: string;
+  buildTimestamp: string;
+  sizeBytes: number;
+}
+
+interface ConfigFragmentOverride {
+  fragmentPath: string;
+  paramKey: string;
+  paramValue: string;
+  overridePriority: number;
+  reason: string;
+}
+
+interface KernelVersion {
+  fullVersion: string;
+  major: number;
+  minor: number;
+  patch: number;
+  extra?: string;
+  buildUser: string;
+  buildDate: string;
+  architecture: string;
+  configHash: string;
+}
 ```
 
 ## Core Concepts / Operations
@@ -80,6 +137,22 @@ interface BootEntry {
 - **manage_boot_entry(entry)** — creates, updates, or removes a bootloader entry
 - **get_kernel_info()** — returns running kernel version, build info, and live parameters
 
+### Operations Table
+
+| Operation | Description | Preconditions | Postconditions |
+|-----------|-------------|---------------|----------------|
+| configure_kernel | Generates kernel .config from profile and overlay fragments | Valid profileName, non-conflicting fragments | KernelConfig updated; .config written |
+| compile_kernel | Compiles kernel source into bootable image | configId exists; build environment ready | Artifact produced with verified hash; build log recorded |
+| load_module | Inserts kernel module into running kernel | Module file exists; dependencies loaded | Module loaded and visible in lsmod; parameters applied |
+| unload_module | Removes kernel module from running kernel | Module loaded; no dependent modules active | Module unloaded; resources released |
+| set_sysctl | Sets kernel parameter at runtime or persists to sysctl.conf | Key is valid and writable; value in allowed range | Parameter applied at runtime; optionally persisted |
+| manage_boot_entry | Creates, updates, or removes a bootloader entry | Bootloader accessible | Boot entry added/updated/removed; single default enforced |
+| get_kernel_info | Returns running kernel version and live parameters | Kernel is running | Structured kernel info returned; no state change |
+| sign_kernel_artifact | Signs compiled kernel image with specified key | Artifact exists; signKeyId is valid | Artifact signed; signature file produced |
+| verify_kernel_image | Validates kernel image integrity and signature | Artifact path and expected hash provided | Integrity result reported; boot blocked on mismatch |
+| rollback_kernel | Reverts to previous kernel version and boot entry | Prior kernel artifact available | Previous kernel set as default; config archived |
+| list_available_profiles | Enumerates all kernel config profiles in inventory | Profile store accessible | Profile list returned with metadata; no state change |
+
 ## Internal Interfaces (table)
 
 | Interface | Provider | Consumer | Purpose |
@@ -89,18 +162,21 @@ interface BootEntry {
 | IModuleManager | ModuleHandler | KernelConfigurator | Load/unload kernel modules |
 | ISysctlService | SysctlManager | KernelConfigurator | Get/set kernel parameters |
 | IBootManager | BootEntryManager | KernelConfigurator | Manage boot entries |
+| ISigningService | ArtifactSigner | KernelConfigurator | Sign kernel build artifacts |
+| IVersionResolver | VersionHandler | KernelConfigurator | Resolve and track kernel versions |
+| IConfigValidator | ConfigValidator | KernelConfigurator | Validate config fragments for conflicts |
 
 ## Events (table)
 
-| Event | Emitter | Payload | Meaning |
-|-------|---------|---------|---------|
-| Linux.KernelConfigured | KernelConfigurator | { configId, profileName } | Kernel config applied successfully |
-| Linux.KernelCompiled | KernelConfigurator | { configId, version, hash } | Kernel compilation completed |
-| Linux.KernelCompileFailed | KernelConfigurator | { configId, errorCode, logRef } | Kernel compilation failed |
-| Linux.ModuleLoaded | ModuleHandler | { moduleName, version } | Module loaded into kernel |
-| Linux.ModuleUnloaded | ModuleHandler | { moduleName } | Module removed from kernel |
-| Linux.SysctlApplied | SysctlManager | { key, value, scope } | Kernel parameter changed |
-| Linux.BootEntryChanged | BootEntryManager | { entryId, action } | Boot entry created, updated, or removed |
+| Event Type | Produced When | Fields |
+|-------|---------|---------|
+| Linux.KernelConfigured | KernelConfigurator: { configId, profileName } | Kernel config applied successfully |
+| Linux.KernelCompiled | KernelConfigurator: { configId, version, hash } | Kernel compilation completed |
+| Linux.KernelCompileFailed | KernelConfigurator: { configId, errorCode, logRef } | Kernel compilation failed |
+| Linux.ModuleLoaded | ModuleHandler: { moduleName, version } | Module loaded into kernel |
+| Linux.ModuleUnloaded | ModuleHandler: { moduleName } | Module removed from kernel |
+| Linux.SysctlApplied | SysctlManager: { key, value, scope } | Kernel parameter changed |
+| Linux.BootEntryChanged | BootEntryManager: { entryId, action } | Boot entry created, updated, or removed |
 
 ## Error Cases (table with Code, Condition, Severity, Recovery)
 

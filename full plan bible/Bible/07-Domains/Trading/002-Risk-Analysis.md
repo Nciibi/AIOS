@@ -133,15 +133,15 @@ interface CorrelationMatrix {
 
 ## Events
 
-| Event | Producer | Payload | Description |
-|-------|----------|---------|-------------|
-| Trading.RiskMetricsCalculated | RiskEngine | portfolioId, metrics, method | Published after risk metric computation |
-| Trading.VaRComputed | VaRCalculator | portfolioId, varResult | Fired when VaR is recalculated |
-| Trading.StressTestRun | StressTestRunner | portfolioId, scenarios, summary | Emitted after stress test completion |
-| Trading.ExposureUpdated | ExposureTracker | portfolioId, report | Published on exposure change |
-| Trading.LimitBreached | LimitEnforcer | limitId, scope, currentValue, maxValue | Fired when any limit threshold is crossed |
-| Trading.LimitRestored | LimitEnforcer | limitId, scope, currentValue | Fired when a breached limit recovers |
-| Trading.CorrelationUpdated | RiskEngine | matrixId, pairs | Emitted when correlation matrix is refreshed |
+| Event Type | Produced When | Fields |
+|-------|----------|---------|
+| Trading.RiskMetricsCalculated | RiskEngine: portfolioId, metrics, method | Published after risk metric computation |
+| Trading.VaRComputed | VaRCalculator: portfolioId, varResult | Fired when VaR is recalculated |
+| Trading.StressTestRun | StressTestRunner: portfolioId, scenarios, summary | Emitted after stress test completion |
+| Trading.ExposureUpdated | ExposureTracker: portfolioId, report | Published on exposure change |
+| Trading.LimitBreached | LimitEnforcer: limitId, scope, currentValue, maxValue | Fired when any limit threshold is crossed |
+| Trading.LimitRestored | LimitEnforcer: limitId, scope, currentValue | Fired when a breached limit recovers |
+| Trading.CorrelationUpdated | RiskEngine: matrixId, pairs | Emitted when correlation matrix is refreshed |
 
 ## Error Cases
 

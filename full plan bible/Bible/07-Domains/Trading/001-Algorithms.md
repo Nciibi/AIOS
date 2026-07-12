@@ -127,15 +127,15 @@ interface AlgorithmTemplate {
 
 ## Events
 
-| Event | Producer | Payload | Description |
-|-------|----------|---------|-------------|
-| Trading.AlgorithmImplemented | StrategyEngine | algorithmId, templateId, version | Fired when a new algorithm is registered |
-| Trading.AlgorithmConfigured | StrategyEngine | algorithmId, params, hash | Fired after parameter update |
-| Trading.SignalGenerated | SignalBus | algorithmId, signal, confidence, timestamp | Emitted on each signal computation |
-| Trading.OrderConstructed | OrderFactory | algorithmId, orderPayload, checksum | Fired when an order is built |
-| Trading.AlgorithmOptimized | Optimizer | algorithmId, metrics, optimalParams | Fired after optimization run |
-| Trading.AlgorithmDeployed | StrategyEngine | algorithmId, targetEnv | Fired on promotion to paper/live |
-| Trading.AlgorithmPaused | StrategyEngine | algorithmId, reason | Fired when algorithm is halted |
+| Event Type | Produced When | Fields |
+|-------|----------|---------|
+| Trading.AlgorithmImplemented | StrategyEngine: algorithmId, templateId, version | Fired when a new algorithm is registered |
+| Trading.AlgorithmConfigured | StrategyEngine: algorithmId, params, hash | Fired after parameter update |
+| Trading.SignalGenerated | SignalBus: algorithmId, signal, confidence, timestamp | Emitted on each signal computation |
+| Trading.OrderConstructed | OrderFactory: algorithmId, orderPayload, checksum | Fired when an order is built |
+| Trading.AlgorithmOptimized | Optimizer: algorithmId, metrics, optimalParams | Fired after optimization run |
+| Trading.AlgorithmDeployed | StrategyEngine: algorithmId, targetEnv | Fired on promotion to paper/live |
+| Trading.AlgorithmPaused | StrategyEngine: algorithmId, reason | Fired when algorithm is halted |
 
 ## Error Cases
 

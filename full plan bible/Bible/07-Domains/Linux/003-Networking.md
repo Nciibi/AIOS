@@ -21,6 +21,31 @@ Enable AIOS to declaratively manage Linux networking — interfaces, firewalls, 
 
 Networking is modeled as a layered stack. At the physical/link layer, interfaces are configured with IP addressing and bonding. At the network layer, routing tables and policy rules are managed. At the transport/application layer, firewall rules and DNS resolution apply. Each mutation is wrapped in a transaction: changes are staged, connectivity verified, and rolled back on failure. The NetworkManager agent reconciles desired network state against live state.
 
+### Architecture Flow
+
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                     NetworkManager Agent                         │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
+│  │ Interface│  │ Firewall │  │ Route    │  │ DNS      │        │
+│  │ Handler  │  │ Handler  │  │ Handler  │  │ Handler  │        │
+│  └─────┬────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘        │
+│        │             │             │             │              │
+│  ┌─────▼─────────────▼─────────────▼─────────────▼─────┐       │
+│  │            Transaction Manager                       │       │
+│  │  ┌────────────┐  ┌────────────┐  ┌───────────────┐  │       │
+│  │  │ Stage      │  │ Verify     │  │ Rollback      │  │       │
+│  │  │ Changes    │  │ Connect.   │  │ on Fail       │  │       │
+│  │  └────────────┘  └────────────┘  └───────────────┘  │       │
+│  └───────────────────────┬──────────────────────────────┘       │
+│                          │                                      │
+│  ┌───────────────────────▼──────────────────────────────┐       │
+│  │              Live Network State                       │       │
+│  │  ip link   nftables   /etc/resolv.conf   route -n   │       │
+│  └──────────────────────────────────────────────────────┘       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
 ## Data Model (TypeScript interfaces)
 
 ```typescript
@@ -78,6 +103,38 @@ interface VpnConfig {
   peerPublicKey: string;
   persistentKeepalive: number;
 }
+
+interface BondConfig {
+  name: string;
+  mode: 'balance-rr' | 'active-backup' | 'balance-xor' | 'broadcast' | '802.3ad' | 'balance-tlb' | 'balance-alb';
+  slaves: string[];
+  miimon: number;
+  updelay: number;
+  downdelay: number;
+  lacpRate?: 'slow' | 'fast';
+  state: 'up' | 'down';
+}
+
+interface TrafficControlRule {
+  id: string;
+  interface: string;
+  direction: 'ingress' | 'egress';
+  handle: string;
+  parent: string;
+  discipline: 'htb' | 'tbf' | 'fq_codel' | 'pfifo_fast';
+  rate?: string;
+  ceil?: string;
+  burst?: number;
+  state: 'active' | 'disabled';
+}
+
+interface DhcpRelayConfig {
+  name: string;
+  interface: string;
+  serverAddress: string;
+  options: Record<string, string>;
+  state: 'running' | 'stopped';
+}
 ```
 
 ## Core Concepts / Operations
@@ -91,6 +148,23 @@ interface VpnConfig {
 - **setup_vpn(config)** — establishes VPN tunnel with key material
 - **verify_connectivity(targets)** — pings or probes endpoints after change
 
+### Operations Table
+
+| Operation | Description | Preconditions | Postconditions |
+|-----------|-------------|---------------|----------------|
+| configure_interface | Applies IP addressing, MTU, bonding, and link state | Interface exists; kernel driver loaded | Interface configured with IP, MTU, state; link verified |
+| add_firewall_rule | Inserts rule into nftables/iptables chain at priority | nftables/iptables available; chain exists | Rule inserted; nftables config persisted |
+| remove_firewall_rule | Deletes rule by ID | Rule ID exists in active firewall set | Rule removed; firewall state updated |
+| set_dns | Configures DNS resolution for hostname or search domain | Resolver service running | DNS entry created/updated; resolver config reloaded |
+| add_route | Adds route to routing table with metric | Destination network valid; gateway reachable | Route added; routing table updated; no overlap detected |
+| remove_route | Removes route from routing table | Route exists in routing table | Route removed; traffic redirected to remaining routes |
+| setup_vpn | Establishes VPN tunnel with key material | VPN type supported; key material accessible; endpoint reachable | VPN tunnel established; allowedIPs routed through tunnel |
+| verify_connectivity | Pings or probes endpoints after change | Target endpoints specified; ICMP/probe protocol allowed | Connectivity status reported; logs written to audit trail |
+| configure_bond | Creates or modifies bond interface with slaves | Minimum 2 slaves available; bonding driver loaded | Bond interface created; slaves enslaved; link aggregation active |
+| configure_vlan | Creates or removes VLAN interface | Parent interface exists; 8021q module loaded | VLAN interface created with tagged VID; traffic isolated |
+| set_traffic_control | Applies traffic shaping or QoS rule | tc tool available; interface exists | QoS discipline attached; rate/ceil limits enforced |
+| configure_dhcp_relay | Sets up DHCP relay agent on interface | DHCP relay package installed; server reachable | DHCP relay running; BOOTP requests forwarded to server |
+
 ## Internal Interfaces (table)
 
 | Interface | Provider | Consumer | Purpose |
@@ -101,19 +175,22 @@ interface VpnConfig {
 | IRouteManager | RouteHandler | NetworkManager | Manage routing table |
 | IVpnManager | VpnHandler | NetworkManager | Establish/tear down VPN |
 | IConnectivityProbe | ProbeHandler | NetworkManager | Verify network connectivity |
+| IBondManager | BondHandler | NetworkManager | Manage bond interface configuration |
+| ITrafficControlManager | TrafficControlHandler | NetworkManager | Apply traffic shaping and QoS rules |
+| IDhcpRelayManager | DhcpRelayHandler | NetworkManager | Configure DHCP relay agents |
 
 ## Events (table)
 
-| Event | Emitter | Payload | Meaning |
-|-------|---------|---------|---------|
-| Linux.InterfaceConfigured | InterfaceHandler | { ifaceName, ipAddresses, state } | Interface brought up or down |
-| Linux.InterfaceFailed | InterfaceHandler | { ifaceName, error } | Interface configuration failed |
-| Linux.FirewallRuleChanged | FirewallHandler | { ruleId, chain, action } | Firewall rule added or removed |
-| Linux.DNSUpdated | DnsHandler | { hostname, resolver, entries } | DNS resolution configuration changed |
-| Linux.RouteChanged | RouteHandler | { destination, gateway, metric } | Route added or removed |
-| Linux.VpnConnected | VpnHandler | { vpnName, endpoint } | VPN tunnel established |
-| Linux.VpnDisconnected | VpnHandler | { vpnName, reason } | VPN tunnel torn down |
-| Linux.ConnectivityVerified | ProbeHandler | { target, reachable, latency } | Connectivity probe result |
+| Event Type | Produced When | Fields |
+|-------|---------|---------|
+| Linux.InterfaceConfigured | InterfaceHandler: { ifaceName, ipAddresses, state } | Interface brought up or down |
+| Linux.InterfaceFailed | InterfaceHandler: { ifaceName, error } | Interface configuration failed |
+| Linux.FirewallRuleChanged | FirewallHandler: { ruleId, chain, action } | Firewall rule added or removed |
+| Linux.DNSUpdated | DnsHandler: { hostname, resolver, entries } | DNS resolution configuration changed |
+| Linux.RouteChanged | RouteHandler: { destination, gateway, metric } | Route added or removed |
+| Linux.VpnConnected | VpnHandler: { vpnName, endpoint } | VPN tunnel established |
+| Linux.VpnDisconnected | VpnHandler: { vpnName, reason } | VPN tunnel torn down |
+| Linux.ConnectivityVerified | ProbeHandler: { target, reachable, latency } | Connectivity probe result |
 
 ## Error Cases (table with Code, Condition, Severity, Recovery)
 

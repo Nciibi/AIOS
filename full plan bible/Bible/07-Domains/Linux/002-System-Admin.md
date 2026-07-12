@@ -21,6 +21,31 @@ Enable AIOS to manage Linux system state — users, services, packages, and file
 
 System administration follows a playbook-driven model. Desired state is defined in resource manifests (UserAccount, SystemService, etc.) which are reconciled by the SysAdminWorker agent. A playbook is an ordered collection of operations that can target one or many hosts. Each operation is dry-run before apply to verify correctness. Execution reports are stored as RunbookRecord entries for audit compliance.
 
+### Architecture Flow
+
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                     SysAdminWorker Agent                         │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
+│  │ User     │  │ Service  │  │ Package  │  │ Filesys  │        │
+│  │ Handler  │  │ Handler  │  │ Handler  │  │ Handler  │        │
+│  └─────┬────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘        │
+│        │             │             │             │              │
+│  ┌─────▼─────────────▼─────────────▼─────────────▼─────┐       │
+│  │              Playbook Engine                          │       │
+│  │  ┌────────────┐  ┌────────────┐  ┌───────────────┐  │       │
+│  │  │ Dry-Run    │  │ Execution  │  │ Rollback      │  │       │
+│  │  │ Validator  │  │ Runner     │  │ Manager       │  │       │
+│  │  └────────────┘  └────────────┘  └───────────────┘  │       │
+│  └───────────────────────┬──────────────────────────────┘       │
+│                          │                                      │
+│  ┌───────────────────────▼──────────────────────────────┐       │
+│  │              Live System State                        │       │
+│  │  /etc/passwd   systemctl   dpkg/rpm   /etc/fstab     │       │
+│  └──────────────────────────────────────────────────────┘       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
 ## Data Model (TypeScript interfaces)
 
 ```typescript
@@ -63,6 +88,35 @@ interface FileSystemConfig {
   pass: number;
   state: 'mounted' | 'unmounted' | 'absent';
 }
+
+interface CronJob {
+  name: string;
+  command: string;
+  schedule: string;
+  user: string;
+  state: 'present' | 'absent';
+  environment: Record<string, string>;
+}
+
+interface LogrotateConfig {
+  path: string;
+  rotationInterval: 'daily' | 'weekly' | 'monthly';
+  rotate: number;
+  compress: boolean;
+  delayCompress: boolean;
+  postrotateScript?: string;
+  state: 'present' | 'absent';
+}
+
+interface SelinuxContext {
+  path: string;
+  user?: string;
+  role?: string;
+  type?: string;
+  level?: string;
+  recursive: boolean;
+  state: 'applied' | 'absent';
+}
 ```
 
 ## Core Concepts / Operations
@@ -74,6 +128,21 @@ interface FileSystemConfig {
 - **run_playbook(operations, targets)** — executes sequence of operations across hosts with dry-run
 - **dry_run_playbook(operations, targets)** — previews changes without applying them
 
+### Operations Table
+
+| Operation | Description | Preconditions | Postconditions |
+|-----------|-------------|---------------|----------------|
+| manage_user | Creates or removes user account with groups, shell, SSH keys | Valid username; sudo/capability for useradd/usermod | User created/removed; SSH keys deployed; groups assigned |
+| configure_service | Ensures service is in desired run state and enablement | Service unit file exists; systemd accessible | Service started/stopped/restarted; enable symlink set |
+| install_package | Installs, removes, or updates package from repository | Package repository reachable; dpkg/rpm available | Package installed/removed/updated; holds preserved |
+| mount_filesystem | Mounts or unmounts filesystem per fstab specification | Device accessible; fstab entry valid | Filesystem mounted/unmounted; fstab updated |
+| run_playbook | Executes sequence of operations across hosts with dry-run | Playbook validated; all targets reachable | Operations applied in order; RunbookRecord created |
+| dry_run_playbook | Previews changes without applying them | Playbook parsed; targets accessible | Diff output produced; no system state changed |
+| schedule_cron_job | Creates, updates, or removes cron job entry | cron daemon running; crontab accessible | Cron entry added/removed; next run scheduled |
+| configure_logrotate | Sets log rotation policy for a service | Logrotate installed; log directory exists | Logrotate config written; rotation schedule active |
+| manage_selinux_context | Applies SELinux file context to path | SELinux enabled; restorecon/semanage available | File context applied; SELinux policy updated |
+| set_firewalld_zone | Assigns firewalld zone to interfaces | firewalld running; zone exists | Interface assigned to zone; firewall rules reloaded |
+
 ## Internal Interfaces (table)
 
 | Interface | Provider | Consumer | Purpose |
@@ -83,19 +152,22 @@ interface FileSystemConfig {
 | IPackageManager | PackageHandler | SysAdminWorker | Install/remove packages |
 | IFilesystemManager | FsHandler | SysAdminWorker | Mount/unmount filesystems |
 | IPlaybookEngine | PlaybookRunner | SysAdminWorker | Execute ordered operation sets |
+| ICronManager | CronHandler | SysAdminWorker | Manage cron job entries |
+| ILogrotateManager | LogrotateHandler | SysAdminWorker | Configure log rotation policies |
+| ISelinuxManager | SelinuxHandler | SysAdminWorker | Apply SELinux file contexts |
 
 ## Events (table)
 
-| Event | Emitter | Payload | Meaning |
-|-------|---------|---------|---------|
-| Linux.UserCreated | UserHandler | { username, uid, groups } | User account created |
-| Linux.UserDeleted | UserHandler | { username } | User account removed |
-| Linux.UserModified | UserHandler | { username, changes } | User account attributes changed |
-| Linux.ServiceRestarted | ServiceHandler | { serviceName, reason } | Service restarted |
-| Linux.ServiceFailed | ServiceHandler | { serviceName, error } | Service failed to start/stop |
-| Linux.PackageOperation | PackageHandler | { packageName, operation, version } | Package installed/removed/updated |
-| Linux.FilesystemMounted | FsHandler | { mountPoint, device, fstype } | Filesystem mounted |
-| Linux.FilesystemUnmounted | FsHandler | { mountPoint } | Filesystem unmounted |
+| Event Type | Produced When | Fields |
+|-------|---------|---------|
+| Linux.UserCreated | UserHandler: { username, uid, groups } | User account created |
+| Linux.UserDeleted | UserHandler: { username } | User account removed |
+| Linux.UserModified | UserHandler: { username, changes } | User account attributes changed |
+| Linux.ServiceRestarted | ServiceHandler: { serviceName, reason } | Service restarted |
+| Linux.ServiceFailed | ServiceHandler: { serviceName, error } | Service failed to start/stop |
+| Linux.PackageOperation | PackageHandler: { packageName, operation, version } | Package installed/removed/updated |
+| Linux.FilesystemMounted | FsHandler: { mountPoint, device, fstype } | Filesystem mounted |
+| Linux.FilesystemUnmounted | FsHandler: { mountPoint } | Filesystem unmounted |
 
 ## Error Cases (table with Code, Condition, Severity, Recovery)
 
