@@ -195,7 +195,6 @@ interface StalenessMonitor {
 | R13 — Design for Failure | Source outage marks stale; stale threshold prevents silent data rot |
 | R14 — Paved Path | Pre-defined health metrics are the default for all views |
 | R15 — Open/Closed | New aggregation methods register via AggregationStep extension |
-| R16 — Evidence Traceability | Every value traces to an evidenceRef; untraceable values are blocked |
 
 ## Related Documents
 
