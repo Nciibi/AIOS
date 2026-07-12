@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | DNA |
 | Document ID | DNA-001 |
-| Source Laws | Law 0 — Law of Supremacy, Law 5 — Law of Autonomy |
+| Source Laws | Law 9 — Law of Constitutional Supremacy, Law 5 — Law of Identity |
 | Source Physics | Physics/011-Design-DNA.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
