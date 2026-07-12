@@ -165,14 +165,14 @@ interface ClockConfiguration {
 ## Events
 
 | Event Type | Produced When | Fields |
-|-------|---------|-------------|
-| Embedded.DeviceRegistered | { deviceId: string, boardId: string } | A new device has been added to the registry |
-| Embedded.MCUDetected | { profileId: string, method: string } | An MCU was detected and profile-matched |
-| Embedded.BSPGenerated | { boardId: string, artifactCount: number } | A board support package was generated |
-| Embedded.PinConflictDetected | { pin: string, conflictCount: number } | A pin assignment conflict was found |
-| Embedded.DeviceTreeCompiled | { boardId: string, nodeCount: number } | Device tree compilation completed |
-| Embedded.PeripheralMismatch | { peripheral: string, expected: string, actual: string } | Peripheral type mismatch detected |
-| Embedded.BSPCacheHit | { boardId: string } | BSP retrieved from cache instead of regenerated |
+|-----------|---------------|--------|
+| Embedded.DeviceRegistered | A new device is added to the registry | deviceId, boardId, registeredAt, registeredBy |
+| Embedded.MCUDetected | An MCU is detected and profile-matched | profileId, method, confidence, detectedAt |
+| Embedded.BSPGenerated | A board support package is generated | boardId, artifactCount, generationDuration |
+| Embedded.PinConflictDetected | A pin assignment conflict is found | pin, conflictCount, peripheralList |
+| Embedded.DeviceTreeCompiled | Device tree compilation completes | boardId, nodeCount, validationStatus |
+| Embedded.PeripheralMismatch | A peripheral type mismatch is detected | peripheral, expected, actual, severity |
+| Embedded.BSPCacheHit | BSP is retrieved from cache instead of regenerated | boardId, cacheAge, cacheKey |
 
 ## Error Cases
 
@@ -215,9 +215,11 @@ interface ClockConfiguration {
 
 ## Related Documents
 
-- Bible/00-Overview.md
-- Bible/07-Domains/Embedded/000-Overview.md
-- Bible/07-Domains/Embedded/002-Firmware.md
-- Bible/07-Domains/Embedded/003-Constraints.md
-- Bible/90-ACF/ACF-000-Core.md
-- Bible/80-Provider-SDK/Provider-SDK-000.md
+| Document | Relationship |
+|----------|-------------|
+| Bible/0000-Master-Architecture-Plan.md | Master Architecture Plan — device support in AIOS context |
+| Bible/07-Domains/Embedded/000-Overview.md | Base Embedded domain overview |
+| Bible/07-Domains/Embedded/002-Firmware.md | Firmware generation downstream consumer of device data |
+| Bible/07-Domains/Embedded/003-Constraints.md | Resource constraint analysis depends on device profiles |
+| Bible/06-Services/ACF/000-Overview.md | ACF — device discovery event transport |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — hardware probe adapter interface |

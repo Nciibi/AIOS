@@ -247,14 +247,14 @@ interface OptimizationEngine {
 ## Events
 
 | Event Type | Produced When | Fields |
-|-------|---------|-------------|
-| Embedded.FlashAnalyzed | { binaryId: string, usedBytes: number, totalBytes: number } | Flash section analysis completed |
-| Embedded.RAMProfiled | { binaryId: string, peakUsage: number, fragmentationIndex: number } | RAM profiling completed |
-| Embedded.StackDepthChecked | { binaryId: string, worstCase: number, margin: number } | Stack depth analysis completed |
-| Embedded.PowerEstimated | { binaryId: string, averageMa: number, batteryHours: number } | Power consumption estimation completed |
-| Embedded.TimingAnalyzed | { binaryId: string, slack: number, deadlineMet: boolean } | Timing analysis completed |
-| Embedded.ConstraintViolation | { binaryId: string, violations: number, category: string } | One or more resource constraints exceeded |
-| Embedded.OptimizationApplied | { binaryId: string, savingBytes: number, autoFixCount: number } | An auto-fix optimization was applied to the project |
+|-----------|---------------|--------|
+| Embedded.FlashAnalyzed | Flash usage analysis completes | binaryId, usedFlash, totalFlash, utilizationPct |
+| Embedded.RAMProfiled | RAM profiling completes | binaryId, peakUsage, totalRam, heapFragmentation |
+| Embedded.StackDepthChecked | Stack depth analysis completes | binaryId, maxDepth, confidence, callChainDepth |
+| Embedded.PowerEstimated | Power consumption estimation completes | binaryId, averageMa, batteryHours, operatingMode |
+| Embedded.TimingAnalyzed | Timing analysis completes | binaryId, slack, deadlineMet, criticalPath |
+| Embedded.ConstraintViolation | One or more resource constraints are exceeded | binaryId, violations, category, severity |
+| Embedded.OptimizationApplied | An auto-fix optimization is applied to the project | binaryId, savingBytes, autoFixCount, recommendations |
 
 ## Error Cases
 
@@ -297,9 +297,11 @@ interface OptimizationEngine {
 
 ## Related Documents
 
-- Bible/00-Overview.md
-- Bible/07-Domains/Embedded/000-Overview.md
-- Bible/07-Domains/Embedded/001-Devices.md
-- Bible/07-Domains/Embedded/002-Firmware.md
-- Bible/90-ACF/ACF-000-Core.md
-- Bible/80-Provider-SDK/Provider-SDK-000.md
+| Document | Relationship |
+|----------|-------------|
+| Bible/0000-Master-Architecture-Plan.md | Master Architecture Plan — constraint analysis in AIOS context |
+| Bible/07-Domains/Embedded/000-Overview.md | Base Embedded domain overview |
+| Bible/07-Domains/Embedded/001-Devices.md | Device profiles provide resource budgets for constraint checking |
+| Bible/07-Domains/Embedded/002-Firmware.md | Firmware generator produces the binaries that constraint analysis validates |
+| Bible/06-Services/ACF/000-Overview.md | ACF — analysis event transport |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — analysis tool adapter interface |

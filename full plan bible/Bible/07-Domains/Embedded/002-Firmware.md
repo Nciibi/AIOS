@@ -271,14 +271,14 @@ interface BuildError {
 ## Events
 
 | Event Type | Produced When | Fields |
-|-------|---------|-------------|
-| Embedded.FirmwareProjectCreated | { projectId: string, boardId: string } | New firmware project initialized from board profile |
-| Embedded.HALGenerated | { projectId: string, halVersion: string } | HAL abstraction layer code has been generated |
-| Embedded.DriverWritten | { projectId: string, driverName: string } | A device driver was instantiated from template |
-| Embedded.LinkerConfigured | { projectId: string, regionCount: number } | Linker script tailored to target memory map |
-| Embedded.BuildStarted | { projectId: string, toolchain: string } | Cross-compilation process has begun |
-| Embedded.BuildCompleted | { projectId: string, binarySize: number } | Build finished with or without errors |
-| Embedded.BuildFailed | { projectId: string, errorCount: number } | Build terminated due to compilation or linking errors |
+|-----------|---------------|--------|
+| Embedded.FirmwareProjectCreated | A new firmware project is initialized from board profile | projectId, boardId, mcuFamily, templateVersion |
+| Embedded.HALGenerated | HAL abstraction layer code is generated | projectId, halVersion, interfaceCount |
+| Embedded.DriverWritten | A device driver is instantiated from template | projectId, driverName, peripheralType |
+| Embedded.LinkerConfigured | Linker script is tailored to target memory map | projectId, regionCount, totalSize |
+| Embedded.BuildStarted | Cross-compilation process begins | projectId, toolchain, targetArch, startTime |
+| Embedded.BuildCompleted | Build finishes with or without errors | projectId, binarySize, warningCount, success |
+| Embedded.BuildFailed | Build terminates due to compilation or linking errors | projectId, errorCount, firstError, logRef |
 
 ## Error Cases
 
@@ -321,9 +321,11 @@ interface BuildError {
 
 ## Related Documents
 
-- Bible/00-Overview.md
-- Bible/07-Domains/Embedded/000-Overview.md
-- Bible/07-Domains/Embedded/001-Devices.md
-- Bible/07-Domains/Embedded/003-Constraints.md
-- Bible/90-ACF/ACF-000-Core.md
-- Bible/80-Provider-SDK/Provider-SDK-000.md
+| Document | Relationship |
+|----------|-------------|
+| Bible/0000-Master-Architecture-Plan.md | Master Architecture Plan — firmware generation in AIOS context |
+| Bible/07-Domains/Embedded/000-Overview.md | Base Embedded domain overview |
+| Bible/07-Domains/Embedded/001-Devices.md | Device registry provides MCU profiles for firmware generation |
+| Bible/07-Domains/Embedded/003-Constraints.md | Constraint analysis validates firmware resource usage |
+| Bible/06-Services/ACF/000-Overview.md | ACF — build event transport |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — toolchain adapter interface |
