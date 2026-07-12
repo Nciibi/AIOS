@@ -604,7 +604,7 @@ interface TradeOffVisualizer {
 |----------|-------------|
 | Decision/000-Overview.md | Trade-off Analyzer is a sub-system of the Decision System |
 | Decision/001-Scoring-Engine.md | Scorer Engine produces the ScoreMatrix consumed by Trade-off Analyzer |
-| Decision/003-Constraint-Checker.md | Constraint Checker runs after trade-off analysis for final filtering |
+| Decision/003-Constraints.md | Constraint Checker runs after trade-off analysis for final filtering |
 | Brain/Sou/000-Overview.md | Sou consumes TradeOffReport to make strategic decisions |
 | Brain/Context/000-Overview.md | Context System provides the context snapshot for trade-off framing |
 | Bible/05-Platform/004-EVS.md | All Trade-off events recorded as evidence |

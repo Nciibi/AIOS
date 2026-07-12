@@ -647,8 +647,8 @@ PipelineConfig defaultConfig = {
 |----------|-------------|
 | Decision/000-Overview.md | Pipeline orchestrates the components defined in the overview |
 | Decision/001-Scoring-Engine.md | Pipeline invokes Score stage via Scoring Engine |
-| Decision/002-Tradeoff-Analyzer.md | Pipeline invokes Trade-off Analyze stage via Trade-off Analyzer |
-| Decision/003-Constraint-Checker.md | Pipeline invokes Constraint Check stage via Constraint Checker |
+| Decision/002-Trade-off-Analysis.md | Pipeline invokes Trade-off Analyze stage via Trade-off Analyzer |
+| Decision/003-Constraints.md | Pipeline invokes Constraint Check stage via Constraint Checker |
 | Decision/004-Criteria-Registry.md | Pipeline uses criteria from Registry for Log stage metadata |
 | Brain/Context/000-Overview.md | Context snapshot captured in DecisionContext |
 | Brain/Sou/000-Overview.md | Sou is the consumer of recommendations and calls recordFinalChoice |

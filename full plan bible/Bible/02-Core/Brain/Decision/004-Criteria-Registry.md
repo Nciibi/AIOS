@@ -440,8 +440,8 @@ interface CriteriaRegistry {
 |----------|-------------|
 | Decision/000-Overview.md | Criteria Registry is a subsystem of the Decision System |
 | Decision/001-Scoring-Engine.md | Registry provides criteria definitions to the Scorer |
-| Decision/002-Tradeoff-Analyzer.md | Trade-offs computed using criteria from Registry |
-| Decision/003-Constraint-Checker.md | Constraints checked alongside criteria evaluation |
+| Decision/002-Trade-off-Analysis.md | Trade-offs computed using criteria from Registry |
+| Decision/003-Constraints.md | Constraints checked alongside criteria evaluation |
 | Decision/005-Decision-Pipeline.md | Every decision record includes effective criteria snapshot |
 | Brain/Memory/001-Working-Memory.md | Session overrides live in Working Memory during session |
 | Bible/05-Platform/004-EVS.md | Global overrides persisted via Event Store |
