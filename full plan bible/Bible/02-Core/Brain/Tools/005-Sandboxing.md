@@ -17,7 +17,7 @@
 
 Tool Sandboxing constrains tool execution within resource limits to protect the system from runaway processes, excessive resource consumption, and unintended side effects. The Sandbox Manager enforces CPU, memory, network, and filesystem limits, imposes timeouts, caps output sizes, and validates capability bounds during execution. It ensures that no tool can exceed its declared capability scope or consume more resources than allocated.
 
-Under Law 7 (Capability Bounds), each tool's sandbox profile is derived from its capability declaration. Under Law 13 (Design for Failure), sandbox violations are caught gracefully with clear error reporting.
+Under Law 7 (Capability Bounds), each tool's sandbox profile is derived from its capability declaration. Under R13 (Design for Failure), sandbox violations are caught gracefully with clear error reporting.
 
 ## Data Model
 
