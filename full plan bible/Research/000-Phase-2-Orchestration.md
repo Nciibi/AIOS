@@ -33,7 +33,7 @@ The Agent Factory is the mechanism by which Sou creates workers on demand. Rathe
 
 **Design Reference:**
 
-From `ChatGPT-souuSouu Agent System Design.md`:
+From `ChatGPT-souuSouu Agent System Design.md` (project root):
 
 ```
 Agent Factory creates unlimited sessions:
