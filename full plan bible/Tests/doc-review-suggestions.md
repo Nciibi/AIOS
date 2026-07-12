@@ -95,6 +95,8 @@ The 24 former FAILs were forward-references to P3 (Execution-tier) components
 - Event + Law consistency recheck: `eventcheck.ps1`
 - Event-prefix normalization: `fixevents.ps1`
 - Design DNA / Cross-Cutting / Invariants remediation: `remediate.ps1`
+- Event traceability (S3): `tracecheck.ps1`
+- Semantic invariant/rule resolution (S5): `semcheck.ps1`
 - (All under `C:\Users\ncibi\AppData\Local\Temp\opencode\`.)
 
 ## P3 forward-references resolved
