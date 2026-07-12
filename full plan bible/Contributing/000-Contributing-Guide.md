@@ -187,8 +187,8 @@ Every contribution must be reviewed against R1–R15 from `Bible/00-Foundations/
 | R4 (Builder Pattern) | Is construction separated from representation? |
 | R5 (Liskov Substitution) | Can implementations substitute for interfaces? |
 | R6 (DI over Singletons) | Are dependencies injected, not hardcoded? |
-| R7 (Composition over Inheritance) | Does it compose behavior rather than extend classes? |
-| R8 (Promise over Callback) | Are async boundaries clean? |
+| R7 (Tests Exist) | Are there tests at every level for this change? |
+| R8 (Tests Fast) | Does the test suite run under 5 minutes? |
 | R9 (Fail Closed) | Does it deny on uncertainty? |
 | R10 (Simpler Over Complex) | Is this the simplest valid solution? |
 | R11 (Testable Separately) | Can this be tested in isolation? |
