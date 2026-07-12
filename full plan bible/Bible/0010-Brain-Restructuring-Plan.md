@@ -1,4 +1,4 @@
-# AIOS Bible — Brain Restructuring Plan
+﻿# AIOS Bible — Brain Restructuring Plan
 
 > **Purpose:** Define the new "Brain" subsystem — a cognitive container that houses Sou (the single executive intelligence) and all cognitive services. This plan restructures the top of the AIOS architecture based on the insight that Sou is not a wrapper around an agent but IS the agent, and every other component is infrastructure that extends Sou's ability to perceive, decide, organize, and execute.
 > **Source:** `sou new idea.md` (ChatGPT conversation 7/10/2026)
@@ -95,12 +95,12 @@ AIOS
 
 | Component | Location | Reason |
 |-----------|----------|--------|
-| Academy | Bible/02-Core/Academy/ | Learning is not execution; Academy is independent |
-| Security Council | Bible/04-Execution/Security/ | Verifies ALL actions, not just brain actions |
+| Academy | Bible/02-Core/Academy/000-Overview.md | Learning is not execution; Academy is independent |
+| Security Council | Bible/04-Execution/Security/000-Overview.md | Verifies ALL actions, not just brain actions |
 | Organizations | Bible/03-Institutions/Organizations/ | Execution infrastructure, not cognition |
 | Workers | Bible/03-Institutions/Workers/ | Temporary execution units, not agents |
 | Missions | Bible/03-Institutions/Missions/ | Work packages created by Sou but executed externally |
-| Runtime | Bible/04-Execution/Runtime/ | Execution layer, not cognitive |
+| Runtime | Bible/04-Execution/Runtime/000-Overview.md | Execution layer, not cognitive |
 | Federation | Bible/06-Services/Federation/ | Cross-instance protocols, orthogonal to Brain |
 | ACF | Bible/06-Services/ACF/ | Universal communication fabric |
 
@@ -389,7 +389,7 @@ SOU-007: All cognitive services live inside the Brain.
 | 12 | DecisionContext undefined in Decision/Planning | `Decision/000-Overview.md` | Added DecisionContext type definition |
 | 13 | ExecutionGraph undefined in Planning | `Planning/000-Overview.md` | Added ExecutionGraph + ExecutionNode type definitions |
 | 14 | Tools cross-references used relative paths | `Tools/000-Overview.md` | Changed to absolute paths (Bible/04-Execution/...) |
-| 15 | Planning ROS cross-reference wrong path | `Planning/000-Overview.md` | Changed from Bible/05-Platform/ROS/ to Bible/02-Core/ROS/ |
+| 15 | Planning ROS cross-reference wrong path | `Planning/000-Overview.md` | Changed from Bible/05-Platform/ROS/ to Bible/02-Core/ROS/000-Overview.md |
 | 16 | Master API Spec missing Phase B service entries | `000-Master-API-Spec.md` | Added 3.5 Context, 3.6 Decision, 3.7 Planning, 3.8 Tool — 68 new catalog entries, renumbered to 582 |
 | 17 | Architecture Diagram LAYER 5 box alignment | `AIOS-Architecture-Diagram.md` | Fixed indentation: all box lines (┌, │, └) now start at column 2 |
 | 18 | Brain overview Source Laws format inconsistent | `Brain/000-Overview.md` | Changed parenthetical format to em-dash format |

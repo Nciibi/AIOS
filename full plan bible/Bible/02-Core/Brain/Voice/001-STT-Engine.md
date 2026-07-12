@@ -383,4 +383,4 @@ Per Law 7 (Capability Bounds), Voice System declares its capabilities at creatio
 | Voice/003-Voice-Profiles.md | Voice profiles may influence STT language defaults |
 | Brain/Conversation/000-Overview.md | Conversation OS routes audio to STT Engine |
 | Brain/Sou/000-Overview.md | Sou consumes STTResult for understanding |
-| Bible/04-Execution/Runtime/ | STT providers registered as Execution Providers |
+| Bible/04-Execution/Runtime/000-Overview.md | STT providers registered as Execution Providers |

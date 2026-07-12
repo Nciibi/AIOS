@@ -248,5 +248,5 @@ Workers communicate exclusively through ACF. No direct IPC, no shared memory, no
 | Bible/02-Core/ROS/005-Budget.md | ROS â€” Worker resource budgets |
 | Bible/03-Institutions/Missions/000-Lifecycle.md | Missions â€” Mission lifecycle constrains Workers |
 | Bible/03-Institutions/Organizations/000-Overview.md | Organizations â€” Workers belong to Orgs |
-| Bible/04-Execution/Security/IDS | IDS â€” Worker identity creation |
-| Bible/04-Execution/Security/ATS | ATS â€” Worker authentication tokens
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS â€” Worker identity creation |
+| Bible/04-Execution/Security/ATS/000-Overview.md | ATS â€” Worker authentication tokens

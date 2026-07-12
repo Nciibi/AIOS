@@ -414,4 +414,4 @@ Per Law 7 (Capability Bounds), Attention System declares its capabilities at cre
 | Attention/001-Priority-Scoring.md | Scores below focus threshold route to Priority Scoring for re-evaluation |
 | Brain/Context/000-Overview.md | Context provides active goal and user context |
 | Brain/Personality/000-Overview.md | Personality traits influence factor weights |
-| Bible/04-Execution/Security/ | Security sources have critical trust tier |
+| Bible/04-Execution/Security/000-Overview.md | Security sources have critical trust tier |

@@ -305,7 +305,7 @@ interface VoiceRouterStrategy {
 | Brain/Conversation/000-Overview.md | Conversation OS routes audio to/from Voice System |
 | Brain/Sou/000-Overview.md | Sou consumes STT output and produces TTS input |
 | Brain/Memory/000-Overview.md | Voice profiles and audio history persisted here |
-| Bible/04-Execution/Runtime/ | Voice providers are registered as Execution Providers |
+| Bible/04-Execution/Runtime/000-Overview.md | Voice providers are registered as Execution Providers |
 
 ## Error Cases
 

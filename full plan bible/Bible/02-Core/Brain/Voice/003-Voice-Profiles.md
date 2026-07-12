@@ -368,4 +368,4 @@ Per Law 7 (Capability Bounds), Voice System declares its capabilities at creatio
 | Voice/004-Streaming.md | Streaming uses profiles for voice configuration |
 | Brain/Conversation/000-Overview.md | Conversation OS stores user voice preferences |
 | Brain/Memory/000-Overview.md | Profile persistence and retrieval |
-| Bible/04-Execution/Runtime/ | Profiles reference provider registrations |
+| Bible/04-Execution/Runtime/000-Overview.md | Profiles reference provider registrations |

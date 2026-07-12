@@ -1,4 +1,4 @@
-# AIOS Bible — Core
+﻿# AIOS Bible — Core
 ## OSYS 000 — Overview (Organization System)
 
 | Property | Value |
@@ -239,8 +239,8 @@ All Organization communication flows through ACF. Inter-Organization communicati
 | Physics/007-Capabilities.md | Capabilities — Organizations have capability bounds |
 | Bible/02-Core/OSYS/001-Architecture.md | OSYS architecture — component details |
 | Bible/02-Core/OSYS/002-Org-Lifecycle.md | Organization lifecycle — state definitions and transitions |
-| Bible/04-Execution/Security/IDS | IDS — Organization identity management |
-| Bible/02-Core/ROS | ROS — Organization resource management |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — Organization identity management |
+| Bible/02-Core/ROS/000-Overview.md | ROS — Organization resource management |
 | Bible/03-Institutions/Organizations | Organization types — detailed Organization specifications |
 | Bible/02-Core/Sou | Sou — Organization strategic direction |
 | Bible/01-Governance/002-DGP.md | DGP — Organization-related decisions |

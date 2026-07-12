@@ -1,4 +1,4 @@
-# AIOS Bible — Core
+﻿# AIOS Bible — Core
 ## AGS 000 — Overview (Agent Genome System)
 
 | Property | Value |
@@ -264,7 +264,7 @@ All AGS operations communicate through ACF. Genomes are requested by Security Co
 | Bible/02-Core/AGS/003-Validation.md | Validation — Genome validation rules |
 | Bible/02-Core/AGS/004-Versioning.md | Versioning — Genome version management |
 | Bible/02-Core/AGS/005-Signing.md | Signing — cryptographic signing |
-| Bible/04-Execution/Security/IDS | IDS — identity registration for new Sessions |
-| Bible/04-Execution/Security/ATS | ATS — authentication methods for Session types |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — identity registration for new Sessions |
+| Bible/04-Execution/Security/ATS/000-Overview.md | ATS — authentication methods for Session types |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |

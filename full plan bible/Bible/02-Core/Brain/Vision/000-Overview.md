@@ -374,7 +374,7 @@ interface ImagePreprocessor {
 | Brain/Cognitive/000-Overview.md | Cognitive OS reasons about vision results |
 | Brain/LLMOS/000-Overview.md | LLMOS provides the inference backend for vision |
 | Brain/Memory/000-Overview.md | Vision analysis results persisted here |
-| Bible/04-Execution/Runtime/ | Vision providers registered as Execution Providers |
+| Bible/04-Execution/Runtime/000-Overview.md | Vision providers registered as Execution Providers |
 
 ## Error Cases
 

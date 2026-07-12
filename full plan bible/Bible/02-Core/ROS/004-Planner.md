@@ -1,4 +1,4 @@
-# AIOS Bible — Core
+﻿# AIOS Bible — Core
 ## 004 — Resource Planner
 
 | Property | Value |
@@ -253,5 +253,5 @@ The Planner reads historical data from Cost (010-Cost) and current capacity from
 | ROS/002-Registry.md | Capacity data source for forecasts |
 | ROS/010-Cost.md | Historical usage data for forecasts |
 | ROS/013-Observability.md | Plan divergence alerting |
-| Bible/02-Core/OSYS | Organization growth projections |
+| Bible/02-Core/OSYS/000-Overview.md | Organization growth projections |
 | Bible/02-Core/Sou/003-Missions.md | Mission resource projections |

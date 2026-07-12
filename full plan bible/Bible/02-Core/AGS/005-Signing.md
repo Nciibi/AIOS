@@ -1,4 +1,4 @@
-# AIOS Bible — Core
+﻿# AIOS Bible — Core
 ## AGS 005 — Genome Signing
 
 | Property | Value |
@@ -256,8 +256,8 @@ HSM communication occurs through a secure, isolated channel. Signature verificat
 | Physics/008-Security.md | Security — signing is a constitutional security operation |
 | Bible/02-Core/AGS/000-Overview.md | AGS overview — signing is the final AGS operation |
 | Bible/02-Core/AGS/003-Validation.md | Validation — Genome must be validated before signing |
-| Bible/04-Execution/Security/IDS | IDS — public keys registered with IDS |
-| Bible/04-Execution/Security/ATS | ATS — authentication uses signed Genome identity |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — public keys registered with IDS |
+| Bible/04-Execution/Security/ATS/000-Overview.md | ATS — authentication uses signed Genome identity |
 | Bible/06-Services/Cryptography/HSM.md | HSM — hardware security module for key management |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |

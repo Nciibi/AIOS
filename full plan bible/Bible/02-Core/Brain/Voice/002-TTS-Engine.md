@@ -414,4 +414,4 @@ Per Law 7 (Capability Bounds), Voice System declares its capabilities at creatio
 | Voice/004-Streaming.md | Streaming architecture for chunked audio output |
 | Brain/Conversation/000-Overview.md | Conversation OS delivers synthesized audio to user |
 | Brain/Sou/000-Overview.md | Sou produces text input for TTS |
-| Bible/04-Execution/Runtime/ | TTS providers registered as Execution Providers |
+| Bible/04-Execution/Runtime/000-Overview.md | TTS providers registered as Execution Providers |

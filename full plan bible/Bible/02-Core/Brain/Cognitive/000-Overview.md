@@ -223,7 +223,7 @@ interface EvidenceScorer {
 | Brain/Decision/000-Overview.md | Decision System consumes reasoning output |
 | Brain/Planning/000-Overview.md | Planning uses reasoning for goal decomposition |
 | Brain/Memory/000-Overview.md | Reasoning context retrieved from memory |
-| Bible/04-Execution/Security/ | Evidence evaluation uses Security Council trust data |
+| Bible/04-Execution/Security/000-Overview.md | Evidence evaluation uses Security Council trust data |
 
 ## Error Cases
 

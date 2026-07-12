@@ -1,4 +1,4 @@
-# AIOS Bible — Core
+﻿# AIOS Bible — Core
 ## OSYS 001 — Architecture
 
 | Property | Value |
@@ -277,8 +277,8 @@ All OSYS components communicate via ACF. Inter-Organization messages are routed 
 | Physics/007-Capabilities.md | Capabilities — Organizations are capability containers |
 | Bible/02-Core/OSYS/000-Overview.md | OSYS overview — architecture context |
 | Bible/02-Core/OSYS/002-Org-Lifecycle.md | Organization lifecycle — state machine |
-| Bible/04-Execution/Security/IDS | IDS — Organization identity |
-| Bible/02-Core/ROS | ROS — Organization resource budgets |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — Organization identity |
+| Bible/02-Core/ROS/000-Overview.md | ROS — Organization resource budgets |
 | Bible/03-Institutions/Organizations | Organization types — specifications |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |

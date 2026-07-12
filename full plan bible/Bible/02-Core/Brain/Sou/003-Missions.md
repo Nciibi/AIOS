@@ -269,8 +269,8 @@ All mission-related communication flows through ACF. DGP receives proposals. OSY
 | Bible/02-Core/Brain/Sou/001-Reasoning.md | Reasoning â€” Sou reasons about mission adjustments |
 | Bible/02-Core/Brain/Sou/002-Planner.md | Planning â€” Sou produces mission plans via Planning System |
 | Bible/02-Core/Brain/Sou/004-Learning.md | Learning â€” Sou learns from completed missions |
-| Bible/02-Core/OSYS | OSYS â€” Organizations own and execute missions |
-| Bible/02-Core/DTS | DTS â€” confidence scoring for mission proposals |
+| Bible/02-Core/OSYS/000-Overview.md | OSYS â€” Organizations own and execute missions |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” confidence scoring for mission proposals |
 | Bible/03-Institutions/Missions/000-Lifecycle.md | Mission lifecycle â€” detailed mission state machine |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

@@ -268,7 +268,7 @@ Learning communicates via ACF. Academy knowledge is received as evidence. Update
 | Bible/02-Core/Brain/Sou/003-Missions.md | Missions â€” learning from mission outcomes |
 | Bible/02-Core/Brain/Sou/005-Knowledge.md | Knowledge â€” learning stores patterns in Memory OS |
 | Bible/02-Core/Brain/Memory/000-Overview.md | Memory OS â€” stores learned patterns |
-| Bible/02-Core/Academy | Academy â€” Sou consumes evidence from Academy |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” Sou consumes evidence from Academy |
 | Bible/02-Core/DTS/004-Confidence.md | Confidence â€” learning updates confidence models |
 | Bible/01-Governance/002-DGP.md | DGP â€” learning from decision outcomes |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |

@@ -1,4 +1,4 @@
-# AIOS Bible — Core
+﻿# AIOS Bible — Core
 ## OSYS 002 — Organization Lifecycle
 
 | Property | Value |
@@ -244,7 +244,7 @@ Lifecycle transition notifications are broadcast via ACF. Affected entities (sub
 | Bible/02-Core/OSYS/000-Overview.md | OSYS overview — lifecycle context |
 | Bible/02-Core/OSYS/001-Architecture.md | OSYS architecture — Lifecycle Manager component |
 | Bible/04-Execution/Security/IDS/003-Lifecycle.md | Identity lifecycle — parallel to Organization lifecycle |
-| Bible/02-Core/ROS | ROS — resource budget lifecycle tied to Organization state |
+| Bible/02-Core/ROS/000-Overview.md | ROS — resource budget lifecycle tied to Organization state |
 | Bible/03-Institutions/Organizations/000-Overview.md | Organization types — lifecycle variations per type |
 | Bible/01-Governance/002-DGP.md | DGP — dissolution requires Sou approval through DGP |
 | Bible/00-Foundations/008-Object-Lifecycle.md | Object Lifecycle — canonical state model |

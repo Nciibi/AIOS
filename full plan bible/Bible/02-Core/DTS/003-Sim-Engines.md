@@ -1,4 +1,4 @@
-# AIOS Bible — Core
+﻿# AIOS Bible — Core
 ## DTS 003 — Simulation Engines
 
 | Property | Value |
@@ -266,6 +266,6 @@ Engines are invoked via ACF. Results are returned via ACF. Engine health is repo
 | Bible/02-Core/DTS/002-Sim-Pipeline.md | Pipeline — engines are invoked by the pipeline |
 | Bible/02-Core/DTS/004-Confidence.md | Confidence — engine outputs feed confidence scoring |
 | Bible/02-Core/Sou/002-Planner.md | Planner — Planning Simulator wraps the Planner |
-| Bible/02-Core/Academy | Academy — ML Predictor uses Academy models |
+| Bible/02-Core/Academy/000-Overview.md | Academy — ML Predictor uses Academy models |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |

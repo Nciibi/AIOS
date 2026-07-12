@@ -233,7 +233,7 @@ interface InterruptRouter {
 | Brain/Sou/000-Overview.md | Sou consumes the attention-gated output |
 | Brain/Decision/000-Overview.md | Interrupt handling is a decision Sou makes |
 | Brain/Personality/000-Overview.md | Personality influences salience scoring |
-| Bible/04-Execution/Security/ | Security alerts are the highest-priority interrupt |
+| Bible/04-Execution/Security/000-Overview.md | Security alerts are the highest-priority interrupt |
 
 ## Error Cases
 

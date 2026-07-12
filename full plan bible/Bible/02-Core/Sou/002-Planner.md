@@ -1,4 +1,4 @@
-# AIOS Bible — Brain
+﻿# AIOS Bible — Brain
 ## Sou 002 — Planning (Delegated to Planning System)
 
 | Property | Value |
@@ -246,8 +246,8 @@ Plans are communicated via ACF. ROS is queried for resource availability. DGP re
 | Bible/02-Core/Brain/Sou/003-Missions.md | Missions — Planning produces mission proposals |
 | Bible/02-Core/Brain/Sou/004-Learning.md | Learning — Planning improves from learning |
 | Bible/02-Core/Brain/Planning/000-Overview.md | Planning System — handles goal decomposition and milestone tracking |
-| Bible/02-Core/OSYS | OSYS — plans are executed by Organizations |
+| Bible/02-Core/OSYS/000-Overview.md | OSYS — plans are executed by Organizations |
 | Bible/02-Core/DTS/002-Sim-Pipeline.md | Simulation — plans can be simulated before execution |
-| Bible/02-Core/ROS | ROS — resource queries for feasibility checks |
+| Bible/02-Core/ROS/000-Overview.md | ROS — resource queries for feasibility checks |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |

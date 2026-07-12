@@ -1,4 +1,4 @@
-# AIOS Bible — Core
+﻿# AIOS Bible — Core
 ## AGS 004 — Genome Versioning
 
 | Property | Value |
@@ -256,6 +256,6 @@ Version deprecation notifications are sent through ACF to all affected entities.
 | Bible/02-Core/AGS/003-Validation.md | Validation — each new version must be validated |
 | Bible/02-Core/AGS/005-Signing.md | Signing — each version is independently signed |
 | Bible/00-Foundations/009-Versioning.md | Versioning — Foundations versioning conventions |
-| Bible/04-Execution/Security/ATS | ATS — Sessions authenticate using their Genome version |
+| Bible/04-Execution/Security/ATS/000-Overview.md | ATS — Sessions authenticate using their Genome version |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |

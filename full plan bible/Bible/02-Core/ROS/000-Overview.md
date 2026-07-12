@@ -1,4 +1,4 @@
-# AIOS Bible — Core
+﻿# AIOS Bible — Core
 ## 000 — ROS Overview
 
 | Property | Value |
@@ -206,6 +206,6 @@ ROS communicates internally via ACF. Cross-instance resource sharing (014-RXP) u
 | Physics/010-Execution.md | ROS pre-reservation in Stage 7 of verification pipeline |
 | Physics/006-Lifecycles.md | Lifecycle-integrated resource allocation and recovery |
 | Physics/005-Events.md | Event sourcing for all resource operations |
-| Bible/02-Core/OSYS | Organization lifecycle integration with resource budgeting |
+| Bible/02-Core/OSYS/000-Overview.md | Organization lifecycle integration with resource budgeting |
 | Bible/02-Core/Sou | Sou decisions may trigger ROS planning |
-| Bible/04-Execution/Security/IDS | Entity identity required for all resource operations |
+| Bible/04-Execution/Security/IDS/000-Overview.md | Entity identity required for all resource operations |

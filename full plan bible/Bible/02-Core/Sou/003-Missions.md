@@ -1,4 +1,4 @@
-# AIOS Bible — Brain
+﻿# AIOS Bible — Brain
 ## Sou 003 — Missions (Creation and Oversight)
 
 | Property | Value |
@@ -253,8 +253,8 @@ All mission-related communication flows through ACF. DGP receives proposals. OSY
 | Bible/02-Core/Brain/Sou/001-Reasoning.md | Reasoning — Sou reasons about mission adjustments |
 | Bible/02-Core/Brain/Sou/002-Planner.md | Planning — Sou produces mission plans via Planning System |
 | Bible/02-Core/Brain/Sou/004-Learning.md | Learning — Sou learns from completed missions |
-| Bible/02-Core/OSYS | OSYS — Organizations own and execute missions |
-| Bible/02-Core/DTS | DTS — confidence scoring for mission proposals |
+| Bible/02-Core/OSYS/000-Overview.md | OSYS — Organizations own and execute missions |
+| Bible/02-Core/DTS/000-Overview.md | DTS — confidence scoring for mission proposals |
 | Bible/03-Institutions/Missions/000-Lifecycle.md | Mission lifecycle — detailed mission state machine |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |

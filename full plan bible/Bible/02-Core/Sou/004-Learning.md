@@ -1,4 +1,4 @@
-# AIOS Bible — Brain
+﻿# AIOS Bible — Brain
 ## Sou 004 — Learning (Integration and Adaptation)
 
 | Property | Value |
@@ -252,7 +252,7 @@ Learning communicates via ACF. Academy knowledge is received as evidence. Update
 | Bible/02-Core/Brain/Sou/003-Missions.md | Missions — learning from mission outcomes |
 | Bible/02-Core/Brain/Sou/005-Knowledge.md | Knowledge — learning stores patterns in Memory OS |
 | Bible/02-Core/Brain/Memory/000-Overview.md | Memory OS — stores learned patterns |
-| Bible/02-Core/Academy | Academy — Sou consumes evidence from Academy |
+| Bible/02-Core/Academy/000-Overview.md | Academy — Sou consumes evidence from Academy |
 | Bible/02-Core/DTS/004-Confidence.md | Confidence — learning updates confidence models |
 | Bible/01-Governance/002-DGP.md | DGP — learning from decision outcomes |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |

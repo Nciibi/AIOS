@@ -245,4 +245,4 @@ All transition notifications are broadcast via ACF. Affected entities (owning Or
 | Bible/02-Core/ROS/005-Budget.md | Budget â€” Mission resource budgets |
 | Bible/03-Institutions/Organizations/000-Overview.md | Organizations â€” Organizations own and execute Missions |
 | Bible/03-Institutions/Workers/000-Overview.md | Workers â€” Workers execute Mission tasks |
-| Bible/04-Execution/Security/IDS | IDS â€” Mission identity creation
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS â€” Mission identity creation

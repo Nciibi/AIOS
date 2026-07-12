@@ -256,4 +256,4 @@ All Organization communication flows through ACF. Inter-Organization communicati
 | Bible/02-Core/ROS/005-Budget.md | ROS â€” Organization resource budgets |
 | Bible/03-Institutions/Missions/000-Lifecycle.md | Missions â€” Organizations own Missions |
 | Bible/03-Institutions/Workers/000-Overview.md | Workers â€” Organizations employ Workers |
-| Bible/04-Execution/Security/IDS | IDS â€” Organization identity
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS â€” Organization identity

@@ -262,8 +262,8 @@ Plans are communicated via ACF. ROS is queried for resource availability. DGP re
 | Bible/02-Core/Brain/Sou/003-Missions.md | Missions â€” Planning produces mission proposals |
 | Bible/02-Core/Brain/Sou/004-Learning.md | Learning â€” Planning improves from learning |
 | Bible/02-Core/Brain/Planning/000-Overview.md | Planning System â€” handles goal decomposition and milestone tracking |
-| Bible/02-Core/OSYS | OSYS â€” plans are executed by Organizations |
+| Bible/02-Core/OSYS/000-Overview.md | OSYS â€” plans are executed by Organizations |
 | Bible/02-Core/DTS/002-Sim-Pipeline.md | Simulation â€” plans can be simulated before execution |
-| Bible/02-Core/ROS | ROS â€” resource queries for feasibility checks |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” resource queries for feasibility checks |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |
