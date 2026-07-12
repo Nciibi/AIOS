@@ -72,7 +72,7 @@ UserProximity {
   task_context_match: number       // 0.0–1.0
   reasoning: string
 }
-`
+```
 
 ### SignalEvaluation
 

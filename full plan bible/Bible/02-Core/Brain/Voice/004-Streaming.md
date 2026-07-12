@@ -338,7 +338,7 @@ type StreamErrorCode =
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| STM-001 | Every stream has exactly one lifecycle: open → active → (closed | cancelled | errored) | Algorithmic — state transitions enforced by FSM |
+| STM-001 | Every stream has exactly one lifecycle: open → active → (closed \| cancelled \| errored) | Algorithmic — state transitions enforced by FSM |
 | STM-002 | Stream sequence numbers are monotonically increasing with no gaps | Algorithmic — sequence assigned on write/emit |
 | STM-003 | Audio format is consistent across all chunks in a stream | Algorithmic — format validated on each writeChunk |
 | STM-004 | A cancelled stream emits no further events after cancellation | Algorithmic — cancel flushes event queue |

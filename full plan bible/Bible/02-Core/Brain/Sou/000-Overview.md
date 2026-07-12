@@ -1,5 +1,5 @@
 # AIOS Bible — Brain
-## Sou 000 — Overview (The Executive Intelligence)
+## 000 — Overview (The Executive Intelligence)
 
 | Property | Value |
 |----------|-------|

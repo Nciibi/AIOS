@@ -112,6 +112,7 @@ ViolatedConstraint {
   type: "hard" | "soft"
   detail: string           // Human-readable explanation
 }
+```
 
 ### 1. Scoring Engine
 
