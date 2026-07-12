@@ -594,8 +594,8 @@ TimedOutSession {
 | Document | Relationship |
 |----------|-------------|
 | Conversation/000-Overview.md | Session Management is a sub-component of Conversation OS |
-| Conversation/001-Turn-Manager.md | Turn Manager operates within a session; session tracks turn_count |
-| Conversation/002-Modality-Adapter.md | Session captures modality; Modality Adapter uses it for I/O adaptation |
+| Conversation/002-Multi-Turn.md | Turn Manager operates within a session; session tracks turn_count |
+| Conversation/005-Channel-Adaptation.md | Session captures modality; Modality Adapter uses it for I/O adaptation |
 | Memory/000-Overview.md | Sessions persisted in Memory OS Episodic Memory |
 | Memory/001-Working-Memory.md | Session lifecycle controls Working Memory lifecycle |
 | Memory/002-Episodic-Memory.md | Session data and summaries stored as Episodic Memory records |

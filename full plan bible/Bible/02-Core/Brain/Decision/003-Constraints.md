@@ -842,8 +842,8 @@ Named constraints are resolved from registry, evaluated against option attribute
 | Document | Relationship |
 |----------|-------------|
 | Decision/000-Overview.md | Constraint Checker is a component of the Decision System |
-| Decision/001-Scoring.md | Constraint Checker runs before Scoring Engine; passes remaining options |
-| Decision/002-Tradeoffs.md | Trade-off Analyzer uses constraint results in explanations |
+| Decision/001-Scoring-Engine.md | Constraint Checker runs before Scoring Engine; passes remaining options |
+| Decision/002-Trade-off-Analysis.md | Trade-off Analyzer uses constraint results in explanations |
 | Brain/Context/000-Overview.md | Context System provides attribute snapshots for constraint evaluation |
 | Brain/Sou/000-Overview.md | Sou configures constraints and consumes ViolationReport |
 | Bible/05-Platform/004-EVS.md | Events emitted throughout constraint evaluation lifecycle |
