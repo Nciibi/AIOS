@@ -213,6 +213,22 @@ If any rule exceeds its max evaluation time, it times out and falls to `audit` s
 |-------|--------|---------|
 | `LLMOS.GuardrailChecked` | request_id, direction, rules_evaluated, passed, blocked, matched_rules, evaluation_duration_us | After guardrail evaluation (Stages 11 and 14) |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Guardrails is the sole content policy enforcer |
+| R2 — Dependency Order | Guardrails evaluates after Compiler, before Provider |
+| R3 — DRY | Rule model centralized, not duplicated per direction |
+| R4 — Builder Pattern | GuardrailRule built through configuration |
+| R5 — Liskov Substitution | All rule categories handled uniformly |
+| R6 — DI over Singletons | GuardrailEngine injected into pipeline |
+| R9 — Deterministic | Same content gets same guardrail decision |
+| R10 — Simpler Over Complex | Priority-ordered evaluation over complex ML pipeline |
+| R13 — Design for Failure | Rule timeout falls to audit severity |
+| R14 — Paved Path | Built-in rule categories cover standard policies |
+| R15 — Open/Closed | New rule types added without pipeline changes |
+
 ## Related Documents
 
 | Document | Relationship |

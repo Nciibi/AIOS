@@ -233,6 +233,22 @@ Entities can pre-warm the cache by submitting requests with `cache_policy.mode =
 | `LLMOS.CacheStored` | request_id, cache_key, ttl, storage_size_bytes | Cache write (Stage 16) |
 | `LLMOS.CacheEvicted` | cache_key, reason, age, access_count, saved_cost_total | Eviction |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Cache is the single caching authority in the pipeline |
+| R2 — Dependency Order | Cache lookup precedes pipeline processing (Stage 7) |
+| R3 — DRY | Single cache key model across all entries |
+| R4 — Builder Pattern | CacheEntry built via structured construction |
+| R5 — Liskov Substitution | All responses cached uniformly regardless of provider |
+| R6 — DI over Singletons | CacheManager injected into pipeline |
+| R9 — Deterministic | Same request produces same cache key and lookup result |
+| R10 — Simpler Over Complex | SHA-256 hashing over complex content addressing |
+| R13 — Design for Failure | Cache miss falls through to normal pipeline |
+| R14 — Paved Path | Standard TTL and eviction for all entities |
+| R15 — Open/Closed | New backends added without pipeline changes |
+
 ## Related Documents
 
 | Document | Relationship |

@@ -190,6 +190,22 @@ async function performHealthCheck(provider: string): Promise<void>
 | `LLMOS.ProviderHealthChanged` | provider, old_state, new_state, reason, failure_count | Health check transition |
 | `LLMOS.ModelsResolved` | request_id, total_matched, filtered_by_*, candidates_summary | Pipeline Stage 4 |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Registry is the sole source of model inventory across all providers |
+| R2 — Dependency Order | Registry precedes Router and Cost Optimizer in pipeline order |
+| R3 — DRY | Single ModelEntry schema used across all components |
+| R4 — Builder Pattern | ModelEntry constructed via builder for validation |
+| R5 — Liskov Substitution | All providers produce ModelEntry uniformly |
+| R6 — DI over Singletons | Registry injected into pipeline stages |
+| R9 — Deterministic | Resolve produces deterministic candidate list for identical input |
+| R10 — Simpler Over Complex | Bitmask capabilities over complex type system |
+| R13 — Design for Failure | Health monitoring with degraded/offline states |
+| R14 — Paved Path | Standardized model registration flow for all providers |
+| R15 — Open/Closed | New providers add entries without changing registry implementation |
+
 ## Related Documents
 
 | Document | Relationship |

@@ -365,6 +365,22 @@ Dual-implementation providers (Claude, Codex, Ollama) implement both interfaces.
 | `LLMOS.ProviderDeregistered` | provider_name, reason, uptime_seconds | On shutdown() |
 | `LLMOS.ProviderHealthChanged` | provider_name, old_status, new_status, latency_ms, error | On healthCheck() change |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Provider SDK is the sole provider interface definition |
+| R2 — Dependency Order | Provider SDK implementations consumed by Registry and Retry Engine |
+| R3 — DRY | Single interface for all providers |
+| R4 — Builder Pattern | ProviderRequest/ProviderResponse built through typed interfaces |
+| R5 — Liskov Substitution | All providers are drop-in replacements via the interface |
+| R6 — DI over Singletons | Provider instances injected via ProviderFactory |
+| R9 — Deterministic | Same request produces same response for same model |
+| R10 — Simpler Over Complex | Minimal interface surface over provider-specific SDKs |
+| R13 — Design for Failure | ProviderError model covers all failure modes |
+| R14 — Paved Path | Standardized interface defines paved path for provider integration |
+| R15 — Open/Closed | New providers implement existing interface without SDK changes |
+
 ## Related Documents
 
 | Document | Relationship |

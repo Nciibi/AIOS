@@ -205,6 +205,22 @@ interface ValidationWarning {
 | `LLMOS.ResponseValidationFailed` | request_id, validation_types, errors, retry_strategy, model_used | Validation failure |
 | `LLMOS.ResponseValidationRetry` | request_id, retry_number, strategy, adjusted_parameters | Before retry |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Response Validator is the sole response quality gate |
+| R2 — Dependency Order | Validator depends on Prompt Compiler schemas |
+| R3 — DRY | Validation types defined once, not per provider |
+| R4 — Builder Pattern | ValidationResult built through validation pipeline |
+| R5 — Liskov Substitution | All responses validated uniformly |
+| R6 — DI over Singletons | Validator injected into pipeline |
+| R9 — Deterministic | Same response gets same validation result |
+| R10 — Simpler Over Complex | JSON Schema validation over custom parsers |
+| R13 — Design for Failure | Validation failure triggers retry |
+| R14 — Paved Path | Standard validation types for all responses |
+| R15 — Open/Closed | New validation types added without pipeline changes |
+
 ## Related Documents
 
 | Document | Relationship |

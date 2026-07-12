@@ -157,6 +157,22 @@ interface TruncatedSection {
 |-------|--------|---------|
 | `LLMOS.ContextBuilt` | request_id, total_tokens, input_tokens, truncated_sections, allocations | After context building (Stage 8) |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Context Builder is the sole context window manager |
+| R2 — Dependency Order | Context Builder precedes Memory Injection and Prompt Compiler |
+| R3 — DRY | Truncation strategies defined once, applied consistently |
+| R4 — Builder Pattern | ContextPayload built through staged pipeline architecture |
+| R5 — Liskov Substitution | Content categories interchangeable within budget |
+| R6 — DI over Singletons | ContextBuilder injected as pipeline service |
+| R9 — Deterministic | Same input produces same truncation decisions |
+| R10 — Simpler Over Complex | Priority tiers over complex allocation algorithms |
+| R13 — Design for Failure | Overflow handled gracefully with truncated sections manifest |
+| R14 — Paved Path | Default allocation provides safe baseline for all entities |
+| R15 — Open/Closed | New content categories added without rebuilding pipeline |
+
 ## Related Documents
 
 | Document | Relationship |

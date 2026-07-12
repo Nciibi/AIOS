@@ -202,6 +202,22 @@ interface CircuitBreakerState {
 | `LLMOS.CircuitBreakerOpened` | model_id, provider, failure_count, opened_at | Circuit opens |
 | `LLMOS.CircuitBreakerClosed` | model_id, provider, recovery_success_count, closed_at | Circuit recovers |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Retry Engine is the sole provider call executor |
+| R2 — Dependency Order | Retry Engine depends on Provider SDK for execution |
+| R3 — DRY | Single retry logic applied to all providers |
+| R4 — Builder Pattern | RetryConfig built via builder pattern |
+| R5 — Liskov Substitution | All providers interchangeable through ModelProvider interface |
+| R6 — DI over Singletons | RetryEngine injected into pipeline |
+| R9 — Deterministic | Same request produces same retry sequence |
+| R10 — Simpler Over Complex | Configurable backoff over opaque retry logic |
+| R13 — Design for Failure | Core purpose — design for failure with circuit breakers |
+| R14 — Paved Path | Default retry config for all provider calls |
+| R15 — Open/Closed | New error types retried without engine changes |
+
 ## Related Documents
 
 | Document | Relationship |

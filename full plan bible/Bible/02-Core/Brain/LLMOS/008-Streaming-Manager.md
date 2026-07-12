@@ -141,6 +141,22 @@ Final chunk contains:
 | `LLMOS.StreamCompleted` | request_id, total_chunks, total_tokens, time_to_first_token_ms, tokens_per_second, finish_reason | Stream termination |
 | `LLMOS.StreamError` | request_id, sequence_at_error, error_code, was_resumed | Mid-stream error |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Streaming Manager is the sole stream handler |
+| R2 — Dependency Order | Streaming depends on Provider SDK for chunk delivery |
+| R3 — DRY | Stream modes defined once (direct/buffered/hybrid) |
+| R4 — Builder Pattern | AssembledResponse built through stream assembly |
+| R5 — Liskov Substitution | All provider streams handled uniformly |
+| R6 — DI over Singletons | StreamingManager injected into pipeline |
+| R9 — Deterministic | Same chunks produce same assembled response |
+| R10 — Simpler Over Complex | Simple delta concatenation over complex state machines |
+| R13 — Design for Failure | Backpressure buffer prevents data loss |
+| R14 — Paved Path | Direct mode provides default streaming behavior |
+| R15 — Open/Closed | New provider stream formats added without manager changes |
+
 ## Related Documents
 
 | Document | Relationship |

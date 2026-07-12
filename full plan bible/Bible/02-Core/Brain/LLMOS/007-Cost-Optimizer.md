@@ -136,6 +136,22 @@ interface ModelDiscount {
 |-------|--------|---------|
 | `LLMOS.CostOptimized` | request_id, model_estimates_summary, selected_strategy, strategy_results, estimated_savings, recommended_model | After optimization (Stage 6) |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Cost Optimizer is the sole cost estimation authority |
+| R2 — Dependency Order | Optimizer depends on Registry pricing data |
+| R3 — DRY | Single estimation algorithm avoids duplication |
+| R4 — Builder Pattern | CostEstimate built through estimation pipeline |
+| R5 — Liskov Substitution | All models cost-estimated uniformly |
+| R6 — DI over Singletons | CostOptimizer injected into pipeline |
+| R9 — Deterministic | Same request produces same cost estimates |
+| R10 — Simpler Over Complex | Linear cost scoring over complex financial models |
+| R13 — Design for Failure | Default pricing when provider data unavailable |
+| R14 — Paved Path | Standard optimization strategies for all entities |
+| R15 — Open/Closed | New strategies added without changing core estimation |
+
 ## Related Documents
 
 | Document | Relationship |

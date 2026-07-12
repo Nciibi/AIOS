@@ -156,6 +156,22 @@ interface MemoryOperation {
 |-------|--------|---------|
 | `LLMOS.MemoryInjected` | request_id, sources_queried, sources_returned, total_memory_tokens, items_by_source, retrieval_duration_us | After injection (Stage 9) |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Memory Injection is the sole memory retrieval point in the pipeline |
+| R2 — Dependency Order | Memory Injection depends on Context Builder budget allocation |
+| R3 — DRY | Retrieval logic centralized in single algorithm |
+| R4 — Builder Pattern | InjectedMemoryBlock built through retrieval pipeline |
+| R5 — Liskov Substitution | All memory sources interchangeable via MemorySource abstraction |
+| R6 — DI over Singletons | MemoryOS injected as dependency |
+| R9 — Deterministic | Same session produces same memory retrieval |
+| R10 — Simpler Over Complex | Structured XML tagging over complex formatting |
+| R13 — Design for Failure | Empty memory block on source failure |
+| R14 — Paved Path | Default retrieval config for all sessions |
+| R15 — Open/Closed | New memory sources added without pipeline changes |
+
 ## Related Documents
 
 | Document | Relationship |

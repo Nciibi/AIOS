@@ -150,6 +150,22 @@ interface CreditBudget {
 | `LLMOS.BudgetChecked` | request_id, entity_id, budget_type, budget_before, budget_after, estimated_cost, overrides_applied, approved | Stage 3 check |
 | `LLMOS.BudgetReconciled` | request_id, actual_tokens, estimated_tokens, difference, adjusted_cost | Stage 17 reconciliation |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Token Budget Manager is the sole budget authority |
+| R2 — Dependency Order | Budget check precedes all pipeline processing (Stage 3) |
+| R3 — DRY | Single budgeting model applied across all entities |
+| R4 — Builder Pattern | Token budgets configured through builder patterns |
+| R5 — Liskov Substitution | All entity budgets handled uniformly |
+| R6 — DI over Singletons | BudgetManager injected into pipeline stages |
+| R9 — Deterministic | Same request gets same budget decision |
+| R10 — Simpler Over Complex | Window-based budgets over complex rate-limiting |
+| R13 — Design for Failure | Default budget applied when entity config missing |
+| R14 — Paved Path | Standard budget windows defined for all entities |
+| R15 — Open/Closed | New budget windows added without pipeline changes |
+
 ## Related Documents
 
 | Document | Relationship |

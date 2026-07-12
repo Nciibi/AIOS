@@ -179,6 +179,22 @@ interface PromptSection {
 |-------|--------|---------|
 | `LLMOS.PromptCompiled` | request_id, template_used, token_count, compile_duration_us, sections | After compilation (Stage 10) |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Compiler is the sole prompt construction authority |
+| R2 — Dependency Order | Compiler depends on Context Builder and Memory Injection |
+| R3 — DRY | Templates centralized in Template Registry |
+| R4 — Builder Pattern | CompiledPrompt built through staged pipeline |
+| R5 — Liskov Substitution | ProviderRequest is provider-agnostic |
+| R6 — DI over Singletons | Compiler injected into pipeline stage |
+| R9 — Deterministic | Same payload produces same compiled prompt |
+| R10 — Simpler Over Complex | Template interpolation over complex DSL |
+| R13 — Design for Failure | Fallback to raw messages when template not found |
+| R14 — Paved Path | Default system prompt when none provided |
+| R15 — Open/Closed | New models add formatting without compiler changes |
+
 ## Related Documents
 
 | Document | Relationship |

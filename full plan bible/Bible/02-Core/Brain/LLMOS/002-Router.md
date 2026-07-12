@@ -122,6 +122,22 @@ interface RoutingDecision {
 |-------|--------|---------|
 | `LLMOS.ModelSelected` | request_id, model_selected, selection_reason, composite_score, mode, alternatives_considered | After selection (Stage 5) |
 
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 — Modulsingularity | Router is the sole decision-maker for model selection |
+| R2 — Dependency Order | Router depends on Registry candidates and Cost Optimizer estimates |
+| R3 — DRY | Scoring logic centralized in Router, not duplicated across consumers |
+| R4 — Builder Pattern | SelectionConfig built via builder with entity overrides |
+| R5 — Liskov Substitution | All models interchangeable via normalized scoring |
+| R6 — DI over Singletons | Router injected as service into pipeline |
+| R9 — Deterministic | Scoring produces identical results for identical inputs |
+| R10 — Simpler Over Complex | Weighted linear scoring over complex ML-based routing |
+| R13 — Design for Failure | Fallback to first candidate when all score 0.0 |
+| R14 — Paved Path | Predefined routing modes cover common patterns |
+| R15 — Open/Closed | Entity overrides extend routing without modifying core |
+
 ## Related Documents
 
 | Document | Relationship |
