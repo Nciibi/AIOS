@@ -167,3 +167,14 @@ Design DNA compliance is checked at multiple levels:
 | Physics/008-Security.md | R13 (Design for Failure), R14 (Paved Path) |
 | Physics/009-Interaction.md | R6 (DI over Singletons), R10 (Simpler Over Complex) |
 | Physics/010-Execution.md | R13 (Design for Failure), R14 (Paved Path) |
+
+## Related Documents
+
+| Document | Relationship |
+|---------|-------------|
+| DNA/000-AIOS-DNA.md | Design DNA compact reference — R1–R15 summary table |
+| Physics/011-Design-DNA.md | Design DNA Physics — normative specification with edge cases |
+| Bible/00-Foundations/000-Overview.md | Foundations overview — reading guide |
+| Bible/00-Foundations/006-Design-Rules.md | Design rules — enforcement checklist |
+| Standards/000-Design-Language.md | Design language conventions |
+| Contributing/000-Contributing-Guide.md | Contributor workflow — Design DNA compliance checklist |
