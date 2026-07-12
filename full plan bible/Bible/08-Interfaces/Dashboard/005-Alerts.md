@@ -202,7 +202,6 @@ interface ActionRouter {
 | R13 — Design for Failure | Source unavailable queues alerts; evidence missing marks degraded |
 | R14 — Paved Path | Critical alerts appear on Health view by default |
 | R15 — Open/Closed | New alert sources register via AlertIngestor extension |
-| R16 — Evidence Traceability | All alerts carry evidenceRef to source event |
 
 ## Related Documents
 

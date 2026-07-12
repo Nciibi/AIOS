@@ -3,7 +3,7 @@
 
 | Property | Value |
 |----------|-------|
-| Status | Active — updated for new paradigm |
+| Status | Active |
 | Version | 2.0 |
 | Category | Bible — Brain |
 | Document ID | AIOS-BBL-002-SOU-005 |

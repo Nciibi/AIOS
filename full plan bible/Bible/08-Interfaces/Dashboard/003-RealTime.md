@@ -216,8 +216,6 @@ interface ThrottleController {
 | R13 — Design for Failure | Disconnect marks stale + fall back to polling; never blank |
 | R14 — Paved Path | Default refresh interval (30s polling) covers most use cases |
 | R15 — Open/Closed | New stream types register via StreamConnection extension |
-| R16 — Evidence Traceability | All streamed data points carry evidenceRef |
-| R17 — Observability | Connection state and rate metrics are available for monitoring |
 
 ## Related Documents
 

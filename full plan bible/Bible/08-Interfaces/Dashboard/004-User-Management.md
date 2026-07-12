@@ -211,7 +211,6 @@ interface SavedViewManager {
 | R13 — Design for Failure | Preference save failure returns last known state; never blank |
 | R14 — Paved Path | Health view is default for all new users |
 | R15 — Open/Closed | New preference types register via UserPreference extension |
-| R16 — Evidence Traceability | Customized views reference same evidence as base views |
 
 ## Related Documents
 

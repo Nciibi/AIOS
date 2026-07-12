@@ -198,8 +198,6 @@ interface LayoutManager {
 | R13 — Design for Failure | Data bind failure shows error state with retry, not blank |
 | R14 — Paved Path | Metric-card widgets are the default for all dashboard views |
 | R15 — Open/Closed | New widget types register via WidgetRenderer extension point |
-| R16 — Evidence Traceability | Every rendered value traces to evidence via DrillDownLink |
-| R17 — Observability | Widget render duration and errors are logged for performance monitoring |
 
 ## Related Documents
 
