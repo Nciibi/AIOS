@@ -217,15 +217,24 @@ function selectReasoningMethod(problem, evidence, constraints):
 | Maximum reasoning depth | 10 levels | 20 levels |
 | Maximum options evaluated | 50 options | 100 options |
 
-## Error Codes (R12)
+## Error Cases
 
-| Code | Description |
-|------|-------------|
-| SOU_RSN_001 | Insufficient evidence for reasoning method |
-| SOU_RSN_002 | Constitutional constraint violation — proposal blocked |
-| SOU_RSN_003 | Circular reasoning dependency detected |
-| SOU_RSN_004 | Reasoning method not applicable to problem domain |
-| SOU_RSN_005 | Evidence chain incomplete — missing causal link |
+| Condition | Error Code | Severity | Recovery |
+|-----------|------------|----------|----------|
+| Insufficient evidence for reasoning method | SOU_RSN_001 | Medium | Fall back to available evidence; flag gaps in output |
+| Constitutional constraint violation — proposal blocked | SOU_RSN_002 | Critical | Block proposal; require constitutional clarification from DGP |
+| Circular reasoning dependency detected | SOU_RSN_003 | High | Break cycle by selecting most authoritative source |
+| Reasoning method not applicable to problem domain | SOU_RSN_004 | Medium | Select alternative reasoning method; log method mismatch |
+| Evidence chain incomplete — missing causal link | SOU_RSN_005 | High | Continue with reduced confidence; flag missing links |
+
+## Invariants
+
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| SOU-RSN-001 | Reasoning never produces executable code | Architectural — no code execution path |
+| SOU-RSN-002 | Every reasoning session produces exactly one proposal or failure event | API-level — event emission enforced |
+| SOU-RSN-003 | Reasoning output is always reviewed by DGP before execution | Governance — DGP pipeline enforcement |
+| SOU-RSN-004 | Constitutional reasoning is always applied to every proposal | Algorithmic — selectReasoningMethod always includes it |
 
 ## Cross-Cutting Concerns
 
@@ -253,11 +262,17 @@ Reasoning outputs are communicated via ACF. DGP receives decision proposals. Aca
 
 | Rule | Compliance |
 |------|-----------|
-| R1 (Modulsingularity) | Reasoning is focused solely on producing reasoned proposals |
-| R5 (Liskov) | All reasoning methods implement the Reasoner interface |
-| R10 (Simpler Over Complex) | Simplest adequate reasoning method is selected first |
-| R12 (Embrace Errors) | All errors have unique codes (SOU_RSN_001–005) |
-| R13 (Design for Failure) | Reasoning degrades gracefully when evidence is unavailable |
+| R1 — Modulsingularity | Reasoning is focused solely on producing reasoned proposals |
+| R2 — Dependency Order | Reasoning depends on Cognitive OS and DGP; no upward dependencies |
+| R3 — DRY | Reasoning methods are defined once in the Reasoner interface |
+| R4 — Builder Pattern | Decision proposals built through the proposeDecision pipeline |
+| R5 — Liskov Substitution | All reasoning methods implement the Reasoner interface |
+| R6 — DI over Singletons | Cognitive OS is injected, not a singleton |
+| R9 — Deterministic | Same evidence and constraints produce the same reasoning output |
+| R10 — Simpler Over Complex | Simplest adequate reasoning method is selected first |
+| R13 — Design for Failure | Reasoning degrades gracefully when evidence is unavailable |
+| R14 — Paved Path | All reasoning flows through proposeDecision → DGP |
+| R15 — Open/Closed | New reasoning methods added by extending Reasoner, not by modifying existing methods |
 
 ## Related Documents
 
