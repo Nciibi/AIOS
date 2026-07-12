@@ -130,12 +130,14 @@ Planning occurs in the **Planned** state (000-Lifecycle.md). The plan is produce
 
 ## Internal Interfaces
 
-| Method | Input | Output | Consumed By |
-|--------|-------|--------|-------------|
-| createPlan(intent, context) | Intent, Context | MissionPlan | Sou |
-| validatePlan(plan) | MissionPlan | ValidationResult | DGP |
-| approvePlan(plan, approver) | MissionPlan, Approver | ApprovalRecord | Security Council |
-| rejectPlan(plan, reason) | MissionPlan, Reason | RejectionRecord | Sou |
+```typescript
+interface MissionPlanner {
+  createPlan(intent: Intent, context: Context): Promise<MissionPlan>;
+  validatePlan(plan: MissionPlan): Promise<ValidationResult>;
+  approvePlan(plan: MissionPlan, approver: Approver): Promise<ApprovalRecord>;
+  rejectPlan(plan: MissionPlan, reason: string): Promise<RejectionRecord>;
+}
+```
 
 ## Events
 

@@ -122,14 +122,16 @@ Delegation can occur in any state from Planned through Running. Sub-Missions fol
 
 ## Internal Interfaces
 
-| Method | Input | Output | Consumed By |
-|--------|-------|--------|-------------|
-| createDelegation(contract) | DelegationContract | ContractID | Sou |
-| acceptDelegation(contract_id) | UUID | AcceptanceRecord | Delegate |
-| rejectDelegation(contract_id, reason) | UUID, Reason | RejectionRecord | Source Mission |
-| recordResult(contract_id, deliverables) | UUID, Deliverable[] | ResultRecord | ACL |
-| verifyResult(contract_id, criteria) | UUID, Criterion[] | ResultVerification | Reviewer |
-| escalateFailure(contract_id, level) | UUID, EscalationLevel | EscalationRecord | Security Council |
+```typescript
+interface MissionDelegator {
+  createDelegation(contract: DelegationContract): Promise<ContractID>;
+  acceptDelegation(contractId: UUID): Promise<AcceptanceRecord>;
+  rejectDelegation(contractId: UUID, reason: string): Promise<RejectionRecord>;
+  recordResult(contractId: UUID, deliverables: Deliverable[]): Promise<ResultRecord>;
+  verifyResult(contractId: UUID, criteria: Criterion[]): Promise<ResultVerification>;
+  escalateFailure(contractId: UUID, level: EscalationLevel): Promise<EscalationRecord>;
+}
+```
 
 ## Events
 

@@ -131,15 +131,17 @@ Execution occurs in the **Running** state (000-Lifecycle.md). Transitions from R
 
 ## Internal Interfaces
 
-| Method | Input | Output | Consumed By |
-|--------|-------|--------|-------------|
-| dispatchWorker(mission, milestone, worker) | MissionPlan, Milestone, WorkerID | WorkerAssignment | LMS |
-| recordProgress(mission, snapshot) | UUID, ProgressSnapshot | ConfirmedSnapshot | Sou |
-| recordEvidence(action, package) | ActionRef, EvidencePackage | EvidenceReceipt | ACL |
-| reallocateResources(mission, adaptation) | UUID, RuntimeAdaptation | AdaptationConfirmation | ROS |
-| adjustTimeline(mission, new_timeline) | UUID, Timeline | TimelineConfirmation | Planner |
-| createCheckIn(mission, type, evidence) | UUID, CheckInType, Evidence[] | CheckInRecord | LMS |
-| checkpoint(execution_state) | ExecutionState | CheckpointID | Recovery |
+```typescript
+interface MissionExecutor {
+  dispatchWorker(missionId: UUID, milestone: Milestone, workerId: UUID): Promise<WorkerAssignment>;
+  recordProgress(missionId: UUID, snapshot: ProgressSnapshot): Promise<ConfirmedSnapshot>;
+  recordEvidence(actionRef: UUID, package_: EvidencePackage): Promise<EvidenceReceipt>;
+  reallocateResources(missionId: UUID, adaptation: RuntimeAdaptation): Promise<AdaptationConfirmation>;
+  adjustTimeline(missionId: UUID, timeline: Timeline): Promise<TimelineConfirmation>;
+  createCheckIn(missionId: UUID, type: CheckInType, evidence: EvidencePackage[]): Promise<CheckInRecord>;
+  checkpoint(state: ExecutionState): Promise<CheckpointID>;
+}
+```
 
 ## Events
 

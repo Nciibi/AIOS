@@ -162,15 +162,17 @@ Failure handling intersects the Mission lifecycle at Running, Waiting, Paused, a
 
 ## Internal Interfaces
 
-| Method | Input | Output | Consumed By |
-|--------|-------|--------|-------------|
-| detectFailure(mission, detection) | UUID, DetectionSignal | FailureRecord | Monitor |
-| classifyFailure(failure) | FailureRecord | FailureClassification | Classifier |
-| escalate(failure, level) | FailureRecord, EscalationLevel | EscalationPath | Security Council |
-| proposeRecovery(failure, strategy) | FailureRecord, RecoveryStrategy | StrategyID | Sou |
-| approveRecovery(strategy_id, approver) | UUID, Approver | ApprovalRecord | Supervisor |
-| executeRecovery(strategy) | RecoveryStrategy | RecoveryExecution | LMS |
-| rollbackToCheckpoint(checkpoint_id) | UUID | RecoveryExecution | LMS |
+```typescript
+interface FailureManager {
+  detectFailure(missionId: UUID, signal: DetectionSignal): Promise<FailureRecord>;
+  classifyFailure(record: FailureRecord): Promise<FailureClassification>;
+  escalate(record: FailureRecord, level: EscalationLevel): Promise<EscalationPath>;
+  proposeRecovery(record: FailureRecord, strategy: RecoveryStrategy): Promise<StrategyID>;
+  approveRecovery(strategyId: UUID, approver: Approver): Promise<ApprovalRecord>;
+  executeRecovery(strategy: RecoveryStrategy): Promise<RecoveryExecution>;
+  rollbackToCheckpoint(checkpointId: UUID): Promise<RecoveryExecution>;
+}
+```
 
 ## Events
 
