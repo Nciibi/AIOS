@@ -187,3 +187,14 @@ ACF validates the authentication token before routing:
 - **R10**: 4 auth methods, 5 token operations — no over-design
 - **R13**: Fail closed — if ACF cannot reach TRL, tokens treated as revoked
 - **R15**: Auth methods added through AuthMethod interface without modifying core
+
+## Related Documents
+
+| Document | Relationship |
+|---------|-------------|
+| Bible/04-Execution/Security/000-Overview.md | Security overview — ATS is one security layer |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — identity source for all tokens |
+| Bible/04-Execution/Security/ATS/001-MFA.md | MFA — second factor for token issuance |
+| Bible/04-Execution/Security/ATS/002-Session-Mgmt.md | Session & token management |
+| Physics/008-Security.md | Security framework — ATS enforces authentication stage |
+| Physics/001-Identity.md | Identity — ATS authenticates IDS identities |

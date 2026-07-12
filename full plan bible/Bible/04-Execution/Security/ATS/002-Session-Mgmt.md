@@ -211,3 +211,14 @@ Revocations propagated through ACF Event Streams within 1 second. Replicated to 
 ### Cleanup
 
 Revoked tokens retained for `max_token_lifetime` (24h) + 7 days. Then moved to long-term evidence store.
+
+## Related Documents
+
+| Document | Relationship |
+|---------|-------------|
+| Bible/04-Execution/Security/ATS/000-Auth-Methods.md | Authentication methods — token issuance |
+| Bible/04-Execution/Security/ATS/001-MFA.md | MFA — factor for token issuance |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — identity source |
+| Bible/04-Execution/Runtime/000-Overview.md | Runtime — token-bound sessions execute here |
+| Physics/006-Lifecycles.md | Lifecycles — session lifecycle |
+| Physics/008-Security.md | Security framework |
