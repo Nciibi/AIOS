@@ -201,5 +201,6 @@ Brain service specifications have been created across three phases:
 | Bible/04-Execution/Security/000-Overview.md | Security Council — verification infrastructure |
 | Bible/03-Institutions/000-Overview.md | Institutions — execution infrastructure |
 | Bible/04-Execution/Runtime/000-Overview.md | Runtime — code execution infrastructure |
+| DNA/001-Brain-DNA.md | Brain architectural invariants — SOU-001-007, BRAIN-001-009 |
 | APIs/AIOS-Architecture-Diagram.md | Architecture diagram |
 | APIs/000-Master-API-Spec.md | API registry |
