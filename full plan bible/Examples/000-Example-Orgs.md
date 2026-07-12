@@ -161,8 +161,9 @@ Sou: "Your secure messaging app is ready. Here's what was built:
 Created   → Mission M-001 exists
 Verified  → Structure checked against Genome template
 Active    → Workers hired, work begins
-Review    → QA completes, Sou reviews
+Active    → Workers hired, work begins
 Dissolved → Workers terminated, resources returned, evidence archived
+Archived  → Record preserved for audit
 ```
 
 ## Example 2: Autonomous Security Monitoring
