@@ -184,6 +184,6 @@ interface CorrelationMatrix {
 
 - Bible/07-Domains/Trading/001-Algorithms.md
 - Bible/07-Domains/Trading/003-Market-Data.md
-- Bible/04-Physics/005-Events.md
-- Bible/04-Physics/007-Capabilities.md
-- Bible/04-Physics/012-Experience.md
+- Physics/005-Events.md
+- Physics/007-Capabilities.md
+- Physics/012-Experience.md
