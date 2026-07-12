@@ -237,5 +237,5 @@ Sou's capabilities expand beyond text to vision, voice, and tool use.
 | Bible/0007-Implementation-Roadmap.md | Implementation phasing — Phase 3 schedule |
 | Bible/0008-Future-Research.md | Research agenda and open questions |
 | Bible/02-Core/Brain/Autonomy/000-Overview.md | Autonomy System — learning enables L3+ autonomy |
-| ChatGPT-souuSouu Agent System Design.md | Original design vision — Learning Engine, Knowledge Graph |
-| sou new idea.md | Brain/Sou paradigm — Sou is the learner, Academy is the infrastructure |
+| ChatGPT-souuSouu Agent System Design.md (project root) | Original design vision — Learning Engine, Knowledge Graph |
+| sou new idea.md (project root) | Brain/Sou paradigm — Sou is the learner, Academy is the infrastructure |
