@@ -296,7 +296,7 @@ AIOS Instance Alpha                    AIOS Instance Beta
 5. Worker W-302 reviews and returns comments
 6. Sou Beta sends review back to Sou Alpha via IXP
 7. Sou Alpha incorporates feedback
-8. Final document approved by both Souver
+8. Final document approved by both Sou instances
 ```
 
 ## Invariants
