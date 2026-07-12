@@ -273,4 +273,9 @@ Each milestone requires:
 | 01-Governance/003-CRP.md | RFC pipeline — implementation changes flow through CRP |
 | 01-Governance/005-ADG.md | ADG — architectural decisions needed for implementation |
 | 09-Reference/003-Migration-Guide.md | Migration guide — version-to-version implementation migration |
+| Research/000-Phase-2-Orchestration.md | Phase 2 research — autonomous agent orchestration |
+| Research/001-Phase-3-Intelligence.md | Phase 3 research — learning engine and knowledge graph |
+| Research/002-Phase-4-Integration.md | Phase 4 research — Linux OS integration and dashboard |
+| Research/003-Phase-5-Ecosystem.md | Phase 5 research — plugin system and marketplace |
+| DNA/000-AIOS-DNA.md | Design DNA compact reference — R1–R15 compliance |
 | 00-Foundations/002-Design-DNA.md | Design DNA — implementation must comply with R1–R15 |
