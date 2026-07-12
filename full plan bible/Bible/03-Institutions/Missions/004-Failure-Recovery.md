@@ -232,6 +232,6 @@ interface FailureManager {
 | Missions/002-Execution.md | Sibling — failures originate during execution |
 | Missions/003-Delegation.md | Sibling — delegation failures trigger recovery |
 | Bible/02-Core/OSYS/002-Org-Lifecycle.md | Organization lifecycle — failure containment |
-| Bible/04-Execution/Security/001-Security-Council.md | Security Council escalation |
+| Bible/04-Execution/Security/000-Overview.md | Security Council escalation |
 | Physics/002-Missions.md | Mission canonical definitions |
 | Physics/005-Events.md | Event system |
