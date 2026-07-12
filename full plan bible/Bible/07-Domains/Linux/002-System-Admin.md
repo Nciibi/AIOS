@@ -158,16 +158,16 @@ interface SelinuxContext {
 
 ## Events (table)
 
-| Event | Emitter | Payload | Meaning |
-|-------|---------|---------|---------|
-| Linux.UserCreated | UserHandler | { username, uid, groups } | User account created |
-| Linux.UserDeleted | UserHandler | { username } | User account removed |
-| Linux.UserModified | UserHandler | { username, changes } | User account attributes changed |
-| Linux.ServiceRestarted | ServiceHandler | { serviceName, reason } | Service restarted |
-| Linux.ServiceFailed | ServiceHandler | { serviceName, error } | Service failed to start/stop |
-| Linux.PackageOperation | PackageHandler | { packageName, operation, version } | Package installed/removed/updated |
-| Linux.FilesystemMounted | FsHandler | { mountPoint, device, fstype } | Filesystem mounted |
-| Linux.FilesystemUnmounted | FsHandler | { mountPoint } | Filesystem unmounted |
+| Event Type | Produced When | Fields |
+|-----------|---------------|--------|
+| Linux.UserCreated | UserHandler creates a new user account | username, uid, groups, homeDirectory, createdBy |
+| Linux.UserDeleted | UserHandler removes a user account | username, uid, deletedBy, backupRef |
+| Linux.UserModified | UserHandler changes user account attributes | username, changes, modifiedBy |
+| Linux.ServiceRestarted | ServiceHandler restarts a system service | serviceName, reason, previousState, restartDuration |
+| Linux.ServiceFailed | ServiceHandler reports a service start/stop failure | serviceName, error, exitCode, journalRef |
+| Linux.PackageOperation | PackageHandler installs, removes, or updates a package | packageName, operation, version, repository, transactionId |
+| Linux.FilesystemMounted | FsHandler mounts a filesystem | mountPoint, device, fstype, options, mountedBy |
+| Linux.FilesystemUnmounted | FsHandler unmounts a filesystem | mountPoint, device, unmountedBy, safeIndicator |
 
 ## Error Cases (table with Code, Condition, Severity, Recovery)
 

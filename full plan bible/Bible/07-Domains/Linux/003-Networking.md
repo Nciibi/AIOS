@@ -181,16 +181,16 @@ interface DhcpRelayConfig {
 
 ## Events (table)
 
-| Event | Emitter | Payload | Meaning |
-|-------|---------|---------|---------|
-| Linux.InterfaceConfigured | InterfaceHandler | { ifaceName, ipAddresses, state } | Interface brought up or down |
-| Linux.InterfaceFailed | InterfaceHandler | { ifaceName, error } | Interface configuration failed |
-| Linux.FirewallRuleChanged | FirewallHandler | { ruleId, chain, action } | Firewall rule added or removed |
-| Linux.DNSUpdated | DnsHandler | { hostname, resolver, entries } | DNS resolution configuration changed |
-| Linux.RouteChanged | RouteHandler | { destination, gateway, metric } | Route added or removed |
-| Linux.VpnConnected | VpnHandler | { vpnName, endpoint } | VPN tunnel established |
-| Linux.VpnDisconnected | VpnHandler | { vpnName, reason } | VPN tunnel torn down |
-| Linux.ConnectivityVerified | ProbeHandler | { target, reachable, latency } | Connectivity probe result |
+| Event Type | Produced When | Fields |
+|-----------|---------------|--------|
+| Linux.InterfaceConfigured | InterfaceHandler brings an interface up or down | ifaceName, ipAddresses, state, mtu, macAddress |
+| Linux.InterfaceFailed | InterfaceHandler reports a configuration failure | ifaceName, error, configState, attemptedParams |
+| Linux.FirewallRuleChanged | FirewallHandler adds or removes a rule | ruleId, chain, action, protocol, source, destination |
+| Linux.DNSUpdated | DnsHandler changes DNS resolution configuration | hostname, resolver, entries, ttl, updatedBy |
+| Linux.RouteChanged | RouteHandler adds or removes a route | destination, gateway, metric, device, table |
+| Linux.VpnConnected | VpnHandler establishes a VPN tunnel | vpnName, endpoint, protocol, encryption, localIP |
+| Linux.VpnDisconnected | VpnHandler tears down a VPN tunnel | vpnName, endpoint, reason, trafficStats, duration |
+| Linux.ConnectivityVerified | ProbeHandler runs a connectivity probe | target, reachable, latency, packetLoss, probeId |
 
 ## Error Cases (table with Code, Condition, Severity, Recovery)
 

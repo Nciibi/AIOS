@@ -168,15 +168,15 @@ interface KernelVersion {
 
 ## Events (table)
 
-| Event | Emitter | Payload | Meaning |
-|-------|---------|---------|---------|
-| Linux.KernelConfigured | KernelConfigurator | { configId, profileName } | Kernel config applied successfully |
-| Linux.KernelCompiled | KernelConfigurator | { configId, version, hash } | Kernel compilation completed |
-| Linux.KernelCompileFailed | KernelConfigurator | { configId, errorCode, logRef } | Kernel compilation failed |
-| Linux.ModuleLoaded | ModuleHandler | { moduleName, version } | Module loaded into kernel |
-| Linux.ModuleUnloaded | ModuleHandler | { moduleName } | Module removed from kernel |
-| Linux.SysctlApplied | SysctlManager | { key, value, scope } | Kernel parameter changed |
-| Linux.BootEntryChanged | BootEntryManager | { entryId, action } | Boot entry created, updated, or removed |
+| Event Type | Produced When | Fields |
+|-----------|---------------|--------|
+| Linux.KernelConfigured | KernelConfigurator applies a kernel config profile | configId, profileName, appliedAt |
+| Linux.KernelCompiled | KernelConfigurator finishes a kernel build | configId, version, hash, compileDuration |
+| Linux.KernelCompileFailed | KernelConfigurator encounters a build error | configId, errorCode, logRef, failedAt |
+| Linux.ModuleLoaded | ModuleHandler inserts a kernel module | moduleName, version, dependencies |
+| Linux.ModuleUnloaded | ModuleHandler removes a kernel module | moduleName, refCount, removedBy |
+| Linux.SysctlApplied | SysctlManager changes a kernel parameter | key, value, scope, persisted |
+| Linux.BootEntryChanged | BootEntryManager creates, updates, or removes a boot entry | entryId, action, bootloader, previousEntryId |
 
 ## Error Cases (table with Code, Condition, Severity, Recovery)
 
