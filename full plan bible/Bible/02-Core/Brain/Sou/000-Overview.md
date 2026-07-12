@@ -3,11 +3,11 @@
 
 | Property | Value |
 |----------|-------|
-| Status | Active — rewritten for new paradigm |
+| Status | Active |
 | Version | 2.0 |
 | Category | Bible — Brain |
 | Document ID | AIOS-BBL-002-SOU-000 |
-| Source Laws | Law 0 (Supremacy), Law 4 (Identity), Law 5 (Autonomy), Law 3 (Communication) |
+| Source Laws | Law 9 (Constitutional Supremacy), Law 4 (Identity), Law 5 (Autonomy), Law 3 (Communication) |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Bible/02-Core/Sou/000-Overview.md v1.0 |
 | Superseded By | Nothing |

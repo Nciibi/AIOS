@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Brain/Decision |
 | Document ID | AIOS-BBL-002-DEC-005 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle, Law 13 — Design for Failure |
+| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle, Law 9 — Law of Constitutional Supremacy |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |

@@ -3,7 +3,7 @@
 
 | Property | Value |
 |----------|-------|
-| Status | Active — moved to Brain |
+| Status | Active |
 | Version | 1.0 |
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-000 |

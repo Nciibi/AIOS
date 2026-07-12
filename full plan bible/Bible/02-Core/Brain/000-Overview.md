@@ -7,7 +7,8 @@
 | Version | 1.0 |
 | Category | Bible — Brain |
 | Document ID | AIOS-BBL-002-BRN-000 |
-| Source Laws | Law 0 — Law of Supremacy, Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 9 — Law of Constitutional Supremacy, Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Physics | Physics/000-Laws.md |
 | Supersedes | Bible/02-Core/Sou/000-Overview.md (partial — Sou now a component of Brain) |
 | Superseded By | Nothing |
 | Amended By | RFC |
