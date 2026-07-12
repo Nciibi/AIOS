@@ -182,8 +182,8 @@ Trust verification uses ACF synchronous calls. Cross-instance trust handshakes u
 | 000-Overview.md | Security overview — trust is a foundational concern |
 | 001-Architecture.md | Security Council architecture — Council issues trust bindings |
 | IDS/000-Overview.md | Identity verification — prerequisite for trust |
-| TLM/000-TLM.md | Trust Lifecycle Manager — trust binding lifecycle |
-| Federation/000-Overview.md | Cross-instance trust — federation trust model |
-| Cryptography/000-CSP.md | Cryptographic signing of trust bindings |
-| Cryptography/001-CAM.md | CA certificates for trust chain |
+| Trust/000-TLM.md | Trust Lifecycle Manager — trust binding lifecycle |
+| Bible/06-Services/Federation/000-Overview.md | Cross-instance trust — federation trust model |
+| Crypto/000-CSP.md | Cryptographic signing of trust bindings |
+| Crypto/001-CAM.md | CA certificates for trust chain |
 | Physics/008-Security.md | Security invariants |
