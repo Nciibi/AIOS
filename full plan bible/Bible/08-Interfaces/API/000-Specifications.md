@@ -69,8 +69,8 @@ Every API must return errors in a standardized format:
 ```
 {
   "error": {
-    "code": "API_XXX",
-    "message": "Human-readable description",
+     "code": "API-001",
+     "message": "InvalidEnvelope: the request envelope failed structural validation",
     "details": { ... },
     "correlation_id": "uuid-v7"
   }
