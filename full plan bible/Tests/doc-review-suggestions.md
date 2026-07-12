@@ -15,8 +15,9 @@ A deep recheck was performed on top of the structural verifier (`verify_docs.ps1
 | Event-reference consistency (backticked `Comp.Event` resolves to a defined event) | 0 undefined |
 | `Law N` mentions in prose (must be 1–10) | 0 out of range |
 
-The 24 remaining FAILs are forward-references to P3 (Execution-tier) components
-(`Bible/04-Execution/...`, `Bible/02-Core/{ROS,OSYS,DTS,Academy}`), which are out of P0/P1/P2 scope.
+The 24 former FAILs were forward-references to P3 (Execution-tier) components
+(`Bible/04-Execution/...`, `Bible/02-Core/{ROS,OSYS,DTS,Academy}`). They are now cleared
+(see "P3 forward-references resolved" below).
 
 ## Fixes applied this session
 
