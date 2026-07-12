@@ -214,7 +214,7 @@ If any rule exceeds its max evaluation time, it times out and falls to `audit` s
 | LLMOS/003-Prompt-Compiler.md | Input guardrails validate compiled prompt before provider call |
 | LLMOS/008-Streaming-Manager.md | Output guardrails validate each chunk before delivery |
 | Bible/04-Execution/Security/000-Overview.md | Security Council pipeline governs guardrail rule deployment |
-| Physics/008-Verification.md | Verification-first principle requires guardrail confirmation |
+| Physics/008-Security.md | Verification-first principle requires guardrail confirmation |
 
 ## Error Cases
 

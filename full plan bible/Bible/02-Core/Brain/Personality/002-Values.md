@@ -8,7 +8,7 @@
 | Category | Bible — Brain/Personality |
 | Document ID | AIOS-BBL-002-PER-002 |
 | Source Laws | Law 1 — Law of Strategic Autonomy, Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 5 — Law of Identity, Law 7 — Law of Capability Bounds, Law 8 — Law of Verification-First |
-| Source Physics | Physics/009-Interaction.md, Physics/008-Decision.md |
+| Source Physics | Physics/009-Interaction.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |

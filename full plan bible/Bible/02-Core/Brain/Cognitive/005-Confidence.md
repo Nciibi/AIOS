@@ -8,7 +8,7 @@
 | Category | Bible — Brain/Cognitive |
 | Document ID | AIOS-BBL-002-COG-005 |
 | Source Laws | Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
-| Source Physics | Physics/005-Events.md, Physics/009-Causality.md |
+| Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |

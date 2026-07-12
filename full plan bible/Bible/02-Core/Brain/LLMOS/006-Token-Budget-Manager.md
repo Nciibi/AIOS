@@ -148,7 +148,7 @@ interface CreditBudget {
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/05-Platform/ROS/000-Overview.md | Token budgets are stored and tracked by ROS |
+| Bible/02-Core/ROS/000-Overview.md | Token budgets are stored and tracked by ROS |
 | LLMOS/007-Cost-Optimizer.md | Cost optimizer produces credit rates consumed by this manager |
 | LLMOS/000-Overview.md | TokenBudget Check is Stage 3 of the pipeline |
 | Physics/007-Capabilities.md | Capability Bounds define token budget constraints |

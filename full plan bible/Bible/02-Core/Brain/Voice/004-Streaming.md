@@ -386,4 +386,4 @@ type StreamErrorCode =
 | Voice/003-Voice-Profiles.md | Streaming config may reference profile defaults |
 | Voice/005-Emotion-Detection.md | Emotion detection processes in parallel with STT stream |
 | Brain/Conversation/000-Overview.md | Conversation OS manages stream session lifecycle |
-| Bible/05-Platform/005-Sessions.md | Session lifecycle events trigger stream cleanup |
+| Bible/05-Platform/005-AUS.md | Session lifecycle events trigger stream cleanup |

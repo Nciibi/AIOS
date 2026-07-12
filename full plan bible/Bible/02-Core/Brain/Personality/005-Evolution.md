@@ -425,4 +425,4 @@ interface PersonalityEvolutionConfig {
 | Bible/02-Core/Academy/000-Overview.md | Academy mediates experience-based personality evolution |
 | Brain/Memory/002-Episodic-Memory.md | Experiences stored in Episodic Memory drive evolution |
 | Bible/05-Platform/004-EVS.md | Evolution events recorded throughout lifecycle |
-| Bible/06-Governance/001-Security-Council.md | Drift alerts and personality resets handled by Security Council |
+| Bible/04-Execution/Security/000-Overview.md | Drift alerts and personality resets handled by Security Council |

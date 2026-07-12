@@ -608,4 +608,4 @@ interface TradeOffVisualizer {
 | Brain/Sou/000-Overview.md | Sou consumes TradeOffReport to make strategic decisions |
 | Brain/Context/000-Overview.md | Context System provides the context snapshot for trade-off framing |
 | Bible/05-Platform/004-EVS.md | All Trade-off events recorded as evidence |
-| Bible/05-Platform/007-Config.md | TradeOffConfig stored in platform configuration |
+| Bible/05-Platform/007-EIP.md | TradeOffConfig stored in platform configuration |

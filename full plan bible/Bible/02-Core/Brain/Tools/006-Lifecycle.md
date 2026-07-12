@@ -419,5 +419,5 @@ interface ToolLifecycleManager {
 | Brain/Tools/002-Discovery.md | Lifecycle stage affects tool visibility in discovery |
 | Brain/Tools/003-Invocation.md | Lifecycle stage checked before invocation is allowed |
 | Brain/Tools/005-Sandboxing.md | Violation history feeds health tracking |
-| Brain/Physics/006-Lifecycles.md | Lifecycle stages follow the general Lifecycle Physics |
+| Physics/006-Lifecycles.md | Lifecycle stages follow the general Lifecycle Physics |
 | Bible/05-Platform/004-EVS.md | Events emitted for every lifecycle transition |

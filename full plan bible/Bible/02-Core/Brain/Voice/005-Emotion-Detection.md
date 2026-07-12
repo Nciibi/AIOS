@@ -358,4 +358,4 @@ type EmotionErrorCode =
 | Brain/Sou/000-Overview.md | Sou reads emotion data from context to adjust response |
 | Brain/Context/000-Overview.md | Emotion metadata is passed through the context window |
 | Brain/Conversation/000-Overview.md | Conversation OS manages emotion privacy disclosure |
-| Bible/05-Platform/005-Sessions.md | Emotion timeline cleared on session end |
+| Bible/05-Platform/005-AUS.md | Emotion timeline cleared on session end |

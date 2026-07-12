@@ -266,7 +266,7 @@ Reasoning outputs are communicated via ACF. DGP receives decision proposals. Aca
 | Physics/005-Events.md | Evidence — reasoning consumes and produces Events |
 | Physics/007-Capabilities.md | Capability bounds — reasoning constrained by capabilities |
 | Physics/012-Experience.md | Experience — reasoning learns from past outcomes |
-| Bible/01-Bible/01-Governance/002-DGP.md | DGP — reasoning proposals are routed through DGP |
+| Bible/01-Governance/002-DGP.md | DGP — reasoning proposals are routed through DGP |
 | Bible/02-Core/Brain/Sou/000-Overview.md | Sou overview — reasoning is a capability of the executive intelligence |
 | Bible/02-Core/Brain/Sou/002-Planner.md | Planner — reasoning feeds planning |
 | Bible/02-Core/Brain/Sou/004-Learning.md | Learning — reasoning improves from learning |

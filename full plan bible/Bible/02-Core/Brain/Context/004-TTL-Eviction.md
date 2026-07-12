@@ -8,7 +8,7 @@
 | Category | Bible — Brain/Context |
 | Document ID | AIOS-BBL-002-CTX-004 |
 | Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle |
-| Source Physics | Physics/006-Lifecycles.md, Physics/011-Balance.md |
+| Source Physics | Physics/006-Lifecycles.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |

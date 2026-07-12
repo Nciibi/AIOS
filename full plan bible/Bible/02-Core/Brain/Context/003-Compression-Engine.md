@@ -8,7 +8,7 @@
 | Category | Bible — Brain/Context |
 | Document ID | AIOS-BBL-002-CTX-003 |
 | Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
-| Source Physics | Physics/009-Interaction.md, Physics/011-Balance.md |
+| Source Physics | Physics/009-Interaction.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |

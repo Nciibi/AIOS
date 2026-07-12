@@ -264,4 +264,4 @@ interface IdentityStoreConfig {
 | Brain/LLMOS/003-Prompt-Compiler.md | Identity injected into every system prompt |
 | Brain/Sou/000-Overview.md | Sou's persistent identity is anchored here |
 | Bible/05-Platform/004-EVS.md | Identity access and verification events recorded |
-| Bible/06-Governance/001-Security-Council.md | Security Council authorizes identity amendments |
+| Bible/04-Execution/Security/000-Overview.md | Security Council authorizes identity amendments |

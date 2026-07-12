@@ -724,4 +724,4 @@ interface ClarificationContext {
 | Brain/Attention/000-Overview.md | Topic shifts and intent changes generate attention signals |
 | Brain/Planning/000-Overview.md | Plans reference the current conversation phase and flow constraints |
 | Bible/05-Platform/004-EVS.md | All Dialogue State events recorded via Event System |
-| Bible/02-Core/Physics/009-Interaction.md | Dialogue State implements the Interaction Physics model |
+| Physics/009-Interaction.md | Dialogue State implements the Interaction Physics model |

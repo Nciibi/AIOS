@@ -159,6 +159,6 @@ Sou does NOT directly implement reasoning, planning, or memory. These are delega
 | Bible/02-Core/Brain/LLMOS/000-Overview.md | AI inference |
 | Bible/01-Governance/002-DGP.md | Decision routing |
 | Bible/04-Execution/Security/000-Overview.md | Verification |
-| Bible/03-Institutions/000-Overview.md | Execution infrastructure |
+| Bible/03-Institutions/Missions/000-Lifecycle.md | Execution infrastructure |
 | Bible/00-Foundations/001-AIOS-Philosophy.md | Philosophical grounding |
 | Bible/00-Foundations/003-Core-Principles.md | Core principles |

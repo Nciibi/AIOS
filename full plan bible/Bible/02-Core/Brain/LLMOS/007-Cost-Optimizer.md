@@ -137,7 +137,7 @@ interface ModelDiscount {
 | LLMOS/002-Router.md | Router consumes cost scores from Cost Optimizer |
 | LLMOS/001-Model-Registry.md | Model pricing data comes from ModelEntry records |
 | LLMOS/006-Token-Budget-Manager.md | Token estimator and entity budgets are shared |
-| Bible/05-Platform/ROS/000-Overview.md | Billing profiles, entity discounts, and pricing sources are managed by ROS |
+| Bible/02-Core/ROS/000-Overview.md | Billing profiles, entity discounts, and pricing sources are managed by ROS |
 
 ## Error Cases
 
