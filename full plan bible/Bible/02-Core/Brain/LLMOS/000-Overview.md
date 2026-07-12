@@ -1,4 +1,4 @@
-# AIOS Bible — Brain
+# AIOS Bible — Brain/LLMOS
 ## 000 — LLMOS: Large Language Model Operating System
 
 | Property | Value |
