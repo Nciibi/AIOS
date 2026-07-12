@@ -103,16 +103,16 @@ Preparation â†’ Detection â†’ Analysis â†’ Containment â†’ E
 
 ## Events
 
-| SEC.EventType |     Produced When | Fields |
+| SEC.EventType |      Produced When | Fields |
 |-----------|--------------|--------|
-| SEC.VulnerabilityFound |     Potential vulnerability identified | finding_id, target, cve, cvss_score, confidence, discovery_method |
-| SEC.VulnerabilityVerified |     Vulnerability confirmed in sandbox | finding_id, verification_env, exploit_result, risk_level, reproducibility |
-| SEC.ExploitAttempted |     Exploit verification executed | attempt_id, target_sandbox, technique, outcome, detection_bypassed |
-| SEC.IncidentDetected |     Security incident is identified | incident_id, severity, category, affected_assets, confidence |
-| SEC.IncidentContained |     Incident containment completed | incident_id, containment_action, effectiveness, duration_seconds |
-| SEC.IncidentResolved |     Incident fully resolved | incident_id, recovery_action, post_mortem_ref, lessons_learned |
-| SEC.IntelReportGenerated |     Threat intelligence report produced | report_id, threat_actor, ttps, iocs, confidence, tlp_level |
-| SEC.ComplianceAuditRun |     Compliance audit completes | audit_id, standard, scope, passed, failed, score, critical_findings |
+| SEC.VulnerabilityFound |      Potential vulnerability identified | finding_id, target, cve, cvss_score, confidence, discovery_method |
+| SEC.VulnerabilityVerified |      Vulnerability confirmed in sandbox | finding_id, verification_env, exploit_result, risk_level, reproducibility |
+| SEC.ExploitAttempted |      Exploit verification executed | attempt_id, target_sandbox, technique, outcome, detection_bypassed |
+| SEC.IncidentDetected |      Security incident is identified | incident_id, severity, category, affected_assets, confidence |
+| SEC.IncidentContained |      Incident containment completed | incident_id, containment_action, effectiveness, duration_seconds |
+| SEC.IncidentResolved |      Incident fully resolved | incident_id, recovery_action, post_mortem_ref, lessons_learned |
+| SEC.IntelReportGenerated |      Threat intelligence report produced | report_id, threat_actor, ttps, iocs, confidence, tlp_level |
+| SEC.ComplianceAuditRun |      Compliance audit completes | audit_id, standard, scope, passed, failed, score, critical_findings |
 
 
 ## Design DNA

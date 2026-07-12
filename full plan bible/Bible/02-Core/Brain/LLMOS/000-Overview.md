@@ -81,24 +81,24 @@ Every inference request passes through LLMOS in order:
 
 | Stage | Component | Responsibility | Produces Event |
 |-------|-----------|----------------|----------------|
-| 0 | Gateway | Receive request via ACF, authenticate, validate schema | `LLMOS.RequestReceived` |
-| 1 | Security Check | Verify execution token against Security Council pipeline | `LLMOS.SecurityChecked` |
-| 2 | Rate Limiter | Enforce per-entity rate limits | `LLMOS.RateChecked` |
-| 3 | Token Budget Check | Verify entity has sufficient token budget | `LLMOS.BudgetChecked` |
-| 4 | Model Registry | Resolve available models matching request requirements | `LLMOS.ModelsResolved` |
-| 5 | Cost Optimizer | Estimate cost, apply cost optimization strategies for all candidates | `LLMOS.CostOptimized` |
-| 6 | Router | Select optimal model using cost estimates + capability + latency scoring | `LLMOS.ModelSelected` |
-| 7 | Cache Lookup | Check for cached response (exact or semantic match) | `LLMOS.CacheHit` / `LLMOS.CacheMiss` |
-| 8 | Context Builder | Manage context window, truncate, prioritize content | `LLMOS.ContextBuilt` |
-| 9 | Memory Injection | Retrieve and inject relevant memories | `LLMOS.MemoryInjected` |
-| 10 | Prompt Compiler | Construct final prompt from template + context + memory | `LLMOS.PromptCompiled` |
-| 11 | Guardrail Check | Scan prompt for policy violations | `LLMOS.GuardrailChecked` |
-| 12 | Retry Engine | Send to provider, handle failures with retry/fallback | `LLMOS.ProviderCalled` |
-| 13 | Streaming Manager | Manage streaming response, assemble chunks | `LLMOS.StreamChunk` |
-| 14 | Guardrail Check (output) | Scan response for policy violations | `LLMOS.GuardrailChecked` (direction=output) |
-| 15 | Response Validator | Validate structured output against schema | `LLMOS.ResponseValidated` |
-| 16 | Cache Store | Store response in cache | `LLMOS.CacheStored` |
-| 17 | Post-Processing | Update budgets, record metrics, produce final Event | `LLMOS.RequestCompleted` |
+| 0 | Gateway | Receive request via ACF, authenticate, validate schema | `LLM.RequestReceived` |
+| 1 | Security Check | Verify execution token against Security Council pipeline | `LLM.SecurityChecked` |
+| 2 | Rate Limiter | Enforce per-entity rate limits | `LLM.RateChecked` |
+| 3 | Token Budget Check | Verify entity has sufficient token budget | `LLM.BudgetChecked` |
+| 4 | Model Registry | Resolve available models matching request requirements | `LLM.ModelsResolved` |
+| 5 | Cost Optimizer | Estimate cost, apply cost optimization strategies for all candidates | `LLM.CostOptimized` |
+| 6 | Router | Select optimal model using cost estimates + capability + latency scoring | `LLM.ModelSelected` |
+| 7 | Cache Lookup | Check for cached response (exact or semantic match) | `LLM.CacheHit` / `LLM.CacheMiss` |
+| 8 | Context Builder | Manage context window, truncate, prioritize content | `LLM.ContextBuilt` |
+| 9 | Memory Injection | Retrieve and inject relevant memories | `LLM.MemoryInjected` |
+| 10 | Prompt Compiler | Construct final prompt from template + context + memory | `LLM.PromptCompiled` |
+| 11 | Guardrail Check | Scan prompt for policy violations | `LLM.GuardrailChecked` |
+| 12 | Retry Engine | Send to provider, handle failures with retry/fallback | `LLM.ProviderCalled` |
+| 13 | Streaming Manager | Manage streaming response, assemble chunks | `LLM.StreamChunk` |
+| 14 | Guardrail Check (output) | Scan response for policy violations | `LLM.GuardrailChecked` (direction=output) |
+| 15 | Response Validator | Validate structured output against schema | `LLM.ResponseValidated` |
+| 16 | Cache Store | Store response in cache | `LLM.CacheStored` |
+| 17 | Post-Processing | Update budgets, record metrics, produce final Event | `LLM.RequestCompleted` |
 
 Stages 0-3 are gateway. Stages 4-11 are pre-processing. Stages 12-13 are execution. Stages 14-17 are post-processing.
 
@@ -191,41 +191,41 @@ Controls what memory LLMOS injects into the context:
 
 ## Events
 
-| LLM.EventType |     Produced By | Fields |
+| LLM.EventType |      Produced By | Fields |
 |------------|-------------|--------|
-| LLM.RequestReceived |     Gateway | request_id, entity_id, model_requirements_summary |
-| LLM.SecurityChecked |     Gateway | request_id, entity_id, pipeline_result |
-| LLM.RateChecked |     Gateway | request_id, entity_id, remaining, limit, reset_at |
-| LLM.BudgetChecked |     Gateway | request_id, entity_id, budget_before, budget_after |
-| LLM.BudgetReconciled |     Token Budget Manager | request_id, actual_tokens, estimated_tokens, difference, adjusted_cost |
-| LLM.ModelsResolved |     Model Registry | request_id, matched_model_count, model_list |
-| LLM.ModelSelected |     Router | request_id, model_selected, selection_reason, alternatives_considered |
-| LLM.CostOptimized |     Cost Optimizer | request_id, estimated_cost, optimization_strategy, savings |
-| LLM.CacheHit |     Cache | request_id, cache_key, age, similarity_score |
-| LLM.CacheMiss |     Cache | request_id, cache_key, reason |
-| LLM.CacheStored |     Cache | request_id, cache_key, ttl, storage_size_bytes |
-| LLM.CacheEvicted |     Cache | cache_key, reason, age, access_count, saved_cost_total |
-| LLM.ContextBuilt |     Context Builder | request_id, total_tokens, input_tokens, truncated_sections |
-| LLM.MemoryInjected |     Memory Injection | request_id, memory_sources, total_memory_tokens, sources_count |
-| LLM.PromptCompiled |     Prompt Compiler | request_id, template_used, compiled_length_tokens, compile_duration_us |
-| LLM.GuardrailChecked |     Guardrails | request_id, direction(input/output), rules_evaluated, blocked, matched_rules |
-| LLM.ModelRegistered |     Model Registry | model_id, provider, capabilities, quality_tier |
-| LLM.ModelDeregistered |     Model Registry | model_id, provider, reason |
-| LLM.ProviderRegistered |     Provider SDK | provider_name, version, model_count, registered_at |
-| LLM.ProviderDeregistered |     Provider SDK | provider_name, reason, uptime_seconds |
-| LLM.ProviderHealthChanged |     Model Registry | provider, old_state, new_state, reason, failure_count |
-| LLM.ProviderCalled |     Retry Engine | request_id, provider, model, attempt, is_fallback, latency_ms, tokens_consumed |
-| LLM.ProviderRetry |     Retry Engine | request_id, attempt, error, backoff_ms, fallback_activated |
-| LLM.CircuitBreakerOpened |     Retry Engine | model_id, provider, failure_count, opened_at |
-| LLM.CircuitBreakerClosed |     Retry Engine | model_id, provider, recovery_success_count, closed_at |
-| LLM.StreamChunk |     Streaming Manager | request_id, sequence, cumulative_tokens, streaming_latency_ms |
-| LLM.StreamCompleted |     Streaming Manager | request_id, total_chunks, total_tokens, time_to_first_token_ms, tokens_per_second |
-| LLM.StreamError |     Streaming Manager | request_id, sequence_at_error, error_code, was_resumed |
-| LLM.ResponseValidated |     Response Validator | request_id, schema_name, valid, errors |
-| LLM.ResponseValidationFailed |     Response Validator | request_id, validation_types, errors, retry_strategy |
-| LLM.ResponseValidationRetry |     Response Validator | request_id, retry_number, strategy, adjusted_parameters |
-| LLM.RequestCompleted |     Pipeline | request_id, total_duration_ms, total_cost, total_tokens, cache_hit |
-| LLM.RequestFailed |     Pipeline | request_id, stage, error_code, error_message, recovery_attempted |
+| LLM.RequestReceived |      Gateway | request_id, entity_id, model_requirements_summary |
+| LLM.SecurityChecked |      Gateway | request_id, entity_id, pipeline_result |
+| LLM.RateChecked |      Gateway | request_id, entity_id, remaining, limit, reset_at |
+| LLM.BudgetChecked |      Gateway | request_id, entity_id, budget_before, budget_after |
+| LLM.BudgetReconciled |      Token Budget Manager | request_id, actual_tokens, estimated_tokens, difference, adjusted_cost |
+| LLM.ModelsResolved |      Model Registry | request_id, matched_model_count, model_list |
+| LLM.ModelSelected |      Router | request_id, model_selected, selection_reason, alternatives_considered |
+| LLM.CostOptimized |      Cost Optimizer | request_id, estimated_cost, optimization_strategy, savings |
+| LLM.CacheHit |      Cache | request_id, cache_key, age, similarity_score |
+| LLM.CacheMiss |      Cache | request_id, cache_key, reason |
+| LLM.CacheStored |      Cache | request_id, cache_key, ttl, storage_size_bytes |
+| LLM.CacheEvicted |      Cache | cache_key, reason, age, access_count, saved_cost_total |
+| LLM.ContextBuilt |      Context Builder | request_id, total_tokens, input_tokens, truncated_sections |
+| LLM.MemoryInjected |      Memory Injection | request_id, memory_sources, total_memory_tokens, sources_count |
+| LLM.PromptCompiled |      Prompt Compiler | request_id, template_used, compiled_length_tokens, compile_duration_us |
+| LLM.GuardrailChecked |      Guardrails | request_id, direction(input/output), rules_evaluated, blocked, matched_rules |
+| LLM.ModelRegistered |      Model Registry | model_id, provider, capabilities, quality_tier |
+| LLM.ModelDeregistered |      Model Registry | model_id, provider, reason |
+| LLM.ProviderRegistered |      Provider SDK | provider_name, version, model_count, registered_at |
+| LLM.ProviderDeregistered |      Provider SDK | provider_name, reason, uptime_seconds |
+| LLM.ProviderHealthChanged |      Model Registry | provider, old_state, new_state, reason, failure_count |
+| LLM.ProviderCalled |      Retry Engine | request_id, provider, model, attempt, is_fallback, latency_ms, tokens_consumed |
+| LLM.ProviderRetry |      Retry Engine | request_id, attempt, error, backoff_ms, fallback_activated |
+| LLM.CircuitBreakerOpened |      Retry Engine | model_id, provider, failure_count, opened_at |
+| LLM.CircuitBreakerClosed |      Retry Engine | model_id, provider, recovery_success_count, closed_at |
+| LLM.StreamChunk |      Streaming Manager | request_id, sequence, cumulative_tokens, streaming_latency_ms |
+| LLM.StreamCompleted |      Streaming Manager | request_id, total_chunks, total_tokens, time_to_first_token_ms, tokens_per_second |
+| LLM.StreamError |      Streaming Manager | request_id, sequence_at_error, error_code, was_resumed |
+| LLM.ResponseValidated |      Response Validator | request_id, schema_name, valid, errors |
+| LLM.ResponseValidationFailed |      Response Validator | request_id, validation_types, errors, retry_strategy |
+| LLM.ResponseValidationRetry |      Response Validator | request_id, retry_number, strategy, adjusted_parameters |
+| LLM.RequestCompleted |      Pipeline | request_id, total_duration_ms, total_cost, total_tokens, cache_hit |
+| LLM.RequestFailed |      Pipeline | request_id, stage, error_code, error_message, recovery_attempted |
 
 ## Error Codes
 

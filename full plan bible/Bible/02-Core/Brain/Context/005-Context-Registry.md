@@ -421,14 +421,14 @@ interface TokenBreakdown {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| CTX.RegistryEntryCreated |     item_id, session_id, content_hash, source | Entry registered |
-| CTX.RegistryEntryUpdated |     item_id, updated_fields, changes | Entry metadata changed |
-| CTX.RegistryEntryDeleted |     item_id, session_id, reason | Entry removed from all indexes |
-| CTX.RegistryQueried |     session_id, filter_summary, result_count | Query executed |
-| CTX.RegistrySnapshotTaken |     session_id, total_items, total_tokens | Snapshot captured |
-| CTX.RegistryRebuilt |     session_id, entry_count, source | Indexes rebuilt from Memory OS |
-| CTX.RegistryCleared |     session_id, entries_removed | All entries for session removed |
-| CTX.RegistryDedupHit |     item_id, duplicate_of_id, content_hash | Deduplication triggered |
+| CTX.RegistryEntryCreated |      item_id, session_id, content_hash, source | Entry registered |
+| CTX.RegistryEntryUpdated |      item_id, updated_fields, changes | Entry metadata changed |
+| CTX.RegistryEntryDeleted |      item_id, session_id, reason | Entry removed from all indexes |
+| CTX.RegistryQueried |      session_id, filter_summary, result_count | Query executed |
+| CTX.RegistrySnapshotTaken |      session_id, total_items, total_tokens | Snapshot captured |
+| CTX.RegistryRebuilt |      session_id, entry_count, source | Indexes rebuilt from Memory OS |
+| CTX.RegistryCleared |      session_id, entries_removed | All entries for session removed |
+| CTX.RegistryDedupHit |      item_id, duplicate_of_id, content_hash | Deduplication triggered |
 
 ## Invariants
 

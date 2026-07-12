@@ -171,13 +171,13 @@ Capabilities are verified by the Security Council before every action (Physics/0
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
-| `Worker.Created` | Worker Session is created | worker_id, template_id, org_id, mission_id |
-| `Worker.Activated` | Worker enters Running state | worker_id, runtime_id, activated_at |
-| `Worker.Deactivated` | Worker leaves Running state | worker_id, from_state, to_state, reason |
-| `Worker.Completed` | Worker purpose is fulfilled | worker_id, outcome, evidence_hash |
-| `Worker.Terminated` | Worker is terminated | worker_id, reason, terminated_by |
-| `Worker.Heartbeat` | Periodic health signal from Worker | worker_id, health_metrics, timestamp |
-| `Worker.StateChanged` | Worker lifecycle state transitions | worker_id, from_state, to_state, authorized_by |
+| `WRK.Created` | Worker Session is created | worker_id, template_id, org_id, mission_id |
+| `WRK.Activated` | Worker enters Running state | worker_id, runtime_id, activated_at |
+| `WRK.Deactivated` | Worker leaves Running state | worker_id, from_state, to_state, reason |
+| `WRK.Completed` | Worker purpose is fulfilled | worker_id, outcome, evidence_hash |
+| `WRK.Terminated` | Worker is terminated | worker_id, reason, terminated_by |
+| `WRK.Heartbeat` | Periodic health signal from Worker | worker_id, health_metrics, timestamp |
+| `WRK.StateChanged` | Worker lifecycle state transitions | worker_id, from_state, to_state, authorized_by |
 
 
 ## Design DNA

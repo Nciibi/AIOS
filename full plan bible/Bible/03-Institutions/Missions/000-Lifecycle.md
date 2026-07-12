@@ -149,18 +149,18 @@ Every transition produces an Event:
 
 | Event Type | Fields | Consumed By |
 |-----------|-------|-------------|
-| `Mission.StateChanged` | mission_id, from_state, to_state, authorized_by, timestamp, evidence_ref | Audit, Security Council, Sou, parent Organization |
-| `Mission.Created` | mission_id, source_intent, created_by, parent_mission | LMS, IDS, Audit |
-| `Mission.Planned` | mission_id, plan_hash, milestone_count, resource_budget | Sou, DGP, Security Council |
-| `Mission.Assigned` | mission_id, org_id, worker_count, budget_id | OSYS, ROS, LMS |
-| `Mission.Activated` | mission_id, activated_at, runtime_config | LMS, Workers, Sou |
-| `Mission.DependencyResolved` | mission_id, dependency_id, resolution_evidence | LMS |
-| `Mission.Paused` | mission_id, reason, paused_by, expected_duration | Sou, Security Council |
-| `Mission.Blocked` | mission_id, blocker_type, error_code, attempted_resolutions | Sou, Security Council |
-| `Mission.ReviewInitiated` | mission_id, reviewer_id, sla_deadline | Reviewer, Security Council |
-| `Mission.Completed` | mission_id, goal_achievement_score, evidence_hash | Sou, Academy, OSYS |
-| `Mission.Archived` | mission_id, retention_period, archived_at | Audit, Event Store |
-| `Mission.TransitionDenied` | mission_id, from_state, attempted_to, reason, denied_by | Security Council, parent Organization |
+| `MSN.StateChanged` | mission_id, from_state, to_state, authorized_by, timestamp, evidence_ref | Audit, Security Council, Sou, parent Organization |
+| `MSN.Created` | mission_id, source_intent, created_by, parent_mission | LMS, IDS, Audit |
+| `MSN.Planned` | mission_id, plan_hash, milestone_count, resource_budget | Sou, DGP, Security Council |
+| `MSN.Assigned` | mission_id, org_id, worker_count, budget_id | OSYS, ROS, LMS |
+| `MSN.Activated` | mission_id, activated_at, runtime_config | LMS, Workers, Sou |
+| `MSN.DependencyResolved` | mission_id, dependency_id, resolution_evidence | LMS |
+| `MSN.Paused` | mission_id, reason, paused_by, expected_duration | Sou, Security Council |
+| `MSN.Blocked` | mission_id, blocker_type, error_code, attempted_resolutions | Sou, Security Council |
+| `MSN.ReviewInitiated` | mission_id, reviewer_id, sla_deadline | Reviewer, Security Council |
+| `MSN.Completed` | mission_id, goal_achievement_score, evidence_hash | Sou, Academy, OSYS |
+| `MSN.Archived` | mission_id, retention_period, archived_at | Audit, Event Store |
+| `MSN.TransitionDenied` | mission_id, from_state, attempted_to, reason, denied_by | Security Council, parent Organization |
 
 ## Error Codes (R12)
 

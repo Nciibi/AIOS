@@ -290,16 +290,16 @@ interface SchemaValidator {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| TOL.ValidationPassed |     invocation_id, tool_id, duration_ms | All validations passed |
-| TOL.ValidationFailed |     invocation_id, tool_id, field, code, reason | Validation error detected |
-| TOL.ValidationWarning |     invocation_id, tool_id, field, code, suggestion | Non-fatal validation warning |
-| TOL.ValidationCoerced |     invocation_id, field, from_type, to_type, original_value | Value coerced to expected type |
-| TOL.ValidationClamped |     invocation_id, field, constraint, original, clamped | Value clamped to range |
-| TOL.ValidationDefaultApplied |     invocation_id, field, default_value | Default value used for missing field |
-| TOL.CustomValidatorRegistered |     validator_name, description | New custom validator registered |
-| TOL.CustomValidatorFailed |     validator_name, invocation_id, field, message | Custom validator returned error |
-| TOL.SchemaValidationSkipped |     invocation_id, reason | Validation skipped (e.g., internal tool) |
-| TOL.ValidationMetrics |     total_validations, pass_rate, avg_duration_ms | Aggregated validation metrics |
+| TOL.ValidationPassed |      invocation_id, tool_id, duration_ms | All validations passed |
+| TOL.ValidationFailed |      invocation_id, tool_id, field, code, reason | Validation error detected |
+| TOL.ValidationWarning |      invocation_id, tool_id, field, code, suggestion | Non-fatal validation warning |
+| TOL.ValidationCoerced |      invocation_id, field, from_type, to_type, original_value | Value coerced to expected type |
+| TOL.ValidationClamped |      invocation_id, field, constraint, original, clamped | Value clamped to range |
+| TOL.ValidationDefaultApplied |      invocation_id, field, default_value | Default value used for missing field |
+| TOL.CustomValidatorRegistered |      validator_name, description | New custom validator registered |
+| TOL.CustomValidatorFailed |      validator_name, invocation_id, field, message | Custom validator returned error |
+| TOL.SchemaValidationSkipped |      invocation_id, reason | Validation skipped (e.g., internal tool) |
+| TOL.ValidationMetrics |      total_validations, pass_rate, avg_duration_ms | Aggregated validation metrics |
 
 ## Invariants
 

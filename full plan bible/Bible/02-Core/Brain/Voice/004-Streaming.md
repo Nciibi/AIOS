@@ -174,7 +174,7 @@ StreamOpenRequest {
 
 - Validates stream type and session
 - Returns `StreamHandle` with `status: "open"`
-- Emits `VOI.StreamOpened`
+- Emits `VCE.StreamOpened`
 
 ### Write Chunk (STT)
 
@@ -192,7 +192,7 @@ BufferInput {
 
 - Appends audio data to the STT stream buffer
 - Validates format matches the initial chunk
-- Emits `VOI.StreamChunkWritten`
+- Emits `VCE.StreamChunkWritten`
 - May trigger partial result emission if thresholds met
 
 ### Read Chunk (TTS)
@@ -204,7 +204,7 @@ readChunk(stream_id: string): Promise<StreamChunk | null>
 - Reads next available audio chunk from TTS stream
 - Blocks if no chunk ready and stream still active (backpressure-strategy-dependent)
 - Returns `null` when stream is done
-- Emits `VOI.StreamChunkRead`
+- Emits `VCE.StreamChunkRead`
 
 ### Close Stream
 
@@ -238,7 +238,7 @@ cancelStream(stream_id: string): Promise<void>
 - Discards buffered data
 - Transitions stream to `cancelled`
 - Does not emit partial results after cancellation
-- Emits `VOI.StreamCancelled`
+- Emits `VCE.StreamCancelled`
 
 ## Internal Interface
 
@@ -321,18 +321,18 @@ type StreamErrorCode =
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| VCE.StreamOpened |     stream_id, type, session_id, config | Stream lifecycle started |
-| VCE.StreamClosed |     stream_id, type, total_chunks, duration_ms | Stream completed normally |
-| VCE.StreamCancelled |     stream_id, type, chunks_processed | Stream terminated mid-flight |
-| VCE.StreamErrored |     stream_id, type, error_code, reason | Unrecoverable stream error |
-| VCE.StreamChunkWritten |     stream_id, sequence, bytes | Audio chunk received (STT) |
-| VCE.StreamChunkRead |     stream_id, sequence, bytes, is_final | Audio chunk output (TTS) |
-| VCE.StreamTimeoutFired |     stream_id, idle_duration_ms | No activity within timeout window |
-| VCE.StreamBackpressureEngaged |     stream_id, strategy, buffer_utilization | Backpressure activated |
-| VCE.StreamBackpressureReleased |     stream_id, strategy | Backpressure deactivated |
-| VCE.StreamBufferDiscard |     stream_id, chunks_dropped, bytes_lost | Chunks dropped due to `drop` strategy |
-| VCE.StreamMaxDurationReached |     stream_id, duration_ms | Stream exceeded max lifetime |
-| VCE.StreamErrorRecovery |     stream_id, error_code, recovery_action | Error recovery initiated during stream |
+| VCE.StreamOpened |      stream_id, type, session_id, config | Stream lifecycle started |
+| VCE.StreamClosed |      stream_id, type, total_chunks, duration_ms | Stream completed normally |
+| VCE.StreamCancelled |      stream_id, type, chunks_processed | Stream terminated mid-flight |
+| VCE.StreamErrored |      stream_id, type, error_code, reason | Unrecoverable stream error |
+| VCE.StreamChunkWritten |      stream_id, sequence, bytes | Audio chunk received (STT) |
+| VCE.StreamChunkRead |      stream_id, sequence, bytes, is_final | Audio chunk output (TTS) |
+| VCE.StreamTimeoutFired |      stream_id, idle_duration_ms | No activity within timeout window |
+| VCE.StreamBackpressureEngaged |      stream_id, strategy, buffer_utilization | Backpressure activated |
+| VCE.StreamBackpressureReleased |      stream_id, strategy | Backpressure deactivated |
+| VCE.StreamBufferDiscard |      stream_id, chunks_dropped, bytes_lost | Chunks dropped due to `drop` strategy |
+| VCE.StreamMaxDurationReached |      stream_id, duration_ms | Stream exceeded max lifetime |
+| VCE.StreamErrorRecovery |      stream_id, error_code, recovery_action | Error recovery initiated during stream |
 
 ## Invariants
 

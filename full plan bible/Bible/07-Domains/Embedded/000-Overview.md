@@ -100,14 +100,14 @@ Embedded development in AIOS follows this workflow:
 
 ## Events
 
-| EMB.EventType |     Produced When | Fields |
+| EMB.EventType |      Produced When | Fields |
 |-----------|--------------|--------|
-| EMB.FirmwareGenerated |     Firmware source is generated | worker_id, target_mcu, platform, lines_of_code, hal_version |
-| EMB.CrossCompileCompleted |     Cross-compilation finishes | build_id, target_arch, outcome, binary_size, ram_estimate, flash_estimate |
-| EMB.HardwareProbed |     Hardware is detected and probed | board_id, mcu_type, revision, peripherals_found, firmware_version |
-| EMB.FlashCompleted |     Firmware is flashed to device | flash_id, target_device, protocol, duration, verification_status |
-| EMB.HILTestCompleted |     Hardware-in-the-loop test run finishes | test_id, test_suite, passed, failed, signal_quality, duration_ms |
-| EMB.ResourceReportGenerated |     Resource utilization report is produced | report_id, flash_usage, ram_usage, stack_depth, power_estimate, mips_estimate |
+| EMB.FirmwareGenerated |      Firmware source is generated | worker_id, target_mcu, platform, lines_of_code, hal_version |
+| EMB.CrossCompileCompleted |      Cross-compilation finishes | build_id, target_arch, outcome, binary_size, ram_estimate, flash_estimate |
+| EMB.HardwareProbed |      Hardware is detected and probed | board_id, mcu_type, revision, peripherals_found, firmware_version |
+| EMB.FlashCompleted |      Firmware is flashed to device | flash_id, target_device, protocol, duration, verification_status |
+| EMB.HILTestCompleted |      Hardware-in-the-loop test run finishes | test_id, test_suite, passed, failed, signal_quality, duration_ms |
+| EMB.ResourceReportGenerated |      Resource utilization report is produced | report_id, flash_usage, ram_usage, stack_depth, power_estimate, mips_estimate |
 
 
 ## Design DNA

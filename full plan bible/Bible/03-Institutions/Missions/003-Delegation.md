@@ -137,16 +137,16 @@ interface MissionDelegator {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.MSNEvent |     contract_id, source_mission, target, scope_hash | Delegation contract created |
-| MSN.MSNEvent |     contract_id, accepted_by, acceptance_hash | Delegation accepted |
-| MSN.MSNEvent |     contract_id, rejected_by, reason | Delegation rejected |
-| MSN.MSNEvent |     contract_id, sub_mission_id, started_at | Sub-Mission begins execution |
-| MSN.MSNEvent |     contract_id, sub_mission_id, result_summary | Sub-Mission completes |
-| MSN.MSNEvent |     contract_id, sub_mission_id, error_code, details | Sub-Mission fails |
-| MSN.MSNEvent |     contract_id, deliverables_hash, count | Results returned |
-| MSN.MSNEvent |     contract_id, verification_status, score | Results verified |
-| MSN.MSNEvent |     contract_id, verification_status, failures | Results rejected |
-| MSN.MSNEvent |     contract_id, chain_hash, links | Chain recorded |
+| MSN.MSNEvent |      contract_id, source_mission, target, scope_hash | Delegation contract created |
+| MSN.MSNEvent |      contract_id, accepted_by, acceptance_hash | Delegation accepted |
+| MSN.MSNEvent |      contract_id, rejected_by, reason | Delegation rejected |
+| MSN.MSNEvent |      contract_id, sub_mission_id, started_at | Sub-Mission begins execution |
+| MSN.MSNEvent |      contract_id, sub_mission_id, result_summary | Sub-Mission completes |
+| MSN.MSNEvent |      contract_id, sub_mission_id, error_code, details | Sub-Mission fails |
+| MSN.MSNEvent |      contract_id, deliverables_hash, count | Results returned |
+| MSN.MSNEvent |      contract_id, verification_status, score | Results verified |
+| MSN.MSNEvent |      contract_id, verification_status, failures | Results rejected |
+| MSN.MSNEvent |      contract_id, chain_hash, links | Chain recorded |
 
 ## Error Cases
 

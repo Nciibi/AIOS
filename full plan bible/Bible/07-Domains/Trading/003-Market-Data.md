@@ -137,16 +137,16 @@ interface FeedStatus {
 
 ## Events
 
-| TRD.EventType |     Produced When | Fields |
+| TRD.EventType |      Produced When | Fields |
 |-------|----------|---------|
-| TRD.FeedConnected |     FeedManager: feedId, exchange, symbols | Fired when a feed establishes connection |
-| TRD.TickProcessed |     Normalizer: tickId, symbol, exchange | Published for every normalized tick |
-| TRD.BarClosed |     OHLCVBuilder: symbol, timeframe, bar | Emitted when a bar period closes |
-| TRD.DataQualityAlert |     Validator: feedId, symbol, failedChecks[] | Fired when validation rules fail |
-| TRD.FeedDegraded |     FeedManager: feedId, reason, latencyMs | Published on latency or reliability degradation |
-| TRD.FeedDisconnected |     FeedManager: feedId, reason, lastSequence | Fired on unexpected disconnection |
-| TRD.GapDetected |     DataStore: symbol, fromTimestamp, toTimestamp, gapDuration | Emitted when a data gap is found |
-| TRD.OrderBookUpdated |     OrderBookManager: symbol, exchange, sequence, depth | Published on significant order book change |
+| TRD.FeedConnected |      FeedManager: feedId, exchange, symbols | Fired when a feed establishes connection |
+| TRD.TickProcessed |      Normalizer: tickId, symbol, exchange | Published for every normalized tick |
+| TRD.BarClosed |      OHLCVBuilder: symbol, timeframe, bar | Emitted when a bar period closes |
+| TRD.DataQualityAlert |      Validator: feedId, symbol, failedChecks[] | Fired when validation rules fail |
+| TRD.FeedDegraded |      FeedManager: feedId, reason, latencyMs | Published on latency or reliability degradation |
+| TRD.FeedDisconnected |      FeedManager: feedId, reason, lastSequence | Fired on unexpected disconnection |
+| TRD.GapDetected |      DataStore: symbol, fromTimestamp, toTimestamp, gapDuration | Emitted when a data gap is found |
+| TRD.OrderBookUpdated |      OrderBookManager: symbol, exchange, sequence, depth | Published on significant order book change |
 
 ## Error Cases
 

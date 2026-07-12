@@ -181,16 +181,16 @@ interface DhcpRelayConfig {
 
 ## Events (table)
 
-| Event Type | Produced When | Fields |
+| LNX.EventType |  Produced When | Fields |
 |-----------|---------------|--------|
-| Linux.InterfaceConfigured | InterfaceHandler brings an interface up or down | ifaceName, ipAddresses, state, mtu, macAddress |
-| Linux.InterfaceFailed | InterfaceHandler reports a configuration failure | ifaceName, error, configState, attemptedParams |
-| Linux.FirewallRuleChanged | FirewallHandler adds or removes a rule | ruleId, chain, action, protocol, source, destination |
-| Linux.DNSUpdated | DnsHandler changes DNS resolution configuration | hostname, resolver, entries, ttl, updatedBy |
-| Linux.RouteChanged | RouteHandler adds or removes a route | destination, gateway, metric, device, table |
-| Linux.VpnConnected | VpnHandler establishes a VPN tunnel | vpnName, endpoint, protocol, encryption, localIP |
-| Linux.VpnDisconnected | VpnHandler tears down a VPN tunnel | vpnName, endpoint, reason, trafficStats, duration |
-| Linux.ConnectivityVerified | ProbeHandler runs a connectivity probe | target, reachable, latency, packetLoss, probeId |
+| LNX.InterfaceConfigured |  InterfaceHandler brings an interface up or down | ifaceName, ipAddresses, state, mtu, macAddress |
+| LNX.InterfaceFailed |  InterfaceHandler reports a configuration failure | ifaceName, error, configState, attemptedParams |
+| LNX.FirewallRuleChanged |  FirewallHandler adds or removes a rule | ruleId, chain, action, protocol, source, destination |
+| LNX.DNSUpdated |  DnsHandler changes DNS resolution configuration | hostname, resolver, entries, ttl, updatedBy |
+| LNX.RouteChanged |  RouteHandler adds or removes a route | destination, gateway, metric, device, table |
+| LNX.VpnConnected |  VpnHandler establishes a VPN tunnel | vpnName, endpoint, protocol, encryption, localIP |
+| LNX.VpnDisconnected |  VpnHandler tears down a VPN tunnel | vpnName, endpoint, reason, trafficStats, duration |
+| LNX.ConnectivityVerified |  ProbeHandler runs a connectivity probe | target, reachable, latency, packetLoss, probeId |
 
 ## Error Cases (table with Code, Condition, Severity, Recovery)
 

@@ -300,17 +300,17 @@ type STTErrorCode =
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| VCE.STTStarted |     request_id, session_id, format, duration_ms, model | STT processing began |
-| VCE.STTCompleted |     request_id, session_id, transcript_length, confidence, language | Transcription finished |
-| VCE.STTFailed |     request_id, session_id, error_code, reason | Transcription failed |
-| VCE.STTStreamChunk |     request_id, session_id, partial_transcript, confidence, is_final | Streaming transcript chunk emitted |
-| VCE.STTLanguageDetected |     request_id, session_id, language, confidence | Language auto-detected |
-| VCE.STTSpeakerIdentified |     request_id, speaker_tag, duration_ms | New speaker detected in diarization |
-| VCE.STTProfanityFiltered |     request_id, total_masked, original_words | Profanity was masked |
-| VCE.STTCustomVocabApplied |     request_id, entries_matched, boosts_applied | Custom vocabulary influenced recognition |
-| VCE.STTAlternativeGenerated |     request_id, alternative_count | Alternative transcriptions produced |
-| VCE.STTStreamTimeout |     request_id, session_id, chunks_received, partial_transcript | Stream closed due to timeout |
-| VCE.STTModelChanged |     model_id, request_id | Streaming model switched mid-stream |
+| VCE.STTStarted |      request_id, session_id, format, duration_ms, model | STT processing began |
+| VCE.STTCompleted |      request_id, session_id, transcript_length, confidence, language | Transcription finished |
+| VCE.STTFailed |      request_id, session_id, error_code, reason | Transcription failed |
+| VCE.STTStreamChunk |      request_id, session_id, partial_transcript, confidence, is_final | Streaming transcript chunk emitted |
+| VCE.STTLanguageDetected |      request_id, session_id, language, confidence | Language auto-detected |
+| VCE.STTSpeakerIdentified |      request_id, speaker_tag, duration_ms | New speaker detected in diarization |
+| VCE.STTProfanityFiltered |      request_id, total_masked, original_words | Profanity was masked |
+| VCE.STTCustomVocabApplied |      request_id, entries_matched, boosts_applied | Custom vocabulary influenced recognition |
+| VCE.STTAlternativeGenerated |      request_id, alternative_count | Alternative transcriptions produced |
+| VCE.STTStreamTimeout |      request_id, session_id, chunks_received, partial_transcript | Stream closed due to timeout |
+| VCE.STTModelChanged |      model_id, request_id | Streaming model switched mid-stream |
 
 ## Invariants
 

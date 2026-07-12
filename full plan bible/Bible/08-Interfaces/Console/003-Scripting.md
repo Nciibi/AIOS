@@ -180,16 +180,16 @@ interface Scheduler {
 
 ## Events
 
-| CON.EventType |     Produced When | Fields |
+| CON.EventType |      Produced When | Fields |
 |-------|--------|-------------|
-| CON.ScriptDefined |     scriptId, name, version | New script registered in the script registry |
-| CON.ScriptStarted |     scriptId, executionId, variableCount | Script execution initiated |
-| CON.ScriptStepCompleted |     scriptId, executionId, stepId, status, durationMs | Individual script step finished |
-| CON.ScriptStepRetried |     scriptId, executionId, stepId, attempt, error | Step retry triggered by error handler |
-| CON.ScriptFailed |     scriptId, executionId, stepId, error | Script execution terminated with failure |
-| CON.ScriptCompleted |     scriptId, executionId, stepCount, totalDuration | Script execution finished successfully |
-| CON.ScriptScheduled |     scriptId, cronExpression, nextRun | Script bound to a cron schedule |
-| CON.ScriptScheduleFired |     scriptId, executionId | Scheduled execution started |
+| CON.ScriptDefined |      scriptId, name, version | New script registered in the script registry |
+| CON.ScriptStarted |      scriptId, executionId, variableCount | Script execution initiated |
+| CON.ScriptStepCompleted |      scriptId, executionId, stepId, status, durationMs | Individual script step finished |
+| CON.ScriptStepRetried |      scriptId, executionId, stepId, attempt, error | Step retry triggered by error handler |
+| CON.ScriptFailed |      scriptId, executionId, stepId, error | Script execution terminated with failure |
+| CON.ScriptCompleted |      scriptId, executionId, stepCount, totalDuration | Script execution finished successfully |
+| CON.ScriptScheduled |      scriptId, cronExpression, nextRun | Script bound to a cron schedule |
+| CON.ScriptScheduleFired |      scriptId, executionId | Scheduled execution started |
 
 ## Error Cases
 

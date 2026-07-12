@@ -164,15 +164,15 @@ interface ClockConfiguration {
 
 ## Events
 
-| EMB.EventType |     Produced When | Fields |
+| EMB.EventType |      Produced When | Fields |
 |-----------|---------------|--------|
-| EMB.DeviceRegistered |     A new device is added to the registry | deviceId, boardId, registeredAt, registeredBy |
-| EMB.MCUDetected |     An MCU is detected and profile-matched | profileId, method, confidence, detectedAt |
-| EMB.BSPGenerated |     A board support package is generated | boardId, artifactCount, generationDuration |
-| EMB.PinConflictDetected |     A pin assignment conflict is found | pin, conflictCount, peripheralList |
-| EMB.DeviceTreeCompiled |     Device tree compilation completes | boardId, nodeCount, validationStatus |
-| EMB.PeripheralMismatch |     A peripheral type mismatch is detected | peripheral, expected, actual, severity |
-| EMB.BSPCacheHit |     BSP is retrieved from cache instead of regenerated | boardId, cacheAge, cacheKey |
+| EMB.DeviceRegistered |      A new device is added to the registry | deviceId, boardId, registeredAt, registeredBy |
+| EMB.MCUDetected |      An MCU is detected and profile-matched | profileId, method, confidence, detectedAt |
+| EMB.BSPGenerated |      A board support package is generated | boardId, artifactCount, generationDuration |
+| EMB.PinConflictDetected |      A pin assignment conflict is found | pin, conflictCount, peripheralList |
+| EMB.DeviceTreeCompiled |      Device tree compilation completes | boardId, nodeCount, validationStatus |
+| EMB.PeripheralMismatch |      A peripheral type mismatch is detected | peripheral, expected, actual, severity |
+| EMB.BSPCacheHit |      BSP is retrieved from cache instead of regenerated | boardId, cacheAge, cacheKey |
 
 ## Error Cases
 

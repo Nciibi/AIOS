@@ -136,7 +136,7 @@ interface ModelDiscount {
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| LLM.CostOptimized |     request_id, model_estimates_summary, selected_strategy, strategy_results, estimated_savings, recommended_model | After optimization (Stage 6) |
+| LLM.CostOptimized |      request_id, model_estimates_summary, selected_strategy, strategy_results, estimated_savings, recommended_model | After optimization (Stage 6) |
 
 
 ## Cross-Cutting Concerns

@@ -222,16 +222,16 @@ interface ResourceEstimator {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PLN.PlanCreated |     plan_id, goal, milestone_count | Plan created but not yet approved |
-| PLN.PlanApproved |     plan_id, resource_estimate | Sou approved the plan |
-| PLN.PlanCancelled |     plan_id, reason | Plan cancelled before/during execution |
-| PLN.PlanCompleted |     plan_id, duration_ms | All milestones completed |
-| PLN.PlanFailed |     plan_id, failed_milestone, reason | Plan failed at a milestone |
-| PLN.MilestoneStarted |     milestone_id, plan_id | Milestone execution began |
-| PLN.MilestoneCompleted |     milestone_id, plan_id, result | Milestone finished |
-| PLN.MilestoneBlocked |     milestone_id, blocking_dependency | Milestone waiting on dependency |
-| PLN.MilestoneFailed |     milestone_id, error | Milestone failed |
-| PLN.DependencyCycleDetected |     cycle_nodes | Dependency cycle prevented |
+| PLN.PlanCreated |      plan_id, goal, milestone_count | Plan created but not yet approved |
+| PLN.PlanApproved |      plan_id, resource_estimate | Sou approved the plan |
+| PLN.PlanCancelled |      plan_id, reason | Plan cancelled before/during execution |
+| PLN.PlanCompleted |      plan_id, duration_ms | All milestones completed |
+| PLN.PlanFailed |      plan_id, failed_milestone, reason | Plan failed at a milestone |
+| PLN.MilestoneStarted |      milestone_id, plan_id | Milestone execution began |
+| PLN.MilestoneCompleted |      milestone_id, plan_id, result | Milestone finished |
+| PLN.MilestoneBlocked |      milestone_id, blocking_dependency | Milestone waiting on dependency |
+| PLN.MilestoneFailed |      milestone_id, error | Milestone failed |
+| PLN.DependencyCycleDetected |      cycle_nodes | Dependency cycle prevented |
 
 ## Invariants
 

@@ -209,17 +209,17 @@ Delivered to human; evidence recorded (Law 4)
 
 ## Events
 
-| UI.EventType |     Produced When | Fields |
+| UI.EventType |      Produced When | Fields |
 |-------|--------|-------------|
-| UI.SessionStarted |     sessionId, humanId, channel | Human interaction session opened |
-| UI.MessageReceived |     messageId, sessionId, intent | Human message parsed |
-| UI.CommandExecuted |     sessionId, command, result | Structured command run |
-| UI.NotificationSent |     notificationId, humanId, priority | Notification delivered |
-| UI.NotificationAcked |     notificationId, humanId | Notification acknowledged |
-| UI.ApprovalRequested |     requestId, humanId, subject | Routine approval requested |
-| UI.ApprovalResolved |     requestId, decision, humanId | Approval decision recorded |
-| UI.SessionEnded |     sessionId, humanId | Session closed |
-| UI.IntentUnclear |     sessionId, content, confidence | Parser low-confidence; clarification requested |
+| UI.SessionStarted |      sessionId, humanId, channel | Human interaction session opened |
+| UI.MessageReceived |      messageId, sessionId, intent | Human message parsed |
+| UI.CommandExecuted |      sessionId, command, result | Structured command run |
+| UI.NotificationSent |      notificationId, humanId, priority | Notification delivered |
+| UI.NotificationAcked |      notificationId, humanId | Notification acknowledged |
+| UI.ApprovalRequested |      requestId, humanId, subject | Routine approval requested |
+| UI.ApprovalResolved |      requestId, decision, humanId | Approval decision recorded |
+| UI.SessionEnded |      sessionId, humanId | Session closed |
+| UI.IntentUnclear |      sessionId, content, confidence | Parser low-confidence; clarification requested |
 
 ## Error Cases
 

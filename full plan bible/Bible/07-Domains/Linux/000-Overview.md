@@ -103,15 +103,15 @@ Discovered â†’ Assessed â†’ Provisioned â†’ Configured â†’ M
 
 ## Events
 
-| LNX.EventType |     Produced When | Fields |
+| LNX.EventType |      Produced When | Fields |
 |-----------|--------------|--------|
-| LNX.HostDiscovered |     New Linux host is found | host_id, hostname, distro, kernel_version, ip_address, discovered_by |
-| LNX.CommandExecuted |     A command is run on a host | command_id, host_id, command, exit_code, duration, output_hash |
-| LNX.ConfigChanged |     System configuration is modified | change_id, host_id, file_path, old_hash, new_hash, approved_by, playbook_id |
-| LNX.PackageInstalled |     A package is installed or removed | package_id, host_id, action, package_name, version, repository |
-| LNX.ComplianceScanRun |     Compliance audit completes | scan_id, host_id, standard, passed, failed, score, critical_findings |
-| LNX.IncidentDetected |     Anomaly or alert is identified | incident_id, host_id, severity, category, details, recommended_action |
-| LNX.PatchApplied |     Security patch is applied | patch_id, host_id, cve_list, reboot_required, outcome, duration_seconds |
+| LNX.HostDiscovered |      New Linux host is found | host_id, hostname, distro, kernel_version, ip_address, discovered_by |
+| LNX.CommandExecuted |      A command is run on a host | command_id, host_id, command, exit_code, duration, output_hash |
+| LNX.ConfigChanged |      System configuration is modified | change_id, host_id, file_path, old_hash, new_hash, approved_by, playbook_id |
+| LNX.PackageInstalled |      A package is installed or removed | package_id, host_id, action, package_name, version, repository |
+| LNX.ComplianceScanRun |      Compliance audit completes | scan_id, host_id, standard, passed, failed, score, critical_findings |
+| LNX.IncidentDetected |      Anomaly or alert is identified | incident_id, host_id, severity, category, details, recommended_action |
+| LNX.PatchApplied |      Security patch is applied | patch_id, host_id, cve_list, reboot_required, outcome, duration_seconds |
 
 
 ## Design DNA

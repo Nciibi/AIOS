@@ -272,16 +272,16 @@ interface LessonContext {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| COG.COGEvent |     request_id, type, experience_id, depth | Reflection process began |
-| COG.COGEvent |     request_id, type, lesson_count, pattern_count, bias_count | Reflection finished |
-| COG.COGEvent |     request_id, error_code, partial_results | Reflection terminated with error |
-| COG.COGEvent |     lesson_id, category, severity, generalizability | New lesson created |
-| COG.COGEvent |     lesson_id, confirming_experience_id, evidence_strength | Lesson confirmed by new experience |
-| COG.COGEvent |     lesson_id, reason, lessons_replaced_by | Lesson archived after being disproven |
-| COG.COGEvent |     pattern_id, type, occurrences, confidence | New pattern identified |
-| COG.COGEvent |     bias_id, bias_type, confidence, impact, source_experience | Bias detected in decision history |
-| COG.COGEvent |     request_ids, total_lessons, total_patterns | Batch reflection finished |
-| COG.COGEvent |     request_id, phase_number, phases_total | Multi-pass deep reflection progress |
+| COG.COGEvent |      request_id, type, experience_id, depth | Reflection process began |
+| COG.COGEvent |      request_id, type, lesson_count, pattern_count, bias_count | Reflection finished |
+| COG.COGEvent |      request_id, error_code, partial_results | Reflection terminated with error |
+| COG.COGEvent |      lesson_id, category, severity, generalizability | New lesson created |
+| COG.COGEvent |      lesson_id, confirming_experience_id, evidence_strength | Lesson confirmed by new experience |
+| COG.COGEvent |      lesson_id, reason, lessons_replaced_by | Lesson archived after being disproven |
+| COG.COGEvent |      pattern_id, type, occurrences, confidence | New pattern identified |
+| COG.COGEvent |      bias_id, bias_type, confidence, impact, source_experience | Bias detected in decision history |
+| COG.COGEvent |      request_ids, total_lessons, total_patterns | Batch reflection finished |
+| COG.COGEvent |      request_id, phase_number, phases_total | Multi-pass deep reflection progress |
 
 ## Invariants
 

@@ -422,20 +422,20 @@ type QueueResult = {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| CONV.TurnStarted |     turn_id, session_id, turn_number, role, modality | A new turn enters the lifecycle |
-| CONV.TurnStageChanged |     turn_id, session_id, from_stage, to_stage, elapsed_ms | Turn advanced to next stage |
-| CONV.TurnCompleted |     turn_id, session_id, pair_id, duration_ms | Turn reached delivered status |
-| CONV.TurnFailed |     turn_id, session_id, stage, reason | Turn failed at a stage |
-| CONV.TurnQueued |     turn_id, session_id, position, queue_depth | Turn enqueued while another is active |
-| CONV.TurnTimeout |     turn_id, session_id, stage, elapsed_ms, action | Stage timer expired |
-| CONV.TurnPairCreated |     pair_id, user_turn_id, sou_turn_id | User-Sou turn pair established |
-| CONV.TurnPairCompleted |     pair_id, duration_ms | Turn pair fully completed |
-| CONV.DuplicateSuppressed |     turn_id, session_id, original_turn_id, match_type | Duplicate turn detected and suppressed |
-| CONV.TurnReplayed |     turn_id, session_id, turn_number | Historical turn replayed for context |
-| CONV.TurnQueueFlushed |     session_id, dropped_count, reason | Queue cleared on session end |
-| CONV.TypingExpired |     session_id, duration_ms | User typing indicator timed out without message |
-| CONV.TurnInterrupted |     turn_id, session_id, reason | Sou processing interrupted by user |
-| CONV.TurnOrphanDetected |     turn_id, session_id, elapsed_ms | User turn without paired response detected |
+| CONV.TurnStarted |      turn_id, session_id, turn_number, role, modality | A new turn enters the lifecycle |
+| CONV.TurnStageChanged |      turn_id, session_id, from_stage, to_stage, elapsed_ms | Turn advanced to next stage |
+| CONV.TurnCompleted |      turn_id, session_id, pair_id, duration_ms | Turn reached delivered status |
+| CONV.TurnFailed |      turn_id, session_id, stage, reason | Turn failed at a stage |
+| CONV.TurnQueued |      turn_id, session_id, position, queue_depth | Turn enqueued while another is active |
+| CONV.TurnTimeout |      turn_id, session_id, stage, elapsed_ms, action | Stage timer expired |
+| CONV.TurnPairCreated |      pair_id, user_turn_id, sou_turn_id | User-Sou turn pair established |
+| CONV.TurnPairCompleted |      pair_id, duration_ms | Turn pair fully completed |
+| CONV.DuplicateSuppressed |      turn_id, session_id, original_turn_id, match_type | Duplicate turn detected and suppressed |
+| CONV.TurnReplayed |      turn_id, session_id, turn_number | Historical turn replayed for context |
+| CONV.TurnQueueFlushed |      session_id, dropped_count, reason | Queue cleared on session end |
+| CONV.TypingExpired |      session_id, duration_ms | User typing indicator timed out without message |
+| CONV.TurnInterrupted |      turn_id, session_id, reason | Sou processing interrupted by user |
+| CONV.TurnOrphanDetected |      turn_id, session_id, elapsed_ms | User turn without paired response detected |
 
 ## Invariants
 

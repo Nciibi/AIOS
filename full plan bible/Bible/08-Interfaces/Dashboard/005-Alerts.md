@@ -154,15 +154,15 @@ interface ActionRouter {
 
 ## Events
 
-| DASH.EventType |     Produced When | Fields |
+| DASH.EventType |      Produced When | Fields |
 |-------|--------|-------------|
-| DASH.AlertSurfaced |     alertId, severity, source | Alert displayed on dashboard alert-list |
-| DASH.AlertClassified |     alertId, severity, classifier | Severity assigned or updated |
-| DASH.AlertAcknowledged |     alertId, userId | Human acknowledged alert |
-| DASH.AlertActioned |     alertId, actionId, targetType | Human navigated to action target |
-| DASH.AlertResolved |     alertId, source | Source system reported resolution |
-| DASH.AlertArchived |     alertId, userId | Alert moved to archive |
-| DASH.AlertHistoryExported |     count, since | Alert history exported for audit |
+| DASH.AlertSurfaced |      alertId, severity, source | Alert displayed on dashboard alert-list |
+| DASH.AlertClassified |      alertId, severity, classifier | Severity assigned or updated |
+| DASH.AlertAcknowledged |      alertId, userId | Human acknowledged alert |
+| DASH.AlertActioned |      alertId, actionId, targetType | Human navigated to action target |
+| DASH.AlertResolved |      alertId, source | Source system reported resolution |
+| DASH.AlertArchived |      alertId, userId | Alert moved to archive |
+| DASH.AlertHistoryExported |      count, since | Alert history exported for audit |
 
 ## Error Cases
 

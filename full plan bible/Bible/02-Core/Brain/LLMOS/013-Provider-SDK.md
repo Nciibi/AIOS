@@ -363,9 +363,9 @@ Dual-implementation providers (Claude, Codex, Ollama) implement both interfaces.
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| `LLMOS.ProviderRegistered` | provider_name, version, model_count, registered_at | After initialize() |
-| `LLMOS.ProviderDeregistered` | provider_name, reason, uptime_seconds | On shutdown() |
-| `LLMOS.ProviderHealthChanged` | provider_name, old_status, new_status, latency_ms, error | On healthCheck() change |
+| LLM.ProviderRegistered |  provider_name, version, model_count, registered_at | After initialize() |
+| LLM.ProviderDeregistered |  provider_name, reason, uptime_seconds | On shutdown() |
+| LLM.ProviderHealthChanged |  provider_name, old_status, new_status, latency_ms, error | On healthCheck() change |
 
 
 ## Cross-Cutting Concerns

@@ -391,17 +391,17 @@ interface CompactionStatus {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| MEM.MEMEvent |     cycle_id, phases_planned | Compaction cycle began |
-| MEM.MEMEvent |     cycle_id, duration_ms, phases_executed | Cycle finished |
-| MEM.MEMEvent |     items_deleted, bytes_reclaimed | Storage reclamation pass |
-| MEM.MEMEvent |     segments_rewritten, stale_bytes | Data reorganization pass |
-| MEM.MEMEvent |     items_promoted, items_decayed | Importance scores adjusted |
-| MEM.MEMEvent |     type, count | Items promoted between memory types |
-| MEM.MEMEvent |     items_evicted, reason | Storage pressure eviction |
-| MEM.MEMEvent |     issue_type, item_id, details | Corruption or inconsistency detected |
-| MEM.MEMEvent |     item_id, issue_type | Auto-repair applied |
-| MEM.MEMEvent |     usage_ratio, total_bytes, free_bytes | Storage threshold exceeded |
-| MEM.MEMEvent |     usage_ratio, actions_taken | Emergency eviction triggered |
+| MEM.MEMEvent |      cycle_id, phases_planned | Compaction cycle began |
+| MEM.MEMEvent |      cycle_id, duration_ms, phases_executed | Cycle finished |
+| MEM.MEMEvent |      items_deleted, bytes_reclaimed | Storage reclamation pass |
+| MEM.MEMEvent |      segments_rewritten, stale_bytes | Data reorganization pass |
+| MEM.MEMEvent |      items_promoted, items_decayed | Importance scores adjusted |
+| MEM.MEMEvent |      type, count | Items promoted between memory types |
+| MEM.MEMEvent |      items_evicted, reason | Storage pressure eviction |
+| MEM.MEMEvent |      issue_type, item_id, details | Corruption or inconsistency detected |
+| MEM.MEMEvent |      item_id, issue_type | Auto-repair applied |
+| MEM.MEMEvent |      usage_ratio, total_bytes, free_bytes | Storage threshold exceeded |
+| MEM.MEMEvent |      usage_ratio, actions_taken | Emergency eviction triggered |
 
 ## Invariants
 

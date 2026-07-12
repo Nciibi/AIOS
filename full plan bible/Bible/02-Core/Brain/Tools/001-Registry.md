@@ -260,16 +260,16 @@ interface ToolRegistry {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| TOL.ToolRegistered |     tool_id, name, category, provider, version | Tool registered in the catalog |
-| TOL.ToolDeregistered |     tool_id, provider, category, reason | Tool removed from registry |
-| TOL.ToolHealthChanged |     tool_id, old_status, new_status, consecutive_failures | Tool health transition detected |
-| TOL.ToolStatusChanged |     tool_id, old_status, new_status, version | Tool status lifecycle transition |
-| TOL.ToolUpdated |     tool_id, provider, updated_fields, version | Tool definition modified |
-| TOL.ToolCategoryChanged |     tool_id, old_category, new_category | Tool category reassigned |
-| TOL.RegistryQuery |     query_type, filters, result_count | Registry queried by Sou or system |
-| TOL.RegistrySnapshotTaken |     total_tools, healthy, degraded, unavailable | Registry snapshot generated |
-| TOL.ProviderToolsListed |     provider, tool_ids, count | All tools for a provider listed |
-| TOL.RegistryIntegrityCheck |     total_tools, inconsistencies_found | Periodic registry integrity verified |
+| TOL.ToolRegistered |      tool_id, name, category, provider, version | Tool registered in the catalog |
+| TOL.ToolDeregistered |      tool_id, provider, category, reason | Tool removed from registry |
+| TOL.ToolHealthChanged |      tool_id, old_status, new_status, consecutive_failures | Tool health transition detected |
+| TOL.ToolStatusChanged |      tool_id, old_status, new_status, version | Tool status lifecycle transition |
+| TOL.ToolUpdated |      tool_id, provider, updated_fields, version | Tool definition modified |
+| TOL.ToolCategoryChanged |      tool_id, old_category, new_category | Tool category reassigned |
+| TOL.RegistryQuery |      query_type, filters, result_count | Registry queried by Sou or system |
+| TOL.RegistrySnapshotTaken |      total_tools, healthy, degraded, unavailable | Registry snapshot generated |
+| TOL.ProviderToolsListed |      provider, tool_ids, count | All tools for a provider listed |
+| TOL.RegistryIntegrityCheck |      total_tools, inconsistencies_found | Periodic registry integrity verified |
 
 ## Invariants
 

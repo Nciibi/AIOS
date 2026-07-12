@@ -158,16 +158,16 @@ interface SelinuxContext {
 
 ## Events (table)
 
-| Event Type | Produced When | Fields |
+| LNX.EventType |  Produced When | Fields |
 |-----------|---------------|--------|
-| Linux.UserCreated | UserHandler creates a new user account | username, uid, groups, homeDirectory, createdBy |
-| Linux.UserDeleted | UserHandler removes a user account | username, uid, deletedBy, backupRef |
-| Linux.UserModified | UserHandler changes user account attributes | username, changes, modifiedBy |
-| Linux.ServiceRestarted | ServiceHandler restarts a system service | serviceName, reason, previousState, restartDuration |
-| Linux.ServiceFailed | ServiceHandler reports a service start/stop failure | serviceName, error, exitCode, journalRef |
-| Linux.PackageOperation | PackageHandler installs, removes, or updates a package | packageName, operation, version, repository, transactionId |
-| Linux.FilesystemMounted | FsHandler mounts a filesystem | mountPoint, device, fstype, options, mountedBy |
-| Linux.FilesystemUnmounted | FsHandler unmounts a filesystem | mountPoint, device, unmountedBy, safeIndicator |
+| LNX.UserCreated |  UserHandler creates a new user account | username, uid, groups, homeDirectory, createdBy |
+| LNX.UserDeleted |  UserHandler removes a user account | username, uid, deletedBy, backupRef |
+| LNX.UserModified |  UserHandler changes user account attributes | username, changes, modifiedBy |
+| LNX.ServiceRestarted |  ServiceHandler restarts a system service | serviceName, reason, previousState, restartDuration |
+| LNX.ServiceFailed |  ServiceHandler reports a service start/stop failure | serviceName, error, exitCode, journalRef |
+| LNX.PackageOperation |  PackageHandler installs, removes, or updates a package | packageName, operation, version, repository, transactionId |
+| LNX.FilesystemMounted |  FsHandler mounts a filesystem | mountPoint, device, fstype, options, mountedBy |
+| LNX.FilesystemUnmounted |  FsHandler unmounts a filesystem | mountPoint, device, unmountedBy, safeIndicator |
 
 ## Error Cases (table with Code, Condition, Severity, Recovery)
 

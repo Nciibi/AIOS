@@ -523,19 +523,19 @@ type ThreadSwitchReason = "user_initiated" | "sou_suggested" | "topic_detected" 
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| CONV.ThreadCreated |     thread_id, session_id, parent_thread_id, topic, depth | New conversation thread created |
-| CONV.ThreadSwitched |     from_thread_id, to_thread_id, session_id, reason | Active thread changed |
-| CONV.ThreadSplit |     parent_thread_id, child_thread_id, session_id, sub_topic | Thread split into parent + child |
-| CONV.ThreadMerged |     child_thread_id, parent_thread_id, session_id, facts_merged | Child thread merged back to parent |
-| CONV.ThreadArchived |     thread_id, session_id, turn_count, final_summary | Thread archived with final summary |
-| CONV.ThreadClosed |     thread_id, session_id, turn_count, duration_ms | Thread permanently closed |
-| CONV.ThreadContextUpdated |     thread_id, session_id, new_fact_count, new_decision_count | Thread context accumulated new items |
-| CONV.ThreadSuggested |     session_id, action, suggested_topic, confidence | Sou suggested a thread operation |
-| CONV.ThreadDepthWarning |     session_id, thread_id, current_depth, max_depth | Thread depth limit approached or reached |
-| CONV.ThreadAutoDetected |     session_id, detected_topic, confidence, action | Topic shift auto-detected from turn content |
-| CONV.ThreadLimitReached |     session_id, active_count, max_threads | Session thread limit reached |
-| CONV.ThreadTreeUpdated |     session_id, active_thread_id, total_threads | Thread hierarchy structure changed |
-| CONV.ThreadSearchCompleted |     thread_id, session_id, match_type, matched_terms | Thread found during switch detection |
+| CONV.ThreadCreated |      thread_id, session_id, parent_thread_id, topic, depth | New conversation thread created |
+| CONV.ThreadSwitched |      from_thread_id, to_thread_id, session_id, reason | Active thread changed |
+| CONV.ThreadSplit |      parent_thread_id, child_thread_id, session_id, sub_topic | Thread split into parent + child |
+| CONV.ThreadMerged |      child_thread_id, parent_thread_id, session_id, facts_merged | Child thread merged back to parent |
+| CONV.ThreadArchived |      thread_id, session_id, turn_count, final_summary | Thread archived with final summary |
+| CONV.ThreadClosed |      thread_id, session_id, turn_count, duration_ms | Thread permanently closed |
+| CONV.ThreadContextUpdated |      thread_id, session_id, new_fact_count, new_decision_count | Thread context accumulated new items |
+| CONV.ThreadSuggested |      session_id, action, suggested_topic, confidence | Sou suggested a thread operation |
+| CONV.ThreadDepthWarning |      session_id, thread_id, current_depth, max_depth | Thread depth limit approached or reached |
+| CONV.ThreadAutoDetected |      session_id, detected_topic, confidence, action | Topic shift auto-detected from turn content |
+| CONV.ThreadLimitReached |      session_id, active_count, max_threads | Session thread limit reached |
+| CONV.ThreadTreeUpdated |      session_id, active_thread_id, total_threads | Thread hierarchy structure changed |
+| CONV.ThreadSearchCompleted |      thread_id, session_id, match_type, matched_terms | Thread found during switch detection |
 
 ## Invariants
 

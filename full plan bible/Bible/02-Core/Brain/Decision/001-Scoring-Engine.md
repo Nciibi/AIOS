@@ -473,16 +473,16 @@ getRegisteredFunctions():
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| DEC.ScoreMatrixComputed |     request_id, option_count, criteria_count | Score matrix computed and ranked |
-| DEC.ScoreApplied |     request_id, option_id, criterion_id, raw_score, normalized_score | Single score applied for a pair |
-| DEC.NormalizationApplied |     request_id, method, criteria_normalized | Normalization phase completed |
-| DEC.WeightsApplied |     request_id, weight_sum, verified | Weighting phase completed |
-| DEC.ConfidenceEstimated |     request_id, overall_confidence, option_confidences | Confidence estimation complete |
-| DEC.OutlierDetected |     request_id, criterion_id, option_id, z_score | Outlier flagged during normalization |
-| DEC.CustomFunctionInvoked |     function_id, request_id, option_id, success | Custom scoring function executed |
-| DEC.InvalidWeights |     request_id, weight_sum, normalized_flag | Criteria weights do not sum to 1.0 |
-| DEC.MatrixCached |     request_id, ttl_ms | ScoreMatrix cached for retrieval |
-| DEC.MatrixExpired |     request_id, age_ms | Cached ScoreMatrix evicted |
+| DEC.ScoreMatrixComputed |      request_id, option_count, criteria_count | Score matrix computed and ranked |
+| DEC.ScoreApplied |      request_id, option_id, criterion_id, raw_score, normalized_score | Single score applied for a pair |
+| DEC.NormalizationApplied |      request_id, method, criteria_normalized | Normalization phase completed |
+| DEC.WeightsApplied |      request_id, weight_sum, verified | Weighting phase completed |
+| DEC.ConfidenceEstimated |      request_id, overall_confidence, option_confidences | Confidence estimation complete |
+| DEC.OutlierDetected |      request_id, criterion_id, option_id, z_score | Outlier flagged during normalization |
+| DEC.CustomFunctionInvoked |      function_id, request_id, option_id, success | Custom scoring function executed |
+| DEC.InvalidWeights |      request_id, weight_sum, normalized_flag | Criteria weights do not sum to 1.0 |
+| DEC.MatrixCached |      request_id, ttl_ms | ScoreMatrix cached for retrieval |
+| DEC.MatrixExpired |      request_id, age_ms | Cached ScoreMatrix evicted |
 
 ## Invariants
 

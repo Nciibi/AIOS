@@ -190,15 +190,15 @@ interface EvidenceScorer {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| COG.ReasoningStarted |     request_id, type, strategy | Reasoning process began |
-| COG.ReasoningCompleted |     request_id, confidence, token_cost | Reasoning finished |
-| COG.ThoughtStepGenerated |     request_id, step_number, type | Individual thought step produced |
-| COG.ReflectionCompleted |     request_id, type, lessons | Reflection finished |
-| COG.MetacognitionUpdate |     request_id, function, result | Metacognitive insight produced |
-| COG.SynthesisCompleted |     request_id, mode, source_count | Synthesis finished |
-| COG.LowConfidenceDetected |     request_id, confidence, reason | Confidence below threshold |
-| COG.StrategySelected |     request_id, strategy, rationale | Reasoning strategy chosen |
-| COG.EvidenceEvaluated |     request_id, evidence_count, avg_reliability | Evidence quality assessed |
+| COG.ReasoningStarted |      request_id, type, strategy | Reasoning process began |
+| COG.ReasoningCompleted |      request_id, confidence, token_cost | Reasoning finished |
+| COG.ThoughtStepGenerated |      request_id, step_number, type | Individual thought step produced |
+| COG.ReflectionCompleted |      request_id, type, lessons | Reflection finished |
+| COG.MetacognitionUpdate |      request_id, function, result | Metacognitive insight produced |
+| COG.SynthesisCompleted |      request_id, mode, source_count | Synthesis finished |
+| COG.LowConfidenceDetected |      request_id, confidence, reason | Confidence below threshold |
+| COG.StrategySelected |      request_id, strategy, rationale | Reasoning strategy chosen |
+| COG.EvidenceEvaluated |      request_id, evidence_count, avg_reliability | Evidence quality assessed |
 
 ## Invariants
 

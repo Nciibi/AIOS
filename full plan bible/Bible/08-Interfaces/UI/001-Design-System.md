@@ -137,15 +137,15 @@ interface PatternLibrary {
 
 ## Events
 
-| UI.EventType |     Produced When | Fields |
+| UI.EventType |      Produced When | Fields |
 |-------|--------|-------------|
-| UI.DesignTokenUpdated |     tokenId, category, oldValue, newValue | A design token value changed |
-| UI.ComponentRegistered |     componentId, name, type | New component added to the library |
-| UI.PatternDocumented |     patternId, docId | Interaction pattern documented |
-| UI.DesignSystemVersioned |     version, changelog | Design system version published |
-| UI.TokenDeprecated |     tokenId, replacement | Token marked deprecated with migration path |
-| UI.LayoutComputed |     gridId, breakpoint, columnCount | Layout grid computed for breakpoint |
-| UI.ComponentValidated |     componentId, result | Component spec passed validation |
+| UI.DesignTokenUpdated |      tokenId, category, oldValue, newValue | A design token value changed |
+| UI.ComponentRegistered |      componentId, name, type | New component added to the library |
+| UI.PatternDocumented |      patternId, docId | Interaction pattern documented |
+| UI.DesignSystemVersioned |      version, changelog | Design system version published |
+| UI.TokenDeprecated |      tokenId, replacement | Token marked deprecated with migration path |
+| UI.LayoutComputed |      gridId, breakpoint, columnCount | Layout grid computed for breakpoint |
+| UI.ComponentValidated |      componentId, result | Component spec passed validation |
 
 ## Error Cases
 

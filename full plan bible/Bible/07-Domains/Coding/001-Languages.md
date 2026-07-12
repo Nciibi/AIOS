@@ -118,9 +118,9 @@ enum SupportLevel {
 
 | Operation | Precondition | Postcondition |
 |-----------|-------------|---------------|
-| register_language | Language profile is valid and complete | Language is added to registry; `Coding.LanguageRegistered` is emitted |
+| register_language | Language profile is valid and complete | Language is added to registry; `COD.LanguageRegistered` is emitted |
 | unregister_language | No active Workers use the language | Language is removed from registry; dependent Workers are notified |
-| detect_runtime | BuildSandbox is active | Runtime version is verified and returned; `Coding.ToolchainVerified` emitted |
+| detect_runtime | BuildSandbox is active | Runtime version is verified and returned; `COD.ToolchainVerified` emitted |
 | get_toolchain | Language is registered | Optimal toolchain configuration is returned with capability bounds |
 | resolve_profile | Language and platform are specified | Resolved LanguageProfile with platform-matched toolchain is returned |
 | verify_toolchain | Toolchain entry exists | Runtime is executed with version command; verified flag is updated |
@@ -137,21 +137,21 @@ enum SupportLevel {
 
 ## Events
 
-| COD.EventType |     Produced When | Fields |
+| COD.EventType |      Produced When | Fields |
 |-----------|--------------|--------|
-| COD.LanguageRegistered |     A new language is added to the registry | language_id, display_name, toolchain_count, support_level |
-| COD.LanguageUnregistered |     A language is removed from the registry | language_id, reason, affected_worker_count |
-| COD.ToolchainVerified |     A toolchain runtime is verified successfully | toolchain_id, language_id, version, platform, duration_ms |
-| COD.ToolchainFailed |     Toolchain verification fails | toolchain_id, language_id, error_output, retry_count |
-| COD.ProfileResolved |     A language profile is resolved for a Worker | worker_id, language_id, toolchain_id, capability_count |
-| COD.RuntimeDetected |     Runtime is auto-detected in a BuildSandbox | sandbox_id, detected_runtimes, version_map |
+| COD.LanguageRegistered |      A new language is added to the registry | language_id, display_name, toolchain_count, support_level |
+| COD.LanguageUnregistered |      A language is removed from the registry | language_id, reason, affected_worker_count |
+| COD.ToolchainVerified |      A toolchain runtime is verified successfully | toolchain_id, language_id, version, platform, duration_ms |
+| COD.ToolchainFailed |      Toolchain verification fails | toolchain_id, language_id, error_output, retry_count |
+| COD.ProfileResolved |      A language profile is resolved for a Worker | worker_id, language_id, toolchain_id, capability_count |
+| COD.RuntimeDetected |      Runtime is auto-detected in a BuildSandbox | sandbox_id, detected_runtimes, version_map |
 
 ## Error Cases
 
 | Code | Condition | Severity | Recovery |
 |------|-----------|----------|----------|
 | COD_LNG_001 | Unsupported language requested | Error | Return supported language list; Worker falls back to default |
-| COD_LNG_002 | Missing toolchain for registered language | Error | Emit `Coding.ToolchainFailed`; attempt auto-install or report unavailability |
+| COD_LNG_002 | Missing toolchain for registered language | Error | Emit `COD.ToolchainFailed`; attempt auto-install or report unavailability |
 | COD_LNG_003 | Toolchain version mismatch | Warning | Select best-matching version; log version discrepancy |
 | COD_LNG_004 | Runtime detection timeout | Error | Retry with extended timeout (max 3 attempts); use cached detection |
 | COD_LNG_005 | Platform not supported by toolchain | Error | Return platform compatibility matrix; select fallback toolchain |

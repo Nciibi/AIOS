@@ -191,16 +191,16 @@ interface ROSInterfaceField {
 
 ## Events
 
-| ROB.EventType |     Produced When | Fields |
+| ROB.EventType |      Produced When | Fields |
 |-----------|--------------|--------|
-| ROB.ROSPackageCreated |     ROS package scaffold is generated | package_id, package_name, version, build_type, node_count, interface_count |
-| ROB.ROSNodeGenerated |     ROS node source code is generated | node_id, node_name, language, package_name, publisher_count, subscriber_count, service_count, action_count |
-| ROB.ROSInterfaceDefined |     ROS msg/srv/action interface is created | interface_id, interface_name, interface_type, field_count, package_name |
-| ROB.ROSGraphUpdated |     ROS topic/service graph is modified | graph_id, node_name, added_topics, removed_topics, added_services, removed_services |
-| ROB.ROSLaunchDeployed |     Launch file is deployed and nodes start | launch_id, launch_file, node_count, target_platform, deployment_time_ms |
-| ROB.ROSSecurityConfigured |     DDS security configuration is applied | config_id, domain_id, transport, security_enabled, package_name |
-| ROB.ROSBuildCompleted |     ROS package build finishes | build_id, package_name, success, error_count, warning_count, build_time_ms |
-| ROB.ROSPackageValidated |     ROS package validation completes | validation_id, package_name, is_valid, errors, warnings |
+| ROB.ROSPackageCreated |      ROS package scaffold is generated | package_id, package_name, version, build_type, node_count, interface_count |
+| ROB.ROSNodeGenerated |      ROS node source code is generated | node_id, node_name, language, package_name, publisher_count, subscriber_count, service_count, action_count |
+| ROB.ROSInterfaceDefined |      ROS msg/srv/action interface is created | interface_id, interface_name, interface_type, field_count, package_name |
+| ROB.ROSGraphUpdated |      ROS topic/service graph is modified | graph_id, node_name, added_topics, removed_topics, added_services, removed_services |
+| ROB.ROSLaunchDeployed |      Launch file is deployed and nodes start | launch_id, launch_file, node_count, target_platform, deployment_time_ms |
+| ROB.ROSSecurityConfigured |      DDS security configuration is applied | config_id, domain_id, transport, security_enabled, package_name |
+| ROB.ROSBuildCompleted |      ROS package build finishes | build_id, package_name, success, error_count, warning_count, build_time_ms |
+| ROB.ROSPackageValidated |      ROS package validation completes | validation_id, package_name, is_valid, errors, warnings |
 
 ## Error Cases
 

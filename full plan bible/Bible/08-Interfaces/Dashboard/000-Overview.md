@@ -195,16 +195,16 @@ All displayed data is evidence-backed (Law 4)
 
 ## Events
 
-| DASH.EventType |     Produced When | Fields |
+| DASH.EventType |      Produced When | Fields |
 |-------|--------|-------------|
-| DASH.ViewLoaded |     viewId, category, viewerId | Dashboard view rendered |
-| DASH.WidgetUpdated |     widgetId, value, evidenceRef | Widget value refreshed from source |
-| DASH.DataStale |     widgetId, lastUpdated | Data source unreachable; marked stale |
-| DASH.HealthComputed |     score, componentCount | Composite health score recalculated |
-| DASH.AlertSurfaced |     alertId, severity, source | Alert shown on dashboard |
-| DASH.AlertActioned |     alertId, action, target | Human acted on alert (console/UI link) |
-| DASH.DrillDown |     widgetId, point, evidenceRef | Human traced value to evidence |
-| DASH.SimulationShown |     simulationId, outcome | Simulation result displayed |
+| DASH.ViewLoaded |      viewId, category, viewerId | Dashboard view rendered |
+| DASH.WidgetUpdated |      widgetId, value, evidenceRef | Widget value refreshed from source |
+| DASH.DataStale |      widgetId, lastUpdated | Data source unreachable; marked stale |
+| DASH.HealthComputed |      score, componentCount | Composite health score recalculated |
+| DASH.AlertSurfaced |      alertId, severity, source | Alert shown on dashboard |
+| DASH.AlertActioned |      alertId, action, target | Human acted on alert (console/UI link) |
+| DASH.DrillDown |      widgetId, point, evidenceRef | Human traced value to evidence |
+| DASH.SimulationShown |      simulationId, outcome | Simulation result displayed |
 
 ## Error Cases
 

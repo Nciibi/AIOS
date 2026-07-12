@@ -104,15 +104,15 @@ When a user message arrives, the Communication domain resolves intent through th
 
 ## Events
 
-| COM.EventType |     Produced When | Fields |
+| COM.EventType |      Produced When | Fields |
 |-----------|--------------|--------|
-| COM.MessageReceived |     User message arrives | message_id, user_id, channel, message_type, intent, timestamp |
-| COM.MessageSent |     Response is delivered to user | message_id, recipient, channel, response_time_ms, token_count |
-| COM.IntentResolved |     User intent is classified | message_id, intent_category, confidence, entities, alternatives |
-| COM.SentimentAnalyzed |     Sentiment analysis completes | message_id, sentiment_score, urgency_score, tone |
-| COM.ConversationStarted |     New conversation session begins | session_id, user_id, channel, start_time, user_preference_hash |
-| COM.ConversationResolved |     Conversation goal is achieved | session_id, outcome, turns_count, satisfaction_score, resolution_path |
-| COM.NotificationSent |     Notification is dispatched | notification_id, recipient, priority, channel, delivery_status |
+| COM.MessageReceived |      User message arrives | message_id, user_id, channel, message_type, intent, timestamp |
+| COM.MessageSent |      Response is delivered to user | message_id, recipient, channel, response_time_ms, token_count |
+| COM.IntentResolved |      User intent is classified | message_id, intent_category, confidence, entities, alternatives |
+| COM.SentimentAnalyzed |      Sentiment analysis completes | message_id, sentiment_score, urgency_score, tone |
+| COM.ConversationStarted |      New conversation session begins | session_id, user_id, channel, start_time, user_preference_hash |
+| COM.ConversationResolved |      Conversation goal is achieved | session_id, outcome, turns_count, satisfaction_score, resolution_path |
+| COM.NotificationSent |      Notification is dispatched | notification_id, recipient, priority, channel, delivery_status |
 
 
 ## Design DNA

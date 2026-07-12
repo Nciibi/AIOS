@@ -202,18 +202,18 @@ interface OptimizationEngine {
 
 ## Events
 
-| ECON.EventType |     Produced When | Fields |
+| ECON.EventType |      Produced When | Fields |
 |-------|--------|-------------|
-| ECON.AllocationRuleCreated |     ruleId, name, strategy, targets | New cost allocation rule registered |
-| ECON.AllocationRuleApplied |     ruleId, recordsAffected, totalAllocated | Allocation rule executed against cost records |
-| ECON.CostsAllocated |     period, totalDirect, totalShared, entitiesCount | Batch allocation completed for a period |
-| ECON.ChargebackComputed |     chargebackId, consumerId, totalCharged | Chargeback record generated for an entity |
-| ECON.VarianceDetected |     reportId, budgetId, variancePercentage, severity | Budget variance threshold crossed |
-| ECON.VarianceEscalated |     reportId, severity, rootCauseCount | Variance requires management attention |
-| ECON.TrendReported |     trendId, resourceType, direction, slope | Cost trend analysis completed |
-| ECON.AnomalyDetected |     trendId, timestamp, deviation, probableCause | Unexpected cost spike or drop flagged |
-| ECON.OptimizationGenerated |     recommendationId, projectedSavings, paybackPeriod | Cost optimization recommendation created |
-| ECON.ReconciliationComplete |     period, totalAllocated, totalUnallocated, unallocatedCount | Periodic cost reconciliation finished |
+| ECON.AllocationRuleCreated |      ruleId, name, strategy, targets | New cost allocation rule registered |
+| ECON.AllocationRuleApplied |      ruleId, recordsAffected, totalAllocated | Allocation rule executed against cost records |
+| ECON.CostsAllocated |      period, totalDirect, totalShared, entitiesCount | Batch allocation completed for a period |
+| ECON.ChargebackComputed |      chargebackId, consumerId, totalCharged | Chargeback record generated for an entity |
+| ECON.VarianceDetected |      reportId, budgetId, variancePercentage, severity | Budget variance threshold crossed |
+| ECON.VarianceEscalated |      reportId, severity, rootCauseCount | Variance requires management attention |
+| ECON.TrendReported |      trendId, resourceType, direction, slope | Cost trend analysis completed |
+| ECON.AnomalyDetected |      trendId, timestamp, deviation, probableCause | Unexpected cost spike or drop flagged |
+| ECON.OptimizationGenerated |      recommendationId, projectedSavings, paybackPeriod | Cost optimization recommendation created |
+| ECON.ReconciliationComplete |      period, totalAllocated, totalUnallocated, unallocatedCount | Periodic cost reconciliation finished |
 
 ## Error Cases
 

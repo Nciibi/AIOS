@@ -140,16 +140,16 @@ interface ParameterCompleter {
 
 ## Events
 
-| CON.EventType |     Produced When | Fields |
+| CON.EventType |      Produced When | Fields |
 |-------|--------|-------------|
-| CON.AutocompleteTriggered |     sessionId, inputLength, cursorPosition | Auto-completion activated by human input |
-| CON.CandidateGenerated |     sessionId, candidateCount, maxScore | Candidates generated from all providers |
-| CON.CandidateScored |     sessionId, candidateCount, topScore | Candidates scored and ranked |
-| CON.SuggestionAccepted |     sessionId, acceptedText, candidateType | Human selected a suggestion from the list |
-| CON.HelpDisplayed |     sessionId, topic, source | Help entry displayed for a command or topic |
-| CON.ParameterCompleted |     sessionId, paramName, valueSource | Parameter value completed from enum or dynamic source |
-| CON.FuzzyMatchPerformed |     sessionId, input, candidateCount, maxMatchScore | Fuzzy matching executed for partial input |
-| CON.CompletionContextResolved |     sessionId, tokenCount, position | CompletionContext built from current input state |
+| CON.AutocompleteTriggered |      sessionId, inputLength, cursorPosition | Auto-completion activated by human input |
+| CON.CandidateGenerated |      sessionId, candidateCount, maxScore | Candidates generated from all providers |
+| CON.CandidateScored |      sessionId, candidateCount, topScore | Candidates scored and ranked |
+| CON.SuggestionAccepted |      sessionId, acceptedText, candidateType | Human selected a suggestion from the list |
+| CON.HelpDisplayed |      sessionId, topic, source | Help entry displayed for a command or topic |
+| CON.ParameterCompleted |      sessionId, paramName, valueSource | Parameter value completed from enum or dynamic source |
+| CON.FuzzyMatchPerformed |      sessionId, input, candidateCount, maxMatchScore | Fuzzy matching executed for partial input |
+| CON.CompletionContextResolved |      sessionId, tokenCount, position | CompletionContext built from current input state |
 
 ## Error Cases
 

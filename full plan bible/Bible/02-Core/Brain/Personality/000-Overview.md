@@ -222,12 +222,12 @@ interface StyleAdapter {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PER.ProfileLoaded |     instance_id, trait_count, value_count | Personality loaded on startup |
-| PER.TraitAdjusted |     trait_id, old_score, new_score, reason | Trait score changed |
-| PER.MoodChanged |     old_mood, new_mood, intensity, trigger | Mood state transitioned |
-| PER.ValueConflict |     value_a, value_b, context | Two values came into conflict |
-| PER.StyleAdapted |     style_dimension, old_value, new_value, context | Communication style adapted |
-| PER.IdentityAccessed |     field, caller | Identity read by authorized component |
+| PER.ProfileLoaded |      instance_id, trait_count, value_count | Personality loaded on startup |
+| PER.TraitAdjusted |      trait_id, old_score, new_score, reason | Trait score changed |
+| PER.MoodChanged |      old_mood, new_mood, intensity, trigger | Mood state transitioned |
+| PER.ValueConflict |      value_a, value_b, context | Two values came into conflict |
+| PER.StyleAdapted |      style_dimension, old_value, new_value, context | Communication style adapted |
+| PER.IdentityAccessed |      field, caller | Identity read by authorized component |
 
 ## Invariants
 

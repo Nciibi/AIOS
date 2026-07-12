@@ -251,16 +251,16 @@ interface TraitEngineConfig {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PER.TraitEngineLoaded |     trait_count, categories | Trait engine initialized on startup |
-| PER.TraitAdjusted |     trait_id, old_score, new_score, delta, reason | Trait score changed |
-| PER.TraitAdjustmentClamped |     trait_id, requested_delta, clamped_delta | Adjustment limited by plasticity |
-| PER.TraitConflict |     conflict_id, trait_a, trait_b, severity | Trait conflict detected |
-| PER.TraitConflictResolved |     conflict_id, resolution | Trait conflict resolved |
-| PER.TraitMoodModulation |     trait_id, original_score, modulated_score, mood | Mood modulated a trait |
-| PER.TraitCooldownActive |     trait_id, remaining_cycles | Adjustment blocked by cooldown |
-| PER.TraitResetToDefault |     trait_id, old_score, default_score | Trait reset to constitutional default |
-| PER.TraitInfluenceComputed |     trait_id, dimension, influence, context | Trait influence calculated for decision |
-| PER.TraitAcademyLearning |     trait_id, lesson_id, old_score, new_score | Academy modified trait through learning |
+| PER.TraitEngineLoaded |      trait_count, categories | Trait engine initialized on startup |
+| PER.TraitAdjusted |      trait_id, old_score, new_score, delta, reason | Trait score changed |
+| PER.TraitAdjustmentClamped |      trait_id, requested_delta, clamped_delta | Adjustment limited by plasticity |
+| PER.TraitConflict |      conflict_id, trait_a, trait_b, severity | Trait conflict detected |
+| PER.TraitConflictResolved |      conflict_id, resolution | Trait conflict resolved |
+| PER.TraitMoodModulation |      trait_id, original_score, modulated_score, mood | Mood modulated a trait |
+| PER.TraitCooldownActive |      trait_id, remaining_cycles | Adjustment blocked by cooldown |
+| PER.TraitResetToDefault |      trait_id, old_score, default_score | Trait reset to constitutional default |
+| PER.TraitInfluenceComputed |      trait_id, dimension, influence, context | Trait influence calculated for decision |
+| PER.TraitAcademyLearning |      trait_id, lesson_id, old_score, new_score | Academy modified trait through learning |
 
 ## Invariants
 

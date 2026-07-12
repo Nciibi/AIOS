@@ -156,7 +156,7 @@ interface MemoryOperation {
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| LLM.MemoryInjected |     request_id, sources_queried, sources_returned, total_memory_tokens, items_by_source, retrieval_duration_us | After injection (Stage 9) |
+| LLM.MemoryInjected |      request_id, sources_queried, sources_returned, total_memory_tokens, items_by_source, retrieval_duration_us | After injection (Stage 9) |
 
 
 ## Cross-Cutting Concerns

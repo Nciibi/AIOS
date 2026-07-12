@@ -171,15 +171,15 @@ enum FragmentType {
 
 ## Events
 
-| COD.EventType |     Produced When | Fields |
+| COD.EventType |      Produced When | Fields |
 |-----------|--------------|--------|
-| COD.CodeGenStarted |     A generation request enters the pipeline | request_id, worker_id, language_id, generation_type, estimated_tokens |
-| COD.CodeGenCompleted |     Generation produces output successfully | request_id, language_id, tokens_used, confidence, duration_ms |
-| COD.CodeGenValidated |     Generated output passes syntax validation | request_id, lint_errors, validation_duration_ms |
-| COD.CodeGenFailed |     Generation pipeline encounters an error | request_id, error_code, error_message, retry_count |
-| COD.CodeGenRetried |     Generation is retried after failure | request_id, retry_attempt, adjusted_params |
-| COD.CodeGenOverflow |     Context window limit is exceeded | request_id, context_size, max_size, overflow_strategy |
-| COD.CodeGenFormatted |     Generated code is formatted | request_id, formatter_name, formatting_duration_ms |
+| COD.CodeGenStarted |      A generation request enters the pipeline | request_id, worker_id, language_id, generation_type, estimated_tokens |
+| COD.CodeGenCompleted |      Generation produces output successfully | request_id, language_id, tokens_used, confidence, duration_ms |
+| COD.CodeGenValidated |      Generated output passes syntax validation | request_id, lint_errors, validation_duration_ms |
+| COD.CodeGenFailed |      Generation pipeline encounters an error | request_id, error_code, error_message, retry_count |
+| COD.CodeGenRetried |      Generation is retried after failure | request_id, retry_attempt, adjusted_params |
+| COD.CodeGenOverflow |      Context window limit is exceeded | request_id, context_size, max_size, overflow_strategy |
+| COD.CodeGenFormatted |      Generated code is formatted | request_id, formatter_name, formatting_duration_ms |
 
 ## Error Cases
 
@@ -201,7 +201,7 @@ enum FragmentType {
 | COD-GEN-I-001 | Same CodePlan step + context + seed produces identical output | Pipeline uses deterministic seed and temperature=0 for reproducible generation |
 | COD-GEN-I-002 | All generated code passes language syntax validation | Pipeline blocks output that fails validation; retry loop enforces compliance |
 | COD-GEN-I-003 | Generated code must not exceed context bounds of the target file | Pipeline enforces maxLines constraint from GenerationConstraints |
-| COD-GEN-I-004 | Every generation produces an Event with token usage | Pipeline emits `Coding.CodeGenCompleted` or `Coding.CodeGenFailed` |
+| COD-GEN-I-004 | Every generation produces an Event with token usage | Pipeline emits `COD.CodeGenCompleted` or `COD.CodeGenFailed` |
 | COD-GEN-I-005 | Generation templates are immutable after registration | Template store enforces versioned immutable templates |
 | COD-GEN-I-006 | Generated tests must be executable (syntax-valid) | Pipeline validates test output against language test framework syntax |
 

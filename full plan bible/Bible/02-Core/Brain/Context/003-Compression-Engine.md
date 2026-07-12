@@ -411,15 +411,15 @@ interface EstimationReport {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| CTX.CompressionStarted |     session_id, original_tokens, target_tokens, reason | Compression beginning |
-| CTX.WindowCompressed |     session_id, before_tokens, after_tokens, strategy_list | Compression completed |
-| CTX.CompressionFailed |     session_id, before_tokens, target_tokens, reason | Could not meet budget |
-| CTX.ItemSummarized |     item_ids, summary_item_id, token_savings | Turn group summarized |
-| CTX.Deduplicated |     item_id, duplicate_of, token_savings | Duplicate item removed |
-| CTX.ItemPruned |     item_id, field_removed, token_savings | Metadata field removed |
-| CTX.ItemEvicted |     item_id, item_type, priority, reason | Item dropped from window |
-| CTX.BackgroundExcluded |     item_ids, token_savings | Background items excluded |
-| CTX.FallbackEviction |     item_ids, token_savings, emergency | Hard-limit fallback triggered |
+| CTX.CompressionStarted |      session_id, original_tokens, target_tokens, reason | Compression beginning |
+| CTX.WindowCompressed |      session_id, before_tokens, after_tokens, strategy_list | Compression completed |
+| CTX.CompressionFailed |      session_id, before_tokens, target_tokens, reason | Could not meet budget |
+| CTX.ItemSummarized |      item_ids, summary_item_id, token_savings | Turn group summarized |
+| CTX.Deduplicated |      item_id, duplicate_of, token_savings | Duplicate item removed |
+| CTX.ItemPruned |      item_id, field_removed, token_savings | Metadata field removed |
+| CTX.ItemEvicted |      item_id, item_type, priority, reason | Item dropped from window |
+| CTX.BackgroundExcluded |      item_ids, token_savings | Background items excluded |
+| CTX.FallbackEviction |      item_ids, token_savings, emergency | Hard-limit fallback triggered |
 
 ## Invariants
 

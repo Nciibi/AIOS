@@ -263,19 +263,19 @@ interface EscalationRouter {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| AUT.LevelAssigned |     entity_id, level, assigned_by, reason | Entity autonomy level set |
-| AUT.LevelChanged |     entity_id, old_level, new_level, reason | Entity autonomy level changed |
-| AUT.ProgressionRequested |     entity_id, target_level, current_level | Progression workflow initiated |
-| AUT.ProgressionApproved |     entity_id, new_level, approved_by | Progression granted |
-| AUT.ProgressionDenied |     entity_id, target_level, reason, reviewed_by | Progression rejected |
-| AUT.Regressed |     entity_id, old_level, new_level, triggered_by | Autonomy level reduced |
-| AUT.ActionFiltered |     entity_id, action, reason, escalation_id | Action exceeded bounds, escalated |
-| AUT.ActionDenied |     entity_id, action, reason | Action exceeded bounds, denied (no escalation) |
-| AUT.EscalationSubmitted |     escalation_id, entity_id, chain_position | Escalation request entered the chain |
-| AUT.EscalationResolved |     escalation_id, approved, resolved_by | Escalation chain produced a decision |
-| AUT.OverrideGranted |     override_id, entity_id, grantor_id, override_type | Temporary override authorized |
-| AUT.OverrideRevoked |     override_id, entity_id, revoked_by | Override terminated |
-| AUT.ComplianceScoreChanged |     entity_id, old_score, new_score, reason | Compliance score updated |
+| AUT.LevelAssigned |      entity_id, level, assigned_by, reason | Entity autonomy level set |
+| AUT.LevelChanged |      entity_id, old_level, new_level, reason | Entity autonomy level changed |
+| AUT.ProgressionRequested |      entity_id, target_level, current_level | Progression workflow initiated |
+| AUT.ProgressionApproved |      entity_id, new_level, approved_by | Progression granted |
+| AUT.ProgressionDenied |      entity_id, target_level, reason, reviewed_by | Progression rejected |
+| AUT.Regressed |      entity_id, old_level, new_level, triggered_by | Autonomy level reduced |
+| AUT.ActionFiltered |      entity_id, action, reason, escalation_id | Action exceeded bounds, escalated |
+| AUT.ActionDenied |      entity_id, action, reason | Action exceeded bounds, denied (no escalation) |
+| AUT.EscalationSubmitted |      escalation_id, entity_id, chain_position | Escalation request entered the chain |
+| AUT.EscalationResolved |      escalation_id, approved, resolved_by | Escalation chain produced a decision |
+| AUT.OverrideGranted |      override_id, entity_id, grantor_id, override_type | Temporary override authorized |
+| AUT.OverrideRevoked |      override_id, entity_id, revoked_by | Override terminated |
+| AUT.ComplianceScoreChanged |      entity_id, old_score, new_score, reason | Compliance score updated |
 
 ## Invariants
 

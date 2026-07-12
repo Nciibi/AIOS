@@ -154,7 +154,7 @@ type ValidationRetryStrategy =
 
 ### Retry Flow
 
-1. Validation fails â†’ produce `LLMOS.ResponseValidationFailed` Event
+1. Validation fails â†’ produce `LLM.ResponseValidationFailed` Event
 2. If `max_retries > 0` and retries not exhausted:
    a. Apply retry strategy (add instruction, example, or adjust temperature)
    b. Recompile prompt with the adjustment
@@ -203,9 +203,9 @@ interface ValidationWarning {
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| LLM.ResponseValidated |     request_id, validation_types, valid, errors, retry_count, retry_attempted | After validation (Stage 15) |
-| LLM.ResponseValidationFailed |     request_id, validation_types, errors, retry_strategy, model_used | Validation failure |
-| LLM.ResponseValidationRetry |     request_id, retry_number, strategy, adjusted_parameters | Before retry |
+| LLM.ResponseValidated |      request_id, validation_types, valid, errors, retry_count, retry_attempted | After validation (Stage 15) |
+| LLM.ResponseValidationFailed |      request_id, validation_types, errors, retry_strategy, model_used | Validation failure |
+| LLM.ResponseValidationRetry |      request_id, retry_number, strategy, adjusted_parameters | Before retry |
 
 
 ## Cross-Cutting Concerns
