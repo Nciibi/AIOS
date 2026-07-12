@@ -7,8 +7,11 @@
 | Version | 1.0 |
 | Category | Bible — Security / Identity |
 | Document ID | AIOS-BIBLE-IDS-003 |
-| Source Laws | Law 5 — Law of Identity, Law/6 — Law of Lifecycle Compliance |
+| Source Laws | Law 5 — Law of Identity, Law 6 — Law of Lifecycle Compliance |
 | Source Physics | Physics/001-Identity.md, Physics/006-Lifecycles.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 
 ## Lifecycle States
 

@@ -7,8 +7,11 @@
 | Version | 1.0 |
 | Category | Bible — Security / Identity |
 | Document ID | AIOS-BIBLE-IDS-004 |
-| Source Laws | Law/5 — Law of Identity |
+| Source Laws | Law 5 — Law of Identity |
 | Source Physics | Physics/001-Identity.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 
 ## Intra-Instance Federation (Same AIOS Instance)
 
