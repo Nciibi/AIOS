@@ -127,7 +127,7 @@ interface AlgorithmTemplate {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| TRD.EventType | Produced When | Fields |
 |-------|----------|---------|
 | Trading.AlgorithmImplemented | StrategyEngine: algorithmId, templateId, version | Fired when a new algorithm is registered |
 | Trading.AlgorithmConfigured | StrategyEngine: algorithmId, params, hash | Fired after parameter update |
@@ -171,6 +171,25 @@ interface AlgorithmTemplate {
 - **R13 â€” Defensive Design**: Stale signals are dropped; missing indicators produce neutral output.
 - **R14 â€” Self-Healing**: On transient indicator failure, signal computation retries once with exponential backoff.
 - **R15 â€” Backward Compatibility**: Algorithm templates and parameter schemas maintain versioned migration paths.
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Trading operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Trading emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Trading instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Trading declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Related Documents
 

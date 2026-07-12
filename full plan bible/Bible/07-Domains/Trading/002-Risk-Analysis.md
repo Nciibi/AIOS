@@ -133,7 +133,7 @@ interface CorrelationMatrix {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| TRD.EventType | Produced When | Fields |
 |-------|----------|---------|
 | Trading.RiskMetricsCalculated | RiskEngine: portfolioId, metrics, method | Published after risk metric computation |
 | Trading.VaRComputed | VaRCalculator: portfolioId, varResult | Fired when VaR is recalculated |
@@ -179,6 +179,25 @@ interface CorrelationMatrix {
 - **R13 â€” Defensive Design**: Correlated model failures cause fallback to conservative parametric VaR.
 - **R14 â€” Self-Healing**: On transient correlation matrix failure, the previous valid matrix is reused with a staleness flag.
 - **R15 â€” Backward Compatibility**: Risk metric schemas and scenario definitions maintain versioned migration paths.
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Trading operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Trading emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Trading instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Trading declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Related Documents
 

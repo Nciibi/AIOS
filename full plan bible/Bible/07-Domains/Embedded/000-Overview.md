@@ -100,7 +100,7 @@ Embedded development in AIOS follows this workflow:
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| EMB.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Embedded.FirmwareGenerated` | Firmware source is generated | worker_id, target_mcu, platform, lines_of_code, hal_version |
 | `Embedded.CrossCompileCompleted` | Cross-compilation finishes | build_id, target_arch, outcome, binary_size, ram_estimate, flash_estimate |

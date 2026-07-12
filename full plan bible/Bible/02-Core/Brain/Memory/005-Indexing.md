@@ -417,13 +417,13 @@ interface RebuildReport {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `MEM.IDX.ItemIndexed` | item_id, indexes_updated | Item added to all indexes |
-| `MEM.IDX.IndexUpdated` | index_type, key, item_id | Single index entry updated |
-| `MEM.IDX.IndexRemoved` | index_type, key, item_id | Single index entry removed |
-| `MEM.IDX.QueryExecuted` | query_id, indexes_used, result_count, latency_ms | Composite query completed |
-| `MEM.IDX.RebuildStarted` | reason | Full index rebuild initiated |
-| `MEM.IDX.RebuildCompleted` | items_processed, duration_ms, indexes_rebuilt | Rebuild finished |
-| `MEM.IDX.BudgetWarning` | current_bytes, budget_bytes, growth_rate | Index approaching memory budget |
+| MEM.MEM.IDX.ItemIndexed | item_id, indexes_updated | Item added to all indexes |
+| MEM.MEM.IDX.IndexUpdated | index_type, key, item_id | Single index entry updated |
+| MEM.MEM.IDX.IndexRemoved | index_type, key, item_id | Single index entry removed |
+| MEM.MEM.IDX.QueryExecuted | query_id, indexes_used, result_count, latency_ms | Composite query completed |
+| MEM.MEM.IDX.RebuildStarted | reason | Full index rebuild initiated |
+| MEM.MEM.IDX.RebuildCompleted | items_processed, duration_ms, indexes_rebuilt | Rebuild finished |
+| MEM.MEM.IDX.BudgetWarning | current_bytes, budget_bytes, growth_rate | Index approaching memory budget |
 
 ## Invariants
 
@@ -436,6 +436,9 @@ interface RebuildReport {
 | IDX-005 | Composite queries use the most selective index first | Algorithmic â€” query planner sorts by selectivity |
 | IDX-006 | Time index uses nanosecond precision | Schema â€” prevents timestamp collisions |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
+| BRAIN-008 | Sou has read access to ALL memories. Services have scoped access. | Constitutional - Sou's omniscience within Brain. Access control enforced by Memory OS. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -446,6 +449,25 @@ interface RebuildReport {
 | Session index memory limit | `IDX_SESSION_LIMIT` | LRU evict oldest session |
 | Tag too long (> 256 chars) | `IDX_TAG_TOO_LONG` | Truncate tag; log warning |
 | Importance out of range | `IDX_IMPORTANCE_OUT_OF_RANGE` | Clamp to [0.0, 1.0] |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Memory OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Memory OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Memory OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Memory OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

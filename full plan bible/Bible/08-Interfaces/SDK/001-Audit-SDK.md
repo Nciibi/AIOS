@@ -169,7 +169,7 @@ Audit providers must support configurable retention policies:
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| SDK.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Audit.EvidenceQueried` | Audit query is executed | query_id, filter_hash, result_count, duration_ms, query_type |
 | `Audit.ChainVerified` | Event chain verification completes | chain_id, start_event, end_event, is_valid, broken_links, verification_level |

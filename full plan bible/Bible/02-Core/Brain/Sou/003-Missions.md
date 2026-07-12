@@ -176,7 +176,7 @@ Mission Execution â†’ Events â†’ Event Store â†’ ACF Stream â†
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| SOU.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Sou.MissionProposed` | Sou creates a mission proposal | mission_id, goal, plan_id |
 | `Sou.MissionPlanApproved` | Sou approves the detailed plan | mission_id, approved_by, conditions |
@@ -216,6 +216,8 @@ Mission Execution â†’ Events â†’ Event Store â†’ ACF Stream â†
 | SOU-MIS-003 | Every mission proposal traces to a Human Intent | Schema â€” Law 1 evidence chain required |
 | SOU-MIS-004 | Mission adjustments are always proposed, never applied directly | API-level â€” adjustMission produces proposal, not mutation |
 
+| BRAIN-002 | Sou is the only component with strategic decision authority. | Constitutional - SOU-001. Verified by Security Council. |
+| BRAIN-005 | Every user-facing response passes through Sou. | Constitutional - SOU-005. ACF routing enforced. |
 ## Cross-Cutting Concerns
 
 ### Security

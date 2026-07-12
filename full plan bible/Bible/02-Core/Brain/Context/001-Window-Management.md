@@ -402,6 +402,8 @@ interface BudgetStatus {
 | WM-007 | Every context item has a unique item_id and source | Schema â€” required fields on push |
 | WM-008 | User input is always the first section | Algorithmic â€” ordering = 0, always present |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-006 | The Context System owns the global context window. Single authority for context. | Architectural - no other component may persist or modify global context. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -413,6 +415,25 @@ interface BudgetStatus {
 | Budget set below minimum (1024) | `CTX_BUDGET_TOO_LOW` | Clamp to minimum; log warning |
 | Window at capacity, no evictable items | `CTX_WINDOW_FULL` | Return error; caller must wait for space |
 | Suspend on non-existent window | `CTX_WINDOW_NOT_FOUND` | Return error; no-op |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Context System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Context System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Context System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Context System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

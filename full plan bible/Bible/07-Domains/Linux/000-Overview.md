@@ -103,7 +103,7 @@ Discovered â†’ Assessed â†’ Provisioned â†’ Configured â†’ M
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| LNX.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Linux.HostDiscovered` | New Linux host is found | host_id, hostname, distro, kernel_version, ip_address, discovered_by |
 | `Linux.CommandExecuted` | A command is run on a host | command_id, host_id, command, exit_code, duration, output_hash |

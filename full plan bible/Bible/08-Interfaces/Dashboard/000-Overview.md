@@ -195,7 +195,7 @@ All displayed data is evidence-backed (Law 4)
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| DASH.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | `DB.ViewLoaded` | viewId, category, viewerId | Dashboard view rendered |
 | `DB.WidgetUpdated` | widgetId, value, evidenceRef | Widget value refreshed from source |
@@ -228,6 +228,25 @@ All displayed data is evidence-backed (Law 4)
 | DB-004 | Health score is derived from evidence, never asserted | Algorithmic â€” Health Calculator requires component evidence |
 | DB-005 | Alerts inform only â€” never auto-resolve sensitive actions | Constitutional â€” alert actions route to Console/UI for human |
 | DB-006 | Drill-down always reaches a verifiable evidence record | Algorithmic â€” Drill-Down Engine rejects untraceable points |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Dashboard operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Dashboard emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Dashboard instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

@@ -107,7 +107,7 @@ All risk limits are enforced by ROS budget allocation. A trade that would violat
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| TRD.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Trading.StrategyResearched` | Strategy research completes | strategy_id, hypothesis, instruments, time_horizon, confidence, methodology |
 | `Trading.BacktestRun` | Backtest execution finishes | backtest_id, strategy_id, start_date, end_date, sharpe, max_drawdown, total_return, trades_count |

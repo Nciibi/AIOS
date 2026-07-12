@@ -172,7 +172,7 @@ Health checks occur every 30 seconds. A provider that reports Unhealthy for 3 co
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| SDK.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `SDK.RuntimeSessionCreated` | Runtime session is created | session_id, runtime_type, provider_id, genome_hash, isolation_level |
 | `SDK.RuntimeSessionStarted` | Session transitions to Running | session_id, started_at, initial_metrics, provider_health |

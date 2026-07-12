@@ -270,19 +270,19 @@ Parent status is derived from children:
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `PLN.MS.MilestoneCreated` | milestone_id, plan_id, name, parent_id | New milestone added to plan |
-| `PLN.MS.MilestoneUpdated` | milestone_id, plan_id, updated_fields | Milestone metadata or order changed |
-| `PLN.MS.MilestoneDeleted` | milestone_id, plan_id | Milestone removed from plan |
-| `PLN.MS.StatusChanged` | milestone_id, old_status, new_status, reason | Milestone status transitioned |
-| `PLN.MS.MilestoneStarted` | milestone_id, plan_id, mission_id | Mission assigned; execution begins |
-| `PLN.MS.MilestoneCompleted` | milestone_id, plan_id, result, duration_ms | Milestone finished successfully |
-| `PLN.MS.MilestoneBlocked` | milestone_id, blocking_milestone_id | Milestone blocked on dependency |
-| `PLN.MS.MilestoneUnblocked` | milestone_id, resolved_milestone_id | Blocking dependency resolved |
-| `PLN.MS.MilestoneFailed` | milestone_id, plan_id, error | Milestone execution failed |
-| `PLN.MS.ParentStatusUpdated` | milestone_id, derived_status, child_summary | Parent status recalculated from children |
-| `PLN.MS.Reordered` | plan_id, previous_order, new_order | Milestone execution order changed |
-| `PLN.MS.MissionAssigned` | milestone_id, mission_id | Milestone bound to a mission |
-| `PLN.MS.MissionUnassigned` | milestone_id, mission_id | Mission unbound from milestone |
+| PLN.PLN.MS.MilestoneCreated | milestone_id, plan_id, name, parent_id | New milestone added to plan |
+| PLN.PLN.MS.MilestoneUpdated | milestone_id, plan_id, updated_fields | Milestone metadata or order changed |
+| PLN.PLN.MS.MilestoneDeleted | milestone_id, plan_id | Milestone removed from plan |
+| PLN.PLN.MS.StatusChanged | milestone_id, old_status, new_status, reason | Milestone status transitioned |
+| PLN.PLN.MS.MilestoneStarted | milestone_id, plan_id, mission_id | Mission assigned; execution begins |
+| PLN.PLN.MS.MilestoneCompleted | milestone_id, plan_id, result, duration_ms | Milestone finished successfully |
+| PLN.PLN.MS.MilestoneBlocked | milestone_id, blocking_milestone_id | Milestone blocked on dependency |
+| PLN.PLN.MS.MilestoneUnblocked | milestone_id, resolved_milestone_id | Blocking dependency resolved |
+| PLN.PLN.MS.MilestoneFailed | milestone_id, plan_id, error | Milestone execution failed |
+| PLN.PLN.MS.ParentStatusUpdated | milestone_id, derived_status, child_summary | Parent status recalculated from children |
+| PLN.PLN.MS.Reordered | plan_id, previous_order, new_order | Milestone execution order changed |
+| PLN.PLN.MS.MissionAssigned | milestone_id, mission_id | Milestone bound to a mission |
+| PLN.PLN.MS.MissionUnassigned | milestone_id, mission_id | Mission unbound from milestone |
 
 ## Invariants
 
@@ -297,6 +297,8 @@ Parent status is derived from children:
 | MS-007 | Parallelizable milestones must have no dependency path between them | Validation â€” checked on `setParallelizable` |
 | MS-008 | Order values within the same parent are unique | Validation â€” checked on `reorderMilestones` |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -309,6 +311,25 @@ Parent status is derived from children:
 | Locked milestone modification attempt | `PLN_MS_MILESTONE_LOCKED` | Return error; unlock before modifying |
 | Cyclic parent-child relationship | `PLN_MS_CYCLIC_HIERARCHY` | Return error; cannot set child as ancestor |
 | Milestone not found for status update | `PLN_MS_MILESTONE_NOT_FOUND` | Return error; no state change |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Planning System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Planning System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Planning System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Planning System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

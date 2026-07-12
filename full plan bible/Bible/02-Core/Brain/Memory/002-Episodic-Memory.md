@@ -294,17 +294,17 @@ interface RollupReport {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `MEM.EP.EpisodeStored` | episode_id, session_id, type, importance | Episode created |
-| `MEM.EP.EpisodeUpdated` | episode_id, updated_fields | Episode metadata changed |
-| `MEM.EP.EpisodeArchived` | episode_id, summary_length | Episode moved to archive |
-| `MEM.EP.EpisodeDeleted` | episode_id, type, reason | Episode hard-deleted |
-| `MEM.EP.EpisodePromoted` | episode_id, target_memory, target_id | Episode content moved to Semantic/Procedural |
-| `MEM.EP.ChainCreated` | chain_id, topic, first_episode | Episode chain started |
-| `MEM.EP.ChainContinued` | chain_id, episode_count | Episode appended to chain |
-| `MEM.EP.TurnSummarized` | session_id, turn_range, summary_length | Conversation turns summarized |
-| `MEM.EP.PruneCompleted` | archived_count, deleted_count, duration_ms | Pruning finished |
-| `MEM.EP.RollupCompleted` | session_id, promotions, archives | Session rollup finished |
-| `MEM.EP.ImportanceAdjusted` | episode_id, old_importance, new_importance, reason | Importance score changed |
+| MEM.MEM.EP.EpisodeStored | episode_id, session_id, type, importance | Episode created |
+| MEM.MEM.EP.EpisodeUpdated | episode_id, updated_fields | Episode metadata changed |
+| MEM.MEM.EP.EpisodeArchived | episode_id, summary_length | Episode moved to archive |
+| MEM.MEM.EP.EpisodeDeleted | episode_id, type, reason | Episode hard-deleted |
+| MEM.MEM.EP.EpisodePromoted | episode_id, target_memory, target_id | Episode content moved to Semantic/Procedural |
+| MEM.MEM.EP.ChainCreated | chain_id, topic, first_episode | Episode chain started |
+| MEM.MEM.EP.ChainContinued | chain_id, episode_count | Episode appended to chain |
+| MEM.MEM.EP.TurnSummarized | session_id, turn_range, summary_length | Conversation turns summarized |
+| MEM.MEM.EP.PruneCompleted | archived_count, deleted_count, duration_ms | Pruning finished |
+| MEM.MEM.EP.RollupCompleted | session_id, promotions, archives | Session rollup finished |
+| MEM.MEM.EP.ImportanceAdjusted | episode_id, old_importance, new_importance, reason | Importance score changed |
 
 ## Invariants
 
@@ -317,6 +317,9 @@ interface RollupReport {
 | EP-005 | Importance scores are bounded [0.0, 1.0] | Schema â€” clamped on update |
 | EP-006 | Sliding window always keeps the most recent N turns | Algorithmic â€” oldest evicted on insert |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
+| BRAIN-008 | Sou has read access to ALL memories. Services have scoped access. | Constitutional - Sou's omniscience within Brain. Access control enforced by Memory OS. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -327,6 +330,25 @@ interface RollupReport {
 | Summarization fails (LLMOS error) | `EP_SUMMARIZATION_FAILED` | Skip summarization; archive raw |
 | Prune with no candidates | `EP_NOTHING_TO_PRUNE` | Return empty report |
 | Chain not found for append | `EP_CHAIN_NOT_FOUND` | Create new chain |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Memory OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Memory OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Memory OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Memory OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

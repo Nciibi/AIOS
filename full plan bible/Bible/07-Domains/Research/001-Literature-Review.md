@@ -179,7 +179,7 @@ interface ConfidenceInterval {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| RES.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | Research.LiteratureSearchRun | Academic database search completes | search_id, query, databases_queried, result_count, duration_ms |
 | Research.PaperRetrieved | Full paper metadata is fetched | paper_id, source, retrieval_time, content_size, is_open_access |
@@ -210,6 +210,25 @@ interface ConfidenceInterval {
 | LIT-I-003 | Conflicting findings must be surfaced, not suppressed | Comparison engine must report all contradictions. Suppression is a constitutional violation. |
 | LIT-I-004 | Quality scores must be computed using a documented, consistent rubric | Scoring methodology is immutable per rubric version. Rubric changes require RFC. |
 | LIT-I-005 | Paywalled papers must still be cited in reference lists if their metadata is accessible | Reference list includes all retrieved papers regardless of access status. Paywalled marked accordingly. |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Research operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Research emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Research instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Research declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

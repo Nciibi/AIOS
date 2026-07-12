@@ -254,16 +254,16 @@ interface FocusManager {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `ATT.FOC.StateChanged` | from_state, to_state, task, trigger, duration_ms | Focus state transition executed |
-| `ATT.FOC.SwitchRecorded` | switch_id, from_task, to_task, cost_ms, switch_type | Context switch tracked |
-| `ATT.FOC.DeepWorkStarted` | session_id, task, goal_id, guaranteed_window_ms | Deep work session initiated |
-| `ATT.FOC.DeepWorkEnded` | session_id, task, elapsed_ms, completed | Deep work session ended |
-| `ATT.FOC.DeepWorkProtected` | session_id, interrupt_attempted, blocked | Deep work protection blocked an interrupt |
-| `ATT.FOC.DeepWorkBreached` | session_id, interrupt_id, priority | Critical interrupt penetrated deep work |
-| `ATT.FOC.DurationLimitExceeded` | state, current_duration_ms, limit_ms | Sou exceeded recommended state duration |
-| `ATT.FOC.SwitchRateExceeded` | current_rate, limit, exceeded_by | Switch rate exceeded 12/min threshold |
-| `ATT.FOC.Resumed` | previous_state, task, interrupt_duration_ms | Sou resumed previous focus after interruption |
-| `ATT.FOC.Cleared` | previous_state, task | Focus cleared on session end |
+| ATT.ATT.FOC.StateChanged | from_state, to_state, task, trigger, duration_ms | Focus state transition executed |
+| ATT.ATT.FOC.SwitchRecorded | switch_id, from_task, to_task, cost_ms, switch_type | Context switch tracked |
+| ATT.ATT.FOC.DeepWorkStarted | session_id, task, goal_id, guaranteed_window_ms | Deep work session initiated |
+| ATT.ATT.FOC.DeepWorkEnded | session_id, task, elapsed_ms, completed | Deep work session ended |
+| ATT.ATT.FOC.DeepWorkProtected | session_id, interrupt_attempted, blocked | Deep work protection blocked an interrupt |
+| ATT.ATT.FOC.DeepWorkBreached | session_id, interrupt_id, priority | Critical interrupt penetrated deep work |
+| ATT.ATT.FOC.DurationLimitExceeded | state, current_duration_ms, limit_ms | Sou exceeded recommended state duration |
+| ATT.ATT.FOC.SwitchRateExceeded | current_rate, limit, exceeded_by | Switch rate exceeded 12/min threshold |
+| ATT.ATT.FOC.Resumed | previous_state, task, interrupt_duration_ms | Sou resumed previous focus after interruption |
+| ATT.ATT.FOC.Cleared | previous_state, task | Focus cleared on session end |
 
 ## Invariants
 
@@ -277,6 +277,8 @@ interface FocusManager {
 | ATT-FOC-006 | Focus state is per-session and is cleared when the session ends | Architectural â€” `clearFocus` called by Session Manager |
 | ATT-FOC-007 | Context switch cost is monotonic (switch cost never decreases within a transition) | Algorithmic â€” cost is computed before the switch |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -288,6 +290,25 @@ interface FocusManager {
 | Extend deep work on expired session | `ATT_FOC_SESSION_EXPIRED` | Reject extension; session already ended |
 | Unknown focus state requested | `ATT_FOC_UNKNOWN_STATE` | Default to Processing; log error |
 | getSwitchHistory with window < 1000ms | `ATT_FOC_WINDOW_TOO_SMALL` | Clamp to 1000ms; log warning |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Attention System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Attention System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Attention System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Attention System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

@@ -188,7 +188,7 @@ interface SensitivityEngine {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| ECON.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | `ECN.ModelBuildStarted` | modelId, modelType, algorithm | Economic model build initiated |
 | `ECN.ModelBuilt` | modelId, validationMetrics | Model fitted and validated successfully |
@@ -223,6 +223,25 @@ interface SensitivityEngine {
 | ECN-MDL-004 | Forecast horizon must not exceed training window length | Algorithmic â€” validation rejects horizon > training window |
 | ECN-MDL-005 | All model inputs must reference evidence records (Law 4) | Architectural â€” inputRefs must resolve to valid evidence |
 | ECN-MDL-006 | Model retraining produces a new version; prior versions remain available | Architectural â€” model versioning is append-only |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Economic operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Economic emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Economic instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Economic declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

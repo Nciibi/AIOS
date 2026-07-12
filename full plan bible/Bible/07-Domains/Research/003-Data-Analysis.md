@@ -248,7 +248,7 @@ interface ConfidenceInterval {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| RES.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | Research.DataIngested | Dataset loading completes | dataset_id, record_count, field_count, source, checksum, size_bytes |
 | Research.DataCleaned | Cleaning step completes | dataset_id, missing_values_handled, outliers_removed, duplicates_removed, audit_log_hash |
@@ -280,6 +280,25 @@ interface ConfidenceInterval {
 | DAT-I-003 | Confidence intervals must be reported alongside all point estimates | Statistical results without confidence intervals are flagged. Reporting is enforced at assessment time. |
 | DAT-I-004 | Assumption violations for statistical tests must be documented and addressed | Assumption checking is mandatory before test execution. Violations trigger alternative method selection. |
 | DAT-I-005 | Data cleaning operations must preserve an audit trail of all modifications | Cleaning step logs all changes. Original values preserved for rollback. Audit trail included in report. |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Research operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Research emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Research instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Research declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

@@ -175,16 +175,16 @@ interface PriorityScorer {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `ATT.PRI.ScoreComputed` | signal_id, raw_score, normalized_score, factors | Signal scored by Priority Scorer |
-| `ATT.PRI.OverrideSet` | source_pattern, override_score, reason | Salience override created or updated |
-| `ATT.PRI.OverrideRemoved` | source_pattern, previous_score | Salience override deleted |
-| `ATT.PRI.OverrideExpired` | source_pattern, expires_at | Override reached TTL, removed automatically |
-| `ATT.PRI.WeightsAdjusted` | old_weights, new_weights, context_reason | Dynamic weight adjustment applied |
-| `ATT.PRI.WeightsReset` | previous_weights | Weights returned to defaults |
-| `ATT.PRI.ThresholdExceeded` | signal_id, score, threshold, signal_type | Score crossed above focus threshold |
-| `ATT.PRI.ThresholdBelow` | signal_id, score, threshold, action | Score fell below threshold, signal snoozed/dropped |
-| `ATT.PRI.NormalizationApplied` | method, factor_before, factor_after | Factor normalization executed |
-| `ATT.PRI.DynamicAdjustment` | adjustment_type, delta, rationale | Dynamic weight adjustment triggered |
+| ATT.ATT.PRI.ScoreComputed | signal_id, raw_score, normalized_score, factors | Signal scored by Priority Scorer |
+| ATT.ATT.PRI.OverrideSet | source_pattern, override_score, reason | Salience override created or updated |
+| ATT.ATT.PRI.OverrideRemoved | source_pattern, previous_score | Salience override deleted |
+| ATT.ATT.PRI.OverrideExpired | source_pattern, expires_at | Override reached TTL, removed automatically |
+| ATT.ATT.PRI.WeightsAdjusted | old_weights, new_weights, context_reason | Dynamic weight adjustment applied |
+| ATT.ATT.PRI.WeightsReset | previous_weights | Weights returned to defaults |
+| ATT.ATT.PRI.ThresholdExceeded | signal_id, score, threshold, signal_type | Score crossed above focus threshold |
+| ATT.ATT.PRI.ThresholdBelow | signal_id, score, threshold, action | Score fell below threshold, signal snoozed/dropped |
+| ATT.ATT.PRI.NormalizationApplied | method, factor_before, factor_after | Factor normalization executed |
+| ATT.ATT.PRI.DynamicAdjustment | adjustment_type, delta, rationale | Dynamic weight adjustment triggered |
 
 ## Invariants
 
@@ -197,6 +197,8 @@ interface PriorityScorer {
 | ATT-PRI-005 | Normalized score never exceeds the [0.0, 1.0] range | Algorithmic â€” clamping enforced after every computation |
 | ATT-PRI-006 | Dynamic weight adjustments are monotonic within a single scoring context | Algorithmic â€” weights are restored after context ends |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -208,6 +210,25 @@ interface PriorityScorer {
 | Weight config version mismatch | `ATT_PRI_VERSION_MISMATCH` | Use latest config; log out-of-date version |
 | Circular dependency in dynamic adjustment rules | `ATT_PRI_CIRCULAR_ADJUSTMENT` | Reject adjustment; log to Event Store |
 | Override TTL in the past | `ATT_PRI_OVERRIDE_EXPIRED_IMMEDIATE` | Create with 0 TTL; log warning |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Attention System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Attention System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Attention System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Attention System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

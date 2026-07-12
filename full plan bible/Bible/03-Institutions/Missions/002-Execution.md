@@ -147,16 +147,16 @@ interface MissionExecutor {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.Exec.WorkerDispatched | mission_id, worker_id, milestone_id, instruction_hash | Worker dispatched |
-| MSN.Exec.WorkerCompleted | mission_id, worker_id, milestone_id, result_hash | Worker finishes milestone |
-| MSN.Exec.ProgressUpdated | mission_id, overall_completion, milestone_progress | Progress snapshot taken |
-| MSN.Exec.EvidenceRecorded | mission_id, package_id, evidence_type, hash | Evidence collected |
-| MSN.Exec.ResourceReallocated | mission_id, adaptation_id, resource_delta | Resources reallocated |
-| MSN.Exec.TimelineAdjusted | mission_id, old_timeline, new_timeline | Timeline adjusted |
-| MSN.Exec.CheckInRequired | mission_id, check_in_id, type, deadline | Check-in triggered |
-| MSN.Exec.CheckInCompleted | mission_id, check_in_id, status, evidence_count | Check-in completed |
-| MSN.Exec.EscalationTriggered | mission_id, reason, escalation_level | Escalation triggered |
-| MSN.Exec.Heartbeat | mission_id, worker_id, timestamp, status | Periodic heartbeat |
+| MSN.MSN.Exec.WorkerDispatched | mission_id, worker_id, milestone_id, instruction_hash | Worker dispatched |
+| MSN.MSN.Exec.WorkerCompleted | mission_id, worker_id, milestone_id, result_hash | Worker finishes milestone |
+| MSN.MSN.Exec.ProgressUpdated | mission_id, overall_completion, milestone_progress | Progress snapshot taken |
+| MSN.MSN.Exec.EvidenceRecorded | mission_id, package_id, evidence_type, hash | Evidence collected |
+| MSN.MSN.Exec.ResourceReallocated | mission_id, adaptation_id, resource_delta | Resources reallocated |
+| MSN.MSN.Exec.TimelineAdjusted | mission_id, old_timeline, new_timeline | Timeline adjusted |
+| MSN.MSN.Exec.CheckInRequired | mission_id, check_in_id, type, deadline | Check-in triggered |
+| MSN.MSN.Exec.CheckInCompleted | mission_id, check_in_id, status, evidence_count | Check-in completed |
+| MSN.MSN.Exec.EscalationTriggered | mission_id, reason, escalation_level | Escalation triggered |
+| MSN.MSN.Exec.Heartbeat | mission_id, worker_id, timestamp, status | Periodic heartbeat |
 
 ## Error Cases
 
@@ -178,6 +178,25 @@ interface MissionExecutor {
 | MSN-EXEC-003 | Total resource consumption must not exceed allocated budget | Algorithmic â€” ROS budget enforcement at allocation |
 | MSN-EXEC-004 | Timeline adjustments must preserve milestone DAG ordering | Algorithmic â€” DAG order validated on every adjustment |
 | MSN-EXEC-005 | Missed check-in must trigger escalation within SLA timeout | Algorithmic â€” Timer triggers escalation if check-in not received |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Missions operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Missions emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Missions instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Missions declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

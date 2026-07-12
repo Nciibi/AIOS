@@ -185,7 +185,7 @@ function selectReasoningMethod(problem, evidence, constraints):
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| SOU.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Sou.ReasoningStarted` | Reasoning session begins | reason_id, method, input_summary |
 | `Sou.ReasoningCompleted` | Reasoning session ends | reason_id, output_type, output_id, confidence |
@@ -236,6 +236,8 @@ function selectReasoningMethod(problem, evidence, constraints):
 | SOU-RSN-003 | Reasoning output is always reviewed by DGP before execution | Governance â€” DGP pipeline enforcement |
 | SOU-RSN-004 | Constitutional reasoning is always applied to every proposal | Algorithmic â€” selectReasoningMethod always includes it |
 
+| BRAIN-002 | Sou is the only component with strategic decision authority. | Constitutional - SOU-001. Verified by Security Council. |
+| BRAIN-005 | Every user-facing response passes through Sou. | Constitutional - SOU-005. ACF routing enforced. |
 ## Cross-Cutting Concerns
 
 ### Security

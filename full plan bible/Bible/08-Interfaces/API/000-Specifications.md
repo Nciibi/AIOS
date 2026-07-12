@@ -197,7 +197,7 @@ Every API must have automated conformance tests:
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| API.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `API.ContractPublished` | New API contract is registered | contract_id, api_name, version, category |
 | `API.ContractDeprecated` | API version is deprecated | contract_id, deprecation_date, migration_target |

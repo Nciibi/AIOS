@@ -157,7 +157,7 @@ interface HistoryManager {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| CON.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | `GC.CLICommandParsed` | sessionId, raw, commandName | Raw input parsed into command structure |
 | `GC.CLIArgsValidated` | sessionId, commandName, args, valid | Argument validation completed |
@@ -191,6 +191,25 @@ interface HistoryManager {
 | GC-001-04 | CLI sessions expire after configurable idle timeout | Algorithmic â€” session manager enforces timeout |
 | GC-001-05 | Alias resolution never creates cycles | Architectural â€” alias target must resolve to a registered command |
 | GC-001-06 | History is bounded to a maximum configurable size | Algorithmic â€” oldest entries pruned on overflow |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Console operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Console emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Console instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Console declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

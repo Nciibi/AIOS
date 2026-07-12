@@ -151,11 +151,32 @@ interface TruncatedSection {
 | LLM-CTX-004 | Context Builder runs before Memory Injection â€” memories are treated as a content category within the budget. | Architectural â€” pipeline stage ordering |
 | LLM-CTX-005 | The same input produces the same context output (deterministic truncation). | Algorithmic â€” deterministic truncation strategy |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-009 | LLMOS is the ONLY path for AI inference inside the Brain. No direct provider calls. | Architectural - all inference requests route through LLMOS pipeline. Direct provider calls are blocked. |
 ## Events
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
 | `LLMOS.ContextBuilt` | request_id, total_tokens, input_tokens, truncated_sections, allocations | After context building (Stage 8) |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+LLMOS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), LLMOS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), LLMOS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), LLMOS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

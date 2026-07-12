@@ -552,6 +552,8 @@ type ThreadSwitchReason = "user_initiated" | "sou_suggested" | "topic_detected" 
 | CTXTH-009 | A thread can only be active if all its ancestors are active or paused (no orphaned active threads) | Algorithmic â€” if ancestor is archived/closed, descendant must be archived/closed first |
 | CTXTH-010 | Thread topic matching for switch detection is deterministic (same input produces same match) | Algorithmic â€” fuzzy matching uses stable string comparison |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -679,6 +681,25 @@ Thread A1 resolved â†’ mergeThread(A1, A)
 
 User can now see a comprehensive summary of the merged thread.
 ```
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Conversation OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Conversation OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Conversation OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Conversation OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

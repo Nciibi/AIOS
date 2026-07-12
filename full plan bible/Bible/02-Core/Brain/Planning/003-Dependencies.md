@@ -370,17 +370,17 @@ Validated ExecutionGraph (output to Progress Tracker, Institution OS)
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `PLN.DEP.GraphBuilt` | plan_id, node_count, edge_count, depth | Execution graph constructed |
-| `PLN.DEP.CycleDetected` | plan_id, cycle_nodes, suggested_resolution | Dependency cycle found and blocked |
-| `PLN.DEP.CycleResolved` | plan_id, removed_dependency_id | Cycle resolved by user |
-| `PLN.DEP.CriticalPathCalculated` | plan_id, path, total_duration_ms | Critical path identified |
-| `PLN.DEP.ValidationComplete` | plan_id, valid, warnings | Dependency validation finished |
-| `PLN.DEP.DependencyAdded` | dependency_id, from, to, type | New dependency created |
-| `PLN.DEP.DependencyRemoved` | dependency_id, from, to | Dependency deleted |
-| `PLN.DEP.DependencyUpdated` | dependency_id, updated_fields | Dependency type or condition changed |
-| `PLN.DEP.ConditionalEvaluated` | dependency_id, condition, result | Conditional dependency evaluated |
-| `PLN.DEP.ConditionUnsatisfiable` | dependency_id, condition, reason | Condition cannot be evaluated with current context |
-| `PLN.DEP.ParallelGroupDetected` | group_id, milestone_ids, duration_ms | Parallel execution opportunity identified |
+| PLN.PLN.DEP.GraphBuilt | plan_id, node_count, edge_count, depth | Execution graph constructed |
+| PLN.PLN.DEP.CycleDetected | plan_id, cycle_nodes, suggested_resolution | Dependency cycle found and blocked |
+| PLN.PLN.DEP.CycleResolved | plan_id, removed_dependency_id | Cycle resolved by user |
+| PLN.PLN.DEP.CriticalPathCalculated | plan_id, path, total_duration_ms | Critical path identified |
+| PLN.PLN.DEP.ValidationComplete | plan_id, valid, warnings | Dependency validation finished |
+| PLN.PLN.DEP.DependencyAdded | dependency_id, from, to, type | New dependency created |
+| PLN.PLN.DEP.DependencyRemoved | dependency_id, from, to | Dependency deleted |
+| PLN.PLN.DEP.DependencyUpdated | dependency_id, updated_fields | Dependency type or condition changed |
+| PLN.PLN.DEP.ConditionalEvaluated | dependency_id, condition, result | Conditional dependency evaluated |
+| PLN.PLN.DEP.ConditionUnsatisfiable | dependency_id, condition, reason | Condition cannot be evaluated with current context |
+| PLN.PLN.DEP.ParallelGroupDetected | group_id, milestone_ids, duration_ms | Parallel execution opportunity identified |
 
 ## Invariants
 
@@ -395,6 +395,8 @@ Validated ExecutionGraph (output to Progress Tracker, Institution OS)
 | DEP-007 | Optional dependencies do not block execution when unsatisfied | Algorithmic â€” excluded from critical path |
 | DEP-008 | A milestone cannot depend on itself | Schema â€” `from !== to` enforced |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -407,6 +409,25 @@ Validated ExecutionGraph (output to Progress Tracker, Institution OS)
 | Redundant parallel dependency | `PLN_DEP_REDUNDANT` | Warning; parallel parallel to sibling is implied |
 | Orphaned milestone (no connections) | `PLN_DEP_ORPHAN_MILESTONE` | Warning; milestone excluded from schedule |
 | Modification of resolved graph during execution | `PLN_DEP_GRAPH_LOCKED` | Return error; plan must be paused |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Planning System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Planning System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Planning System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Planning System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

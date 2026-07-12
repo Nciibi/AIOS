@@ -207,11 +207,32 @@ If any rule exceeds its max evaluation time, it times out and falls to `audit` s
 | LLM-GRD-006 | Guardrail rules are immutable once deployed â€” changes require new rule version. | Governance â€” immutability policy |
 | LLM-GRD-007 | Classifier-based rules are evaluated asynchronously to avoid blocking the pipeline. | Algorithmic â€” async evaluation |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-009 | LLMOS is the ONLY path for AI inference inside the Brain. No direct provider calls. | Architectural - all inference requests route through LLMOS pipeline. Direct provider calls are blocked. |
 ## Events
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
 | `LLMOS.GuardrailChecked` | request_id, direction, rules_evaluated, passed, blocked, matched_rules, evaluation_duration_us | After guardrail evaluation (Stages 11 and 14) |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+LLMOS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), LLMOS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), LLMOS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), LLMOS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

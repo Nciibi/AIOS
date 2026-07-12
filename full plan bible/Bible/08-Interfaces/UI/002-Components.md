@@ -139,7 +139,7 @@ interface AccessibilityEngine {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| UI.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | UI.ComponentRendered | componentId, type, timestamp | Component mounted and visible |
 | UI.ComponentInteracted | componentId, event, value | User interaction on component |
@@ -171,6 +171,25 @@ interface AccessibilityEngine {
 | COMP-004 | Events bubble from child to parent; never skip a level | Architectural â€” Event Bus enforces strict hierarchy |
 | COMP-005 | Components reference registered design system specs only | Algorithmic â€” ComponentRegistry validates specRef |
 | COMP-006 | Lazy-hydrated components render placeholder synchronously | Architectural â€” Render Engine guarantees fallback |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+UI operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), UI emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), UI instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), UI declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

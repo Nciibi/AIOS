@@ -148,7 +148,7 @@ interface StalenessMonitor {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| DASH.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | DB.MetricDefined | metricId, name, source | New metric registered in catalog |
 | DB.MetricQueried | metricId, source, durationMs | Source query executed for metric |
@@ -179,6 +179,25 @@ interface StalenessMonitor {
 | DB-009 | Metric definitions are immutable after registration | Architectural â€” catalog enforces create-only |
 | DB-010 | Aggregation pipeline is deterministic for identical inputs | Algorithmic â€” same steps + same data = same output |
 | DB-011 | Each metric binds to exactly one data source | Architectural â€” DataSourceBinding is singular |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Dashboard operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Dashboard emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Dashboard instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

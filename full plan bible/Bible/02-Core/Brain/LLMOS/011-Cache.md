@@ -224,6 +224,8 @@ Entities can pre-warm the cache by submitting requests with `cache_policy.mode =
 | LLM-CCH-005 | Semantic cache matches never return results with similarity below the configured threshold. | Algorithmic â€” threshold-based filtering |
 | LLM-CCH-006 | Cache entries are immutable after creation â€” no partial updates. | Schema â€” immutability design |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-009 | LLMOS is the ONLY path for AI inference inside the Brain. No direct provider calls. | Architectural - all inference requests route through LLMOS pipeline. Direct provider calls are blocked. |
 ## Events
 
 | Event | Fields | Trigger |
@@ -232,6 +234,25 @@ Entities can pre-warm the cache by submitting requests with `cache_policy.mode =
 | `LLMOS.CacheMiss` | request_id, cache_key, reason, semantic_candidates_count | Cache miss (Stage 7) |
 | `LLMOS.CacheStored` | request_id, cache_key, ttl, storage_size_bytes | Cache write (Stage 16) |
 | `LLMOS.CacheEvicted` | cache_key, reason, age, access_count, saved_cost_total | Eviction |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+LLMOS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), LLMOS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), LLMOS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), LLMOS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

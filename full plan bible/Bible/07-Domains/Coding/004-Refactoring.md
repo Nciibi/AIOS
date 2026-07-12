@@ -256,7 +256,7 @@ enum VerificationStatus {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| COD.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Coding.RefactoringPlanned` | A refactoring plan is created and analyzed | plan_id, operation_type, symbol_name, files_affected, risk_level |
 | `Coding.RefactoringApplied` | Transformation changes are written to files | plan_id, changeset_id, files_modified, operations_count |
@@ -289,6 +289,25 @@ enum VerificationStatus {
 | COD-REF-I-004 | No circular dependency is introduced by refactoring | Post-transformation dependency graph is checked for cycles |
 | COD-REF-I-005 | Refactoring does not change public API signatures unless explicitly planned | Default operation mode preserves public API; explicit opt-in for API changes |
 | COD-REF-I-006 | Each file change is hash-verified before and after transformation | Original and modified file hashes are recorded in ChangeSet |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Coding operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Coding emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Coding instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Coding declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

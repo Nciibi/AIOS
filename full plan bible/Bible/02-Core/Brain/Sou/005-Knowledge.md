@@ -174,7 +174,7 @@ Created â†’ Active â†’ Updated â†’ Archived (retention expired)
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| SOU.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Sou.KnowledgeStored` | New knowledge is stored | knowledge_id, type, privacy_level |
 | `Sou.KnowledgeRetrieved` | Knowledge is retrieved | knowledge_id, requester_id |
@@ -204,6 +204,8 @@ Created â†’ Active â†’ Updated â†’ Archived (retention expired)
 | SOU-KNW-003 | Private knowledge is never shared without explicit privacy filter | Governance â€” privacy filter enforced before Academy sharing |
 | SOU-KNW-004 | Knowledge records are never mutated â€” only created, updated (new version), or archived | API-level â€” update creates new version |
 
+| BRAIN-002 | Sou is the only component with strategic decision authority. | Constitutional - SOU-001. Verified by Security Council. |
+| BRAIN-005 | Every user-facing response passes through Sou. | Constitutional - SOU-005. ACF routing enforced. |
 ## Cross-Cutting Concerns
 
 ### Security

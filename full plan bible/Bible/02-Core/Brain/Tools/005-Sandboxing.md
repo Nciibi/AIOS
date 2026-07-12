@@ -328,6 +328,8 @@ interface SandboxManager {
 | SAN-007 | Resource usage tracking is monotonic (counters only increase) | Algorithmic â€” cumulative counters |
 | SAN-008 | Violation events always include the limit and actual values | Schema â€” SandboxViolation requires limit and actual |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -340,6 +342,25 @@ interface SandboxManager {
 | Execution timeout | `SAN_TIMEOUT` | Kill execution; return timeout error |
 | Subprocess creation denied | `SAN_SUBPROCESS_DENIED` | Return error; subprocess not allowed |
 | Isolation breach detected | `SAN_ISOLATION_BREACH` | Kill execution; escalate security alert |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Tool System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Tool System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Tool System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Tool System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

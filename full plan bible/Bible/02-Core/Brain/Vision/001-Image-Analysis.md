@@ -408,6 +408,8 @@ interface AnalysisError {
 | IMA-007 | Image data is ephemeral unless explicitly stored to Memory OS | Architectural â€” no automatic persistence |
 | IMA-008 | All faces in an image are returned in a single result (no paging) | Schema â€” face array contains all detections |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -423,6 +425,25 @@ interface AnalysisError {
 | Batch: all requests failed | `VIS_BATCH_ALL_FAILED` | Return BatchAnalysisResult with empty results and all errors |
 | Batch: concurrency limit exceeded | `VIS_BATCH_CONCURRENCY_EXCEEDED` | Cap to max concurrency, log warning, continue |
 | Provider returned malformed response | `VIS_PROVIDER_MALFORMED_RESPONSE` | Retry once; on repeat failure, return error |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Vision System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Vision System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Vision System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Vision System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

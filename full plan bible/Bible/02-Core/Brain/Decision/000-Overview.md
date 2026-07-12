@@ -257,6 +257,8 @@ interface ConstraintExpression {
 | DEC-004 | Criteria weights always sum to 1.0 | Validation â€” enforced on EvaluationRequest |
 | DEC-005 | The Decision System is stateless â€” history lives in Event Store | Architectural â€” no internal persistence |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Related Documents
 
 | Document | Relationship |
@@ -275,6 +277,25 @@ interface ConstraintExpression {
 | Criteria weights don't sum to 1.0 | `DEC_INVALID_WEIGHTS` | Normalize weights and proceed |
 | Unknown scoring function | `DEC_UNKNOWN_FUNCTION` | Return error; reject request |
 | Hard constraint eliminates all options | `DEC_ALL_ELIMINATED` | Return empty recommendation with explanation |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Decision System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Decision System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Decision System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Decision System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

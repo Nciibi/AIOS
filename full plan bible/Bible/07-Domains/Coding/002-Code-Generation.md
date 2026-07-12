@@ -171,7 +171,7 @@ enum FragmentType {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| COD.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Coding.CodeGenStarted` | A generation request enters the pipeline | request_id, worker_id, language_id, generation_type, estimated_tokens |
 | `Coding.CodeGenCompleted` | Generation produces output successfully | request_id, language_id, tokens_used, confidence, duration_ms |
@@ -204,6 +204,25 @@ enum FragmentType {
 | COD-GEN-I-004 | Every generation produces an Event with token usage | Pipeline emits `Coding.CodeGenCompleted` or `Coding.CodeGenFailed` |
 | COD-GEN-I-005 | Generation templates are immutable after registration | Template store enforces versioned immutable templates |
 | COD-GEN-I-006 | Generated tests must be executable (syntax-valid) | Pipeline validates test output against language test framework syntax |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Coding operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Coding emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Coding instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Coding declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

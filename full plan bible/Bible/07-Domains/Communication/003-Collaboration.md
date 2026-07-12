@@ -178,7 +178,7 @@ interface SessionPolicy {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| COM.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Comm.SessionCreated` | New collaboration session is created | session_id, workspace_id, creator_id, max_participants, created_at |
 | `Comm.ParticipantJoined` | Participant enters an active session | session_id, participant_id, participant_type, role, current_participant_count |
@@ -212,6 +212,25 @@ interface SessionPolicy {
 | COM-COL-I-004 | Session state is never lost on participant departure | WorkspaceState is retained in session until session archival; departure is soft event |
 | COM-COL-I-005 | Handoff transfers complete session state including pending events | HandoffCoordinator serializes state snapshot plus unprocessed event queue before transfer |
 | COM-COL-I-006 | Presence updates are eventually consistent across all participants | Presence broadcast converges within syncIntervalMs; stale presence is tolerated temporarily |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Communication operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Communication emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Communication instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Communication declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

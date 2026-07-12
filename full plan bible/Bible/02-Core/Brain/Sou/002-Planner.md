@@ -179,7 +179,7 @@ Every plan must pass four validation gates before it can be proposed:
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| SOU.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Sou.PlanCreated` | A new plan is created | plan_id, goal_id, milestone_count |
 | `Sou.PlanRefined` | An existing plan is refined | plan_id, change_summary |
@@ -208,6 +208,8 @@ Every plan must pass four validation gates before it can be proposed:
 | SOU-PLN-003 | Plans always trace to a specific goal from Reasoning | Schema â€” goal_id required in MissionPlan |
 | SOU-PLN-004 | Plan modifications produce a new version, never mutate in place | API-level â€” refinePlan produces new version |
 
+| BRAIN-002 | Sou is the only component with strategic decision authority. | Constitutional - SOU-001. Verified by Security Council. |
+| BRAIN-005 | Every user-facing response passes through Sou. | Constitutional - SOU-005. ACF routing enforced. |
 ## Cross-Cutting Concerns
 
 ### Security

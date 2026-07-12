@@ -104,7 +104,7 @@ Robotics software development in AIOS:
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| ROB.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Robotics.ROSNodeGenerated` | ROS2 node code is generated | worker_id, node_name, topics_published, topics_subscribed, services, interfaces_used |
 | `Robotics.MotionPlanComputed` | Motion plan is calculated | plan_id, robot_id, start_state, goal_state, trajectory_length, collision_free, computation_time_ms |

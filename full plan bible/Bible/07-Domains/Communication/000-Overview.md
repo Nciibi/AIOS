@@ -104,7 +104,7 @@ When a user message arrives, the Communication domain resolves intent through th
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| COM.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Comm.MessageReceived` | User message arrives | message_id, user_id, channel, message_type, intent, timestamp |
 | `Comm.MessageSent` | Response is delivered to user | message_id, recipient, channel, response_time_ms, token_count |

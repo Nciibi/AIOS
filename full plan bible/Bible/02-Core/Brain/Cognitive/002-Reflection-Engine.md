@@ -272,16 +272,16 @@ interface LessonContext {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `COG.REFL.ReflectionStarted` | request_id, type, experience_id, depth | Reflection process began |
-| `COG.REFL.ReflectionCompleted` | request_id, type, lesson_count, pattern_count, bias_count | Reflection finished |
-| `COG.REFL.ReflectionFailed` | request_id, error_code, partial_results | Reflection terminated with error |
-| `COG.REFL.LessonExtracted` | lesson_id, category, severity, generalizability | New lesson created |
-| `COG.REFL.LessonValidated` | lesson_id, confirming_experience_id, evidence_strength | Lesson confirmed by new experience |
-| `COG.REFL.LessonArchived` | lesson_id, reason, lessons_replaced_by | Lesson archived after being disproven |
-| `COG.REFL.PatternDetected` | pattern_id, type, occurrences, confidence | New pattern identified |
-| `COG.REFL.BiasFlagged` | bias_id, bias_type, confidence, impact, source_experience | Bias detected in decision history |
-| `COG.REFL.BatchReflectionCompleted` | request_ids, total_lessons, total_patterns | Batch reflection finished |
-| `COG.REFL.DeepReflectionProgress` | request_id, phase_number, phases_total | Multi-pass deep reflection progress |
+| COG.COG.REFL.ReflectionStarted | request_id, type, experience_id, depth | Reflection process began |
+| COG.COG.REFL.ReflectionCompleted | request_id, type, lesson_count, pattern_count, bias_count | Reflection finished |
+| COG.COG.REFL.ReflectionFailed | request_id, error_code, partial_results | Reflection terminated with error |
+| COG.COG.REFL.LessonExtracted | lesson_id, category, severity, generalizability | New lesson created |
+| COG.COG.REFL.LessonValidated | lesson_id, confirming_experience_id, evidence_strength | Lesson confirmed by new experience |
+| COG.COG.REFL.LessonArchived | lesson_id, reason, lessons_replaced_by | Lesson archived after being disproven |
+| COG.COG.REFL.PatternDetected | pattern_id, type, occurrences, confidence | New pattern identified |
+| COG.COG.REFL.BiasFlagged | bias_id, bias_type, confidence, impact, source_experience | Bias detected in decision history |
+| COG.COG.REFL.BatchReflectionCompleted | request_ids, total_lessons, total_patterns | Batch reflection finished |
+| COG.COG.REFL.DeepReflectionProgress | request_id, phase_number, phases_total | Multi-pass deep reflection progress |
 
 ## Invariants
 
@@ -296,6 +296,8 @@ interface LessonContext {
 | COG-REFL-007 | Deep reflection always includes at least 2 passes (analysis + verification) | Algorithmic â€” multi-pass enforced |
 | COG-REFL-008 | Lessons cannot be deleted, only archived with an explanation | Architectural â€” immutable audit trail |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -308,6 +310,25 @@ interface LessonContext {
 | Empty experience batch for bias detection | `COG_REFL_NO_EXPERIENCES` | Return error; provide at least one experience |
 | Reflection type not recognized | `COG_REFL_UNKNOWN_TYPE` | Default to outcome_analysis |
 | Lesson validation cycle detected | `COG_REFL_VALIDATION_CYCLE` | Reject validation if same experience used twice |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Cognitive OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Cognitive OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Cognitive OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Cognitive OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

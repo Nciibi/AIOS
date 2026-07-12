@@ -282,15 +282,15 @@ interface ProcedureOutcome {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `MEM.PM.ProcedureStored` | procedure_id, name, category, domain | New procedure created |
-| `MEM.PM.ProcedureUpdated` | procedure_id, version, updated_fields | Procedure content changed |
-| `MEM.PM.ProcedureDeleted` | procedure_id, category, reason | Procedure removed |
-| `MEM.PM.ProcedureExecuted` | procedure_id, success_rate_after, duration_ms | Procedure was used |
-| `MEM.PM.ProcedureOutcome` | procedure_id, outcome, new_success_rate | Outcome recorded |
-| `MEM.PM.ProcedureFlagged` | procedure_id, reason, current_success_rate | Procedure needs review |
-| `MEM.PM.ProcedureDeprecated` | procedure_id, replacement_id?, reason | Procedure retired |
-| `MEM.PM.TemplateInstantiated` | template_id, new_procedure_id, parameters | Template expanded |
-| `MEM.PM.PrefetchCompleted` | context_signals, results_count, latency_ms | Context-based prefetch |
+| MEM.MEM.PM.ProcedureStored | procedure_id, name, category, domain | New procedure created |
+| MEM.MEM.PM.ProcedureUpdated | procedure_id, version, updated_fields | Procedure content changed |
+| MEM.MEM.PM.ProcedureDeleted | procedure_id, category, reason | Procedure removed |
+| MEM.MEM.PM.ProcedureExecuted | procedure_id, success_rate_after, duration_ms | Procedure was used |
+| MEM.MEM.PM.ProcedureOutcome | procedure_id, outcome, new_success_rate | Outcome recorded |
+| MEM.MEM.PM.ProcedureFlagged | procedure_id, reason, current_success_rate | Procedure needs review |
+| MEM.MEM.PM.ProcedureDeprecated | procedure_id, replacement_id?, reason | Procedure retired |
+| MEM.MEM.PM.TemplateInstantiated | template_id, new_procedure_id, parameters | Template expanded |
+| MEM.MEM.PM.PrefetchCompleted | context_signals, results_count, latency_ms | Context-based prefetch |
 
 ## Invariants
 
@@ -303,6 +303,9 @@ interface ProcedureOutcome {
 | PM-005 | Conditional steps must have both if_true and if_false targets | Schema â€” validated on creation |
 | PM-006 | Templates require parameter substitution before execution | Algorithmic â€” instantiateTemplate validates all params |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
+| BRAIN-008 | Sou has read access to ALL memories. Services have scoped access. | Constitutional - Sou's omniscience within Brain. Access control enforced by Memory OS. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -313,6 +316,25 @@ interface ProcedureOutcome {
 | Procedure deprecated | `PM_PROCEDURE_DEPRECATED` | Return error with replacement suggestion |
 | Semantic search returns no matches | `PM_NO_MATCHES` | Return empty; suggest broader query |
 | Prefetch with no context signals | `PM_NO_SIGNALS` | Return empty; not an error |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Memory OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Memory OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Memory OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Memory OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

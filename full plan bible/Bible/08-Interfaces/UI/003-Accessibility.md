@@ -143,7 +143,7 @@ interface ContrastValidator {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| UI.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | UI.AccessibilityAuditRun | auditId, componentCount, passedCount, failedCount | Full accessibility scan completed |
 | UI.ViolationDetected | violationId, componentId, severity, wcagCriteria | New accessibility violation found |
@@ -175,6 +175,25 @@ interface ContrastValidator {
 | A11Y-004 | Color is never the sole means of conveying information | Algorithmic â€” AccessibilityAuditor flags color-only states |
 | A11Y-005 | All touch targets are at least 44x44 CSS pixels | Algorithmic â€” LayoutEngine measures and validates targets |
 | A11Y-006 | Error suggestions are programmatically associated with inputs | Algorithmic â€” ARIA describedBy required on error state |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+UI operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), UI emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), UI instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), UI declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

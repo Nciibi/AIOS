@@ -178,17 +178,17 @@ interface FailureManager {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.Fail.FailureDetected | failure_id, mission_id, method, details | Failure detected |
-| MSN.Fail.FailureClassified | failure_id, category, severity, root_cause | Failure classified |
-| MSN.Fail.AutoRetryScheduled | failure_id, attempt_number, backoff_ms | Auto-retry scheduled |
-| MSN.Fail.AutoRetryCompleted | failure_id, attempt_number, success | Auto-retry succeeds |
-| MSN.Fail.AutoRetryExhausted | failure_id, attempts_made, last_error | All retries exhausted |
-| MSN.Fail.Escalated | failure_id, level, escalated_to | Escalation triggered |
-| MSN.Fail.RecoveryStarted | failure_id, strategy_type, checkpoint_ref | Recovery begins |
-| MSN.Fail.RecoveryCompleted | failure_id, strategy_type, outcome | Recovery succeeds |
-| MSN.Fail.RecoveryFailed | failure_id, strategy_type, error | Recovery fails |
-| MSN.Fail.PartialFailure | failure_id, failed_count, total_count, isolated_milestones | Partial failure |
-| MSN.Fail.CascadingFailure | failure_id, source_mission, affected_missions | Cascading failure |
+| MSN.MSN.Fail.FailureDetected | failure_id, mission_id, method, details | Failure detected |
+| MSN.MSN.Fail.FailureClassified | failure_id, category, severity, root_cause | Failure classified |
+| MSN.MSN.Fail.AutoRetryScheduled | failure_id, attempt_number, backoff_ms | Auto-retry scheduled |
+| MSN.MSN.Fail.AutoRetryCompleted | failure_id, attempt_number, success | Auto-retry succeeds |
+| MSN.MSN.Fail.AutoRetryExhausted | failure_id, attempts_made, last_error | All retries exhausted |
+| MSN.MSN.Fail.Escalated | failure_id, level, escalated_to | Escalation triggered |
+| MSN.MSN.Fail.RecoveryStarted | failure_id, strategy_type, checkpoint_ref | Recovery begins |
+| MSN.MSN.Fail.RecoveryCompleted | failure_id, strategy_type, outcome | Recovery succeeds |
+| MSN.MSN.Fail.RecoveryFailed | failure_id, strategy_type, error | Recovery fails |
+| MSN.MSN.Fail.PartialFailure | failure_id, failed_count, total_count, isolated_milestones | Partial failure |
+| MSN.MSN.Fail.CascadingFailure | failure_id, source_mission, affected_missions | Cascading failure |
 
 ## Error Cases
 
@@ -211,6 +211,25 @@ interface FailureManager {
 | MSN-FAIL-003 | Recovery approval must come from level above current escalation | Algorithmic â€” Approval authorization check |
 | MSN-FAIL-004 | Evidence integrity must be preserved through all recovery actions | Architectural â€” Evidence chain is append-only during recovery |
 | MSN-FAIL-005 | Cascading failure must isolate affected Missions before propagation | Algorithmic â€” Containment check before recovery execution |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Missions operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Missions emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Missions instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Missions declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

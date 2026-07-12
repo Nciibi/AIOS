@@ -211,6 +211,8 @@ interface EvidenceScorer {
 | COG-005 | Every reasoning step has a confidence score | Schema â€” required field on ThoughtStep |
 | COG-006 | Evidence must be evaluated before it can inform reasoning | Algorithmic â€” enforced in Evidence Evaluator |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Related Documents
 
 | Document | Relationship |
@@ -232,6 +234,25 @@ interface EvidenceScorer {
 | No evidence found for reflection | `COG_NO_EVIDENCE` | Return "no relevant experience" |
 | Conflicting evidence cannot be reconciled | `COG_UNRESOLVABLE_CONFLICT` | Present both sides with uncertainty flag |
 | Unknown reasoning strategy | `COG_UNKNOWN_STRATEGY` | Default to chain-of-thought |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Cognitive OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Cognitive OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Cognitive OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Cognitive OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

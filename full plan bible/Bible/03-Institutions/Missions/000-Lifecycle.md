@@ -175,6 +175,23 @@ Every transition produces an Event:
 | MSN_LIF_007 | Mission stuck in Blocked state â€” escalation timeout exceeded |
 | MSN_LIF_008 | Evidence package incomplete â€” cannot transition to Review |
 
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
+
 ## Cross-Cutting Concerns
 
 ### Security

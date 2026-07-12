@@ -245,7 +245,7 @@ Enforcement Gateway checks budget via checkBudget()
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| ECON.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | `ECN.BudgetCreated` | budgetId, ownerId, totalAmount | New budget registered |
 | `ECN.BudgetActivated` | budgetId, effectiveFrom | Budget entered Active phase |
@@ -286,6 +286,25 @@ Enforcement Gateway checks budget via checkBudget()
 | ECN-006 | Price sheets in the same scope cannot have overlapping effective periods | Algorithmic â€” validation on PriceSheet creation |
 | ECN-007 | Total spending across all Organizations never exceeds platform-wide resource capacity | Constitutional â€” enforced by ROS at allocation time |
 | ECN-008 | Overage decisions are always recorded as evidence | Architectural â€” OverageAllowed/OverageDenied events emitted |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Economic operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Economic emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Economic instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Economic declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

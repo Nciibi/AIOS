@@ -503,15 +503,15 @@ interface TradeOffVisualizer {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `DEC.TradeOff.AnalysisStarted` | request_id, option_count, criteria_count | Trade-off analysis initiated |
-| `DEC.TradeOff.AnalysisCompleted` | request_id, trade_off_count, frontier_size | Analysis finished |
-| `DEC.TradeOff.PairwiseCompared` | request_id, pair_count | All pairwise comparisons done |
-| `DEC.TradeOff.ParetoComputed` | request_id, frontier_options, dominated_options | Pareto frontier calculated |
-| `DEC.TradeOff.HighMagnitudeDetected` | request_id, magnitude, criteria_pair, option_pair | Trade-off exceeds high threshold |
-| `DEC.TradeOff.DominanceFound` | request_id, dominator_id, dominated_id, criteria_superset | Option A dominates Option B |
-| `DEC.TradeOff.NoDominance` | request_id, pair_count | No option dominates â€” trade-offs present |
-| `DEC.TradeOff.CustomTypeRegistered` | request_id, criterion_x, criterion_y, label | Custom trade-off type added |
-| `DEC.TradeOff.AllEqual` | request_id | All options score identically |
+| DEC.DEC.TradeOff.AnalysisStarted | request_id, option_count, criteria_count | Trade-off analysis initiated |
+| DEC.DEC.TradeOff.AnalysisCompleted | request_id, trade_off_count, frontier_size | Analysis finished |
+| DEC.DEC.TradeOff.PairwiseCompared | request_id, pair_count | All pairwise comparisons done |
+| DEC.DEC.TradeOff.ParetoComputed | request_id, frontier_options, dominated_options | Pareto frontier calculated |
+| DEC.DEC.TradeOff.HighMagnitudeDetected | request_id, magnitude, criteria_pair, option_pair | Trade-off exceeds high threshold |
+| DEC.DEC.TradeOff.DominanceFound | request_id, dominator_id, dominated_id, criteria_superset | Option A dominates Option B |
+| DEC.DEC.TradeOff.NoDominance | request_id, pair_count | No option dominates â€” trade-offs present |
+| DEC.DEC.TradeOff.CustomTypeRegistered | request_id, criterion_x, criterion_y, label | Custom trade-off type added |
+| DEC.DEC.TradeOff.AllEqual | request_id | All options score identically |
 
 ## Invariants
 
@@ -525,6 +525,8 @@ interface TradeOffVisualizer {
 | TRO-006 | The report always includes the full pairwise comparison matrix | Architectural â€” consumers need complete picture |
 | TRO-007 | Dominated options are never silently removed | Architectural â€” always flagged and explained, never hidden |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -581,6 +583,25 @@ interface TradeOffVisualizer {
 5. Sou reviews and confirms the trade-off was consciously accepted
 6. Audit evidence stored alongside DecisionRecord
 ```
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Decision System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Decision System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Decision System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Decision System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

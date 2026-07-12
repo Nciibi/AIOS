@@ -180,7 +180,7 @@ interface Scheduler {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| CON.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | `GC.ScriptDefined` | scriptId, name, version | New script registered in the script registry |
 | `GC.ScriptStarted` | scriptId, executionId, variableCount | Script execution initiated |
@@ -214,6 +214,25 @@ interface Scheduler {
 | GC-003-04 | Scripts are immutable after definition â€” changes create new versions | Architectural â€” registry enforces append-only versioning |
 | GC-003-05 | Scheduled scripts enforce maxConcurrentExecutions | Algorithmic â€” scheduler checks before firing |
 | GC-003-06 | Step dependencies form a directed acyclic graph | Algorithmic â€” parser validates acyclic structure |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Console operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Console emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Console instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Console declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

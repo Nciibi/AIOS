@@ -355,6 +355,8 @@ type TTSErrorCode =
 | TTS-006 | Streaming cancellation produces no further audio after cancel() returns | Algorithmic â€” cancel flushes buffer and terminates |
 | TTS-007 | Speed, pitch, and volume are clamped to provider-supported ranges | Algorithmic â€” values capped at min/max before dispatch |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -367,6 +369,25 @@ type TTSErrorCode =
 | Stream cancelled mid-synthesis | `VOI_TTS_STREAM_CANCELLED` | Emit `TTSStreamCancelled`; no error, partial data discarded |
 | Unknown provider in VoiceProfileRef | `VOI_PROVIDER_UNAVAILABLE` | Return error; list available providers |
 | Speed/pitch/volume out of supported range | `VOI_TTS_PARAM_OUT_OF_RANGE` | Clamp to nearest valid value; emit warning |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Voice System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Voice System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Voice System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Voice System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

@@ -322,16 +322,16 @@ Plan Completed / Failed / Cancelled
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `PLN.PT.ProgressUpdated` | plan_id, completion_percentage, timestamp | Progress metrics recalculated |
-| `PLN.PT.MilestoneStateChanged` | milestone_id, new_status, old_status | Individual milestone state update |
-| `PLN.PT.SnapshotTaken` | snapshot_id, plan_id, metrics | Periodic progress snapshot recorded |
-| `PLN.PT.TimelineVarianceUpdated` | plan_id, variance_ms, variance_pct | Timeline variance recalculated |
-| `PLN.PT.ResourceAlert` | plan_id, resource_type, consumption_pct | Resource consumption exceeded threshold |
-| `PLN.PT.RiskIndicatorRaised` | plan_id, level, category, message | New risk indicator generated |
-| `PLN.PT.RiskIndicatorResolved` | plan_id, risk_id | Risk condition cleared |
-| `PLN.PT.BlockChainUpdated` | plan_id, blocked_count, chain | Blocked milestone chain changed |
-| `PLN.PT.HeartbeatTick` | plan_id, elapsed_ms, metrics | Periodic heartbeat event |
-| `PLN.PT.PushedToContext` | plan_id, context_slot | Progress snapshot sent to Context System |
+| PLN.PLN.PT.ProgressUpdated | plan_id, completion_percentage, timestamp | Progress metrics recalculated |
+| PLN.PLN.PT.MilestoneStateChanged | milestone_id, new_status, old_status | Individual milestone state update |
+| PLN.PLN.PT.SnapshotTaken | snapshot_id, plan_id, metrics | Periodic progress snapshot recorded |
+| PLN.PLN.PT.TimelineVarianceUpdated | plan_id, variance_ms, variance_pct | Timeline variance recalculated |
+| PLN.PLN.PT.ResourceAlert | plan_id, resource_type, consumption_pct | Resource consumption exceeded threshold |
+| PLN.PLN.PT.RiskIndicatorRaised | plan_id, level, category, message | New risk indicator generated |
+| PLN.PLN.PT.RiskIndicatorResolved | plan_id, risk_id | Risk condition cleared |
+| PLN.PLN.PT.BlockChainUpdated | plan_id, blocked_count, chain | Blocked milestone chain changed |
+| PLN.PLN.PT.HeartbeatTick | plan_id, elapsed_ms, metrics | Periodic heartbeat event |
+| PLN.PLN.PT.PushedToContext | plan_id, context_slot | Progress snapshot sent to Context System |
 
 ## Invariants
 
@@ -346,6 +346,8 @@ Plan Completed / Failed / Cancelled
 | PT-007 | Heartbeat timer is stopped when plan reaches terminal state | Algorithmic â€” checked on plan completion/failure |
 | PT-008 | Resource consumption ratios never exceed 100% of budget | Algorithmic â€” hard cap; further consumption flagged separately |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -358,6 +360,25 @@ Plan Completed / Failed / Cancelled
 | Context System push failure | `PLN_PT_CONTEXT_PUSH_FAILED` | Retry with backoff; log error |
 | Snapshot storage failure | `PLN_PT_SNAPSHOT_FAILED` | Log error; continue monitoring |
 | Invalid milestone event sequence | `PLN_PT_INVALID_EVENT_SEQUENCE` | Reject event; log with context for debugging |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Planning System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Planning System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Planning System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Planning System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

@@ -103,7 +103,7 @@ Preparation â†’ Detection â†’ Analysis â†’ Containment â†’ E
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| SEC.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Security.VulnerabilityFound` | Potential vulnerability identified | finding_id, target, cve, cvss_score, confidence, discovery_method |
 | `Security.VulnerabilityVerified` | Vulnerability confirmed in sandbox | finding_id, verification_env, exploit_result, risk_level, reproducibility |

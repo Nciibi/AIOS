@@ -348,18 +348,18 @@ interface StrategySelectionContext {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `COG.META.MetacognitionStarted` | request_id, functions[], target_id, depth | Metacognition analysis began |
-| `COG.META.MetacognitionCompleted` | request_id, health, recommended_action, signals_count | Metacognition finished |
-| `COG.META.ConfidenceCalibrated` | request_id, calibration_error, offset_applied | Confidence calibration adjusted |
-| `COG.META.CognitiveLoadWarning` | target_id, load_score, level, suggestion | Cognitive load threshold exceeded |
-| `COG.META.StrategyRecommended` | target_id, recommended_strategy, rationale, alternatives | Strategy change suggested |
-| `COG.META.KnowledgeGapDetected` | target_id, gap_count, impact_estimate | One or more knowledge gaps found |
-| `COG.META.UncertaintySpike` | target_id, uncertainty, dominant_source | Uncertainty above threshold |
-| `COG.META.ProgressStalled` | target_id, progress, stalled_duration_ms | Progress below threshold for extended period |
-| `COG.META.ProgressSufficient` | target_id, progress, criteria_met | Goal criteria sufficiently met |
-| `COG.META.FeedbackEmitted` | target_id, signal_type, severity, narrative | Individual feedback signal sent |
-| `COG.META.HealthChanged` | target_id, previous_health, new_health, reason | Overall cognitive health status changed |
-| `COG.META.CalibrationReset` | session_id, sample_size_before | Calibration curve was reset |
+| COG.COG.META.MetacognitionStarted | request_id, functions[], target_id, depth | Metacognition analysis began |
+| COG.COG.META.MetacognitionCompleted | request_id, health, recommended_action, signals_count | Metacognition finished |
+| COG.COG.META.ConfidenceCalibrated | request_id, calibration_error, offset_applied | Confidence calibration adjusted |
+| COG.COG.META.CognitiveLoadWarning | target_id, load_score, level, suggestion | Cognitive load threshold exceeded |
+| COG.COG.META.StrategyRecommended | target_id, recommended_strategy, rationale, alternatives | Strategy change suggested |
+| COG.COG.META.KnowledgeGapDetected | target_id, gap_count, impact_estimate | One or more knowledge gaps found |
+| COG.COG.META.UncertaintySpike | target_id, uncertainty, dominant_source | Uncertainty above threshold |
+| COG.COG.META.ProgressStalled | target_id, progress, stalled_duration_ms | Progress below threshold for extended period |
+| COG.COG.META.ProgressSufficient | target_id, progress, criteria_met | Goal criteria sufficiently met |
+| COG.COG.META.FeedbackEmitted | target_id, signal_type, severity, narrative | Individual feedback signal sent |
+| COG.COG.META.HealthChanged | target_id, previous_health, new_health, reason | Overall cognitive health status changed |
+| COG.COG.META.CalibrationReset | session_id, sample_size_before | Calibration curve was reset |
 
 ## Invariants
 
@@ -374,6 +374,8 @@ interface StrategySelectionContext {
 | COG-META-007 | A strategy recommendation is advisory; Sou must approve changes | Architectural â€” no auto-switching |
 | COG-META-008 | The calibration curve is session-scoped and resets on new session | Algorithmic â€” session-scoped state |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -386,6 +388,25 @@ interface StrategySelectionContext {
 | Recognized strategy not available | `COG_META_STRATEGY_UNAVAILABLE` | Recommend next-best strategy; document why |
 | Metacognition function not recognized | `COG_META_UNKNOWN_FUNCTION` | Skip unknown function; execute remainder |
 | Circular feedback loop detected | `COG_META_FEEDBACK_CYCLE` | Break loop; apply last valid signal; emit warning |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Cognitive OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Cognitive OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Cognitive OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Cognitive OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

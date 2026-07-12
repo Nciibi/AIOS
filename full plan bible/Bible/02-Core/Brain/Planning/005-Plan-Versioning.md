@@ -379,19 +379,19 @@ function rollback(plan_id: string, target_version_id: string, reason: string): P
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `PLN.VER.VersionCreated` | version_id, plan_id, version_number, status | New plan version created |
-| `PLN.VER.PlanApproved` | version_id, plan_id, approved_at | Plan version approved by Sou |
-| `PLN.VER.PlanRejected` | version_id, plan_id, rejection_reason | Plan version rejected by Sou |
-| `PLN.VER.PlanActivated` | version_id, plan_id | Plan version moved to active execution |
-| `PLN.VER.PlanCompleted` | version_id, plan_id, duration_ms | Plan version completed |
-| `PLN.VER.PlanFailed` | version_id, plan_id, reason | Plan version failed |
-| `PLN.VER.PlanCancelled` | version_id, plan_id, reason | Plan version cancelled |
-| `PLN.VER.PlanRolledBack` | plan_id, from_version, to_version | Plan rolled back to earlier version |
-| `PLN.VER.VersionDiffComputed` | version_id, parent_id, change_count | Diff calculated between versions |
-| `PLN.VER.ConcurrentModification` | plan_id, expected_version, actual_version | Concurrent edit prevented |
-| `PLN.VER.VersionLocked` | version_id, plan_id | Version locked (no further modifications) |
-| `PLN.VER.VersionUnlocked` | version_id, plan_id | Version unlocked |
-| `PLN.VER.IntegrityCheckFailed` | version_id, expected_checksum, actual_checksum | Snapshot checksum mismatch |
+| PLN.PLN.VER.VersionCreated | version_id, plan_id, version_number, status | New plan version created |
+| PLN.PLN.VER.PlanApproved | version_id, plan_id, approved_at | Plan version approved by Sou |
+| PLN.PLN.VER.PlanRejected | version_id, plan_id, rejection_reason | Plan version rejected by Sou |
+| PLN.PLN.VER.PlanActivated | version_id, plan_id | Plan version moved to active execution |
+| PLN.PLN.VER.PlanCompleted | version_id, plan_id, duration_ms | Plan version completed |
+| PLN.PLN.VER.PlanFailed | version_id, plan_id, reason | Plan version failed |
+| PLN.PLN.VER.PlanCancelled | version_id, plan_id, reason | Plan version cancelled |
+| PLN.PLN.VER.PlanRolledBack | plan_id, from_version, to_version | Plan rolled back to earlier version |
+| PLN.PLN.VER.VersionDiffComputed | version_id, parent_id, change_count | Diff calculated between versions |
+| PLN.PLN.VER.ConcurrentModification | plan_id, expected_version, actual_version | Concurrent edit prevented |
+| PLN.PLN.VER.VersionLocked | version_id, plan_id | Version locked (no further modifications) |
+| PLN.PLN.VER.VersionUnlocked | version_id, plan_id | Version unlocked |
+| PLN.PLN.VER.IntegrityCheckFailed | version_id, expected_checksum, actual_checksum | Snapshot checksum mismatch |
 
 ## Invariants
 
@@ -406,6 +406,8 @@ function rollback(plan_id: string, target_version_id: string, reason: string): P
 | VER-007 | Only Sou can approve a plan | API-level â€” `approved_by` must be "sou" |
 | VER-008 | Rollback always creates a new draft version (history is append-only) | Algorithmic â€” rollback never mutates existing versions |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -419,6 +421,25 @@ function rollback(plan_id: string, target_version_id: string, reason: string): P
 | Locked version modification | `PLN_VER_PLAN_LOCKED` | Return error; unlock before modifying |
 | Non-Sou approval attempt | `PLN_VER_UNAUTHORIZED_APPROVAL` | Deny; log security event |
 | Snapshot checksum mismatch | `PLN_VER_INTEGRITY_FAILURE` | Return error; data corruption detected |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Planning System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Planning System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Planning System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Planning System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

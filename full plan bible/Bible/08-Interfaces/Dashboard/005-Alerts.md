@@ -154,7 +154,7 @@ interface ActionRouter {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| DASH.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | DB.AlertSurfaced | alertId, severity, source | Alert displayed on dashboard alert-list |
 | DB.AlertClassified | alertId, severity, classifier | Severity assigned or updated |
@@ -186,6 +186,25 @@ interface ActionRouter {
 | DB-033 | Archived alerts are immutable; no edits after archive | Architectural â€” archive transitions state to read-only |
 | DB-034 | Action links target Console or UI, never direct execution | Architectural â€” ActionRouter resolves to view URLs only |
 | DB-035 | Duplicate alerts from same source are suppressed | Algorithmic â€” AlertIngestor deduplicates by sourceAlertId |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Dashboard operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Dashboard emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Dashboard instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

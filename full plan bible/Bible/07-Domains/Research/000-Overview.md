@@ -110,7 +110,7 @@ Evidence with a composite quality score below 0.4 is flagged as low-confidence. 
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| RES.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Research.QuestionFormulated` | Research question is defined | question_id, question_text, scope, constraints, success_criteria |
 | `Research.SourceRetrieved` | External source is fetched | source_id, url, content_type, size_bytes, retrieval_time, source_quality |

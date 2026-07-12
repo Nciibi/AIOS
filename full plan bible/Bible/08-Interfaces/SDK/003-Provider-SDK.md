@@ -177,7 +177,7 @@ The Provider SDK supports these built-in resource types, with extension points f
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| SDK.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `SDK.ProviderRegistered` | Provider registers with ROS | provider_id, provider_type, capabilities_hash, version |
 | `SDK.ProviderHealthChanged` | Provider health status transitions | provider_id, from_status, to_status, reason, consecutive_checks |

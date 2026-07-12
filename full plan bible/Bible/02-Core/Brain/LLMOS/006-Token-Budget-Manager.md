@@ -143,12 +143,33 @@ interface CreditBudget {
 | LLM-BGT-005 | Budget overrides are multiplicative â€” applied to token counts before comparison with limits. | Algorithmic â€” override calculation |
 | LLM-BGT-006 | Credit budgets and token budgets are mutually exclusive â€” an entity uses one or the other. | Schema â€” budget type exclusivity |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-009 | LLMOS is the ONLY path for AI inference inside the Brain. No direct provider calls. | Architectural - all inference requests route through LLMOS pipeline. Direct provider calls are blocked. |
 ## Events
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
 | `LLMOS.BudgetChecked` | request_id, entity_id, budget_type, budget_before, budget_after, estimated_cost, overrides_applied, approved | Stage 3 check |
 | `LLMOS.BudgetReconciled` | request_id, actual_tokens, estimated_tokens, difference, adjusted_cost | Stage 17 reconciliation |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+LLMOS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), LLMOS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), LLMOS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), LLMOS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

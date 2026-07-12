@@ -140,7 +140,7 @@ interface ParameterCompleter {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| CON.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | `GC.AutocompleteTriggered` | sessionId, inputLength, cursorPosition | Auto-completion activated by human input |
 | `GC.CandidateGenerated` | sessionId, candidateCount, maxScore | Candidates generated from all providers |
@@ -173,6 +173,25 @@ interface ParameterCompleter {
 | GC-004-04 | Help entries are sourced from command definitions, never hardcoded | Architectural â€” HelpProvider reads from CommandRegistry |
 | GC-004-05 | Fuzzy matching is typo-tolerant up to a configurable edit distance | Algorithmic â€” matcher enforces maximum edit distance |
 | GC-004-06 | Candidate overflow is handled gracefully without crashing the UI | Architectural â€” overflow trigger returns capped set |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Console operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Console emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Console instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Console declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

@@ -363,6 +363,8 @@ interface ImagePreprocessor {
 | VIS-006 | OCR confidence below threshold returns error, never hallucinated text | Schema â€” minimum confidence enforcement |
 | VIS-007 | Video analysis always has a configurable frame limit | Schema â€” max_frames prevents unbounded processing |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Related Documents
 
 | Document | Relationship |
@@ -387,6 +389,25 @@ interface ImagePreprocessor {
 | Analysis timeout | `VIS_ANALYSIS_TIMEOUT` | Return partial results with error |
 | Privacy filter blocked all content | `VIS_ALL_CONTENT_BLOCKED` | Return "content not available" |
 | Document type not recognized | `VIS_DOCUMENT_TYPE_UNKNOWN` | Fall back to generic parsing |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Vision System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Vision System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Vision System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Vision System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

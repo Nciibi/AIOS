@@ -180,6 +180,8 @@ async function performHealthCheck(provider: string): Promise<void>
 | LLM-REG-004 | Health checks run for every registered provider regardless of usage. | Algorithmic â€” health check loop |
 | LLM-REG-005 | Resolve never returns an empty list if at least one model matches requirements. | Algorithmic â€” resolve logic guarantees |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-009 | LLMOS is the ONLY path for AI inference inside the Brain. No direct provider calls. | Architectural - all inference requests route through LLMOS pipeline. Direct provider calls are blocked. |
 ## Events
 
 | Event | Fields | Trigger |
@@ -189,6 +191,25 @@ async function performHealthCheck(provider: string): Promise<void>
 | `LLMOS.ModelUpdated` | model_id, changed_fields, old_values, new_values | Health/metrics change |
 | `LLMOS.ProviderHealthChanged` | provider, old_state, new_state, reason, failure_count | Health check transition |
 | `LLMOS.ModelsResolved` | request_id, total_matched, filtered_by_*, candidates_summary | Pipeline Stage 4 |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+LLMOS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), LLMOS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), LLMOS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), LLMOS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

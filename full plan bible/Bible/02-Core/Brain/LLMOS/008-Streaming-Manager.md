@@ -133,6 +133,8 @@ Final chunk contains:
 | LLM-STR-005 | Backpressure never causes data loss â€” only delays. | Algorithmic â€” buffer management |
 | LLM-STR-006 | Every chunk delivered to caller passes through output guardrails (Stage 14) before delivery. | Architectural â€” pipeline stage ordering |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-009 | LLMOS is the ONLY path for AI inference inside the Brain. No direct provider calls. | Architectural - all inference requests route through LLMOS pipeline. Direct provider calls are blocked. |
 ## Events
 
 | Event | Fields | Trigger |
@@ -140,6 +142,25 @@ Final chunk contains:
 | `LLMOS.StreamChunk` | request_id, sequence, delta_length, cumulative_tokens, streaming_latency_ms | Every 10th chunk emitted |
 | `LLMOS.StreamCompleted` | request_id, total_chunks, total_tokens, time_to_first_token_ms, tokens_per_second, finish_reason | Stream termination |
 | `LLMOS.StreamError` | request_id, sequence_at_error, error_code, was_resumed | Mid-stream error |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+LLMOS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), LLMOS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), LLMOS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), LLMOS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

@@ -146,7 +146,7 @@ interface DeviceSelector {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| FPGA.EventType | Produced When | Fields |
 |-------|----------|---------|
 | FPGA.DeviceSelected | DeviceRegistry: device_id, part_number, rationale | Fired when a target device is selected |
 | FPGA.ResourcesEstimated | ResourceEstimator: estimate_id, total_percent, confidence | Fired after resource estimation completes |
@@ -189,6 +189,25 @@ interface DeviceSelector {
 - **R13 â€” Defensive Design**: Resource estimates include safety margin (10%) above calculated utilization.
 - **R14 â€” Self-Healing**: On license expiry, IPCatalog queries Academy for substitute cores automatically.
 - **R15 â€” Backward Compatibility**: Device family registry maintains versioned migration paths for deprecated families.
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+FPGA operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), FPGA emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), FPGA instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), FPGA declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Related Documents
 

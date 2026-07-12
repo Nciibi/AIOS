@@ -150,7 +150,7 @@ interface LayoutManager {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| DASH.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | DB.WidgetCreated | widgetId, type, viewId | New widget registered in a view |
 | DB.WidgetConfigured | widgetId, settings | Widget settings updated |
@@ -182,6 +182,25 @@ interface LayoutManager {
 | DB-015 | Widget layout never exceeds parent view boundaries | Algorithmic â€” LayoutManager.validate enforces grid constraints |
 | DB-016 | Widgets are composable within views; no circular nesting | Architectural â€” widget containment is flat per view |
 | DB-017 | Widget settings are type-safe per WidgetType schema | Algorithmic â€” configure_widget validates against type schema |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Dashboard operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Dashboard emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Dashboard instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

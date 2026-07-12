@@ -268,6 +268,9 @@ interface TTLScanner {
 | MEM-005 | Working memory is session-scoped and cleared on session end | Algorithmic â€” TTL policy enforcement |
 | MEM-006 | Semantic memory items are automatically embedded | Architectural â€” Vector Store is mandatory |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
+| BRAIN-008 | Sou has read access to ALL memories. Services have scoped access. | Constitutional - Sou's omniscience within Brain. Access control enforced by Memory OS. |
 ## Related Documents
 
 | Document | Relationship |
@@ -292,6 +295,25 @@ interface TTLScanner {
 | Item already exists (immutable violation) | `MEM_ITEM_EXISTS` | Return existing item_id; no overwrite |
 | Batch store partial failure | `MEM_BATCH_PARTIAL` | Return success count and failure details |
 | TTL sweep in progress | `MEM_SWEEP_IN_PROGRESS` | Queue write; complete after sweep |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Memory OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Memory OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Memory OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Memory OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

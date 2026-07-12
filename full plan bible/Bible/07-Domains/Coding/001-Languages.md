@@ -137,7 +137,7 @@ enum SupportLevel {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| COD.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Coding.LanguageRegistered` | A new language is added to the registry | language_id, display_name, toolchain_count, support_level |
 | `Coding.LanguageUnregistered` | A language is removed from the registry | language_id, reason, affected_worker_count |
@@ -167,6 +167,25 @@ enum SupportLevel {
 | COD-LNG-I-003 | A toolchain cannot be registered without verification | Registry enforces verified flag before marking toolchain as active |
 | COD-LNG-I-004 | Language IDs are globally unique across the registry | Registry enforces uniqueness constraint on language_id field |
 | COD-LNG-I-005 | Deprecated languages remain resolvable for existing Workers | Registry retains deprecated profiles but blocks new Worker assignment |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Coding operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Coding emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Coding instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Coding declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

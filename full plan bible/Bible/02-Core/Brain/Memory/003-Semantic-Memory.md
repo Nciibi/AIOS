@@ -314,17 +314,17 @@ interface ReindexReport {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `MEM.SM.FactStored` | fact_id, fact_type, subject, predicate, confidence | New fact created |
-| `MEM.SM.FactUpdated` | fact_id, updated_fields, old_values | Fact metadata changed |
-| `MEM.SM.FactDeleted` | fact_id, fact_type, reason | Fact removed |
-| `MEM.SM.FactVerified` | fact_id, previous_confidence, new_confidence | Fact verified |
-| `MEM.SM.FactDeprecated` | fact_id, superseeded_by, reason | Fact superseded |
-| `MEM.SM.DuplicateDetected` | existing_id, incoming_id, similarity | Duplicate prevented |
-| `MEM.SM.ContradictionDetected` | fact_a_id, fact_b_id, context | Conflicting facts flagged |
-| `MEM.SM.ContradictionResolved` | survivor_id, deprecated_id, resolved_by | Conflict resolved |
-| `MEM.SM.SearchExecuted` | query_id, result_count, avg_score, latency | Semantic search completed |
-| `MEM.SM.ConfidenceAdjusted` | fact_id, old_confidence, new_confidence, reason | Confidence score changed |
-| `MEM.SM.ReindexCompleted` | facts_reindexed, duration_ms, errors | HNSW index rebuilt |
+| MEM.MEM.SM.FactStored | fact_id, fact_type, subject, predicate, confidence | New fact created |
+| MEM.MEM.SM.FactUpdated | fact_id, updated_fields, old_values | Fact metadata changed |
+| MEM.MEM.SM.FactDeleted | fact_id, fact_type, reason | Fact removed |
+| MEM.MEM.SM.FactVerified | fact_id, previous_confidence, new_confidence | Fact verified |
+| MEM.MEM.SM.FactDeprecated | fact_id, superseeded_by, reason | Fact superseded |
+| MEM.MEM.SM.DuplicateDetected | existing_id, incoming_id, similarity | Duplicate prevented |
+| MEM.MEM.SM.ContradictionDetected | fact_a_id, fact_b_id, context | Conflicting facts flagged |
+| MEM.MEM.SM.ContradictionResolved | survivor_id, deprecated_id, resolved_by | Conflict resolved |
+| MEM.MEM.SM.SearchExecuted | query_id, result_count, avg_score, latency | Semantic search completed |
+| MEM.MEM.SM.ConfidenceAdjusted | fact_id, old_confidence, new_confidence, reason | Confidence score changed |
+| MEM.MEM.SM.ReindexCompleted | facts_reindexed, duration_ms, errors | HNSW index rebuilt |
 
 ## Invariants
 
@@ -338,6 +338,9 @@ interface ReindexReport {
 | SM-006 | Semantic search always returns results ordered by similarity | Algorithmic â€” HNSW search ordering |
 | SM-007 | Deprecated facts are excluded from default queries | Algorithmic â€” filter applied in query |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
+| BRAIN-008 | Sou has read access to ALL memories. Services have scoped access. | Constitutional - Sou's omniscience within Brain. Access control enforced by Memory OS. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -348,6 +351,25 @@ interface ReindexReport {
 | Contradiction resolution with no survivor | `SM_INVALID_RESOLUTION` | Return error; both facts must exist |
 | Reindex in progress | `SM_REINDEX_IN_PROGRESS` | Queue writes; service reads from old index |
 | Vector search timeout | `SM_SEARCH_TIMEOUT` | Fall back to keyword search |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Memory OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Memory OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Memory OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Memory OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

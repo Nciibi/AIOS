@@ -246,20 +246,20 @@ interface ReasoningContext {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `COG.REASON.PipelineStarted` | pipeline_id, request_id, strategy, depth_limit | Reasoning pipeline initialized |
-| `COG.REASON.PipelineCompleted` | pipeline_id, confidence, total_steps, token_cost | Pipeline finished successfully |
-| `COG.REASON.PipelineFailed` | pipeline_id, error_code, partial_steps | Pipeline terminated with error |
-| `COG.REASON.ThoughtStepGenerated` | pipeline_id, step_number, type, confidence, token_cost | Individual step produced |
-| `COG.REASON.StrategySelected` | pipeline_id, strategy, rationale, alternatives | Strategy chosen by selector |
-| `COG.REASON.BranchCreated` | pipeline_id, step_number, branch_count | Alternative branch added (tree-of-thought) |
-| `COG.REASON.BranchPruned` | pipeline_id, step_number, pruned_label | Branch discarded |
-| `COG.REASON.StepOverridden` | pipeline_id, step_number, confidence_before, confidence_after | Sou overrode a step |
-| `COG.REASON.PipelinePaused` | pipeline_id, reason | Pipeline paused for metacognition |
-| `COG.REASON.PipelineResumed` | pipeline_id, reason | Pipeline resumed after metacognition |
-| `COG.REASON.LowConfidenceStep` | pipeline_id, step_number, confidence, threshold | Step below confidence threshold |
-| `COG.REASON.StrategyFallback` | pipeline_id, original_strategy, fallback_strategy, reason | Fallback to alternative strategy |
-| `COG.REASON.StreamingChunkSent` | pipeline_id, step_number, bytes | Streaming output delivered |
-| `COG.REASON.EarlyTermination` | pipeline_id, step_number, reason, confidence | Pipeline terminated before full depth |
+| COG.COG.REASON.PipelineStarted | pipeline_id, request_id, strategy, depth_limit | Reasoning pipeline initialized |
+| COG.COG.REASON.PipelineCompleted | pipeline_id, confidence, total_steps, token_cost | Pipeline finished successfully |
+| COG.COG.REASON.PipelineFailed | pipeline_id, error_code, partial_steps | Pipeline terminated with error |
+| COG.COG.REASON.ThoughtStepGenerated | pipeline_id, step_number, type, confidence, token_cost | Individual step produced |
+| COG.COG.REASON.StrategySelected | pipeline_id, strategy, rationale, alternatives | Strategy chosen by selector |
+| COG.COG.REASON.BranchCreated | pipeline_id, step_number, branch_count | Alternative branch added (tree-of-thought) |
+| COG.COG.REASON.BranchPruned | pipeline_id, step_number, pruned_label | Branch discarded |
+| COG.COG.REASON.StepOverridden | pipeline_id, step_number, confidence_before, confidence_after | Sou overrode a step |
+| COG.COG.REASON.PipelinePaused | pipeline_id, reason | Pipeline paused for metacognition |
+| COG.COG.REASON.PipelineResumed | pipeline_id, reason | Pipeline resumed after metacognition |
+| COG.COG.REASON.LowConfidenceStep | pipeline_id, step_number, confidence, threshold | Step below confidence threshold |
+| COG.COG.REASON.StrategyFallback | pipeline_id, original_strategy, fallback_strategy, reason | Fallback to alternative strategy |
+| COG.COG.REASON.StreamingChunkSent | pipeline_id, step_number, bytes | Streaming output delivered |
+| COG.COG.REASON.EarlyTermination | pipeline_id, step_number, reason, confidence | Pipeline terminated before full depth |
 
 ## Invariants
 
@@ -274,6 +274,8 @@ interface ReasoningContext {
 | COG-REASON-007 | Strategy selection is deterministic for identical inputs at temperature=0 | Algorithmic â€” selection rules ordered by priority |
 | COG-REASON-008 | Branching depth never exceeds configured branching_limit | Algorithmic â€” enforced in tree-of-thought executor |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -288,6 +290,25 @@ interface ReasoningContext {
 | Circular reference in thought chain | `COG_REASON_CIRCULAR_CHAIN` | Detect cycle; prune to break cycle; emit warning |
 | Pipeline not found for getThoughtChain | `COG_REASON_PIPELINE_NOT_FOUND` | Return null; no error |
 | Strategy executor not registered | `COG_REASON_EXECUTOR_MISSING` | Fall back to chain-of-thought; log warning |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Cognitive OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Cognitive OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Cognitive OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Cognitive OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

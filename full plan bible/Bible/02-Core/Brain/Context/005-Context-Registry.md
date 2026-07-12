@@ -442,6 +442,8 @@ interface TokenBreakdown {
 | RG-006 | Purged entries are removed from all indexes atomically | Algorithmic â€” delete removes from every index |
 | RG-007 | Registry is scoped per session | Schema â€” all queries require session_id |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-006 | The Context System owns the global context window. Single authority for context. | Architectural - no other component may persist or modify global context. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -453,6 +455,25 @@ interface TokenBreakdown {
 | findByHash on closed session | `CTX_SESSION_NOT_FOUND` | Return null; session terminated |
 | Snapshot on empty registry | `CTX_EMPTY_REGISTRY` | Return zeroed snapshot |
 | Delete already-deleted entry | `CTX_ALREADY_DELETED` | Idempotent; skip |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Context System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Context System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Context System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Context System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

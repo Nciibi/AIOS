@@ -433,6 +433,8 @@ interface EstimationReport {
 | CP-006 | Emergency compression always produces a result (even if over budget) | Architectural â€” last resort always executes |
 | CP-007 | Summarization failures fall back to extractive method | Algorithmic â€” fallback chain defined |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-006 | The Context System owns the global context window. Single authority for context. | Architectural - no other component may persist or modify global context. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -443,6 +445,25 @@ interface EstimationReport {
 | No eligible items for any strategy | `CTX_NO_ELIGIBLE_ITEMS` | Return result with no strategies applied |
 | target_tokens >= current_tokens | `CTX_NO_COMPRESSION_NEEDED` | No-op; return result with zero savings |
 | Unknown strategy name | `CTX_UNKNOWN_STRATEGY` | Skip unknown strategy; log error |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Context System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Context System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Context System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Context System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

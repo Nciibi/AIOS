@@ -262,18 +262,18 @@ interface InterruptManager {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `ATT.INT.InterruptCreated` | interrupt_id, interrupt_type, priority, source, reason | New interrupt request created |
-| `ATT.INT.InterruptDelivered` | interrupt_id, latency_ms, cooldown_remaining | Interrupt delivered to Sou |
-| `ATT.INT.InterruptAcknowledged` | interrupt_id, latency_ms, action_taken | Sou acknowledged interrupt |
-| `ATT.INT.InterruptQueued` | interrupt_id, queue_position, reason | Interrupt queued due to cooldown/budget |
-| `ATT.INT.InterruptDequeued` | interrupt_id, queue_duration_ms | Interrupt removed from queue and delivered |
-| `ATT.INT.InterruptDropped` | interrupt_id, reason, snooze_count | Interrupt expired or queue full, dropped |
-| `ATT.INT.CooldownAdjusted` | old_multiplier, new_multiplier, reason | Cooldown multiplier dynamically adjusted |
-| `ATT.INT.CooldownBypass` | interrupt_id, bypass_reason | Critical security alert bypassed cooldown |
-| `ATT.INT.QueueFull` | queue_size, policy, dropped_id | Interrupt queue exceeded capacity |
-| `ATT.INT.OverloadEscalation` | interrupt_rate, switch_rate, consecutive, action | Sou overwhelmed, escalation triggered |
-| `ATT.INT.EscalationResolved` | duration_ms, interrupts_cleared | Overload condition resolved |
-| `ATT.INT.AcknowledgmentMissed` | interrupt_id, priority, window_ms | Sou did not ack within required window |
+| ATT.ATT.INT.InterruptCreated | interrupt_id, interrupt_type, priority, source, reason | New interrupt request created |
+| ATT.ATT.INT.InterruptDelivered | interrupt_id, latency_ms, cooldown_remaining | Interrupt delivered to Sou |
+| ATT.ATT.INT.InterruptAcknowledged | interrupt_id, latency_ms, action_taken | Sou acknowledged interrupt |
+| ATT.ATT.INT.InterruptQueued | interrupt_id, queue_position, reason | Interrupt queued due to cooldown/budget |
+| ATT.ATT.INT.InterruptDequeued | interrupt_id, queue_duration_ms | Interrupt removed from queue and delivered |
+| ATT.ATT.INT.InterruptDropped | interrupt_id, reason, snooze_count | Interrupt expired or queue full, dropped |
+| ATT.ATT.INT.CooldownAdjusted | old_multiplier, new_multiplier, reason | Cooldown multiplier dynamically adjusted |
+| ATT.ATT.INT.CooldownBypass | interrupt_id, bypass_reason | Critical security alert bypassed cooldown |
+| ATT.ATT.INT.QueueFull | queue_size, policy, dropped_id | Interrupt queue exceeded capacity |
+| ATT.ATT.INT.OverloadEscalation | interrupt_rate, switch_rate, consecutive, action | Sou overwhelmed, escalation triggered |
+| ATT.ATT.INT.EscalationResolved | duration_ms, interrupts_cleared | Overload condition resolved |
+| ATT.ATT.INT.AcknowledgmentMissed | interrupt_id, priority, window_ms | Sou did not ack within required window |
 
 ## Invariants
 
@@ -287,6 +287,8 @@ interface InterruptManager {
 | ATT-INT-006 | Overload escalation is idempotent (calling it multiple times is safe) | Architectural â€” guard on `is_overloaded` flag |
 | ATT-INT-007 | Acknowledgment latency is measured from delivery to ack, never negative | Algorithmic â€” computed as `max(0, ack_time - deliver_time)` |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -299,6 +301,25 @@ interface InterruptManager {
 | Set cooldown multiplier outside [0.5, 5.0] | `ATT_INT_INVALID_MULTIPLIER` | Clamp to nearest bound; log warning |
 | Dequeue from empty queue | `ATT_INT_QUEUE_EMPTY` | Return null; no error |
 | Flush queue with no items matching threshold | `ATT_INT_NO_MATCHING_ITEMS` | Return 0; log informational |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Attention System operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Attention System emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Attention System instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Attention System declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

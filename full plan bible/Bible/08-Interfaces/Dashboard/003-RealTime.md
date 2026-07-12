@@ -167,7 +167,7 @@ interface ThrottleController {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| DASH.EventType | Produced When | Fields |
 |-------|--------|-------------|
 | DB.StreamConnected | connectionId, source, endpoint | Streaming connection established |
 | DB.StreamDisconnected | connectionId, reason | Streaming connection lost |
@@ -200,6 +200,25 @@ interface ThrottleController {
 | DB-021 | Update batches are delivered atomically to widgets | Algorithmic â€” UpdateDistributor processes batches as units |
 | DB-022 | No persistent connection is left dangling on view close | Architectural â€” SubscriptionManager cleans up on view unload |
 | DB-023 | Rate limiting never drops evidence-critical data | Algorithmic â€” evidenceRef-bearing updates are queued, not dropped |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Dashboard operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Dashboard emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Dashboard instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

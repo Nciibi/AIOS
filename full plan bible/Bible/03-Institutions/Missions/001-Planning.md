@@ -143,17 +143,17 @@ interface MissionPlanner {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.Plan.Created | mission_id, plan_hash, version | Plan created |
-| MSN.Plan.Validated | mission_id, validation_result, passed | Plan validated |
-| MSN.Plan.GoalDecomposed | mission_id, goal_count, hierarchy | Goals decomposed |
-| MSN.Plan.MilestoneDefined | mission_id, milestone_count, dag_hash | Milestones defined |
-| MSN.Plan.ResourceEstimated | mission_id, resource_budget | Resources estimated |
-| MSN.Plan.DependencyMapped | mission_id, dependency_count, types | Dependencies mapped |
-| MSN.Plan.TimelineEstimated | mission_id, start_date, end_date, critical_path | Timeline estimated |
-| MSN.Plan.RiskAssessed | mission_id, overall_score, top_risks | Risk assessed |
-| MSN.Plan.Approved | mission_id, approved_by, approval_hash | Plan approved |
-| MSN.Plan.Rejected | mission_id, rejected_by, reasons | Plan rejected |
-| MSN.Plan.Versioned | mission_id, old_version, new_version | Plan updated |
+| MSN.MSN.Plan.Created | mission_id, plan_hash, version | Plan created |
+| MSN.MSN.Plan.Validated | mission_id, validation_result, passed | Plan validated |
+| MSN.MSN.Plan.GoalDecomposed | mission_id, goal_count, hierarchy | Goals decomposed |
+| MSN.MSN.Plan.MilestoneDefined | mission_id, milestone_count, dag_hash | Milestones defined |
+| MSN.MSN.Plan.ResourceEstimated | mission_id, resource_budget | Resources estimated |
+| MSN.MSN.Plan.DependencyMapped | mission_id, dependency_count, types | Dependencies mapped |
+| MSN.MSN.Plan.TimelineEstimated | mission_id, start_date, end_date, critical_path | Timeline estimated |
+| MSN.MSN.Plan.RiskAssessed | mission_id, overall_score, top_risks | Risk assessed |
+| MSN.MSN.Plan.Approved | mission_id, approved_by, approval_hash | Plan approved |
+| MSN.MSN.Plan.Rejected | mission_id, rejected_by, reasons | Plan rejected |
+| MSN.MSN.Plan.Versioned | mission_id, old_version, new_version | Plan updated |
 
 ## Error Cases
 
@@ -175,6 +175,25 @@ interface MissionPlanner {
 | MSN-PLN-003 | Resource requirements must not exceed Organization allocation | Algorithmic â€” Budget validation against ROS allocation |
 | MSN-PLN-004 | Timeline must be internally consistent (start â‰¤ end for all segments) | Algorithmic â€” Timeline cross-validation on creation |
 | MSN-PLN-005 | All milestones must be associated with a Goal | Architectural â€” Milestone.goal_id references must resolve |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Missions operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Missions emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Missions instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Missions declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

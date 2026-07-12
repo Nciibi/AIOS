@@ -106,7 +106,7 @@ FPGA toolchain operations are among the most compute-intensive in AIOS:
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| FPGA.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `FPGA.RTLGenerated` | HDL code is generated | worker_id, module_name, language, lines, ports, hierarchy_depth |
 | `FPGA.SimulationRun` | RTL simulation completes | sim_id, test_name, passed, coverage_pct, duration, assertions_fired |

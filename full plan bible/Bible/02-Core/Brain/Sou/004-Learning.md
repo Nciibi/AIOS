@@ -188,7 +188,7 @@ Each model is versioned independently. Models may be shared with the Academy for
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| SOU.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Sou.LearningIngested` | Outcome evidence is ingested | outcome_id, source_type, evidence_hash |
 | `Sou.ModelUpdated` | A learning model is updated | model_id, old_version, new_version, change_summary |
@@ -216,6 +216,8 @@ Each model is versioned independently. Models may be shared with the Academy for
 | SOU-LRN-003 | Learning does not expose entity-identifiable information in shared models | Governance â€” privacy filter enforced before Academy sharing |
 | SOU-LRN-004 | Model updates are always validated before deployment | API-level â€” evaluateImprovement runs before model activation |
 
+| BRAIN-002 | Sou is the only component with strategic decision authority. | Constitutional - SOU-001. Verified by Security Council. |
+| BRAIN-005 | Every user-facing response passes through Sou. | Constitutional - SOU-005. ACF routing enforced. |
 ## Cross-Cutting Concerns
 
 ### Security

@@ -193,7 +193,7 @@ Knowledge execution (via KEE) follows this protocol:
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| SDK.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `SDK.KnowledgeSearched` | Knowledge search is executed | query_id, query_hash, result_count, duration_ms, query_type |
 | `SDK.KnowledgeProposed` | Knowledge artifact is submitted | proposal_id, artifact_type, source_event_ids, confidence |

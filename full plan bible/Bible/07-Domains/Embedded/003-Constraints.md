@@ -246,7 +246,7 @@ interface OptimizationEngine {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| EMB.EventType | Produced When | Fields |
 |-----------|---------------|--------|
 | Embedded.FlashAnalyzed | Flash usage analysis completes | binaryId, usedFlash, totalFlash, utilizationPct |
 | Embedded.RAMProfiled | RAM profiling completes | binaryId, peakUsage, totalRam, heapFragmentation |
@@ -294,6 +294,25 @@ interface OptimizationEngine {
 | R13 â€” Event-Driven Consistency | ConstraintViolation events trigger automatic rollback or alternative generation passes |
 | R14 â€” Code as Law | Constraint budgets are enforced programmatically; no manual overrides bypass analysis |
 | R15 â€” Provably Deterministic | MD5 of binary + budget matches MD5 of all reports across all runs |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Embedded operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Embedded emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Embedded instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Embedded declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Related Documents
 

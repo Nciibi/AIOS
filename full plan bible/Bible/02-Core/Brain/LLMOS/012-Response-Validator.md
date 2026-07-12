@@ -197,6 +197,8 @@ interface ValidationWarning {
 | LLM-VLD-004 | Schema validation is strict by default â€” additional properties cause failure. | Algorithmic â€” strict mode validation |
 | LLM-VLD-005 | Quality validation requires minimum length > 0 to be enforced. | Algorithmic â€” minimum threshold check |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-009 | LLMOS is the ONLY path for AI inference inside the Brain. No direct provider calls. | Architectural - all inference requests route through LLMOS pipeline. Direct provider calls are blocked. |
 ## Events
 
 | Event | Fields | Trigger |
@@ -204,6 +206,25 @@ interface ValidationWarning {
 | `LLMOS.ResponseValidated` | request_id, validation_types, valid, errors, retry_count, retry_attempted | After validation (Stage 15) |
 | `LLMOS.ResponseValidationFailed` | request_id, validation_types, errors, retry_strategy, model_used | Validation failure |
 | `LLMOS.ResponseValidationRetry` | request_id, retry_number, strategy, adjusted_parameters | Before retry |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+LLMOS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), LLMOS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), LLMOS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), LLMOS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

@@ -191,7 +191,7 @@ Controls what memory LLMOS injects into the context:
 
 ## Events
 
-| Event Type | Produced By | Fields |
+| LLM.EventType | Produced By | Fields |
 |------------|-------------|--------|
 | `LLMOS.RequestReceived` | Gateway | request_id, entity_id, model_requirements_summary |
 | `LLMOS.SecurityChecked` | Gateway | request_id, entity_id, pipeline_result |
@@ -260,6 +260,14 @@ Controls what memory LLMOS injects into the context:
 - LLM-INV-007: Cost optimization never selects a model that violates the requester's constraints.
 - LLM-INV-008: Memory injection never exceeds the configured `max_memory_tokens`.
 - LLM-INV-009: All token usage is tracked and reported regardless of cache hit or failure.
+
+
+## Invariants
+
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-009 | LLMOS is the ONLY path for AI inference inside the Brain. No direct provider calls. | Architectural - all inference requests route through LLMOS pipeline. Direct provider calls are blocked. |
 
 ## Cross-Cutting Concerns
 

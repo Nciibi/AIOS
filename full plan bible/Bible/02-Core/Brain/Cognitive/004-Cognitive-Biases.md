@@ -317,16 +317,16 @@ interface DecisionContext {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `COG.BIAS.BiasDetected` | request_id, bias_type, confidence, severity, step_numbers | Bias found in reasoning chain |
-| `COG.BIAS.BiasMitigated` | request_id, bias_type, strategy, effectiveness | Mitigation action applied |
-| `COG.BIAS.MitigationFailed` | request_id, bias_type, strategy, reason | Mitigation could not be applied |
-| `COG.BIAS.BiasReportGenerated` | request_id, overall_score, detections_count, mitigations_count | Full bias report created |
-| `COG.BIAS.DebiasingPromptInjected` | request_id, bias_type, prompt_template | Debiasing prompt sent to LLMOS |
-| `COG.BIAS.CounterargumentGenerated` | request_id, bias_type, target_step | Counterargument created for anchored/framed step |
-| `COG.BIAS.PerspectiveShifted` | request_id, bias_type, original_conclusion, shifted_view | Alternative perspective considered |
-| `COG.BIAS.RecurrencePatternDetected` | bias_type, occurrence_count, session_ids, avg_severity | Recurring bias pattern identified |
-| `COG.BIAS.BiasThresholdAdjusted` | bias_type, threshold_before, threshold_after, reason | Detection threshold changed |
-| `COG.BIAS.HighSeverityBiasFlagged` | request_id, bias_type, severity, impact_assessment | Critical bias requiring immediate attention |
+| COG.COG.BIAS.BiasDetected | request_id, bias_type, confidence, severity, step_numbers | Bias found in reasoning chain |
+| COG.COG.BIAS.BiasMitigated | request_id, bias_type, strategy, effectiveness | Mitigation action applied |
+| COG.COG.BIAS.MitigationFailed | request_id, bias_type, strategy, reason | Mitigation could not be applied |
+| COG.COG.BIAS.BiasReportGenerated | request_id, overall_score, detections_count, mitigations_count | Full bias report created |
+| COG.COG.BIAS.DebiasingPromptInjected | request_id, bias_type, prompt_template | Debiasing prompt sent to LLMOS |
+| COG.COG.BIAS.CounterargumentGenerated | request_id, bias_type, target_step | Counterargument created for anchored/framed step |
+| COG.COG.BIAS.PerspectiveShifted | request_id, bias_type, original_conclusion, shifted_view | Alternative perspective considered |
+| COG.COG.BIAS.RecurrencePatternDetected | bias_type, occurrence_count, session_ids, avg_severity | Recurring bias pattern identified |
+| COG.COG.BIAS.BiasThresholdAdjusted | bias_type, threshold_before, threshold_after, reason | Detection threshold changed |
+| COG.COG.BIAS.HighSeverityBiasFlagged | request_id, bias_type, severity, impact_assessment | Critical bias requiring immediate attention |
 
 ## Invariants
 
@@ -341,6 +341,8 @@ interface DecisionContext {
 | COG-BIAS-007 | Mitigation does not modify the original reasoning chain | Architectural â€” creates advisory output |
 | COG-BIAS-008 | Recurrence patterns require â‰¥3 occurrences in a session to be logged | Threshold â€” configurable via BiasThresholds |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -353,6 +355,25 @@ interface DecisionContext {
 | Calibration curve unavailable for overconfidence check | `COG_BIAS_NO_CALIBRATION_DATA` | Flag as potential overconfidence without confirmation |
 | Counterargument generation fails | `COG_BIAS_COUNTERARGUMENT_FAILED` | Skip counterargument; use perspective shift instead |
 | Recurrence pattern query exceeds session history | `COG_BIAS_PATTERN_QUERY_LIMIT` | Return partial pattern results; limit to last N sessions |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Cognitive OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Cognitive OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Cognitive OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Cognitive OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

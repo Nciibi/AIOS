@@ -168,7 +168,7 @@ interface ProtocolCapability {
 
 ## Events
 
-| Event Type | Produced When | Fields |
+| COM.EventType | Produced When | Fields |
 |-----------|--------------|--------|
 | `Comm.ProtocolRegistered` | New protocol spec is added to registry | protocol_id, name, version, format_count, channel_types |
 | `Comm.MessageParsed` | Raw bytes are successfully parsed into envelope | message_id, protocol_id, channel_type, parse_duration_ms, schema_valid |
@@ -201,6 +201,25 @@ interface ProtocolCapability {
 | COM-PRO-I-004 | Schema validation is applied to every parsed message | Parser runs schema check against protocol spec before envelope is dispatched |
 | COM-PRO-I-005 | Deprecated protocol versions remain parseable but block new sessions | Registry retains deprecated parsers; negotiation rejects deprecated versions for new sessions |
 | COM-PRO-I-006 | Channel adapters always report status changes via event | Adapter lifecycle hooks enforce status transition event emission |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Communication operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Communication emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Communication instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Communication declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

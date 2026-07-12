@@ -137,16 +137,16 @@ interface MissionDelegator {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.Del.DelegationCreated | contract_id, source_mission, target, scope_hash | Delegation contract created |
-| MSN.Del.DelegationAccepted | contract_id, accepted_by, acceptance_hash | Delegation accepted |
-| MSN.Del.DelegationRejected | contract_id, rejected_by, reason | Delegation rejected |
-| MSN.Del.SubMissionStarted | contract_id, sub_mission_id, started_at | Sub-Mission begins execution |
-| MSN.Del.SubMissionCompleted | contract_id, sub_mission_id, result_summary | Sub-Mission completes |
-| MSN.Del.SubMissionFailed | contract_id, sub_mission_id, error_code, details | Sub-Mission fails |
-| MSN.Del.ResultReturned | contract_id, deliverables_hash, count | Results returned |
-| MSN.Del.ResultVerified | contract_id, verification_status, score | Results verified |
-| MSN.Del.ResultRejected | contract_id, verification_status, failures | Results rejected |
-| MSN.Del.AccountabilityChain | contract_id, chain_hash, links | Chain recorded |
+| MSN.MSN.Del.DelegationCreated | contract_id, source_mission, target, scope_hash | Delegation contract created |
+| MSN.MSN.Del.DelegationAccepted | contract_id, accepted_by, acceptance_hash | Delegation accepted |
+| MSN.MSN.Del.DelegationRejected | contract_id, rejected_by, reason | Delegation rejected |
+| MSN.MSN.Del.SubMissionStarted | contract_id, sub_mission_id, started_at | Sub-Mission begins execution |
+| MSN.MSN.Del.SubMissionCompleted | contract_id, sub_mission_id, result_summary | Sub-Mission completes |
+| MSN.MSN.Del.SubMissionFailed | contract_id, sub_mission_id, error_code, details | Sub-Mission fails |
+| MSN.MSN.Del.ResultReturned | contract_id, deliverables_hash, count | Results returned |
+| MSN.MSN.Del.ResultVerified | contract_id, verification_status, score | Results verified |
+| MSN.MSN.Del.ResultRejected | contract_id, verification_status, failures | Results rejected |
+| MSN.MSN.Del.AccountabilityChain | contract_id, chain_hash, links | Chain recorded |
 
 ## Error Cases
 
@@ -166,6 +166,25 @@ interface MissionDelegator {
 | MSN-DEL-002 | A Mission cannot delegate its entire scope â€” must retain at least one milestone | Algorithmic â€” Validation rejects delegation of all milestones |
 | MSN-DEL-003 | Delegated budget must not exceed parent Mission's allocated budget | Algorithmic â€” Budget cross-check against parent allocation |
 | MSN-DEL-004 | Accountability chain must be recorded before any work is transferred | Architectural â€” Event store write precedes worker dispatch |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Missions operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Missions emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Missions instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Missions declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 

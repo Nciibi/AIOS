@@ -391,17 +391,17 @@ interface CompactionStatus {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `MEM.CMP.CycleStarted` | cycle_id, phases_planned | Compaction cycle began |
-| `MEM.CMP.CycleCompleted` | cycle_id, duration_ms, phases_executed | Cycle finished |
-| `MEM.CMP.ReclamationCompleted` | items_deleted, bytes_reclaimed | Storage reclamation pass |
-| `MEM.CMP.ReorganizationCompleted` | segments_rewritten, stale_bytes | Data reorganization pass |
-| `MEM.CMP.PromotionAdjustments` | items_promoted, items_decayed | Importance scores adjusted |
-| `MEM.CMP.CrossPromotion` | type, count | Items promoted between memory types |
-| `MEM.CMP.EvictionTriggered` | items_evicted, reason | Storage pressure eviction |
-| `MEM.CMP.IntegrityIssue` | issue_type, item_id, details | Corruption or inconsistency detected |
-| `MEM.CMP.IntegrityRepaired` | item_id, issue_type | Auto-repair applied |
-| `MEM.CMP.StorageWarning` | usage_ratio, total_bytes, free_bytes | Storage threshold exceeded |
-| `MEM.CMP.StorageEmergency` | usage_ratio, actions_taken | Emergency eviction triggered |
+| MEM.MEM.CMP.CycleStarted | cycle_id, phases_planned | Compaction cycle began |
+| MEM.MEM.CMP.CycleCompleted | cycle_id, duration_ms, phases_executed | Cycle finished |
+| MEM.MEM.CMP.ReclamationCompleted | items_deleted, bytes_reclaimed | Storage reclamation pass |
+| MEM.MEM.CMP.ReorganizationCompleted | segments_rewritten, stale_bytes | Data reorganization pass |
+| MEM.MEM.CMP.PromotionAdjustments | items_promoted, items_decayed | Importance scores adjusted |
+| MEM.MEM.CMP.CrossPromotion | type, count | Items promoted between memory types |
+| MEM.MEM.CMP.EvictionTriggered | items_evicted, reason | Storage pressure eviction |
+| MEM.MEM.CMP.IntegrityIssue | issue_type, item_id, details | Corruption or inconsistency detected |
+| MEM.MEM.CMP.IntegrityRepaired | item_id, issue_type | Auto-repair applied |
+| MEM.MEM.CMP.StorageWarning | usage_ratio, total_bytes, free_bytes | Storage threshold exceeded |
+| MEM.MEM.CMP.StorageEmergency | usage_ratio, actions_taken | Emergency eviction triggered |
 
 ## Invariants
 
@@ -415,6 +415,9 @@ interface CompactionStatus {
 | CMP-006 | Emergency eviction always preserves Working and pinned items | Algorithmic â€” eviction order enforced |
 | CMP-007 | Integrity checks never modify active data | Architectural â€” read-only verification |
 
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
+| BRAIN-008 | Sou has read access to ALL memories. Services have scoped access. | Constitutional - Sou's omniscience within Brain. Access control enforced by Memory OS. |
 ## Error Cases
 
 | Condition | Error Code | Behavior |
@@ -425,6 +428,25 @@ interface CompactionStatus {
 | Promotion candidate conflicts | `CMP_PROMOTION_CONFLICT` | Skip conflict; log for review |
 | Eviction cannot free enough space | `CMP_EVICTION_INSUFFICIENT` | Report to Sou; escalate |
 | Integrity check finds unrecoverable corruption | `CMP_CORRUPTION_UNRECOVERABLE` | Isolate corrupted segment; report to Sou |
+
+
+## Cross-Cutting Concerns
+
+### Security
+
+Memory OS operates under Law 8 (Verification-First) and Law 7 (Capability Bounds): every operation is authorized by the Security Kernel before execution, and the component never exceeds its declared capabilities. (Physics/008-Security.md)
+
+### Evidence
+
+Per Law 4 (Evidence), Memory OS emits an evidence record for each significant state change - what changed, by whom, on what basis, with what outcome - delivered through ACF and persisted by EVS. (Physics/005-Events.md)
+
+### Lifecycle
+
+Per Law 6 (Lifecycle Compliance), Memory OS instances follow the canonical LMS lifecycle (Draft -> Active -> Suspended -> Archived) and are terminated deterministically; orphan states are prevented. (Physics/006-Lifecycles.md)
+
+### Capability Bounds
+
+Per Law 7 (Capability Bounds), Memory OS declares its capabilities at creation and operates only within them; capability expansion requires reauthorization through the Security Kernel. (Physics/007-Capabilities.md)
 
 ## Design DNA
 
