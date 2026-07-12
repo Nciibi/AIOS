@@ -53,7 +53,7 @@ Before contributing, read these foundational documents in order:
 | `Bible/10-Research/` | Research areas needing exploration |
 | `ideas_suggest.md` | Documented suggestions for stub population |
 | GitHub Issues | Bug reports and feature requests (if available) |
-| `Research/` directory | Open research stubs needing content |
+| `Research/` directory | Phase research vision documents |
 
 ### 3. Understand the Doc Hierarchy
 
