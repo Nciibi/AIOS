@@ -713,6 +713,14 @@ These were identified during the Phase 2 audit but are enhancements, not bugs:
   - `Bible/06-Services/ACF/000-Overview.md` — IOP builds on top of ACF transport
 - **AGX**: Consider splitting into sub-docs (like CCA has 000-CCA.md, 001-CAS.md, 002-CDG.md) once the system matures — e.g., separate docs for the Evolution Engine, Genome Repository, and Competency Registry specifications.
 
-### Remaining work:
-- **Research/** (4 files): Phases 2-5 roadmap
-- **Contributing/**, **Examples/**, **Tests/**: Lower priority
+### Stubs resolved (post-audit):
+- **Contributing/000-Contributing-Guide.md** — ✅ Active
+- **Examples/000-Example-Orgs.md** — ✅ Active
+- **Tests/000-Integration-Tests.md** — ✅ Active
+- **Research/000-Phase-2-Orchestration.md** — ✅ Active
+- **Research/001-Phase-3-Intelligence.md** — ✅ Active
+- **Research/002-Phase-4-Integration.md** — ✅ Active
+- **Research/003-Phase-5-Ecosystem.md** — ✅ Active
+- **DNA/000-AIOS-DNA.md** — ✅ Active
+- **DNA/001-Brain-DNA.md** — ✅ Active
+- **DNA/002-Entity-DNA.md** — ✅ Active
