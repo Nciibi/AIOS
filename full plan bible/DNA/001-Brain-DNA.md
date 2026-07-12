@@ -79,7 +79,7 @@ BRAIN-001 ─┬─ BRAIN-002 (Sou has strategic authority) ── SOU-001
             ├─ BRAIN-004 (no external mission creation) ── SOU-002
             ├─ BRAIN-005 (responses pass through Sou) ── SOU-005
             ├─ BRAIN-006 (Context System owns global context) ── SOU-004
-            ├─ BRAIN-007 (services are stateless) ── R7 (Memory OS)
+            ├─ BRAIN-007 (services are stateless) ── Memory OS
             ├─ BRAIN-008 (Sou has all memory access)
             └─ BRAIN-009 (LLMOS is only inference path)
 ```
