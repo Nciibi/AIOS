@@ -346,14 +346,16 @@ Dual-implementation providers (Claude, Codex, Ollama) implement both interfaces.
 
 ## Invariants
 
-- LLM-SDK-001: Every `ModelProvider` implementation has a unique `provider_name`.
-- LLM-SDK-002: `initialize()` must resolve credentials before any other method is called.
-- LLM-SDK-003: `healthCheck()` is called within 5 seconds or times out to `degraded`.
-- LLM-SDK-004: Provider errors are always wrapped in `ProviderError` with a valid code.
-- LLM-SDK-005: Streaming is always supported — `executeStream` may delegate to `execute` + synthetic stream if provider does not support native streaming.
-- LLM-SDK-006: `shutdown()` is idempotent — calling it multiple times has no effect.
-- LLM-SDK-007: Credentials are never logged, serialized, or exposed outside the `initialize()` scope.
-- LLM-SDK-008: Token counting never throws — returns 0 on failure.
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-SDK-001 | Every `ModelProvider` implementation has a unique `provider_name`. | Schema — registration uniqueness |
+| LLM-SDK-002 | `initialize()` must resolve credentials before any other method is called. | Architectural — lifecycle ordering |
+| LLM-SDK-003 | `healthCheck()` is called within 5 seconds or times out to `degraded`. | Algorithmic — timeout enforcement |
+| LLM-SDK-004 | Provider errors are always wrapped in `ProviderError` with a valid code. | Schema — error type enforcement |
+| LLM-SDK-005 | Streaming is always supported — `executeStream` may delegate to `execute` + synthetic stream if provider does not support native streaming. | Algorithmic — fallback streaming |
+| LLM-SDK-006 | `shutdown()` is idempotent — calling it multiple times has no effect. | Algorithmic — idempotency design |
+| LLM-SDK-007 | Credentials are never logged, serialized, or exposed outside the `initialize()` scope. | Governance — security policy |
+| LLM-SDK-008 | Token counting never throws — returns 0 on failure. | Algorithmic — safe fallback |
 
 ## Events (Provider-Level)
 

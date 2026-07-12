@@ -172,11 +172,13 @@ async function performHealthCheck(provider: string): Promise<void>
 
 ## Invariants
 
-- LLM-REG-001: Every model in the registry has a unique `model_id` across all providers.
-- LLM-REG-002: The registry always contains at least one model for every connected provider.
-- LLM-REG-003: A model cannot be registered without at least one capability.
-- LLM-REG-004: Health checks run for every registered provider regardless of usage.
-- LLM-REG-005: Resolve never returns an empty list if at least one model matches requirements.
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-REG-001 | Every model in the registry has a unique `model_id` across all providers. | Schema — enforced at registration |
+| LLM-REG-002 | The registry always contains at least one model for every connected provider. | Architectural — lifecycle management |
+| LLM-REG-003 | A model cannot be registered without at least one capability. | Schema — CapabilitySet validation |
+| LLM-REG-004 | Health checks run for every registered provider regardless of usage. | Algorithmic — health check loop |
+| LLM-REG-005 | Resolve never returns an empty list if at least one model matches requirements. | Algorithmic — resolve logic guarantees |
 
 ## Events
 

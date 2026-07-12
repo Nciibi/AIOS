@@ -164,12 +164,14 @@ interface PromptSection {
 
 ## Invariants
 
-- LLM-PCP-001: Every compiled prompt has exactly one system section and at least one message.
-- LLM-PCP-002: The system prompt is never empty — if none provided, model default is used.
-- LLM-PCP-003: Token count is always estimated before sending to provider.
-- LLM-PCP-004: Tool definitions match the target model's capabilities — no tool calling on models without tool support.
-- LLM-PCP-005: Response schema injection respects the model's structured output capability.
-- LLM-PCP-006: Compiled prompt never exceeds the model's context window (enforced by Context Builder).
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-PCP-001 | Every compiled prompt has exactly one system section and at least one message. | Schema — compilation pipeline enforces structure |
+| LLM-PCP-002 | The system prompt is never empty — if none provided, model default is used. | Algorithmic — fallback logic |
+| LLM-PCP-003 | Token count is always estimated before sending to provider. | Algorithmic — pre-flight estimation |
+| LLM-PCP-004 | Tool definitions match the target model's capabilities — no tool calling on models without tool support. | Algorithmic — capability-aware formatting |
+| LLM-PCP-005 | Response schema injection respects the model's structured output capability. | Algorithmic — capability-gated schema injection |
+| LLM-PCP-006 | Compiled prompt never exceeds the model's context window (enforced by Context Builder). | Architectural — upstream enforcement |
 
 ## Events
 

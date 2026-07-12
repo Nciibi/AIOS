@@ -122,11 +122,13 @@ interface ModelDiscount {
 
 ## Invariants
 
-- LLM-CST-001: Cost estimation is never the sole routing criterion — it contributes to Router scoring.
-- LLM-CST-002: Cost optimization never suggests a model that violates request model_requirements.
-- LLM-CST-003: Entity discounts are never exposed to the calling entity (internal only).
-- LLM-CST-004: Cost estimates are recorded in Events even for cache hits (to preserve cost basis).
-- LLM-CST-005: Provider pricing is updated from a central source (ROS billing configuration) — never hardcoded.
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-CST-001 | Cost estimation is never the sole routing criterion — it contributes to Router scoring. | Architectural — scoring composition |
+| LLM-CST-002 | Cost optimization never suggests a model that violates request model_requirements. | Algorithmic — requirement filtering |
+| LLM-CST-003 | Entity discounts are never exposed to the calling entity (internal only). | Governance — data privacy policy |
+| LLM-CST-004 | Cost estimates are recorded in Events even for cache hits (to preserve cost basis). | Architectural — event logging invariant |
+| LLM-CST-005 | Provider pricing is updated from a central source (ROS billing configuration) — never hardcoded. | Governance — centralized configuration |
 
 ## Events
 

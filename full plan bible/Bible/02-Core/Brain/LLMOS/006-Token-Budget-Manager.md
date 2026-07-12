@@ -134,12 +134,14 @@ interface CreditBudget {
 
 ## Invariants
 
-- LLM-BGT-001: Every request passes budget check before entering the pipeline (Stage 3).
-- LLM-BGT-002: Budget check is performed against at least one window (daily or hourly).
-- LLM-BGT-003: Token estimation never returns 0 — minimum estimate is 1 token.
-- LLM-BGT-004: Reconciliation always runs after request completion (Stage 17).
-- LLM-BGT-005: Budget overrides are multiplicative — applied to token counts before comparison with limits.
-- LLM-BGT-006: Credit budgets and token budgets are mutually exclusive — an entity uses one or the other.
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-BGT-001 | Every request passes budget check before entering the pipeline (Stage 3). | Architectural — gateway stage enforcement |
+| LLM-BGT-002 | Budget check is performed against at least one window (daily or hourly). | Algorithmic — multi-window check |
+| LLM-BGT-003 | Token estimation never returns 0 — minimum estimate is 1 token. | Algorithmic — floor applied |
+| LLM-BGT-004 | Reconciliation always runs after request completion (Stage 17). | Architectural — post-request stage enforcement |
+| LLM-BGT-005 | Budget overrides are multiplicative — applied to token counts before comparison with limits. | Algorithmic — override calculation |
+| LLM-BGT-006 | Credit budgets and token budgets are mutually exclusive — an entity uses one or the other. | Schema — budget type exclusivity |
 
 ## Events
 

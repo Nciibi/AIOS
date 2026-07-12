@@ -215,12 +215,14 @@ Entities can pre-warm the cache by submitting requests with `cache_policy.mode =
 
 ## Invariants
 
-- LLM-CCH-001: Cache is checked before every provider call (Stage 7).
-- LLM-CCH-002: Cache is written only after response validation passes (Stage 16).
-- LLM-CCH-003: Cache hits still produce Events with full cost and usage records.
-- LLM-CCH-004: Cache keys are unique per (model_id, input_hash, tools_hash, schema_hash, temperature, max_tokens, entity_id).
-- LLM-CCH-005: Semantic cache matches never return results with similarity below the configured threshold.
-- LLM-CCH-006: Cache entries are immutable after creation — no partial updates.
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-CCH-001 | Cache is checked before every provider call (Stage 7). | Architectural — pre-call stage enforcement |
+| LLM-CCH-002 | Cache is written only after response validation passes (Stage 16). | Architectural — post-validation stage enforcement |
+| LLM-CCH-003 | Cache hits still produce Events with full cost and usage records. | Architectural — event logging invariant |
+| LLM-CCH-004 | Cache keys are unique per (model_id, input_hash, tools_hash, schema_hash, temperature, max_tokens, entity_id). | Algorithmic — composite key uniqueness |
+| LLM-CCH-005 | Semantic cache matches never return results with similarity below the configured threshold. | Algorithmic — threshold-based filtering |
+| LLM-CCH-006 | Cache entries are immutable after creation — no partial updates. | Schema — immutability design |
 
 ## Events
 

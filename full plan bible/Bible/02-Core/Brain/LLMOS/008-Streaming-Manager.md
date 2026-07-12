@@ -124,12 +124,14 @@ Final chunk contains:
 
 ## Invariants
 
-- LLM-STR-001: Every chunk has a monotonically increasing sequence number starting at 1.
-- LLM-STR-002: In `direct` mode, chunks are delivered to caller in order with no reordering.
-- LLM-STR-003: In `buffered` mode, assembled response is equivalent to non-streamed response.
-- LLM-STR-004: Tool call arguments are accumulated correctly across chunks.
-- LLM-STR-005: Backpressure never causes data loss — only delays.
-- LLM-STR-006: Every chunk delivered to caller passes through output guardrails (Stage 14 — `LLMOS.GuardrailChecked` with direction=output) before delivery.
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-STR-001 | Every chunk has a monotonically increasing sequence number starting at 1. | Algorithmic — sequence tracking |
+| LLM-STR-002 | In `direct` mode, chunks are delivered to caller in order with no reordering. | Algorithmic — ordered delivery |
+| LLM-STR-003 | In `buffered` mode, assembled response is equivalent to non-streamed response. | Algorithmic — deterministic assembly |
+| LLM-STR-004 | Tool call arguments are accumulated correctly across chunks. | Algorithmic — partial tool call accumulation |
+| LLM-STR-005 | Backpressure never causes data loss — only delays. | Algorithmic — buffer management |
+| LLM-STR-006 | Every chunk delivered to caller passes through output guardrails (Stage 14) before delivery. | Architectural — pipeline stage ordering |
 
 ## Events
 

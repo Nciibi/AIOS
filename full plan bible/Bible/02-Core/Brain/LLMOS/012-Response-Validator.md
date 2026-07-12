@@ -189,11 +189,13 @@ interface ValidationWarning {
 
 ## Invariants
 
-- LLM-VLD-001: Every response with a defined schema is validated before delivery to caller.
-- LLM-VLD-002: Responses that fail validation are never cached.
-- LLM-VLD-003: Validation retries re-enter the pipeline at Stage 12, not Stage 0.
-- LLM-VLD-004: Schema validation is strict by default — additional properties cause failure.
-- LLM-VLD-005: Quality validation requires minimum length > 0 to be enforced.
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-VLD-001 | Every response with a defined schema is validated before delivery to caller. | Architectural — pre-delivery validation stage |
+| LLM-VLD-002 | Responses that fail validation are never cached. | Architectural — cache bypass on failure |
+| LLM-VLD-003 | Validation retries re-enter the pipeline at Stage 12, not Stage 0. | Architectural — retry re-entry point |
+| LLM-VLD-004 | Schema validation is strict by default — additional properties cause failure. | Algorithmic — strict mode validation |
+| LLM-VLD-005 | Quality validation requires minimum length > 0 to be enforced. | Algorithmic — minimum threshold check |
 
 ## Events
 

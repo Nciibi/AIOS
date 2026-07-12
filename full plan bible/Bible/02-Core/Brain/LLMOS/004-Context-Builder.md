@@ -143,11 +143,13 @@ interface TruncatedSection {
 
 ## Invariants
 
-- LLM-CTX-001: The total context payload never exceeds the model's context window minus 2K reserve.
-- LLM-CTX-002: Critical-tier content is never truncated — if critical content exceeds its category max, the pipeline fails with LLM-0302.
-- LLM-CTX-003: Every truncation decision is recorded in the `truncated_sections` manifest.
-- LLM-CTX-004: Context Builder runs before Memory Injection — memories are treated as a content category within the budget.
-- LLM-CTX-005: The same input produces the same context output (deterministic truncation).
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-CTX-001 | The total context payload never exceeds the model's context window minus 2K reserve. | Algorithmic — window fitter enforces budget |
+| LLM-CTX-002 | Critical-tier content is never truncated — if critical content exceeds its category max, the pipeline fails with LLM-0302. | Algorithmic — priority-based truncation |
+| LLM-CTX-003 | Every truncation decision is recorded in the `truncated_sections` manifest. | Architectural — observability invariant |
+| LLM-CTX-004 | Context Builder runs before Memory Injection — memories are treated as a content category within the budget. | Architectural — pipeline stage ordering |
+| LLM-CTX-005 | The same input produces the same context output (deterministic truncation). | Algorithmic — deterministic truncation strategy |
 
 ## Events
 

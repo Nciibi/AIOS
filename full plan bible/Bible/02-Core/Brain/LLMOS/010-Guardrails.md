@@ -197,13 +197,15 @@ If any rule exceeds its max evaluation time, it times out and falls to `audit` s
 
 ## Invariants
 
-- LLM-GRD-001: Every pipeline execution evaluates guardrails twice: input (Stage 11) and output (Stage 14).
-- LLM-GRD-002: A `deny` match on input immediately fails the pipeline with LLM-0401.
-- LLM-GRD-003: A `deny` match on output blocks delivery and returns error to caller.
-- LLM-GRD-004: Entity-specific rules never override global deny rules.
-- LLM-GRD-005: All guardrail evaluations are logged regardless of match or pass.
-- LLM-GRD-006: Guardrail rules are immutable once deployed — changes require new rule version.
-- LLM-GRD-007: Classifier-based rules are evaluated asynchronously to avoid blocking the pipeline.
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-GRD-001 | Every pipeline execution evaluates guardrails twice: input (Stage 11) and output (Stage 14). | Architectural — dual-stage enforcement |
+| LLM-GRD-002 | A `deny` match on input immediately fails the pipeline with LLM-0401. | Algorithmic — fail-fast on match |
+| LLM-GRD-003 | A `deny` match on output blocks delivery and returns error to caller. | Algorithmic — output blocking |
+| LLM-GRD-004 | Entity-specific rules never override global deny rules. | Governance — rule priority hierarchy |
+| LLM-GRD-005 | All guardrail evaluations are logged regardless of match or pass. | Architectural — observability invariant |
+| LLM-GRD-006 | Guardrail rules are immutable once deployed — changes require new rule version. | Governance — immutability policy |
+| LLM-GRD-007 | Classifier-based rules are evaluated asynchronously to avoid blocking the pipeline. | Algorithmic — async evaluation |
 
 ## Events
 

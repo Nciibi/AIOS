@@ -183,13 +183,15 @@ interface CircuitBreakerState {
 
 ## Invariants
 
-- LLM-RTY-001: Every provider call is wrapped by the Retry Engine — no direct provider calls from any pipeline component.
-- LLM-RTY-002: Max total attempts across all fallbacks is never exceeded.
-- LLM-RTY-003: Backoff with jitter ensures no thundering herd on provider recovery.
-- LLM-RTY-004: Non-retryable errors (auth, invalid request, content filter) never trigger retry.
-- LLM-RTY-005: Circuit breaker state is shared across all pipeline instances for the same model.
-- LLM-RTY-006: The attempt record is always produced regardless of success or failure.
-- LLM-RTY-007: Fallback never upgrades to a more expensive model without router approval.
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-RTY-001 | Every provider call is wrapped by the Retry Engine — no direct provider calls from any pipeline component. | Architectural — sole provider call gateway |
+| LLM-RTY-002 | Max total attempts across all fallbacks is never exceeded. | Algorithmic — attempt counter enforcement |
+| LLM-RTY-003 | Backoff with jitter ensures no thundering herd on provider recovery. | Algorithmic — jittered backoff calculation |
+| LLM-RTY-004 | Non-retryable errors (auth, invalid request, content filter) never trigger retry. | Algorithmic — error classification |
+| LLM-RTY-005 | Circuit breaker state is shared across all pipeline instances for the same model. | Architectural — distributed state |
+| LLM-RTY-006 | The attempt record is always produced regardless of success or failure. | Architectural — observability invariant |
+| LLM-RTY-007 | Fallback never upgrades to a more expensive model without router approval. | Algorithmic — fallback strategy enforcement |
 
 ## Events
 

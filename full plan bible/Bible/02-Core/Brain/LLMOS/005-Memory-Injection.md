@@ -141,12 +141,14 @@ interface MemoryOperation {
 
 ## Invariants
 
-- LLM-MEM-001: Injected memory never exceeds the `max_memory_tokens` allocated by Context Builder.
-- LLM-MEM-002: Memory from a non-enabled source (according to `memory_config`) is never injected.
-- LLM-MEM-003: Working memory is always loaded — it is not subject to `recency_bias` for inclusion decisions.
-- LLM-MEM-004: Conversation history maintains message ordering — oldest messages may be truncated but ordering is preserved.
-- LLM-MEM-005: Semantic and episodic memories below the similarity threshold are never injected.
-- LLM-MEM-006: Memory retrieval is a side-effect-free read — it never mutates memory state.
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-MEM-001 | Injected memory never exceeds the `max_memory_tokens` allocated by Context Builder. | Algorithmic — token budget enforcement |
+| LLM-MEM-002 | Memory from a non-enabled source (according to `memory_config`) is never injected. | Schema — source enablement gating |
+| LLM-MEM-003 | Working memory is always loaded — it is not subject to `recency_bias` for inclusion decisions. | Algorithmic — unconditional working memory load |
+| LLM-MEM-004 | Conversation history maintains message ordering — oldest messages may be truncated but ordering is preserved. | Algorithmic — ordered merge logic |
+| LLM-MEM-005 | Semantic and episodic memories below the similarity threshold are never injected. | Algorithmic — threshold-based filtering |
+| LLM-MEM-006 | Memory retrieval is a side-effect-free read — it never mutates memory state. | Architectural — read-only operation |
 
 ## Events
 

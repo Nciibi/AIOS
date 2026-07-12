@@ -108,11 +108,13 @@ interface RoutingDecision {
 
 ## Invariants
 
-- LLM-RTR-001: Every request produces exactly one routing decision.
-- LLM-RTR-002: Router never selects a model from outside the Model Registry candidate list.
-- LLM-RTR-003: Router never selects a blocked model or provider regardless of score.
-- LLM-RTR-004: Manual routing bypasses scoring but enforces allow/block lists.
-- LLM-RTR-005: Router selection is deterministic for identical input (mode, candidates, config).
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| LLM-RTR-001 | Every request produces exactly one routing decision. | Architectural — one decision per request |
+| LLM-RTR-002 | Router never selects a model from outside the Model Registry candidate list. | API-level — candidate list enforced at boundary |
+| LLM-RTR-003 | Router never selects a blocked model or provider regardless of score. | Algorithmic — allow/block list filtering |
+| LLM-RTR-004 | Manual routing bypasses scoring but enforces allow/block lists. | Algorithmic — mode-specific routing logic |
+| LLM-RTR-005 | Router selection is deterministic for identical input (mode, candidates, config). | Algorithmic — deterministic scoring function |
 
 ## Events
 
