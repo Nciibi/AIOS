@@ -230,7 +230,7 @@ Planner is bounded by Sou's capabilities. It may plan any mission but may NOT al
 
 Plans are communicated via ACF. ROS is queried for resource availability. DGP receives plan proposals. LMS receives lifecycle queries. (Law 3 — Communication)
 
-### Design DNA
+## Design DNA
 
 | Rule | Compliance |
 |------|-----------|

@@ -238,7 +238,7 @@ Sou learns only from evidence it is authorized to access. Learning about entitie
 
 Learning communicates via ACF. Academy knowledge is received as evidence. Updated models are distributed to Reasoning and Planner internally. Patterns may be shared with Academy through ACF streams. (Law 3 — Communication)
 
-### Design DNA
+## Design DNA
 
 | Rule | Compliance |
 |------|-----------|

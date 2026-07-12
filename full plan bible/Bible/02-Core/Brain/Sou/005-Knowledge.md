@@ -226,7 +226,7 @@ Sou may store, retrieve, query, and share knowledge. It may NOT modify knowledge
 
 Knowledge operations communicate via ACF internally. Academy sharing uses ACF streams. Queries from other entities arrive through ACF. (Law 3 — Communication)
 
-### Design DNA
+## Design DNA
 
 | Rule | Compliance |
 |------|-----------|

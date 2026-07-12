@@ -238,7 +238,7 @@ Sou may propose, monitor, adjust, and evaluate missions. It may NOT approve miss
 
 All mission-related communication flows through ACF. DGP receives proposals. OSYS receives strategy. LMS receives lifecycle queries. Academy receives learning evidence. (Law 3 — Communication)
 
-### Design DNA
+## Design DNA
 
 | Rule | Compliance |
 |------|-----------|

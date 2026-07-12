@@ -258,7 +258,7 @@ Reasoning is bounded by Sou's capabilities. It may reason about any domain but m
 
 Reasoning outputs are communicated via ACF. DGP receives decision proposals. Academy receives learning-related analysis requests. (Law 3 — Communication)
 
-### Design DNA
+## Design DNA
 
 | Rule | Compliance |
 |------|-----------|
