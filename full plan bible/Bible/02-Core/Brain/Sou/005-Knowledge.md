@@ -184,16 +184,25 @@ Created → Active → Updated → Archived (retention expired)
 | `Sou.KnowledgePruned` | Knowledge is pruned by retention policy | archived_count, policy_version |
 | `Sou.KnowledgePrivacyBlocked` | Share attempt blocked by privacy filter | knowledge_id, privacy_rule |
 
-## Error Codes (R12)
+## Error Cases
 
-| Code | Description |
-|------|-------------|
-| SOU_KNW_001 | Knowledge record not found |
-| SOU_KNW_002 | Privacy level prevents requested operation |
-| SOU_KNW_003 | Knowledge store capacity exceeded |
-| SOU_KNW_004 | Invalid knowledge schema — required field missing |
-| SOU_KNW_005 | Share to Academy blocked — privacy filter violation |
-| SOU_KNW_006 | Query returned too many results — refinement required |
+| Condition | Error Code | Severity | Recovery |
+|-----------|------------|----------|----------|
+| Knowledge record not found | SOU_KNW_001 | Low | Return null; caller handles missing record |
+| Privacy level prevents requested operation | SOU_KNW_002 | Medium | Deny operation; log security event with requester context |
+| Knowledge store capacity exceeded | SOU_KNW_003 | High | Reject store; trigger pruning per retention policy |
+| Invalid knowledge schema — required field missing | SOU_KNW_004 | Medium | Reject store; return validation errors |
+| Share to Academy blocked — privacy filter violation | SOU_KNW_005 | High | Block share; record privacy block event; knowledge remains private |
+| Query returned too many results — refinement required | SOU_KNW_006 | Low | Reject query; return error with max allowed count and refinement hints |
+
+## Invariants
+
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| SOU-KNW-001 | Sou has read access to all memories (BRAIN-008) | API-level — Memory OS grants Sou universal read |
+| SOU-KNW-002 | Knowledge without evidence chain is invalid | Schema — source_events required on all records |
+| SOU-KNW-003 | Private knowledge is never shared without explicit privacy filter | Governance — privacy filter enforced before Academy sharing |
+| SOU-KNW-004 | Knowledge records are never mutated — only created, updated (new version), or archived | API-level — update creates new version |
 
 ## Cross-Cutting Concerns
 
@@ -221,13 +230,17 @@ Knowledge operations communicate via ACF internally. Academy sharing uses ACF st
 
 | Rule | Compliance |
 |------|-----------|
-| R1 (Modulsingularity) | Knowledge is focused solely on Sou's constitutional memory |
-| R3 (DRY) | Knowledge is canonical — reasoning and planning query it rather than duplicate |
-| R6 (DI) | Knowledge store is injected into Sou components that need it |
-| R10 (Simpler Over Complex) | Knowledge uses the simplest query interface sufficient for each retrieval |
-| R12 (Embrace Errors) | All errors have unique codes (SOU_KNW_001–006) |
-| R13 (Design for Failure) | Knowledge store has degraded read capability during store unavailability |
-| R14 (Paved Path) | Knowledge operations follow a single paved path: store → index → query |
+| R1 — Modulsingularity | Knowledge is focused solely on Sou's constitutional memory |
+| R2 — Dependency Order | Knowledge depends on Memory OS and Event Store; no upward dependencies |
+| R3 — DRY | Knowledge is canonical — reasoning and planning query it rather than duplicate |
+| R4 — Builder Pattern | Knowledge records are built through the store → index → query pipeline |
+| R5 — Liskov Substitution | All knowledge types implement the KnowledgeRecord interface |
+| R6 — DI over Singletons | Memory OS is injected into Sou components that need knowledge access |
+| R9 — Deterministic | Same query on same data returns identical results |
+| R10 — Simpler Over Complex | Knowledge uses the simplest query interface sufficient for each retrieval |
+| R13 — Design for Failure | Knowledge store has degraded read capability during store unavailability |
+| R14 — Paved Path | Knowledge operations follow a single paved path: store → index → query |
+| R15 — Open/Closed | New knowledge types added by extending KnowledgeRecord, not by modifying the store |
 
 ## Related Documents
 
