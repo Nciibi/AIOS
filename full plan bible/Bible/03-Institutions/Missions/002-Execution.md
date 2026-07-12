@@ -17,6 +17,27 @@
 
 Manage active Mission execution — worker dispatch, progress tracking, evidence collection, runtime adaptation, and check-in management.
 
+## Architecture
+
+Execution is driven by the LMS in coordination with ROS and Workers. The execution flow follows a cyclic monitor-and-adapt pattern:
+
+```
+Running State Entry
+    │
+    ▼
+Dispatch Workers (LMS → ROS → Worker)
+    │
+    ▼
+[Monitor Progress ← Check-in Collection ← Execute Tasks ← Evidence Recording]
+    │                                      │
+    └── Adaptation Loop ──────────────────┘
+    │
+    ▼
+All Milestones Complete → Transition to Review
+```
+
+Checkpoints are taken at every check-in to enable recovery. The adaptation loop adjusts resources and timelines based on actual progress vs. planned milestones.
+
 ## Data Model
 
 ```typescript

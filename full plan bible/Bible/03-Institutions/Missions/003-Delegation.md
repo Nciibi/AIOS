@@ -17,6 +17,26 @@
 
 Delegate Mission tasks to sub-Missions, Workers, Organizations, or external systems — with clear contracts, accountability, and result verification.
 
+## Architecture
+
+Delegation follows a contract-based pattern where the source Mission defines scope, deliverables, timeline, and success criteria in a formal DelegationContract. The delegate accepts or rejects the contract; upon acceptance, execution proceeds independently with periodic result checkpoints.
+
+```
+Source Mission               Delegate
+    │                           │
+    ├── createDelegation() ────►│
+    │                           ├── accept / reject
+    │◄── acceptance             │
+    │                           │
+    │   [delegated execution]   │
+    │                           │
+    │◄── result + evidence ─────┤
+    │                           │
+    └── verifyResult() ────────┘
+```
+
+Accountability is maintained through an immutable chain recording the source Mission, contract, delegate, and verification result. Escalation paths exist for failures at any stage.
+
 ## Data Model
 
 ```typescript

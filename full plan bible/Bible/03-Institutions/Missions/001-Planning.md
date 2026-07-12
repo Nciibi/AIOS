@@ -17,6 +17,17 @@
 
 Decompose Human Intent into structured Mission plans with goals, milestones, resources, dependencies, timeline, and risk assessment.
 
+## Architecture
+
+The Planning subsystem follows a linear pipeline architecture that transforms raw Intent into a validated Mission plan. Each stage produces a validated artifact consumed by the next stage.
+
+```
+Intent → Goal Decomposition → Milestone Definition → Resource Estimation
+    → Dependency Mapping → Timeline Estimation → Risk Assessment → Plan
+```
+
+Validation gates exist between each stage — a stage cannot proceed until its output passes validation. The completed plan is submitted to DGP + Security Council for approval before the Mission transitions from Planned to Assigned.
+
 ## Data Model
 
 ```typescript

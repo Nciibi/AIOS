@@ -17,6 +17,36 @@
 
 Handle Mission failures gracefully — detection, classification, escalation paths, and recovery strategies while maintaining evidence integrity.
 
+## Architecture
+
+Failure recovery follows a detect-classify-escalate-recover pipeline. Detection produces a raw FailureRecord which is classified into a category. Based on category and severity, an escalation path is chosen, and a recovery strategy is proposed and executed.
+
+```
+Failure Event
+    │
+    ▼
+Detection (timeout / error / heartbeat / evidence / contract)
+    │
+    ▼
+Classification (transient / systemic / constitutional / cascading)
+    │
+    ▼
+Escalation Decision
+    ├── Auto-Retry ──► Success → Resume
+    │                  └── Exhausted → Escalate
+    ├── Supervisor ──► Recovery Strategy Proposed
+    ├── Security Council
+    └── Console
+           │
+           ▼
+    Recovery Execution (retry / rollback / failover / degrade / abort)
+           │
+           ├── Success → Resume Mission
+           └── Failure → Escalate to Next Level
+```
+
+Every step produces evidence for audit and maintains the evidence chain integrity invariant.
+
 ## Data Model
 
 ```typescript
