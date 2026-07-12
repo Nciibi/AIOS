@@ -181,16 +181,16 @@ interface DhcpRelayConfig {
 
 ## Events (table)
 
-| Event Type | Produced When | Fields |
-|-------|---------|---------|
-| Linux.InterfaceConfigured | InterfaceHandler: { ifaceName, ipAddresses, state } | Interface brought up or down |
-| Linux.InterfaceFailed | InterfaceHandler: { ifaceName, error } | Interface configuration failed |
-| Linux.FirewallRuleChanged | FirewallHandler: { ruleId, chain, action } | Firewall rule added or removed |
-| Linux.DNSUpdated | DnsHandler: { hostname, resolver, entries } | DNS resolution configuration changed |
-| Linux.RouteChanged | RouteHandler: { destination, gateway, metric } | Route added or removed |
-| Linux.VpnConnected | VpnHandler: { vpnName, endpoint } | VPN tunnel established |
-| Linux.VpnDisconnected | VpnHandler: { vpnName, reason } | VPN tunnel torn down |
-| Linux.ConnectivityVerified | ProbeHandler: { target, reachable, latency } | Connectivity probe result |
+| Event | Emitter | Payload | Meaning |
+|-------|---------|---------|---------|
+| Linux.InterfaceConfigured | InterfaceHandler | { ifaceName, ipAddresses, state } | Interface brought up or down |
+| Linux.InterfaceFailed | InterfaceHandler | { ifaceName, error } | Interface configuration failed |
+| Linux.FirewallRuleChanged | FirewallHandler | { ruleId, chain, action } | Firewall rule added or removed |
+| Linux.DNSUpdated | DnsHandler | { hostname, resolver, entries } | DNS resolution configuration changed |
+| Linux.RouteChanged | RouteHandler | { destination, gateway, metric } | Route added or removed |
+| Linux.VpnConnected | VpnHandler | { vpnName, endpoint } | VPN tunnel established |
+| Linux.VpnDisconnected | VpnHandler | { vpnName, reason } | VPN tunnel torn down |
+| Linux.ConnectivityVerified | ProbeHandler | { target, reachable, latency } | Connectivity probe result |
 
 ## Error Cases (table with Code, Condition, Severity, Recovery)
 

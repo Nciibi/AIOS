@@ -158,16 +158,16 @@ interface SelinuxContext {
 
 ## Events (table)
 
-| Event Type | Produced When | Fields |
-|-------|---------|---------|
-| Linux.UserCreated | UserHandler: { username, uid, groups } | User account created |
-| Linux.UserDeleted | UserHandler: { username } | User account removed |
-| Linux.UserModified | UserHandler: { username, changes } | User account attributes changed |
-| Linux.ServiceRestarted | ServiceHandler: { serviceName, reason } | Service restarted |
-| Linux.ServiceFailed | ServiceHandler: { serviceName, error } | Service failed to start/stop |
-| Linux.PackageOperation | PackageHandler: { packageName, operation, version } | Package installed/removed/updated |
-| Linux.FilesystemMounted | FsHandler: { mountPoint, device, fstype } | Filesystem mounted |
-| Linux.FilesystemUnmounted | FsHandler: { mountPoint } | Filesystem unmounted |
+| Event | Emitter | Payload | Meaning |
+|-------|---------|---------|---------|
+| Linux.UserCreated | UserHandler | { username, uid, groups } | User account created |
+| Linux.UserDeleted | UserHandler | { username } | User account removed |
+| Linux.UserModified | UserHandler | { username, changes } | User account attributes changed |
+| Linux.ServiceRestarted | ServiceHandler | { serviceName, reason } | Service restarted |
+| Linux.ServiceFailed | ServiceHandler | { serviceName, error } | Service failed to start/stop |
+| Linux.PackageOperation | PackageHandler | { packageName, operation, version } | Package installed/removed/updated |
+| Linux.FilesystemMounted | FsHandler | { mountPoint, device, fstype } | Filesystem mounted |
+| Linux.FilesystemUnmounted | FsHandler | { mountPoint } | Filesystem unmounted |
 
 ## Error Cases (table with Code, Condition, Severity, Recovery)
 

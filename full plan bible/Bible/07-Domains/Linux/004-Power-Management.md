@@ -168,15 +168,15 @@ interface PowerAuditEntry {
 
 ## Events (table)
 
-| Event Type | Produced When | Fields |
-|-------|---------|---------|
-| Linux.PowerProfileChanged | ProfileHandler: { profileName, governor } | Power profile applied |
-| Linux.SuspendInitiated | SuspendHandler: { mode, savedStateRef } | Suspend sequence started |
-| Linux.ResumeCompleted | SuspendHandler: { mode, duration } | Resume completed successfully |
-| Linux.ResumeFailed | SuspendHandler: { mode, error } | Resume failed |
-| Linux.ThermalEvent | ThermalHandler: { zoneName, temperature, state } | Thermal zone crossed threshold |
-| Linux.GovernorChanged | GovernorHandler: { governor, cpuCores } | CPU frequency governor switched |
-| Linux.WakeupSourceChanged | WakeupHandler: { device, enabled } | Wakeup source enabled or disabled |
+| Event | Emitter | Payload | Meaning |
+|-------|---------|---------|---------|
+| Linux.PowerProfileChanged | ProfileHandler | { profileName, governor } | Power profile applied |
+| Linux.SuspendInitiated | SuspendHandler | { mode, savedStateRef } | Suspend sequence started |
+| Linux.ResumeCompleted | SuspendHandler | { mode, duration } | Resume completed successfully |
+| Linux.ResumeFailed | SuspendHandler | { mode, error } | Resume failed |
+| Linux.ThermalEvent | ThermalHandler | { zoneName, temperature, state } | Thermal zone crossed threshold |
+| Linux.GovernorChanged | GovernorHandler | { governor, cpuCores } | CPU frequency governor switched |
+| Linux.WakeupSourceChanged | WakeupHandler | { device, enabled } | Wakeup source enabled or disabled |
 
 ## Error Cases (table with Code, Condition, Severity, Recovery)
 
