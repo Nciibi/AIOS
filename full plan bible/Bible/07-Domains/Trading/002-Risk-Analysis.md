@@ -182,8 +182,11 @@ interface CorrelationMatrix {
 
 ## Related Documents
 
-- Bible/07-Domains/Trading/001-Algorithms.md
-- Bible/07-Domains/Trading/003-Market-Data.md
-- Physics/005-Events.md
-- Physics/007-Capabilities.md
-- Physics/012-Experience.md
+| Document | Relationship |
+|----------|-------------|
+| Bible/07-Domains/Trading/000-Overview.md | Base Trading domain overview |
+| Bible/07-Domains/Trading/001-Algorithms.md | Algorithms produce the positions that risk analysis monitors |
+| Bible/07-Domains/Trading/003-Market-Data.md | Market data feeds risk model computation |
+| Physics/005-Events.md | Evidence — risk operations produce Events |
+| Physics/007-Capabilities.md | Capabilities — risk capability bounds |
+| Physics/012-Experience.md | Experience — risk outcomes drive strategy improvement |

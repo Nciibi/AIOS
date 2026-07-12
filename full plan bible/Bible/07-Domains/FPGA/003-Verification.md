@@ -194,10 +194,12 @@ interface ReadbackResult {
 
 ## Related Documents
 
-- Bible/07-Domains/FPGA/000-Overview.md
-- Bible/07-Domains/FPGA/001-Architecture.md
-- Bible/07-Domains/FPGA/002-Synthesis.md
-- Bible/06-Services/ACF/000-Overview.md
-- Bible/08-Interfaces/SDK/003-Provider-SDK.md
-- Bible/02-Core/DTS/000-Overview.md
-- Bible/02-Core/ROS/000-Overview.md
+| Document | Relationship |
+|----------|-------------|
+| Bible/07-Domains/FPGA/000-Overview.md | Base FPGA domain overview |
+| Bible/07-Domains/FPGA/001-Architecture.md | Architecture defines verification constraints |
+| Bible/07-Domains/FPGA/002-Synthesis.md | Synthesis output is the subject of verification |
+| Bible/06-Services/ACF/000-Overview.md | ACF — verification event transport |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — EDA tool adapter interface |
+| Bible/02-Core/DTS/000-Overview.md | DTS — verification confidence scoring |
+| Bible/02-Core/ROS/000-Overview.md | ROS — compute budgets for simulation and formal verification |

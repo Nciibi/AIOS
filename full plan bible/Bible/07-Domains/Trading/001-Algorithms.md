@@ -174,8 +174,11 @@ interface AlgorithmTemplate {
 
 ## Related Documents
 
-- Bible/07-Domains/Trading/002-Risk-Analysis.md
-- Bible/07-Domains/Trading/003-Market-Data.md
-- Physics/005-Events.md
-- Physics/007-Capabilities.md
-- Physics/012-Experience.md
+| Document | Relationship |
+|----------|-------------|
+| Bible/07-Domains/Trading/000-Overview.md | Base Trading domain overview |
+| Bible/07-Domains/Trading/002-Risk-Analysis.md | Risk analysis validates algorithm risk parameters |
+| Bible/07-Domains/Trading/003-Market-Data.md | Market data feeds algorithm signal generation |
+| Physics/005-Events.md | Evidence — algorithm operations produce Events |
+| Physics/007-Capabilities.md | Capabilities — algorithm capability bounds |
+| Physics/012-Experience.md | Experience — algorithm outcomes drive strategy improvement |

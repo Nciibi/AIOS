@@ -187,8 +187,11 @@ interface FeedStatus {
 
 ## Related Documents
 
-- Bible/07-Domains/Trading/001-Algorithms.md
-- Bible/07-Domains/Trading/002-Risk-Analysis.md
-- Physics/005-Events.md
-- Physics/007-Capabilities.md
-- Physics/012-Experience.md
+| Document | Relationship |
+|----------|-------------|
+| Bible/07-Domains/Trading/000-Overview.md | Base Trading domain overview |
+| Bible/07-Domains/Trading/001-Algorithms.md | Algorithms consume market data for signal generation |
+| Bible/07-Domains/Trading/002-Risk-Analysis.md | Risk analysis uses market data for risk model computation |
+| Physics/005-Events.md | Evidence — market data operations produce Events |
+| Physics/007-Capabilities.md | Capabilities — market data capability bounds |
+| Physics/012-Experience.md | Experience — market data outcomes drive feed improvement |

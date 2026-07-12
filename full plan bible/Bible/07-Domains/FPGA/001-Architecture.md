@@ -192,10 +192,12 @@ interface DeviceSelector {
 
 ## Related Documents
 
-- Bible/07-Domains/FPGA/000-Overview.md
-- Bible/07-Domains/FPGA/002-Synthesis.md
-- Bible/07-Domains/FPGA/003-Verification.md
-- Bible/06-Services/ACF/000-Overview.md
-- Bible/08-Interfaces/SDK/003-Provider-SDK.md
-- Bible/02-Core/DTS/000-Overview.md
-- Bible/02-Core/ROS/000-Overview.md
+| Document | Relationship |
+|----------|-------------|
+| Bible/07-Domains/FPGA/000-Overview.md | Base FPGA domain overview |
+| Bible/07-Domains/FPGA/002-Synthesis.md | Synthesis consumes architecture constraints for P&R |
+| Bible/07-Domains/FPGA/003-Verification.md | Verification validates architecture compliance |
+| Bible/06-Services/ACF/000-Overview.md | ACF — device selection event transport |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — EDA provider adapter interface |
+| Bible/02-Core/DTS/000-Overview.md | DTS — design confidence scoring |
+| Bible/02-Core/ROS/000-Overview.md | ROS — compute budgets for device estimation |
