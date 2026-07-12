@@ -689,10 +689,10 @@ interface ChannelRegistry {
 | Document | Relationship |
 |----------|-------------|
 | Conversation/000-Overview.md | Channel Adaptation is a sub-component of Conversation OS |
-| Conversation/001-Session-Manager.md | Sessions hold per-channel profiles |
-| Conversation/002-Turn-Manager.md | Turns carry modality metadata through the pipeline |
-| Conversation/003-Intent-Router.md | Pre-classification may route based on input modality |
-| Conversation/004-Response-Builder.md | Response Builder calls Channel Adapter for output formatting |
+| Conversation/004-Session-Management.md | Sessions hold per-channel profiles |
+| Conversation/002-Multi-Turn.md | Turns carry modality metadata through the pipeline |
+| Conversation/001-Dialogue-State.md | Modality influences dialogue state and intent routing |
+| Conversation/000-Overview.md | Response Builder calls Channel Adapter for output formatting per overview |
 | Brain/Voice/000-Overview.md | Voice System provides STT/TTS; Channel Adapter bridges to it |
 | Brain/Personality/000-Overview.md | Style Application uses personality formality/verbosity settings |
 | Bible/05-Platform/004-EVS.md | All adaptation events recorded through Event System |

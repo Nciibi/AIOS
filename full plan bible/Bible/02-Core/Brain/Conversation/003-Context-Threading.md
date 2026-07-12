@@ -701,8 +701,8 @@ User can now see a comprehensive summary of the merged thread.
 | Document | Relationship |
 |----------|-------------|
 | Conversation/000-Overview.md | Context Threading is a Conversation OS sub-component |
-| Conversation/001-Session-Manager.md | Threads are scoped to sessions; session lifecycle triggers thread lifecycle |
-| Conversation/002-Turn-Manager.md | Turns are assigned to threads; turn processing updates thread context |
+| Conversation/004-Session-Management.md | Threads are scoped to sessions; session lifecycle triggers thread lifecycle |
+| Conversation/002-Multi-Turn.md | Turns are assigned to threads; turn processing updates thread context |
 | Brain/Context/000-Overview.md | Thread context is injected into the Context System window |
 | Brain/Context/001-Context-Window.md | Thread context feeds into the context window via priority-based allocation |
 | Brain/Memory/002-Episodic-Memory.md | Archived/closed thread contexts persisted to Episodic Memory |

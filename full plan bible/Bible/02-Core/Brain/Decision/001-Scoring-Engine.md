@@ -584,10 +584,10 @@ getRegisteredFunctions():
 | Document | Relationship |
 |----------|-------------|
 | Decision/000-Overview.md | Scoring Engine is the first stage of the Decision System pipeline |
-| Decision/002-Tradeoff-Analyzer.md | Trade-off Analyzer consumes ScoreMatrix for conflict detection |
-| Decision/003-Constraint-Checker.md | Constraint Checker runs before scoring to eliminate non-viable options |
+| Decision/002-Trade-off-Analysis.md | Trade-off Analyzer consumes ScoreMatrix for conflict detection |
+| Decision/003-Constraints.md | Constraint Checker runs before scoring to eliminate non-viable options |
 | Decision/004-Criteria-Registry.md | Criteria Registry provides the scoring functions and weights |
-| Decision/005-History-Logger.md | ScoreMatrix is recorded as evidence in decision history |
+| Decision/005-Decision-Pipeline.md | ScoreMatrix is logged via the pipeline's History Logger stage |
 | Brain/000-Overview.md | Scoring Engine is a Brain Service component |
 | Brain/Sou/000-Overview.md | Sou invokes the Scoring Engine via evaluateOptions |
 | Bible/05-Platform/004-EVS.md | Events emitted throughout scoring lifecycle |

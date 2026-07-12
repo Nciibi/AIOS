@@ -541,7 +541,7 @@ A completes → processQueue dequeues system message first
 | Document | Relationship |
 |----------|-------------|
 | Conversation/000-Overview.md | Multi-Turn is a sub-component of Conversation OS Turn Manager |
-| Conversation/001-Session.md | Session Manager provides session context for turn processing |
+| Conversation/004-Session-Management.md | Session Manager provides session context for turn processing |
 | Brain/Context/000-Overview.md | Turn history is pushed to context window for Sou awareness |
 | Brain/Memory/002-Episodic-Memory.md | Overflow turn pairs archived to Episodic Memory |
 | Brain/Sou/000-Overview.md | Sou receives parsed turns and produces responses via ACF |
