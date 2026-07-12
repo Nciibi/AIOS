@@ -64,12 +64,15 @@ The 24 former FAILs were forward-references to P3 (Execution-tier) components
   event reference resolves to a defined event (0 undefined), so these are discoverable across the
   corpus. No further action required unless a stricter "defined-in-same-doc" rule is desired.
 
-### S3. Producer → consumer event traceability (deeper semantic check)
+### S3. Producer → consumer event traceability (deeper semantic check) — **[EXPLORED, non-actionable]**
 - The current checks confirm event *names* are consistent, but do not verify that every event
   "Produced By" a component is actually consumed/referenced by its intended subscriber doc
   (per `Physics/005` Invariant 6 — Evidence Is Actionable).
-- **Suggest:** a future check that, for each defined event, confirms at least one subscriber doc
-  (Observability, Audit, Academy, Security Council, Organizations, Notifications) references it.
+- **Finding (`tracecheck.ps1`):** 1269 defined events; naive "referenced in another doc" check flags
+  1230 as orphans. This is expected noise, not a defect — in a design Bible events are consumed at
+  runtime (Observability / Audit / Security Council), not necessarily cited in another `.md`. The
+  check is only actionable with a curated producer→consumer map, which the corpus does not encode.
+  No doc changes result from S3.
 
 ### S4. Preserve Design DNA rule-range comment
 - Docs such as `Bible/07-Domains/Embedded/001-Devices.md` originally used a `## Design DNA
