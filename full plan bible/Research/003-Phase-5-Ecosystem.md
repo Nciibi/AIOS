@@ -293,4 +293,4 @@ AIOS Public Federation Protocol
 | Bible/02-Core/Brain/Autonomy/000-Overview.md | Autonomy System — L3+ entities can publish plugins |
 | Bible/07-Domains/Security/000-Overview.md | Security domain — plugin security research |
 | Bible/06-Services/Federation/012-IXP.md | IXP protocol — foundation for public federation |
-| ChatGPT-souuSouu Agent System Design.md | Original design vision — Agent Marketplace, Skill Marketplace |
+| ChatGPT-souuSouu Agent System Design.md (project root) | Original design vision — Agent Marketplace, Skill Marketplace |
