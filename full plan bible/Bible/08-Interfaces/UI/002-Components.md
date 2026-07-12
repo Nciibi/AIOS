@@ -139,15 +139,15 @@ interface AccessibilityEngine {
 
 ## Events
 
-| UI.EventType |  Produced When | Fields |
+| UI.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| UI.ComponentRendered |  componentId, type, timestamp | Component mounted and visible |
-| UI.ComponentInteracted |  componentId, event, value | User interaction on component |
-| UI.StateChanged |  componentId, previousState, newState | Immutable state transition |
-| UI.AccessibilityApplied |  componentId, role, label | ARIA attributes attached |
-| UI.EventBubbled |  componentId, event, origin, target | Event propagated through handler chain |
-| UI.RenderPatched |  componentId, diffSize, duration | Virtual DOM patch applied |
-| UI.ComponentTested |  componentId, testType, result | Test suite execution completed |
+| UI.ComponentRendered |   componentId, type, timestamp | Component mounted and visible |
+| UI.ComponentInteracted |   componentId, event, value | User interaction on component |
+| UI.StateChanged |   componentId, previousState, newState | Immutable state transition |
+| UI.AccessibilityApplied |   componentId, role, label | ARIA attributes attached |
+| UI.EventBubbled |   componentId, event, origin, target | Event propagated through handler chain |
+| UI.RenderPatched |   componentId, diffSize, duration | Virtual DOM patch applied |
+| UI.ComponentTested |   componentId, testType, result | Test suite execution completed |
 
 ## Error Cases
 
@@ -195,29 +195,18 @@ Per Law 7 (Capability Bounds), UI declares its capabilities at creation and oper
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Components are the exclusive atomic unit of UI rendering |
-| R2 â€” Dependency Order | Depends on Design System (001), Interface Hub, Intent Parser; no cycles |
-| R3 â€” DRY | Component logic defined once; reused via composition, not inheritance |
-| R4 â€” Builder Pattern | Components built via ComponentFactory with validation |
-| R5 â€” Law of Demeter | Components interact only with their direct children and own state |
-| R6 â€” Encapsulation | Component internals hidden; interface via props, events, slots |
-| R9 â€” Deterministic | Same props + same state = same render output every time |
-| R10 â€” Simpler Over Complex | Prefer atoms over molecules; compose up only when necessary |
-| R13 â€” Design for Failure | Render failure degrades to plain text, never blank screen |
-| R14 â€” Paved Path | Default event handling via Event Bus; custom handlers are explicit opt-in |
-| R15 â€” Open/Closed | New component types register via ComponentRegistry; existing types closed |
+| R1 - Modulsingularity | Components are the exclusive atomic unit of UI rendering |
+| R2 - Dependency Order | Depends on Design System (001), Interface Hub, Intent Parser; no cycles |
+| R3 - DRY | Component logic defined once; reused via composition, not inheritance |
+| R4 - Builder Pattern | Components built via ComponentFactory with validation |
+| R5 - Liskov Substitution | Components interact only with their direct children and own state |
+| R6 - DI over Singletons | Component internals hidden; interface via props, events, slots |
+| R9 - Deterministic | Same props + same state = same render output every time |
+| R10 - Simpler Over Complex | Prefer atoms over molecules; compose up only when necessary |
+| R13 - Design for Failure | Render failure degrades to plain text, never blank screen |
+| R14 - Paved Path | Default event handling via Event Bus; custom handlers are explicit opt-in |
+| R15 - Open/Closed | New component types register via ComponentRegistry; existing types closed |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

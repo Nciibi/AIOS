@@ -157,16 +157,16 @@ interface HistoryManager {
 
 ## Events
 
-| CON.EventType |  Produced When | Fields |
+| CON.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| CON.CLICommandParsed |  sessionId, raw, commandName | Raw input parsed into command structure |
-| CON.CLIArgsValidated |  sessionId, commandName, args, valid | Argument validation completed |
-| CON.CLICommandExecuted |  sessionId, commandName, durationMs, success | Command dispatched and executed |
-| CON.CLIOutputFormatted |  sessionId, format, outputSize | Result formatted for display |
-| CON.CLISessionStarted |  sessionId, humanId | New CLI command session initialized |
-| CON.CLISessionEnded |  sessionId, humanId, commandCount | CLI session closed |
-| CON.CLIHistoryRetrieved |  sessionId, query, resultCount | History query executed |
-| CON.CLIAliasResolved |  sessionId, alias, targetCommand | Alias mapped to canonical command |
+| CON.CLICommandParsed |   sessionId, raw, commandName | Raw input parsed into command structure |
+| CON.CLIArgsValidated |   sessionId, commandName, args, valid | Argument validation completed |
+| CON.CLICommandExecuted |   sessionId, commandName, durationMs, success | Command dispatched and executed |
+| CON.CLIOutputFormatted |   sessionId, format, outputSize | Result formatted for display |
+| CON.CLISessionStarted |   sessionId, humanId | New CLI command session initialized |
+| CON.CLISessionEnded |   sessionId, humanId, commandCount | CLI session closed |
+| CON.CLIHistoryRetrieved |   sessionId, query, resultCount | History query executed |
+| CON.CLIAliasResolved |   sessionId, alias, targetCommand | Alias mapped to canonical command |
 
 ## Error Cases
 
@@ -215,29 +215,18 @@ Per Law 7 (Capability Bounds), Console declares its capabilities at creation and
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | CLI owns parsing, validation, formatting; governance actions delegated to handlers |
-| R2 â€” Dependency Order | Depends on CommandRegistry, ArgumentValidator, EVS; no circular deps |
-| R3 â€” DRY | Argument specs defined once in CLICommand; reused by validation and help generation |
-| R4 â€” Builder Pattern | CommandResult built incrementally during execution |
-| R5 â€” Deterministic | Same input string always yields same parsed command and validation outcome |
-| R6 â€” Single Source | Commands defined in registry; no scattered references |
-| R9 â€” Deterministic | Replaying command history produces same evidence trail |
-| R10 â€” Simpler Over Complex | Default output format is table; JSON and YAML are opt-in |
-| R13 â€” Design for Failure | Session expiry traps preserve partial state; timeout aborts gracefully |
-| R14 â€” Paved Path | Standard governance commands (override, rfc, certify) have first-class support |
-| R15 â€” Open/Closed | New commands register via CommandRegistry without modifying the CLI engine |
+| R1 - Modulsingularity | CLI owns parsing, validation, formatting; governance actions delegated to handlers |
+| R2 - Dependency Order | Depends on CommandRegistry, ArgumentValidator, EVS; no circular deps |
+| R3 - DRY | Argument specs defined once in CLICommand; reused by validation and help generation |
+| R4 - Builder Pattern | CommandResult built incrementally during execution |
+| R5 - Liskov Substitution | Same input string always yields same parsed command and validation outcome |
+| R6 - DI over Singletons | Commands defined in registry; no scattered references |
+| R9 - Deterministic | Replaying command history produces same evidence trail |
+| R10 - Simpler Over Complex | Default output format is table; JSON and YAML are opt-in |
+| R13 - Design for Failure | Session expiry traps preserve partial state; timeout aborts gracefully |
+| R14 - Paved Path | Standard governance commands (override, rfc, certify) have first-class support |
+| R15 - Open/Closed | New commands register via CommandRegistry without modifying the CLI engine |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

@@ -179,7 +179,7 @@ interface PromptSection {
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| LLM.PromptCompiled |  request_id, template_used, token_count, compile_duration_us, sections | After compilation (Stage 10) |
+| LLM.PromptCompiled |   request_id, template_used, token_count, compile_duration_us, sections | After compilation (Stage 10) |
 
 
 ## Cross-Cutting Concerns

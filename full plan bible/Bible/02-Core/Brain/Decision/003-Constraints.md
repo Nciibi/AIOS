@@ -690,16 +690,16 @@ DecisionRequest.options  â”€â”€â–º  checkConstraints()
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| DEC.ConstraintViolated |  constraint_id, option_id, type, detail, expression | Hard or soft constraint violated |
-| DEC.ConstraintSatisfied |  constraint_id, option_id, type, detail | Constraint passed successfully |
-| DEC.OptionEliminated |  option_id, option_label, failed_constraint_ids | Option removed by hard constraint |
-| DEC.AllOptionsEliminated |  request_id, option_count, eliminated_reasons | All options failed hard constraints |
-| DEC.ConstraintRegistered |  name, constraint_id, category | Named constraint added to registry |
-| DEC.ConstraintUnregistered |  name, constraint_id | Named constraint removed from registry |
-| DEC.ConstraintCheckStarted |  request_id, option_count, constraint_count | Constraint evaluation began |
-| DEC.ConstraintCheckCompleted |  request_id, passed_count, eliminated_count, total_penalty | Constraint evaluation finished |
-| DEC.SoftPenaltyApplied |  constraint_id, option_id, penalty, original_score, adjusted_score | Score penalty applied |
-| DEC.ExpressionParseError |  expression, error, context | Expression could not be parsed |
+| DEC.ConstraintViolated |   constraint_id, option_id, type, detail, expression | Hard or soft constraint violated |
+| DEC.ConstraintSatisfied |   constraint_id, option_id, type, detail | Constraint passed successfully |
+| DEC.OptionEliminated |   option_id, option_label, failed_constraint_ids | Option removed by hard constraint |
+| DEC.AllOptionsEliminated |   request_id, option_count, eliminated_reasons | All options failed hard constraints |
+| DEC.ConstraintRegistered |   name, constraint_id, category | Named constraint added to registry |
+| DEC.ConstraintUnregistered |   name, constraint_id | Named constraint removed from registry |
+| DEC.ConstraintCheckStarted |   request_id, option_count, constraint_count | Constraint evaluation began |
+| DEC.ConstraintCheckCompleted |   request_id, passed_count, eliminated_count, total_penalty | Constraint evaluation finished |
+| DEC.SoftPenaltyApplied |   constraint_id, option_id, penalty, original_score, adjusted_score | Score penalty applied |
+| DEC.ExpressionParseError |   expression, error, context | Expression could not be parsed |
 
 ## Invariants
 

@@ -224,17 +224,17 @@ interface IntentClassifier {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| CONV.SessionCreated |  session_id, user_id, modality | Conversation session started |
-| CONV.SessionEnded |  session_id, turn_count, duration | Session ended |
-| CONV.SessionPaused |  session_id, reason | Session paused |
-| CONV.UserInputReceived |  turn_id, session_id, modality | User input accepted |
-| CONV.UserInputDelivered |  turn_id, session_id, latency_ms | Input delivered to Sou |
-| CONV.ResponseBuilt |  turn_id, session_id, response_length | Response packaged |
-| CONV.ResponseDelivered |  turn_id, session_id, modality, latency_ms | Response sent to user |
-| CONV.TurnTimeout |  turn_id, session_id | Sou took too long to respond |
-| CONV.IntentDetected |  turn_id, intent, confidence | Intent classified |
-| CONV.ModalityAdapted |  from_modality, to_modality, turn_id | Modality conversion occurred |
-| CONV.SouInterrupted |  turn_id, reason | Sou interrupted during processing |
+| CONV.SessionCreated |   session_id, user_id, modality | Conversation session started |
+| CONV.SessionEnded |   session_id, turn_count, duration | Session ended |
+| CONV.SessionPaused |   session_id, reason | Session paused |
+| CONV.UserInputReceived |   turn_id, session_id, modality | User input accepted |
+| CONV.UserInputDelivered |   turn_id, session_id, latency_ms | Input delivered to Sou |
+| CONV.ResponseBuilt |   turn_id, session_id, response_length | Response packaged |
+| CONV.ResponseDelivered |   turn_id, session_id, modality, latency_ms | Response sent to user |
+| CONV.TurnTimeout |   turn_id, session_id | Sou took too long to respond |
+| CONV.IntentDetected |   turn_id, intent, confidence | Intent classified |
+| CONV.ModalityAdapted |   from_modality, to_modality, turn_id | Modality conversion occurred |
+| CONV.SouInterrupted |   turn_id, reason | Sou interrupted during processing |
 
 ## Invariants
 

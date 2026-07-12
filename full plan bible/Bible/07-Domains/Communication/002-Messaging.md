@@ -149,16 +149,16 @@ type QueueOverflowAction = 'reject_newest' | 'reject_oldest' | 'dead_letter_olde
 
 ## Events
 
-| COM.EventType |  Produced When | Fields |
+| COM.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| COM.MessageQueued |  Message enters ingress queue | message_id, queue_id, priority, ttl_ms, queue_depth_after, dedup_key |
-| COM.MessageRouted |  Route is resolved and target is selected | message_id, source_queue, target_worker, target_channel, routing_duration_ms |
-| COM.MessageDelivered |  Recipient acknowledges delivery | message_id, delivery_mode, retry_count, ack_latency_ms, channel_type |
-| COM.MessageDeliveryFailed |  Delivery fails after all retries exhausted | message_id, attempt_count, last_error, total_duration_ms, dead_letter_route |
-| COM.MessageDeadLettered |  Message moved to dead-letter queue | message_id, source_queue, reason, retry_count, ttl_at_death_ms, metadata |
-| COM.MessageExpired |  TTL exceeded, message removed from queue | message_id, queue_id, ttl_ms, age_at_expiry_ms, action_taken |
-| COM.DuplicateSuppressed |  Duplicate message detected and suppressed | message_id, dedup_key, algorithm, original_delivery_id, suppression_type |
-| COM.QueueDepthWarning |  Queue depth exceeds warning threshold | queue_id, depth, max_depth, oldest_message_age_ms, action_recommended |
+| COM.MessageQueued |   Message enters ingress queue | message_id, queue_id, priority, ttl_ms, queue_depth_after, dedup_key |
+| COM.MessageRouted |   Route is resolved and target is selected | message_id, source_queue, target_worker, target_channel, routing_duration_ms |
+| COM.MessageDelivered |   Recipient acknowledges delivery | message_id, delivery_mode, retry_count, ack_latency_ms, channel_type |
+| COM.MessageDeliveryFailed |   Delivery fails after all retries exhausted | message_id, attempt_count, last_error, total_duration_ms, dead_letter_route |
+| COM.MessageDeadLettered |   Message moved to dead-letter queue | message_id, source_queue, reason, retry_count, ttl_at_death_ms, metadata |
+| COM.MessageExpired |   TTL exceeded, message removed from queue | message_id, queue_id, ttl_ms, age_at_expiry_ms, action_taken |
+| COM.DuplicateSuppressed |   Duplicate message detected and suppressed | message_id, dedup_key, algorithm, original_delivery_id, suppression_type |
+| COM.QueueDepthWarning |   Queue depth exceeds warning threshold | queue_id, depth, max_depth, oldest_message_age_ms, action_recommended |
 
 ## Error Cases
 
@@ -207,29 +207,18 @@ Per Law 7 (Capability Bounds), Communication declares its capabilities at creati
 
 | Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Queuing, routing, delivery, dedup, dead-letter are separate modules with clear boundaries |
-| R2 (Capsule) | Each message is a sealed capsule with immutable ID, priority, TTL, and delivery history |
-| R3 (DRY) | Routing table is the single source of truth for target resolution; duplicates are detected by dedup |
-| R4 (Builder) | Delivery state machine builds progressively through queued -> routed -> delivering -> delivered |
-| R5 (Liskov Substitution) | All delivery guarantees implement the same IDeliveryStrategy interface; interchangeable per message |
-| R6 (DI over Singletons) | Queue stores and delivery engines are injected; no global singleton access pattern |
-| R9 (Deterministic) | Same message ID + same routing table state yields identical route resolution |
-| R10 (Simpler Over Complex) | Delivery state machine is linear with a single failure branch to dead-letter; no graph |
-| R13 (Design for Failure) | Dead-letter queue preserves every failed message; no silent data loss |
-| R14 (Paved Path) | Single paved path: queue -> route -> deliver -> ack/dead-letter; all deviations logged |
-| R15 (Open/Closed) | New delivery guarantee modes added by implementing IDeliveryStrategy; core unchanged |
+| R1 - Modulsingularity | Queuing, routing, delivery, dedup, dead-letter are separate modules with clear boundaries |
+| R2 - Dependency Order | Each message is a sealed capsule with immutable ID, priority, TTL, and delivery history |
+| R3 - DRY | Routing table is the single source of truth for target resolution; duplicates are detected by dedup |
+| R4 - Builder Pattern | Delivery state machine builds progressively through queued -> routed -> delivering -> delivered |
+| R5 - Liskov Substitution | All delivery guarantees implement the same IDeliveryStrategy interface; interchangeable per message |
+| R6 - DI over Singletons | Queue stores and delivery engines are injected; no global singleton access pattern |
+| R9 - Deterministic | Same message ID + same routing table state yields identical route resolution |
+| R10 - Simpler Over Complex | Delivery state machine is linear with a single failure branch to dead-letter; no graph |
+| R13 - Design for Failure | Dead-letter queue preserves every failed message; no silent data loss |
+| R14 - Paved Path | Single paved path: queue -> route -> deliver -> ack/dead-letter; all deviations logged |
+| R15 - Open/Closed | New delivery guarantee modes added by implementing IDeliveryStrategy; core unchanged |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

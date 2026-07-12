@@ -154,15 +154,15 @@ interface ActionRouter {
 
 ## Events
 
-| DASH.EventType |  Produced When | Fields |
+| DASH.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| DASH.AlertSurfaced |  alertId, severity, source | Alert displayed on dashboard alert-list |
-| DASH.AlertClassified |  alertId, severity, classifier | Severity assigned or updated |
-| DASH.AlertAcknowledged |  alertId, userId | Human acknowledged alert |
-| DASH.AlertActioned |  alertId, actionId, targetType | Human navigated to action target |
-| DASH.AlertResolved |  alertId, source | Source system reported resolution |
-| DASH.AlertArchived |  alertId, userId | Alert moved to archive |
-| DASH.AlertHistoryExported |  count, since | Alert history exported for audit |
+| DASH.AlertSurfaced |   alertId, severity, source | Alert displayed on dashboard alert-list |
+| DASH.AlertClassified |   alertId, severity, classifier | Severity assigned or updated |
+| DASH.AlertAcknowledged |   alertId, userId | Human acknowledged alert |
+| DASH.AlertActioned |   alertId, actionId, targetType | Human navigated to action target |
+| DASH.AlertResolved |   alertId, source | Source system reported resolution |
+| DASH.AlertArchived |   alertId, userId | Alert moved to archive |
+| DASH.AlertHistoryExported |   count, since | Alert history exported for audit |
 
 ## Error Cases
 
@@ -210,29 +210,18 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Alert subsystem owns surfacing; AOP/AUS own detection |
-| R2 â€” Dependency Order | Depends on AOP, AUS, EVS, Simulation; no circular deps |
-| R3 â€” DRY | Alerts ingested once; surfaced on all relevant alert-list widgets |
-| R4 â€” Builder Pattern | AlertAction uses builder for target URL construction |
-| R5 â€” Law of Demeter | Alert subsystem communicates with sources via AlertSurface interface only |
-| R6 â€” DI over Singletons | Compliant | Alert routing implementations are injected via the AlertDispatcher interface |
-| R9 â€” Deterministic | Same source alert + same classification = same surfaced presentation |
-| R10 â€” Simpler Over Complex | Active alert list is default; history and analytics are opt-in |
-| R13 â€” Design for Failure | Source unavailable queues alerts; evidence missing marks degraded |
-| R14 â€” Paved Path | Critical alerts appear on Health view by default |
-| R15 â€” Open/Closed | New alert sources register via AlertIngestor extension |
+| R1 - Modulsingularity | Alert subsystem owns surfacing; AOP/AUS own detection |
+| R2 - Dependency Order | Depends on AOP, AUS, EVS, Simulation; no circular deps |
+| R3 - DRY | Alerts ingested once; surfaced on all relevant alert-list widgets |
+| R4 - Builder Pattern | AlertAction uses builder for target URL construction |
+| R5 - Liskov Substitution | Alert subsystem communicates with sources via AlertSurface interface only |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Same source alert + same classification = same surfaced presentation |
+| R10 - Simpler Over Complex | Active alert list is default; history and analytics are opt-in |
+| R13 - Design for Failure | Source unavailable queues alerts; evidence missing marks degraded |
+| R14 - Paved Path | Critical alerts appear on Health view by default |
+| R15 - Open/Closed | New alert sources register via AlertIngestor extension |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

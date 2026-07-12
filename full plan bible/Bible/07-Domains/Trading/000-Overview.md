@@ -107,17 +107,17 @@ All risk limits are enforced by ROS budget allocation. A trade that would violat
 
 ## Events
 
-| TRD.EventType |  Produced When | Fields |
+| TRD.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| TRD.StrategyResearched |  Strategy research completes | strategy_id, hypothesis, instruments, time_horizon, confidence, methodology |
-| TRD.BacktestRun |  Backtest execution finishes | backtest_id, strategy_id, start_date, end_date, sharpe, max_drawdown, total_return, trades_count |
-| TRD.PaperTradeCompleted |  Paper trading phase finishes | paper_id, strategy_id, trades_executed, pnl, fill_quality, slippage_analysis |
-| TRD.StrategyDeployed |  Strategy is deployed to live trading | strategy_id, capital_allocated, risk_limits, deployed_at, dts_confidence |
-| TRD.OrderPlaced |  Order is submitted to exchange | order_id, instrument, side, quantity, order_type, limit_price, exchange_route |
-| TRD.OrderFilled |  Order execution confirmed | order_id, fill_price, fill_quantity, fees, timestamp, liquidity_taker |
-| TRD.OrderRejected |  Order is rejected by exchange or risk | order_id, reason, rejection_source, suggested_action |
-| TRD.RiskLimitBreached |  A risk limit is approached or breached | limit_type, current_value, limit_value, action_taken, strategy_id |
-| TRD.StrategyRetired |  Strategy is decommissioned | strategy_id, reason, final_pnl, lessons_learned, total_trades |
+| TRD.StrategyResearched |   Strategy research completes | strategy_id, hypothesis, instruments, time_horizon, confidence, methodology |
+| TRD.BacktestRun |   Backtest execution finishes | backtest_id, strategy_id, start_date, end_date, sharpe, max_drawdown, total_return, trades_count |
+| TRD.PaperTradeCompleted |   Paper trading phase finishes | paper_id, strategy_id, trades_executed, pnl, fill_quality, slippage_analysis |
+| TRD.StrategyDeployed |   Strategy is deployed to live trading | strategy_id, capital_allocated, risk_limits, deployed_at, dts_confidence |
+| TRD.OrderPlaced |   Order is submitted to exchange | order_id, instrument, side, quantity, order_type, limit_price, exchange_route |
+| TRD.OrderFilled |   Order execution confirmed | order_id, fill_price, fill_quantity, fees, timestamp, liquidity_taker |
+| TRD.OrderRejected |   Order is rejected by exchange or risk | order_id, reason, rejection_source, suggested_action |
+| TRD.RiskLimitBreached |   A risk limit is approached or breached | limit_type, current_value, limit_value, action_taken, strategy_id |
+| TRD.StrategyRetired |   Strategy is decommissioned | strategy_id, reason, final_pnl, lessons_learned, total_trades |
 
 
 ## Design DNA

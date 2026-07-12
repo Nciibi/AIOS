@@ -200,16 +200,16 @@ interface InterruptRouter {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| ATT.SignalReceived |  signal_id, source, type, salience | Signal entered Attention System |
-| ATT.SignalFocused |  signal_id, salience, focus_state | Signal promoted to Sou's focus |
-| ATT.SignalSnoozed |  signal_id, condition, duration | Signal deferred |
-| ATT.SignalDropped |  signal_id, reason, snooze_count | Signal dropped (budget exceeded) |
-| ATT.SignalDismissed |  signal_id | Sou explicitly dismissed signal |
-| ATT.InterruptTriggered |  interrupt_id, priority, reason | High-priority interrupt fired |
-| ATT.InterruptAcknowledged |  interrupt_id, latency_ms | Sou acknowledged interrupt |
-| ATT.FocusChanged |  from_state, to_state, task | Focus state transitioned |
-| ATT.BudgetExceeded |  resource, current_usage, limit | Attention budget exceeded |
-| ATT.OverloadEscalation |  switch_rate, consecutive_interrupts | Sou overwhelmed, escalating |
+| ATT.SignalReceived |   signal_id, source, type, salience | Signal entered Attention System |
+| ATT.SignalFocused |   signal_id, salience, focus_state | Signal promoted to Sou's focus |
+| ATT.SignalSnoozed |   signal_id, condition, duration | Signal deferred |
+| ATT.SignalDropped |   signal_id, reason, snooze_count | Signal dropped (budget exceeded) |
+| ATT.SignalDismissed |   signal_id | Sou explicitly dismissed signal |
+| ATT.InterruptTriggered |   interrupt_id, priority, reason | High-priority interrupt fired |
+| ATT.InterruptAcknowledged |   interrupt_id, latency_ms | Sou acknowledged interrupt |
+| ATT.FocusChanged |   from_state, to_state, task | Focus state transitioned |
+| ATT.BudgetExceeded |   resource, current_usage, limit | Attention budget exceeded |
+| ATT.OverloadEscalation |   switch_rate, consecutive_interrupts | Sou overwhelmed, escalating |
 
 ## Invariants
 

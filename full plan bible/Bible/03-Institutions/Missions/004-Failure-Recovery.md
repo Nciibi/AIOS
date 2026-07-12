@@ -178,17 +178,17 @@ interface FailureManager {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.MSNEvent |  failure_id, mission_id, method, details | Failure detected |
-| MSN.MSNEvent |  failure_id, category, severity, root_cause | Failure classified |
-| MSN.MSNEvent |  failure_id, attempt_number, backoff_ms | Auto-retry scheduled |
-| MSN.MSNEvent |  failure_id, attempt_number, success | Auto-retry succeeds |
-| MSN.MSNEvent |  failure_id, attempts_made, last_error | All retries exhausted |
-| MSN.MSNEvent |  failure_id, level, escalated_to | Escalation triggered |
-| MSN.MSNEvent |  failure_id, strategy_type, checkpoint_ref | Recovery begins |
-| MSN.MSNEvent |  failure_id, strategy_type, outcome | Recovery succeeds |
-| MSN.MSNEvent |  failure_id, strategy_type, error | Recovery fails |
-| MSN.MSNEvent |  failure_id, failed_count, total_count, isolated_milestones | Partial failure |
-| MSN.MSNEvent |  failure_id, source_mission, affected_missions | Cascading failure |
+| MSN.MSNEvent |   failure_id, mission_id, method, details | Failure detected |
+| MSN.MSNEvent |   failure_id, category, severity, root_cause | Failure classified |
+| MSN.MSNEvent |   failure_id, attempt_number, backoff_ms | Auto-retry scheduled |
+| MSN.MSNEvent |   failure_id, attempt_number, success | Auto-retry succeeds |
+| MSN.MSNEvent |   failure_id, attempts_made, last_error | All retries exhausted |
+| MSN.MSNEvent |   failure_id, level, escalated_to | Escalation triggered |
+| MSN.MSNEvent |   failure_id, strategy_type, checkpoint_ref | Recovery begins |
+| MSN.MSNEvent |   failure_id, strategy_type, outcome | Recovery succeeds |
+| MSN.MSNEvent |   failure_id, strategy_type, error | Recovery fails |
+| MSN.MSNEvent |   failure_id, failed_count, total_count, isolated_milestones | Partial failure |
+| MSN.MSNEvent |   failure_id, source_mission, affected_missions | Cascading failure |
 
 ## Error Cases
 
@@ -235,24 +235,18 @@ Per Law 7 (Capability Bounds), Missions declares its capabilities at creation an
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Failure and recovery is a single focused concern |
-| R3 â€” DRY | Recovery state machine follows same pattern as Mission lifecycle |
-| R9 â€” Deterministic | Same failure with same strategy produces same recovery outcome |
-| R10 â€” Simpler Over Complex | Clear escalation ladder with defined gates |
-| R12 â€” Embrace Errors | All recovery errors have unique codes (MSN_FAIL_001â€“007) |
-| R13 â€” Design for Failure | Every failure mode has a defined detection and recovery path |
+| R1 - Modulsingularity | Failure and recovery is a single focused concern |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Recovery state machine follows same pattern as Mission lifecycle |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Same failure with same strategy produces same recovery outcome |
+| R10 - Simpler Over Complex | Clear escalation ladder with defined gates |
+| R13 - Design for Failure | Every failure mode has a defined detection and recovery path |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

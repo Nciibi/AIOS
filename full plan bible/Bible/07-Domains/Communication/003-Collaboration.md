@@ -178,16 +178,16 @@ interface SessionPolicy {
 
 ## Events
 
-| COM.EventType |  Produced When | Fields |
+| COM.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| COM.SessionCreated |  New collaboration session is created | session_id, workspace_id, creator_id, max_participants, created_at |
-| COM.ParticipantJoined |  Participant enters an active session | session_id, participant_id, participant_type, role, current_participant_count |
-| COM.ParticipantLeft |  Participant leaves or is removed from session | session_id, participant_id, reason, duration_ms, remaining_count |
-| COM.StateSynced |  SyncEvent is broadcast to all participants | session_id, event_id, sender_id, event_type, sequence_number, vector_clock |
-| COM.PresenceUpdated |  Participant presence status changes | session_id, participant_id, old_status, new_status, typing_state, last_seen_at |
-| COM.SessionHandedOff |  Worker session is handed off to another Worker | session_id, from_worker, to_worker, state_version, pending_event_count, handoff_duration_ms |
-| COM.StateDivergenceDetected |  Vector clock skew exceeds threshold | session_id, participant_ids, clock_diff_ms, threshold_ms, resync_initiated |
-| COM.SessionArchived |  Session is closed and archived | session_id, duration_minutes, total_participants, total_events, reason |
+| COM.SessionCreated |   New collaboration session is created | session_id, workspace_id, creator_id, max_participants, created_at |
+| COM.ParticipantJoined |   Participant enters an active session | session_id, participant_id, participant_type, role, current_participant_count |
+| COM.ParticipantLeft |   Participant leaves or is removed from session | session_id, participant_id, reason, duration_ms, remaining_count |
+| COM.StateSynced |   SyncEvent is broadcast to all participants | session_id, event_id, sender_id, event_type, sequence_number, vector_clock |
+| COM.PresenceUpdated |   Participant presence status changes | session_id, participant_id, old_status, new_status, typing_state, last_seen_at |
+| COM.SessionHandedOff |   Worker session is handed off to another Worker | session_id, from_worker, to_worker, state_version, pending_event_count, handoff_duration_ms |
+| COM.StateDivergenceDetected |   Vector clock skew exceeds threshold | session_id, participant_ids, clock_diff_ms, threshold_ms, resync_initiated |
+| COM.SessionArchived |   Session is closed and archived | session_id, duration_minutes, total_participants, total_events, reason |
 
 ## Error Cases
 
@@ -236,29 +236,18 @@ Per Law 7 (Capability Bounds), Communication declares its capabilities at creati
 
 | Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Session management, presence, sync, and handoff are separate modules with well-defined interfaces |
-| R2 (Capsule) | Each SyncEvent is a sealed capsule with immutable vector clock, sequence, and payload |
-| R3 (DRY) | Workspace state is authored in one replica; SyncEvents are the single source of truth for mutations |
-| R4 (Builder) | Session state is built incrementally by applying ordered SyncEvents to a base snapshot |
-| R5 (Liskov Substitution) | All participant types (human, worker) implement the same IParticipant interface in session |
-| R6 (DI over Singletons) | Session stores and sync engines are injected; no global session registry pattern |
-| R9 (Deterministic) | Same ordered SyncEvent sequence applied to same initial state yields identical final state |
-| R10 (Simpler Over Complex) | Conflict resolution is last-writer-wins; no multi-version merge or CRDT complexity |
-| R13 (Design for Failure) | State divergence triggers automatic resync; no silent inconsistency persists |
-| R14 (Paved Path) | Single paved path: create -> join -> sync -> handoff/leave -> archive; all deviations logged |
-| R15 (Open/Closed) | New sync event types added without changing sync engine; new participant roles extend existing interface |
+| R1 - Modulsingularity | Session management, presence, sync, and handoff are separate modules with well-defined interfaces |
+| R2 - Dependency Order | Each SyncEvent is a sealed capsule with immutable vector clock, sequence, and payload |
+| R3 - DRY | Workspace state is authored in one replica; SyncEvents are the single source of truth for mutations |
+| R4 - Builder Pattern | Session state is built incrementally by applying ordered SyncEvents to a base snapshot |
+| R5 - Liskov Substitution | All participant types (human, worker) implement the same IParticipant interface in session |
+| R6 - DI over Singletons | Session stores and sync engines are injected; no global session registry pattern |
+| R9 - Deterministic | Same ordered SyncEvent sequence applied to same initial state yields identical final state |
+| R10 - Simpler Over Complex | Conflict resolution is last-writer-wins; no multi-version merge or CRDT complexity |
+| R13 - Design for Failure | State divergence triggers automatic resync; no silent inconsistency persists |
+| R14 - Paved Path | Single paved path: create -> join -> sync -> handoff/leave -> archive; all deviations logged |
+| R15 - Open/Closed | New sync event types added without changing sync engine; new participant roles extend existing interface |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

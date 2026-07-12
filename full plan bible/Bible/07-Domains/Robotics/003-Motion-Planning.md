@@ -225,16 +225,16 @@ interface ExecutionStatus {
 
 ## Events
 
-| ROB.EventType |  Produced When | Fields |
+| ROB.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| ROB.MotionPlanRequested |  A motion planning request is submitted | plan_id, robot_id, start_state, goal_state, constraint_count, timeout_ms |
-| ROB.MotionPlanComputed |  A motion plan is successfully computed | plan_id, robot_id, waypoint_count, trajectory_length, computation_time_ms, algorithm_used |
-| ROB.MotionPlanValidated |  A motion plan passes or fails validation | plan_id, is_valid, simulated_outcome, collision_checks_passed, warning_count |
-| ROB.MotionPlanExecuted |  A motion plan begins execution on hardware | plan_id, robot_id, trajectory_duration, safety_gate_passed, executor_id |
-| ROB.MotionPlanCompleted |  Motion plan execution finishes | plan_id, robot_id, status, actual_duration_ms, deviation_max, success |
-| ROB.ObstacleDetected |  A new obstacle is detected in the robot workspace | obstacle_id, obstacle_type, position, is_dynamic, distance_to_robot, replan_triggered |
-| ROB.MotionPlanAborted |  Motion plan execution is aborted | plan_id, robot_id, reason, current_state, safety_layer_triggered, recovery_action |
-| ROB.IKSolutionFailed |  Inverse kinematics solver cannot find a valid solution | plan_id, target_pose, robot_model, constraints, iterations, residual_error |
+| ROB.MotionPlanRequested |   A motion planning request is submitted | plan_id, robot_id, start_state, goal_state, constraint_count, timeout_ms |
+| ROB.MotionPlanComputed |   A motion plan is successfully computed | plan_id, robot_id, waypoint_count, trajectory_length, computation_time_ms, algorithm_used |
+| ROB.MotionPlanValidated |   A motion plan passes or fails validation | plan_id, is_valid, simulated_outcome, collision_checks_passed, warning_count |
+| ROB.MotionPlanExecuted |   A motion plan begins execution on hardware | plan_id, robot_id, trajectory_duration, safety_gate_passed, executor_id |
+| ROB.MotionPlanCompleted |   Motion plan execution finishes | plan_id, robot_id, status, actual_duration_ms, deviation_max, success |
+| ROB.ObstacleDetected |   A new obstacle is detected in the robot workspace | obstacle_id, obstacle_type, position, is_dynamic, distance_to_robot, replan_triggered |
+| ROB.MotionPlanAborted |   Motion plan execution is aborted | plan_id, robot_id, reason, current_state, safety_layer_triggered, recovery_action |
+| ROB.IKSolutionFailed |   Inverse kinematics solver cannot find a valid solution | plan_id, target_pose, robot_model, constraints, iterations, residual_error |
 
 ## Error Cases
 

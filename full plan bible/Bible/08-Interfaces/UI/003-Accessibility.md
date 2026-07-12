@@ -143,15 +143,15 @@ interface ContrastValidator {
 
 ## Events
 
-| UI.EventType |  Produced When | Fields |
+| UI.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| UI.AccessibilityAuditRun |  auditId, componentCount, passedCount, failedCount | Full accessibility scan completed |
-| UI.ViolationDetected |  violationId, componentId, severity, wcagCriteria | New accessibility violation found |
-| UI.ViolationRemediated |  violationId, componentId, fixApplied | Violation resolved and re-audited |
-| UI.ComplianceReportGenerated |  reportId, aaPassRate, aaaPassRate | Compliance report published |
-| UI.FocusOrderChanged |  componentId, previousOrder, newOrder | Keyboard navigation order modified |
-| UI.ScreenReaderConfigured |  configId, reader, version | Screen reader settings updated |
-| UI.ContrastFailure |  tokenId, ratio, minimumRequired | Token pair fails contrast check |
+| UI.AccessibilityAuditRun |   auditId, componentCount, passedCount, failedCount | Full accessibility scan completed |
+| UI.ViolationDetected |   violationId, componentId, severity, wcagCriteria | New accessibility violation found |
+| UI.ViolationRemediated |   violationId, componentId, fixApplied | Violation resolved and re-audited |
+| UI.ComplianceReportGenerated |   reportId, aaPassRate, aaaPassRate | Compliance report published |
+| UI.FocusOrderChanged |   componentId, previousOrder, newOrder | Keyboard navigation order modified |
+| UI.ScreenReaderConfigured |   configId, reader, version | Screen reader settings updated |
+| UI.ContrastFailure |   tokenId, ratio, minimumRequired | Token pair fails contrast check |
 
 ## Error Cases
 
@@ -199,29 +199,18 @@ Per Law 7 (Capability Bounds), UI declares its capabilities at creation and oper
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Accessibility is a first-class concern owned by this system; no component bypasses it |
-| R2 â€” Dependency Order | Depends on Components (002), Design System (001); no cycles |
-| R3 â€” DRY | WCAG criteria defined once; referenced by all audit checks |
-| R4 â€” Builder Pattern | Violation remediation built stepwise with audit at each stage |
-| R5 â€” Liskov Substitution | Compliant | Accessibility providers are interchangeable through the AccessibilityProvider interface |
-| R6 â€” Encapsulation | A11Y concerns encapsulated within AccessibilityEngine; components opt in via props |
-| R9 â€” Deterministic | Same component + same audit = same violation set |
-| R10 â€” Simpler Over Complex | AA compliance is default; AAA is opt-in per component |
-| R13 â€” Design for Failure | Screen reader failure degrades to visible text; never silent |
-| R14 â€” Paved Path | Use predefined focus order; custom ordering requires explicit override |
-| R15 â€” Open/Closed | New WCAG criteria registered via new check definitions; existing checks immutable |
+| R1 - Modulsingularity | Accessibility is a first-class concern owned by this system; no component bypasses it |
+| R2 - Dependency Order | Depends on Components (002), Design System (001); no cycles |
+| R3 - DRY | WCAG criteria defined once; referenced by all audit checks |
+| R4 - Builder Pattern | Violation remediation built stepwise with audit at each stage |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | A11Y concerns encapsulated within AccessibilityEngine; components opt in via props |
+| R9 - Deterministic | Same component + same audit = same violation set |
+| R10 - Simpler Over Complex | AA compliance is default; AAA is opt-in per component |
+| R13 - Design for Failure | Screen reader failure degrades to visible text; never silent |
+| R14 - Paved Path | Use predefined focus order; custom ordering requires explicit override |
+| R15 - Open/Closed | New WCAG criteria registered via new check definitions; existing checks immutable |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

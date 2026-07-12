@@ -140,16 +140,16 @@ interface ParameterCompleter {
 
 ## Events
 
-| CON.EventType |  Produced When | Fields |
+| CON.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| CON.AutocompleteTriggered |  sessionId, inputLength, cursorPosition | Auto-completion activated by human input |
-| CON.CandidateGenerated |  sessionId, candidateCount, maxScore | Candidates generated from all providers |
-| CON.CandidateScored |  sessionId, candidateCount, topScore | Candidates scored and ranked |
-| CON.SuggestionAccepted |  sessionId, acceptedText, candidateType | Human selected a suggestion from the list |
-| CON.HelpDisplayed |  sessionId, topic, source | Help entry displayed for a command or topic |
-| CON.ParameterCompleted |  sessionId, paramName, valueSource | Parameter value completed from enum or dynamic source |
-| CON.FuzzyMatchPerformed |  sessionId, input, candidateCount, maxMatchScore | Fuzzy matching executed for partial input |
-| CON.CompletionContextResolved |  sessionId, tokenCount, position | CompletionContext built from current input state |
+| CON.AutocompleteTriggered |   sessionId, inputLength, cursorPosition | Auto-completion activated by human input |
+| CON.CandidateGenerated |   sessionId, candidateCount, maxScore | Candidates generated from all providers |
+| CON.CandidateScored |   sessionId, candidateCount, topScore | Candidates scored and ranked |
+| CON.SuggestionAccepted |   sessionId, acceptedText, candidateType | Human selected a suggestion from the list |
+| CON.HelpDisplayed |   sessionId, topic, source | Help entry displayed for a command or topic |
+| CON.ParameterCompleted |   sessionId, paramName, valueSource | Parameter value completed from enum or dynamic source |
+| CON.FuzzyMatchPerformed |   sessionId, input, candidateCount, maxMatchScore | Fuzzy matching executed for partial input |
+| CON.CompletionContextResolved |   sessionId, tokenCount, position | CompletionContext built from current input state |
 
 ## Error Cases
 
@@ -197,29 +197,18 @@ Per Law 7 (Capability Bounds), Console declares its capabilities at creation and
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Auto-Complete owns suggestion generation only; command definitions owned by CLI registry |
-| R2 â€” Dependency Order | Depends on CLI CommandRegistry, REPL session, EVS; no circular deps |
-| R3 â€” DRY | Command names and argument specs sourced from CLICommand definitions; no duplication |
-| R4 â€” Builder Pattern | CompletionContext built incrementally from input state |
-| R5 â€” Deterministic | Same input and context always produce identical candidate ranking |
-| R6 â€” Single Source | Command registry is the authoritative source for command metadata |
-| R9 â€” Deterministic | Replaying autocomplete session with same input produces same suggestions |
-| R10 â€” Simpler Over Complex | Default suggestion set is command names; context-aware and fuzzy are opt-in layers |
-| R13 â€” Design for Failure | Dynamic value provider failure degrades gracefully to static values only |
-| R14 â€” Paved Path | Standard completion flow: type prefix, see suggestions, accept with Tab |
-| R15 â€” Open/Closed | New candidate providers register without modifying the auto-complete engine |
+| R1 - Modulsingularity | Auto-Complete owns suggestion generation only; command definitions owned by CLI registry |
+| R2 - Dependency Order | Depends on CLI CommandRegistry, REPL session, EVS; no circular deps |
+| R3 - DRY | Command names and argument specs sourced from CLICommand definitions; no duplication |
+| R4 - Builder Pattern | CompletionContext built incrementally from input state |
+| R5 - Liskov Substitution | Same input and context always produce identical candidate ranking |
+| R6 - DI over Singletons | Command registry is the authoritative source for command metadata |
+| R9 - Deterministic | Replaying autocomplete session with same input produces same suggestions |
+| R10 - Simpler Over Complex | Default suggestion set is command names; context-aware and fuzzy are opt-in layers |
+| R13 - Design for Failure | Dynamic value provider failure degrades gracefully to static values only |
+| R14 - Paved Path | Standard completion flow: type prefix, see suggestions, accept with Tab |
+| R15 - Open/Closed | New candidate providers register without modifying the auto-complete engine |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

@@ -209,17 +209,17 @@ Delivered to human; evidence recorded (Law 4)
 
 ## Events
 
-| UI.EventType |  Produced When | Fields |
+| UI.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| UI.SessionStarted |  sessionId, humanId, channel | Human interaction session opened |
-| UI.MessageReceived |  messageId, sessionId, intent | Human message parsed |
-| UI.CommandExecuted |  sessionId, command, result | Structured command run |
-| UI.NotificationSent |  notificationId, humanId, priority | Notification delivered |
-| UI.NotificationAcked |  notificationId, humanId | Notification acknowledged |
-| UI.ApprovalRequested |  requestId, humanId, subject | Routine approval requested |
-| UI.ApprovalResolved |  requestId, decision, humanId | Approval decision recorded |
-| UI.SessionEnded |  sessionId, humanId | Session closed |
-| UI.IntentUnclear |  sessionId, content, confidence | Parser low-confidence; clarification requested |
+| UI.SessionStarted |   sessionId, humanId, channel | Human interaction session opened |
+| UI.MessageReceived |   messageId, sessionId, intent | Human message parsed |
+| UI.CommandExecuted |   sessionId, command, result | Structured command run |
+| UI.NotificationSent |   notificationId, humanId, priority | Notification delivered |
+| UI.NotificationAcked |   notificationId, humanId | Notification acknowledged |
+| UI.ApprovalRequested |   requestId, humanId, subject | Routine approval requested |
+| UI.ApprovalResolved |   requestId, decision, humanId | Approval decision recorded |
+| UI.SessionEnded |   sessionId, humanId | Session closed |
+| UI.IntentUnclear |   sessionId, content, confidence | Parser low-confidence; clarification requested |
 
 ## Error Cases
 
@@ -269,27 +269,18 @@ Per Law 7 (Capability Bounds), UI declares its capabilities at creation and oper
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | UI owns human interaction exclusively; Brain owns responses; ACF owns transport |
-| R2 â€” Dependency Order | Depends on Conversation OS, ACF, Notification System, Dashboard; no cycles |
-| R3 â€” DRY | Message schemas defined via IOP contracts; UI renders, does not redefine |
-| R4 â€” Builder Pattern | Approval requests and notifications use builder for validation |
-| R9 â€” Deterministic | Same command + same state = same result; conversations are logged for replay |
-| R10 â€” Simpler Over Complex | Conversational + command channels cover most needs; advanced views opt-in |
-| R13 â€” Design for Failure | Parse failure requests clarification; auth failure preserves session context |
-| R14 â€” Paved Path | Conversational chat is the default human entry point |
-| R15 â€” Open/Closed | New channels register via Interface Hub extension |
+| R1 - Modulsingularity | UI owns human interaction exclusively; Brain owns responses; ACF owns transport |
+| R2 - Dependency Order | Depends on Conversation OS, ACF, Notification System, Dashboard; no cycles |
+| R3 - DRY | Message schemas defined via IOP contracts; UI renders, does not redefine |
+| R4 - Builder Pattern | Approval requests and notifications use builder for validation |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Same command + same state = same result; conversations are logged for replay |
+| R10 - Simpler Over Complex | Conversational + command channels cover most needs; advanced views opt-in |
+| R13 - Design for Failure | Parse failure requests clarification; auth failure preserves session context |
+| R14 - Paved Path | Conversational chat is the default human entry point |
+| R15 - Open/Closed | New channels register via Interface Hub extension |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

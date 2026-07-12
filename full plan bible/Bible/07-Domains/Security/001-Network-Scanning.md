@@ -137,15 +137,15 @@ interface RateLimitConfig {
 
 ## Events
 
-| SEC.EventType |  Produced When | Fields |
+| SEC.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| SEC.ScanStarted |  Scan pipeline begins execution | scan_id, target_count, mode, stealth_profile, authorization_ref |
-| SEC.ScanCompleted |  All pipeline stages finish | scan_id, hosts_found, ports_open, duration_ms |
-| SEC.VulnerabilityMatched |  CVE match found for a service | finding_id, scan_id, cve, service, confidence |
-| SEC.ScanTargetBlocked |  Unauthorized or blacklisted target detected | target_ip, reason, authorization_ref, resolver_id |
-| SEC.ScanProgress |  Periodic progress heartbeat | scan_id, stage, percent_complete, estimated_remaining |
-| SEC.ScanHalted |  Scan interrupted by operator or boundary | scan_id, halted_by, reason, partial_results_ref |
-| SEC.ScanRateLimited |  Rate limit threshold approached | scan_id, current_rate, max_rate, throttle_applied |
+| SEC.ScanStarted |   Scan pipeline begins execution | scan_id, target_count, mode, stealth_profile, authorization_ref |
+| SEC.ScanCompleted |   All pipeline stages finish | scan_id, hosts_found, ports_open, duration_ms |
+| SEC.VulnerabilityMatched |   CVE match found for a service | finding_id, scan_id, cve, service, confidence |
+| SEC.ScanTargetBlocked |   Unauthorized or blacklisted target detected | target_ip, reason, authorization_ref, resolver_id |
+| SEC.ScanProgress |   Periodic progress heartbeat | scan_id, stage, percent_complete, estimated_remaining |
+| SEC.ScanHalted |   Scan interrupted by operator or boundary | scan_id, halted_by, reason, partial_results_ref |
+| SEC.ScanRateLimited |   Rate limit threshold approached | scan_id, current_rate, max_rate, throttle_applied |
 
 ## Error Cases
 
@@ -193,30 +193,19 @@ Per Law 7 (Capability Bounds), Security declares its capabilities at creation an
 ## Design DNA
 
 | Rule | Assessment |
-|------|------------|
-| R1 (Modulsingularity) | Each pipeline stage (discovery, fingerprinting, vuln matching) is a separate module with well-defined interfaces |
-| R2 (Capsule) | Scan config, targets, results, and evidence sealed as an atomic scan capsule |
-| R3 (Idempotent) | Identical targets and config produce identical scan results â€” deterministic fingerprinting |
-| R4 (Builder) | Scan result is built incrementally through pipeline stages â€” immutable stage outputs |
-| R5 (Manual Step) | Scan authorization is a manual gate â€” no automated scan without explicit approval |
-| R6 (No Orphans) | Halted scans preserve partial results â€” no unreclaimed scan resources |
-| R9 (Deterministic) | Same CPE fingerprint and CVE DB version yields identical match set |
-| R10 (Event Sourcing) | Every probe, match, and block produces an event â€” full reconstruction from event log |
-| R13 (Design for Failure) | Engine fails closed â€” unauthorized targets never probed even on internal error |
-| R14 (GC) | Scan artifacts retained for audit window, then garbage collected |
-| R15 (Auth Chain) | Every scan links to authorization chain â€” verified at each stage boundary |
+|------|-----------|
+| R1 - Modulsingularity | Each pipeline stage (discovery, fingerprinting, vuln matching) is a separate module with well-defined interfaces |
+| R2 - Dependency Order | Scan config, targets, results, and evidence sealed as an atomic scan capsule |
+| R3 - DRY | Identical targets and config produce identical scan results â€” deterministic fingerprinting |
+| R4 - Builder Pattern | Scan result is built incrementally through pipeline stages â€” immutable stage outputs |
+| R5 - Liskov Substitution | Scan authorization is a manual gate â€” no automated scan without explicit approval |
+| R6 - DI over Singletons | Halted scans preserve partial results â€” no unreclaimed scan resources |
+| R9 - Deterministic | Same CPE fingerprint and CVE DB version yields identical match set |
+| R10 - Simpler Over Complex | Every probe, match, and block produces an event â€” full reconstruction from event log |
+| R13 - Design for Failure | Engine fails closed â€” unauthorized targets never probed even on internal error |
+| R14 - Paved Path | Scan artifacts retained for audit window, then garbage collected |
+| R15 - Open/Closed | Every scan links to authorization chain â€” verified at each stage boundary |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

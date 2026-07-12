@@ -191,15 +191,15 @@ enum ChangeType {
 
 ## Events
 
-| COD.EventType |  Produced When | Fields |
+| COD.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| COD.ReviewStarted |  A review request enters the pipeline | review_id, worker_id, file_count, lines_changed |
-| COD.ReviewCompleted |  Review finishes with a result | review_id, status, overall_score, finding_count |
-| COD.ReviewEscalated |  Review score falls below threshold | review_id, overall_score, threshold, critical_findings |
-| COD.ReviewFindingCreated |  A specific finding is recorded | finding_id, review_id, category, severity, file_path, line |
-| COD.ReviewThresholdViolated |  A severity threshold is breached | review_id, threshold_name, actual_value, max_value |
-| COD.ReviewApproved |  Review passes all thresholds | review_id, overall_score, max_severity, reviewer_id |
-| COD.ReviewChangesRequested |  Review requires modifications | review_id, finding_count, critical_count, summary |
+| COD.ReviewStarted |   A review request enters the pipeline | review_id, worker_id, file_count, lines_changed |
+| COD.ReviewCompleted |   Review finishes with a result | review_id, status, overall_score, finding_count |
+| COD.ReviewEscalated |   Review score falls below threshold | review_id, overall_score, threshold, critical_findings |
+| COD.ReviewFindingCreated |   A specific finding is recorded | finding_id, review_id, category, severity, file_path, line |
+| COD.ReviewThresholdViolated |   A severity threshold is breached | review_id, threshold_name, actual_value, max_value |
+| COD.ReviewApproved |   Review passes all thresholds | review_id, overall_score, max_severity, reviewer_id |
+| COD.ReviewChangesRequested |   Review requires modifications | review_id, finding_count, critical_count, summary |
 
 ## Error Cases
 
@@ -247,29 +247,18 @@ Per Law 7 (Capability Bounds), Coding declares its capabilities at creation and 
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Each review dimension (style, complexity, security, smells) is a separate module |
-| R2 â€” Dependency Order | Review depends on Language Registry; CodeWorker depends on Review |
-| R3 â€” DRY | Style rules and smell patterns are defined once per language; reused across reviews |
-| R4 â€” Builder Pattern | Review result is built incrementally through parallel analysis stages |
-| R5 â€” Liskov Substitution | All analysis stages implement IAnalysisStage interface |
-| R6 â€” DI over Singletons | Analysis stages are injected into pipeline; no shared state |
-| R9 â€” Deterministic | Same diff + thresholds + rules produces identical review score |
-| R10 â€” Simpler Over Complex | Review pipeline uses parallel fan-out with linear aggregation |
-| R13 â€” Design for Failure | Failed analysis stage degrades gracefully; partial results with warning |
-| R14 â€” Paved Path | Single paved path: diff -> analyze -> score -> approve/escalate |
-| R15 â€” Open/Closed | New analysis stages added by implementing IAnalysisStage; pipeline unchanged |
+| R1 - Modulsingularity | Each review dimension (style, complexity, security, smells) is a separate module |
+| R2 - Dependency Order | Review depends on Language Registry; CodeWorker depends on Review |
+| R3 - DRY | Style rules and smell patterns are defined once per language; reused across reviews |
+| R4 - Builder Pattern | Review result is built incrementally through parallel analysis stages |
+| R5 - Liskov Substitution | All analysis stages implement IAnalysisStage interface |
+| R6 - DI over Singletons | Analysis stages are injected into pipeline; no shared state |
+| R9 - Deterministic | Same diff + thresholds + rules produces identical review score |
+| R10 - Simpler Over Complex | Review pipeline uses parallel fan-out with linear aggregation |
+| R13 - Design for Failure | Failed analysis stage degrades gracefully; partial results with warning |
+| R14 - Paved Path | Single paved path: diff -> analyze -> score -> approve/escalate |
+| R15 - Open/Closed | New analysis stages added by implementing IAnalysisStage; pipeline unchanged |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

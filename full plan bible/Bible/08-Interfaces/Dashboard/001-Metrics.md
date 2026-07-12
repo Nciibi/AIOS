@@ -148,15 +148,15 @@ interface StalenessMonitor {
 
 ## Events
 
-| DASH.EventType |  Produced When | Fields |
+| DASH.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| DASH.MetricDefined |  metricId, name, source | New metric registered in catalog |
-| DASH.MetricQueried |  metricId, source, durationMs | Source query executed for metric |
-| DASH.MetricAggregated |  metricId, stepCount, outputType | Aggregation pipeline completed |
-| DASH.ValueBound |  metricId, evidenceRef, computedAt | Evidence reference attached to value |
-| DASH.MetricStale |  metricId, lastUpdated, threshold | Metric marked stale due to freshness timeout |
-| DASH.MetricRefreshed |  metricId, newValue | Stale metric received fresh data |
-| DASH.MetricError |  metricId, errorCode | Metric computation failed |
+| DASH.MetricDefined |   metricId, name, source | New metric registered in catalog |
+| DASH.MetricQueried |   metricId, source, durationMs | Source query executed for metric |
+| DASH.MetricAggregated |   metricId, stepCount, outputType | Aggregation pipeline completed |
+| DASH.ValueBound |   metricId, evidenceRef, computedAt | Evidence reference attached to value |
+| DASH.MetricStale |   metricId, lastUpdated, threshold | Metric marked stale due to freshness timeout |
+| DASH.MetricRefreshed |   metricId, newValue | Stale metric received fresh data |
+| DASH.MetricError |   metricId, errorCode | Metric computation failed |
 
 ## Error Cases
 
@@ -203,29 +203,18 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Metrics subsystem owns value computation; display is handled by Widgets |
-| R2 â€” Dependency Order | Depends on AOP, EVS, AUS via DataSourceBinding; no circular deps |
-| R3 â€” DRY | Metric catalog ensures single definition per metric; widgets reference by ID |
-| R4 â€” Builder Pattern | AggregationPipeline uses builder for composing steps |
-| R5 â€” Liskov Substitution | Compliant | Metric definitions are interchangeable through the MetricProvider interface |
-| R6 â€” Immutability | MetricDefinition is immutable; versions track changes |
-| R9 â€” Deterministic | Same DataQuery + same evidence = same MetricValue |
-| R10 â€” Simpler Over Complex | Default metrics (count, avg, latest) cover 80% of use cases |
-| R13 â€” Design for Failure | Source outage marks stale; stale threshold prevents silent data rot |
-| R14 â€” Paved Path | Pre-defined health metrics are the default for all views |
-| R15 â€” Open/Closed | New aggregation methods register via AggregationStep extension |
+| R1 - Modulsingularity | Metrics subsystem owns value computation; display is handled by Widgets |
+| R2 - Dependency Order | Depends on AOP, EVS, AUS via DataSourceBinding; no circular deps |
+| R3 - DRY | Metric catalog ensures single definition per metric; widgets reference by ID |
+| R4 - Builder Pattern | AggregationPipeline uses builder for composing steps |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | MetricDefinition is immutable; versions track changes |
+| R9 - Deterministic | Same DataQuery + same evidence = same MetricValue |
+| R10 - Simpler Over Complex | Default metrics (count, avg, latest) cover 80% of use cases |
+| R13 - Design for Failure | Source outage marks stale; stale threshold prevents silent data rot |
+| R14 - Paved Path | Pre-defined health metrics are the default for all views |
+| R15 - Open/Closed | New aggregation methods register via AggregationStep extension |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

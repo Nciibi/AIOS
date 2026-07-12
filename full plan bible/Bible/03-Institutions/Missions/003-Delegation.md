@@ -137,16 +137,16 @@ interface MissionDelegator {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.MSNEvent |  contract_id, source_mission, target, scope_hash | Delegation contract created |
-| MSN.MSNEvent |  contract_id, accepted_by, acceptance_hash | Delegation accepted |
-| MSN.MSNEvent |  contract_id, rejected_by, reason | Delegation rejected |
-| MSN.MSNEvent |  contract_id, sub_mission_id, started_at | Sub-Mission begins execution |
-| MSN.MSNEvent |  contract_id, sub_mission_id, result_summary | Sub-Mission completes |
-| MSN.MSNEvent |  contract_id, sub_mission_id, error_code, details | Sub-Mission fails |
-| MSN.MSNEvent |  contract_id, deliverables_hash, count | Results returned |
-| MSN.MSNEvent |  contract_id, verification_status, score | Results verified |
-| MSN.MSNEvent |  contract_id, verification_status, failures | Results rejected |
-| MSN.MSNEvent |  contract_id, chain_hash, links | Chain recorded |
+| MSN.MSNEvent |   contract_id, source_mission, target, scope_hash | Delegation contract created |
+| MSN.MSNEvent |   contract_id, accepted_by, acceptance_hash | Delegation accepted |
+| MSN.MSNEvent |   contract_id, rejected_by, reason | Delegation rejected |
+| MSN.MSNEvent |   contract_id, sub_mission_id, started_at | Sub-Mission begins execution |
+| MSN.MSNEvent |   contract_id, sub_mission_id, result_summary | Sub-Mission completes |
+| MSN.MSNEvent |   contract_id, sub_mission_id, error_code, details | Sub-Mission fails |
+| MSN.MSNEvent |   contract_id, deliverables_hash, count | Results returned |
+| MSN.MSNEvent |   contract_id, verification_status, score | Results verified |
+| MSN.MSNEvent |   contract_id, verification_status, failures | Results rejected |
+| MSN.MSNEvent |   contract_id, chain_hash, links | Chain recorded |
 
 ## Error Cases
 
@@ -190,24 +190,18 @@ Per Law 7 (Capability Bounds), Missions declares its capabilities at creation an
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Delegation is a single focused concern within the Mission system |
-| R3 â€” DRY | Delegation contracts follow the same pattern as Mission plans |
-| R9 â€” Deterministic | Same delegation contract with same target produces same outcome |
-| R10 â€” Simpler Over Complex | Clear contract format with well-defined acceptance/rejection flow |
-| R12 â€” Embrace Errors | All delegation errors have unique codes (MSN_DEL_001â€“005) |
-| R13 â€” Design for Failure | Escalation paths defined for all delegation failure modes |
+| R1 - Modulsingularity | Delegation is a single focused concern within the Mission system |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Delegation contracts follow the same pattern as Mission plans |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Same delegation contract with same target produces same outcome |
+| R10 - Simpler Over Complex | Clear contract format with well-defined acceptance/rejection flow |
+| R13 - Design for Failure | Escalation paths defined for all delegation failure modes |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

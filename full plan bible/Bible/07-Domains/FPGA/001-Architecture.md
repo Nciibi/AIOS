@@ -146,14 +146,14 @@ interface DeviceSelector {
 
 ## Events
 
-| FPGA.EventType |  Produced When | Fields |
+| FPGA.EventType |   Produced When | Fields |
 |-------|----------|---------|
-| FPGA.DeviceSelected |  DeviceRegistry: device_id, part_number, rationale | Fired when a target device is selected |
-| FPGA.ResourcesEstimated |  ResourceEstimator: estimate_id, total_percent, confidence | Fired after resource estimation completes |
-| FPGA.IPCoresInstantiated |  IPCatalog: core_id, name, version, device | Fired when an IP core is instantiated |
-| FPGA.ConstraintsDefined |  ConstraintEngine: constraint_ids, types, count | Fired when constraints are generated |
-| FPGA.DeviceValidated |  DeviceRegistry: device_id, validation_status | Fired after device compatibility check |
-| FPGA.FabricModeled |  FabricModeler: part_number, resource_summary | Fired when fabric model is constructed |
+| FPGA.DeviceSelected |   DeviceRegistry: device_id, part_number, rationale | Fired when a target device is selected |
+| FPGA.ResourcesEstimated |   ResourceEstimator: estimate_id, total_percent, confidence | Fired after resource estimation completes |
+| FPGA.IPCoresInstantiated |   IPCatalog: core_id, name, version, device | Fired when an IP core is instantiated |
+| FPGA.ConstraintsDefined |   ConstraintEngine: constraint_ids, types, count | Fired when constraints are generated |
+| FPGA.DeviceValidated |   DeviceRegistry: device_id, validation_status | Fired after device compatibility check |
+| FPGA.FabricModeled |   FabricModeler: part_number, resource_summary | Fired when fabric model is constructed |
 
 ## Error Cases
 

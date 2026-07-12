@@ -245,20 +245,20 @@ Enforcement Gateway checks budget via checkBudget()
 
 ## Events
 
-| ECON.EventType |  Produced When | Fields |
+| ECON.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| ECON.BudgetCreated |  budgetId, ownerId, totalAmount | New budget registered |
-| ECON.BudgetActivated |  budgetId, effectiveFrom | Budget entered Active phase |
-| ECON.FundsReserved |  budgetId, amount, consumerId | Funds reserved for upcoming spend |
-| ECON.SpendCommitted |  budgetId, amount, consumerId, resourceType | Actual spending recorded |
-| ECON.BudgetThresholdWarning |  budgetId, spentPercentage, threshold | Spending approached configurable threshold |
-| ECON.BudgetExhausted |  budgetId, totalSpent, totalBudget | Budget fully consumed |
-| ECON.BudgetFrozen |  budgetId, reason | Budget suspended pending review |
-| ECON.BudgetClosed |  budgetId, finalReport | Budget period ended, final report generated |
-| ECON.PriceSheetUpdated |  priceSheetId, effectiveFrom, changes | Resource prices changed |
-| ECON.OverageAllowed |  budgetId, amount | Overage policy triggered |
-| ECON.OverageDenied |  budgetId, amount, consumerId | Spend denied due to insufficient budget |
-| ECON.CostReportGenerated |  reportId, period, totalSpend | Periodic cost report ready |
+| ECON.BudgetCreated |   budgetId, ownerId, totalAmount | New budget registered |
+| ECON.BudgetActivated |   budgetId, effectiveFrom | Budget entered Active phase |
+| ECON.FundsReserved |   budgetId, amount, consumerId | Funds reserved for upcoming spend |
+| ECON.SpendCommitted |   budgetId, amount, consumerId, resourceType | Actual spending recorded |
+| ECON.BudgetThresholdWarning |   budgetId, spentPercentage, threshold | Spending approached configurable threshold |
+| ECON.BudgetExhausted |   budgetId, totalSpent, totalBudget | Budget fully consumed |
+| ECON.BudgetFrozen |   budgetId, reason | Budget suspended pending review |
+| ECON.BudgetClosed |   budgetId, finalReport | Budget period ended, final report generated |
+| ECON.PriceSheetUpdated |   priceSheetId, effectiveFrom, changes | Resource prices changed |
+| ECON.OverageAllowed |   budgetId, amount | Overage policy triggered |
+| ECON.OverageDenied |   budgetId, amount, consumerId | Spend denied due to insufficient budget |
+| ECON.CostReportGenerated |   reportId, period, totalSpend | Periodic cost report ready |
 
 ## Error Cases
 
@@ -310,27 +310,18 @@ Per Law 7 (Capability Bounds), Economic declares its capabilities at creation an
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Economic System owns resource economics exclusively; ROS owns resource allocation; EVS owns evidence storage |
-| R2 â€” Dependency Order | Depends on ROS (consumption data), EVS (evidence), ACF (dispatch); no circular dependencies |
-| R3 â€” DRY | Resource prices defined once in PriceSheets; all cost computations reference, not duplicate |
-| R4 â€” Builder Pattern | Budget creation uses builder for complex category limits and overage policy configuration |
-| R9 â€” Deterministic | Given the same consumption and prices, cost computation produces identical results |
-| R10 â€” Simpler Over Complex | Flat-rate pricing is default; demand-based dynamic pricing is opt-in |
-| R13 â€” Design for Failure | Budget exhaustion blocks new spend but preserves existing reservations; cost records are immutable after creation |
-| R14 â€” Paved Path | Organization-scoped monthly budget with category limits covers 80% of use cases |
-| R15 â€” Open/Closed | New resource types can be priced by registering in PriceSheets; new allocation strategies are pluggable |
+| R1 - Modulsingularity | Economic System owns resource economics exclusively; ROS owns resource allocation; EVS owns evidence storage |
+| R2 - Dependency Order | Depends on ROS (consumption data), EVS (evidence), ACF (dispatch); no circular dependencies |
+| R3 - DRY | Resource prices defined once in PriceSheets; all cost computations reference, not duplicate |
+| R4 - Builder Pattern | Budget creation uses builder for complex category limits and overage policy configuration |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Given the same consumption and prices, cost computation produces identical results |
+| R10 - Simpler Over Complex | Flat-rate pricing is default; demand-based dynamic pricing is opt-in |
+| R13 - Design for Failure | Budget exhaustion blocks new spend but preserves existing reservations; cost records are immutable after creation |
+| R14 - Paved Path | Organization-scoped monthly budget with category limits covers 80% of use cases |
+| R15 - Open/Closed | New resource types can be priced by registering in PriceSheets; new allocation strategies are pluggable |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

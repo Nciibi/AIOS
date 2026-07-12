@@ -171,15 +171,15 @@ enum FragmentType {
 
 ## Events
 
-| COD.EventType |  Produced When | Fields |
+| COD.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| COD.CodeGenStarted |  A generation request enters the pipeline | request_id, worker_id, language_id, generation_type, estimated_tokens |
-| COD.CodeGenCompleted |  Generation produces output successfully | request_id, language_id, tokens_used, confidence, duration_ms |
-| COD.CodeGenValidated |  Generated output passes syntax validation | request_id, lint_errors, validation_duration_ms |
-| COD.CodeGenFailed |  Generation pipeline encounters an error | request_id, error_code, error_message, retry_count |
-| COD.CodeGenRetried |  Generation is retried after failure | request_id, retry_attempt, adjusted_params |
-| COD.CodeGenOverflow |  Context window limit is exceeded | request_id, context_size, max_size, overflow_strategy |
-| COD.CodeGenFormatted |  Generated code is formatted | request_id, formatter_name, formatting_duration_ms |
+| COD.CodeGenStarted |   A generation request enters the pipeline | request_id, worker_id, language_id, generation_type, estimated_tokens |
+| COD.CodeGenCompleted |   Generation produces output successfully | request_id, language_id, tokens_used, confidence, duration_ms |
+| COD.CodeGenValidated |   Generated output passes syntax validation | request_id, lint_errors, validation_duration_ms |
+| COD.CodeGenFailed |   Generation pipeline encounters an error | request_id, error_code, error_message, retry_count |
+| COD.CodeGenRetried |   Generation is retried after failure | request_id, retry_attempt, adjusted_params |
+| COD.CodeGenOverflow |   Context window limit is exceeded | request_id, context_size, max_size, overflow_strategy |
+| COD.CodeGenFormatted |   Generated code is formatted | request_id, formatter_name, formatting_duration_ms |
 
 ## Error Cases
 
@@ -228,29 +228,18 @@ Per Law 7 (Capability Bounds), Coding declares its capabilities at creation and 
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Code generation is a single pipeline with clear stage boundaries |
-| R2 â€” Dependency Order | Pipeline depends on Language Registry for profiles; CodeWorker depends on pipeline |
-| R3 â€” DRY | Generation templates capture reusable patterns; context deduplication before assembly |
-| R4 â€” Builder Pattern | Pipeline uses builder stages: construct -> assemble -> invoke -> validate -> format |
-| R5 â€” Liskov Substitution | All generation backends implement ICodeGenerator interface |
-| R6 â€” DI over Singletons | Pipeline components are injected; no shared mutable state |
-| R9 â€” Deterministic | Deterministic generation guaranteed with same inputs and seed value |
-| R10 â€” Simpler Over Complex | Pipeline uses linear stages with no branching; overflow is a distinct path |
-| R13 â€” Design for Failure | Validation failures trigger targeted retry with error feedback; timeout returns stub |
-| R14 â€” Paved Path | Single paved path: request -> construct -> generate -> validate -> format -> return |
-| R15 â€” Open/Closed | New generation types added via template registration without pipeline modification |
+| R1 - Modulsingularity | Code generation is a single pipeline with clear stage boundaries |
+| R2 - Dependency Order | Pipeline depends on Language Registry for profiles; CodeWorker depends on pipeline |
+| R3 - DRY | Generation templates capture reusable patterns; context deduplication before assembly |
+| R4 - Builder Pattern | Pipeline uses builder stages: construct -> assemble -> invoke -> validate -> format |
+| R5 - Liskov Substitution | All generation backends implement ICodeGenerator interface |
+| R6 - DI over Singletons | Pipeline components are injected; no shared mutable state |
+| R9 - Deterministic | Deterministic generation guaranteed with same inputs and seed value |
+| R10 - Simpler Over Complex | Pipeline uses linear stages with no branching; overflow is a distinct path |
+| R13 - Design for Failure | Validation failures trigger targeted retry with error feedback; timeout returns stub |
+| R14 - Paved Path | Single paved path: request -> construct -> generate -> validate -> format -> return |
+| R15 - Open/Closed | New generation types added via template registration without pipeline modification |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

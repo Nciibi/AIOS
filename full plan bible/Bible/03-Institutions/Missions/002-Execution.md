@@ -147,16 +147,16 @@ interface MissionExecutor {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.MSNEvent |  mission_id, worker_id, milestone_id, instruction_hash | Worker dispatched |
-| MSN.MSNEvent |  mission_id, worker_id, milestone_id, result_hash | Worker finishes milestone |
-| MSN.MSNEvent |  mission_id, overall_completion, milestone_progress | Progress snapshot taken |
-| MSN.MSNEvent |  mission_id, package_id, evidence_type, hash | Evidence collected |
-| MSN.MSNEvent |  mission_id, adaptation_id, resource_delta | Resources reallocated |
-| MSN.MSNEvent |  mission_id, old_timeline, new_timeline | Timeline adjusted |
-| MSN.MSNEvent |  mission_id, check_in_id, type, deadline | Check-in triggered |
-| MSN.MSNEvent |  mission_id, check_in_id, status, evidence_count | Check-in completed |
-| MSN.MSNEvent |  mission_id, reason, escalation_level | Escalation triggered |
-| MSN.MSNEvent |  mission_id, worker_id, timestamp, status | Periodic heartbeat |
+| MSN.MSNEvent |   mission_id, worker_id, milestone_id, instruction_hash | Worker dispatched |
+| MSN.MSNEvent |   mission_id, worker_id, milestone_id, result_hash | Worker finishes milestone |
+| MSN.MSNEvent |   mission_id, overall_completion, milestone_progress | Progress snapshot taken |
+| MSN.MSNEvent |   mission_id, package_id, evidence_type, hash | Evidence collected |
+| MSN.MSNEvent |   mission_id, adaptation_id, resource_delta | Resources reallocated |
+| MSN.MSNEvent |   mission_id, old_timeline, new_timeline | Timeline adjusted |
+| MSN.MSNEvent |   mission_id, check_in_id, type, deadline | Check-in triggered |
+| MSN.MSNEvent |   mission_id, check_in_id, status, evidence_count | Check-in completed |
+| MSN.MSNEvent |   mission_id, reason, escalation_level | Escalation triggered |
+| MSN.MSNEvent |   mission_id, worker_id, timestamp, status | Periodic heartbeat |
 
 ## Error Cases
 
@@ -202,24 +202,18 @@ Per Law 7 (Capability Bounds), Missions declares its capabilities at creation an
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Execution is a single focused subsystem of the Mission lifecycle |
-| R3 â€” DRY | Execution reuses types from Physics/002-Missions.md |
-| R9 â€” Deterministic | Same worker dispatch with same input produces same execution |
-| R10 â€” Simpler Over Complex | Linear progress model with clear check-in gates |
-| R12 â€” Embrace Errors | All execution errors have unique codes (MSN_EXEC_001â€“006) |
-| R13 â€” Design for Failure | Checkpoints enable recovery; heartbeat detects failure |
+| R1 - Modulsingularity | Execution is a single focused subsystem of the Mission lifecycle |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Execution reuses types from Physics/002-Missions.md |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Same worker dispatch with same input produces same execution |
+| R10 - Simpler Over Complex | Linear progress model with clear check-in gates |
+| R13 - Design for Failure | Checkpoints enable recovery; heartbeat detects failure |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

@@ -236,17 +236,17 @@ interface WhatIfEngine {
 
 ## Events
 
-| ECON.EventType |  Produced When | Fields |
+| ECON.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| ECON.ScenarioDefined |  scenarioId, name, changeCount | New economic scenario created and validated |
-| ECON.SimulationDefined |  scenarioId, params, bounds | Simulation parameters configured and bounds checked |
-| ECON.SimulationRun |  scenarioId, iterations, timeHorizon | Simulation execution started |
-| ECON.SimulationCompleted |  scenarioId, stabilityScore, warnings | Simulation finished with results |
-| ECON.SimulationDiverged |  scenarioId, iteration, diagnostic | Simulation terminated due to divergence |
-| ECON.ScenarioCompared |  comparisonId, scenarioCount, topRanked | Multi-scenario comparison completed |
-| ECON.SensitivityTested |  reportId, driversCount, stabilityAssessment | Sensitivity analysis completed |
-| ECON.SimulationAborted |  scenarioId, reason | Simulation manually aborted before completion |
-| ECON.WhatIfQueried |  resultId, confidence | Ad-hoc what-if analysis completed |
+| ECON.ScenarioDefined |   scenarioId, name, changeCount | New economic scenario created and validated |
+| ECON.SimulationDefined |   scenarioId, params, bounds | Simulation parameters configured and bounds checked |
+| ECON.SimulationRun |   scenarioId, iterations, timeHorizon | Simulation execution started |
+| ECON.SimulationCompleted |   scenarioId, stabilityScore, warnings | Simulation finished with results |
+| ECON.SimulationDiverged |   scenarioId, iteration, diagnostic | Simulation terminated due to divergence |
+| ECON.ScenarioCompared |   comparisonId, scenarioCount, topRanked | Multi-scenario comparison completed |
+| ECON.SensitivityTested |   reportId, driversCount, stabilityAssessment | Sensitivity analysis completed |
+| ECON.SimulationAborted |   scenarioId, reason | Simulation manually aborted before completion |
+| ECON.WhatIfQueried |   resultId, confidence | Ad-hoc what-if analysis completed |
 
 ## Error Cases
 
@@ -295,29 +295,18 @@ Per Law 7 (Capability Bounds), Economic declares its capabilities at creation an
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Simulation owns what-if analysis and scenario modeling; Models owns forecasting engine; Analysis owns cost allocation |
-| R2 â€” Dependency Order | Depends on Economic (Budget, CostRecord, PriceSheet), Models (DemandForecast, CostProjection), Analysis (VarianceReport), ACF (dispatch) |
-| R3 â€” DRY | Scenario parameters are defined once and reused across simulation runs; comparison logic is shared across all scenario types |
-| R4 â€” Builder Pattern | EconomicScenario uses builder for complex multi-change scenario definition |
-| R5 â€” Stateless | Simulation execution is stateless given the same inputs; scenario state is metadata |
-| R6 â€” Evident Complete | Every scenario definition, simulation run, and comparison produces evidence |
-| R9 â€” Deterministic | Same scenario parameters and seed produce identical simulation outcomes |
-| R10 â€” Simpler Over Complex | Single-parameter sensitivity is default; multi-parameter interaction testing is opt-in |
-| R13 â€” Design for Failure | Diverging simulations are terminated early; unstable outcomes carry confidence warnings |
-| R14 â€” Paved Path | Budget amount what-if with 30-day horizon and 100 iterations covers 80% of simulation use cases |
-| R15 â€” Open/Closed | New scenario change types and simulation models can be registered without changing the engine |
+| R1 - Modulsingularity | Simulation owns what-if analysis and scenario modeling; Models owns forecasting engine; Analysis owns cost allocation |
+| R2 - Dependency Order | Depends on Economic (Budget, CostRecord, PriceSheet), Models (DemandForecast, CostProjection), Analysis (VarianceReport), ACF (dispatch) |
+| R3 - DRY | Scenario parameters are defined once and reused across simulation runs; comparison logic is shared across all scenario types |
+| R4 - Builder Pattern | EconomicScenario uses builder for complex multi-change scenario definition |
+| R5 - Liskov Substitution | Simulation execution is stateless given the same inputs; scenario state is metadata |
+| R6 - DI over Singletons | Every scenario definition, simulation run, and comparison produces evidence |
+| R9 - Deterministic | Same scenario parameters and seed produce identical simulation outcomes |
+| R10 - Simpler Over Complex | Single-parameter sensitivity is default; multi-parameter interaction testing is opt-in |
+| R13 - Design for Failure | Diverging simulations are terminated early; unstable outcomes carry confidence warnings |
+| R14 - Paved Path | Budget amount what-if with 30-day horizon and 100 iterations covers 80% of simulation use cases |
+| R15 - Open/Closed | New scenario change types and simulation models can be registered without changing the engine |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

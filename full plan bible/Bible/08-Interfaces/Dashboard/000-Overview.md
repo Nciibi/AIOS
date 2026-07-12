@@ -195,16 +195,16 @@ All displayed data is evidence-backed (Law 4)
 
 ## Events
 
-| DASH.EventType |  Produced When | Fields |
+| DASH.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| DASH.ViewLoaded |  viewId, category, viewerId | Dashboard view rendered |
-| DASH.WidgetUpdated |  widgetId, value, evidenceRef | Widget value refreshed from source |
-| DASH.DataStale |  widgetId, lastUpdated | Data source unreachable; marked stale |
-| DASH.HealthComputed |  score, componentCount | Composite health score recalculated |
-| DASH.AlertSurfaced |  alertId, severity, source | Alert shown on dashboard |
-| DASH.AlertActioned |  alertId, action, target | Human acted on alert (console/UI link) |
-| DASH.DrillDown |  widgetId, point, evidenceRef | Human traced value to evidence |
-| DASH.SimulationShown |  simulationId, outcome | Simulation result displayed |
+| DASH.ViewLoaded |   viewId, category, viewerId | Dashboard view rendered |
+| DASH.WidgetUpdated |   widgetId, value, evidenceRef | Widget value refreshed from source |
+| DASH.DataStale |   widgetId, lastUpdated | Data source unreachable; marked stale |
+| DASH.HealthComputed |   score, componentCount | Composite health score recalculated |
+| DASH.AlertSurfaced |   alertId, severity, source | Alert shown on dashboard |
+| DASH.AlertActioned |   alertId, action, target | Human acted on alert (console/UI link) |
+| DASH.DrillDown |   widgetId, point, evidenceRef | Human traced value to evidence |
+| DASH.SimulationShown |   simulationId, outcome | Simulation result displayed |
 
 ## Error Cases
 
@@ -252,27 +252,18 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Dashboard owns visualization exclusively; AOP/EVS/AUS own data collection |
-| R2 â€” Dependency Order | Depends on AOP, EVS, AUS, Simulation; no circular deps |
-| R3 â€” DRY | Metrics computed once in aggregator; views reference, not duplicate |
-| R4 â€” Builder Pattern | Dashboard views use builder for widget composition |
-| R9 â€” Deterministic | Same query + same evidence = same displayed value |
-| R10 â€” Simpler Over Complex | Default Health + Mission views cover most needs; advanced views opt-in |
-| R13 â€” Design for Failure | Source outage marks stale, not blank; health unknown is explicit |
-| R14 â€” Paved Path | Health dashboard is the default landing view |
-| R15 â€” Open/Closed | New view categories register via View Manager extension |
+| R1 - Modulsingularity | Dashboard owns visualization exclusively; AOP/EVS/AUS own data collection |
+| R2 - Dependency Order | Depends on AOP, EVS, AUS, Simulation; no circular deps |
+| R3 - DRY | Metrics computed once in aggregator; views reference, not duplicate |
+| R4 - Builder Pattern | Dashboard views use builder for widget composition |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Same query + same evidence = same displayed value |
+| R10 - Simpler Over Complex | Default Health + Mission views cover most needs; advanced views opt-in |
+| R13 - Design for Failure | Source outage marks stale, not blank; health unknown is explicit |
+| R14 - Paved Path | Health dashboard is the default landing view |
+| R15 - Open/Closed | New view categories register via View Manager extension |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

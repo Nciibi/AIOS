@@ -202,18 +202,18 @@ interface OptimizationEngine {
 
 ## Events
 
-| ECON.EventType |  Produced When | Fields |
+| ECON.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| ECON.AllocationRuleCreated |  ruleId, name, strategy, targets | New cost allocation rule registered |
-| ECON.AllocationRuleApplied |  ruleId, recordsAffected, totalAllocated | Allocation rule executed against cost records |
-| ECON.CostsAllocated |  period, totalDirect, totalShared, entitiesCount | Batch allocation completed for a period |
-| ECON.ChargebackComputed |  chargebackId, consumerId, totalCharged | Chargeback record generated for an entity |
-| ECON.VarianceDetected |  reportId, budgetId, variancePercentage, severity | Budget variance threshold crossed |
-| ECON.VarianceEscalated |  reportId, severity, rootCauseCount | Variance requires management attention |
-| ECON.TrendReported |  trendId, resourceType, direction, slope | Cost trend analysis completed |
-| ECON.AnomalyDetected |  trendId, timestamp, deviation, probableCause | Unexpected cost spike or drop flagged |
-| ECON.OptimizationGenerated |  recommendationId, projectedSavings, paybackPeriod | Cost optimization recommendation created |
-| ECON.ReconciliationComplete |  period, totalAllocated, totalUnallocated, unallocatedCount | Periodic cost reconciliation finished |
+| ECON.AllocationRuleCreated |   ruleId, name, strategy, targets | New cost allocation rule registered |
+| ECON.AllocationRuleApplied |   ruleId, recordsAffected, totalAllocated | Allocation rule executed against cost records |
+| ECON.CostsAllocated |   period, totalDirect, totalShared, entitiesCount | Batch allocation completed for a period |
+| ECON.ChargebackComputed |   chargebackId, consumerId, totalCharged | Chargeback record generated for an entity |
+| ECON.VarianceDetected |   reportId, budgetId, variancePercentage, severity | Budget variance threshold crossed |
+| ECON.VarianceEscalated |   reportId, severity, rootCauseCount | Variance requires management attention |
+| ECON.TrendReported |   trendId, resourceType, direction, slope | Cost trend analysis completed |
+| ECON.AnomalyDetected |   trendId, timestamp, deviation, probableCause | Unexpected cost spike or drop flagged |
+| ECON.OptimizationGenerated |   recommendationId, projectedSavings, paybackPeriod | Cost optimization recommendation created |
+| ECON.ReconciliationComplete |   period, totalAllocated, totalUnallocated, unallocatedCount | Periodic cost reconciliation finished |
 
 ## Error Cases
 
@@ -262,29 +262,18 @@ Per Law 7 (Capability Bounds), Economic declares its capabilities at creation an
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Cost Analysis owns allocation, chargeback, variance, and trends; Budget Management owns budget state; Models owns forecasting |
-| R2 â€” Dependency Order | Depends on Economic (CostRecords, CostReports, Budget), EVS (evidence), ACF (dispatch); no circular dependencies |
-| R3 â€” DRY | Allocation rules defined once and reused across periods; cost records are singular sources of truth |
-| R4 â€” Builder Pattern | CostAllocationRule uses builder for complex allocation basis and weight expressions |
-| R5 â€” Stateless | Allocation computation is stateless given the same inputs; rule state is in the rule definition |
-| R6 â€” Evident Complete | Every allocation, chargeback, and variance analysis produces an evidence record |
-| R9 â€” Deterministic | Same cost records and allocation rules produce identical chargeback results |
-| R10 â€” Simpler Over Complex | Direct allocation is default; proportional and weighted allocation are opt-in |
-| R13 â€” Design for Failure | Unallocated costs are flagged not lost; variance escalation ensures visibility |
-| R14 â€” Paved Path | Monthly chargeback by organization with direct allocation covers 80% of use cases |
-| R15 â€” Open/Closed | New allocation strategies are pluggable; new resource types use existing rules |
+| R1 - Modulsingularity | Cost Analysis owns allocation, chargeback, variance, and trends; Budget Management owns budget state; Models owns forecasting |
+| R2 - Dependency Order | Depends on Economic (CostRecords, CostReports, Budget), EVS (evidence), ACF (dispatch); no circular dependencies |
+| R3 - DRY | Allocation rules defined once and reused across periods; cost records are singular sources of truth |
+| R4 - Builder Pattern | CostAllocationRule uses builder for complex allocation basis and weight expressions |
+| R5 - Liskov Substitution | Allocation computation is stateless given the same inputs; rule state is in the rule definition |
+| R6 - DI over Singletons | Every allocation, chargeback, and variance analysis produces an evidence record |
+| R9 - Deterministic | Same cost records and allocation rules produce identical chargeback results |
+| R10 - Simpler Over Complex | Direct allocation is default; proportional and weighted allocation are opt-in |
+| R13 - Design for Failure | Unallocated costs are flagged not lost; variance escalation ensures visibility |
+| R14 - Paved Path | Monthly chargeback by organization with direct allocation covers 80% of use cases |
+| R15 - Open/Closed | New allocation strategies are pluggable; new resource types use existing rules |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

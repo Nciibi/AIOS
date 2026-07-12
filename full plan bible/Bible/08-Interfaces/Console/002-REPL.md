@@ -143,16 +143,16 @@ interface HistoryNavigator {
 
 ## Events
 
-| CON.EventType |  Produced When | Fields |
+| CON.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| CON.REPLStarted |  sessionId, humanId, contextSnapshot | Interactive REPL session initialized |
-| CON.REPLCommandEvaluated |  sessionId, input, durationMs, success | Command evaluated against REPL context |
-| CON.REPLResultPrinted |  sessionId, style, outputSize | Evaluation result rendered to terminal |
-| CON.REPLContextUpdated |  sessionId, updatedKeys | EvalContext modified after evaluation |
-| CON.REPLSuggestionTriggered |  sessionId, prefix, suggestionCount | Auto-suggestions generated for input |
-| CON.REPLHistoryNavigated |  sessionId, direction, entrySequence | Human navigated command history |
-| CON.REPLSessionEnded |  sessionId, humanId, evalCount, duration | Interactive REPL session closed |
-| CON.REPLMultiLineStarted |  sessionId, lineCount | Multi-line input mode entered |
+| CON.REPLStarted |   sessionId, humanId, contextSnapshot | Interactive REPL session initialized |
+| CON.REPLCommandEvaluated |   sessionId, input, durationMs, success | Command evaluated against REPL context |
+| CON.REPLResultPrinted |   sessionId, style, outputSize | Evaluation result rendered to terminal |
+| CON.REPLContextUpdated |   sessionId, updatedKeys | EvalContext modified after evaluation |
+| CON.REPLSuggestionTriggered |   sessionId, prefix, suggestionCount | Auto-suggestions generated for input |
+| CON.REPLHistoryNavigated |   sessionId, direction, entrySequence | Human navigated command history |
+| CON.REPLSessionEnded |   sessionId, humanId, evalCount, duration | Interactive REPL session closed |
+| CON.REPLMultiLineStarted |   sessionId, lineCount | Multi-line input mode entered |
 
 ## Error Cases
 
@@ -200,29 +200,18 @@ Per Law 7 (Capability Bounds), Console declares its capabilities at creation and
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | REPL owns interactive read-eval-print loop; CLI engine owns execution |
-| R2 â€” Dependency Order | Depends on CLI CommandRegistry, EvalEngine, EVS; no circular deps |
-| R3 â€” DRY | Command definitions sourced from CLI command registry; REPL does not duplicate |
-| R4 â€” Builder Pattern | EvalResult built incrementally during evaluation |
-| R5 â€” Deterministic | Same input with same context produces identical eval outcome |
-| R6 â€” Single Source | EvalContext is the single source of session state |
-| R9 â€” Deterministic | Replaying history with same context produces identical results |
-| R10 â€” Simpler Over Complex | Default print style is compact; full and minimal are opt-in |
-| R13 â€” Design for Failure | Context corruption triggers snapshot restore; eval failure preserves prior state |
-| R14 â€” Paved Path | Standard workflow: type command, see result, navigate history |
-| R15 â€” Open/Closed | New eval features register via EvalEngine extension without modifying REPL loop |
+| R1 - Modulsingularity | REPL owns interactive read-eval-print loop; CLI engine owns execution |
+| R2 - Dependency Order | Depends on CLI CommandRegistry, EvalEngine, EVS; no circular deps |
+| R3 - DRY | Command definitions sourced from CLI command registry; REPL does not duplicate |
+| R4 - Builder Pattern | EvalResult built incrementally during evaluation |
+| R5 - Liskov Substitution | Same input with same context produces identical eval outcome |
+| R6 - DI over Singletons | EvalContext is the single source of session state |
+| R9 - Deterministic | Replaying history with same context produces identical results |
+| R10 - Simpler Over Complex | Default print style is compact; full and minimal are opt-in |
+| R13 - Design for Failure | Context corruption triggers snapshot restore; eval failure preserves prior state |
+| R14 - Paved Path | Standard workflow: type command, see result, navigate history |
+| R15 - Open/Closed | New eval features register via EvalEngine extension without modifying REPL loop |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

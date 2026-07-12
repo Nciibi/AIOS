@@ -133,15 +133,15 @@ interface CorrelationMatrix {
 
 ## Events
 
-| TRD.EventType |  Produced When | Fields |
+| TRD.EventType |   Produced When | Fields |
 |-------|----------|---------|
-| TRD.RiskMetricsCalculated |  RiskEngine: portfolioId, metrics, method | Published after risk metric computation |
-| TRD.VaRComputed |  VaRCalculator: portfolioId, varResult | Fired when VaR is recalculated |
-| TRD.StressTestRun |  StressTestRunner: portfolioId, scenarios, summary | Emitted after stress test completion |
-| TRD.ExposureUpdated |  ExposureTracker: portfolioId, report | Published on exposure change |
-| TRD.LimitBreached |  LimitEnforcer: limitId, scope, currentValue, maxValue | Fired when any limit threshold is crossed |
-| TRD.LimitRestored |  LimitEnforcer: limitId, scope, currentValue | Fired when a breached limit recovers |
-| TRD.CorrelationUpdated |  RiskEngine: matrixId, pairs | Emitted when correlation matrix is refreshed |
+| TRD.RiskMetricsCalculated |   RiskEngine: portfolioId, metrics, method | Published after risk metric computation |
+| TRD.VaRComputed |   VaRCalculator: portfolioId, varResult | Fired when VaR is recalculated |
+| TRD.StressTestRun |   StressTestRunner: portfolioId, scenarios, summary | Emitted after stress test completion |
+| TRD.ExposureUpdated |   ExposureTracker: portfolioId, report | Published on exposure change |
+| TRD.LimitBreached |   LimitEnforcer: limitId, scope, currentValue, maxValue | Fired when any limit threshold is crossed |
+| TRD.LimitRestored |   LimitEnforcer: limitId, scope, currentValue | Fired when a breached limit recovers |
+| TRD.CorrelationUpdated |   RiskEngine: matrixId, pairs | Emitted when correlation matrix is refreshed |
 
 ## Error Cases
 

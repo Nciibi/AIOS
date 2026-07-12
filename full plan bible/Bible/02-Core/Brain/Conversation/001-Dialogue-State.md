@@ -656,19 +656,19 @@ interface ClarificationContext {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| CONV.DialogueStateUpdated |  session_id, state_version, updated_fields | Dialogue State was modified |
-| CONV.TopicShifted |  session_id, from_topic_id, to_topic_id, shift_type | User changed conversation topic |
-| CONV.IntentDetected |  session_id, intent_id, intent_type, confidence | New intent detected from user input |
-| CONV.IntentResolved |  session_id, intent_id, duration_ms, param_count | Intent completed successfully |
-| CONV.IntentAbandoned |  session_id, intent_id, reason, turns_active | Intent abandoned by user |
-| CONV.PhaseTransitioned |  session_id, from_phase, to_phase, reason | Conversation phase changed |
-| CONV.ClarificationAsked |  session_id, clarification_id, question, context | Clarification question asked to user |
-| CONV.ClarificationResolved |  session_id, clarification_id, resolution, method | Clarification answered (user/timeout/abandoned) |
-| CONV.TopicDepthChanged |  session_id, topic_id, from_depth, to_depth | Topic depth level changed |
-| CONV.TopicReturned |  session_id, topic_id, previous_active_timestamp | User returned to a previously discussed topic |
-| CONV.DialogueArchived |  session_id, turn_count, phase, intent_count | Dialogue state archived on session end |
-| CONV.IntentParamResolved |  session_id, intent_id, param_name, source | Individual intent parameter resolved |
-| CONV.FlowConstraintActivated |  session_id, constraint, phase | Flow constraint became active |
+| CONV.DialogueStateUpdated |   session_id, state_version, updated_fields | Dialogue State was modified |
+| CONV.TopicShifted |   session_id, from_topic_id, to_topic_id, shift_type | User changed conversation topic |
+| CONV.IntentDetected |   session_id, intent_id, intent_type, confidence | New intent detected from user input |
+| CONV.IntentResolved |   session_id, intent_id, duration_ms, param_count | Intent completed successfully |
+| CONV.IntentAbandoned |   session_id, intent_id, reason, turns_active | Intent abandoned by user |
+| CONV.PhaseTransitioned |   session_id, from_phase, to_phase, reason | Conversation phase changed |
+| CONV.ClarificationAsked |   session_id, clarification_id, question, context | Clarification question asked to user |
+| CONV.ClarificationResolved |   session_id, clarification_id, resolution, method | Clarification answered (user/timeout/abandoned) |
+| CONV.TopicDepthChanged |   session_id, topic_id, from_depth, to_depth | Topic depth level changed |
+| CONV.TopicReturned |   session_id, topic_id, previous_active_timestamp | User returned to a previously discussed topic |
+| CONV.DialogueArchived |   session_id, turn_count, phase, intent_count | Dialogue state archived on session end |
+| CONV.IntentParamResolved |   session_id, intent_id, param_name, source | Individual intent parameter resolved |
+| CONV.FlowConstraintActivated |   session_id, constraint, phase | Flow constraint became active |
 
 ## Invariants
 

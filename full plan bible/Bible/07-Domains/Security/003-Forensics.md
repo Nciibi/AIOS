@@ -159,16 +159,16 @@ type CaseStatus = 'open' | 'analyzing' | 'completed' | 'sealed' | 'reopened';
 
 ## Events
 
-| SEC.EventType |  Produced When | Fields |
+| SEC.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| SEC.ForensicCaseOpened |  New forensic case created | case_id, incident_ref, title, evidence_count |
-| SEC.EvidenceAcquired |  Evidence successfully collected | evidence_id, case_id, type, hash, size_bytes, method |
-| SEC.EvidenceAnalyzed |  Analysis completed for an evidence item | analysis_id, evidence_id, type, findings, iocs, confidence |
-| SEC.TimelineReconstructed |  Full timeline built from correlated artifacts | case_id, event_count, time_span_start, time_span_end |
-| SEC.CaseClosed |  Case analysis complete, ready for sealing | case_id, evidence_items, analysis_count, duration_hours |
-| SEC.ChainOfCustodyBroken |  Hash mismatch or custody gap detected | case_id, evidence_id, expected_hash, actual_hash, sequence |
-| SEC.EvidenceCorrupted |  Storage integrity check fails on evidence | evidence_id, case_id, stored_hash, computed_hash, action |
-| SEC.StorageLimitExceeded |  Forensic storage allocation exceeded | case_id, current_bytes, limit_bytes, oldest_evidence |
+| SEC.ForensicCaseOpened |   New forensic case created | case_id, incident_ref, title, evidence_count |
+| SEC.EvidenceAcquired |   Evidence successfully collected | evidence_id, case_id, type, hash, size_bytes, method |
+| SEC.EvidenceAnalyzed |   Analysis completed for an evidence item | analysis_id, evidence_id, type, findings, iocs, confidence |
+| SEC.TimelineReconstructed |   Full timeline built from correlated artifacts | case_id, event_count, time_span_start, time_span_end |
+| SEC.CaseClosed |   Case analysis complete, ready for sealing | case_id, evidence_items, analysis_count, duration_hours |
+| SEC.ChainOfCustodyBroken |   Hash mismatch or custody gap detected | case_id, evidence_id, expected_hash, actual_hash, sequence |
+| SEC.EvidenceCorrupted |   Storage integrity check fails on evidence | evidence_id, case_id, stored_hash, computed_hash, action |
+| SEC.StorageLimitExceeded |   Forensic storage allocation exceeded | case_id, current_bytes, limit_bytes, oldest_evidence |
 
 ## Error Cases
 
@@ -216,30 +216,19 @@ Per Law 7 (Capability Bounds), Security declares its capabilities at creation an
 ## Design DNA
 
 | Rule | Assessment |
-|------|------------|
-| R1 (Modulsingularity) | Acquisition, analysis, reconstruction, custody, sealing are separate modules |
-| R2 (Capsule) | Each forensic case is an atomic capsule with evidence, timeline, and custody |
-| R3 (Idempotent) | Same evidence and analysis toolset produces identical artifacts and hashes |
-| R4 (Builder) | Case is built incrementally: open -> acquired -> analyzed -> reconstructed -> sealed |
-| R5 (Manual Step) | Evidence sealing is a manual-gated operation â€” no auto-seal without review |
-| R6 (No Orphans) | Every open case reaches sealed or closed status â€” no abandoned cases |
-| R9 (Deterministic) | Same memory dump and profile yields identical process and connection lists |
-| R10 (Event Sourcing) | Full case lifecycle reconstructable from forensic event log |
-| R13 (Design for Failure) | Forensics fails safe â€” corrupted evidence never overwrites original |
-| R14 (GC) | Sealed cases garbage collected after legal hold and retention period expire |
-| R15 (Auth Chain) | Every custody transfer and analysis action links to authenticated actor |
+|------|-----------|
+| R1 - Modulsingularity | Acquisition, analysis, reconstruction, custody, sealing are separate modules |
+| R2 - Dependency Order | Each forensic case is an atomic capsule with evidence, timeline, and custody |
+| R3 - DRY | Same evidence and analysis toolset produces identical artifacts and hashes |
+| R4 - Builder Pattern | Case is built incrementally: open -> acquired -> analyzed -> reconstructed -> sealed |
+| R5 - Liskov Substitution | Evidence sealing is a manual-gated operation â€” no auto-seal without review |
+| R6 - DI over Singletons | Every open case reaches sealed or closed status â€” no abandoned cases |
+| R9 - Deterministic | Same memory dump and profile yields identical process and connection lists |
+| R10 - Simpler Over Complex | Full case lifecycle reconstructable from forensic event log |
+| R13 - Design for Failure | Forensics fails safe â€” corrupted evidence never overwrites original |
+| R14 - Paved Path | Sealed cases garbage collected after legal hold and retention period expire |
+| R15 - Open/Closed | Every custody transfer and analysis action links to authenticated actor |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

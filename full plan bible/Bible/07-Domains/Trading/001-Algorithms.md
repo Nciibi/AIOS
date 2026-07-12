@@ -127,15 +127,15 @@ interface AlgorithmTemplate {
 
 ## Events
 
-| TRD.EventType |  Produced When | Fields |
+| TRD.EventType |   Produced When | Fields |
 |-------|----------|---------|
-| TRD.AlgorithmImplemented |  StrategyEngine: algorithmId, templateId, version | Fired when a new algorithm is registered |
-| TRD.AlgorithmConfigured |  StrategyEngine: algorithmId, params, hash | Fired after parameter update |
-| TRD.SignalGenerated |  SignalBus: algorithmId, signal, confidence, timestamp | Emitted on each signal computation |
-| TRD.OrderConstructed |  OrderFactory: algorithmId, orderPayload, checksum | Fired when an order is built |
-| TRD.AlgorithmOptimized |  Optimizer: algorithmId, metrics, optimalParams | Fired after optimization run |
-| TRD.AlgorithmDeployed |  StrategyEngine: algorithmId, targetEnv | Fired on promotion to paper/live |
-| TRD.AlgorithmPaused |  StrategyEngine: algorithmId, reason | Fired when algorithm is halted |
+| TRD.AlgorithmImplemented |   StrategyEngine: algorithmId, templateId, version | Fired when a new algorithm is registered |
+| TRD.AlgorithmConfigured |   StrategyEngine: algorithmId, params, hash | Fired after parameter update |
+| TRD.SignalGenerated |   SignalBus: algorithmId, signal, confidence, timestamp | Emitted on each signal computation |
+| TRD.OrderConstructed |   OrderFactory: algorithmId, orderPayload, checksum | Fired when an order is built |
+| TRD.AlgorithmOptimized |   Optimizer: algorithmId, metrics, optimalParams | Fired after optimization run |
+| TRD.AlgorithmDeployed |   StrategyEngine: algorithmId, targetEnv | Fired on promotion to paper/live |
+| TRD.AlgorithmPaused |   StrategyEngine: algorithmId, reason | Fired when algorithm is halted |
 
 ## Error Cases
 

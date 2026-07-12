@@ -251,16 +251,16 @@ interface ResultParser {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| TOL.ToolInvoked |  invocation_id, tool_id, parameter_summary | Tool invocation started |
-| TOL.ToolCompleted |  invocation_id, status, duration_ms | Tool execution completed |
-| TOL.ToolFailed |  invocation_id, error_code, error_message | Tool execution failed |
-| TOL.ToolTimeout |  invocation_id, deadline | Tool exceeded deadline |
-| TOL.ToolRegistered |  tool_id, provider, category | New tool registered |
-| TOL.ToolDeregistered |  tool_id, provider | Tool removed from registry |
-| TOL.ToolHealthChanged |  tool_id, old_status, new_status | Tool health transitioned |
-| TOL.ValidationFailed |  invocation_id, field, reason | Parameter validation failed |
-| TOL.CapabilityDenied |  invocation_id, tool_id, required_cap | Sou lacks required capability |
-| TOL.RateLimitExceeded |  tool_id, current_usage, limit | Tool rate limit hit |
+| TOL.ToolInvoked |   invocation_id, tool_id, parameter_summary | Tool invocation started |
+| TOL.ToolCompleted |   invocation_id, status, duration_ms | Tool execution completed |
+| TOL.ToolFailed |   invocation_id, error_code, error_message | Tool execution failed |
+| TOL.ToolTimeout |   invocation_id, deadline | Tool exceeded deadline |
+| TOL.ToolRegistered |   tool_id, provider, category | New tool registered |
+| TOL.ToolDeregistered |   tool_id, provider | Tool removed from registry |
+| TOL.ToolHealthChanged |   tool_id, old_status, new_status | Tool health transitioned |
+| TOL.ValidationFailed |   invocation_id, field, reason | Parameter validation failed |
+| TOL.CapabilityDenied |   invocation_id, tool_id, required_cap | Sou lacks required capability |
+| TOL.RateLimitExceeded |   tool_id, current_usage, limit | Tool rate limit hit |
 
 ## Invariants
 

@@ -137,15 +137,15 @@ interface PatternLibrary {
 
 ## Events
 
-| UI.EventType |  Produced When | Fields |
+| UI.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| UI.DesignTokenUpdated |  tokenId, category, oldValue, newValue | A design token value changed |
-| UI.ComponentRegistered |  componentId, name, type | New component added to the library |
-| UI.PatternDocumented |  patternId, docId | Interaction pattern documented |
-| UI.DesignSystemVersioned |  version, changelog | Design system version published |
-| UI.TokenDeprecated |  tokenId, replacement | Token marked deprecated with migration path |
-| UI.LayoutComputed |  gridId, breakpoint, columnCount | Layout grid computed for breakpoint |
-| UI.ComponentValidated |  componentId, result | Component spec passed validation |
+| UI.DesignTokenUpdated |   tokenId, category, oldValue, newValue | A design token value changed |
+| UI.ComponentRegistered |   componentId, name, type | New component added to the library |
+| UI.PatternDocumented |   patternId, docId | Interaction pattern documented |
+| UI.DesignSystemVersioned |   version, changelog | Design system version published |
+| UI.TokenDeprecated |   tokenId, replacement | Token marked deprecated with migration path |
+| UI.LayoutComputed |   gridId, breakpoint, columnCount | Layout grid computed for breakpoint |
+| UI.ComponentValidated |   componentId, result | Component spec passed validation |
 
 ## Error Cases
 
@@ -193,29 +193,18 @@ Per Law 7 (Capability Bounds), UI declares its capabilities at creation and oper
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Design system is the single source of visual truth; no other subsystem defines tokens |
-| R2 â€” Dependency Order | Depends on Physics/009-Interaction.md, Physics/005-Events.md; no cycles |
-| R3 â€” DRY | Tokens defined once, referenced by ID; no hardcoded values in components |
-| R4 â€” Builder Pattern | Components built via factory with validation; not constructed directly |
-| R5 â€” Law of Demeter | Components interact only with tokens they explicitly reference |
-| R6 â€” Encapsulation | Component internals hidden behind slots and props interface |
-| R9 â€” Deterministic | Same token set + same spec = identical rendered component |
-| R10 â€” Simpler Over Complex | Token-first design; inline overrides only for exceptional cases |
-| R13 â€” Design for Failure | Missing token fails at build time, not runtime |
-| R14 â€” Paved Path | Use predefined token categories; custom categories reviewed |
-| R15 â€” Open/Closed | New token categories registered via extension; existing tokens closed for modification |
+| R1 - Modulsingularity | Design system is the single source of visual truth; no other subsystem defines tokens |
+| R2 - Dependency Order | Depends on Physics/009-Interaction.md, Physics/005-Events.md; no cycles |
+| R3 - DRY | Tokens defined once, referenced by ID; no hardcoded values in components |
+| R4 - Builder Pattern | Components built via factory with validation; not constructed directly |
+| R5 - Liskov Substitution | Components interact only with tokens they explicitly reference |
+| R6 - DI over Singletons | Component internals hidden behind slots and props interface |
+| R9 - Deterministic | Same token set + same spec = identical rendered component |
+| R10 - Simpler Over Complex | Token-first design; inline overrides only for exceptional cases |
+| R13 - Design for Failure | Missing token fails at build time, not runtime |
+| R14 - Paved Path | Use predefined token categories; custom categories reviewed |
+| R15 - Open/Closed | New token categories registered via extension; existing tokens closed for modification |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

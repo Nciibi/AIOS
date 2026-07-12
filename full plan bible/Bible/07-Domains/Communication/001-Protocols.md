@@ -168,15 +168,15 @@ interface ProtocolCapability {
 
 ## Events
 
-| COM.EventType |  Produced When | Fields |
+| COM.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| COM.ProtocolRegistered |  New protocol spec is added to registry | protocol_id, name, version, format_count, channel_types |
-| COM.MessageParsed |  Raw bytes are successfully parsed into envelope | message_id, protocol_id, channel_type, parse_duration_ms, schema_valid |
-| COM.MessageParseFailed |  Raw bytes fail protocol-level validation | channel_id, protocol_id, error_code, raw_size_bytes, parse_duration_ms |
-| COM.ProtocolNegotiated |  Two peers agree on protocol version and format | protocol_id, requested_version, negotiated_version, format, fallback_used |
-| COM.ChannelAdapterOnline |  Channel adapter starts and is ready | adapter_id, channel_type, endpoint, protocol_ids, startup_duration_ms |
-| COM.ChannelAdapterOffline |  Channel adapter disconnects or fails | adapter_id, channel_type, reason, last_online_at, reconnect_policy |
-| COM.SerializationError |  Serialization or deserialization fails | envelope_id, protocol_id, format, error, payload_size_bytes |
+| COM.ProtocolRegistered |   New protocol spec is added to registry | protocol_id, name, version, format_count, channel_types |
+| COM.MessageParsed |   Raw bytes are successfully parsed into envelope | message_id, protocol_id, channel_type, parse_duration_ms, schema_valid |
+| COM.MessageParseFailed |   Raw bytes fail protocol-level validation | channel_id, protocol_id, error_code, raw_size_bytes, parse_duration_ms |
+| COM.ProtocolNegotiated |   Two peers agree on protocol version and format | protocol_id, requested_version, negotiated_version, format, fallback_used |
+| COM.ChannelAdapterOnline |   Channel adapter starts and is ready | adapter_id, channel_type, endpoint, protocol_ids, startup_duration_ms |
+| COM.ChannelAdapterOffline |   Channel adapter disconnects or fails | adapter_id, channel_type, reason, last_online_at, reconnect_policy |
+| COM.SerializationError |   Serialization or deserialization fails | envelope_id, protocol_id, format, error, payload_size_bytes |
 
 ## Error Cases
 
@@ -225,29 +225,18 @@ Per Law 7 (Capability Bounds), Communication declares its capabilities at creati
 
 | Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Protocols layer is a focused module â€” protocol parsing, serialization, channel adaptation are cleanly separated |
-| R2 (Capsule) | Each MessageEnvelope is a sealed capsule with immutable protocol metadata and payload |
-| R3 (DRY) | Protocol specs are defined once in registry; all channels reference the same spec definitions |
-| R4 (Builder) | MessageEnvelope is built incrementally through parse -> normalize -> validate pipeline stages |
-| R5 (Liskov Substitution) | All channel adapters implement the same IChannelAdapter interface; interchangeable by channel type |
-| R6 (DI over Singletons) | Channel adapters are injected via ACF; protocol registry is not a global singleton |
-| R9 (Deterministic) | Same raw bytes + same protocol spec always yields identical parsed envelope |
-| R10 (Simpler Over Complex) | Protocol negotiation is linear: propose -> accept/fallback -> confirm; no branching |
-| R13 (Design for Failure) | Parse or serialization failure returns structured error envelope; pipeline never hangs |
-| R14 (Paved Path) | Single paved path: register -> detect -> parse -> normalize -> route; all deviations logged |
-| R15 (Open/Closed) | New protocols registered without changing parser logic; new channel adapters implement existing interface |
+| R1 - Modulsingularity | Protocols layer is a focused module â€” protocol parsing, serialization, channel adaptation are cleanly separated |
+| R2 - Dependency Order | Each MessageEnvelope is a sealed capsule with immutable protocol metadata and payload |
+| R3 - DRY | Protocol specs are defined once in registry; all channels reference the same spec definitions |
+| R4 - Builder Pattern | MessageEnvelope is built incrementally through parse -> normalize -> validate pipeline stages |
+| R5 - Liskov Substitution | All channel adapters implement the same IChannelAdapter interface; interchangeable by channel type |
+| R6 - DI over Singletons | Channel adapters are injected via ACF; protocol registry is not a global singleton |
+| R9 - Deterministic | Same raw bytes + same protocol spec always yields identical parsed envelope |
+| R10 - Simpler Over Complex | Protocol negotiation is linear: propose -> accept/fallback -> confirm; no branching |
+| R13 - Design for Failure | Parse or serialization failure returns structured error envelope; pipeline never hangs |
+| R14 - Paved Path | Single paved path: register -> detect -> parse -> normalize -> route; all deviations logged |
+| R15 - Open/Closed | New protocols registered without changing parser logic; new channel adapters implement existing interface |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

@@ -163,15 +163,15 @@ interface SavedViewManager {
 
 ## Events
 
-| DASH.EventType |  Produced When | Fields |
+| DASH.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| DASH.UserPreferenceUpdated |  userId, changedFields | User dashboard preferences changed |
-| DASH.ViewCustomized |  userId, viewId, widgetCount | Widget layout customized for user |
-| DASH.ViewSaved |  userId, savedViewId, baseViewId | Dashboard view saved as preset |
-| DASH.ViewShared |  shareId, ownerId, targetUserId | Saved view shared with another user |
-| DASH.PermissionChanged |  userId, viewId, accessLevel, effect | View permission granted or revoked |
-| DASH.ViewSharedExpired |  shareId, targetUserId | Time-limited share expired |
-| DASH.PreferenceReset |  userId | User preferences reset to defaults |
+| DASH.UserPreferenceUpdated |   userId, changedFields | User dashboard preferences changed |
+| DASH.ViewCustomized |   userId, viewId, widgetCount | Widget layout customized for user |
+| DASH.ViewSaved |   userId, savedViewId, baseViewId | Dashboard view saved as preset |
+| DASH.ViewShared |   shareId, ownerId, targetUserId | Saved view shared with another user |
+| DASH.PermissionChanged |   userId, viewId, accessLevel, effect | View permission granted or revoked |
+| DASH.ViewSharedExpired |   shareId, targetUserId | Time-limited share expired |
+| DASH.PreferenceReset |   userId | User preferences reset to defaults |
 
 ## Error Cases
 
@@ -219,29 +219,18 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | User Management owns preferences and permissions; views own definitions |
-| R2 â€” Dependency Order | Depends on Identity system; no circular deps |
-| R3 â€” DRY | User preferences reference view IDs; view definitions are not duplicated |
-| R4 â€” Builder Pattern | SavedView uses builder for widget composition and filter config |
-| R5 â€” Liskov Substitution | Compliant | Permission providers implement the AccessControl interface with interchangeable backends |
-| R6 â€” Immutability | View definitions immutable; customization stored as user overlay |
-| R9 â€” Deterministic | Same user + same saved view = same rendered output |
-| R10 â€” Simpler Over Complex | Default view for all users; customization is opt-in per user |
-| R13 â€” Design for Failure | Preference save failure returns last known state; never blank |
-| R14 â€” Paved Path | Health view is default for all new users |
-| R15 â€” Open/Closed | New preference types register via UserPreference extension |
+| R1 - Modulsingularity | User Management owns preferences and permissions; views own definitions |
+| R2 - Dependency Order | Depends on Identity system; no circular deps |
+| R3 - DRY | User preferences reference view IDs; view definitions are not duplicated |
+| R4 - Builder Pattern | SavedView uses builder for widget composition and filter config |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | View definitions immutable; customization stored as user overlay |
+| R9 - Deterministic | Same user + same saved view = same rendered output |
+| R10 - Simpler Over Complex | Default view for all users; customization is opt-in per user |
+| R13 - Design for Failure | Preference save failure returns last known state; never blank |
+| R14 - Paved Path | Health view is default for all new users |
+| R15 - Open/Closed | New preference types register via UserPreference extension |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

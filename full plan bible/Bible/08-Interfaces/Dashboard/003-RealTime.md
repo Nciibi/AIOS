@@ -167,16 +167,16 @@ interface ThrottleController {
 
 ## Events
 
-| DASH.EventType |  Produced When | Fields |
+| DASH.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| DASH.StreamConnected |  connectionId, source, endpoint | Streaming connection established |
-| DASH.StreamDisconnected |  connectionId, reason | Streaming connection lost |
-| DASH.WidgetRefreshed |  widgetId, batchId, pointCount | Widget received and processed update batch |
-| DASH.ThrottleApplied |  widgetId, rate, limit | Rate limit enforced for widget updates |
-| DASH.SubscriptionCreated |  subscriptionId, widgetId, source | New real-time subscription registered |
-| DASH.SubscriptionRemoved |  subscriptionId, widgetId | Subscription cancelled |
-| DASH.ReconnectionStarted |  connectionId, attempt | Reconnection attempt initiated |
-| DASH.ReconnectionSucceeded |  connectionId, attempt | Reconnection completed successfully |
+| DASH.StreamConnected |   connectionId, source, endpoint | Streaming connection established |
+| DASH.StreamDisconnected |   connectionId, reason | Streaming connection lost |
+| DASH.WidgetRefreshed |   widgetId, batchId, pointCount | Widget received and processed update batch |
+| DASH.ThrottleApplied |   widgetId, rate, limit | Rate limit enforced for widget updates |
+| DASH.SubscriptionCreated |   subscriptionId, widgetId, source | New real-time subscription registered |
+| DASH.SubscriptionRemoved |   subscriptionId, widgetId | Subscription cancelled |
+| DASH.ReconnectionStarted |   connectionId, attempt | Reconnection attempt initiated |
+| DASH.ReconnectionSucceeded |   connectionId, attempt | Reconnection completed successfully |
 
 ## Error Cases
 
@@ -224,29 +224,18 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Real-Time subsystem owns streaming; Metrics own computation |
-| R2 â€” Dependency Order | Subscribes to AOP, EVS, AUS streams; no circular deps |
-| R3 â€” DRY | Stream connections shared across widgets subscribing to same source |
-| R4 â€” Builder Pattern | RefreshSchedule uses builder for hybrid policy configuration |
-| R5 â€” Liskov Substitution | Compliant | Stream connections are interchangeable through StreamProvider interface |
-| R6 â€” DI over Singletons | Compliant | Connection factories are injected via stream registry |
-| R9 â€” Deterministic | Same subscription + same source data = same widget update |
-| R10 â€” Simpler Over Complex | Polling is the default; streaming is opt-in per widget |
-| R13 â€” Design for Failure | Disconnect marks stale + fall back to polling; never blank |
-| R14 â€” Paved Path | Default refresh interval (30s polling) covers most use cases |
-| R15 â€” Open/Closed | New stream types register via StreamConnection extension |
+| R1 - Modulsingularity | Real-Time subsystem owns streaming; Metrics own computation |
+| R2 - Dependency Order | Subscribes to AOP, EVS, AUS streams; no circular deps |
+| R3 - DRY | Stream connections shared across widgets subscribing to same source |
+| R4 - Builder Pattern | RefreshSchedule uses builder for hybrid policy configuration |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Same subscription + same source data = same widget update |
+| R10 - Simpler Over Complex | Polling is the default; streaming is opt-in per widget |
+| R13 - Design for Failure | Disconnect marks stale + fall back to polling; never blank |
+| R14 - Paved Path | Default refresh interval (30s polling) covers most use cases |
+| R15 - Open/Closed | New stream types register via StreamConnection extension |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

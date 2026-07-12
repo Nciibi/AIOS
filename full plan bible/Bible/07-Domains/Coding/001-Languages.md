@@ -137,14 +137,14 @@ enum SupportLevel {
 
 ## Events
 
-| COD.EventType |  Produced When | Fields |
+| COD.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| COD.LanguageRegistered |  A new language is added to the registry | language_id, display_name, toolchain_count, support_level |
-| COD.LanguageUnregistered |  A language is removed from the registry | language_id, reason, affected_worker_count |
-| COD.ToolchainVerified |  A toolchain runtime is verified successfully | toolchain_id, language_id, version, platform, duration_ms |
-| COD.ToolchainFailed |  Toolchain verification fails | toolchain_id, language_id, error_output, retry_count |
-| COD.ProfileResolved |  A language profile is resolved for a Worker | worker_id, language_id, toolchain_id, capability_count |
-| COD.RuntimeDetected |  Runtime is auto-detected in a BuildSandbox | sandbox_id, detected_runtimes, version_map |
+| COD.LanguageRegistered |   A new language is added to the registry | language_id, display_name, toolchain_count, support_level |
+| COD.LanguageUnregistered |   A language is removed from the registry | language_id, reason, affected_worker_count |
+| COD.ToolchainVerified |   A toolchain runtime is verified successfully | toolchain_id, language_id, version, platform, duration_ms |
+| COD.ToolchainFailed |   Toolchain verification fails | toolchain_id, language_id, error_output, retry_count |
+| COD.ProfileResolved |   A language profile is resolved for a Worker | worker_id, language_id, toolchain_id, capability_count |
+| COD.RuntimeDetected |   Runtime is auto-detected in a BuildSandbox | sandbox_id, detected_runtimes, version_map |
 
 ## Error Cases
 
@@ -191,29 +191,18 @@ Per Law 7 (Capability Bounds), Coding declares its capabilities at creation and 
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Language registry is a single, focused module with no cross-cutting concerns |
-| R2 â€” Dependency Order | Registry depends on BuildSandbox for detection; CodeWorker depends on Registry |
-| R3 â€” DRY | Language profiles are defined once per language; toolchains inherit from profiles |
-| R4 â€” Builder Pattern | Profile resolution uses builder pattern: profile + platform -> resolved config |
-| R5 â€” Liskov Substitution | All language profiles implement same LanguageProfile interface |
-| R6 â€” DI over Singletons | Registry is injected into Workers via ACF; not accessed as global singleton |
-| R9 â€” Deterministic | Same language_id + platform + toolchain version always produces identical profile |
-| R10 â€” Simpler Over Complex | Registry uses flat language map with no inheritance between language profiles |
-| R13 â€” Design for Failure | Missing toolchain returns degraded profile; Workers operate in limited mode |
-| R14 â€” Paved Path | Single paved path: register -> detect -> verify -> resolve -> use |
-| R15 â€” Open/Closed | New languages can be added by registering new profiles; registry logic unchanged |
+| R1 - Modulsingularity | Language registry is a single, focused module with no cross-cutting concerns |
+| R2 - Dependency Order | Registry depends on BuildSandbox for detection; CodeWorker depends on Registry |
+| R3 - DRY | Language profiles are defined once per language; toolchains inherit from profiles |
+| R4 - Builder Pattern | Profile resolution uses builder pattern: profile + platform -> resolved config |
+| R5 - Liskov Substitution | All language profiles implement same LanguageProfile interface |
+| R6 - DI over Singletons | Registry is injected into Workers via ACF; not accessed as global singleton |
+| R9 - Deterministic | Same language_id + platform + toolchain version always produces identical profile |
+| R10 - Simpler Over Complex | Registry uses flat language map with no inheritance between language profiles |
+| R13 - Design for Failure | Missing toolchain returns degraded profile; Workers operate in limited mode |
+| R14 - Paved Path | Single paved path: register -> detect -> verify -> resolve -> use |
+| R15 - Open/Closed | New languages can be added by registering new profiles; registry logic unchanged |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

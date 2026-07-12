@@ -248,15 +248,15 @@ interface ConfidenceInterval {
 
 ## Events
 
-| RES.EventType |  Produced When | Fields |
+| RES.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| RES.DataIngested |  Dataset loading completes | dataset_id, record_count, field_count, source, checksum, size_bytes |
-| RES.DataCleaned |  Cleaning step completes | dataset_id, missing_values_handled, outliers_removed, duplicates_removed, audit_log_hash |
-| RES.AnalysisRun |  Statistical analysis completes | result_id, test_type, test_statistic, p_value, effect_size, assumption_violations |
-| RES.VisualizationGenerated |  Visualization is rendered | visualization_id, chart_type, dimensions, measures, file_format, size_bytes |
-| RES.PatternDetected |  Pattern detection finds a result | pattern_id, pattern_type, confidence, support, description |
-| RES.ConfidenceAssessed |  Confidence assessment completes | assessment_id, overall_confidence, data_quality, statistical_validity, reproducibility |
-| RES.PipelineCompleted |  Full analysis pipeline finishes | pipeline_id, step_count, total_duration_ms, status, artifact_count |
+| RES.DataIngested |   Dataset loading completes | dataset_id, record_count, field_count, source, checksum, size_bytes |
+| RES.DataCleaned |   Cleaning step completes | dataset_id, missing_values_handled, outliers_removed, duplicates_removed, audit_log_hash |
+| RES.AnalysisRun |   Statistical analysis completes | result_id, test_type, test_statistic, p_value, effect_size, assumption_violations |
+| RES.VisualizationGenerated |   Visualization is rendered | visualization_id, chart_type, dimensions, measures, file_format, size_bytes |
+| RES.PatternDetected |   Pattern detection finds a result | pattern_id, pattern_type, confidence, support, description |
+| RES.ConfidenceAssessed |   Confidence assessment completes | assessment_id, overall_confidence, data_quality, statistical_validity, reproducibility |
+| RES.PipelineCompleted |   Full analysis pipeline finishes | pipeline_id, step_count, total_duration_ms, status, artifact_count |
 
 ## Error Cases
 
@@ -302,31 +302,20 @@ Per Law 7 (Capability Bounds), Research declares its capabilities at creation an
 
 ## Design DNA
 
-| Rule | Compliance |
+| Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Each pipeline step (ingest, clean, transform, analyze, visualize, report) is a separate concern |
-| R2 (Dependency Order) | Data Analysis depends on ROS for compute budget; depends on Academy for data storage |
-| R3 (DRY) | Dataset stored once in Academy, referenced by all analysis pipelines |
-| R4 (Builder Pattern) | AnalysisPipeline is built step-by-step with validation; StatisticalResult is built from test output |
-| R5 (Liskov) | All IStatisticalEngine implementations (frequentist, Bayesian, non-parametric) are interchangeable |
-| R6 (DI over Singletons) | Statistical engine, visualization renderer, and pattern detector are injected |
-| R9 (Deterministic) | Same dataset and pipeline configuration produces identical analysis output |
-| R10 (Simpler Over Complex) | Default to descriptive statistics before inferential; simple visualizations before complex |
-| R13 (Design for Failure) | Pipeline steps fail independently; partial results propagated with failure annotations |
-| R14 (Paved Path) | Single paved path: ingest -> clean -> transform -> analyze -> visualize -> report |
-| R15 (Open/Closed) | New statistical tests implement IStatisticalEngine without modifying pipeline logic |
+| R1 - Modulsingularity | Each pipeline step (ingest, clean, transform, analyze, visualize, report) is a separate concern |
+| R2 - Dependency Order | Data Analysis depends on ROS for compute budget; depends on Academy for data storage |
+| R3 - DRY | Dataset stored once in Academy, referenced by all analysis pipelines |
+| R4 - Builder Pattern | AnalysisPipeline is built step-by-step with validation; StatisticalResult is built from test output |
+| R5 - Liskov Substitution | All IStatisticalEngine implementations (frequentist, Bayesian, non-parametric) are interchangeable |
+| R6 - DI over Singletons | Statistical engine, visualization renderer, and pattern detector are injected |
+| R9 - Deterministic | Same dataset and pipeline configuration produces identical analysis output |
+| R10 - Simpler Over Complex | Default to descriptive statistics before inferential; simple visualizations before complex |
+| R13 - Design for Failure | Pipeline steps fail independently; partial results propagated with failure annotations |
+| R14 - Paved Path | Single paved path: ingest -> clean -> transform -> analyze -> visualize -> report |
+| R15 - Open/Closed | New statistical tests implement IStatisticalEngine without modifying pipeline logic |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

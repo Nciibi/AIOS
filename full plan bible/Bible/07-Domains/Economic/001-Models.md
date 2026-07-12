@@ -188,17 +188,17 @@ interface SensitivityEngine {
 
 ## Events
 
-| ECON.EventType |  Produced When | Fields |
+| ECON.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| ECON.ModelBuildStarted |  modelId, modelType, algorithm | Economic model build initiated |
-| ECON.ModelBuilt |  modelId, validationMetrics | Model fitted and validated successfully |
-| ECON.ModelFailed |  modelId, errorCode, diagnostic | Model build or validation failed |
-| ECON.ForecastGenerated |  forecastId, modelId, horizon, confidenceInterval | DemandForecast produced and ready |
-| ECON.CostProjectionRun |  projectionId, budgetId, exhaustionProbability | CostProjection computed for a budget |
-| ECON.SupplyDemandUpdated |  modelId, resourceType, equilibriumPrice | Supply/demand equilibrium recalculated |
-| ECON.ROIComputed |  computationId, projectId, npv, irr | ROI analysis completed |
-| ECON.SensitivityRun |  analysisId, topParameter | Sensitivity analysis completed |
-| ECON.ModelDeployed |  modelId, version | Model promoted to production use |
+| ECON.ModelBuildStarted |   modelId, modelType, algorithm | Economic model build initiated |
+| ECON.ModelBuilt |   modelId, validationMetrics | Model fitted and validated successfully |
+| ECON.ModelFailed |   modelId, errorCode, diagnostic | Model build or validation failed |
+| ECON.ForecastGenerated |   forecastId, modelId, horizon, confidenceInterval | DemandForecast produced and ready |
+| ECON.CostProjectionRun |   projectionId, budgetId, exhaustionProbability | CostProjection computed for a budget |
+| ECON.SupplyDemandUpdated |   modelId, resourceType, equilibriumPrice | Supply/demand equilibrium recalculated |
+| ECON.ROIComputed |   computationId, projectId, npv, irr | ROI analysis completed |
+| ECON.SensitivityRun |   analysisId, topParameter | Sensitivity analysis completed |
+| ECON.ModelDeployed |   modelId, version | Model promoted to production use |
 
 ## Error Cases
 
@@ -247,29 +247,18 @@ Per Law 7 (Capability Bounds), Economic declares its capabilities at creation an
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Economic Models owns forecasting and modeling; Budget Management owns budget state; Cost Accounting owns cost records |
-| R2 â€” Dependency Order | Depends on Economic (CostReports, PriceSheets), EVS (evidence), ACF (dispatch); no circular dependencies |
-| R3 â€” DRY | Model algorithms defined once in ModelParams; all forecast types reference the same interfaces |
-| R4 â€” Builder Pattern | EconomicModel uses builder pattern for complex parameter configuration |
-| R5 â€” Stateless | Model computation is stateless given the same inputs; state tracking is in the model metadata only |
-| R6 â€” Evident Complete | Every model build, forecast, and analysis produces an evidence record |
-| R9 â€” Deterministic | Same training data and parameters produce identical model outputs |
-| R10 â€” Simpler Over Complex | Linear regression and exponential smoothing defaults; neural networks opt-in for high-volume resources |
-| R13 â€” Design for Failure | Model validation gates prevent deployment of poor models; forecasts include confidence intervals |
-| R14 â€” Paved Path | Monthly demand forecast with 90-day horizon covers 80% of use cases |
-| R15 â€” Open/Closed | New model algorithms can be registered without changing the pipeline; new resource types use existing models |
+| R1 - Modulsingularity | Economic Models owns forecasting and modeling; Budget Management owns budget state; Cost Accounting owns cost records |
+| R2 - Dependency Order | Depends on Economic (CostReports, PriceSheets), EVS (evidence), ACF (dispatch); no circular dependencies |
+| R3 - DRY | Model algorithms defined once in ModelParams; all forecast types reference the same interfaces |
+| R4 - Builder Pattern | EconomicModel uses builder pattern for complex parameter configuration |
+| R5 - Liskov Substitution | Model computation is stateless given the same inputs; state tracking is in the model metadata only |
+| R6 - DI over Singletons | Every model build, forecast, and analysis produces an evidence record |
+| R9 - Deterministic | Same training data and parameters produce identical model outputs |
+| R10 - Simpler Over Complex | Linear regression and exponential smoothing defaults; neural networks opt-in for high-volume resources |
+| R13 - Design for Failure | Model validation gates prevent deployment of poor models; forecasts include confidence intervals |
+| R14 - Paved Path | Monthly demand forecast with 90-day horizon covers 80% of use cases |
+| R15 - Open/Closed | New model algorithms can be registered without changing the pipeline; new resource types use existing models |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

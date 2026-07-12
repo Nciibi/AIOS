@@ -332,16 +332,16 @@ type TTSErrorCode =
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| VCE.TTSStarted |  request_id, session_id, text_length, voice, quality | TTS synthesis began |
-| VCE.TTSCompleted |  request_id, session_id, format, duration_ms, word_count | Audio synthesis finished |
-| VCE.TTSFailed |  request_id, session_id, error_code, reason | Synthesis failed |
-| VCE.TTSStreamChunk |  request_id, session_id, chunk_sequence, duration_ms, is_final | Streaming audio chunk emitted |
-| VCE.TTSWordSpoken |  request_id, word, start_ms, end_ms | Individual word timing generated |
-| VCE.TTSQualityFallback |  request_id, requested_quality, actual_quality, provider | Quality level not available, fell back |
-| VCE.TTSVoiceSwitch |  request_id, old_profile_id, new_profile_id | Voice changed mid-synthesis (SSML) |
-| VCE.TTSStreamCancelled |  request_id, session_id, chunks_emitted | User cancelled mid-stream |
-| VCE.TTSNormalizationApplied |  request_id, transformations_count | Text normalization completed |
-| VCE.TTSStreamDone |  request_id, session_id, total_chunks, total_duration_ms | All stream chunks emitted |
+| VCE.TTSStarted |   request_id, session_id, text_length, voice, quality | TTS synthesis began |
+| VCE.TTSCompleted |   request_id, session_id, format, duration_ms, word_count | Audio synthesis finished |
+| VCE.TTSFailed |   request_id, session_id, error_code, reason | Synthesis failed |
+| VCE.TTSStreamChunk |   request_id, session_id, chunk_sequence, duration_ms, is_final | Streaming audio chunk emitted |
+| VCE.TTSWordSpoken |   request_id, word, start_ms, end_ms | Individual word timing generated |
+| VCE.TTSQualityFallback |   request_id, requested_quality, actual_quality, provider | Quality level not available, fell back |
+| VCE.TTSVoiceSwitch |   request_id, old_profile_id, new_profile_id | Voice changed mid-synthesis (SSML) |
+| VCE.TTSStreamCancelled |   request_id, session_id, chunks_emitted | User cancelled mid-stream |
+| VCE.TTSNormalizationApplied |   request_id, transformations_count | Text normalization completed |
+| VCE.TTSStreamDone |   request_id, session_id, total_chunks, total_duration_ms | All stream chunks emitted |
 
 ## Invariants
 

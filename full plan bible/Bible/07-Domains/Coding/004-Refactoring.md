@@ -256,15 +256,15 @@ enum VerificationStatus {
 
 ## Events
 
-| COD.EventType |  Produced When | Fields |
+| COD.EventType |   Produced When | Fields |
 |-----------|--------------|--------|
-| COD.RefactoringPlanned |  A refactoring plan is created and analyzed | plan_id, operation_type, symbol_name, files_affected, risk_level |
-| COD.RefactoringApplied |  Transformation changes are written to files | plan_id, changeset_id, files_modified, operations_count |
-| COD.RefactoringVerified |  Verification confirms behavior preservation | plan_id, build_result, test_results, verification_duration_ms |
-| COD.RefactoringFailed |  Refactoring pipeline encounters an error | plan_id, error_code, error_message, failed_stage |
-| COD.RefactoringRolledBack |  Changes are reverted after verification failure | plan_id, changeset_id, files_restored, rollback_duration_ms |
-| COD.SymbolResolved |  A symbol reference is resolved in the codebase | symbol_id, file_path, reference_count, resolution_duration_ms |
-| COD.DependencyCycleDetected |  A circular dependency is found during analysis | plan_id, cycle_path, severity, suggested_resolution |
+| COD.RefactoringPlanned |   A refactoring plan is created and analyzed | plan_id, operation_type, symbol_name, files_affected, risk_level |
+| COD.RefactoringApplied |   Transformation changes are written to files | plan_id, changeset_id, files_modified, operations_count |
+| COD.RefactoringVerified |   Verification confirms behavior preservation | plan_id, build_result, test_results, verification_duration_ms |
+| COD.RefactoringFailed |   Refactoring pipeline encounters an error | plan_id, error_code, error_message, failed_stage |
+| COD.RefactoringRolledBack |   Changes are reverted after verification failure | plan_id, changeset_id, files_restored, rollback_duration_ms |
+| COD.SymbolResolved |   A symbol reference is resolved in the codebase | symbol_id, file_path, reference_count, resolution_duration_ms |
+| COD.DependencyCycleDetected |   A circular dependency is found during analysis | plan_id, cycle_path, severity, suggested_resolution |
 
 ## Error Cases
 
@@ -313,29 +313,18 @@ Per Law 7 (Capability Bounds), Coding declares its capabilities at creation and 
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Each refactoring type (rename, extract, inline, move) is a separate module |
-| R2 â€” Dependency Order | Refactoring depends on Language Registry and CodebaseIndex |
-| R3 â€” DRY | Symbol resolution logic is shared across all refactoring types |
-| R4 â€” Builder Pattern | ChangeSet is built incrementally through analysis + transformation phases |
-| R5 â€” Liskov Substitution | All refactoring operations implement IRefactoringOperation interface |
-| R6 â€” DI over Singletons | Analysis and transformation services are injected; no global state |
-| R9 â€” Deterministic | Same plan + codebase state produces identical ChangeSet |
-| R10 â€” Simpler Over Complex | Refactoring uses sequential transformation with dependency ordering |
-| R13 â€” Design for Failure | Verification failure triggers automatic rollback; no partial state persists |
-| R14 â€” Paved Path | Single paved path: analyze -> plan -> transform -> verify -> commit |
-| R15 â€” Open/Closed | New refactoring types added by implementing IRefactoringOperation interface |
+| R1 - Modulsingularity | Each refactoring type (rename, extract, inline, move) is a separate module |
+| R2 - Dependency Order | Refactoring depends on Language Registry and CodebaseIndex |
+| R3 - DRY | Symbol resolution logic is shared across all refactoring types |
+| R4 - Builder Pattern | ChangeSet is built incrementally through analysis + transformation phases |
+| R5 - Liskov Substitution | All refactoring operations implement IRefactoringOperation interface |
+| R6 - DI over Singletons | Analysis and transformation services are injected; no global state |
+| R9 - Deterministic | Same plan + codebase state produces identical ChangeSet |
+| R10 - Simpler Over Complex | Refactoring uses sequential transformation with dependency ordering |
+| R13 - Design for Failure | Verification failure triggers automatic rollback; no partial state persists |
+| R14 - Paved Path | Single paved path: analyze -> plan -> transform -> verify -> commit |
+| R15 - Open/Closed | New refactoring types added by implementing IRefactoringOperation interface |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

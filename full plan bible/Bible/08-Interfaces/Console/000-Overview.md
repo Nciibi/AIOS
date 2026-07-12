@@ -196,17 +196,17 @@ All actions recorded as evidence (Law 4)
 
 ## Events
 
-| CON.EventType |  Produced When | Fields |
+| CON.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| CON.SessionStarted |  sessionId, humanId, mfaVerified | Human opened governance console |
-| CON.RfcDecided |  rfcId, decision, reviewerId | Human decision on RFC recorded |
-| CON.OverrideRequested |  overrideId, lawSuspended, scope, duration | Human override initiated |
-| CON.OverrideActive |  overrideId, lawSuspended, expiresAt | Override now in effect |
-| CON.OverrideExpired |  overrideId | Override auto-expired at duration end |
-| CON.OverrideRevoked |  overrideId, revokedBy | Override ended early by human |
-| CON.CertificationDecided |  agentId, targetStage, decision, reviewerId | Agent promotion approved/rejected |
-| CON.AuditQueried |  humanId, filter, resultCount | Human ran an audit query |
-| CON.SessionEnded |  sessionId, humanId | Console session closed |
+| CON.SessionStarted |   sessionId, humanId, mfaVerified | Human opened governance console |
+| CON.RfcDecided |   rfcId, decision, reviewerId | Human decision on RFC recorded |
+| CON.OverrideRequested |   overrideId, lawSuspended, scope, duration | Human override initiated |
+| CON.OverrideActive |   overrideId, lawSuspended, expiresAt | Override now in effect |
+| CON.OverrideExpired |   overrideId | Override auto-expired at duration end |
+| CON.OverrideRevoked |   overrideId, revokedBy | Override ended early by human |
+| CON.CertificationDecided |   agentId, targetStage, decision, reviewerId | Agent promotion approved/rejected |
+| CON.AuditQueried |   humanId, filter, resultCount | Human ran an audit query |
+| CON.SessionEnded |   sessionId, humanId | Console session closed |
 
 ## Error Cases
 
@@ -256,27 +256,18 @@ Per Law 7 (Capability Bounds), Console declares its capabilities at creation and
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Console owns human governance interaction exclusively; governance services own the logic |
-| R2 â€” Dependency Order | Depends on 01-Governance services, AUS, EVS, ACF; no circular deps |
-| R3 â€” DRY | Constitution text sourced from CKR; console renders, does not duplicate |
-| R4 â€” Builder Pattern | Override requests use builder for scope and duration validation |
-| R9 â€” Deterministic | Same query returns same evidence; actions are replayable from evidence |
-| R10 â€” Simpler Over Complex | Default console shows pending actions; advanced views are opt-in |
-| R13 â€” Design for Failure | Session expiry and MFA failure preserve partial state; no silent overrides |
-| R14 â€” Paved Path | RFC review and override request are the standard flows |
-| R15 â€” Open/Closed | New governance action types register via Console API extension |
+| R1 - Modulsingularity | Console owns human governance interaction exclusively; governance services own the logic |
+| R2 - Dependency Order | Depends on 01-Governance services, AUS, EVS, ACF; no circular deps |
+| R3 - DRY | Constitution text sourced from CKR; console renders, does not duplicate |
+| R4 - Builder Pattern | Override requests use builder for scope and duration validation |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Same query returns same evidence; actions are replayable from evidence |
+| R10 - Simpler Over Complex | Default console shows pending actions; advanced views are opt-in |
+| R13 - Design for Failure | Session expiry and MFA failure preserve partial state; no silent overrides |
+| R14 - Paved Path | RFC review and override request are the standard flows |
+| R15 - Open/Closed | New governance action types register via Console API extension |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

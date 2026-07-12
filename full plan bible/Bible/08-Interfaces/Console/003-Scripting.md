@@ -180,16 +180,16 @@ interface Scheduler {
 
 ## Events
 
-| CON.EventType |  Produced When | Fields |
+| CON.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| CON.ScriptDefined |  scriptId, name, version | New script registered in the script registry |
-| CON.ScriptStarted |  scriptId, executionId, variableCount | Script execution initiated |
-| CON.ScriptStepCompleted |  scriptId, executionId, stepId, status, durationMs | Individual script step finished |
-| CON.ScriptStepRetried |  scriptId, executionId, stepId, attempt, error | Step retry triggered by error handler |
-| CON.ScriptFailed |  scriptId, executionId, stepId, error | Script execution terminated with failure |
-| CON.ScriptCompleted |  scriptId, executionId, stepCount, totalDuration | Script execution finished successfully |
-| CON.ScriptScheduled |  scriptId, cronExpression, nextRun | Script bound to a cron schedule |
-| CON.ScriptScheduleFired |  scriptId, executionId | Scheduled execution started |
+| CON.ScriptDefined |   scriptId, name, version | New script registered in the script registry |
+| CON.ScriptStarted |   scriptId, executionId, variableCount | Script execution initiated |
+| CON.ScriptStepCompleted |   scriptId, executionId, stepId, status, durationMs | Individual script step finished |
+| CON.ScriptStepRetried |   scriptId, executionId, stepId, attempt, error | Step retry triggered by error handler |
+| CON.ScriptFailed |   scriptId, executionId, stepId, error | Script execution terminated with failure |
+| CON.ScriptCompleted |   scriptId, executionId, stepCount, totalDuration | Script execution finished successfully |
+| CON.ScriptScheduled |   scriptId, cronExpression, nextRun | Script bound to a cron schedule |
+| CON.ScriptScheduleFired |   scriptId, executionId | Scheduled execution started |
 
 ## Error Cases
 
@@ -238,29 +238,18 @@ Per Law 7 (Capability Bounds), Console declares its capabilities at creation and
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Scripting owns automation orchestration; CLI engine owns individual command execution |
-| R2 â€” Dependency Order | Depends on CLI CommandRegistry, EVS, Scheduler; no circular deps |
-| R3 â€” DRY | Steps reference CLI commands by name; script does not re-implement command logic |
-| R4 â€” Builder Pattern | ScriptExecution built incrementally with each StepResult |
-| R5 â€” Deterministic | Same script with same variables produces identical execution sequence |
-| R6 â€” Single Source | Script definition is the single source of workflow specification |
-| R9 â€” Deterministic | Replaying script execution from evidence produces identical step sequence |
-| R10 â€” Simpler Over Complex | Default execution is linear; conditions and branching are opt-in |
-| R13 â€” Design for Failure | Error handlers provide structured recovery paths for every failure mode |
-| R14 â€” Paved Path | Standard scripts for override management, certification review, and audit export |
-| R15 â€” Open/Closed | New error handler actions and step types register via extensions |
+| R1 - Modulsingularity | Scripting owns automation orchestration; CLI engine owns individual command execution |
+| R2 - Dependency Order | Depends on CLI CommandRegistry, EVS, Scheduler; no circular deps |
+| R3 - DRY | Steps reference CLI commands by name; script does not re-implement command logic |
+| R4 - Builder Pattern | ScriptExecution built incrementally with each StepResult |
+| R5 - Liskov Substitution | Same script with same variables produces identical execution sequence |
+| R6 - DI over Singletons | Script definition is the single source of workflow specification |
+| R9 - Deterministic | Replaying script execution from evidence produces identical step sequence |
+| R10 - Simpler Over Complex | Default execution is linear; conditions and branching are opt-in |
+| R13 - Design for Failure | Error handlers provide structured recovery paths for every failure mode |
+| R14 - Paved Path | Standard scripts for override management, certification review, and audit export |
+| R15 - Open/Closed | New error handler actions and step types register via extensions |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

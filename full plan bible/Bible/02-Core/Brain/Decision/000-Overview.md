@@ -239,13 +239,13 @@ interface ConstraintExpression {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| DEC.EvaluationRequested |  request_id, option_count, criteria_count | Decision evaluation started |
-| DEC.EvaluationCompleted |  request_id, recommendation | Evaluation finished |
-| DEC.DecisionMade |  request_id, final_choice | Sou made the final decision |
-| DEC.ConstraintViolated |  constraint_id, option_id, detail | Hard constraint violated |
-| DEC.TradeOffIdentified |  criteria_pair, options, magnitude | Trade-off surfaced |
-| DEC.CriterionRegistered |  criterion_id, name, weight | New criterion added |
-| DEC.PreferenceOverridden |  criterion_id, old_weight, new_weight | Criterion weight changed |
+| DEC.EvaluationRequested |   request_id, option_count, criteria_count | Decision evaluation started |
+| DEC.EvaluationCompleted |   request_id, recommendation | Evaluation finished |
+| DEC.DecisionMade |   request_id, final_choice | Sou made the final decision |
+| DEC.ConstraintViolated |   constraint_id, option_id, detail | Hard constraint violated |
+| DEC.TradeOffIdentified |   criteria_pair, options, magnitude | Trade-off surfaced |
+| DEC.CriterionRegistered |   criterion_id, name, weight | New criterion added |
+| DEC.PreferenceOverridden |   criterion_id, old_weight, new_weight | Criterion weight changed |
 
 ## Invariants
 

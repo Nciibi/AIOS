@@ -150,15 +150,15 @@ interface InheritanceResolver {
 
 ## Events
 
-| UI.EventType |  Produced When | Fields |
+| UI.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| UI.ThemeDefined |  themeId, name, variant, baseThemeId | New theme variant registered |
-| UI.ThemeApplied |  themeId, resolvedTokens, duration | Theme activated and tokens applied |
-| UI.ThemeSwitched |  fromThemeId, toThemeId, strategy | Theme transition completed |
-| UI.PreferencePersisted |  humanId, themeId, source | User theme choice saved |
-| UI.TokenMissingInTheme |  themeId, tokenName, fallbackValue | Token not defined in theme; falling back to base |
-| UI.InheritanceResolved |  themeId, layers, totalTokens | Inheritance chain computed successfully |
-| UI.ThemeRolledBack |  themeId, previousThemeId, reason | Theme application failed; rolled back |
+| UI.ThemeDefined |   themeId, name, variant, baseThemeId | New theme variant registered |
+| UI.ThemeApplied |   themeId, resolvedTokens, duration | Theme activated and tokens applied |
+| UI.ThemeSwitched |   fromThemeId, toThemeId, strategy | Theme transition completed |
+| UI.PreferencePersisted |   humanId, themeId, source | User theme choice saved |
+| UI.TokenMissingInTheme |   themeId, tokenName, fallbackValue | Token not defined in theme; falling back to base |
+| UI.InheritanceResolved |   themeId, layers, totalTokens | Inheritance chain computed successfully |
+| UI.ThemeRolledBack |   themeId, previousThemeId, reason | Theme application failed; rolled back |
 
 ## Error Cases
 
@@ -206,29 +206,18 @@ Per Law 7 (Capability Bounds), UI declares its capabilities at creation and oper
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Theme system exclusively manages visual presentation; no component defines its own colors |
-| R2 â€” Dependency Order | Depends on Design System (001), Accessibility (003); no cycles |
-| R3 â€” DRY | Token values defined once per theme; reused across all components |
-| R4 â€” Builder Pattern | Theme variants built via inheritance chain with validation |
-| R5 â€” Law of Demeter | Components interact only with resolved tokens; never with theme definitions |
-| R6 â€” Encapsulation | Theme internals (inheritance, resolution) hidden behind ThemeApplier interface |
-| R9 â€” Deterministic | Same theme + same tokens = same visual output every time |
-| R10 â€” Simpler Over Complex | Light/dark are built-in; custom themes explicitly opt-in |
-| R13 â€” Design for Failure | Missing token falls back to base theme; never leaves element un-styled |
-| R14 â€” Paved Path | Light theme is default; dark and high-contrast are predefined variants |
-| R15 â€” Open/Closed | New variants registered via ThemeRegistry; base theme closed for modification |
+| R1 - Modulsingularity | Theme system exclusively manages visual presentation; no component defines its own colors |
+| R2 - Dependency Order | Depends on Design System (001), Accessibility (003); no cycles |
+| R3 - DRY | Token values defined once per theme; reused across all components |
+| R4 - Builder Pattern | Theme variants built via inheritance chain with validation |
+| R5 - Liskov Substitution | Components interact only with resolved tokens; never with theme definitions |
+| R6 - DI over Singletons | Theme internals (inheritance, resolution) hidden behind ThemeApplier interface |
+| R9 - Deterministic | Same theme + same tokens = same visual output every time |
+| R10 - Simpler Over Complex | Light/dark are built-in; custom themes explicitly opt-in |
+| R13 - Design for Failure | Missing token falls back to base theme; never leaves element un-styled |
+| R14 - Paved Path | Light theme is default; dark and high-contrast are predefined variants |
+| R15 - Open/Closed | New variants registered via ThemeRegistry; base theme closed for modification |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

@@ -143,17 +143,17 @@ interface MissionPlanner {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.MSNEvent |  mission_id, plan_hash, version | Plan created |
-| MSN.MSNEvent |  mission_id, validation_result, passed | Plan validated |
-| MSN.MSNEvent |  mission_id, goal_count, hierarchy | Goals decomposed |
-| MSN.MSNEvent |  mission_id, milestone_count, dag_hash | Milestones defined |
-| MSN.MSNEvent |  mission_id, resource_budget | Resources estimated |
-| MSN.MSNEvent |  mission_id, dependency_count, types | Dependencies mapped |
-| MSN.MSNEvent |  mission_id, start_date, end_date, critical_path | Timeline estimated |
-| MSN.MSNEvent |  mission_id, overall_score, top_risks | Risk assessed |
-| MSN.MSNEvent |  mission_id, approved_by, approval_hash | Plan approved |
-| MSN.MSNEvent |  mission_id, rejected_by, reasons | Plan rejected |
-| MSN.MSNEvent |  mission_id, old_version, new_version | Plan updated |
+| MSN.MSNEvent |   mission_id, plan_hash, version | Plan created |
+| MSN.MSNEvent |   mission_id, validation_result, passed | Plan validated |
+| MSN.MSNEvent |   mission_id, goal_count, hierarchy | Goals decomposed |
+| MSN.MSNEvent |   mission_id, milestone_count, dag_hash | Milestones defined |
+| MSN.MSNEvent |   mission_id, resource_budget | Resources estimated |
+| MSN.MSNEvent |   mission_id, dependency_count, types | Dependencies mapped |
+| MSN.MSNEvent |   mission_id, start_date, end_date, critical_path | Timeline estimated |
+| MSN.MSNEvent |   mission_id, overall_score, top_risks | Risk assessed |
+| MSN.MSNEvent |   mission_id, approved_by, approval_hash | Plan approved |
+| MSN.MSNEvent |   mission_id, rejected_by, reasons | Plan rejected |
+| MSN.MSNEvent |   mission_id, old_version, new_version | Plan updated |
 
 ## Error Cases
 
@@ -199,24 +199,18 @@ Per Law 7 (Capability Bounds), Missions declares its capabilities at creation an
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Planning is a single focused concern within the Mission lifecycle |
-| R3 â€” DRY | Plans reference canonical types from Physics/002-Missions.md |
-| R9 â€” Deterministic | Same Intent and context produces same plan structure |
-| R10 â€” Simpler Over Complex | Linear planning flow with clear validation gates |
-| R12 â€” Embrace Errors | All planning errors have unique codes (MSN_PLN_001â€“006) |
-| R14 â€” Paved Path | Intent â†’ Goals â†’ Milestones â†’ Resources â†’ Dependencies â†’ Timeline â†’ Risk |
+| R1 - Modulsingularity | Planning is a single focused concern within the Mission lifecycle |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Plans reference canonical types from Physics/002-Missions.md |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Same Intent and context produces same plan structure |
+| R10 - Simpler Over Complex | Linear planning flow with clear validation gates |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Intent â†’ Goals â†’ Milestones â†’ Resources â†’ Dependencies â†’ Timeline â†’ Risk |
+| R15 - Open/Closed | Compliant |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

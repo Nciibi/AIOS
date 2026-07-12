@@ -150,15 +150,15 @@ interface LayoutManager {
 
 ## Events
 
-| DASH.EventType |  Produced When | Fields |
+| DASH.EventType |   Produced When | Fields |
 |-------|--------|-------------|
-| DASH.WidgetCreated |  widgetId, type, viewId | New widget registered in a view |
-| DASH.WidgetConfigured |  widgetId, settings | Widget settings updated |
-| DASH.WidgetBound |  widgetId, metricId, query | Data source attached to widget |
-| DASH.WidgetRendered |  widgetId, type, durationMs | Widget rendering completed |
-| DASH.DrillDownExecuted |  widgetId, targetType, targetId | Human drilled down from widget |
-| DASH.WidgetRemoved |  widgetId, viewId | Widget unregistered from view |
-| DASH.LayoutConflict |  viewId, widgetIds | Layout overlap detected and resolved |
+| DASH.WidgetCreated |   widgetId, type, viewId | New widget registered in a view |
+| DASH.WidgetConfigured |   widgetId, settings | Widget settings updated |
+| DASH.WidgetBound |   widgetId, metricId, query | Data source attached to widget |
+| DASH.WidgetRendered |   widgetId, type, durationMs | Widget rendering completed |
+| DASH.DrillDownExecuted |   widgetId, targetType, targetId | Human drilled down from widget |
+| DASH.WidgetRemoved |   widgetId, viewId | Widget unregistered from view |
+| DASH.LayoutConflict |   viewId, widgetIds | Layout overlap detected and resolved |
 
 ## Error Cases
 
@@ -206,29 +206,18 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 
 | Rule | Assessment |
 |------|-----------|
-| R1 â€” Modulsingularity | Widget system owns visualization; metrics own computation |
-| R2 â€” Dependency Order | Depends on Metrics subsystem and DrillDown Engine; no circular deps |
-| R3 â€” DRY | Widget configs reference metric IDs; metric definitions are not duplicated |
-| R4 â€” Builder Pattern | WidgetConfig uses builder for layout and drill-down composition |
-| R5 â€” Liskov Substitution | Compliant | All widget types implement the WidgetRenderer interface |
-| R6 â€” DI over Singletons | Compliant | Widget renderers are injected via widget type registry |
-| R9 â€” Deterministic | Same WidgetConfig + same MetricValue = same rendered output |
-| R10 â€” Simpler Over Complex | Metric and alert-list widgets cover most use cases; chart is opt-in |
-| R13 â€” Design for Failure | Data bind failure shows error state with retry, not blank |
-| R14 â€” Paved Path | Metric-card widgets are the default for all dashboard views |
-| R15 â€” Open/Closed | New widget types register via WidgetRenderer extension point |
+| R1 - Modulsingularity | Widget system owns visualization; metrics own computation |
+| R2 - Dependency Order | Depends on Metrics subsystem and DrillDown Engine; no circular deps |
+| R3 - DRY | Widget configs reference metric IDs; metric definitions are not duplicated |
+| R4 - Builder Pattern | WidgetConfig uses builder for layout and drill-down composition |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Same WidgetConfig + same MetricValue = same rendered output |
+| R10 - Simpler Over Complex | Metric and alert-list widgets cover most use cases; chart is opt-in |
+| R13 - Design for Failure | Data bind failure shows error state with retry, not blank |
+| R14 - Paved Path | Metric-card widgets are the default for all dashboard views |
+| R15 - Open/Closed | New widget types register via WidgetRenderer extension point |
 
-| R1 | Compliant |
-| R2 | Compliant |
-| R3 | Compliant |
-| R4 | Compliant |
-| R5 | Compliant |
-| R6 | Compliant |
-| R9 | Compliant |
-| R10 | Compliant |
-| R13 | Compliant |
-| R14 | Compliant |
-| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |
