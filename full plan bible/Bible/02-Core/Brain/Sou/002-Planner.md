@@ -188,16 +188,25 @@ Every plan must pass four validation gates before it can be proposed:
 | `Sou.ScenarioCompared` | Two scenarios are compared | comparison_id, plan_a, plan_b, recommendation |
 | `Sou.PlanSubmittedToDGP` | Plan is submitted as a mission proposal | plan_id, dgp_ticket_id |
 
-## Error Codes (R12)
+## Error Cases
 
-| Code | Description |
-|------|-------------|
-| SOU_PLN_001 | Goal is underspecified — missing success criteria |
-| SOU_PLN_002 | Resource requirements exceed available capacity |
-| SOU_PLN_003 | Constitutional constraint violation in plan |
-| SOU_PLN_004 | Circular milestone dependency detected |
-| SOU_PLN_005 | Timeline estimate outside historical bounds |
-| SOU_PLN_006 | Plan validation failed — multiple violations |
+| Condition | Error Code | Severity | Recovery |
+|-----------|------------|----------|----------|
+| Goal is underspecified — missing success criteria | SOU_PLN_001 | Medium | Request clarification from goal source; use conservative assumptions |
+| Resource requirements exceed available capacity | SOU_PLN_002 | High | Reduce scope, wait for resource release, or request emergency allocation |
+| Constitutional constraint violation in plan | SOU_PLN_003 | Critical | Block plan; document violation for Security Council review |
+| Circular milestone dependency detected | SOU_PLN_004 | High | Break cycle by reordering or parallelizing milestones |
+| Timeline estimate outside historical bounds | SOU_PLN_005 | Low | Flag as high-risk; proceed with monitoring tag |
+| Plan validation failed — multiple violations | SOU_PLN_006 | Critical | Return full violation report; require re-plan from corrected inputs |
+
+## Invariants
+
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| SOU-PLN-001 | Planner never allocates resources or assigns entities | Architectural — resource checks are queries only |
+| SOU-PLN-002 | Every plan must pass all four validation gates before proposal | Algorithmic — gated plan submission pipeline |
+| SOU-PLN-003 | Plans always trace to a specific goal from Reasoning | Schema — goal_id required in MissionPlan |
+| SOU-PLN-004 | Plan modifications produce a new version, never mutate in place | API-level — refinePlan produces new version |
 
 ## Cross-Cutting Concerns
 
@@ -225,12 +234,17 @@ Plans are communicated via ACF. ROS is queried for resource availability. DGP re
 
 | Rule | Compliance |
 |------|-----------|
-| R1 (Modulsingularity) | Planner focuses solely on mission planning |
-| R4 (Builder) | Plan construction (createPlan) is separate from execution |
-| R5 (Liskov) | All planning algorithms implement the Planner interface |
-| R10 (Simpler Over Complex) | Plans use the simplest sufficient milestone decomposition |
-| R12 (Embrace Errors) | All planning errors have unique codes (SOU_PLN_001–006) |
-| R13 (Design for Failure) | Planner degrades gracefully when ROS is unavailable |
+| R1 — Modulsingularity | Planner focuses solely on mission planning |
+| R2 — Dependency Order | Planner depends on Reasoning, ROS, LMS; no upward dependencies |
+| R3 — DRY | Plan structure is defined once in the Data Model |
+| R4 — Builder Pattern | Plan construction (createPlan) is separate from execution |
+| R5 — Liskov Substitution | All planning algorithms implement the Planner interface |
+| R6 — DI over Singletons | ROS and LMS clients are injected dependencies |
+| R9 — Deterministic | Same goal and constraints produce the same plan structure |
+| R10 — Simpler Over Complex | Plans use the simplest sufficient milestone decomposition |
+| R13 — Design for Failure | Planner degrades gracefully when ROS is unavailable |
+| R14 — Paved Path | All plans flow through createPlan → validatePlan → DGP |
+| R15 — Open/Closed | New planning heuristics added by extending, not modifying, the Planner interface |
 
 ## Related Documents
 
