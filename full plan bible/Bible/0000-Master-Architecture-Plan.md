@@ -452,6 +452,9 @@ Every Bible volume MUST pass this checklist before acceptance:
 | Constitution | Governance framework — Bible volumes implement constitutional requirements |
 | All BBL-XXXX volumes | This document is the parent of all Bible volumes |
 | RFCs | This document governs the RFC process |
+| Contributing/000-Contributing-Guide.md | Contribution workflow — how to contribute to the Bible |
+| Tests/000-Integration-Tests.md | Documentation integration tests — structural integrity validation |
+| DNA/000-AIOS-DNA.md | Design DNA reference — all volumes must comply with R1–R15 |
 
 ---
 
