@@ -9,6 +9,9 @@
 | Document ID | AIOS-BBL-ATS-002 |
 | Source Laws | Law 8 — Law of Verification-First |
 | Source Physics | Physics/008-Security.md, Physics/006-Lifecycles.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 
 ## Token Types
 

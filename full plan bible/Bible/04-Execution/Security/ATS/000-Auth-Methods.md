@@ -9,6 +9,9 @@
 | Document ID | AIOS-BBL-ATS-000 |
 | Source Laws | Law 5 — Law of Identity, Law 8 — Law of Verification-First |
 | Source Physics | Physics/001-Identity.md, Physics/008-Security.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 
 ## Purpose
 
