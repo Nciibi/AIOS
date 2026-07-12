@@ -172,15 +172,32 @@ Health checks occur every 30 seconds. A provider that reports Unhealthy for 3 co
 
 ## Events
 
-| SDK.EventType | Produced When | Fields |
+| SDK.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `SDK.RuntimeSessionCreated` | Runtime session is created | session_id, runtime_type, provider_id, genome_hash, isolation_level |
-| `SDK.RuntimeSessionStarted` | Session transitions to Running | session_id, started_at, initial_metrics, provider_health |
-| `SDK.RuntimeSessionPaused` | Session is paused | session_id, pause_reason, suspended_state_ref, memory_preserved_bytes |
-| `SDK.RuntimeSessionTerminated` | Session terminates | session_id, reason, final_usage_report, total_duration_seconds |
-| `SDK.RuntimeInvocationCompleted` | Capability invocation finishes | invocation_id, session_id, capability, duration_ms, usage_metrics, outcome |
-| `SDK.RuntimeHealthChanged` | Runtime provider health status changes | provider_id, previous_status, new_status, details, consecutive_failures |
-| `SDK.RuntimeUsageReported` | Resource usage is reported | session_id, report_period, usage_metrics, budget_remaining |
+| SDK.RuntimeSessionCreated |  Runtime session is created | session_id, runtime_type, provider_id, genome_hash, isolation_level |
+| SDK.RuntimeSessionStarted |  Session transitions to Running | session_id, started_at, initial_metrics, provider_health |
+| SDK.RuntimeSessionPaused |  Session is paused | session_id, pause_reason, suspended_state_ref, memory_preserved_bytes |
+| SDK.RuntimeSessionTerminated |  Session terminates | session_id, reason, final_usage_report, total_duration_seconds |
+| SDK.RuntimeInvocationCompleted |  Capability invocation finishes | invocation_id, session_id, capability, duration_ms, usage_metrics, outcome |
+| SDK.RuntimeHealthChanged |  Runtime provider health status changes | provider_id, previous_status, new_status, details, consecutive_failures |
+| SDK.RuntimeUsageReported |  Resource usage is reported | session_id, report_period, usage_metrics, budget_remaining |
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

@@ -137,15 +137,15 @@ interface PatternLibrary {
 
 ## Events
 
-| UI.EventType | Produced When | Fields |
+| UI.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| UI.DesignTokenUpdated | tokenId, category, oldValue, newValue | A design token value changed |
-| UI.ComponentRegistered | componentId, name, type | New component added to the library |
-| UI.PatternDocumented | patternId, docId | Interaction pattern documented |
-| UI.DesignSystemVersioned | version, changelog | Design system version published |
-| UI.TokenDeprecated | tokenId, replacement | Token marked deprecated with migration path |
-| UI.LayoutComputed | gridId, breakpoint, columnCount | Layout grid computed for breakpoint |
-| UI.ComponentValidated | componentId, result | Component spec passed validation |
+| UI.DesignTokenUpdated |  tokenId, category, oldValue, newValue | A design token value changed |
+| UI.ComponentRegistered |  componentId, name, type | New component added to the library |
+| UI.PatternDocumented |  patternId, docId | Interaction pattern documented |
+| UI.DesignSystemVersioned |  version, changelog | Design system version published |
+| UI.TokenDeprecated |  tokenId, replacement | Token marked deprecated with migration path |
+| UI.LayoutComputed |  gridId, breakpoint, columnCount | Layout grid computed for breakpoint |
+| UI.ComponentValidated |  componentId, result | Component spec passed validation |
 
 ## Error Cases
 
@@ -205,6 +205,17 @@ Per Law 7 (Capability Bounds), UI declares its capabilities at creation and oper
 | R14 â€” Paved Path | Use predefined token categories; custom categories reviewed |
 | R15 â€” Open/Closed | New token categories registered via extension; existing tokens closed for modification |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

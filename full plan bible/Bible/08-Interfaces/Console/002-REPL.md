@@ -143,16 +143,16 @@ interface HistoryNavigator {
 
 ## Events
 
-| CON.EventType | Produced When | Fields |
+| CON.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| `GC.REPLStarted` | sessionId, humanId, contextSnapshot | Interactive REPL session initialized |
-| `GC.REPLCommandEvaluated` | sessionId, input, durationMs, success | Command evaluated against REPL context |
-| `GC.REPLResultPrinted` | sessionId, style, outputSize | Evaluation result rendered to terminal |
-| `GC.REPLContextUpdated` | sessionId, updatedKeys | EvalContext modified after evaluation |
-| `GC.REPLSuggestionTriggered` | sessionId, prefix, suggestionCount | Auto-suggestions generated for input |
-| `GC.REPLHistoryNavigated` | sessionId, direction, entrySequence | Human navigated command history |
-| `GC.REPLSessionEnded` | sessionId, humanId, evalCount, duration | Interactive REPL session closed |
-| `GC.REPLMultiLineStarted` | sessionId, lineCount | Multi-line input mode entered |
+| CON.REPLStarted |  sessionId, humanId, contextSnapshot | Interactive REPL session initialized |
+| CON.REPLCommandEvaluated |  sessionId, input, durationMs, success | Command evaluated against REPL context |
+| CON.REPLResultPrinted |  sessionId, style, outputSize | Evaluation result rendered to terminal |
+| CON.REPLContextUpdated |  sessionId, updatedKeys | EvalContext modified after evaluation |
+| CON.REPLSuggestionTriggered |  sessionId, prefix, suggestionCount | Auto-suggestions generated for input |
+| CON.REPLHistoryNavigated |  sessionId, direction, entrySequence | Human navigated command history |
+| CON.REPLSessionEnded |  sessionId, humanId, evalCount, duration | Interactive REPL session closed |
+| CON.REPLMultiLineStarted |  sessionId, lineCount | Multi-line input mode entered |
 
 ## Error Cases
 
@@ -212,6 +212,17 @@ Per Law 7 (Capability Bounds), Console declares its capabilities at creation and
 | R14 â€” Paved Path | Standard workflow: type command, see result, navigate history |
 | R15 â€” Open/Closed | New eval features register via EvalEngine extension without modifying REPL loop |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

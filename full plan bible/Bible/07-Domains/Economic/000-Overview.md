@@ -245,20 +245,20 @@ Enforcement Gateway checks budget via checkBudget()
 
 ## Events
 
-| ECON.EventType | Produced When | Fields |
+| ECON.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| `ECN.BudgetCreated` | budgetId, ownerId, totalAmount | New budget registered |
-| `ECN.BudgetActivated` | budgetId, effectiveFrom | Budget entered Active phase |
-| `ECN.FundsReserved` | budgetId, amount, consumerId | Funds reserved for upcoming spend |
-| `ECN.SpendCommitted` | budgetId, amount, consumerId, resourceType | Actual spending recorded |
-| `ECN.BudgetThresholdWarning` | budgetId, spentPercentage, threshold | Spending approached configurable threshold |
-| `ECN.BudgetExhausted` | budgetId, totalSpent, totalBudget | Budget fully consumed |
-| `ECN.BudgetFrozen` | budgetId, reason | Budget suspended pending review |
-| `ECN.BudgetClosed` | budgetId, finalReport | Budget period ended, final report generated |
-| `ECN.PriceSheetUpdated` | priceSheetId, effectiveFrom, changes | Resource prices changed |
-| `ECN.OverageAllowed` | budgetId, amount | Overage policy triggered |
-| `ECN.OverageDenied` | budgetId, amount, consumerId | Spend denied due to insufficient budget |
-| `ECN.CostReportGenerated` | reportId, period, totalSpend | Periodic cost report ready |
+| ECON.BudgetCreated |  budgetId, ownerId, totalAmount | New budget registered |
+| ECON.BudgetActivated |  budgetId, effectiveFrom | Budget entered Active phase |
+| ECON.FundsReserved |  budgetId, amount, consumerId | Funds reserved for upcoming spend |
+| ECON.SpendCommitted |  budgetId, amount, consumerId, resourceType | Actual spending recorded |
+| ECON.BudgetThresholdWarning |  budgetId, spentPercentage, threshold | Spending approached configurable threshold |
+| ECON.BudgetExhausted |  budgetId, totalSpent, totalBudget | Budget fully consumed |
+| ECON.BudgetFrozen |  budgetId, reason | Budget suspended pending review |
+| ECON.BudgetClosed |  budgetId, finalReport | Budget period ended, final report generated |
+| ECON.PriceSheetUpdated |  priceSheetId, effectiveFrom, changes | Resource prices changed |
+| ECON.OverageAllowed |  budgetId, amount | Overage policy triggered |
+| ECON.OverageDenied |  budgetId, amount, consumerId | Spend denied due to insufficient budget |
+| ECON.CostReportGenerated |  reportId, period, totalSpend | Periodic cost report ready |
 
 ## Error Cases
 
@@ -320,6 +320,17 @@ Per Law 7 (Capability Bounds), Economic declares its capabilities at creation an
 | R14 â€” Paved Path | Organization-scoped monthly budget with category limits covers 80% of use cases |
 | R15 â€” Open/Closed | New resource types can be priced by registering in PriceSheets; new allocation strategies are pluggable |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

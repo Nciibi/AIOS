@@ -137,14 +137,14 @@ enum SupportLevel {
 
 ## Events
 
-| COD.EventType | Produced When | Fields |
+| COD.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `Coding.LanguageRegistered` | A new language is added to the registry | language_id, display_name, toolchain_count, support_level |
-| `Coding.LanguageUnregistered` | A language is removed from the registry | language_id, reason, affected_worker_count |
-| `Coding.ToolchainVerified` | A toolchain runtime is verified successfully | toolchain_id, language_id, version, platform, duration_ms |
-| `Coding.ToolchainFailed` | Toolchain verification fails | toolchain_id, language_id, error_output, retry_count |
-| `Coding.ProfileResolved` | A language profile is resolved for a Worker | worker_id, language_id, toolchain_id, capability_count |
-| `Coding.RuntimeDetected` | Runtime is auto-detected in a BuildSandbox | sandbox_id, detected_runtimes, version_map |
+| COD.LanguageRegistered |  A new language is added to the registry | language_id, display_name, toolchain_count, support_level |
+| COD.LanguageUnregistered |  A language is removed from the registry | language_id, reason, affected_worker_count |
+| COD.ToolchainVerified |  A toolchain runtime is verified successfully | toolchain_id, language_id, version, platform, duration_ms |
+| COD.ToolchainFailed |  Toolchain verification fails | toolchain_id, language_id, error_output, retry_count |
+| COD.ProfileResolved |  A language profile is resolved for a Worker | worker_id, language_id, toolchain_id, capability_count |
+| COD.RuntimeDetected |  Runtime is auto-detected in a BuildSandbox | sandbox_id, detected_runtimes, version_map |
 
 ## Error Cases
 
@@ -203,6 +203,17 @@ Per Law 7 (Capability Bounds), Coding declares its capabilities at creation and 
 | R14 â€” Paved Path | Single paved path: register -> detect -> verify -> resolve -> use |
 | R15 â€” Open/Closed | New languages can be added by registering new profiles; registry logic unchanged |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

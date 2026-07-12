@@ -103,15 +103,32 @@ Discovered â†’ Assessed â†’ Provisioned â†’ Configured â†’ M
 
 ## Events
 
-| LNX.EventType | Produced When | Fields |
+| LNX.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `Linux.HostDiscovered` | New Linux host is found | host_id, hostname, distro, kernel_version, ip_address, discovered_by |
-| `Linux.CommandExecuted` | A command is run on a host | command_id, host_id, command, exit_code, duration, output_hash |
-| `Linux.ConfigChanged` | System configuration is modified | change_id, host_id, file_path, old_hash, new_hash, approved_by, playbook_id |
-| `Linux.PackageInstalled` | A package is installed or removed | package_id, host_id, action, package_name, version, repository |
-| `Linux.ComplianceScanRun` | Compliance audit completes | scan_id, host_id, standard, passed, failed, score, critical_findings |
-| `Linux.IncidentDetected` | Anomaly or alert is identified | incident_id, host_id, severity, category, details, recommended_action |
-| `Linux.PatchApplied` | Security patch is applied | patch_id, host_id, cve_list, reboot_required, outcome, duration_seconds |
+| LNX.HostDiscovered |  New Linux host is found | host_id, hostname, distro, kernel_version, ip_address, discovered_by |
+| LNX.CommandExecuted |  A command is run on a host | command_id, host_id, command, exit_code, duration, output_hash |
+| LNX.ConfigChanged |  System configuration is modified | change_id, host_id, file_path, old_hash, new_hash, approved_by, playbook_id |
+| LNX.PackageInstalled |  A package is installed or removed | package_id, host_id, action, package_name, version, repository |
+| LNX.ComplianceScanRun |  Compliance audit completes | scan_id, host_id, standard, passed, failed, score, critical_findings |
+| LNX.IncidentDetected |  Anomaly or alert is identified | incident_id, host_id, severity, category, details, recommended_action |
+| LNX.PatchApplied |  Security patch is applied | patch_id, host_id, cve_list, reboot_required, outcome, duration_seconds |
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

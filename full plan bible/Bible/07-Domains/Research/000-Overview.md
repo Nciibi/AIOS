@@ -110,14 +110,31 @@ Evidence with a composite quality score below 0.4 is flagged as low-confidence. 
 
 ## Events
 
-| RES.EventType | Produced When | Fields |
+| RES.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `Research.QuestionFormulated` | Research question is defined | question_id, question_text, scope, constraints, success_criteria |
-| `Research.SourceRetrieved` | External source is fetched | source_id, url, content_type, size_bytes, retrieval_time, source_quality |
-| `Research.AnalysisRun` | Data analysis completes | analysis_id, method, dataset_id, key_findings, compute_seconds |
-| `Research.HypothesisTested` | Hypothesis test is evaluated | hypothesis_id, result, confidence_interval, evidence_quality, methodology |
-| `Research.ReportGenerated` | Research report is produced | report_id, title, findings_count, evidence_chain_hash, pages_equivalent |
-| `Research.KnowledgeProposed` | Research artifact submitted to Academy | artifact_id, artifact_type, evidence_hashes, methodology_hash |
+| RES.QuestionFormulated |  Research question is defined | question_id, question_text, scope, constraints, success_criteria |
+| RES.SourceRetrieved |  External source is fetched | source_id, url, content_type, size_bytes, retrieval_time, source_quality |
+| RES.AnalysisRun |  Data analysis completes | analysis_id, method, dataset_id, key_findings, compute_seconds |
+| RES.HypothesisTested |  Hypothesis test is evaluated | hypothesis_id, result, confidence_interval, evidence_quality, methodology |
+| RES.ReportGenerated |  Research report is produced | report_id, title, findings_count, evidence_chain_hash, pages_equivalent |
+| RES.KnowledgeProposed |  Research artifact submitted to Academy | artifact_id, artifact_type, evidence_hashes, methodology_hash |
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

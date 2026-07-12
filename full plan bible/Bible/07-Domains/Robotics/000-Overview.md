@@ -104,15 +104,32 @@ Robotics software development in AIOS:
 
 ## Events
 
-| ROB.EventType | Produced When | Fields |
+| ROB.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `Robotics.ROSNodeGenerated` | ROS2 node code is generated | worker_id, node_name, topics_published, topics_subscribed, services, interfaces_used |
-| `Robotics.MotionPlanComputed` | Motion plan is calculated | plan_id, robot_id, start_state, goal_state, trajectory_length, collision_free, computation_time_ms |
-| `Robotics.SimulationRun` | Robot simulation executes | sim_id, world_config, duration_simulated, metrics, outcome, physics_fidelity |
-| `Robotics.ControlLoopStarted` | Real-time control loop activates | loop_id, robot_id, frequency_hz, controller_type, deadline_us |
-| `Robotics.SensorCalibrated` | Sensor calibration completes | calibration_id, sensor_type, parameters, accuracy, calibration_time |
-| `Robotics.SafetyEvent` | Safety layer triggers | event_id, layer (L1â€“L5), reason, robot_state_at_event, recovery_action |
-| `Robotics.HardwareDeployed` | Software is deployed to robot hardware | deploy_id, robot_id, software_version, safety_check_result, deployment_time |
+| ROB.ROSNodeGenerated |  ROS2 node code is generated | worker_id, node_name, topics_published, topics_subscribed, services, interfaces_used |
+| ROB.MotionPlanComputed |  Motion plan is calculated | plan_id, robot_id, start_state, goal_state, trajectory_length, collision_free, computation_time_ms |
+| ROB.SimulationRun |  Robot simulation executes | sim_id, world_config, duration_simulated, metrics, outcome, physics_fidelity |
+| ROB.ControlLoopStarted |  Real-time control loop activates | loop_id, robot_id, frequency_hz, controller_type, deadline_us |
+| ROB.SensorCalibrated |  Sensor calibration completes | calibration_id, sensor_type, parameters, accuracy, calibration_time |
+| ROB.SafetyEvent |  Safety layer triggers | event_id, layer (L1â€“L5), reason, robot_state_at_event, recovery_action |
+| ROB.HardwareDeployed |  Software is deployed to robot hardware | deploy_id, robot_id, software_version, safety_check_result, deployment_time |
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

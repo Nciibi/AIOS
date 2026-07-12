@@ -137,15 +137,15 @@ interface RateLimitConfig {
 
 ## Events
 
-| SEC.EventType | Produced When | Fields |
+| SEC.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| Security.ScanStarted | Scan pipeline begins execution | scan_id, target_count, mode, stealth_profile, authorization_ref |
-| Security.ScanCompleted | All pipeline stages finish | scan_id, hosts_found, ports_open, duration_ms |
-| Security.VulnerabilityMatched | CVE match found for a service | finding_id, scan_id, cve, service, confidence |
-| Security.ScanTargetBlocked | Unauthorized or blacklisted target detected | target_ip, reason, authorization_ref, resolver_id |
-| Security.ScanProgress | Periodic progress heartbeat | scan_id, stage, percent_complete, estimated_remaining |
-| Security.ScanHalted | Scan interrupted by operator or boundary | scan_id, halted_by, reason, partial_results_ref |
-| Security.ScanRateLimited | Rate limit threshold approached | scan_id, current_rate, max_rate, throttle_applied |
+| SEC.ScanStarted |  Scan pipeline begins execution | scan_id, target_count, mode, stealth_profile, authorization_ref |
+| SEC.ScanCompleted |  All pipeline stages finish | scan_id, hosts_found, ports_open, duration_ms |
+| SEC.VulnerabilityMatched |  CVE match found for a service | finding_id, scan_id, cve, service, confidence |
+| SEC.ScanTargetBlocked |  Unauthorized or blacklisted target detected | target_ip, reason, authorization_ref, resolver_id |
+| SEC.ScanProgress |  Periodic progress heartbeat | scan_id, stage, percent_complete, estimated_remaining |
+| SEC.ScanHalted |  Scan interrupted by operator or boundary | scan_id, halted_by, reason, partial_results_ref |
+| SEC.ScanRateLimited |  Rate limit threshold approached | scan_id, current_rate, max_rate, throttle_applied |
 
 ## Error Cases
 
@@ -206,6 +206,17 @@ Per Law 7 (Capability Bounds), Security declares its capabilities at creation an
 | R14 (GC) | Scan artifacts retained for audit window, then garbage collected |
 | R15 (Auth Chain) | Every scan links to authorization chain â€” verified at each stage boundary |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

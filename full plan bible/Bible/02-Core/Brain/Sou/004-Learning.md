@@ -188,14 +188,14 @@ Each model is versioned independently. Models may be shared with the Academy for
 
 ## Events
 
-| SOU.EventType | Produced When | Fields |
+| SOU.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `Sou.LearningIngested` | Outcome evidence is ingested | outcome_id, source_type, evidence_hash |
-| `Sou.ModelUpdated` | A learning model is updated | model_id, old_version, new_version, change_summary |
-| `Sou.ImprovementEvaluated` | An improvement is evaluated | model_id, improved, metrics |
-| `Sou.ModelRolledBack` | A model update is rolled back | model_id, version, regression_details |
-| `Sou.LearningPrivacyBlocked` | Learning input blocked by privacy filter | outcome_id, privacy_rule_violated |
-| `Sou.KnowledgeSharedWithAcademy` | Learned pattern shared with Academy | knowledge_id, pattern_type |
+| SOU.LearningIngested |  Outcome evidence is ingested | outcome_id, source_type, evidence_hash |
+| SOU.ModelUpdated |  A learning model is updated | model_id, old_version, new_version, change_summary |
+| SOU.ImprovementEvaluated |  An improvement is evaluated | model_id, improved, metrics |
+| SOU.ModelRolledBack |  A model update is rolled back | model_id, version, regression_details |
+| SOU.LearningPrivacyBlocked |  Learning input blocked by privacy filter | outcome_id, privacy_rule_violated |
+| SOU.KnowledgeSharedWithAcademy |  Learned pattern shared with Academy | knowledge_id, pattern_type |
 
 ## Error Cases
 

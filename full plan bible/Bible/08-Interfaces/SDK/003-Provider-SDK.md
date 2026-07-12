@@ -177,15 +177,32 @@ The Provider SDK supports these built-in resource types, with extension points f
 
 ## Events
 
-| SDK.EventType | Produced When | Fields |
+| SDK.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `SDK.ProviderRegistered` | Provider registers with ROS | provider_id, provider_type, capabilities_hash, version |
-| `SDK.ProviderHealthChanged` | Provider health status transitions | provider_id, from_status, to_status, reason, consecutive_checks |
-| `SDK.ProviderResourceAllocated` | Resource is allocated | allocation_id, provider_id, resource_type, quantity, consumer_entity_id |
-| `SDK.ProviderResourceReleased` | Resource is released | allocation_id, provider_id, usage_summary, duration_seconds |
-| `SDK.ProviderCapabilityExecuted` | Capability execution completes | execution_id, provider_id, capability, result_summary, duration_ms |
-| `SDK.ProviderCapabilityDeprecated` | Capability is deprecated | provider_id, capability_id, deprecation_date, replacement |
-| `SDK.ProviderDeregistered` | Provider is removed from registry | provider_id, reason, final_metrics, total_uptime_hours |
+| SDK.ProviderRegistered |  Provider registers with ROS | provider_id, provider_type, capabilities_hash, version |
+| SDK.ProviderHealthChanged |  Provider health status transitions | provider_id, from_status, to_status, reason, consecutive_checks |
+| SDK.ProviderResourceAllocated |  Resource is allocated | allocation_id, provider_id, resource_type, quantity, consumer_entity_id |
+| SDK.ProviderResourceReleased |  Resource is released | allocation_id, provider_id, usage_summary, duration_seconds |
+| SDK.ProviderCapabilityExecuted |  Capability execution completes | execution_id, provider_id, capability, result_summary, duration_ms |
+| SDK.ProviderCapabilityDeprecated |  Capability is deprecated | provider_id, capability_id, deprecation_date, replacement |
+| SDK.ProviderDeregistered |  Provider is removed from registry | provider_id, reason, final_metrics, total_uptime_hours |
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

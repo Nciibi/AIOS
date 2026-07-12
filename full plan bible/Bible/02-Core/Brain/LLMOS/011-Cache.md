@@ -230,10 +230,10 @@ Entities can pre-warm the cache by submitting requests with `cache_policy.mode =
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| `LLMOS.CacheHit` | request_id, cache_key, age, similarity_score, saved_cost, saved_latency_ms | Cache hit (Stage 7) |
-| `LLMOS.CacheMiss` | request_id, cache_key, reason, semantic_candidates_count | Cache miss (Stage 7) |
-| `LLMOS.CacheStored` | request_id, cache_key, ttl, storage_size_bytes | Cache write (Stage 16) |
-| `LLMOS.CacheEvicted` | cache_key, reason, age, access_count, saved_cost_total | Eviction |
+| LLM.CacheHit |  request_id, cache_key, age, similarity_score, saved_cost, saved_latency_ms | Cache hit (Stage 7) |
+| LLM.CacheMiss |  request_id, cache_key, reason, semantic_candidates_count | Cache miss (Stage 7) |
+| LLM.CacheStored |  request_id, cache_key, ttl, storage_size_bytes | Cache write (Stage 16) |
+| LLM.CacheEvicted |  cache_key, reason, age, access_count, saved_cost_total | Eviction |
 
 
 ## Cross-Cutting Concerns

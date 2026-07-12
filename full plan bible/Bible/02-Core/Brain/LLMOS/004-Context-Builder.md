@@ -157,7 +157,7 @@ interface TruncatedSection {
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| `LLMOS.ContextBuilt` | request_id, total_tokens, input_tokens, truncated_sections, allocations | After context building (Stage 8) |
+| LLM.ContextBuilt |  request_id, total_tokens, input_tokens, truncated_sections, allocations | After context building (Stage 8) |
 
 
 ## Cross-Cutting Concerns

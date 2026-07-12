@@ -272,17 +272,17 @@ interface VoiceRouterStrategy {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `VOI.STTStarted` | request_id, audio_format, duration_ms | STT processing began |
-| `VOI.STTCompleted` | request_id, transcript_length, confidence | Transcription finished |
-| `VOI.STTFailed` | request_id, error_code, reason | Transcription failed |
-| `VOI.STTStreamChunk` | request_id, partial_transcript, is_final | Streaming transcript chunk |
-| `VOI.TTSStarted` | request_id, text_length, voice | TTS synthesis began |
-| `VOI.TTSCompleted` | request_id, audio_format, duration_ms | Audio synthesis finished |
-| `VOI.TTSFailed` | request_id, error_code, reason | Synthesis failed |
-| `VOI.TTSStreamChunk` | request_id, chunk_sequence, is_final | Streaming audio chunk |
-| `VOI.VoiceProfileCreated` | profile_id, provider, voice_name | New voice profile created |
-| `VOI.VoiceProfileDeleted` | profile_id, provider | Voice profile removed |
-| `VOI.ProviderHealthChanged` | provider, status | Voice provider health transitioned |
+| VCE.STTStarted |  request_id, audio_format, duration_ms | STT processing began |
+| VCE.STTCompleted |  request_id, transcript_length, confidence | Transcription finished |
+| VCE.STTFailed |  request_id, error_code, reason | Transcription failed |
+| VCE.STTStreamChunk |  request_id, partial_transcript, is_final | Streaming transcript chunk |
+| VCE.TTSStarted |  request_id, text_length, voice | TTS synthesis began |
+| VCE.TTSCompleted |  request_id, audio_format, duration_ms | Audio synthesis finished |
+| VCE.TTSFailed |  request_id, error_code, reason | Synthesis failed |
+| VCE.TTSStreamChunk |  request_id, chunk_sequence, is_final | Streaming audio chunk |
+| VCE.VoiceProfileCreated |  profile_id, provider, voice_name | New voice profile created |
+| VCE.VoiceProfileDeleted |  profile_id, provider | Voice profile removed |
+| VCE.ProviderHealthChanged |  provider, status | Voice provider health transitioned |
 
 ## Invariants
 

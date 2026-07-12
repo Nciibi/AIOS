@@ -188,17 +188,17 @@ interface SensitivityEngine {
 
 ## Events
 
-| ECON.EventType | Produced When | Fields |
+| ECON.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| `ECN.ModelBuildStarted` | modelId, modelType, algorithm | Economic model build initiated |
-| `ECN.ModelBuilt` | modelId, validationMetrics | Model fitted and validated successfully |
-| `ECN.ModelFailed` | modelId, errorCode, diagnostic | Model build or validation failed |
-| `ECN.ForecastGenerated` | forecastId, modelId, horizon, confidenceInterval | DemandForecast produced and ready |
-| `ECN.CostProjectionRun` | projectionId, budgetId, exhaustionProbability | CostProjection computed for a budget |
-| `ECN.SupplyDemandUpdated` | modelId, resourceType, equilibriumPrice | Supply/demand equilibrium recalculated |
-| `ECN.ROIComputed` | computationId, projectId, npv, irr | ROI analysis completed |
-| `ECN.SensitivityRun` | analysisId, topParameter | Sensitivity analysis completed |
-| `ECN.ModelDeployed` | modelId, version | Model promoted to production use |
+| ECON.ModelBuildStarted |  modelId, modelType, algorithm | Economic model build initiated |
+| ECON.ModelBuilt |  modelId, validationMetrics | Model fitted and validated successfully |
+| ECON.ModelFailed |  modelId, errorCode, diagnostic | Model build or validation failed |
+| ECON.ForecastGenerated |  forecastId, modelId, horizon, confidenceInterval | DemandForecast produced and ready |
+| ECON.CostProjectionRun |  projectionId, budgetId, exhaustionProbability | CostProjection computed for a budget |
+| ECON.SupplyDemandUpdated |  modelId, resourceType, equilibriumPrice | Supply/demand equilibrium recalculated |
+| ECON.ROIComputed |  computationId, projectId, npv, irr | ROI analysis completed |
+| ECON.SensitivityRun |  analysisId, topParameter | Sensitivity analysis completed |
+| ECON.ModelDeployed |  modelId, version | Model promoted to production use |
 
 ## Error Cases
 
@@ -259,6 +259,17 @@ Per Law 7 (Capability Bounds), Economic declares its capabilities at creation an
 | R14 â€” Paved Path | Monthly demand forecast with 90-day horizon covers 80% of use cases |
 | R15 â€” Open/Closed | New model algorithms can be registered without changing the pipeline; new resource types use existing models |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

@@ -178,16 +178,16 @@ interface SessionPolicy {
 
 ## Events
 
-| COM.EventType | Produced When | Fields |
+| COM.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `Comm.SessionCreated` | New collaboration session is created | session_id, workspace_id, creator_id, max_participants, created_at |
-| `Comm.ParticipantJoined` | Participant enters an active session | session_id, participant_id, participant_type, role, current_participant_count |
-| `Comm.ParticipantLeft` | Participant leaves or is removed from session | session_id, participant_id, reason, duration_ms, remaining_count |
-| `Comm.StateSynced` | SyncEvent is broadcast to all participants | session_id, event_id, sender_id, event_type, sequence_number, vector_clock |
-| `Comm.PresenceUpdated` | Participant presence status changes | session_id, participant_id, old_status, new_status, typing_state, last_seen_at |
-| `Comm.SessionHandedOff` | Worker session is handed off to another Worker | session_id, from_worker, to_worker, state_version, pending_event_count, handoff_duration_ms |
-| `Comm.StateDivergenceDetected` | Vector clock skew exceeds threshold | session_id, participant_ids, clock_diff_ms, threshold_ms, resync_initiated |
-| `Comm.SessionArchived` | Session is closed and archived | session_id, duration_minutes, total_participants, total_events, reason |
+| COM.SessionCreated |  New collaboration session is created | session_id, workspace_id, creator_id, max_participants, created_at |
+| COM.ParticipantJoined |  Participant enters an active session | session_id, participant_id, participant_type, role, current_participant_count |
+| COM.ParticipantLeft |  Participant leaves or is removed from session | session_id, participant_id, reason, duration_ms, remaining_count |
+| COM.StateSynced |  SyncEvent is broadcast to all participants | session_id, event_id, sender_id, event_type, sequence_number, vector_clock |
+| COM.PresenceUpdated |  Participant presence status changes | session_id, participant_id, old_status, new_status, typing_state, last_seen_at |
+| COM.SessionHandedOff |  Worker session is handed off to another Worker | session_id, from_worker, to_worker, state_version, pending_event_count, handoff_duration_ms |
+| COM.StateDivergenceDetected |  Vector clock skew exceeds threshold | session_id, participant_ids, clock_diff_ms, threshold_ms, resync_initiated |
+| COM.SessionArchived |  Session is closed and archived | session_id, duration_minutes, total_participants, total_events, reason |
 
 ## Error Cases
 
@@ -248,6 +248,17 @@ Per Law 7 (Capability Bounds), Communication declares its capabilities at creati
 | R14 (Paved Path) | Single paved path: create -> join -> sync -> handoff/leave -> archive; all deviations logged |
 | R15 (Open/Closed) | New sync event types added without changing sync engine; new participant roles extend existing interface |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

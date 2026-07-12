@@ -246,20 +246,20 @@ interface ReasoningContext {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| COG.COG.REASON.PipelineStarted | pipeline_id, request_id, strategy, depth_limit | Reasoning pipeline initialized |
-| COG.COG.REASON.PipelineCompleted | pipeline_id, confidence, total_steps, token_cost | Pipeline finished successfully |
-| COG.COG.REASON.PipelineFailed | pipeline_id, error_code, partial_steps | Pipeline terminated with error |
-| COG.COG.REASON.ThoughtStepGenerated | pipeline_id, step_number, type, confidence, token_cost | Individual step produced |
-| COG.COG.REASON.StrategySelected | pipeline_id, strategy, rationale, alternatives | Strategy chosen by selector |
-| COG.COG.REASON.BranchCreated | pipeline_id, step_number, branch_count | Alternative branch added (tree-of-thought) |
-| COG.COG.REASON.BranchPruned | pipeline_id, step_number, pruned_label | Branch discarded |
-| COG.COG.REASON.StepOverridden | pipeline_id, step_number, confidence_before, confidence_after | Sou overrode a step |
-| COG.COG.REASON.PipelinePaused | pipeline_id, reason | Pipeline paused for metacognition |
-| COG.COG.REASON.PipelineResumed | pipeline_id, reason | Pipeline resumed after metacognition |
-| COG.COG.REASON.LowConfidenceStep | pipeline_id, step_number, confidence, threshold | Step below confidence threshold |
-| COG.COG.REASON.StrategyFallback | pipeline_id, original_strategy, fallback_strategy, reason | Fallback to alternative strategy |
-| COG.COG.REASON.StreamingChunkSent | pipeline_id, step_number, bytes | Streaming output delivered |
-| COG.COG.REASON.EarlyTermination | pipeline_id, step_number, reason, confidence | Pipeline terminated before full depth |
+| COG.COGEvent |  pipeline_id, request_id, strategy, depth_limit | Reasoning pipeline initialized |
+| COG.COGEvent |  pipeline_id, confidence, total_steps, token_cost | Pipeline finished successfully |
+| COG.COGEvent |  pipeline_id, error_code, partial_steps | Pipeline terminated with error |
+| COG.COGEvent |  pipeline_id, step_number, type, confidence, token_cost | Individual step produced |
+| COG.COGEvent |  pipeline_id, strategy, rationale, alternatives | Strategy chosen by selector |
+| COG.COGEvent |  pipeline_id, step_number, branch_count | Alternative branch added (tree-of-thought) |
+| COG.COGEvent |  pipeline_id, step_number, pruned_label | Branch discarded |
+| COG.COGEvent |  pipeline_id, step_number, confidence_before, confidence_after | Sou overrode a step |
+| COG.COGEvent |  pipeline_id, reason | Pipeline paused for metacognition |
+| COG.COGEvent |  pipeline_id, reason | Pipeline resumed after metacognition |
+| COG.COGEvent |  pipeline_id, step_number, confidence, threshold | Step below confidence threshold |
+| COG.COGEvent |  pipeline_id, original_strategy, fallback_strategy, reason | Fallback to alternative strategy |
+| COG.COGEvent |  pipeline_id, step_number, bytes | Streaming output delivered |
+| COG.COGEvent |  pipeline_id, step_number, reason, confidence | Pipeline terminated before full depth |
 
 ## Invariants
 

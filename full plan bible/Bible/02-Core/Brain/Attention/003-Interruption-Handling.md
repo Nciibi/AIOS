@@ -262,18 +262,18 @@ interface InterruptManager {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| ATT.ATT.INT.InterruptCreated | interrupt_id, interrupt_type, priority, source, reason | New interrupt request created |
-| ATT.ATT.INT.InterruptDelivered | interrupt_id, latency_ms, cooldown_remaining | Interrupt delivered to Sou |
-| ATT.ATT.INT.InterruptAcknowledged | interrupt_id, latency_ms, action_taken | Sou acknowledged interrupt |
-| ATT.ATT.INT.InterruptQueued | interrupt_id, queue_position, reason | Interrupt queued due to cooldown/budget |
-| ATT.ATT.INT.InterruptDequeued | interrupt_id, queue_duration_ms | Interrupt removed from queue and delivered |
-| ATT.ATT.INT.InterruptDropped | interrupt_id, reason, snooze_count | Interrupt expired or queue full, dropped |
-| ATT.ATT.INT.CooldownAdjusted | old_multiplier, new_multiplier, reason | Cooldown multiplier dynamically adjusted |
-| ATT.ATT.INT.CooldownBypass | interrupt_id, bypass_reason | Critical security alert bypassed cooldown |
-| ATT.ATT.INT.QueueFull | queue_size, policy, dropped_id | Interrupt queue exceeded capacity |
-| ATT.ATT.INT.OverloadEscalation | interrupt_rate, switch_rate, consecutive, action | Sou overwhelmed, escalation triggered |
-| ATT.ATT.INT.EscalationResolved | duration_ms, interrupts_cleared | Overload condition resolved |
-| ATT.ATT.INT.AcknowledgmentMissed | interrupt_id, priority, window_ms | Sou did not ack within required window |
+| ATT.ATTEvent |  interrupt_id, interrupt_type, priority, source, reason | New interrupt request created |
+| ATT.ATTEvent |  interrupt_id, latency_ms, cooldown_remaining | Interrupt delivered to Sou |
+| ATT.ATTEvent |  interrupt_id, latency_ms, action_taken | Sou acknowledged interrupt |
+| ATT.ATTEvent |  interrupt_id, queue_position, reason | Interrupt queued due to cooldown/budget |
+| ATT.ATTEvent |  interrupt_id, queue_duration_ms | Interrupt removed from queue and delivered |
+| ATT.ATTEvent |  interrupt_id, reason, snooze_count | Interrupt expired or queue full, dropped |
+| ATT.ATTEvent |  old_multiplier, new_multiplier, reason | Cooldown multiplier dynamically adjusted |
+| ATT.ATTEvent |  interrupt_id, bypass_reason | Critical security alert bypassed cooldown |
+| ATT.ATTEvent |  queue_size, policy, dropped_id | Interrupt queue exceeded capacity |
+| ATT.ATTEvent |  interrupt_rate, switch_rate, consecutive, action | Sou overwhelmed, escalation triggered |
+| ATT.ATTEvent |  duration_ms, interrupts_cleared | Overload condition resolved |
+| ATT.ATTEvent |  interrupt_id, priority, window_ms | Sou did not ack within required window |
 
 ## Invariants
 

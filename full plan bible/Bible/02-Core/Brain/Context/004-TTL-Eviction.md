@@ -471,16 +471,16 @@ interface PurgeReport {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `CTX.TTLRecordCreated` | item_id, item_type, ttl_policy, ttl_value | TTL tracking started |
-| `CTX.ItemExpired` | item_id, item_type, reason | Item reached TTL=0 |
-| `CTX.ItemRemoved` | item_id, session_id, phase | Item removed from window (expired phase) |
-| `CTX.ItemRestored` | item_id, session_id, extension_count | Item recovered from recovery phase |
-| `CTX.ItemPurged` | item_id, item_type, turns_lived | Item hard-deleted after recovery window |
-| `CTX.ItemEmergencyEvicted` | item_id, item_type, priority, reason | Emergency eviction triggered |
-| `CTX.TTLExtended` | item_id, session_id, additional_turns, total_turns | TTL extended for item |
-| `CTX.TTLSweepCompleted` | session_id, expired, removed, purged | Periodic sweep finished |
-| `CTX.EmergencyEvictionCompleted` | session_id, items_evicted, tokens_freed | Emergency eviction done |
-| `CTX.RecoveryWindowExpired` | item_id, item_type | Recovery window closed; item purged |
+| CTX.TTLRecordCreated |  item_id, item_type, ttl_policy, ttl_value | TTL tracking started |
+| CTX.ItemExpired |  item_id, item_type, reason | Item reached TTL=0 |
+| CTX.ItemRemoved |  item_id, session_id, phase | Item removed from window (expired phase) |
+| CTX.ItemRestored |  item_id, session_id, extension_count | Item recovered from recovery phase |
+| CTX.ItemPurged |  item_id, item_type, turns_lived | Item hard-deleted after recovery window |
+| CTX.ItemEmergencyEvicted |  item_id, item_type, priority, reason | Emergency eviction triggered |
+| CTX.TTLExtended |  item_id, session_id, additional_turns, total_turns | TTL extended for item |
+| CTX.TTLSweepCompleted |  session_id, expired, removed, purged | Periodic sweep finished |
+| CTX.EmergencyEvictionCompleted |  session_id, items_evicted, tokens_freed | Emergency eviction done |
+| CTX.RecoveryWindowExpired |  item_id, item_type | Recovery window closed; item purged |
 
 ## Invariants
 

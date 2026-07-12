@@ -139,15 +139,15 @@ interface AccessibilityEngine {
 
 ## Events
 
-| UI.EventType | Produced When | Fields |
+| UI.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| UI.ComponentRendered | componentId, type, timestamp | Component mounted and visible |
-| UI.ComponentInteracted | componentId, event, value | User interaction on component |
-| UI.StateChanged | componentId, previousState, newState | Immutable state transition |
-| UI.AccessibilityApplied | componentId, role, label | ARIA attributes attached |
-| UI.EventBubbled | componentId, event, origin, target | Event propagated through handler chain |
-| UI.RenderPatched | componentId, diffSize, duration | Virtual DOM patch applied |
-| UI.ComponentTested | componentId, testType, result | Test suite execution completed |
+| UI.ComponentRendered |  componentId, type, timestamp | Component mounted and visible |
+| UI.ComponentInteracted |  componentId, event, value | User interaction on component |
+| UI.StateChanged |  componentId, previousState, newState | Immutable state transition |
+| UI.AccessibilityApplied |  componentId, role, label | ARIA attributes attached |
+| UI.EventBubbled |  componentId, event, origin, target | Event propagated through handler chain |
+| UI.RenderPatched |  componentId, diffSize, duration | Virtual DOM patch applied |
+| UI.ComponentTested |  componentId, testType, result | Test suite execution completed |
 
 ## Error Cases
 
@@ -207,6 +207,17 @@ Per Law 7 (Capability Bounds), UI declares its capabilities at creation and oper
 | R14 â€” Paved Path | Default event handling via Event Bus; custom handlers are explicit opt-in |
 | R15 â€” Open/Closed | New component types register via ComponentRegistry; existing types closed |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

@@ -225,16 +225,16 @@ interface ExecutionStatus {
 
 ## Events
 
-| ROB.EventType | Produced When | Fields |
+| ROB.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| Robotics.MotionPlanRequested | A motion planning request is submitted | plan_id, robot_id, start_state, goal_state, constraint_count, timeout_ms |
-| Robotics.MotionPlanComputed | A motion plan is successfully computed | plan_id, robot_id, waypoint_count, trajectory_length, computation_time_ms, algorithm_used |
-| Robotics.MotionPlanValidated | A motion plan passes or fails validation | plan_id, is_valid, simulated_outcome, collision_checks_passed, warning_count |
-| Robotics.MotionPlanExecuted | A motion plan begins execution on hardware | plan_id, robot_id, trajectory_duration, safety_gate_passed, executor_id |
-| Robotics.MotionPlanCompleted | Motion plan execution finishes | plan_id, robot_id, status, actual_duration_ms, deviation_max, success |
-| Robotics.ObstacleDetected | A new obstacle is detected in the robot workspace | obstacle_id, obstacle_type, position, is_dynamic, distance_to_robot, replan_triggered |
-| Robotics.MotionPlanAborted | Motion plan execution is aborted | plan_id, robot_id, reason, current_state, safety_layer_triggered, recovery_action |
-| Robotics.IKSolutionFailed | Inverse kinematics solver cannot find a valid solution | plan_id, target_pose, robot_model, constraints, iterations, residual_error |
+| ROB.MotionPlanRequested |  A motion planning request is submitted | plan_id, robot_id, start_state, goal_state, constraint_count, timeout_ms |
+| ROB.MotionPlanComputed |  A motion plan is successfully computed | plan_id, robot_id, waypoint_count, trajectory_length, computation_time_ms, algorithm_used |
+| ROB.MotionPlanValidated |  A motion plan passes or fails validation | plan_id, is_valid, simulated_outcome, collision_checks_passed, warning_count |
+| ROB.MotionPlanExecuted |  A motion plan begins execution on hardware | plan_id, robot_id, trajectory_duration, safety_gate_passed, executor_id |
+| ROB.MotionPlanCompleted |  Motion plan execution finishes | plan_id, robot_id, status, actual_duration_ms, deviation_max, success |
+| ROB.ObstacleDetected |  A new obstacle is detected in the robot workspace | obstacle_id, obstacle_type, position, is_dynamic, distance_to_robot, replan_triggered |
+| ROB.MotionPlanAborted |  Motion plan execution is aborted | plan_id, robot_id, reason, current_state, safety_layer_triggered, recovery_action |
+| ROB.IKSolutionFailed |  Inverse kinematics solver cannot find a valid solution | plan_id, target_pose, robot_model, constraints, iterations, residual_error |
 
 ## Error Cases
 
@@ -276,6 +276,23 @@ interface ExecutionStatus {
 | R14 (Paved Path) | Paved path: set goal â†’ check collisions â†’ solve IK â†’ optimize â†’ validate â†’ execute. Alternative planners available for specialized domains |
 | R15 (Testability) | Each planner module has independently testable input/output contracts. Plans are verifiable against ground-truth simulation outcomes |
 
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

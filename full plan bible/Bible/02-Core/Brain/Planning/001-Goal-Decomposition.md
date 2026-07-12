@@ -302,16 +302,16 @@ Output to Milestone Planner
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PLN.PLN.GD.AnalysisComplete | goal, complexity, domain_tags, ambiguity_score | Goal analysis finished |
-| PLN.PLN.GD.StrategySelected | goal, strategy_type, confidence | Decomposition strategy chosen |
-| PLN.PLN.GD.NodeCreated | node_id, parent_id, depth, strategy_used | Single decomposition node created |
-| PLN.PLN.GD.TreeGenerated | tree_id, node_count, max_depth, strategy | Full milestone tree built |
-| PLN.PLN.GD.RecursionStep | parent_node_id, child_count, depth | Recursive decomposition step |
-| PLN.PLN.GD.QualityAssessment | node_id, quality_score, failed_criteria | Node quality check completed |
-| PLN.PLN.GD.RefinementNeeded | node_id, quality_score, suggestions | Node below quality threshold |
-| PLN.PLN.GD.TemplateMatched | goal, template_id, confidence | Goal matched a plan template |
-| PLN.PLN.GD.DepthLimitReached | node_id, depth, max_depth | Max depth hit; node marked primitive |
-| PLN.PLN.GD.DecompositionFailed | goal, reason, suggestions | Goal too vague or ambiguous to decompose |
+| PLN.PLNEvent |  goal, complexity, domain_tags, ambiguity_score | Goal analysis finished |
+| PLN.PLNEvent |  goal, strategy_type, confidence | Decomposition strategy chosen |
+| PLN.PLNEvent |  node_id, parent_id, depth, strategy_used | Single decomposition node created |
+| PLN.PLNEvent |  tree_id, node_count, max_depth, strategy | Full milestone tree built |
+| PLN.PLNEvent |  parent_node_id, child_count, depth | Recursive decomposition step |
+| PLN.PLNEvent |  node_id, quality_score, failed_criteria | Node quality check completed |
+| PLN.PLNEvent |  node_id, quality_score, suggestions | Node below quality threshold |
+| PLN.PLNEvent |  goal, template_id, confidence | Goal matched a plan template |
+| PLN.PLNEvent |  node_id, depth, max_depth | Max depth hit; node marked primitive |
+| PLN.PLNEvent |  goal, reason, suggestions | Goal too vague or ambiguous to decompose |
 
 ## Invariants
 

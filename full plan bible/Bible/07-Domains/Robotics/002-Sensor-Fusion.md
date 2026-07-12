@@ -248,16 +248,16 @@ interface Point3D {
 
 ## Events
 
-| ROB.EventType | Produced When | Fields |
+| ROB.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| Robotics.SensorFusionInitialized | Fusion filter is initialized with config | fusion_id, algorithm, state_dimension, sensor_count, update_rate_hz |
-| Robotics.SensorCalibrated | Sensor calibration completes | calibration_id, sensor_id, sensor_type, accuracy, calibration_method, valid_until |
-| Robotics.FusionUpdatePublished | Fused state estimate is published | fusion_id, timestamp, state_dimension, convergence_metric, active_sensor_count |
-| Robotics.FusionDegraded | One or more sensors are lost or degraded | fusion_id, lost_sensors, degraded_sensors, fallback_mode, uncertainty_increase_factor |
-| Robotics.SensorDropout | A sensor stops providing data | sensor_id, sensor_type, last_valid_timestamp, dropout_duration_ms |
-| Robotics.TimestampDesyncDetected | Sensor timestamps drift beyond acceptable threshold | sensor_id, drift_ms, threshold_ms, resynchronization_initiated |
-| Robotics.FusionDivergence | Filter state estimate diverges from expected bounds | fusion_id, divergence_metric, threshold, reset_action_taken |
-| Robotics.OutlierRejected | Sensor reading rejected as outlier | sensor_id, fusion_id, innovation_magnitude, threshold, consecutive_outlier_count |
+| ROB.SensorFusionInitialized |  Fusion filter is initialized with config | fusion_id, algorithm, state_dimension, sensor_count, update_rate_hz |
+| ROB.SensorCalibrated |  Sensor calibration completes | calibration_id, sensor_id, sensor_type, accuracy, calibration_method, valid_until |
+| ROB.FusionUpdatePublished |  Fused state estimate is published | fusion_id, timestamp, state_dimension, convergence_metric, active_sensor_count |
+| ROB.FusionDegraded |  One or more sensors are lost or degraded | fusion_id, lost_sensors, degraded_sensors, fallback_mode, uncertainty_increase_factor |
+| ROB.SensorDropout |  A sensor stops providing data | sensor_id, sensor_type, last_valid_timestamp, dropout_duration_ms |
+| ROB.TimestampDesyncDetected |  Sensor timestamps drift beyond acceptable threshold | sensor_id, drift_ms, threshold_ms, resynchronization_initiated |
+| ROB.FusionDivergence |  Filter state estimate diverges from expected bounds | fusion_id, divergence_metric, threshold, reset_action_taken |
+| ROB.OutlierRejected |  Sensor reading rejected as outlier | sensor_id, fusion_id, innovation_magnitude, threshold, consecutive_outlier_count |
 
 ## Error Cases
 
@@ -299,6 +299,23 @@ interface Point3D {
 | R14 (Paved Path) | Paved path: configure sensors â†’ calibrate â†’ synchronize â†’ fuse â†’ estimate â†’ publish. Alternative algorithms available for specialized needs |
 | R15 (Testability) | Each pipeline stage has independently testable input/output contracts. Filter behavior verifiable against known ground-truth trajectories |
 
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

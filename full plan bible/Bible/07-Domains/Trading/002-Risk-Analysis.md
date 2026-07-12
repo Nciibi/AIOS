@@ -133,15 +133,15 @@ interface CorrelationMatrix {
 
 ## Events
 
-| TRD.EventType | Produced When | Fields |
+| TRD.EventType |  Produced When | Fields |
 |-------|----------|---------|
-| Trading.RiskMetricsCalculated | RiskEngine: portfolioId, metrics, method | Published after risk metric computation |
-| Trading.VaRComputed | VaRCalculator: portfolioId, varResult | Fired when VaR is recalculated |
-| Trading.StressTestRun | StressTestRunner: portfolioId, scenarios, summary | Emitted after stress test completion |
-| Trading.ExposureUpdated | ExposureTracker: portfolioId, report | Published on exposure change |
-| Trading.LimitBreached | LimitEnforcer: limitId, scope, currentValue, maxValue | Fired when any limit threshold is crossed |
-| Trading.LimitRestored | LimitEnforcer: limitId, scope, currentValue | Fired when a breached limit recovers |
-| Trading.CorrelationUpdated | RiskEngine: matrixId, pairs | Emitted when correlation matrix is refreshed |
+| TRD.RiskMetricsCalculated |  RiskEngine: portfolioId, metrics, method | Published after risk metric computation |
+| TRD.VaRComputed |  VaRCalculator: portfolioId, varResult | Fired when VaR is recalculated |
+| TRD.StressTestRun |  StressTestRunner: portfolioId, scenarios, summary | Emitted after stress test completion |
+| TRD.ExposureUpdated |  ExposureTracker: portfolioId, report | Published on exposure change |
+| TRD.LimitBreached |  LimitEnforcer: limitId, scope, currentValue, maxValue | Fired when any limit threshold is crossed |
+| TRD.LimitRestored |  LimitEnforcer: limitId, scope, currentValue | Fired when a breached limit recovers |
+| TRD.CorrelationUpdated |  RiskEngine: matrixId, pairs | Emitted when correlation matrix is refreshed |
 
 ## Error Cases
 
@@ -180,6 +180,23 @@ interface CorrelationMatrix {
 - **R14 â€” Self-Healing**: On transient correlation matrix failure, the previous valid matrix is reused with a staleness flag.
 - **R15 â€” Backward Compatibility**: Risk metric schemas and scenario definitions maintain versioned migration paths.
 
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

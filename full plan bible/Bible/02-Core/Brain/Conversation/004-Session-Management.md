@@ -456,18 +456,18 @@ TimedOutSession {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `CONV.SessionCreated` | session_id, user_id, modality, preferences | Conversation session started |
-| `CONV.SessionEnded` | session_id, user_id, turn_count, duration, reason | Session terminated |
-| `CONV.SessionPaused` | session_id, user_id, reason | Session paused by user or Sou |
-| `CONV.SessionResumed` | session_id, user_id, idle_duration_ms | Session resumed from pause |
-| `CONV.SessionIdle` | session_id, user_id, idle_duration_ms | Session transitioned to idle |
-| `CONV.SessionRestored` | session_id, user_id, previous_status | Session rebuilt from Memory OS |
-| `CONV.SessionArchived` | session_id, user_id, summary | Session summary archived |
-| `CONV.SessionTimeoutWarning` | session_id, timeout_type, remaining_ms | Warning at 80% of idle timeout |
-| `CONV.SessionAbsoluteTimeout` | session_id, total_duration_ms | Absolute timeout enforced |
-| `CONV.SessionLimitEnforced` | user_id, ended_session_id, limit_type | Session ended due to limit enforcement |
-| `CONV.PreferencesUpdated` | session_id, user_id, changed_fields | User preferences changed |
-| `CONV.SessionCacheEvicted` | session_id, reason, age_ms | Session removed from in-memory cache |
+| CONV.SessionCreated |  session_id, user_id, modality, preferences | Conversation session started |
+| CONV.SessionEnded |  session_id, user_id, turn_count, duration, reason | Session terminated |
+| CONV.SessionPaused |  session_id, user_id, reason | Session paused by user or Sou |
+| CONV.SessionResumed |  session_id, user_id, idle_duration_ms | Session resumed from pause |
+| CONV.SessionIdle |  session_id, user_id, idle_duration_ms | Session transitioned to idle |
+| CONV.SessionRestored |  session_id, user_id, previous_status | Session rebuilt from Memory OS |
+| CONV.SessionArchived |  session_id, user_id, summary | Session summary archived |
+| CONV.SessionTimeoutWarning |  session_id, timeout_type, remaining_ms | Warning at 80% of idle timeout |
+| CONV.SessionAbsoluteTimeout |  session_id, total_duration_ms | Absolute timeout enforced |
+| CONV.SessionLimitEnforced |  user_id, ended_session_id, limit_type | Session ended due to limit enforcement |
+| CONV.PreferencesUpdated |  session_id, user_id, changed_fields | User preferences changed |
+| CONV.SessionCacheEvicted |  session_id, reason, age_ms | Session removed from in-memory cache |
 
 ## Invariants
 

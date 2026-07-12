@@ -298,16 +298,16 @@ type EmotionErrorCode =
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `VOI.EmotionDetected` | request_id, session_id, primary_emotion, confidence | Emotion result produced |
-| `VOI.EmotionStreamChunk` | request_id, session_id, primary_emotion, confidence, is_final | Streaming emotion result |
-| `VOI.EmotionTimelineUpdated` | session_id, request_id, segments_count | Timeline segment added |
-| `VOI.EmotionLowConfidence` | request_id, top_emotion, confidence | No emotion above threshold |
-| `VOI.EmotionThresholdChanged` | old_threshold, new_threshold | Confidence threshold updated |
-| `VOI.EmotionFeatureExtracted` | request_id, pitch_mean, speaking_rate, volume_mean | Acoustic features computed |
-| `VOI.EmotionStreamStarted` | stream_id, session_id, model | Emotion detection stream began |
-| `VOI.EmotionStreamEnded` | stream_id, session_id, segments_count | Emotion detection stream ended |
-| `VOI.EmotionConfigurationChanged` | enabled, threshold, model | Emotion detection config updated |
-| `VOI.EmotionPrivacyFilterApplied` | request_id, fields_stripped | Acoustic features stripped per privacy config |
+| VCE.EmotionDetected |  request_id, session_id, primary_emotion, confidence | Emotion result produced |
+| VCE.EmotionStreamChunk |  request_id, session_id, primary_emotion, confidence, is_final | Streaming emotion result |
+| VCE.EmotionTimelineUpdated |  session_id, request_id, segments_count | Timeline segment added |
+| VCE.EmotionLowConfidence |  request_id, top_emotion, confidence | No emotion above threshold |
+| VCE.EmotionThresholdChanged |  old_threshold, new_threshold | Confidence threshold updated |
+| VCE.EmotionFeatureExtracted |  request_id, pitch_mean, speaking_rate, volume_mean | Acoustic features computed |
+| VCE.EmotionStreamStarted |  stream_id, session_id, model | Emotion detection stream began |
+| VCE.EmotionStreamEnded |  stream_id, session_id, segments_count | Emotion detection stream ended |
+| VCE.EmotionConfigurationChanged |  enabled, threshold, model | Emotion detection config updated |
+| VCE.EmotionPrivacyFilterApplied |  request_id, fields_stripped | Acoustic features stripped per privacy config |
 
 ## Invariants
 

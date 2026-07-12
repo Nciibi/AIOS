@@ -440,18 +440,18 @@ interface LayoutAnalyzer {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `VIS.DocumentParsingStarted` | request_id, document_type, auto_detect | Document parsing began |
-| `VIS.DocumentTypeDetected` | request_id, detected_type, confidence, method | Document type identified |
-| `VIS.DocumentTypeUnknown` | request_id, fallback_to_generic, alternatives | Document type not recognized |
-| `VIS.DocumentFieldExtracted` | request_id, field_name, confidence, field_type | Individual field extracted |
-| `VIS.DocumentFieldValidated` | request_id, field_name, is_valid, errors | Field validation completed |
-| `VIS.DocumentParsed` | request_id, document_type, field_count, overall_confidence | Document parsing completed |
-| `VIS.DocumentParseFailed` | request_id, error_code, stage | Document parsing failed |
-| `VIS.DocumentValidationReport` | request_id, valid, missing_fields, error_count | Full validation report |
-| `VIS.DocumentTableExtracted` | request_id, table_label, rows, columns | Table detected and extracted |
-| `VIS.DocumentFallbackToGeneric` | request_id, reason, original_type | Falling back to generic parsing |
-| `VIS.DocumentSignatureDetected` | request_id, confidence, region | Signature field identified |
-| `VIS.DocumentCheckboxDetected` | request_id, field_name, checked | Checkbox field identified and read |
+| VIS.DocumentParsingStarted |  request_id, document_type, auto_detect | Document parsing began |
+| VIS.DocumentTypeDetected |  request_id, detected_type, confidence, method | Document type identified |
+| VIS.DocumentTypeUnknown |  request_id, fallback_to_generic, alternatives | Document type not recognized |
+| VIS.DocumentFieldExtracted |  request_id, field_name, confidence, field_type | Individual field extracted |
+| VIS.DocumentFieldValidated |  request_id, field_name, is_valid, errors | Field validation completed |
+| VIS.DocumentParsed |  request_id, document_type, field_count, overall_confidence | Document parsing completed |
+| VIS.DocumentParseFailed |  request_id, error_code, stage | Document parsing failed |
+| VIS.DocumentValidationReport |  request_id, valid, missing_fields, error_count | Full validation report |
+| VIS.DocumentTableExtracted |  request_id, table_label, rows, columns | Table detected and extracted |
+| VIS.DocumentFallbackToGeneric |  request_id, reason, original_type | Falling back to generic parsing |
+| VIS.DocumentSignatureDetected |  request_id, confidence, region | Signature field identified |
+| VIS.DocumentCheckboxDetected |  request_id, field_name, checked | Checkbox field identified and read |
 
 ## Invariants
 

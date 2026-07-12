@@ -169,15 +169,32 @@ Audit providers must support configurable retention policies:
 
 ## Events
 
-| SDK.EventType | Produced When | Fields |
+| SDK.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `Audit.EvidenceQueried` | Audit query is executed | query_id, filter_hash, result_count, duration_ms, query_type |
-| `Audit.ChainVerified` | Event chain verification completes | chain_id, start_event, end_event, is_valid, broken_links, verification_level |
-| `Audit.AnomalyDetected` | Anomaly detection triggers | anomaly_id, pattern, severity, affected_events_count, confidence |
-| `Audit.ComplianceReportGenerated` | Compliance report is produced | report_id, standard, scope, passed_checks, failed_checks, score_pct |
-| `Audit.EvidencePackageSealed` | Evidence package is created and sealed | package_id, case_id, event_count, seal_hash, retention_days |
-| `Audit.EvidencePackageAccessed` | Sealed evidence package is accessed | package_id, accessed_by, access_reason, timestamp |
-| `Audit.RetentionPolicyChanged` | Retention policy is modified | policy_id, previous_policy, new_policy, changed_by, reason |
+| SDK.EvidenceQueried |  Audit query is executed | query_id, filter_hash, result_count, duration_ms, query_type |
+| SDK.ChainVerified |  Event chain verification completes | chain_id, start_event, end_event, is_valid, broken_links, verification_level |
+| SDK.AnomalyDetected |  Anomaly detection triggers | anomaly_id, pattern, severity, affected_events_count, confidence |
+| SDK.ComplianceReportGenerated |  Compliance report is produced | report_id, standard, scope, passed_checks, failed_checks, score_pct |
+| SDK.EvidencePackageSealed |  Evidence package is created and sealed | package_id, case_id, event_count, seal_hash, retention_days |
+| SDK.EvidencePackageAccessed |  Sealed evidence package is accessed | package_id, accessed_by, access_reason, timestamp |
+| SDK.RetentionPolicyChanged |  Retention policy is modified | policy_id, previous_policy, new_policy, changed_by, reason |
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

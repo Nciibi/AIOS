@@ -246,16 +246,16 @@ interface DiscoveryEngine {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `TLS.DiscoveryQuery` | mode, filter_summary, result_count, duration_ms | Discovery query executed |
-| `TLS.DiscoveryCacheHit` | query_hash, result_count | Cache returned cached results |
-| `TLS.DiscoveryCacheMiss` | query_hash, reason | No cached results found |
-| `TLS.DiscoveryCacheEvicted` | query_hash, age_ms | Cache entry evicted |
-| `TLS.ToolRecommended` | goal, recommended_tool_id, score, reason | Tool recommended for goal |
-| `TLS.CapabilityInferred` | goal, capabilities, confidence | Capabilities inferred from goal text |
-| `TLS.SemanticSearchExecuted` | query_text, result_count, top_score | Semantic search completed |
-| `TLS.DiscoveryCacheCleared` | entry_count | Discovery cache invalidated |
-| `TLS.DiscoveryNoResults` | mode, query_summary | Query returned zero results |
-| `TLS.DiscoveryFallback` | primary_mode, fallback_mode, reason | Discovery fell back to alternative mode |
+| TOL.DiscoveryQuery |  mode, filter_summary, result_count, duration_ms | Discovery query executed |
+| TOL.DiscoveryCacheHit |  query_hash, result_count | Cache returned cached results |
+| TOL.DiscoveryCacheMiss |  query_hash, reason | No cached results found |
+| TOL.DiscoveryCacheEvicted |  query_hash, age_ms | Cache entry evicted |
+| TOL.ToolRecommended |  goal, recommended_tool_id, score, reason | Tool recommended for goal |
+| TOL.CapabilityInferred |  goal, capabilities, confidence | Capabilities inferred from goal text |
+| TOL.SemanticSearchExecuted |  query_text, result_count, top_score | Semantic search completed |
+| TOL.DiscoveryCacheCleared |  entry_count | Discovery cache invalidated |
+| TOL.DiscoveryNoResults |  mode, query_summary | Query returned zero results |
+| TOL.DiscoveryFallback |  primary_mode, fallback_mode, reason | Discovery fell back to alternative mode |
 
 ## Invariants
 

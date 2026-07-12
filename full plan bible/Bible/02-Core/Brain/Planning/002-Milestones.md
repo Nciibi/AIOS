@@ -270,19 +270,19 @@ Parent status is derived from children:
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PLN.PLN.MS.MilestoneCreated | milestone_id, plan_id, name, parent_id | New milestone added to plan |
-| PLN.PLN.MS.MilestoneUpdated | milestone_id, plan_id, updated_fields | Milestone metadata or order changed |
-| PLN.PLN.MS.MilestoneDeleted | milestone_id, plan_id | Milestone removed from plan |
-| PLN.PLN.MS.StatusChanged | milestone_id, old_status, new_status, reason | Milestone status transitioned |
-| PLN.PLN.MS.MilestoneStarted | milestone_id, plan_id, mission_id | Mission assigned; execution begins |
-| PLN.PLN.MS.MilestoneCompleted | milestone_id, plan_id, result, duration_ms | Milestone finished successfully |
-| PLN.PLN.MS.MilestoneBlocked | milestone_id, blocking_milestone_id | Milestone blocked on dependency |
-| PLN.PLN.MS.MilestoneUnblocked | milestone_id, resolved_milestone_id | Blocking dependency resolved |
-| PLN.PLN.MS.MilestoneFailed | milestone_id, plan_id, error | Milestone execution failed |
-| PLN.PLN.MS.ParentStatusUpdated | milestone_id, derived_status, child_summary | Parent status recalculated from children |
-| PLN.PLN.MS.Reordered | plan_id, previous_order, new_order | Milestone execution order changed |
-| PLN.PLN.MS.MissionAssigned | milestone_id, mission_id | Milestone bound to a mission |
-| PLN.PLN.MS.MissionUnassigned | milestone_id, mission_id | Mission unbound from milestone |
+| PLN.PLNEvent |  milestone_id, plan_id, name, parent_id | New milestone added to plan |
+| PLN.PLNEvent |  milestone_id, plan_id, updated_fields | Milestone metadata or order changed |
+| PLN.PLNEvent |  milestone_id, plan_id | Milestone removed from plan |
+| PLN.PLNEvent |  milestone_id, old_status, new_status, reason | Milestone status transitioned |
+| PLN.PLNEvent |  milestone_id, plan_id, mission_id | Mission assigned; execution begins |
+| PLN.PLNEvent |  milestone_id, plan_id, result, duration_ms | Milestone finished successfully |
+| PLN.PLNEvent |  milestone_id, blocking_milestone_id | Milestone blocked on dependency |
+| PLN.PLNEvent |  milestone_id, resolved_milestone_id | Blocking dependency resolved |
+| PLN.PLNEvent |  milestone_id, plan_id, error | Milestone execution failed |
+| PLN.PLNEvent |  milestone_id, derived_status, child_summary | Parent status recalculated from children |
+| PLN.PLNEvent |  plan_id, previous_order, new_order | Milestone execution order changed |
+| PLN.PLNEvent |  milestone_id, mission_id | Milestone bound to a mission |
+| PLN.PLNEvent |  milestone_id, mission_id | Mission unbound from milestone |
 
 ## Invariants
 

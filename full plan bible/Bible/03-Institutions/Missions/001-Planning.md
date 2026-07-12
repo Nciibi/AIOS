@@ -143,17 +143,17 @@ interface MissionPlanner {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.MSN.Plan.Created | mission_id, plan_hash, version | Plan created |
-| MSN.MSN.Plan.Validated | mission_id, validation_result, passed | Plan validated |
-| MSN.MSN.Plan.GoalDecomposed | mission_id, goal_count, hierarchy | Goals decomposed |
-| MSN.MSN.Plan.MilestoneDefined | mission_id, milestone_count, dag_hash | Milestones defined |
-| MSN.MSN.Plan.ResourceEstimated | mission_id, resource_budget | Resources estimated |
-| MSN.MSN.Plan.DependencyMapped | mission_id, dependency_count, types | Dependencies mapped |
-| MSN.MSN.Plan.TimelineEstimated | mission_id, start_date, end_date, critical_path | Timeline estimated |
-| MSN.MSN.Plan.RiskAssessed | mission_id, overall_score, top_risks | Risk assessed |
-| MSN.MSN.Plan.Approved | mission_id, approved_by, approval_hash | Plan approved |
-| MSN.MSN.Plan.Rejected | mission_id, rejected_by, reasons | Plan rejected |
-| MSN.MSN.Plan.Versioned | mission_id, old_version, new_version | Plan updated |
+| MSN.MSNEvent |  mission_id, plan_hash, version | Plan created |
+| MSN.MSNEvent |  mission_id, validation_result, passed | Plan validated |
+| MSN.MSNEvent |  mission_id, goal_count, hierarchy | Goals decomposed |
+| MSN.MSNEvent |  mission_id, milestone_count, dag_hash | Milestones defined |
+| MSN.MSNEvent |  mission_id, resource_budget | Resources estimated |
+| MSN.MSNEvent |  mission_id, dependency_count, types | Dependencies mapped |
+| MSN.MSNEvent |  mission_id, start_date, end_date, critical_path | Timeline estimated |
+| MSN.MSNEvent |  mission_id, overall_score, top_risks | Risk assessed |
+| MSN.MSNEvent |  mission_id, approved_by, approval_hash | Plan approved |
+| MSN.MSNEvent |  mission_id, rejected_by, reasons | Plan rejected |
+| MSN.MSNEvent |  mission_id, old_version, new_version | Plan updated |
 
 ## Error Cases
 
@@ -206,6 +206,17 @@ Per Law 7 (Capability Bounds), Missions declares its capabilities at creation an
 | R12 â€” Embrace Errors | All planning errors have unique codes (MSN_PLN_001â€“006) |
 | R14 â€” Paved Path | Intent â†’ Goals â†’ Milestones â†’ Resources â†’ Dependencies â†’ Timeline â†’ Risk |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

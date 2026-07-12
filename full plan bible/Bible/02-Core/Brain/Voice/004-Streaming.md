@@ -321,18 +321,18 @@ type StreamErrorCode =
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `VOI.StreamOpened` | stream_id, type, session_id, config | Stream lifecycle started |
-| `VOI.StreamClosed` | stream_id, type, total_chunks, duration_ms | Stream completed normally |
-| `VOI.StreamCancelled` | stream_id, type, chunks_processed | Stream terminated mid-flight |
-| `VOI.StreamErrored` | stream_id, type, error_code, reason | Unrecoverable stream error |
-| `VOI.StreamChunkWritten` | stream_id, sequence, bytes | Audio chunk received (STT) |
-| `VOI.StreamChunkRead` | stream_id, sequence, bytes, is_final | Audio chunk output (TTS) |
-| `VOI.StreamTimeoutFired` | stream_id, idle_duration_ms | No activity within timeout window |
-| `VOI.StreamBackpressureEngaged` | stream_id, strategy, buffer_utilization | Backpressure activated |
-| `VOI.StreamBackpressureReleased` | stream_id, strategy | Backpressure deactivated |
-| `VOI.StreamBufferDiscard` | stream_id, chunks_dropped, bytes_lost | Chunks dropped due to `drop` strategy |
-| `VOI.StreamMaxDurationReached` | stream_id, duration_ms | Stream exceeded max lifetime |
-| `VOI.StreamErrorRecovery` | stream_id, error_code, recovery_action | Error recovery initiated during stream |
+| VCE.StreamOpened |  stream_id, type, session_id, config | Stream lifecycle started |
+| VCE.StreamClosed |  stream_id, type, total_chunks, duration_ms | Stream completed normally |
+| VCE.StreamCancelled |  stream_id, type, chunks_processed | Stream terminated mid-flight |
+| VCE.StreamErrored |  stream_id, type, error_code, reason | Unrecoverable stream error |
+| VCE.StreamChunkWritten |  stream_id, sequence, bytes | Audio chunk received (STT) |
+| VCE.StreamChunkRead |  stream_id, sequence, bytes, is_final | Audio chunk output (TTS) |
+| VCE.StreamTimeoutFired |  stream_id, idle_duration_ms | No activity within timeout window |
+| VCE.StreamBackpressureEngaged |  stream_id, strategy, buffer_utilization | Backpressure activated |
+| VCE.StreamBackpressureReleased |  stream_id, strategy | Backpressure deactivated |
+| VCE.StreamBufferDiscard |  stream_id, chunks_dropped, bytes_lost | Chunks dropped due to `drop` strategy |
+| VCE.StreamMaxDurationReached |  stream_id, duration_ms | Stream exceeded max lifetime |
+| VCE.StreamErrorRecovery |  stream_id, error_code, recovery_action | Error recovery initiated during stream |
 
 ## Invariants
 

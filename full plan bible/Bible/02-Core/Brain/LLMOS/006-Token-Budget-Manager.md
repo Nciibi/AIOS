@@ -149,8 +149,8 @@ interface CreditBudget {
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| `LLMOS.BudgetChecked` | request_id, entity_id, budget_type, budget_before, budget_after, estimated_cost, overrides_applied, approved | Stage 3 check |
-| `LLMOS.BudgetReconciled` | request_id, actual_tokens, estimated_tokens, difference, adjusted_cost | Stage 17 reconciliation |
+| LLM.BudgetChecked |  request_id, entity_id, budget_type, budget_before, budget_after, estimated_cost, overrides_applied, approved | Stage 3 check |
+| LLM.BudgetReconciled |  request_id, actual_tokens, estimated_tokens, difference, adjusted_cost | Stage 17 reconciliation |
 
 
 ## Cross-Cutting Concerns

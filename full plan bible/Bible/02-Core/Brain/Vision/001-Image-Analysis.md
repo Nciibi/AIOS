@@ -381,19 +381,19 @@ interface AnalysisError {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `VIS.ImageAnalysisStarted` | request_id, analysis_type, dimensions, mode_count | Image analysis began |
-| `VIS.ImageAnalysisCompleted` | request_id, analysis_type, label_count, processing_time | Analysis finished successfully |
-| `VIS.ImageAnalysisFailed` | request_id, error_code, reason, stage | Analysis failed at a specific pipeline stage |
-| `VIS.PreprocessingStarted` | request_id, original_format, original_size | Preprocessing pipeline initiated |
-| `VIS.PreprocessingCompleted` | request_id, processed_format, processed_size, steps_applied | Preprocessing finished |
-| `VIS.FaceDetected` | request_id, face_count, max_confidence | Faces found in image (count only, no identity) |
-| `VIS.PrivacyFilterApplied` | request_id, filter_type, regions, total_redacted | Privacy filter triggered during preprocessing |
-| `VIS.BatchAnalysisStarted` | batch_id, request_count, concurrency | Batch analysis job began |
-| `VIS.BatchAnalysisProgress` | batch_id, completed, failed, total | Batch analysis progress update |
-| `VIS.BatchAnalysisCompleted` | batch_id, total, succeeded, failed, total_time_ms | Batch analysis finished |
-| `VIS.LabelExtracted` | request_id, label, confidence, category | Individual classification label produced |
-| `VIS.ObjectDetected` | request_id, object_name, confidence, box_area | Individual object detected with bounding box |
-| `VIS.AllContentBlocked` | request_id, filter_type, reason | Privacy filter redacted entire image |
+| VIS.ImageAnalysisStarted |  request_id, analysis_type, dimensions, mode_count | Image analysis began |
+| VIS.ImageAnalysisCompleted |  request_id, analysis_type, label_count, processing_time | Analysis finished successfully |
+| VIS.ImageAnalysisFailed |  request_id, error_code, reason, stage | Analysis failed at a specific pipeline stage |
+| VIS.PreprocessingStarted |  request_id, original_format, original_size | Preprocessing pipeline initiated |
+| VIS.PreprocessingCompleted |  request_id, processed_format, processed_size, steps_applied | Preprocessing finished |
+| VIS.FaceDetected |  request_id, face_count, max_confidence | Faces found in image (count only, no identity) |
+| VIS.PrivacyFilterApplied |  request_id, filter_type, regions, total_redacted | Privacy filter triggered during preprocessing |
+| VIS.BatchAnalysisStarted |  batch_id, request_count, concurrency | Batch analysis job began |
+| VIS.BatchAnalysisProgress |  batch_id, completed, failed, total | Batch analysis progress update |
+| VIS.BatchAnalysisCompleted |  batch_id, total, succeeded, failed, total_time_ms | Batch analysis finished |
+| VIS.LabelExtracted |  request_id, label, confidence, category | Individual classification label produced |
+| VIS.ObjectDetected |  request_id, object_name, confidence, box_area | Individual object detected with bounding box |
+| VIS.AllContentBlocked |  request_id, filter_type, reason | Privacy filter redacted entire image |
 
 ## Invariants
 

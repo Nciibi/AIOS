@@ -180,16 +180,16 @@ interface Scheduler {
 
 ## Events
 
-| CON.EventType | Produced When | Fields |
+| CON.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| `GC.ScriptDefined` | scriptId, name, version | New script registered in the script registry |
-| `GC.ScriptStarted` | scriptId, executionId, variableCount | Script execution initiated |
-| `GC.ScriptStepCompleted` | scriptId, executionId, stepId, status, durationMs | Individual script step finished |
-| `GC.ScriptStepRetried` | scriptId, executionId, stepId, attempt, error | Step retry triggered by error handler |
-| `GC.ScriptFailed` | scriptId, executionId, stepId, error | Script execution terminated with failure |
-| `GC.ScriptCompleted` | scriptId, executionId, stepCount, totalDuration | Script execution finished successfully |
-| `GC.ScriptScheduled` | scriptId, cronExpression, nextRun | Script bound to a cron schedule |
-| `GC.ScriptScheduleFired` | scriptId, executionId | Scheduled execution started |
+| CON.ScriptDefined |  scriptId, name, version | New script registered in the script registry |
+| CON.ScriptStarted |  scriptId, executionId, variableCount | Script execution initiated |
+| CON.ScriptStepCompleted |  scriptId, executionId, stepId, status, durationMs | Individual script step finished |
+| CON.ScriptStepRetried |  scriptId, executionId, stepId, attempt, error | Step retry triggered by error handler |
+| CON.ScriptFailed |  scriptId, executionId, stepId, error | Script execution terminated with failure |
+| CON.ScriptCompleted |  scriptId, executionId, stepCount, totalDuration | Script execution finished successfully |
+| CON.ScriptScheduled |  scriptId, cronExpression, nextRun | Script bound to a cron schedule |
+| CON.ScriptScheduleFired |  scriptId, executionId | Scheduled execution started |
 
 ## Error Cases
 
@@ -250,6 +250,17 @@ Per Law 7 (Capability Bounds), Console declares its capabilities at creation and
 | R14 â€” Paved Path | Standard scripts for override management, certification review, and audit export |
 | R15 â€” Open/Closed | New error handler actions and step types register via extensions |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

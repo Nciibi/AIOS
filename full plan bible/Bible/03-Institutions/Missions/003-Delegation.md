@@ -137,16 +137,16 @@ interface MissionDelegator {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.MSN.Del.DelegationCreated | contract_id, source_mission, target, scope_hash | Delegation contract created |
-| MSN.MSN.Del.DelegationAccepted | contract_id, accepted_by, acceptance_hash | Delegation accepted |
-| MSN.MSN.Del.DelegationRejected | contract_id, rejected_by, reason | Delegation rejected |
-| MSN.MSN.Del.SubMissionStarted | contract_id, sub_mission_id, started_at | Sub-Mission begins execution |
-| MSN.MSN.Del.SubMissionCompleted | contract_id, sub_mission_id, result_summary | Sub-Mission completes |
-| MSN.MSN.Del.SubMissionFailed | contract_id, sub_mission_id, error_code, details | Sub-Mission fails |
-| MSN.MSN.Del.ResultReturned | contract_id, deliverables_hash, count | Results returned |
-| MSN.MSN.Del.ResultVerified | contract_id, verification_status, score | Results verified |
-| MSN.MSN.Del.ResultRejected | contract_id, verification_status, failures | Results rejected |
-| MSN.MSN.Del.AccountabilityChain | contract_id, chain_hash, links | Chain recorded |
+| MSN.MSNEvent |  contract_id, source_mission, target, scope_hash | Delegation contract created |
+| MSN.MSNEvent |  contract_id, accepted_by, acceptance_hash | Delegation accepted |
+| MSN.MSNEvent |  contract_id, rejected_by, reason | Delegation rejected |
+| MSN.MSNEvent |  contract_id, sub_mission_id, started_at | Sub-Mission begins execution |
+| MSN.MSNEvent |  contract_id, sub_mission_id, result_summary | Sub-Mission completes |
+| MSN.MSNEvent |  contract_id, sub_mission_id, error_code, details | Sub-Mission fails |
+| MSN.MSNEvent |  contract_id, deliverables_hash, count | Results returned |
+| MSN.MSNEvent |  contract_id, verification_status, score | Results verified |
+| MSN.MSNEvent |  contract_id, verification_status, failures | Results rejected |
+| MSN.MSNEvent |  contract_id, chain_hash, links | Chain recorded |
 
 ## Error Cases
 
@@ -197,6 +197,17 @@ Per Law 7 (Capability Bounds), Missions declares its capabilities at creation an
 | R12 â€” Embrace Errors | All delegation errors have unique codes (MSN_DEL_001â€“005) |
 | R13 â€” Design for Failure | Escalation paths defined for all delegation failure modes |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

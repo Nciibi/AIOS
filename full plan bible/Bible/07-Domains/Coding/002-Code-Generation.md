@@ -171,15 +171,15 @@ enum FragmentType {
 
 ## Events
 
-| COD.EventType | Produced When | Fields |
+| COD.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `Coding.CodeGenStarted` | A generation request enters the pipeline | request_id, worker_id, language_id, generation_type, estimated_tokens |
-| `Coding.CodeGenCompleted` | Generation produces output successfully | request_id, language_id, tokens_used, confidence, duration_ms |
-| `Coding.CodeGenValidated` | Generated output passes syntax validation | request_id, lint_errors, validation_duration_ms |
-| `Coding.CodeGenFailed` | Generation pipeline encounters an error | request_id, error_code, error_message, retry_count |
-| `Coding.CodeGenRetried` | Generation is retried after failure | request_id, retry_attempt, adjusted_params |
-| `Coding.CodeGenOverflow` | Context window limit is exceeded | request_id, context_size, max_size, overflow_strategy |
-| `Coding.CodeGenFormatted` | Generated code is formatted | request_id, formatter_name, formatting_duration_ms |
+| COD.CodeGenStarted |  A generation request enters the pipeline | request_id, worker_id, language_id, generation_type, estimated_tokens |
+| COD.CodeGenCompleted |  Generation produces output successfully | request_id, language_id, tokens_used, confidence, duration_ms |
+| COD.CodeGenValidated |  Generated output passes syntax validation | request_id, lint_errors, validation_duration_ms |
+| COD.CodeGenFailed |  Generation pipeline encounters an error | request_id, error_code, error_message, retry_count |
+| COD.CodeGenRetried |  Generation is retried after failure | request_id, retry_attempt, adjusted_params |
+| COD.CodeGenOverflow |  Context window limit is exceeded | request_id, context_size, max_size, overflow_strategy |
+| COD.CodeGenFormatted |  Generated code is formatted | request_id, formatter_name, formatting_duration_ms |
 
 ## Error Cases
 
@@ -240,6 +240,17 @@ Per Law 7 (Capability Bounds), Coding declares its capabilities at creation and 
 | R14 â€” Paved Path | Single paved path: request -> construct -> generate -> validate -> format -> return |
 | R15 â€” Open/Closed | New generation types added via template registration without pipeline modification |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

@@ -143,15 +143,15 @@ interface ContrastValidator {
 
 ## Events
 
-| UI.EventType | Produced When | Fields |
+| UI.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| UI.AccessibilityAuditRun | auditId, componentCount, passedCount, failedCount | Full accessibility scan completed |
-| UI.ViolationDetected | violationId, componentId, severity, wcagCriteria | New accessibility violation found |
-| UI.ViolationRemediated | violationId, componentId, fixApplied | Violation resolved and re-audited |
-| UI.ComplianceReportGenerated | reportId, aaPassRate, aaaPassRate | Compliance report published |
-| UI.FocusOrderChanged | componentId, previousOrder, newOrder | Keyboard navigation order modified |
-| UI.ScreenReaderConfigured | configId, reader, version | Screen reader settings updated |
-| UI.ContrastFailure | tokenId, ratio, minimumRequired | Token pair fails contrast check |
+| UI.AccessibilityAuditRun |  auditId, componentCount, passedCount, failedCount | Full accessibility scan completed |
+| UI.ViolationDetected |  violationId, componentId, severity, wcagCriteria | New accessibility violation found |
+| UI.ViolationRemediated |  violationId, componentId, fixApplied | Violation resolved and re-audited |
+| UI.ComplianceReportGenerated |  reportId, aaPassRate, aaaPassRate | Compliance report published |
+| UI.FocusOrderChanged |  componentId, previousOrder, newOrder | Keyboard navigation order modified |
+| UI.ScreenReaderConfigured |  configId, reader, version | Screen reader settings updated |
+| UI.ContrastFailure |  tokenId, ratio, minimumRequired | Token pair fails contrast check |
 
 ## Error Cases
 
@@ -211,6 +211,17 @@ Per Law 7 (Capability Bounds), UI declares its capabilities at creation and oper
 | R14 â€” Paved Path | Use predefined focus order; custom ordering requires explicit override |
 | R15 â€” Open/Closed | New WCAG criteria registered via new check definitions; existing checks immutable |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

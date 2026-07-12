@@ -196,6 +196,17 @@ Capabilities are verified by the Security Council before every action (Physics/0
 | R14 - Paved Path | Compliant |
 | R15 - Open/Closed | Compliant |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Cross-Cutting Concerns
 
 ### Security

@@ -328,18 +328,18 @@ interface SalienceScorer {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| ATT.ATT.SAL.EvaluationStarted | signal_id, source, type | Salience evaluation began for signal |
-| ATT.ATT.SAL.EvaluationCompleted | evaluation_id, signal_id, composite_score, factors | Full evaluation finished |
-| ATT.ATT.SAL.GoalAligned | signal_id, matched_goal_id, score, confidence | Goal alignment factor computed |
-| ATT.ATT.SAL.UrgencyAssessed | signal_id, score, time_sensitivity_ms, deadline | Urgency assessment completed |
-| ATT.ATT.SAL.SourceScored | signal_id, source, trust_tier, score | Source authority scored |
-| ATT.ATT.SAL.NoveltyDetected | signal_id, score, similarity, first_seen | Novelty detection completed |
-| ATT.ATT.SAL.UserProximityScored | signal_id, score, direct_input, mentioned | User proximity scored |
-| ATT.ATT.SAL.SalienceDecayed | signal_id, previous_score, new_score, elapsed_ms | Temporal decay applied |
-| ATT.ATT.SAL.ThresholdExceeded | signal_id, composite_score, threshold, action | Signal crossed focus threshold |
-| ATT.ATT.SAL.ThresholdBelow | signal_id, composite_score, threshold, action | Signal fell below threshold |
-| ATT.ATT.SAL.ShortCircuited | signal_id, stage, reason | Pipeline short-circuited at stage due to low score |
-| ATT.ATT.SAL.AutoDropped | signal_id, composite_score, consecutive_below_threshold | Signal dropped after decay below threshold |
+| ATT.ATTEvent |  signal_id, source, type | Salience evaluation began for signal |
+| ATT.ATTEvent |  evaluation_id, signal_id, composite_score, factors | Full evaluation finished |
+| ATT.ATTEvent |  signal_id, matched_goal_id, score, confidence | Goal alignment factor computed |
+| ATT.ATTEvent |  signal_id, score, time_sensitivity_ms, deadline | Urgency assessment completed |
+| ATT.ATTEvent |  signal_id, source, trust_tier, score | Source authority scored |
+| ATT.ATTEvent |  signal_id, score, similarity, first_seen | Novelty detection completed |
+| ATT.ATTEvent |  signal_id, score, direct_input, mentioned | User proximity scored |
+| ATT.ATTEvent |  signal_id, previous_score, new_score, elapsed_ms | Temporal decay applied |
+| ATT.ATTEvent |  signal_id, composite_score, threshold, action | Signal crossed focus threshold |
+| ATT.ATTEvent |  signal_id, composite_score, threshold, action | Signal fell below threshold |
+| ATT.ATTEvent |  signal_id, stage, reason | Pipeline short-circuited at stage due to low score |
+| ATT.ATTEvent |  signal_id, composite_score, consecutive_below_threshold | Signal dropped after decay below threshold |
 
 ## Invariants
 

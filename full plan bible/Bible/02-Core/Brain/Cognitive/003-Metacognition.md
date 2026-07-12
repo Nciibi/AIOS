@@ -348,18 +348,18 @@ interface StrategySelectionContext {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| COG.COG.META.MetacognitionStarted | request_id, functions[], target_id, depth | Metacognition analysis began |
-| COG.COG.META.MetacognitionCompleted | request_id, health, recommended_action, signals_count | Metacognition finished |
-| COG.COG.META.ConfidenceCalibrated | request_id, calibration_error, offset_applied | Confidence calibration adjusted |
-| COG.COG.META.CognitiveLoadWarning | target_id, load_score, level, suggestion | Cognitive load threshold exceeded |
-| COG.COG.META.StrategyRecommended | target_id, recommended_strategy, rationale, alternatives | Strategy change suggested |
-| COG.COG.META.KnowledgeGapDetected | target_id, gap_count, impact_estimate | One or more knowledge gaps found |
-| COG.COG.META.UncertaintySpike | target_id, uncertainty, dominant_source | Uncertainty above threshold |
-| COG.COG.META.ProgressStalled | target_id, progress, stalled_duration_ms | Progress below threshold for extended period |
-| COG.COG.META.ProgressSufficient | target_id, progress, criteria_met | Goal criteria sufficiently met |
-| COG.COG.META.FeedbackEmitted | target_id, signal_type, severity, narrative | Individual feedback signal sent |
-| COG.COG.META.HealthChanged | target_id, previous_health, new_health, reason | Overall cognitive health status changed |
-| COG.COG.META.CalibrationReset | session_id, sample_size_before | Calibration curve was reset |
+| COG.COGEvent |  request_id, functions[], target_id, depth | Metacognition analysis began |
+| COG.COGEvent |  request_id, health, recommended_action, signals_count | Metacognition finished |
+| COG.COGEvent |  request_id, calibration_error, offset_applied | Confidence calibration adjusted |
+| COG.COGEvent |  target_id, load_score, level, suggestion | Cognitive load threshold exceeded |
+| COG.COGEvent |  target_id, recommended_strategy, rationale, alternatives | Strategy change suggested |
+| COG.COGEvent |  target_id, gap_count, impact_estimate | One or more knowledge gaps found |
+| COG.COGEvent |  target_id, uncertainty, dominant_source | Uncertainty above threshold |
+| COG.COGEvent |  target_id, progress, stalled_duration_ms | Progress below threshold for extended period |
+| COG.COGEvent |  target_id, progress, criteria_met | Goal criteria sufficiently met |
+| COG.COGEvent |  target_id, signal_type, severity, narrative | Individual feedback signal sent |
+| COG.COGEvent |  target_id, previous_health, new_health, reason | Overall cognitive health status changed |
+| COG.COGEvent |  session_id, sample_size_before | Calibration curve was reset |
 
 ## Invariants
 

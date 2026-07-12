@@ -154,15 +154,15 @@ interface ActionRouter {
 
 ## Events
 
-| DASH.EventType | Produced When | Fields |
+| DASH.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| DB.AlertSurfaced | alertId, severity, source | Alert displayed on dashboard alert-list |
-| DB.AlertClassified | alertId, severity, classifier | Severity assigned or updated |
-| DB.AlertAcknowledged | alertId, userId | Human acknowledged alert |
-| DB.AlertActioned | alertId, actionId, targetType | Human navigated to action target |
-| DB.AlertResolved | alertId, source | Source system reported resolution |
-| DB.AlertArchived | alertId, userId | Alert moved to archive |
-| DB.AlertHistoryExported | count, since | Alert history exported for audit |
+| DASH.AlertSurfaced |  alertId, severity, source | Alert displayed on dashboard alert-list |
+| DASH.AlertClassified |  alertId, severity, classifier | Severity assigned or updated |
+| DASH.AlertAcknowledged |  alertId, userId | Human acknowledged alert |
+| DASH.AlertActioned |  alertId, actionId, targetType | Human navigated to action target |
+| DASH.AlertResolved |  alertId, source | Source system reported resolution |
+| DASH.AlertArchived |  alertId, userId | Alert moved to archive |
+| DASH.AlertHistoryExported |  count, since | Alert history exported for audit |
 
 ## Error Cases
 
@@ -222,6 +222,17 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 | R14 â€” Paved Path | Critical alerts appear on Health view by default |
 | R15 â€” Open/Closed | New alert sources register via AlertIngestor extension |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

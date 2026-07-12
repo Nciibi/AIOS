@@ -167,16 +167,16 @@ interface ThrottleController {
 
 ## Events
 
-| DASH.EventType | Produced When | Fields |
+| DASH.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| DB.StreamConnected | connectionId, source, endpoint | Streaming connection established |
-| DB.StreamDisconnected | connectionId, reason | Streaming connection lost |
-| DB.WidgetRefreshed | widgetId, batchId, pointCount | Widget received and processed update batch |
-| DB.ThrottleApplied | widgetId, rate, limit | Rate limit enforced for widget updates |
-| DB.SubscriptionCreated | subscriptionId, widgetId, source | New real-time subscription registered |
-| DB.SubscriptionRemoved | subscriptionId, widgetId | Subscription cancelled |
-| DB.ReconnectionStarted | connectionId, attempt | Reconnection attempt initiated |
-| DB.ReconnectionSucceeded | connectionId, attempt | Reconnection completed successfully |
+| DASH.StreamConnected |  connectionId, source, endpoint | Streaming connection established |
+| DASH.StreamDisconnected |  connectionId, reason | Streaming connection lost |
+| DASH.WidgetRefreshed |  widgetId, batchId, pointCount | Widget received and processed update batch |
+| DASH.ThrottleApplied |  widgetId, rate, limit | Rate limit enforced for widget updates |
+| DASH.SubscriptionCreated |  subscriptionId, widgetId, source | New real-time subscription registered |
+| DASH.SubscriptionRemoved |  subscriptionId, widgetId | Subscription cancelled |
+| DASH.ReconnectionStarted |  connectionId, attempt | Reconnection attempt initiated |
+| DASH.ReconnectionSucceeded |  connectionId, attempt | Reconnection completed successfully |
 
 ## Error Cases
 
@@ -236,6 +236,17 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 | R14 â€” Paved Path | Default refresh interval (30s polling) covers most use cases |
 | R15 â€” Open/Closed | New stream types register via StreamConnection extension |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

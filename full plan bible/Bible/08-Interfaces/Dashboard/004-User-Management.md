@@ -163,15 +163,15 @@ interface SavedViewManager {
 
 ## Events
 
-| DASH.EventType | Produced When | Fields |
+| DASH.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| DB.UserPreferenceUpdated | userId, changedFields | User dashboard preferences changed |
-| DB.ViewCustomized | userId, viewId, widgetCount | Widget layout customized for user |
-| DB.ViewSaved | userId, savedViewId, baseViewId | Dashboard view saved as preset |
-| DB.ViewShared | shareId, ownerId, targetUserId | Saved view shared with another user |
-| DB.PermissionChanged | userId, viewId, accessLevel, effect | View permission granted or revoked |
-| DB.ViewSharedExpired | shareId, targetUserId | Time-limited share expired |
-| DB.PreferenceReset | userId | User preferences reset to defaults |
+| DASH.UserPreferenceUpdated |  userId, changedFields | User dashboard preferences changed |
+| DASH.ViewCustomized |  userId, viewId, widgetCount | Widget layout customized for user |
+| DASH.ViewSaved |  userId, savedViewId, baseViewId | Dashboard view saved as preset |
+| DASH.ViewShared |  shareId, ownerId, targetUserId | Saved view shared with another user |
+| DASH.PermissionChanged |  userId, viewId, accessLevel, effect | View permission granted or revoked |
+| DASH.ViewSharedExpired |  shareId, targetUserId | Time-limited share expired |
+| DASH.PreferenceReset |  userId | User preferences reset to defaults |
 
 ## Error Cases
 
@@ -231,6 +231,17 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 | R14 â€” Paved Path | Health view is default for all new users |
 | R15 â€” Open/Closed | New preference types register via UserPreference extension |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

@@ -159,16 +159,16 @@ type CaseStatus = 'open' | 'analyzing' | 'completed' | 'sealed' | 'reopened';
 
 ## Events
 
-| SEC.EventType | Produced When | Fields |
+| SEC.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| Security.ForensicCaseOpened | New forensic case created | case_id, incident_ref, title, evidence_count |
-| Security.EvidenceAcquired | Evidence successfully collected | evidence_id, case_id, type, hash, size_bytes, method |
-| Security.EvidenceAnalyzed | Analysis completed for an evidence item | analysis_id, evidence_id, type, findings, iocs, confidence |
-| Security.TimelineReconstructed | Full timeline built from correlated artifacts | case_id, event_count, time_span_start, time_span_end |
-| Security.CaseClosed | Case analysis complete, ready for sealing | case_id, evidence_items, analysis_count, duration_hours |
-| Security.ChainOfCustodyBroken | Hash mismatch or custody gap detected | case_id, evidence_id, expected_hash, actual_hash, sequence |
-| Security.EvidenceCorrupted | Storage integrity check fails on evidence | evidence_id, case_id, stored_hash, computed_hash, action |
-| Security.StorageLimitExceeded | Forensic storage allocation exceeded | case_id, current_bytes, limit_bytes, oldest_evidence |
+| SEC.ForensicCaseOpened |  New forensic case created | case_id, incident_ref, title, evidence_count |
+| SEC.EvidenceAcquired |  Evidence successfully collected | evidence_id, case_id, type, hash, size_bytes, method |
+| SEC.EvidenceAnalyzed |  Analysis completed for an evidence item | analysis_id, evidence_id, type, findings, iocs, confidence |
+| SEC.TimelineReconstructed |  Full timeline built from correlated artifacts | case_id, event_count, time_span_start, time_span_end |
+| SEC.CaseClosed |  Case analysis complete, ready for sealing | case_id, evidence_items, analysis_count, duration_hours |
+| SEC.ChainOfCustodyBroken |  Hash mismatch or custody gap detected | case_id, evidence_id, expected_hash, actual_hash, sequence |
+| SEC.EvidenceCorrupted |  Storage integrity check fails on evidence | evidence_id, case_id, stored_hash, computed_hash, action |
+| SEC.StorageLimitExceeded |  Forensic storage allocation exceeded | case_id, current_bytes, limit_bytes, oldest_evidence |
 
 ## Error Cases
 
@@ -229,6 +229,17 @@ Per Law 7 (Capability Bounds), Security declares its capabilities at creation an
 | R14 (GC) | Sealed cases garbage collected after legal hold and retention period expire |
 | R15 (Auth Chain) | Every custody transfer and analysis action links to authenticated actor |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

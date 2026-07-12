@@ -248,15 +248,15 @@ interface ConfidenceInterval {
 
 ## Events
 
-| RES.EventType | Produced When | Fields |
+| RES.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| Research.DataIngested | Dataset loading completes | dataset_id, record_count, field_count, source, checksum, size_bytes |
-| Research.DataCleaned | Cleaning step completes | dataset_id, missing_values_handled, outliers_removed, duplicates_removed, audit_log_hash |
-| Research.AnalysisRun | Statistical analysis completes | result_id, test_type, test_statistic, p_value, effect_size, assumption_violations |
-| Research.VisualizationGenerated | Visualization is rendered | visualization_id, chart_type, dimensions, measures, file_format, size_bytes |
-| Research.PatternDetected | Pattern detection finds a result | pattern_id, pattern_type, confidence, support, description |
-| Research.ConfidenceAssessed | Confidence assessment completes | assessment_id, overall_confidence, data_quality, statistical_validity, reproducibility |
-| Research.PipelineCompleted | Full analysis pipeline finishes | pipeline_id, step_count, total_duration_ms, status, artifact_count |
+| RES.DataIngested |  Dataset loading completes | dataset_id, record_count, field_count, source, checksum, size_bytes |
+| RES.DataCleaned |  Cleaning step completes | dataset_id, missing_values_handled, outliers_removed, duplicates_removed, audit_log_hash |
+| RES.AnalysisRun |  Statistical analysis completes | result_id, test_type, test_statistic, p_value, effect_size, assumption_violations |
+| RES.VisualizationGenerated |  Visualization is rendered | visualization_id, chart_type, dimensions, measures, file_format, size_bytes |
+| RES.PatternDetected |  Pattern detection finds a result | pattern_id, pattern_type, confidence, support, description |
+| RES.ConfidenceAssessed |  Confidence assessment completes | assessment_id, overall_confidence, data_quality, statistical_validity, reproducibility |
+| RES.PipelineCompleted |  Full analysis pipeline finishes | pipeline_id, step_count, total_duration_ms, status, artifact_count |
 
 ## Error Cases
 
@@ -316,6 +316,17 @@ Per Law 7 (Capability Bounds), Research declares its capabilities at creation an
 | R14 (Paved Path) | Single paved path: ingest -> clean -> transform -> analyze -> visualize -> report |
 | R15 (Open/Closed) | New statistical tests implement IStatisticalEngine without modifying pipeline logic |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

@@ -254,16 +254,16 @@ interface FocusManager {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| ATT.ATT.FOC.StateChanged | from_state, to_state, task, trigger, duration_ms | Focus state transition executed |
-| ATT.ATT.FOC.SwitchRecorded | switch_id, from_task, to_task, cost_ms, switch_type | Context switch tracked |
-| ATT.ATT.FOC.DeepWorkStarted | session_id, task, goal_id, guaranteed_window_ms | Deep work session initiated |
-| ATT.ATT.FOC.DeepWorkEnded | session_id, task, elapsed_ms, completed | Deep work session ended |
-| ATT.ATT.FOC.DeepWorkProtected | session_id, interrupt_attempted, blocked | Deep work protection blocked an interrupt |
-| ATT.ATT.FOC.DeepWorkBreached | session_id, interrupt_id, priority | Critical interrupt penetrated deep work |
-| ATT.ATT.FOC.DurationLimitExceeded | state, current_duration_ms, limit_ms | Sou exceeded recommended state duration |
-| ATT.ATT.FOC.SwitchRateExceeded | current_rate, limit, exceeded_by | Switch rate exceeded 12/min threshold |
-| ATT.ATT.FOC.Resumed | previous_state, task, interrupt_duration_ms | Sou resumed previous focus after interruption |
-| ATT.ATT.FOC.Cleared | previous_state, task | Focus cleared on session end |
+| ATT.ATTEvent |  from_state, to_state, task, trigger, duration_ms | Focus state transition executed |
+| ATT.ATTEvent |  switch_id, from_task, to_task, cost_ms, switch_type | Context switch tracked |
+| ATT.ATTEvent |  session_id, task, goal_id, guaranteed_window_ms | Deep work session initiated |
+| ATT.ATTEvent |  session_id, task, elapsed_ms, completed | Deep work session ended |
+| ATT.ATTEvent |  session_id, interrupt_attempted, blocked | Deep work protection blocked an interrupt |
+| ATT.ATTEvent |  session_id, interrupt_id, priority | Critical interrupt penetrated deep work |
+| ATT.ATTEvent |  state, current_duration_ms, limit_ms | Sou exceeded recommended state duration |
+| ATT.ATTEvent |  current_rate, limit, exceeded_by | Switch rate exceeded 12/min threshold |
+| ATT.ATTEvent |  previous_state, task, interrupt_duration_ms | Sou resumed previous focus after interruption |
+| ATT.ATTEvent |  previous_state, task | Focus cleared on session end |
 
 ## Invariants
 

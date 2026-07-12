@@ -197,13 +197,13 @@ Every API must have automated conformance tests:
 
 ## Events
 
-| API.EventType | Produced When | Fields |
+| API.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `API.ContractPublished` | New API contract is registered | contract_id, api_name, version, category |
-| `API.ContractDeprecated` | API version is deprecated | contract_id, deprecation_date, migration_target |
-| `API.RequestProcessed` | API request completes (all categories) | message_id, api_name, duration_ms, status_code |
-| `API.RateLimitExceeded` | Entity exceeds API rate limit | entity_id, api_name, limit, period, retry_after |
-| `API.SchemaValidationFailed` | Request payload fails schema validation | message_id, api_name, validation_errors |
+| API.ContractPublished |  New API contract is registered | contract_id, api_name, version, category |
+| API.ContractDeprecated |  API version is deprecated | contract_id, deprecation_date, migration_target |
+| API.RequestProcessed |  API request completes (all categories) | message_id, api_name, duration_ms, status_code |
+| API.RateLimitExceeded |  Entity exceeds API rate limit | entity_id, api_name, limit, period, retry_after |
+| API.SchemaValidationFailed |  Request payload fails schema validation | message_id, api_name, validation_errors |
 
 ## API Governance
 
@@ -216,6 +216,23 @@ API governance is enforced through the ADG (Architectural Decision Gateway):
 | Schema-first design | All API contracts must include JSON Schema | Architecture review |
 | Authentication required | No unauthenticated APIs (except public health endpoints) | Security Council |
 | Rate limits mandatory | Every API must define rate limits | ROS |
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

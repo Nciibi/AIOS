@@ -322,16 +322,16 @@ Plan Completed / Failed / Cancelled
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PLN.PLN.PT.ProgressUpdated | plan_id, completion_percentage, timestamp | Progress metrics recalculated |
-| PLN.PLN.PT.MilestoneStateChanged | milestone_id, new_status, old_status | Individual milestone state update |
-| PLN.PLN.PT.SnapshotTaken | snapshot_id, plan_id, metrics | Periodic progress snapshot recorded |
-| PLN.PLN.PT.TimelineVarianceUpdated | plan_id, variance_ms, variance_pct | Timeline variance recalculated |
-| PLN.PLN.PT.ResourceAlert | plan_id, resource_type, consumption_pct | Resource consumption exceeded threshold |
-| PLN.PLN.PT.RiskIndicatorRaised | plan_id, level, category, message | New risk indicator generated |
-| PLN.PLN.PT.RiskIndicatorResolved | plan_id, risk_id | Risk condition cleared |
-| PLN.PLN.PT.BlockChainUpdated | plan_id, blocked_count, chain | Blocked milestone chain changed |
-| PLN.PLN.PT.HeartbeatTick | plan_id, elapsed_ms, metrics | Periodic heartbeat event |
-| PLN.PLN.PT.PushedToContext | plan_id, context_slot | Progress snapshot sent to Context System |
+| PLN.PLNEvent |  plan_id, completion_percentage, timestamp | Progress metrics recalculated |
+| PLN.PLNEvent |  milestone_id, new_status, old_status | Individual milestone state update |
+| PLN.PLNEvent |  snapshot_id, plan_id, metrics | Periodic progress snapshot recorded |
+| PLN.PLNEvent |  plan_id, variance_ms, variance_pct | Timeline variance recalculated |
+| PLN.PLNEvent |  plan_id, resource_type, consumption_pct | Resource consumption exceeded threshold |
+| PLN.PLNEvent |  plan_id, level, category, message | New risk indicator generated |
+| PLN.PLNEvent |  plan_id, risk_id | Risk condition cleared |
+| PLN.PLNEvent |  plan_id, blocked_count, chain | Blocked milestone chain changed |
+| PLN.PLNEvent |  plan_id, elapsed_ms, metrics | Periodic heartbeat event |
+| PLN.PLNEvent |  plan_id, context_slot | Progress snapshot sent to Context System |
 
 ## Invariants
 

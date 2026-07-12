@@ -146,14 +146,14 @@ interface DeviceSelector {
 
 ## Events
 
-| FPGA.EventType | Produced When | Fields |
+| FPGA.EventType |  Produced When | Fields |
 |-------|----------|---------|
-| FPGA.DeviceSelected | DeviceRegistry: device_id, part_number, rationale | Fired when a target device is selected |
-| FPGA.ResourcesEstimated | ResourceEstimator: estimate_id, total_percent, confidence | Fired after resource estimation completes |
-| FPGA.IPCoresInstantiated | IPCatalog: core_id, name, version, device | Fired when an IP core is instantiated |
-| FPGA.ConstraintsDefined | ConstraintEngine: constraint_ids, types, count | Fired when constraints are generated |
-| FPGA.DeviceValidated | DeviceRegistry: device_id, validation_status | Fired after device compatibility check |
-| FPGA.FabricModeled | FabricModeler: part_number, resource_summary | Fired when fabric model is constructed |
+| FPGA.DeviceSelected |  DeviceRegistry: device_id, part_number, rationale | Fired when a target device is selected |
+| FPGA.ResourcesEstimated |  ResourceEstimator: estimate_id, total_percent, confidence | Fired after resource estimation completes |
+| FPGA.IPCoresInstantiated |  IPCatalog: core_id, name, version, device | Fired when an IP core is instantiated |
+| FPGA.ConstraintsDefined |  ConstraintEngine: constraint_ids, types, count | Fired when constraints are generated |
+| FPGA.DeviceValidated |  DeviceRegistry: device_id, validation_status | Fired after device compatibility check |
+| FPGA.FabricModeled |  FabricModeler: part_number, resource_summary | Fired when fabric model is constructed |
 
 ## Error Cases
 
@@ -190,6 +190,23 @@ interface DeviceSelector {
 - **R14 â€” Self-Healing**: On license expiry, IPCatalog queries Academy for substitute cores automatically.
 - **R15 â€” Backward Compatibility**: Device family registry maintains versioned migration paths for deprecated families.
 
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

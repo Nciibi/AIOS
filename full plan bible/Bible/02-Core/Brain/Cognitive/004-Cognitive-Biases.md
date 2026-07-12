@@ -317,16 +317,16 @@ interface DecisionContext {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| COG.COG.BIAS.BiasDetected | request_id, bias_type, confidence, severity, step_numbers | Bias found in reasoning chain |
-| COG.COG.BIAS.BiasMitigated | request_id, bias_type, strategy, effectiveness | Mitigation action applied |
-| COG.COG.BIAS.MitigationFailed | request_id, bias_type, strategy, reason | Mitigation could not be applied |
-| COG.COG.BIAS.BiasReportGenerated | request_id, overall_score, detections_count, mitigations_count | Full bias report created |
-| COG.COG.BIAS.DebiasingPromptInjected | request_id, bias_type, prompt_template | Debiasing prompt sent to LLMOS |
-| COG.COG.BIAS.CounterargumentGenerated | request_id, bias_type, target_step | Counterargument created for anchored/framed step |
-| COG.COG.BIAS.PerspectiveShifted | request_id, bias_type, original_conclusion, shifted_view | Alternative perspective considered |
-| COG.COG.BIAS.RecurrencePatternDetected | bias_type, occurrence_count, session_ids, avg_severity | Recurring bias pattern identified |
-| COG.COG.BIAS.BiasThresholdAdjusted | bias_type, threshold_before, threshold_after, reason | Detection threshold changed |
-| COG.COG.BIAS.HighSeverityBiasFlagged | request_id, bias_type, severity, impact_assessment | Critical bias requiring immediate attention |
+| COG.COGEvent |  request_id, bias_type, confidence, severity, step_numbers | Bias found in reasoning chain |
+| COG.COGEvent |  request_id, bias_type, strategy, effectiveness | Mitigation action applied |
+| COG.COGEvent |  request_id, bias_type, strategy, reason | Mitigation could not be applied |
+| COG.COGEvent |  request_id, overall_score, detections_count, mitigations_count | Full bias report created |
+| COG.COGEvent |  request_id, bias_type, prompt_template | Debiasing prompt sent to LLMOS |
+| COG.COGEvent |  request_id, bias_type, target_step | Counterargument created for anchored/framed step |
+| COG.COGEvent |  request_id, bias_type, original_conclusion, shifted_view | Alternative perspective considered |
+| COG.COGEvent |  bias_type, occurrence_count, session_ids, avg_severity | Recurring bias pattern identified |
+| COG.COGEvent |  bias_type, threshold_before, threshold_after, reason | Detection threshold changed |
+| COG.COGEvent |  request_id, bias_type, severity, impact_assessment | Critical bias requiring immediate attention |
 
 ## Invariants
 

@@ -185,13 +185,13 @@ function selectReasoningMethod(problem, evidence, constraints):
 
 ## Events
 
-| SOU.EventType | Produced When | Fields |
+| SOU.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `Sou.ReasoningStarted` | Reasoning session begins | reason_id, method, input_summary |
-| `Sou.ReasoningCompleted` | Reasoning session ends | reason_id, output_type, output_id, confidence |
-| `Sou.ReasoningFailed` | Reasoning encounters an error | reason_id, error_code, error_message |
-| `Sou.DecisionProposed` | proposeDecision succeeds | decision_id, decision_type, constitutional_score |
-| `Sou.ReasoningConstraintViolation` | A constraint blocks the proposal | reason_id, constraint_type, violation_details |
+| SOU.ReasoningStarted |  Reasoning session begins | reason_id, method, input_summary |
+| SOU.ReasoningCompleted |  Reasoning session ends | reason_id, output_type, output_id, confidence |
+| SOU.ReasoningFailed |  Reasoning encounters an error | reason_id, error_code, error_message |
+| SOU.DecisionProposed |  proposeDecision succeeds | decision_id, decision_type, constitutional_score |
+| SOU.ReasoningConstraintViolation |  A constraint blocks the proposal | reason_id, constraint_type, violation_details |
 
 ## Edge Cases â€” Reasoning
 

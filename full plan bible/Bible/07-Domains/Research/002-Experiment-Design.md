@@ -243,15 +243,15 @@ interface ConfoundingControl {
 
 ## Events
 
-| RES.EventType | Produced When | Fields |
+| RES.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| Research.HypothesisFormalized | Hypothesis is validated and accepted | hypothesis_id, null_hypothesis, alternative_hypothesis, is_falsifiable |
-| Research.VariablesIdentified | Variables are defined and categorized | design_id, independent_count, dependent_count, confounders_detected |
-| Research.DesignSelected | Experimental design type is chosen | design_id, design_type, rationale, alternatives_considered |
-| Research.SampleCalculated | Sample size calculation completes | calculation_id, required_size, feasible_size, power, alpha, effect_size |
-| Research.ProtocolGenerated | Protocol is produced and validated | protocol_id, step_count, estimated_duration, reproducibility_score |
-| Research.EthicsApproved | Ethics review is completed | review_id, risk_level, approval_granted, review_notes_count |
-| Research.ExperimentDesigned | Full experiment design is completed and ready | experiment_id, hypothesis_id, design_type, status, design_duration_ms |
+| RES.HypothesisFormalized |  Hypothesis is validated and accepted | hypothesis_id, null_hypothesis, alternative_hypothesis, is_falsifiable |
+| RES.VariablesIdentified |  Variables are defined and categorized | design_id, independent_count, dependent_count, confounders_detected |
+| RES.DesignSelected |  Experimental design type is chosen | design_id, design_type, rationale, alternatives_considered |
+| RES.SampleCalculated |  Sample size calculation completes | calculation_id, required_size, feasible_size, power, alpha, effect_size |
+| RES.ProtocolGenerated |  Protocol is produced and validated | protocol_id, step_count, estimated_duration, reproducibility_score |
+| RES.EthicsApproved |  Ethics review is completed | review_id, risk_level, approval_granted, review_notes_count |
+| RES.ExperimentDesigned |  Full experiment design is completed and ready | experiment_id, hypothesis_id, design_type, status, design_duration_ms |
 
 ## Error Cases
 
@@ -311,6 +311,17 @@ Per Law 7 (Capability Bounds), Research declares its capabilities at creation an
 | R14 (Paved Path) | Single paved path: hypothesis -> variables -> design -> sample -> protocol -> ethics |
 | R15 (Open/Closed) | New design types implement IDesignRecommender without modifying the pipeline |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

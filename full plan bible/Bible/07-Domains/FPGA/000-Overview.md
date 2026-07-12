@@ -106,15 +106,32 @@ FPGA toolchain operations are among the most compute-intensive in AIOS:
 
 ## Events
 
-| FPGA.EventType | Produced When | Fields |
+| FPGA.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `FPGA.RTLGenerated` | HDL code is generated | worker_id, module_name, language, lines, ports, hierarchy_depth |
-| `FPGA.SimulationRun` | RTL simulation completes | sim_id, test_name, passed, coverage_pct, duration, assertions_fired |
-| `FPGA.SynthesisCompleted` | Synthesis finishes | synth_id, device, lut_usage, ff_usage, bram_usage, dsp_usage, freq_achieved |
-| `FPGA.PlaceRouteCompleted` | P&R finishes | par_id, cell_utilization, wire_length, congestion, duration, iterations |
-| `FPGA.TimingAnalyzed` | STA completes | sta_id, fmax, setup_slack_worst, hold_slack_worst, violating_paths, total_paths |
-| `FPGA.BitstreamGenerated` | Bitstream is produced | bitstream_id, device, checksum, size_bytes, encryption_enabled |
-| `FPGA.DeviceProgrammed` | FPGA is programmed | program_id, device_id, protocol, verification_status, duration_seconds |
+| FPGA.RTLGenerated |  HDL code is generated | worker_id, module_name, language, lines, ports, hierarchy_depth |
+| FPGA.SimulationRun |  RTL simulation completes | sim_id, test_name, passed, coverage_pct, duration, assertions_fired |
+| FPGA.SynthesisCompleted |  Synthesis finishes | synth_id, device, lut_usage, ff_usage, bram_usage, dsp_usage, freq_achieved |
+| FPGA.PlaceRouteCompleted |  P&R finishes | par_id, cell_utilization, wire_length, congestion, duration, iterations |
+| FPGA.TimingAnalyzed |  STA completes | sta_id, fmax, setup_slack_worst, hold_slack_worst, violating_paths, total_paths |
+| FPGA.BitstreamGenerated |  Bitstream is produced | bitstream_id, device, checksum, size_bytes, encryption_enabled |
+| FPGA.DeviceProgrammed |  FPGA is programmed | program_id, device_id, protocol, verification_status, duration_seconds |
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

@@ -338,18 +338,18 @@ interface ImagePreprocessor {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `VIS.ImageAnalysisStarted` | request_id, analysis_type, dimensions | Image analysis began |
-| `VIS.ImageAnalysisCompleted` | request_id, label_count, processing_time | Analysis finished |
-| `VIS.ImageAnalysisFailed` | request_id, error_code, reason | Analysis failed |
-| `VIS.OCRCompleted` | request_id, text_length, confidence | Text extraction finished |
-| `VIS.SceneDescribed` | request_id, description_length | Scene description generated |
-| `VIS.VideoProcessingStarted` | request_id, duration_ms, frames_planned | Video processing began |
-| `VIS.VideoFrameAnalyzed` | request_id, frame_number, timestamp | Individual frame processed |
-| `VIS.VideoProcessingCompleted` | request_id, frames_analyzed, events_detected | Video processing finished |
-| `VIS.DocumentParsed` | request_id, document_type, field_count | Document extraction completed |
-| `VIS.FaceDetected` | request_id, face_count | Faces found (count only, no identity) |
-| `VIS.PrivacyFilterApplied` | request_id, filter_type, regions | Privacy filter triggered |
-| `VIS.ProviderHealthChanged` | provider, status | Vision provider health transitioned |
+| VIS.ImageAnalysisStarted |  request_id, analysis_type, dimensions | Image analysis began |
+| VIS.ImageAnalysisCompleted |  request_id, label_count, processing_time | Analysis finished |
+| VIS.ImageAnalysisFailed |  request_id, error_code, reason | Analysis failed |
+| VIS.OCRCompleted |  request_id, text_length, confidence | Text extraction finished |
+| VIS.SceneDescribed |  request_id, description_length | Scene description generated |
+| VIS.VideoProcessingStarted |  request_id, duration_ms, frames_planned | Video processing began |
+| VIS.VideoFrameAnalyzed |  request_id, frame_number, timestamp | Individual frame processed |
+| VIS.VideoProcessingCompleted |  request_id, frames_analyzed, events_detected | Video processing finished |
+| VIS.DocumentParsed |  request_id, document_type, field_count | Document extraction completed |
+| VIS.FaceDetected |  request_id, face_count | Faces found (count only, no identity) |
+| VIS.PrivacyFilterApplied |  request_id, filter_type, regions | Privacy filter triggered |
+| VIS.ProviderHealthChanged |  provider, status | Vision provider health transitioned |
 
 ## Invariants
 

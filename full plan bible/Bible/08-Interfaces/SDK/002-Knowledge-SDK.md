@@ -193,15 +193,32 @@ Knowledge execution (via KEE) follows this protocol:
 
 ## Events
 
-| SDK.EventType | Produced When | Fields |
+| SDK.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `SDK.KnowledgeSearched` | Knowledge search is executed | query_id, query_hash, result_count, duration_ms, query_type |
-| `SDK.KnowledgeProposed` | Knowledge artifact is submitted | proposal_id, artifact_type, source_event_ids, confidence |
-| `SDK.KnowledgeValidated` | Knowledge validation completes | artifact_id, validator_id, passed, validation_score, validation_detail |
-| `SDK.KnowledgeVerified` | Knowledge verification completes | artifact_id, verifier_id, confidence, evidence_match_score |
-| `SDK.KnowledgeComposed` | Knowledge composition finishes | composition_id, source_ids, result_id, composition_time_ms |
-| `SDK.KnowledgeExecuted` | Knowledge execution runs | execution_id, knowledge_id, outcome, evidence_hash, duration_ms |
-| `SDK.KnowledgeSubscriptionCreated` | Topic subscription is registered | subscription_id, topic, entity_id, filter_criteria |
+| SDK.KnowledgeSearched |  Knowledge search is executed | query_id, query_hash, result_count, duration_ms, query_type |
+| SDK.KnowledgeProposed |  Knowledge artifact is submitted | proposal_id, artifact_type, source_event_ids, confidence |
+| SDK.KnowledgeValidated |  Knowledge validation completes | artifact_id, validator_id, passed, validation_score, validation_detail |
+| SDK.KnowledgeVerified |  Knowledge verification completes | artifact_id, verifier_id, confidence, evidence_match_score |
+| SDK.KnowledgeComposed |  Knowledge composition finishes | composition_id, source_ids, result_id, composition_time_ms |
+| SDK.KnowledgeExecuted |  Knowledge execution runs | execution_id, knowledge_id, outcome, evidence_hash, duration_ms |
+| SDK.KnowledgeSubscriptionCreated |  Topic subscription is registered | subscription_id, topic, entity_id, filter_criteria |
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

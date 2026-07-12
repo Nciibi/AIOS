@@ -256,15 +256,15 @@ enum VerificationStatus {
 
 ## Events
 
-| COD.EventType | Produced When | Fields |
+| COD.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| `Coding.RefactoringPlanned` | A refactoring plan is created and analyzed | plan_id, operation_type, symbol_name, files_affected, risk_level |
-| `Coding.RefactoringApplied` | Transformation changes are written to files | plan_id, changeset_id, files_modified, operations_count |
-| `Coding.RefactoringVerified` | Verification confirms behavior preservation | plan_id, build_result, test_results, verification_duration_ms |
-| `Coding.RefactoringFailed` | Refactoring pipeline encounters an error | plan_id, error_code, error_message, failed_stage |
-| `Coding.RefactoringRolledBack` | Changes are reverted after verification failure | plan_id, changeset_id, files_restored, rollback_duration_ms |
-| `Coding.SymbolResolved` | A symbol reference is resolved in the codebase | symbol_id, file_path, reference_count, resolution_duration_ms |
-| `Coding.DependencyCycleDetected` | A circular dependency is found during analysis | plan_id, cycle_path, severity, suggested_resolution |
+| COD.RefactoringPlanned |  A refactoring plan is created and analyzed | plan_id, operation_type, symbol_name, files_affected, risk_level |
+| COD.RefactoringApplied |  Transformation changes are written to files | plan_id, changeset_id, files_modified, operations_count |
+| COD.RefactoringVerified |  Verification confirms behavior preservation | plan_id, build_result, test_results, verification_duration_ms |
+| COD.RefactoringFailed |  Refactoring pipeline encounters an error | plan_id, error_code, error_message, failed_stage |
+| COD.RefactoringRolledBack |  Changes are reverted after verification failure | plan_id, changeset_id, files_restored, rollback_duration_ms |
+| COD.SymbolResolved |  A symbol reference is resolved in the codebase | symbol_id, file_path, reference_count, resolution_duration_ms |
+| COD.DependencyCycleDetected |  A circular dependency is found during analysis | plan_id, cycle_path, severity, suggested_resolution |
 
 ## Error Cases
 
@@ -325,6 +325,17 @@ Per Law 7 (Capability Bounds), Coding declares its capabilities at creation and 
 | R14 â€” Paved Path | Single paved path: analyze -> plan -> transform -> verify -> commit |
 | R15 â€” Open/Closed | New refactoring types added by implementing IRefactoringOperation interface |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

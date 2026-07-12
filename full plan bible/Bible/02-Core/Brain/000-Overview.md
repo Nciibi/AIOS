@@ -180,6 +180,21 @@ Brain service specifications have been created across three phases:
 **Sou's sub-files** (`Sou/001-Reasoning.md` through `005-Knowledge.md`) contain the detailed technical content from the old Sou engine, adapted for the new paradigm. They serve as the detailed specification for how Sou interacts with each Brain service.
 
 
+
+## Invariants
+
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| BRAIN-001 | Every cognitive service is inside the Brain. | Architectural - documented in Bible directory structure. |
+| BRAIN-002 | Sou is the only component with strategic decision authority. | Constitutional - SOU-001. Verified by Security Council. |
+| BRAIN-003 | The Brain communicates with external systems only through ACF. No direct calls out of the Brain. | Architectural - no system calls from Brain components to external APIs bypassing ACF. |
+| BRAIN-004 | No component outside the Brain can create missions. | Constitutional - SOU-002. Mission OS verifies caller identity. |
+| BRAIN-005 | Every user-facing response passes through Sou. | Constitutional - SOU-005. ACF routing enforced. |
+| BRAIN-006 | The Context System owns the global context window. Single authority for context. | Architectural - no other component may persist or modify global context. |
+| BRAIN-007 | Cognitive services are stateless. All state lives in Memory OS. Services are reusable pipelines. | Architectural - service restarts lose no state. Memory OS is the single state authority. |
+| BRAIN-008 | Sou has read access to ALL memories. Services have scoped access. | Constitutional - Sou's omniscience within Brain. Access control enforced by Memory OS. |
+| BRAIN-009 | LLMOS is the ONLY path for AI inference inside the Brain. No direct provider calls. | Architectural - all inference requests route through LLMOS pipeline. Direct provider calls are blocked. |
+
 ## Cross-Cutting Concerns
 
 ### Security

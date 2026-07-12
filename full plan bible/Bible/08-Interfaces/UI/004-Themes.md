@@ -150,15 +150,15 @@ interface InheritanceResolver {
 
 ## Events
 
-| UI.EventType | Produced When | Fields |
+| UI.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| UI.ThemeDefined | themeId, name, variant, baseThemeId | New theme variant registered |
-| UI.ThemeApplied | themeId, resolvedTokens, duration | Theme activated and tokens applied |
-| UI.ThemeSwitched | fromThemeId, toThemeId, strategy | Theme transition completed |
-| UI.PreferencePersisted | humanId, themeId, source | User theme choice saved |
-| UI.TokenMissingInTheme | themeId, tokenName, fallbackValue | Token not defined in theme; falling back to base |
-| UI.InheritanceResolved | themeId, layers, totalTokens | Inheritance chain computed successfully |
-| UI.ThemeRolledBack | themeId, previousThemeId, reason | Theme application failed; rolled back |
+| UI.ThemeDefined |  themeId, name, variant, baseThemeId | New theme variant registered |
+| UI.ThemeApplied |  themeId, resolvedTokens, duration | Theme activated and tokens applied |
+| UI.ThemeSwitched |  fromThemeId, toThemeId, strategy | Theme transition completed |
+| UI.PreferencePersisted |  humanId, themeId, source | User theme choice saved |
+| UI.TokenMissingInTheme |  themeId, tokenName, fallbackValue | Token not defined in theme; falling back to base |
+| UI.InheritanceResolved |  themeId, layers, totalTokens | Inheritance chain computed successfully |
+| UI.ThemeRolledBack |  themeId, previousThemeId, reason | Theme application failed; rolled back |
 
 ## Error Cases
 
@@ -218,6 +218,17 @@ Per Law 7 (Capability Bounds), UI declares its capabilities at creation and oper
 | R14 â€” Paved Path | Light theme is default; dark and high-contrast are predefined variants |
 | R15 â€” Open/Closed | New variants registered via ThemeRegistry; base theme closed for modification |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

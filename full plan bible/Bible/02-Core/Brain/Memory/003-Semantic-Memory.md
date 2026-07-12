@@ -314,17 +314,17 @@ interface ReindexReport {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| MEM.MEM.SM.FactStored | fact_id, fact_type, subject, predicate, confidence | New fact created |
-| MEM.MEM.SM.FactUpdated | fact_id, updated_fields, old_values | Fact metadata changed |
-| MEM.MEM.SM.FactDeleted | fact_id, fact_type, reason | Fact removed |
-| MEM.MEM.SM.FactVerified | fact_id, previous_confidence, new_confidence | Fact verified |
-| MEM.MEM.SM.FactDeprecated | fact_id, superseeded_by, reason | Fact superseded |
-| MEM.MEM.SM.DuplicateDetected | existing_id, incoming_id, similarity | Duplicate prevented |
-| MEM.MEM.SM.ContradictionDetected | fact_a_id, fact_b_id, context | Conflicting facts flagged |
-| MEM.MEM.SM.ContradictionResolved | survivor_id, deprecated_id, resolved_by | Conflict resolved |
-| MEM.MEM.SM.SearchExecuted | query_id, result_count, avg_score, latency | Semantic search completed |
-| MEM.MEM.SM.ConfidenceAdjusted | fact_id, old_confidence, new_confidence, reason | Confidence score changed |
-| MEM.MEM.SM.ReindexCompleted | facts_reindexed, duration_ms, errors | HNSW index rebuilt |
+| MEM.MEMEvent |  fact_id, fact_type, subject, predicate, confidence | New fact created |
+| MEM.MEMEvent |  fact_id, updated_fields, old_values | Fact metadata changed |
+| MEM.MEMEvent |  fact_id, fact_type, reason | Fact removed |
+| MEM.MEMEvent |  fact_id, previous_confidence, new_confidence | Fact verified |
+| MEM.MEMEvent |  fact_id, superseeded_by, reason | Fact superseded |
+| MEM.MEMEvent |  existing_id, incoming_id, similarity | Duplicate prevented |
+| MEM.MEMEvent |  fact_a_id, fact_b_id, context | Conflicting facts flagged |
+| MEM.MEMEvent |  survivor_id, deprecated_id, resolved_by | Conflict resolved |
+| MEM.MEMEvent |  query_id, result_count, avg_score, latency | Semantic search completed |
+| MEM.MEMEvent |  fact_id, old_confidence, new_confidence, reason | Confidence score changed |
+| MEM.MEMEvent |  facts_reindexed, duration_ms, errors | HNSW index rebuilt |
 
 ## Invariants
 

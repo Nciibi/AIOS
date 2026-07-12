@@ -270,15 +270,15 @@ interface BuildError {
 
 ## Events
 
-| EMB.EventType | Produced When | Fields |
+| EMB.EventType |  Produced When | Fields |
 |-----------|---------------|--------|
-| Embedded.FirmwareProjectCreated | A new firmware project is initialized from board profile | projectId, boardId, mcuFamily, templateVersion |
-| Embedded.HALGenerated | HAL abstraction layer code is generated | projectId, halVersion, interfaceCount |
-| Embedded.DriverWritten | A device driver is instantiated from template | projectId, driverName, peripheralType |
-| Embedded.LinkerConfigured | Linker script is tailored to target memory map | projectId, regionCount, totalSize |
-| Embedded.BuildStarted | Cross-compilation process begins | projectId, toolchain, targetArch, startTime |
-| Embedded.BuildCompleted | Build finishes with or without errors | projectId, binarySize, warningCount, success |
-| Embedded.BuildFailed | Build terminates due to compilation or linking errors | projectId, errorCount, firstError, logRef |
+| EMB.FirmwareProjectCreated |  A new firmware project is initialized from board profile | projectId, boardId, mcuFamily, templateVersion |
+| EMB.HALGenerated |  HAL abstraction layer code is generated | projectId, halVersion, interfaceCount |
+| EMB.DriverWritten |  A device driver is instantiated from template | projectId, driverName, peripheralType |
+| EMB.LinkerConfigured |  Linker script is tailored to target memory map | projectId, regionCount, totalSize |
+| EMB.BuildStarted |  Cross-compilation process begins | projectId, toolchain, targetArch, startTime |
+| EMB.BuildCompleted |  Build finishes with or without errors | projectId, binarySize, warningCount, success |
+| EMB.BuildFailed |  Build terminates due to compilation or linking errors | projectId, errorCount, firstError, logRef |
 
 ## Error Cases
 
@@ -319,6 +319,23 @@ interface BuildError {
 | R14 â€” Code as Law | Linker script generation programmatically enforces memory region boundaries |
 | R15 â€” Provably Deterministic | SHA-256 of inputs matches SHA-256 of binary output across all runs |
 
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

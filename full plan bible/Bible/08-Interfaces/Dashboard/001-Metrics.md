@@ -148,15 +148,15 @@ interface StalenessMonitor {
 
 ## Events
 
-| DASH.EventType | Produced When | Fields |
+| DASH.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| DB.MetricDefined | metricId, name, source | New metric registered in catalog |
-| DB.MetricQueried | metricId, source, durationMs | Source query executed for metric |
-| DB.MetricAggregated | metricId, stepCount, outputType | Aggregation pipeline completed |
-| DB.ValueBound | metricId, evidenceRef, computedAt | Evidence reference attached to value |
-| DB.MetricStale | metricId, lastUpdated, threshold | Metric marked stale due to freshness timeout |
-| DB.MetricRefreshed | metricId, newValue | Stale metric received fresh data |
-| DB.MetricError | metricId, errorCode | Metric computation failed |
+| DASH.MetricDefined |  metricId, name, source | New metric registered in catalog |
+| DASH.MetricQueried |  metricId, source, durationMs | Source query executed for metric |
+| DASH.MetricAggregated |  metricId, stepCount, outputType | Aggregation pipeline completed |
+| DASH.ValueBound |  metricId, evidenceRef, computedAt | Evidence reference attached to value |
+| DASH.MetricStale |  metricId, lastUpdated, threshold | Metric marked stale due to freshness timeout |
+| DASH.MetricRefreshed |  metricId, newValue | Stale metric received fresh data |
+| DASH.MetricError |  metricId, errorCode | Metric computation failed |
 
 ## Error Cases
 
@@ -215,6 +215,17 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 | R14 â€” Paved Path | Pre-defined health metrics are the default for all views |
 | R15 â€” Open/Closed | New aggregation methods register via AggregationStep extension |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

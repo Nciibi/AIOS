@@ -137,16 +137,16 @@ interface FeedStatus {
 
 ## Events
 
-| TRD.EventType | Produced When | Fields |
+| TRD.EventType |  Produced When | Fields |
 |-------|----------|---------|
-| Trading.FeedConnected | FeedManager: feedId, exchange, symbols | Fired when a feed establishes connection |
-| Trading.TickProcessed | Normalizer: tickId, symbol, exchange | Published for every normalized tick |
-| Trading.BarClosed | OHLCVBuilder: symbol, timeframe, bar | Emitted when a bar period closes |
-| Trading.DataQualityAlert | Validator: feedId, symbol, failedChecks[] | Fired when validation rules fail |
-| Trading.FeedDegraded | FeedManager: feedId, reason, latencyMs | Published on latency or reliability degradation |
-| Trading.FeedDisconnected | FeedManager: feedId, reason, lastSequence | Fired on unexpected disconnection |
-| Trading.GapDetected | DataStore: symbol, fromTimestamp, toTimestamp, gapDuration | Emitted when a data gap is found |
-| Trading.OrderBookUpdated | OrderBookManager: symbol, exchange, sequence, depth | Published on significant order book change |
+| TRD.FeedConnected |  FeedManager: feedId, exchange, symbols | Fired when a feed establishes connection |
+| TRD.TickProcessed |  Normalizer: tickId, symbol, exchange | Published for every normalized tick |
+| TRD.BarClosed |  OHLCVBuilder: symbol, timeframe, bar | Emitted when a bar period closes |
+| TRD.DataQualityAlert |  Validator: feedId, symbol, failedChecks[] | Fired when validation rules fail |
+| TRD.FeedDegraded |  FeedManager: feedId, reason, latencyMs | Published on latency or reliability degradation |
+| TRD.FeedDisconnected |  FeedManager: feedId, reason, lastSequence | Fired on unexpected disconnection |
+| TRD.GapDetected |  DataStore: symbol, fromTimestamp, toTimestamp, gapDuration | Emitted when a data gap is found |
+| TRD.OrderBookUpdated |  OrderBookManager: symbol, exchange, sequence, depth | Published on significant order book change |
 
 ## Error Cases
 
@@ -185,6 +185,23 @@ interface FeedStatus {
 - **R14 â€” Self-Healing**: On transient feed disconnection, automatic reconnection with sequence gap detection and replay.
 - **R15 â€” Backward Compatibility**: Historical data schemas and query interfaces maintain versioned migration paths.
 
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

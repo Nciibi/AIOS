@@ -286,16 +286,16 @@ type ProfileErrorCode =
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| `VOI.VoiceProfileCreated` | profile_id, name, voice_type, provider, user_id | New voice profile created |
-| `VOI.VoiceProfileUpdated` | profile_id, name, changed_fields | Profile properties modified |
-| `VOI.VoiceProfileDeleted` | profile_id, name, voice_type, provider | Profile removed |
-| `VOI.VoiceProfileDefaultSet` | profile_id, user_id | User default profile changed |
-| `VOI.VoiceProfileDefaultFallback` | profile_id, reason, fallback_profile_id | Default unavailable, fell back |
-| `VOI.VoiceProfileProviderMapped` | profile_id, mapping_id, provider, voice_id | New provider mapping added |
-| `VOI.VoiceProfileProviderUnmapped` | profile_id, mapping_id, provider | Provider mapping removed |
-| `VOI.VoiceProfileUsageIncremented` | profile_id, total_usage | Usage count updated |
-| `VOI.VoiceProfileSessionExpired` | profile_id, session_id | Context override profile cleaned |
-| `VOI.VoiceProfileLimitWarning` | user_id, current_count, max_allowed | User approaching custom profile limit |
+| VCE.VoiceProfileCreated |  profile_id, name, voice_type, provider, user_id | New voice profile created |
+| VCE.VoiceProfileUpdated |  profile_id, name, changed_fields | Profile properties modified |
+| VCE.VoiceProfileDeleted |  profile_id, name, voice_type, provider | Profile removed |
+| VCE.VoiceProfileDefaultSet |  profile_id, user_id | User default profile changed |
+| VCE.VoiceProfileDefaultFallback |  profile_id, reason, fallback_profile_id | Default unavailable, fell back |
+| VCE.VoiceProfileProviderMapped |  profile_id, mapping_id, provider, voice_id | New provider mapping added |
+| VCE.VoiceProfileProviderUnmapped |  profile_id, mapping_id, provider | Provider mapping removed |
+| VCE.VoiceProfileUsageIncremented |  profile_id, total_usage | Usage count updated |
+| VCE.VoiceProfileSessionExpired |  profile_id, session_id | Context override profile cleaned |
+| VCE.VoiceProfileLimitWarning |  user_id, current_count, max_allowed | User approaching custom profile limit |
 
 ## Invariants
 

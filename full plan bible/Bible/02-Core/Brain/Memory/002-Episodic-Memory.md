@@ -294,17 +294,17 @@ interface RollupReport {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| MEM.MEM.EP.EpisodeStored | episode_id, session_id, type, importance | Episode created |
-| MEM.MEM.EP.EpisodeUpdated | episode_id, updated_fields | Episode metadata changed |
-| MEM.MEM.EP.EpisodeArchived | episode_id, summary_length | Episode moved to archive |
-| MEM.MEM.EP.EpisodeDeleted | episode_id, type, reason | Episode hard-deleted |
-| MEM.MEM.EP.EpisodePromoted | episode_id, target_memory, target_id | Episode content moved to Semantic/Procedural |
-| MEM.MEM.EP.ChainCreated | chain_id, topic, first_episode | Episode chain started |
-| MEM.MEM.EP.ChainContinued | chain_id, episode_count | Episode appended to chain |
-| MEM.MEM.EP.TurnSummarized | session_id, turn_range, summary_length | Conversation turns summarized |
-| MEM.MEM.EP.PruneCompleted | archived_count, deleted_count, duration_ms | Pruning finished |
-| MEM.MEM.EP.RollupCompleted | session_id, promotions, archives | Session rollup finished |
-| MEM.MEM.EP.ImportanceAdjusted | episode_id, old_importance, new_importance, reason | Importance score changed |
+| MEM.MEMEvent |  episode_id, session_id, type, importance | Episode created |
+| MEM.MEMEvent |  episode_id, updated_fields | Episode metadata changed |
+| MEM.MEMEvent |  episode_id, summary_length | Episode moved to archive |
+| MEM.MEMEvent |  episode_id, type, reason | Episode hard-deleted |
+| MEM.MEMEvent |  episode_id, target_memory, target_id | Episode content moved to Semantic/Procedural |
+| MEM.MEMEvent |  chain_id, topic, first_episode | Episode chain started |
+| MEM.MEMEvent |  chain_id, episode_count | Episode appended to chain |
+| MEM.MEMEvent |  session_id, turn_range, summary_length | Conversation turns summarized |
+| MEM.MEMEvent |  archived_count, deleted_count, duration_ms | Pruning finished |
+| MEM.MEMEvent |  session_id, promotions, archives | Session rollup finished |
+| MEM.MEMEvent |  episode_id, old_importance, new_importance, reason | Importance score changed |
 
 ## Invariants
 

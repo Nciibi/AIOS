@@ -179,15 +179,15 @@ interface ConfidenceInterval {
 
 ## Events
 
-| RES.EventType | Produced When | Fields |
+| RES.EventType |  Produced When | Fields |
 |-----------|--------------|--------|
-| Research.LiteratureSearchRun | Academic database search completes | search_id, query, databases_queried, result_count, duration_ms |
-| Research.PaperRetrieved | Full paper metadata is fetched | paper_id, source, retrieval_time, content_size, is_open_access |
-| Research.CitationExtracted | Citations are parsed from a paper | paper_id, citation_count, extraction_time, errors_count |
-| Research.FindingCompared | Two or more findings are compared | comparison_id, paper_count, agreement_level, contradictions_found |
-| Research.QualityAssessed | Paper quality scoring completes | paper_id, quality_score, methodology_score, sample_adequacy, rigor_score |
-| Research.GapIdentified | Gap analysis is produced | gap_id, uncovered_aspects_count, priority, research_question_id |
-| Research.SynthesisGenerated | Literature synthesis is created | synthesis_id, papers_covered, finding_count, word_count |
+| RES.LiteratureSearchRun |  Academic database search completes | search_id, query, databases_queried, result_count, duration_ms |
+| RES.PaperRetrieved |  Full paper metadata is fetched | paper_id, source, retrieval_time, content_size, is_open_access |
+| RES.CitationExtracted |  Citations are parsed from a paper | paper_id, citation_count, extraction_time, errors_count |
+| RES.FindingCompared |  Two or more findings are compared | comparison_id, paper_count, agreement_level, contradictions_found |
+| RES.QualityAssessed |  Paper quality scoring completes | paper_id, quality_score, methodology_score, sample_adequacy, rigor_score |
+| RES.GapIdentified |  Gap analysis is produced | gap_id, uncovered_aspects_count, priority, research_question_id |
+| RES.SynthesisGenerated |  Literature synthesis is created | synthesis_id, papers_covered, finding_count, word_count |
 
 ## Error Cases
 
@@ -246,6 +246,17 @@ Per Law 7 (Capability Bounds), Research declares its capabilities at creation an
 | R14 (Paved Path) | Single paved path: search -> retrieve -> extract -> compare -> synthesize -> gap |
 | R15 (Open/Closed) | New academic databases implement ISearchProvider without modifying existing gateways |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

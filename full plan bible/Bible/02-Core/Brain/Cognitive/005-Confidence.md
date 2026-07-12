@@ -358,17 +358,17 @@ interface BiasAdjustment {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| COG.COG.CONF.ConfidenceEstimated | request_id, target_id, score, target_type | Confidence score computed |
-| COG.COG.CONF.StepConfidenceScored | request_id, step_number, score, decomposition | Individual step confidence assigned |
-| COG.COG.CONF.ChainConfidenceAggregated | request_id, chain_id, aggregate_score, method | Chain-level confidence computed |
-| COG.COG.CONF.ConfidenceCalibrated | request_id, score_before, score_after, offset_applied | Calibration adjustment applied |
-| COG.COG.CONF.CalibrationUpdated | curve_id, new_error, sample_size, domain | Calibration curve updated with new data |
-| COG.COG.CONF.CalibrationReset | session_id, previous_sample_size | Calibration curve reset |
-| COG.COG.CONF.EvidenceAdjustmentApplied | request_id, adjustment_value, factor | Evidence quality adjusted confidence |
-| COG.COG.CONF.LowConfidenceTriggered | request_id, score, threshold, action_type | Confidence below threshold |
-| COG.COG.CONF.LowConfidenceResolved | action_id, resolved, new_confidence, resolution | Low confidence action handled |
-| COG.COG.CONF.ThresholdChanged | session_id, threshold_type, old_value, new_value | Confidence threshold updated |
-| COG.COG.CONF.ConfidenceOverride | target_id, original_score, override_score, reason | Sou overrode a confidence score |
+| COG.COGEvent |  request_id, target_id, score, target_type | Confidence score computed |
+| COG.COGEvent |  request_id, step_number, score, decomposition | Individual step confidence assigned |
+| COG.COGEvent |  request_id, chain_id, aggregate_score, method | Chain-level confidence computed |
+| COG.COGEvent |  request_id, score_before, score_after, offset_applied | Calibration adjustment applied |
+| COG.COGEvent |  curve_id, new_error, sample_size, domain | Calibration curve updated with new data |
+| COG.COGEvent |  session_id, previous_sample_size | Calibration curve reset |
+| COG.COGEvent |  request_id, adjustment_value, factor | Evidence quality adjusted confidence |
+| COG.COGEvent |  request_id, score, threshold, action_type | Confidence below threshold |
+| COG.COGEvent |  action_id, resolved, new_confidence, resolution | Low confidence action handled |
+| COG.COGEvent |  session_id, threshold_type, old_value, new_value | Confidence threshold updated |
+| COG.COGEvent |  target_id, original_score, override_score, reason | Sou overrode a confidence score |
 
 ## Invariants
 

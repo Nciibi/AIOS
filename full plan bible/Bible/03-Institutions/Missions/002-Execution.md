@@ -147,16 +147,16 @@ interface MissionExecutor {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.MSN.Exec.WorkerDispatched | mission_id, worker_id, milestone_id, instruction_hash | Worker dispatched |
-| MSN.MSN.Exec.WorkerCompleted | mission_id, worker_id, milestone_id, result_hash | Worker finishes milestone |
-| MSN.MSN.Exec.ProgressUpdated | mission_id, overall_completion, milestone_progress | Progress snapshot taken |
-| MSN.MSN.Exec.EvidenceRecorded | mission_id, package_id, evidence_type, hash | Evidence collected |
-| MSN.MSN.Exec.ResourceReallocated | mission_id, adaptation_id, resource_delta | Resources reallocated |
-| MSN.MSN.Exec.TimelineAdjusted | mission_id, old_timeline, new_timeline | Timeline adjusted |
-| MSN.MSN.Exec.CheckInRequired | mission_id, check_in_id, type, deadline | Check-in triggered |
-| MSN.MSN.Exec.CheckInCompleted | mission_id, check_in_id, status, evidence_count | Check-in completed |
-| MSN.MSN.Exec.EscalationTriggered | mission_id, reason, escalation_level | Escalation triggered |
-| MSN.MSN.Exec.Heartbeat | mission_id, worker_id, timestamp, status | Periodic heartbeat |
+| MSN.MSNEvent |  mission_id, worker_id, milestone_id, instruction_hash | Worker dispatched |
+| MSN.MSNEvent |  mission_id, worker_id, milestone_id, result_hash | Worker finishes milestone |
+| MSN.MSNEvent |  mission_id, overall_completion, milestone_progress | Progress snapshot taken |
+| MSN.MSNEvent |  mission_id, package_id, evidence_type, hash | Evidence collected |
+| MSN.MSNEvent |  mission_id, adaptation_id, resource_delta | Resources reallocated |
+| MSN.MSNEvent |  mission_id, old_timeline, new_timeline | Timeline adjusted |
+| MSN.MSNEvent |  mission_id, check_in_id, type, deadline | Check-in triggered |
+| MSN.MSNEvent |  mission_id, check_in_id, status, evidence_count | Check-in completed |
+| MSN.MSNEvent |  mission_id, reason, escalation_level | Escalation triggered |
+| MSN.MSNEvent |  mission_id, worker_id, timestamp, status | Periodic heartbeat |
 
 ## Error Cases
 
@@ -209,6 +209,17 @@ Per Law 7 (Capability Bounds), Missions declares its capabilities at creation an
 | R12 â€” Embrace Errors | All execution errors have unique codes (MSN_EXEC_001â€“006) |
 | R13 â€” Design for Failure | Checkpoints enable recovery; heartbeat detects failure |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

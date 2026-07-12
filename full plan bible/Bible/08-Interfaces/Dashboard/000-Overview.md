@@ -195,16 +195,16 @@ All displayed data is evidence-backed (Law 4)
 
 ## Events
 
-| DASH.EventType | Produced When | Fields |
+| DASH.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| `DB.ViewLoaded` | viewId, category, viewerId | Dashboard view rendered |
-| `DB.WidgetUpdated` | widgetId, value, evidenceRef | Widget value refreshed from source |
-| `DB.DataStale` | widgetId, lastUpdated | Data source unreachable; marked stale |
-| `DB.HealthComputed` | score, componentCount | Composite health score recalculated |
-| `DB.AlertSurfaced` | alertId, severity, source | Alert shown on dashboard |
-| `DB.AlertActioned` | alertId, action, target | Human acted on alert (console/UI link) |
-| `DB.DrillDown` | widgetId, point, evidenceRef | Human traced value to evidence |
-| `DB.SimulationShown` | simulationId, outcome | Simulation result displayed |
+| DASH.ViewLoaded |  viewId, category, viewerId | Dashboard view rendered |
+| DASH.WidgetUpdated |  widgetId, value, evidenceRef | Widget value refreshed from source |
+| DASH.DataStale |  widgetId, lastUpdated | Data source unreachable; marked stale |
+| DASH.HealthComputed |  score, componentCount | Composite health score recalculated |
+| DASH.AlertSurfaced |  alertId, severity, source | Alert shown on dashboard |
+| DASH.AlertActioned |  alertId, action, target | Human acted on alert (console/UI link) |
+| DASH.DrillDown |  widgetId, point, evidenceRef | Human traced value to evidence |
+| DASH.SimulationShown |  simulationId, outcome | Simulation result displayed |
 
 ## Error Cases
 
@@ -262,6 +262,17 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 | R14 â€” Paved Path | Health dashboard is the default landing view |
 | R15 â€” Open/Closed | New view categories register via View Manager extension |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

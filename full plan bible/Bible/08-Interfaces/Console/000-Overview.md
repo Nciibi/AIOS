@@ -196,17 +196,17 @@ All actions recorded as evidence (Law 4)
 
 ## Events
 
-| CON.EventType | Produced When | Fields |
+| CON.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| `GC.SessionStarted` | sessionId, humanId, mfaVerified | Human opened governance console |
-| `GC.RfcDecided` | rfcId, decision, reviewerId | Human decision on RFC recorded |
-| `GC.OverrideRequested` | overrideId, lawSuspended, scope, duration | Human override initiated |
-| `GC.OverrideActive` | overrideId, lawSuspended, expiresAt | Override now in effect |
-| `GC.OverrideExpired` | overrideId | Override auto-expired at duration end |
-| `GC.OverrideRevoked` | overrideId, revokedBy | Override ended early by human |
-| `GC.CertificationDecided` | agentId, targetStage, decision, reviewerId | Agent promotion approved/rejected |
-| `GC.AuditQueried` | humanId, filter, resultCount | Human ran an audit query |
-| `GC.SessionEnded` | sessionId, humanId | Console session closed |
+| CON.SessionStarted |  sessionId, humanId, mfaVerified | Human opened governance console |
+| CON.RfcDecided |  rfcId, decision, reviewerId | Human decision on RFC recorded |
+| CON.OverrideRequested |  overrideId, lawSuspended, scope, duration | Human override initiated |
+| CON.OverrideActive |  overrideId, lawSuspended, expiresAt | Override now in effect |
+| CON.OverrideExpired |  overrideId | Override auto-expired at duration end |
+| CON.OverrideRevoked |  overrideId, revokedBy | Override ended early by human |
+| CON.CertificationDecided |  agentId, targetStage, decision, reviewerId | Agent promotion approved/rejected |
+| CON.AuditQueried |  humanId, filter, resultCount | Human ran an audit query |
+| CON.SessionEnded |  sessionId, humanId | Console session closed |
 
 ## Error Cases
 
@@ -266,6 +266,17 @@ Per Law 7 (Capability Bounds), Console declares its capabilities at creation and
 | R14 â€” Paved Path | RFC review and override request are the standard flows |
 | R15 â€” Open/Closed | New governance action types register via Console API extension |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

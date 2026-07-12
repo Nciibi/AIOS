@@ -146,15 +146,15 @@ interface ReadbackResult {
 
 ## Events
 
-| FPGA.EventType | Produced When | Fields |
+| FPGA.EventType |  Produced When | Fields |
 |-------|----------|---------|
-| FPGA.SimulationPassed | SimulationRunner: sim_id, test_cases, passed, coverage | Fired when simulation completes with all tests passing |
-| FPGA.FormalVerified | FormalEngine: formal_id, properties, proven, inconclusive | Fired when formal verification completes |
-| FPGA.AssertionChecked | AssertionChecker: module, assertions_fired, passed, failed | Fired after assertion evaluation |
-| FPGA.CoverageAnalyzed | CoverageAnalyzer: sim_id, total_coverage, gaps, threshold | Fired when coverage analysis finishes |
-| FPGA.BitstreamVerified | BitstreamVerifier: bitstream_id, checksum, signature_valid | Fired after bitstream integrity check |
-| FPGA.ReadbackVerified | ReadbackController: readback_id, match, mismatches | Fired after readback comparison |
-| FPGA.SimulationFailed | SimulationRunner: sim_id, failing_tests, logs, assertions | Fired when simulation fails |
+| FPGA.SimulationPassed |  SimulationRunner: sim_id, test_cases, passed, coverage | Fired when simulation completes with all tests passing |
+| FPGA.FormalVerified |  FormalEngine: formal_id, properties, proven, inconclusive | Fired when formal verification completes |
+| FPGA.AssertionChecked |  AssertionChecker: module, assertions_fired, passed, failed | Fired after assertion evaluation |
+| FPGA.CoverageAnalyzed |  CoverageAnalyzer: sim_id, total_coverage, gaps, threshold | Fired when coverage analysis finishes |
+| FPGA.BitstreamVerified |  BitstreamVerifier: bitstream_id, checksum, signature_valid | Fired after bitstream integrity check |
+| FPGA.ReadbackVerified |  ReadbackController: readback_id, match, mismatches | Fired after readback comparison |
+| FPGA.SimulationFailed |  SimulationRunner: sim_id, failing_tests, logs, assertions | Fired when simulation fails |
 
 ## Error Cases
 
@@ -192,6 +192,23 @@ interface ReadbackResult {
 - **R14 â€” Self-Healing**: On formal timeout, FormalEngine retries with partitioned property sets automatically.
 - **R15 â€” Backward Compatibility**: Verification configs maintain versioned migration paths across tool updates.
 
+
+
+## Design DNA
+
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

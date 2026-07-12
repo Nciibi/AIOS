@@ -202,18 +202,18 @@ interface OptimizationEngine {
 
 ## Events
 
-| ECON.EventType | Produced When | Fields |
+| ECON.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| `ECN.AllocationRuleCreated` | ruleId, name, strategy, targets | New cost allocation rule registered |
-| `ECN.AllocationRuleApplied` | ruleId, recordsAffected, totalAllocated | Allocation rule executed against cost records |
-| `ECN.CostsAllocated` | period, totalDirect, totalShared, entitiesCount | Batch allocation completed for a period |
-| `ECN.ChargebackComputed` | chargebackId, consumerId, totalCharged | Chargeback record generated for an entity |
-| `ECN.VarianceDetected` | reportId, budgetId, variancePercentage, severity | Budget variance threshold crossed |
-| `ECN.VarianceEscalated` | reportId, severity, rootCauseCount | Variance requires management attention |
-| `ECN.TrendReported` | trendId, resourceType, direction, slope | Cost trend analysis completed |
-| `ECN.AnomalyDetected` | trendId, timestamp, deviation, probableCause | Unexpected cost spike or drop flagged |
-| `ECN.OptimizationGenerated` | recommendationId, projectedSavings, paybackPeriod | Cost optimization recommendation created |
-| `ECN.ReconciliationComplete` | period, totalAllocated, totalUnallocated, unallocatedCount | Periodic cost reconciliation finished |
+| ECON.AllocationRuleCreated |  ruleId, name, strategy, targets | New cost allocation rule registered |
+| ECON.AllocationRuleApplied |  ruleId, recordsAffected, totalAllocated | Allocation rule executed against cost records |
+| ECON.CostsAllocated |  period, totalDirect, totalShared, entitiesCount | Batch allocation completed for a period |
+| ECON.ChargebackComputed |  chargebackId, consumerId, totalCharged | Chargeback record generated for an entity |
+| ECON.VarianceDetected |  reportId, budgetId, variancePercentage, severity | Budget variance threshold crossed |
+| ECON.VarianceEscalated |  reportId, severity, rootCauseCount | Variance requires management attention |
+| ECON.TrendReported |  trendId, resourceType, direction, slope | Cost trend analysis completed |
+| ECON.AnomalyDetected |  trendId, timestamp, deviation, probableCause | Unexpected cost spike or drop flagged |
+| ECON.OptimizationGenerated |  recommendationId, projectedSavings, paybackPeriod | Cost optimization recommendation created |
+| ECON.ReconciliationComplete |  period, totalAllocated, totalUnallocated, unallocatedCount | Periodic cost reconciliation finished |
 
 ## Error Cases
 
@@ -274,6 +274,17 @@ Per Law 7 (Capability Bounds), Economic declares its capabilities at creation an
 | R14 â€” Paved Path | Monthly chargeback by organization with direct allocation covers 80% of use cases |
 | R15 â€” Open/Closed | New allocation strategies are pluggable; new resource types use existing rules |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

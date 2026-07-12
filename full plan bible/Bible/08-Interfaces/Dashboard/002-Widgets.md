@@ -150,15 +150,15 @@ interface LayoutManager {
 
 ## Events
 
-| DASH.EventType | Produced When | Fields |
+| DASH.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| DB.WidgetCreated | widgetId, type, viewId | New widget registered in a view |
-| DB.WidgetConfigured | widgetId, settings | Widget settings updated |
-| DB.WidgetBound | widgetId, metricId, query | Data source attached to widget |
-| DB.WidgetRendered | widgetId, type, durationMs | Widget rendering completed |
-| DB.DrillDownExecuted | widgetId, targetType, targetId | Human drilled down from widget |
-| DB.WidgetRemoved | widgetId, viewId | Widget unregistered from view |
-| DB.LayoutConflict | viewId, widgetIds | Layout overlap detected and resolved |
+| DASH.WidgetCreated |  widgetId, type, viewId | New widget registered in a view |
+| DASH.WidgetConfigured |  widgetId, settings | Widget settings updated |
+| DASH.WidgetBound |  widgetId, metricId, query | Data source attached to widget |
+| DASH.WidgetRendered |  widgetId, type, durationMs | Widget rendering completed |
+| DASH.DrillDownExecuted |  widgetId, targetType, targetId | Human drilled down from widget |
+| DASH.WidgetRemoved |  widgetId, viewId | Widget unregistered from view |
+| DASH.LayoutConflict |  viewId, widgetIds | Layout overlap detected and resolved |
 
 ## Error Cases
 
@@ -218,6 +218,17 @@ Per Law 7 (Capability Bounds), Dashboard declares its capabilities at creation a
 | R14 â€” Paved Path | Metric-card widgets are the default for all dashboard views |
 | R15 â€” Open/Closed | New widget types register via WidgetRenderer extension point |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

@@ -213,7 +213,7 @@ If any rule exceeds its max evaluation time, it times out and falls to `audit` s
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| `LLMOS.GuardrailChecked` | request_id, direction, rules_evaluated, passed, blocked, matched_rules, evaluation_duration_us | After guardrail evaluation (Stages 11 and 14) |
+| LLM.GuardrailChecked |  request_id, direction, rules_evaluated, passed, blocked, matched_rules, evaluation_duration_us | After guardrail evaluation (Stages 11 and 14) |
 
 
 ## Cross-Cutting Concerns

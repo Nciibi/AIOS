@@ -236,17 +236,17 @@ interface WhatIfEngine {
 
 ## Events
 
-| ECON.EventType | Produced When | Fields |
+| ECON.EventType |  Produced When | Fields |
 |-------|--------|-------------|
-| `ECN.ScenarioDefined` | scenarioId, name, changeCount | New economic scenario created and validated |
-| `ECN.SimulationDefined` | scenarioId, params, bounds | Simulation parameters configured and bounds checked |
-| `ECN.SimulationRun` | scenarioId, iterations, timeHorizon | Simulation execution started |
-| `ECN.SimulationCompleted` | scenarioId, stabilityScore, warnings | Simulation finished with results |
-| `ECN.SimulationDiverged` | scenarioId, iteration, diagnostic | Simulation terminated due to divergence |
-| `ECN.ScenarioCompared` | comparisonId, scenarioCount, topRanked | Multi-scenario comparison completed |
-| `ECN.SensitivityTested` | reportId, driversCount, stabilityAssessment | Sensitivity analysis completed |
-| `ECN.SimulationAborted` | scenarioId, reason | Simulation manually aborted before completion |
-| `ECN.WhatIfQueried` | resultId, confidence | Ad-hoc what-if analysis completed |
+| ECON.ScenarioDefined |  scenarioId, name, changeCount | New economic scenario created and validated |
+| ECON.SimulationDefined |  scenarioId, params, bounds | Simulation parameters configured and bounds checked |
+| ECON.SimulationRun |  scenarioId, iterations, timeHorizon | Simulation execution started |
+| ECON.SimulationCompleted |  scenarioId, stabilityScore, warnings | Simulation finished with results |
+| ECON.SimulationDiverged |  scenarioId, iteration, diagnostic | Simulation terminated due to divergence |
+| ECON.ScenarioCompared |  comparisonId, scenarioCount, topRanked | Multi-scenario comparison completed |
+| ECON.SensitivityTested |  reportId, driversCount, stabilityAssessment | Sensitivity analysis completed |
+| ECON.SimulationAborted |  scenarioId, reason | Simulation manually aborted before completion |
+| ECON.WhatIfQueried |  resultId, confidence | Ad-hoc what-if analysis completed |
 
 ## Error Cases
 
@@ -307,6 +307,17 @@ Per Law 7 (Capability Bounds), Economic declares its capabilities at creation an
 | R14 â€” Paved Path | Budget amount what-if with 30-day horizon and 100 iterations covers 80% of simulation use cases |
 | R15 â€” Open/Closed | New scenario change types and simulation models can be registered without changing the engine |
 
+| R1 | Compliant |
+| R2 | Compliant |
+| R3 | Compliant |
+| R4 | Compliant |
+| R5 | Compliant |
+| R6 | Compliant |
+| R9 | Compliant |
+| R10 | Compliant |
+| R13 | Compliant |
+| R14 | Compliant |
+| R15 | Compliant |
 ## Related Documents
 
 | Document | Relationship |

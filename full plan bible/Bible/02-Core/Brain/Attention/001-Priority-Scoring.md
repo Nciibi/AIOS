@@ -175,16 +175,16 @@ interface PriorityScorer {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| ATT.ATT.PRI.ScoreComputed | signal_id, raw_score, normalized_score, factors | Signal scored by Priority Scorer |
-| ATT.ATT.PRI.OverrideSet | source_pattern, override_score, reason | Salience override created or updated |
-| ATT.ATT.PRI.OverrideRemoved | source_pattern, previous_score | Salience override deleted |
-| ATT.ATT.PRI.OverrideExpired | source_pattern, expires_at | Override reached TTL, removed automatically |
-| ATT.ATT.PRI.WeightsAdjusted | old_weights, new_weights, context_reason | Dynamic weight adjustment applied |
-| ATT.ATT.PRI.WeightsReset | previous_weights | Weights returned to defaults |
-| ATT.ATT.PRI.ThresholdExceeded | signal_id, score, threshold, signal_type | Score crossed above focus threshold |
-| ATT.ATT.PRI.ThresholdBelow | signal_id, score, threshold, action | Score fell below threshold, signal snoozed/dropped |
-| ATT.ATT.PRI.NormalizationApplied | method, factor_before, factor_after | Factor normalization executed |
-| ATT.ATT.PRI.DynamicAdjustment | adjustment_type, delta, rationale | Dynamic weight adjustment triggered |
+| ATT.ATTEvent |  signal_id, raw_score, normalized_score, factors | Signal scored by Priority Scorer |
+| ATT.ATTEvent |  source_pattern, override_score, reason | Salience override created or updated |
+| ATT.ATTEvent |  source_pattern, previous_score | Salience override deleted |
+| ATT.ATTEvent |  source_pattern, expires_at | Override reached TTL, removed automatically |
+| ATT.ATTEvent |  old_weights, new_weights, context_reason | Dynamic weight adjustment applied |
+| ATT.ATTEvent |  previous_weights | Weights returned to defaults |
+| ATT.ATTEvent |  signal_id, score, threshold, signal_type | Score crossed above focus threshold |
+| ATT.ATTEvent |  signal_id, score, threshold, action | Score fell below threshold, signal snoozed/dropped |
+| ATT.ATTEvent |  method, factor_before, factor_after | Factor normalization executed |
+| ATT.ATTEvent |  adjustment_type, delta, rationale | Dynamic weight adjustment triggered |
 
 ## Invariants
 
