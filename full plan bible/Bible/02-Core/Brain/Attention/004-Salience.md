@@ -390,7 +390,7 @@ interface SalienceScorer {
 | Attention/001-Priority-Scoring.md | Composite score feeds directly into Priority Scoring weights |
 | Attention/002-Focus-Management.md | Deep work state adjusts salience thresholds |
 | Attention/003-Interruption-Handling.md | Urgency scores determine interrupt priority |
-| Attention/005-Snooze-Queue.md | Scores below focus threshold route to Snooze Queue |
+| Attention/001-Priority-Scoring.md | Scores below focus threshold route to Priority Scoring for re-evaluation |
 | Brain/Context/000-Overview.md | Context provides active goal and user context |
 | Brain/Personality/000-Overview.md | Personality traits influence factor weights |
 | Bible/04-Execution/Security/ | Security sources have critical trust tier |

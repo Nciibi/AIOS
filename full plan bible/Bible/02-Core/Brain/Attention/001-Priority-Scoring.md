@@ -233,7 +233,7 @@ interface PriorityScorer {
 | Attention/002-Focus-Management.md | Focus state feeds context to dynamic weight adjustment |
 | Attention/003-Interruption-Handling.md | Scores determine which signals become interrupts |
 | Attention/004-Salience.md | Salience factors are computed by SalienceScorer |
-| Attention/005-Snooze-Queue.md | Scores below threshold route to Snooze Queue |
+| Attention/004-Salience.md | Scores below threshold route to Salience re-evaluation |
 | Brain/Context/000-Overview.md | Context window provides goal and recent signal data |
 | Brain/Personality/000-Overview.md | Personality profile influences base weights |
 

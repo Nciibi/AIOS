@@ -323,7 +323,7 @@ interface InterruptManager {
 | Attention/000-Overview.md | Interrupt Manager is one of five Attention System components |
 | Attention/001-Priority-Scoring.md | Scores determine which signals become interrupts |
 | Attention/002-Focus-Management.md | Focus state affects cooldown multiplier and queuing |
-| Attention/005-Snooze-Queue.md | Non-critical interrupts are snoozed instead of queued |
+| Attention/000-Overview.md | Non-critical signals can be snoozed per the Attention overview |
 | Brain/Context/000-Overview.md | Context can be frozen during high-priority interrupts |
 | Brain/Sou/000-Overview.md | Sou consumes and acknowledges interrupts |
 | Bible/04-Execution/Security/000-Overview.md | Security alerts are the highest priority interrupt type |
