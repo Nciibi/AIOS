@@ -21,6 +21,32 @@ Enable AIOS to manage Linux power states — suspend/resume, CPU frequency scali
 
 Power management is modeled as a state machine with transitions between S0 (working), S1-S3 (sleep), S4 (hibernate), and S5 (power off). PowerProfiles bundle governor settings, wakeup sources, and timeout policies. The PowerManager agent reconciles desired profile against hardware capabilities. Thermal zones are monitored continuously; critical thresholds trigger alerts or automatic profile demotion. Suspend operations save running state, verify wakeup readiness, and emit events on completion.
 
+### Architecture Flow
+
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                      PowerManager Agent                          │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
+│  │ Governor  │  │ Suspend  │  │ Thermal  │  │ Wakeup   │        │
+│  │ Handler   │  │ Handler  │  │ Handler  │  │ Handler  │        │
+│  └─────┬────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘        │
+│        │             │             │             │              │
+│  ┌─────▼─────────────▼─────────────▼─────────────▼─────┐       │
+│  │              Profile & State Machine                  │       │
+│  │  ┌────────────┐  ┌────────────┐  ┌───────────────┐  │       │
+│  │  │ Power      │  │ S0-S5      │  │ Thermal       │  │       │
+│  │  │ Profile    │  │ Transitions│  │ Thresholds    │  │       │
+│  │  └────────────┘  └────────────┘  └───────────────┘  │       │
+│  └───────────────────────┬──────────────────────────────┘       │
+│                          │                                      │
+│  ┌───────────────────────▼──────────────────────────────┐       │
+│  │              Hardware / Kernel Interface              │       │
+│  │  /sys/devices/system/cpu   /sys/class/thermal/       │       │
+│  │  /sys/power/state          /proc/acpi/wakeup         │       │
+│  └──────────────────────────────────────────────────────┘       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
 ## Data Model (TypeScript interfaces)
 
 ```typescript
@@ -72,6 +98,33 @@ interface WakeupSource {
   enabled: boolean;
   eventCount: number;
 }
+
+interface CpuBoostConfig {
+  enabled: boolean;
+  available: boolean;
+  maxBoostFreq: number;
+  cores: string[];
+  state: 'boost' | 'noboost';
+}
+
+interface PlatformProfileConfig {
+  name: string;
+  platform: 'dell' | 'lenovo' | 'hp' | 'asus' | 'generic';
+  profile: 'balanced' | 'performance' | 'quiet' | 'cool';
+  availableProfiles: string[];
+  state: 'active' | 'inactive';
+}
+
+interface PowerAuditEntry {
+  id: string;
+  timestamp: string;
+  profileSnapshot: PowerProfile;
+  governorStates: CpuGovernor[];
+  acpiStates: ACPIState[];
+  thermalReadings: ThermalZone[];
+  wakeupSources: WakeupSource[];
+  duration: number;
+}
 ```
 
 ## Core Concepts / Operations
@@ -84,6 +137,22 @@ interface WakeupSource {
 - **manage_thermal(zone, action)** — sets thermal trip points or enables cooling device
 - **list_wakeup_sources()** — enumerates devices that can wake the system
 
+### Operations Table
+
+| Operation | Description | Preconditions | Postconditions |
+|-----------|-------------|---------------|----------------|
+| set_power_profile | Applies named power profile across CPUs and devices | Profile exists in PowerProfile store; governor available | Profile active; CPUs scaled; timeouts and wakeup configured |
+| switch_governor | Changes CPU frequency scaling governor | Governor available on CPU hardware; cpufreq driver loaded | Governor switch applied; scaling range preserved |
+| configure_suspend | Sets suspend/hibernate timeouts and wakeup sources | ACPI S3/S4 supported; wakeup devices valid | Timeouts written to sleep config; wakeup devices configured |
+| initiate_suspend | Triggers S3 suspend or S4 hibernate with pre-save checks | No critical thermal event active; state serialized | System suspended/hibernated; saved state ref recorded |
+| initiate_resume | Triggers resume from suspend or hibernate | Wakeup event received; saved state intact | System resumed; drivers reinitialized; resume event emitted |
+| manage_thermal | Sets thermal trip points or enables cooling device | Thermal zone exists; cooling device available | Trip points updated; cooling device enabled/disabled |
+| list_wakeup_sources | Enumerates devices that can wake the system | /proc/acpi/wakeup accessible | Wakeup device list returned; no state change |
+| set_cpu_boost | Enables or disables CPU boost/turbo mode | CPU supports boost; intel_pstate/amd-pstate driver loaded | Boost mode toggled; max frequency adjusted accordingly |
+| configure_platform_profile | Sets OEM platform profile (balanced/performance/cool) | Platform firmware supports profile; platform driver loaded | Platform profile applied; thermal and power characteristics changed |
+| set_rtc_wakealarm | Schedules RTC wake alarm for next boot | RTC device present; /sys/class/rtc accessible | Wakealarm set; system will wake at specified time |
+| audit_power_state | Captures full power state snapshot for diagnostics | Power subsystems accessible; sufficient permissions | Power state snapshot written to audit store; no state change |
+
 ## Internal Interfaces (table)
 
 | Interface | Provider | Consumer | Purpose |
@@ -93,6 +162,9 @@ interface WakeupSource {
 | ISuspendManager | SuspendHandler | PowerManager | Initiate suspend/resume |
 | IThermalManager | ThermalHandler | PowerManager | Monitor and manage thermal zones |
 | IWakeupManager | WakeupHandler | PowerManager | Configure wakeup sources |
+| ICpuBoostManager | CpuBoostHandler | PowerManager | Control CPU boost/turbo mode |
+| IPlatformProfileManager | PlatformProfileHandler | PowerManager | Set OEM platform profiles |
+| IPowerAuditor | PowerAuditor | PowerManager | Capture and report power state snapshots |
 
 ## Events (table)
 
