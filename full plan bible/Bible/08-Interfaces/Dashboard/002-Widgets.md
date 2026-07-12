@@ -191,6 +191,8 @@ interface LayoutManager {
 | R2 — Dependency Order | Depends on Metrics subsystem and DrillDown Engine; no circular deps |
 | R3 — DRY | Widget configs reference metric IDs; metric definitions are not duplicated |
 | R4 — Builder Pattern | WidgetConfig uses builder for layout and drill-down composition |
+| R5 — Liskov Substitution | Compliant | All widget types implement the WidgetRenderer interface |
+| R6 — DI over Singletons | Compliant | Widget renderers are injected via widget type registry |
 | R9 — Deterministic | Same WidgetConfig + same MetricValue = same rendered output |
 | R10 — Simpler Over Complex | Metric and alert-list widgets cover most use cases; chart is opt-in |
 | R13 — Design for Failure | Data bind failure shows error state with retry, not blank |

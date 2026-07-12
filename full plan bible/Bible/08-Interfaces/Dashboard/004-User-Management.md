@@ -204,6 +204,7 @@ interface SavedViewManager {
 | R2 — Dependency Order | Depends on Identity system; no circular deps |
 | R3 — DRY | User preferences reference view IDs; view definitions are not duplicated |
 | R4 — Builder Pattern | SavedView uses builder for widget composition and filter config |
+| R5 — Liskov Substitution | Compliant | Permission providers implement the AccessControl interface with interchangeable backends |
 | R6 — Immutability | View definitions immutable; customization stored as user overlay |
 | R9 — Deterministic | Same user + same saved view = same rendered output |
 | R10 — Simpler Over Complex | Default view for all users; customization is opt-in per user |

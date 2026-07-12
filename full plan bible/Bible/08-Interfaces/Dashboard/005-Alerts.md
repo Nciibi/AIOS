@@ -196,6 +196,7 @@ interface ActionRouter {
 | R3 — DRY | Alerts ingested once; surfaced on all relevant alert-list widgets |
 | R4 — Builder Pattern | AlertAction uses builder for target URL construction |
 | R5 — Law of Demeter | Alert subsystem communicates with sources via AlertSurface interface only |
+| R6 — DI over Singletons | Compliant | Alert routing implementations are injected via the AlertDispatcher interface |
 | R9 — Deterministic | Same source alert + same classification = same surfaced presentation |
 | R10 — Simpler Over Complex | Active alert list is default; history and analytics are opt-in |
 | R13 — Design for Failure | Source unavailable queues alerts; evidence missing marks degraded |

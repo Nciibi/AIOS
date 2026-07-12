@@ -188,6 +188,7 @@ interface StalenessMonitor {
 | R2 — Dependency Order | Depends on AOP, EVS, AUS via DataSourceBinding; no circular deps |
 | R3 — DRY | Metric catalog ensures single definition per metric; widgets reference by ID |
 | R4 — Builder Pattern | AggregationPipeline uses builder for composing steps |
+| R5 — Liskov Substitution | Compliant | Metric definitions are interchangeable through the MetricProvider interface |
 | R6 — Immutability | MetricDefinition is immutable; versions track changes |
 | R9 — Deterministic | Same DataQuery + same evidence = same MetricValue |
 | R10 — Simpler Over Complex | Default metrics (count, avg, latest) cover 80% of use cases |

@@ -209,6 +209,8 @@ interface ThrottleController {
 | R2 — Dependency Order | Subscribes to AOP, EVS, AUS streams; no circular deps |
 | R3 — DRY | Stream connections shared across widgets subscribing to same source |
 | R4 — Builder Pattern | RefreshSchedule uses builder for hybrid policy configuration |
+| R5 — Liskov Substitution | Compliant | Stream connections are interchangeable through StreamProvider interface |
+| R6 — DI over Singletons | Compliant | Connection factories are injected via stream registry |
 | R9 — Deterministic | Same subscription + same source data = same widget update |
 | R10 — Simpler Over Complex | Polling is the default; streaming is opt-in per widget |
 | R13 — Design for Failure | Disconnect marks stale + fall back to polling; never blank |

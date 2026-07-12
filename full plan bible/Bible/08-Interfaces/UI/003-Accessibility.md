@@ -184,6 +184,7 @@ interface ContrastValidator {
 | R2 — Dependency Order | Depends on Components (002), Design System (001); no cycles |
 | R3 — DRY | WCAG criteria defined once; referenced by all audit checks |
 | R4 — Builder Pattern | Violation remediation built stepwise with audit at each stage |
+| R5 — Liskov Substitution | Compliant | Accessibility providers are interchangeable through the AccessibilityProvider interface |
 | R6 — Encapsulation | A11Y concerns encapsulated within AccessibilityEngine; components opt in via props |
 | R9 — Deterministic | Same component + same audit = same violation set |
 | R10 — Simpler Over Complex | AA compliance is default; AAA is opt-in per component |
