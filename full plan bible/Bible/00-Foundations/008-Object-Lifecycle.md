@@ -135,3 +135,13 @@ Capabilities are bound by lifecycle state. An entity in Running state has access
 ### Security
 
 Lifecycle transitions that affect operational state (Running → Paused, Running → Blocked) require Security Council authorisation or notification. Unauthorized transitions are constitutional violations and trigger S2 escalation.
+
+## Related Documents
+
+| Document | Relationship |
+|---------|-------------|
+| DNA/002-Entity-DNA.md | Entity lifecycle genetics — entity-specific lifecycle specializations |
+| Physics/006-Lifecycles.md | Lifecycle Physics — normative invariants |
+| Bible/05-Platform/000-LMS.md | LMS — Lifecycle Management Service |
+| Bible/05-Platform/001-State-Machine.md | State machine framework |
+| Bible/05-Platform/002-Transition-Validator.md | Transition validation rules |
