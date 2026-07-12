@@ -325,17 +325,17 @@ interface StyleConfig {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PER.StyleProfileLoaded |   dimensions, language | Style profile loaded on startup |
-| PER.StyleAdapted |   dimension, old_value, new_value, context | Style dimension adapted to context |
-| PER.StyleApplied |   response_id, dimensions_modified | Style applied to a response |
-| PER.StyleDimensionSet |   dimension, old_value, new_value, reason | Manual dimension override |
-| PER.StyleReset |   dimension, previous_value, default_value | Dimension reset to base |
-| PER.StyleTraitModulated |   dimension, trait_id, modulation_value | Trait modulated a style dimension |
-| PER.StyleMoodModulated |   dimension, mood, modulation_value | Mood modulated a style dimension |
-| PER.StylePersisted |   version, dimension_count | Style saved to Memory OS |
-| PER.StyleAdaptationExpired |   adaptation_id, dimension, reverted_value | Temporary adaptation expired |
-| PER.StyleDimensionClamped |   dimension, attempted_value, clamped_value | Dimension value clamped to 0.0â€“1.0 |
-| PER.StyleLanguageChanged |   old_language, new_language | Language preference changed |
+| PER.StyleProfileLoaded |    dimensions, language | Style profile loaded on startup |
+| PER.StyleAdapted |    dimension, old_value, new_value, context | Style dimension adapted to context |
+| PER.StyleApplied |    response_id, dimensions_modified | Style applied to a response |
+| PER.StyleDimensionSet |    dimension, old_value, new_value, reason | Manual dimension override |
+| PER.StyleReset |    dimension, previous_value, default_value | Dimension reset to base |
+| PER.StyleTraitModulated |    dimension, trait_id, modulation_value | Trait modulated a style dimension |
+| PER.StyleMoodModulated |    dimension, mood, modulation_value | Mood modulated a style dimension |
+| PER.StylePersisted |    version, dimension_count | Style saved to Memory OS |
+| PER.StyleAdaptationExpired |    adaptation_id, dimension, reverted_value | Temporary adaptation expired |
+| PER.StyleDimensionClamped |    dimension, attempted_value, clamped_value | Dimension value clamped to 0.0â€“1.0 |
+| PER.StyleLanguageChanged |    old_language, new_language | Language preference changed |
 
 ## Invariants
 

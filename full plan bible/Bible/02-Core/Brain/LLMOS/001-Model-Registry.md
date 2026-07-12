@@ -186,11 +186,11 @@ async function performHealthCheck(provider: string): Promise<void>
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| LLM.ModelRegistered |   model_id, provider, capabilities, quality_tier | Provider initialization |
-| LLM.ModelDeregistered |   model_id, provider, reason | Provider disconnect or removal |
-| LLM.ModelUpdated |   model_id, changed_fields, old_values, new_values | Health/metrics change |
-| LLM.ProviderHealthChanged |   provider, old_state, new_state, reason, failure_count | Health check transition |
-| LLM.ModelsResolved |   request_id, total_matched, filtered_by_*, candidates_summary | Pipeline Stage 4 |
+| LLM.ModelRegistered |    model_id, provider, capabilities, quality_tier | Provider initialization |
+| LLM.ModelDeregistered |    model_id, provider, reason | Provider disconnect or removal |
+| LLM.ModelUpdated |    model_id, changed_fields, old_values, new_values | Health/metrics change |
+| LLM.ProviderHealthChanged |    provider, old_state, new_state, reason, failure_count | Health check transition |
+| LLM.ModelsResolved |    request_id, total_matched, filtered_by_*, candidates_summary | Pipeline Stage 4 |
 
 
 ## Cross-Cutting Concerns

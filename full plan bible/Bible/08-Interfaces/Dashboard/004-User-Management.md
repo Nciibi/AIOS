@@ -163,15 +163,15 @@ interface SavedViewManager {
 
 ## Events
 
-| DASH.EventType |   Produced When | Fields |
+| DASH.EventType |    Produced When | Fields |
 |-------|--------|-------------|
-| DASH.UserPreferenceUpdated |   userId, changedFields | User dashboard preferences changed |
-| DASH.ViewCustomized |   userId, viewId, widgetCount | Widget layout customized for user |
-| DASH.ViewSaved |   userId, savedViewId, baseViewId | Dashboard view saved as preset |
-| DASH.ViewShared |   shareId, ownerId, targetUserId | Saved view shared with another user |
-| DASH.PermissionChanged |   userId, viewId, accessLevel, effect | View permission granted or revoked |
-| DASH.ViewSharedExpired |   shareId, targetUserId | Time-limited share expired |
-| DASH.PreferenceReset |   userId | User preferences reset to defaults |
+| DASH.UserPreferenceUpdated |    userId, changedFields | User dashboard preferences changed |
+| DASH.ViewCustomized |    userId, viewId, widgetCount | Widget layout customized for user |
+| DASH.ViewSaved |    userId, savedViewId, baseViewId | Dashboard view saved as preset |
+| DASH.ViewShared |    shareId, ownerId, targetUserId | Saved view shared with another user |
+| DASH.PermissionChanged |    userId, viewId, accessLevel, effect | View permission granted or revoked |
+| DASH.ViewSharedExpired |    shareId, targetUserId | Time-limited share expired |
+| DASH.PreferenceReset |    userId | User preferences reset to defaults |
 
 ## Error Cases
 

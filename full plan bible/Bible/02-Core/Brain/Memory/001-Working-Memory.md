@@ -317,17 +317,17 @@ interface WorkingMemoryConfig {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| MEM.MEMEvent |   item_id, session_id, category, priority | Working Memory item created |
-| MEM.MEMEvent |   item_id, session_id, updated_fields | Item content or priority changed |
-| MEM.MEMEvent |   item_id, session_id, category | Item removed |
-| MEM.MEMEvent |   task_id, session_id, stack_depth | Task added to stack |
-| MEM.MEMEvent |   task_id, session_id, stack_depth, duration_ms | Task completed and popped |
-| MEM.MEMEvent |   item_id, session_id, priority | Item pinned by Sou |
-| MEM.MEMEvent |   item_id, session_id | Pin removed |
-| MEM.MEMEvent |   session_id, items_decayed, total_delta | Priority decay executed |
-| MEM.MEMEvent |   slot_label, evicted_item_id, reason | Item evicted due to capacity |
-| MEM.MEMEvent |   session_id, item_count, tokens_freed | Session ended and cleared |
-| MEM.MEMEvent |   session_id, total_tokens, max_tokens, items_evicted | Token budget exceeded |
+| MEM.MEMEvent |    item_id, session_id, category, priority | Working Memory item created |
+| MEM.MEMEvent |    item_id, session_id, updated_fields | Item content or priority changed |
+| MEM.MEMEvent |    item_id, session_id, category | Item removed |
+| MEM.MEMEvent |    task_id, session_id, stack_depth | Task added to stack |
+| MEM.MEMEvent |    task_id, session_id, stack_depth, duration_ms | Task completed and popped |
+| MEM.MEMEvent |    item_id, session_id, priority | Item pinned by Sou |
+| MEM.MEMEvent |    item_id, session_id | Pin removed |
+| MEM.MEMEvent |    session_id, items_decayed, total_delta | Priority decay executed |
+| MEM.MEMEvent |    slot_label, evicted_item_id, reason | Item evicted due to capacity |
+| MEM.MEMEvent |    session_id, item_count, tokens_freed | Session ended and cleared |
+| MEM.MEMEvent |    session_id, total_tokens, max_tokens, items_evicted | Token budget exceeded |
 
 ## Invariants
 

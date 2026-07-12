@@ -379,19 +379,19 @@ function rollback(plan_id: string, target_version_id: string, reason: string): P
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PLN.PLNEvent |   version_id, plan_id, version_number, status | New plan version created |
-| PLN.PLNEvent |   version_id, plan_id, approved_at | Plan version approved by Sou |
-| PLN.PLNEvent |   version_id, plan_id, rejection_reason | Plan version rejected by Sou |
-| PLN.PLNEvent |   version_id, plan_id | Plan version moved to active execution |
-| PLN.PLNEvent |   version_id, plan_id, duration_ms | Plan version completed |
-| PLN.PLNEvent |   version_id, plan_id, reason | Plan version failed |
-| PLN.PLNEvent |   version_id, plan_id, reason | Plan version cancelled |
-| PLN.PLNEvent |   plan_id, from_version, to_version | Plan rolled back to earlier version |
-| PLN.PLNEvent |   version_id, parent_id, change_count | Diff calculated between versions |
-| PLN.PLNEvent |   plan_id, expected_version, actual_version | Concurrent edit prevented |
-| PLN.PLNEvent |   version_id, plan_id | Version locked (no further modifications) |
-| PLN.PLNEvent |   version_id, plan_id | Version unlocked |
-| PLN.PLNEvent |   version_id, expected_checksum, actual_checksum | Snapshot checksum mismatch |
+| PLN.PLNEvent |    version_id, plan_id, version_number, status | New plan version created |
+| PLN.PLNEvent |    version_id, plan_id, approved_at | Plan version approved by Sou |
+| PLN.PLNEvent |    version_id, plan_id, rejection_reason | Plan version rejected by Sou |
+| PLN.PLNEvent |    version_id, plan_id | Plan version moved to active execution |
+| PLN.PLNEvent |    version_id, plan_id, duration_ms | Plan version completed |
+| PLN.PLNEvent |    version_id, plan_id, reason | Plan version failed |
+| PLN.PLNEvent |    version_id, plan_id, reason | Plan version cancelled |
+| PLN.PLNEvent |    plan_id, from_version, to_version | Plan rolled back to earlier version |
+| PLN.PLNEvent |    version_id, parent_id, change_count | Diff calculated between versions |
+| PLN.PLNEvent |    plan_id, expected_version, actual_version | Concurrent edit prevented |
+| PLN.PLNEvent |    version_id, plan_id | Version locked (no further modifications) |
+| PLN.PLNEvent |    version_id, plan_id | Version unlocked |
+| PLN.PLNEvent |    version_id, expected_checksum, actual_checksum | Snapshot checksum mismatch |
 
 ## Invariants
 

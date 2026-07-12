@@ -147,15 +147,15 @@ interface CongestionReport {
 
 ## Events
 
-| FPGA.EventType |   Produced When | Fields |
+| FPGA.EventType |    Produced When | Fields |
 |-------|----------|---------|
-| FPGA.SynthesisStarted |   SynthesisEngine: synth_id, device, goal, frequency | Fired when synthesis job begins |
-| FPGA.SynthesisCompleted |   SynthesisEngine: synth_id, tech_map, utilization, duration | Fired after synthesis finishes |
-| FPGA.MappingDone |   Mapper: synth_id, lut_type, dsp, bram, util | Fired when technology mapping completes |
-| FPGA.PlacementDone |   Placer: placement_id, cell_util, congestion, iter | Fired when placement finishes |
-| FPGA.RoutingDone |   Router: routing_id, wires_routed, unrouted, slack | Fired when routing completes |
-| FPGA.TimingAnalyzed |   TimingAnalyzer: timing_id, fmax, violators, paths | Fired after timing analysis |
-| FPGA.TimingClosed |   Optimizer: closure_id, iterations, final_slack, status | Fired when timing closure is achieved or abandoned |
+| FPGA.SynthesisStarted |    SynthesisEngine: synth_id, device, goal, frequency | Fired when synthesis job begins |
+| FPGA.SynthesisCompleted |    SynthesisEngine: synth_id, tech_map, utilization, duration | Fired after synthesis finishes |
+| FPGA.MappingDone |    Mapper: synth_id, lut_type, dsp, bram, util | Fired when technology mapping completes |
+| FPGA.PlacementDone |    Placer: placement_id, cell_util, congestion, iter | Fired when placement finishes |
+| FPGA.RoutingDone |    Router: routing_id, wires_routed, unrouted, slack | Fired when routing completes |
+| FPGA.TimingAnalyzed |    TimingAnalyzer: timing_id, fmax, violators, paths | Fired after timing analysis |
+| FPGA.TimingClosed |    Optimizer: closure_id, iterations, final_slack, status | Fired when timing closure is achieved or abandoned |
 
 ## Error Cases
 
@@ -179,21 +179,21 @@ interface CongestionReport {
 | FPGA-SYN-INV-004 | Congestion score must be below 90% for a design to proceed to bitstream | Threshold check in PlaceRouteCompleted handler |
 | FPGA-SYN-INV-005 | Synthesis results must be bit-identical for identical RTL and toolchain | Determinism check via checksum on TechnologyMap; regression test enforcement |
 
-## Design DNA (R1-R6,R9,R10,R13-R15)
+## Design DNA
 
-- **R1 â€” Single Source of Truth**: SynthesisConfig is the sole configuration source for all P&R operations.
-- **R2 â€” Immutable Event Log**: Every synthesis, placement, routing, and timing event is recorded immutably.
-- **R3 â€” Capability-Based Authorization**: Only SynthesisWorker capability may invoke SynthesisEngine operations.
-- **R4 â€” Law of Diminishing Returns**: P&R stops after 5 iterations with less than 1% improvement; premature closure avoided.
-- **R5 â€” Deterministic Computation**: Same RTL, toolchain, and seed produces identical routed netlist.
-- **R6 â€” Bounded Context**: Synthesis owns the P&R pipeline; timing analysis results are shared via Events.
-- **R9 â€” Fail-Fast**: Toolchain mismatch and license errors are detected pre-execution, not mid-synthesis.
-- **R10 â€” Audit Trail**: Every P&R iteration, timing analysis, and optimization step is logged with timestamps.
-- **R13 â€” Defensive Design**: DRC and LVS checks run between P&R stages; partial results preserved on failure.
-- **R14 â€” Self-Healing**: On placement congestion, Placer retries with relaxed density target up to 3 times.
-- **R15 â€” Backward Compatibility**: Synthesis configs from older toolchain versions have migration paths documented.
-
-
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Design DNA
 

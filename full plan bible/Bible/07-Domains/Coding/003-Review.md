@@ -191,15 +191,15 @@ enum ChangeType {
 
 ## Events
 
-| COD.EventType |   Produced When | Fields |
+| COD.EventType |    Produced When | Fields |
 |-----------|--------------|--------|
-| COD.ReviewStarted |   A review request enters the pipeline | review_id, worker_id, file_count, lines_changed |
-| COD.ReviewCompleted |   Review finishes with a result | review_id, status, overall_score, finding_count |
-| COD.ReviewEscalated |   Review score falls below threshold | review_id, overall_score, threshold, critical_findings |
-| COD.ReviewFindingCreated |   A specific finding is recorded | finding_id, review_id, category, severity, file_path, line |
-| COD.ReviewThresholdViolated |   A severity threshold is breached | review_id, threshold_name, actual_value, max_value |
-| COD.ReviewApproved |   Review passes all thresholds | review_id, overall_score, max_severity, reviewer_id |
-| COD.ReviewChangesRequested |   Review requires modifications | review_id, finding_count, critical_count, summary |
+| COD.ReviewStarted |    A review request enters the pipeline | review_id, worker_id, file_count, lines_changed |
+| COD.ReviewCompleted |    Review finishes with a result | review_id, status, overall_score, finding_count |
+| COD.ReviewEscalated |    Review score falls below threshold | review_id, overall_score, threshold, critical_findings |
+| COD.ReviewFindingCreated |    A specific finding is recorded | finding_id, review_id, category, severity, file_path, line |
+| COD.ReviewThresholdViolated |    A severity threshold is breached | review_id, threshold_name, actual_value, max_value |
+| COD.ReviewApproved |    Review passes all thresholds | review_id, overall_score, max_severity, reviewer_id |
+| COD.ReviewChangesRequested |    Review requires modifications | review_id, finding_count, critical_count, summary |
 
 ## Error Cases
 

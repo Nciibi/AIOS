@@ -201,21 +201,21 @@ interface PowerAuditEntry {
 | PWR-INV-05 | Power profile changes are reverted on failure | ProfileHandler rolls back to previous profile if apply fails |
 | PWR-INV-06 | Suspend is not initiated while critical thermal event active | PowerManager blocks suspend when thermal state is critical |
 
-## Design DNA (table with Rule, Assessment â€” include R1,R2,R3,R4,R5,R6,R9,R10,R13,R14,R15)
+## Design DNA
 
 | Rule | Assessment |
-|------|------------|
-| R1 â€” Composition over Inheritance | PowerProfile composes governor, thermal, and wakeup settings; agent composes handlers |
-| R2 â€” Explicit over Implicit | All power states and governors explicitly declared; no automatic fallback without log |
-| R3 â€” Immutable Artifacts | Saved suspend state is immutable snapshot; power profiles versioned |
-| R4 â€” Stateless Workers | PowerManager is stateless; state held in PowerProfile resources |
-| R5 â€” Idempotency | Applying same power profile twice is no-op; governor switch idempotent |
-| R6 â€” Observability | Every power state transition and thermal event emits structured event |
-| R9 â€” Fail Closed | On resume failure, system halts to safe recovery state; no partial boot |
-| R10 â€” Least Privilege | Suspend and governor changes require elevated capability grants |
-| R13 â€” Graceful Degradation | If preferred governor unsupported, fall back to nearest alternative |
-| R14 â€” Data Immutability | Power profile history preserved; previous profile snapshots retained |
-| R15 â€” Explicit Errors | Every failure returns typed code with recovery action |
+|------|-----------|
+| R1 - Modulsingularity | PowerProfile composes governor, thermal, and wakeup settings; agent composes handlers |
+| R2 - Dependency Order | All power states and governors explicitly declared; no automatic fallback without log |
+| R3 - DRY | Saved suspend state is immutable snapshot; power profiles versioned |
+| R4 - Builder Pattern | PowerManager is stateless; state held in PowerProfile resources |
+| R5 - Liskov Substitution | Applying same power profile twice is no-op; governor switch idempotent |
+| R6 - DI over Singletons | Every power state transition and thermal event emits structured event |
+| R9 - Deterministic | On resume failure, system halts to safe recovery state; no partial boot |
+| R10 - Simpler Over Complex | Suspend and governor changes require elevated capability grants |
+| R13 - Design for Failure | If preferred governor unsupported, fall back to nearest alternative |
+| R14 - Paved Path | Power profile history preserved; previous profile snapshots retained |
+| R15 - Open/Closed | Every failure returns typed code with recovery action |
 
 ## Related Documents (table)
 

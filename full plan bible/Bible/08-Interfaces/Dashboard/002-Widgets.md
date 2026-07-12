@@ -150,15 +150,15 @@ interface LayoutManager {
 
 ## Events
 
-| DASH.EventType |   Produced When | Fields |
+| DASH.EventType |    Produced When | Fields |
 |-------|--------|-------------|
-| DASH.WidgetCreated |   widgetId, type, viewId | New widget registered in a view |
-| DASH.WidgetConfigured |   widgetId, settings | Widget settings updated |
-| DASH.WidgetBound |   widgetId, metricId, query | Data source attached to widget |
-| DASH.WidgetRendered |   widgetId, type, durationMs | Widget rendering completed |
-| DASH.DrillDownExecuted |   widgetId, targetType, targetId | Human drilled down from widget |
-| DASH.WidgetRemoved |   widgetId, viewId | Widget unregistered from view |
-| DASH.LayoutConflict |   viewId, widgetIds | Layout overlap detected and resolved |
+| DASH.WidgetCreated |    widgetId, type, viewId | New widget registered in a view |
+| DASH.WidgetConfigured |    widgetId, settings | Widget settings updated |
+| DASH.WidgetBound |    widgetId, metricId, query | Data source attached to widget |
+| DASH.WidgetRendered |    widgetId, type, durationMs | Widget rendering completed |
+| DASH.DrillDownExecuted |    widgetId, targetType, targetId | Human drilled down from widget |
+| DASH.WidgetRemoved |    widgetId, viewId | Widget unregistered from view |
+| DASH.LayoutConflict |    viewId, widgetIds | Layout overlap detected and resolved |
 
 ## Error Cases
 

@@ -248,16 +248,16 @@ interface Point3D {
 
 ## Events
 
-| ROB.EventType |   Produced When | Fields |
+| ROB.EventType |    Produced When | Fields |
 |-----------|--------------|--------|
-| ROB.SensorFusionInitialized |   Fusion filter is initialized with config | fusion_id, algorithm, state_dimension, sensor_count, update_rate_hz |
-| ROB.SensorCalibrated |   Sensor calibration completes | calibration_id, sensor_id, sensor_type, accuracy, calibration_method, valid_until |
-| ROB.FusionUpdatePublished |   Fused state estimate is published | fusion_id, timestamp, state_dimension, convergence_metric, active_sensor_count |
-| ROB.FusionDegraded |   One or more sensors are lost or degraded | fusion_id, lost_sensors, degraded_sensors, fallback_mode, uncertainty_increase_factor |
-| ROB.SensorDropout |   A sensor stops providing data | sensor_id, sensor_type, last_valid_timestamp, dropout_duration_ms |
-| ROB.TimestampDesyncDetected |   Sensor timestamps drift beyond acceptable threshold | sensor_id, drift_ms, threshold_ms, resynchronization_initiated |
-| ROB.FusionDivergence |   Filter state estimate diverges from expected bounds | fusion_id, divergence_metric, threshold, reset_action_taken |
-| ROB.OutlierRejected |   Sensor reading rejected as outlier | sensor_id, fusion_id, innovation_magnitude, threshold, consecutive_outlier_count |
+| ROB.SensorFusionInitialized |    Fusion filter is initialized with config | fusion_id, algorithm, state_dimension, sensor_count, update_rate_hz |
+| ROB.SensorCalibrated |    Sensor calibration completes | calibration_id, sensor_id, sensor_type, accuracy, calibration_method, valid_until |
+| ROB.FusionUpdatePublished |    Fused state estimate is published | fusion_id, timestamp, state_dimension, convergence_metric, active_sensor_count |
+| ROB.FusionDegraded |    One or more sensors are lost or degraded | fusion_id, lost_sensors, degraded_sensors, fallback_mode, uncertainty_increase_factor |
+| ROB.SensorDropout |    A sensor stops providing data | sensor_id, sensor_type, last_valid_timestamp, dropout_duration_ms |
+| ROB.TimestampDesyncDetected |    Sensor timestamps drift beyond acceptable threshold | sensor_id, drift_ms, threshold_ms, resynchronization_initiated |
+| ROB.FusionDivergence |    Filter state estimate diverges from expected bounds | fusion_id, divergence_metric, threshold, reset_action_taken |
+| ROB.OutlierRejected |    Sensor reading rejected as outlier | sensor_id, fusion_id, innovation_magnitude, threshold, consecutive_outlier_count |
 
 ## Error Cases
 
@@ -283,23 +283,21 @@ interface Point3D {
 | ROB-FUS-I-005 | Bounded computation time â€” filter update must complete within 1/fusion_update_rate to maintain real-time operation | Timing guard at each pipeline stage. Deadline miss degrades to lower update rate. |
 | ROB-FUS-I-006 | Sensor exclusion atomicity â€” adding or removing a sensor from the fusion pipeline must be an atomic operation with consistent state | Transactional sensor registry updates. Failure during add/remove rolls back to previous valid configuration. |
 
-## Design DNA (R1-R6,R9,R10,R13-R15)
+## Design DNA
 
-| Rule | Compliance |
+| Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Each sensor fusion concern (preprocessing, sync, algorithm, calibration, uncertainty) is a separate module with single responsibility |
-| R2 (Encapsulation) | Filter internal state (Kalman gains, particle weights) is encapsulated; external consumers interact only through FusedEstimate |
-| R3 (Orthogonality) | Sensor preprocessing, time synchronization, and fusion algorithm selection are orthogonal â€” any combination is valid |
-| R4 (Polymorphism) | Fusion algorithm module supports polymorphic algorithm selection (Kalman, particle, complementary, Mahony) through a common interface |
-| R5 (Liskov) | All fusion algorithm implementations conform to the same IFusionAlgorithm interface and produce FusedEstimate output |
-| R6 (Interface) | Fusion pipeline exposes narrow interfaces (ISensorDriver, IPreprocessor, ITimeSynchronizer, IFusionAlgorithm) for testability and swap-ability |
-| R9 (Deterministic) | Same sensor readings and FusionConfig input must produce identical state estimate output â€” no randomness in Kalman filter; particle filters use seeded RNG |
-| R10 (Simpler Over Complex) | Default to Kalman filter (simplest adequate). Use particle filtering only when non-Gaussian uncertainty or multi-modal state distribution requires it |
-| R13 (Design for Failure) | Fusion filter detects divergence and resets automatically. Sensor dropout triggers graceful degradation not crash. NaN detection halts update without propagating bad state |
-| R14 (Paved Path) | Paved path: configure sensors â†’ calibrate â†’ synchronize â†’ fuse â†’ estimate â†’ publish. Alternative algorithms available for specialized needs |
-| R15 (Testability) | Each pipeline stage has independently testable input/output contracts. Filter behavior verifiable against known ground-truth trajectories |
-
-
+| R1 - Modulsingularity | Each sensor fusion concern (preprocessing, sync, algorithm, calibration, uncertainty) is a separate module with single responsibility |
+| R2 - Dependency Order | Filter internal state (Kalman gains, particle weights) is encapsulated; external consumers interact only through FusedEstimate |
+| R3 - DRY | Sensor preprocessing, time synchronization, and fusion algorithm selection are orthogonal â€” any combination is valid |
+| R4 - Builder Pattern | Fusion algorithm module supports polymorphic algorithm selection (Kalman, particle, complementary, Mahony) through a common interface |
+| R5 - Liskov Substitution | All fusion algorithm implementations conform to the same IFusionAlgorithm interface and produce FusedEstimate output |
+| R6 - DI over Singletons | Fusion pipeline exposes narrow interfaces (ISensorDriver, IPreprocessor, ITimeSynchronizer, IFusionAlgorithm) for testability and swap-ability |
+| R9 - Deterministic | Same sensor readings and FusionConfig input must produce identical state estimate output â€” no randomness in Kalman filter; particle filters use seeded RNG |
+| R10 - Simpler Over Complex | Default to Kalman filter (simplest adequate). Use particle filtering only when non-Gaussian uncertainty or multi-modal state distribution requires it |
+| R13 - Design for Failure | Fusion filter detects divergence and resets automatically. Sensor dropout triggers graceful degradation not crash. NaN detection halts update without propagating bad state |
+| R14 - Paved Path | Paved path: configure sensors â†’ calibrate â†’ synchronize â†’ fuse â†’ estimate â†’ publish. Alternative algorithms available for specialized needs |
+| R15 - Open/Closed | Each pipeline stage has independently testable input/output contracts. Filter behavior verifiable against known ground-truth trajectories |
 
 ## Design DNA
 

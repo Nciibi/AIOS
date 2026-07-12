@@ -168,15 +168,15 @@ interface ProtocolCapability {
 
 ## Events
 
-| COM.EventType |   Produced When | Fields |
+| COM.EventType |    Produced When | Fields |
 |-----------|--------------|--------|
-| COM.ProtocolRegistered |   New protocol spec is added to registry | protocol_id, name, version, format_count, channel_types |
-| COM.MessageParsed |   Raw bytes are successfully parsed into envelope | message_id, protocol_id, channel_type, parse_duration_ms, schema_valid |
-| COM.MessageParseFailed |   Raw bytes fail protocol-level validation | channel_id, protocol_id, error_code, raw_size_bytes, parse_duration_ms |
-| COM.ProtocolNegotiated |   Two peers agree on protocol version and format | protocol_id, requested_version, negotiated_version, format, fallback_used |
-| COM.ChannelAdapterOnline |   Channel adapter starts and is ready | adapter_id, channel_type, endpoint, protocol_ids, startup_duration_ms |
-| COM.ChannelAdapterOffline |   Channel adapter disconnects or fails | adapter_id, channel_type, reason, last_online_at, reconnect_policy |
-| COM.SerializationError |   Serialization or deserialization fails | envelope_id, protocol_id, format, error, payload_size_bytes |
+| COM.ProtocolRegistered |    New protocol spec is added to registry | protocol_id, name, version, format_count, channel_types |
+| COM.MessageParsed |    Raw bytes are successfully parsed into envelope | message_id, protocol_id, channel_type, parse_duration_ms, schema_valid |
+| COM.MessageParseFailed |    Raw bytes fail protocol-level validation | channel_id, protocol_id, error_code, raw_size_bytes, parse_duration_ms |
+| COM.ProtocolNegotiated |    Two peers agree on protocol version and format | protocol_id, requested_version, negotiated_version, format, fallback_used |
+| COM.ChannelAdapterOnline |    Channel adapter starts and is ready | adapter_id, channel_type, endpoint, protocol_ids, startup_duration_ms |
+| COM.ChannelAdapterOffline |    Channel adapter disconnects or fails | adapter_id, channel_type, reason, last_online_at, reconnect_policy |
+| COM.SerializationError |    Serialization or deserialization fails | envelope_id, protocol_id, format, error, payload_size_bytes |
 
 ## Error Cases
 

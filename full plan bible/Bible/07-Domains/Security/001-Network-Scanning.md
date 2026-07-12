@@ -137,15 +137,15 @@ interface RateLimitConfig {
 
 ## Events
 
-| SEC.EventType |   Produced When | Fields |
+| SEC.EventType |    Produced When | Fields |
 |-----------|--------------|--------|
-| SEC.ScanStarted |   Scan pipeline begins execution | scan_id, target_count, mode, stealth_profile, authorization_ref |
-| SEC.ScanCompleted |   All pipeline stages finish | scan_id, hosts_found, ports_open, duration_ms |
-| SEC.VulnerabilityMatched |   CVE match found for a service | finding_id, scan_id, cve, service, confidence |
-| SEC.ScanTargetBlocked |   Unauthorized or blacklisted target detected | target_ip, reason, authorization_ref, resolver_id |
-| SEC.ScanProgress |   Periodic progress heartbeat | scan_id, stage, percent_complete, estimated_remaining |
-| SEC.ScanHalted |   Scan interrupted by operator or boundary | scan_id, halted_by, reason, partial_results_ref |
-| SEC.ScanRateLimited |   Rate limit threshold approached | scan_id, current_rate, max_rate, throttle_applied |
+| SEC.ScanStarted |    Scan pipeline begins execution | scan_id, target_count, mode, stealth_profile, authorization_ref |
+| SEC.ScanCompleted |    All pipeline stages finish | scan_id, hosts_found, ports_open, duration_ms |
+| SEC.VulnerabilityMatched |    CVE match found for a service | finding_id, scan_id, cve, service, confidence |
+| SEC.ScanTargetBlocked |    Unauthorized or blacklisted target detected | target_ip, reason, authorization_ref, resolver_id |
+| SEC.ScanProgress |    Periodic progress heartbeat | scan_id, stage, percent_complete, estimated_remaining |
+| SEC.ScanHalted |    Scan interrupted by operator or boundary | scan_id, halted_by, reason, partial_results_ref |
+| SEC.ScanRateLimited |    Rate limit threshold approached | scan_id, current_rate, max_rate, throttle_applied |
 
 ## Error Cases
 

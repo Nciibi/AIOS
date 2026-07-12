@@ -215,21 +215,21 @@ interface DhcpRelayConfig {
 | NET-INV-05 | Interface IP addresses do not conflict within subnet | InterfaceHandler validates IP uniqueness on subnet |
 | NET-INV-06 | VPN private key references are never logged or exposed | VpnHandler stores keys in secret store, uses reference |
 
-## Design DNA (table with Rule, Assessment â€” include R1,R2,R3,R4,R5,R6,R9,R10,R13,R14,R15)
+## Design DNA
 
 | Rule | Assessment |
-|------|------------|
-| R1 â€” Composition over Inheritance | Network stack layers compose; interfaces contain slaves and bond options |
-| R2 â€” Explicit over Implicit | Every IP, route, and rule is explicitly declared; no DHCP assumptions |
-| R3 â€” Immutable Artifacts | Firewall rule sets are immutable once applied; changes create new revision |
-| R4 â€” Stateless Workers | NetworkManager agent is stateless; desired state lives in manifests |
-| R5 â€” Idempotency | All network operations are idempotent; same config applied twice is no-op |
-| R6 â€” Observability | Every network change emits events; connectivity probes provide live status |
-| R9 â€” Fail Closed | Connectivity failure triggers rollback; network stays at last known good state |
-| R10 â€” Least Privilege | Firewall and route changes require elevated capability grants |
-| R13 â€” Graceful Degradation | If DNS resolver fails, cached entries serve until fallback activated |
-| R14 â€” Data Immutability | Network config history is append-only; rollbacks restore prior immutable snapshot |
-| R15 â€” Explicit Errors | Every failure includes typed error code and recovery action |
+|------|-----------|
+| R1 - Modulsingularity | Network stack layers compose; interfaces contain slaves and bond options |
+| R2 - Dependency Order | Every IP, route, and rule is explicitly declared; no DHCP assumptions |
+| R3 - DRY | Firewall rule sets are immutable once applied; changes create new revision |
+| R4 - Builder Pattern | NetworkManager agent is stateless; desired state lives in manifests |
+| R5 - Liskov Substitution | All network operations are idempotent; same config applied twice is no-op |
+| R6 - DI over Singletons | Every network change emits events; connectivity probes provide live status |
+| R9 - Deterministic | Connectivity failure triggers rollback; network stays at last known good state |
+| R10 - Simpler Over Complex | Firewall and route changes require elevated capability grants |
+| R13 - Design for Failure | If DNS resolver fails, cached entries serve until fallback activated |
+| R14 - Paved Path | Network config history is append-only; rollbacks restore prior immutable snapshot |
+| R15 - Open/Closed | Every failure includes typed error code and recovery action |
 
 ## Related Documents (table)
 

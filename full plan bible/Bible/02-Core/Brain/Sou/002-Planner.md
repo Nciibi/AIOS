@@ -179,14 +179,14 @@ Every plan must pass four validation gates before it can be proposed:
 
 ## Events
 
-| SOU.EventType |   Produced When | Fields |
+| SOU.EventType |    Produced When | Fields |
 |-----------|--------------|--------|
-| SOU.PlanCreated |   A new plan is created | plan_id, goal_id, milestone_count |
-| SOU.PlanRefined |   An existing plan is refined | plan_id, change_summary |
-| SOU.PlanValidated |   Plan passes validation | plan_id, validation_report |
-| SOU.PlanRejected |   Plan fails validation | plan_id, rejection_reason, error_code |
-| SOU.ScenarioCompared |   Two scenarios are compared | comparison_id, plan_a, plan_b, recommendation |
-| SOU.PlanSubmittedToDGP |   Plan is submitted as a mission proposal | plan_id, dgp_ticket_id |
+| SOU.PlanCreated |    A new plan is created | plan_id, goal_id, milestone_count |
+| SOU.PlanRefined |    An existing plan is refined | plan_id, change_summary |
+| SOU.PlanValidated |    Plan passes validation | plan_id, validation_report |
+| SOU.PlanRejected |    Plan fails validation | plan_id, rejection_reason, error_code |
+| SOU.ScenarioCompared |    Two scenarios are compared | comparison_id, plan_a, plan_b, recommendation |
+| SOU.PlanSubmittedToDGP |    Plan is submitted as a mission proposal | plan_id, dgp_ticket_id |
 
 ## Error Cases
 

@@ -146,14 +146,14 @@ interface DeviceSelector {
 
 ## Events
 
-| FPGA.EventType |   Produced When | Fields |
+| FPGA.EventType |    Produced When | Fields |
 |-------|----------|---------|
-| FPGA.DeviceSelected |   DeviceRegistry: device_id, part_number, rationale | Fired when a target device is selected |
-| FPGA.ResourcesEstimated |   ResourceEstimator: estimate_id, total_percent, confidence | Fired after resource estimation completes |
-| FPGA.IPCoresInstantiated |   IPCatalog: core_id, name, version, device | Fired when an IP core is instantiated |
-| FPGA.ConstraintsDefined |   ConstraintEngine: constraint_ids, types, count | Fired when constraints are generated |
-| FPGA.DeviceValidated |   DeviceRegistry: device_id, validation_status | Fired after device compatibility check |
-| FPGA.FabricModeled |   FabricModeler: part_number, resource_summary | Fired when fabric model is constructed |
+| FPGA.DeviceSelected |    DeviceRegistry: device_id, part_number, rationale | Fired when a target device is selected |
+| FPGA.ResourcesEstimated |    ResourceEstimator: estimate_id, total_percent, confidence | Fired after resource estimation completes |
+| FPGA.IPCoresInstantiated |    IPCatalog: core_id, name, version, device | Fired when an IP core is instantiated |
+| FPGA.ConstraintsDefined |    ConstraintEngine: constraint_ids, types, count | Fired when constraints are generated |
+| FPGA.DeviceValidated |    DeviceRegistry: device_id, validation_status | Fired after device compatibility check |
+| FPGA.FabricModeled |    FabricModeler: part_number, resource_summary | Fired when fabric model is constructed |
 
 ## Error Cases
 
@@ -176,21 +176,21 @@ interface DeviceSelector {
 | FPGA-ARC-INV-004 | Constraint generation must produce at least one timing constraint per clock domain | Postcondition check in ConstraintEngine; warn on missing domain |
 | FPGA-ARC-INV-005 | Device selection must consider power, thermal, and package constraints from requirements | Multi-field filter in DeviceSelector; rejection on any unmet constraint |
 
-## Design DNA (R1-R6,R9,R10,R13-R15)
+## Design DNA
 
-- **R1 â€” Single Source of Truth**: Device family registry is the sole source for device capabilities; fabric models derive from it.
-- **R2 â€” Immutable Event Log**: Every device selection, resource estimate, and IP instantiation produces an immutable event.
-- **R3 â€” Capability-Based Authorization**: Only HDLWorker and SynthesisWorker capabilities may access the DeviceRegistry.
-- **R4 â€” Law of Diminishing Returns**: Resource estimation beyond 80% utilization triggers diminishing returns warnings.
-- **R5 â€” Deterministic Computation**: All resource estimates are deterministic functions of design metadata and device spec.
-- **R6 â€” Bounded Context**: Device architecture owns device families and fabric models; cross-domain device handoff goes through Sou.
-- **R9 â€” Fail-Fast**: Device mismatch and license issues are detected at selection time, never during synthesis.
-- **R10 â€” Audit Trail**: Every constraint definition and IP instantiation is logged with device ID, timestamp, and worker identity.
-- **R13 â€” Defensive Design**: Resource estimates include safety margin (10%) above calculated utilization.
-- **R14 â€” Self-Healing**: On license expiry, IPCatalog queries Academy for substitute cores automatically.
-- **R15 â€” Backward Compatibility**: Device family registry maintains versioned migration paths for deprecated families.
-
-
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Design DNA
 

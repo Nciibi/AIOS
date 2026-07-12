@@ -188,17 +188,17 @@ interface SensitivityEngine {
 
 ## Events
 
-| ECON.EventType |   Produced When | Fields |
+| ECON.EventType |    Produced When | Fields |
 |-------|--------|-------------|
-| ECON.ModelBuildStarted |   modelId, modelType, algorithm | Economic model build initiated |
-| ECON.ModelBuilt |   modelId, validationMetrics | Model fitted and validated successfully |
-| ECON.ModelFailed |   modelId, errorCode, diagnostic | Model build or validation failed |
-| ECON.ForecastGenerated |   forecastId, modelId, horizon, confidenceInterval | DemandForecast produced and ready |
-| ECON.CostProjectionRun |   projectionId, budgetId, exhaustionProbability | CostProjection computed for a budget |
-| ECON.SupplyDemandUpdated |   modelId, resourceType, equilibriumPrice | Supply/demand equilibrium recalculated |
-| ECON.ROIComputed |   computationId, projectId, npv, irr | ROI analysis completed |
-| ECON.SensitivityRun |   analysisId, topParameter | Sensitivity analysis completed |
-| ECON.ModelDeployed |   modelId, version | Model promoted to production use |
+| ECON.ModelBuildStarted |    modelId, modelType, algorithm | Economic model build initiated |
+| ECON.ModelBuilt |    modelId, validationMetrics | Model fitted and validated successfully |
+| ECON.ModelFailed |    modelId, errorCode, diagnostic | Model build or validation failed |
+| ECON.ForecastGenerated |    forecastId, modelId, horizon, confidenceInterval | DemandForecast produced and ready |
+| ECON.CostProjectionRun |    projectionId, budgetId, exhaustionProbability | CostProjection computed for a budget |
+| ECON.SupplyDemandUpdated |    modelId, resourceType, equilibriumPrice | Supply/demand equilibrium recalculated |
+| ECON.ROIComputed |    computationId, projectId, npv, irr | ROI analysis completed |
+| ECON.SensitivityRun |    analysisId, topParameter | Sensitivity analysis completed |
+| ECON.ModelDeployed |    modelId, version | Model promoted to production use |
 
 ## Error Cases
 

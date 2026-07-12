@@ -225,16 +225,16 @@ interface ExecutionStatus {
 
 ## Events
 
-| ROB.EventType |   Produced When | Fields |
+| ROB.EventType |    Produced When | Fields |
 |-----------|--------------|--------|
-| ROB.MotionPlanRequested |   A motion planning request is submitted | plan_id, robot_id, start_state, goal_state, constraint_count, timeout_ms |
-| ROB.MotionPlanComputed |   A motion plan is successfully computed | plan_id, robot_id, waypoint_count, trajectory_length, computation_time_ms, algorithm_used |
-| ROB.MotionPlanValidated |   A motion plan passes or fails validation | plan_id, is_valid, simulated_outcome, collision_checks_passed, warning_count |
-| ROB.MotionPlanExecuted |   A motion plan begins execution on hardware | plan_id, robot_id, trajectory_duration, safety_gate_passed, executor_id |
-| ROB.MotionPlanCompleted |   Motion plan execution finishes | plan_id, robot_id, status, actual_duration_ms, deviation_max, success |
-| ROB.ObstacleDetected |   A new obstacle is detected in the robot workspace | obstacle_id, obstacle_type, position, is_dynamic, distance_to_robot, replan_triggered |
-| ROB.MotionPlanAborted |   Motion plan execution is aborted | plan_id, robot_id, reason, current_state, safety_layer_triggered, recovery_action |
-| ROB.IKSolutionFailed |   Inverse kinematics solver cannot find a valid solution | plan_id, target_pose, robot_model, constraints, iterations, residual_error |
+| ROB.MotionPlanRequested |    A motion planning request is submitted | plan_id, robot_id, start_state, goal_state, constraint_count, timeout_ms |
+| ROB.MotionPlanComputed |    A motion plan is successfully computed | plan_id, robot_id, waypoint_count, trajectory_length, computation_time_ms, algorithm_used |
+| ROB.MotionPlanValidated |    A motion plan passes or fails validation | plan_id, is_valid, simulated_outcome, collision_checks_passed, warning_count |
+| ROB.MotionPlanExecuted |    A motion plan begins execution on hardware | plan_id, robot_id, trajectory_duration, safety_gate_passed, executor_id |
+| ROB.MotionPlanCompleted |    Motion plan execution finishes | plan_id, robot_id, status, actual_duration_ms, deviation_max, success |
+| ROB.ObstacleDetected |    A new obstacle is detected in the robot workspace | obstacle_id, obstacle_type, position, is_dynamic, distance_to_robot, replan_triggered |
+| ROB.MotionPlanAborted |    Motion plan execution is aborted | plan_id, robot_id, reason, current_state, safety_layer_triggered, recovery_action |
+| ROB.IKSolutionFailed |    Inverse kinematics solver cannot find a valid solution | plan_id, target_pose, robot_model, constraints, iterations, residual_error |
 
 ## Error Cases
 
@@ -260,23 +260,21 @@ interface ExecutionStatus {
 | ROB-MOT-I-005 | Monotonic progress â€” execution must make monotonic progress along the trajectory; backtracking is prohibited unless in replan | Waypoint index is strictly increasing. Reversal requires full abort and re-plan. |
 | ROB-MOT-I-006 | Bounded replanning â€” replanning must complete within a configurable deadline to maintain real-time operation | Replan timer guards. Deadline miss triggers fallback to safe stop trajectory. |
 
-## Design DNA (R1-R6,R9,R10,R13-R15)
+## Design DNA
 
-| Rule | Compliance |
+| Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Each motion planning concern (collision checking, IK, trajectory optimization, validation, execution) is a separate module with a single responsibility |
-| R2 (Encapsulation) | Planner internal state (search trees, optimization variables) is encapsulated; consumers interact through MotionPlan interface only |
-| R3 (Orthogonality) | Collision checking, IK solving, trajectory optimization, and validation are orthogonal â€” each can be used independently or composed |
-| R4 (Polymorphism) | Planner supports polymorphic algorithm selection (CHOMP, STOMP, gradient descent, QP) through a common IPlanner interface |
-| R5 (Liskov) | All IK solver implementations conform to the same IIKSolver interface and produce IKResult regardless of solver type |
-| R6 (Interface) | Motion planning exposes narrow interfaces (ICollisionChecker, IIKSolver, ITrajectoryOptimizer, IPlanValidator) for testability |
-| R9 (Deterministic) | Same planning input must produce identical trajectory output for safety-critical paths; non-deterministic planning prohibited for L4+ paths |
-| R10 (Simpler Over Complex) | Default to joint-space planning with cubic splines. Use Cartesian or hybrid only when end-effector pose constraints require it |
-| R13 (Design for Failure) | Planning failures preserve search state for debugging. IK failure returns best-effort results. Collision-unavoidable returns closest approach analysis |
-| R14 (Paved Path) | Paved path: set goal â†’ check collisions â†’ solve IK â†’ optimize â†’ validate â†’ execute. Alternative planners available for specialized domains |
-| R15 (Testability) | Each planner module has independently testable input/output contracts. Plans are verifiable against ground-truth simulation outcomes |
-
-
+| R1 - Modulsingularity | Each motion planning concern (collision checking, IK, trajectory optimization, validation, execution) is a separate module with a single responsibility |
+| R2 - Dependency Order | Planner internal state (search trees, optimization variables) is encapsulated; consumers interact through MotionPlan interface only |
+| R3 - DRY | Collision checking, IK solving, trajectory optimization, and validation are orthogonal â€” each can be used independently or composed |
+| R4 - Builder Pattern | Planner supports polymorphic algorithm selection (CHOMP, STOMP, gradient descent, QP) through a common IPlanner interface |
+| R5 - Liskov Substitution | All IK solver implementations conform to the same IIKSolver interface and produce IKResult regardless of solver type |
+| R6 - DI over Singletons | Motion planning exposes narrow interfaces (ICollisionChecker, IIKSolver, ITrajectoryOptimizer, IPlanValidator) for testability |
+| R9 - Deterministic | Same planning input must produce identical trajectory output for safety-critical paths; non-deterministic planning prohibited for L4+ paths |
+| R10 - Simpler Over Complex | Default to joint-space planning with cubic splines. Use Cartesian or hybrid only when end-effector pose constraints require it |
+| R13 - Design for Failure | Planning failures preserve search state for debugging. IK failure returns best-effort results. Collision-unavoidable returns closest approach analysis |
+| R14 - Paved Path | Paved path: set goal â†’ check collisions â†’ solve IK â†’ optimize â†’ validate â†’ execute. Alternative planners available for specialized domains |
+| R15 - Open/Closed | Each planner module has independently testable input/output contracts. Plans are verifiable against ground-truth simulation outcomes |
 
 ## Design DNA
 

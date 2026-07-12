@@ -335,17 +335,17 @@ interface CriteriaRegistry {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| DEC.CriterionRegistered |   criterion_id, name, weight, category | New criterion added to registry |
-| DEC.CriterionUpdated |   criterion_id, updated_fields | Criterion definition changed |
-| DEC.CriterionArchived |   criterion_id, timestamp | Criterion deprecated and archived |
-| DEC.CriterionRestored |   criterion_id, timestamp | Archived criterion restored |
-| DEC.PreferenceOverridden |   criterion_id, old_weight, new_weight, scope, reason | Criterion weight changed |
-| DEC.SessionOverridesCleared |   session_id, override_count | All session overrides removed |
-| DEC.CriterionSetCreated |   set_id, name, criteria_count | New criterion set registered |
-| DEC.CriterionSetUpdated |   set_id, criteria_count | Criterion set modified |
-| DEC.CriterionSetDeleted |   set_id | Criterion set removed |
-| DEC.WeightsNormalized |   affected_criteria, total_before, total_after | Weights auto-normalized |
-| DEC.OverrideReverted |   criterion_id, restored_weight, session_id | Override removed, default restored |
+| DEC.CriterionRegistered |    criterion_id, name, weight, category | New criterion added to registry |
+| DEC.CriterionUpdated |    criterion_id, updated_fields | Criterion definition changed |
+| DEC.CriterionArchived |    criterion_id, timestamp | Criterion deprecated and archived |
+| DEC.CriterionRestored |    criterion_id, timestamp | Archived criterion restored |
+| DEC.PreferenceOverridden |    criterion_id, old_weight, new_weight, scope, reason | Criterion weight changed |
+| DEC.SessionOverridesCleared |    session_id, override_count | All session overrides removed |
+| DEC.CriterionSetCreated |    set_id, name, criteria_count | New criterion set registered |
+| DEC.CriterionSetUpdated |    set_id, criteria_count | Criterion set modified |
+| DEC.CriterionSetDeleted |    set_id | Criterion set removed |
+| DEC.WeightsNormalized |    affected_criteria, total_before, total_after | Weights auto-normalized |
+| DEC.OverrideReverted |    criterion_id, restored_weight, session_id | Override removed, default restored |
 
 ## Invariants
 

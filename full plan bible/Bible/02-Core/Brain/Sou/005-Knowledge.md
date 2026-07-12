@@ -174,15 +174,15 @@ Created â†’ Active â†’ Updated â†’ Archived (retention expired)
 
 ## Events
 
-| SOU.EventType |   Produced When | Fields |
+| SOU.EventType |    Produced When | Fields |
 |-----------|--------------|--------|
-| SOU.KnowledgeStored |   New knowledge is stored | knowledge_id, type, privacy_level |
-| SOU.KnowledgeRetrieved |   Knowledge is retrieved | knowledge_id, requester_id |
-| SOU.KnowledgeQueried |   Knowledge store is queried | query_id, query_type, result_count |
-| SOU.KnowledgeUpdated |   Existing knowledge is updated | knowledge_id, new_version, change_summary |
-| SOU.KnowledgeSharedWithAcademy |   Knowledge is shared with Academy | knowledge_id, submission_id |
-| SOU.KnowledgePruned |   Knowledge is pruned by retention policy | archived_count, policy_version |
-| SOU.KnowledgePrivacyBlocked |   Share attempt blocked by privacy filter | knowledge_id, privacy_rule |
+| SOU.KnowledgeStored |    New knowledge is stored | knowledge_id, type, privacy_level |
+| SOU.KnowledgeRetrieved |    Knowledge is retrieved | knowledge_id, requester_id |
+| SOU.KnowledgeQueried |    Knowledge store is queried | query_id, query_type, result_count |
+| SOU.KnowledgeUpdated |    Existing knowledge is updated | knowledge_id, new_version, change_summary |
+| SOU.KnowledgeSharedWithAcademy |    Knowledge is shared with Academy | knowledge_id, submission_id |
+| SOU.KnowledgePruned |    Knowledge is pruned by retention policy | archived_count, policy_version |
+| SOU.KnowledgePrivacyBlocked |    Share attempt blocked by privacy filter | knowledge_id, privacy_rule |
 
 ## Error Cases
 

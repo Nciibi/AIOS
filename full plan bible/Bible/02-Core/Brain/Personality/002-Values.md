@@ -222,16 +222,16 @@ interface ValueMatrixConfig {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PER.ValueMatrixLoaded |   value_count, constitutional_count | Value matrix loaded on startup |
-| PER.ValueConflict |   conflict_id, value_a, value_b, context | Two values came into conflict |
-| PER.ValueConflictResolved |   conflict_id, resolution, resolved_by | Conflict resolution completed |
-| PER.ValueImportanceEvolved |   value_id, old_importance, new_importance, reason | Value importance changed |
-| PER.ValueDecisionWeighted |   decision_id, chosen_option, top_values | Weighted decision made using values |
-| PER.ValueAccessed |   value_id, caller | Value read by component |
-| PER.ValueMatrixAmended |   amendment_type, affected_values, authority | Constitutional values amended |
-| PER.ValueConflictEscalated |   conflict_id, to_authority, reason | Conflict escalated to Security Council |
-| PER.ValueConflictDeferred |   conflict_id, defer_reason, deferred_until | Conflict deferred to later resolution |
-| PER.ValueImportanceClamped |   value_id, attempted_delta, clamped_delta | Evolution attempt clamped by bounds |
+| PER.ValueMatrixLoaded |    value_count, constitutional_count | Value matrix loaded on startup |
+| PER.ValueConflict |    conflict_id, value_a, value_b, context | Two values came into conflict |
+| PER.ValueConflictResolved |    conflict_id, resolution, resolved_by | Conflict resolution completed |
+| PER.ValueImportanceEvolved |    value_id, old_importance, new_importance, reason | Value importance changed |
+| PER.ValueDecisionWeighted |    decision_id, chosen_option, top_values | Weighted decision made using values |
+| PER.ValueAccessed |    value_id, caller | Value read by component |
+| PER.ValueMatrixAmended |    amendment_type, affected_values, authority | Constitutional values amended |
+| PER.ValueConflictEscalated |    conflict_id, to_authority, reason | Conflict escalated to Security Council |
+| PER.ValueConflictDeferred |    conflict_id, defer_reason, deferred_until | Conflict deferred to later resolution |
+| PER.ValueImportanceClamped |    value_id, attempted_delta, clamped_delta | Evolution attempt clamped by bounds |
 
 ## Invariants
 

@@ -200,21 +200,21 @@ interface KernelVersion {
 | KRN-INV-04 | Module load respects dependency ordering | ModuleHandler resolves DAG and loads in topological order |
 | KRN-INV-05 | Kernel parameters are validated against allowed list before apply | SysctlManager rejects unknown or dangerous parameter names |
 
-## Design DNA (table with Rule, Assessment â€” include R1,R2,R3,R4,R5,R6,R9,R10,R13,R14,R15)
+## Design DNA
 
 | Rule | Assessment |
-|------|------------|
-| R1 â€” Composition over Inheritance | Kernel configuration uses fragment composition; operations composed via agent orchestration |
-| R2 â€” Explicit over Implicit | All kernel config fragments and build flags are explicitly declared in desired state |
-| R3 â€” Immutable Artifacts | Kernel build outputs are immutable, content-addressed by hash |
-| R4 â€” Stateless Workers | KernelConfigurator agent is stateless; state stored in KernelConfig resource |
-| R5 â€” Idempotency | Every kernel operation is idempotent â€” configure, load, and param-set are safe to retry |
-| R6 â€” Observability | Every kernel mutation emits an event; sysctl reads are exposed via capability API |
-| R9 â€” Fail Closed | Compile failure or hash mismatch prevents deployment of untrusted kernel |
-| R10 â€” Least Privilege | Module loading and sysctl writes require explicit capability grants per host |
-| R13 â€” Graceful Degradation | If boot manager is unavailable, runtime sysctl changes still succeed |
-| R14 â€” Data Immutability | KernelConfig records are append-only; history preserved for audit |
-| R15 â€” Explicit Errors | Every failure mode has a typed error code and structured recovery |
+|------|-----------|
+| R1 - Modulsingularity | Kernel configuration uses fragment composition; operations composed via agent orchestration |
+| R2 - Dependency Order | All kernel config fragments and build flags are explicitly declared in desired state |
+| R3 - DRY | Kernel build outputs are immutable, content-addressed by hash |
+| R4 - Builder Pattern | KernelConfigurator agent is stateless; state stored in KernelConfig resource |
+| R5 - Liskov Substitution | Every kernel operation is idempotent â€” configure, load, and param-set are safe to retry |
+| R6 - DI over Singletons | Every kernel mutation emits an event; sysctl reads are exposed via capability API |
+| R9 - Deterministic | Compile failure or hash mismatch prevents deployment of untrusted kernel |
+| R10 - Simpler Over Complex | Module loading and sysctl writes require explicit capability grants per host |
+| R13 - Design for Failure | If boot manager is unavailable, runtime sysctl changes still succeed |
+| R14 - Paved Path | KernelConfig records are append-only; history preserved for audit |
+| R15 - Open/Closed | Every failure mode has a typed error code and structured recovery |
 
 ## Related Documents (table)
 

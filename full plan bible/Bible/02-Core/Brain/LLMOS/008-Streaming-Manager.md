@@ -139,9 +139,9 @@ Final chunk contains:
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| LLM.StreamChunk |   request_id, sequence, delta_length, cumulative_tokens, streaming_latency_ms | Every 10th chunk emitted |
-| LLM.StreamCompleted |   request_id, total_chunks, total_tokens, time_to_first_token_ms, tokens_per_second, finish_reason | Stream termination |
-| LLM.StreamError |   request_id, sequence_at_error, error_code, was_resumed | Mid-stream error |
+| LLM.StreamChunk |    request_id, sequence, delta_length, cumulative_tokens, streaming_latency_ms | Every 10th chunk emitted |
+| LLM.StreamCompleted |    request_id, total_chunks, total_tokens, time_to_first_token_ms, tokens_per_second, finish_reason | Stream termination |
+| LLM.StreamError |    request_id, sequence_at_error, error_code, was_resumed | Mid-stream error |
 
 
 ## Cross-Cutting Concerns

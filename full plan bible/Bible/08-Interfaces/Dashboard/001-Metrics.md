@@ -148,15 +148,15 @@ interface StalenessMonitor {
 
 ## Events
 
-| DASH.EventType |   Produced When | Fields |
+| DASH.EventType |    Produced When | Fields |
 |-------|--------|-------------|
-| DASH.MetricDefined |   metricId, name, source | New metric registered in catalog |
-| DASH.MetricQueried |   metricId, source, durationMs | Source query executed for metric |
-| DASH.MetricAggregated |   metricId, stepCount, outputType | Aggregation pipeline completed |
-| DASH.ValueBound |   metricId, evidenceRef, computedAt | Evidence reference attached to value |
-| DASH.MetricStale |   metricId, lastUpdated, threshold | Metric marked stale due to freshness timeout |
-| DASH.MetricRefreshed |   metricId, newValue | Stale metric received fresh data |
-| DASH.MetricError |   metricId, errorCode | Metric computation failed |
+| DASH.MetricDefined |    metricId, name, source | New metric registered in catalog |
+| DASH.MetricQueried |    metricId, source, durationMs | Source query executed for metric |
+| DASH.MetricAggregated |    metricId, stepCount, outputType | Aggregation pipeline completed |
+| DASH.ValueBound |    metricId, evidenceRef, computedAt | Evidence reference attached to value |
+| DASH.MetricStale |    metricId, lastUpdated, threshold | Metric marked stale due to freshness timeout |
+| DASH.MetricRefreshed |    metricId, newValue | Stale metric received fresh data |
+| DASH.MetricError |    metricId, errorCode | Metric computation failed |
 
 ## Error Cases
 

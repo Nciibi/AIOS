@@ -422,19 +422,19 @@ interface StreamEvent {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| VIS.VideoProcessingStarted |   request_id, duration_ms, analysis_type, frames_planned | Video processing began |
-| VIS.VideoFrameSelected |   request_id, frame_number, timestamp_ms, strategy | Frame selected for analysis |
-| VIS.VideoFrameAnalyzed |   request_id, frame_number, timestamp, description | Individual frame analyzed |
-| VIS.VideoEventDetected |   request_id, event_id, event_type, timestamp, confidence | Key event detected in video |
-| VIS.VideoProcessingCompleted |   request_id, frames_analyzed, events_detected, processing_time | Video processing finished |
-| VIS.VideoProcessingFailed |   request_id, error_code, stage, reason | Video processing failed |
-| VIS.VideoFrameLimitReached |   request_id, max_frames, strategy_adjusted | Frame limit enforced (VIS-007) |
-| VIS.VideoSummaryGenerated |   request_id, summary_length, frame_summaries_count | Video summary created |
-| VIS.VideoStreamConnected |   request_id, endpoint, frame_rate | Stream connection established |
-| VIS.VideoStreamDisconnected |   request_id, reason, duration | Stream connection terminated |
-| VIS.VideoStreamFrameDropped |   request_id, frame_number, reason | Frame dropped from stream buffer |
-| VIS.VideoSceneChange |   request_id, timestamp_ms, confidence | Scene transition detected |
-| VIS.VideoMotionDetected |   request_id, timestamp_ms, motion_score, region | Significant motion detected |
+| VIS.VideoProcessingStarted |    request_id, duration_ms, analysis_type, frames_planned | Video processing began |
+| VIS.VideoFrameSelected |    request_id, frame_number, timestamp_ms, strategy | Frame selected for analysis |
+| VIS.VideoFrameAnalyzed |    request_id, frame_number, timestamp, description | Individual frame analyzed |
+| VIS.VideoEventDetected |    request_id, event_id, event_type, timestamp, confidence | Key event detected in video |
+| VIS.VideoProcessingCompleted |    request_id, frames_analyzed, events_detected, processing_time | Video processing finished |
+| VIS.VideoProcessingFailed |    request_id, error_code, stage, reason | Video processing failed |
+| VIS.VideoFrameLimitReached |    request_id, max_frames, strategy_adjusted | Frame limit enforced (VIS-007) |
+| VIS.VideoSummaryGenerated |    request_id, summary_length, frame_summaries_count | Video summary created |
+| VIS.VideoStreamConnected |    request_id, endpoint, frame_rate | Stream connection established |
+| VIS.VideoStreamDisconnected |    request_id, reason, duration | Stream connection terminated |
+| VIS.VideoStreamFrameDropped |    request_id, frame_number, reason | Frame dropped from stream buffer |
+| VIS.VideoSceneChange |    request_id, timestamp_ms, confidence | Scene transition detected |
+| VIS.VideoMotionDetected |    request_id, timestamp_ms, motion_score, region | Significant motion detected |
 
 ## Invariants
 

@@ -244,15 +244,15 @@ ContextItem {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| CTX.ItemPushed |   item_id, source, item_type, priority | Item added to context window |
-| CTX.ItemExpired |   item_id, item_type, reason | Item evicted due to TTL |
-| CTX.WindowPulled |   session_id, item_count, total_tokens | Context window read by Sou |
-| CTX.WindowCompressed |   session_id, before_tokens, after_tokens, strategy | Compression triggered |
-| CTX.ItemPinned |   item_id, priority | Item pinned by Sou |
-| CTX.ItemUnpinned |   item_id | Pin removed |
-| CTX.BudgetUpdated |   session_id, new_budget | Token budget changed by LLMOS |
-| CTX.PriorityOverride |   item_id, old_priority, new_priority | Priority manually adjusted |
-| CTX.Deduplicated |   item_id, duplicate_of | Duplicate item removed |
+| CTX.ItemPushed |    item_id, source, item_type, priority | Item added to context window |
+| CTX.ItemExpired |    item_id, item_type, reason | Item evicted due to TTL |
+| CTX.WindowPulled |    session_id, item_count, total_tokens | Context window read by Sou |
+| CTX.WindowCompressed |    session_id, before_tokens, after_tokens, strategy | Compression triggered |
+| CTX.ItemPinned |    item_id, priority | Item pinned by Sou |
+| CTX.ItemUnpinned |    item_id | Pin removed |
+| CTX.BudgetUpdated |    session_id, new_budget | Token budget changed by LLMOS |
+| CTX.PriorityOverride |    item_id, old_priority, new_priority | Priority manually adjusted |
+| CTX.Deduplicated |    item_id, duplicate_of | Duplicate item removed |
 
 ## Invariants
 

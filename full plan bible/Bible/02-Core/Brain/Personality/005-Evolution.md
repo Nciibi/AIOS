@@ -357,17 +357,17 @@ interface PersonalityEvolutionConfig {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PER.EvolutionCycleStarted |   cycle_id, version, trigger | Evolution cycle began |
-| PER.EvolutionCycleCompleted |   cycle_id, version, changes_count, drift_score | Evolution cycle finished |
-| PER.EvolutionRecorded |   evolution_id, component, entity_id, delta | Personality change recorded |
-| PER.EvolutionSnapshotTaken |   version, checksum, components | Full personality snapshot stored |
-| PER.EvolutionDriftAlert |   drift_score, threshold, components | Drift exceeded threshold |
-| PER.EvolutionReverted |   from_version, to_version, reason | Personality reverted to earlier version |
-| PER.EvolutionBaselineChecked |   aligned, drift_score | Baseline alignment checked |
-| PER.EvolutionMoodModulation |   component, entity_id, original, modulated, mood | Temporary mood modulation applied |
-| PER.EvolutionVersionChanged |   old_version, new_version, change_count | Version number incremented |
-| PER.EvolutionHistoryPruned |   records_removed, oldest_kept | Evolution history pruned |
-| PER.EvolutionAcademyLearning |   lesson_id, changes_applied, lesson_strength | Academy lesson triggered evolution |
+| PER.EvolutionCycleStarted |    cycle_id, version, trigger | Evolution cycle began |
+| PER.EvolutionCycleCompleted |    cycle_id, version, changes_count, drift_score | Evolution cycle finished |
+| PER.EvolutionRecorded |    evolution_id, component, entity_id, delta | Personality change recorded |
+| PER.EvolutionSnapshotTaken |    version, checksum, components | Full personality snapshot stored |
+| PER.EvolutionDriftAlert |    drift_score, threshold, components | Drift exceeded threshold |
+| PER.EvolutionReverted |    from_version, to_version, reason | Personality reverted to earlier version |
+| PER.EvolutionBaselineChecked |    aligned, drift_score | Baseline alignment checked |
+| PER.EvolutionMoodModulation |    component, entity_id, original, modulated, mood | Temporary mood modulation applied |
+| PER.EvolutionVersionChanged |    old_version, new_version, change_count | Version number incremented |
+| PER.EvolutionHistoryPruned |    records_removed, oldest_kept | Evolution history pruned |
+| PER.EvolutionAcademyLearning |    lesson_id, changes_applied, lesson_strength | Academy lesson triggered evolution |
 
 ## Invariants
 

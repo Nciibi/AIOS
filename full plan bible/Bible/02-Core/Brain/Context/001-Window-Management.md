@@ -377,17 +377,17 @@ interface BudgetStatus {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| CTX.WindowInitialized |   session_id, window_id, max_tokens, section_count | Window created |
-| CTX.WindowPulled |   session_id, item_count, total_tokens, expired_count | Snapshot assembled and returned |
-| CTX.WindowClosing |   session_id, item_count, token_usage | Window about to close |
-| CTX.WindowCleared |   session_id, items_flushed, tokens_freed | Window destroyed |
-| CTX.WindowSuspended |   session_id, snapshot_size | Window paused |
-| CTX.WindowRestored |   session_id, turns_missed | Window resumed |
-| CTX.ItemPushed |   item_id, source, item_type, priority, section_type | Item added to window |
-| CTX.BudgetAdjusted |   session_id, old_max, new_max, reason | Token budget changed |
-| CTX.BudgetWarning |   session_id, total_tokens, max_tokens, usage_pct | Warning threshold reached |
-| CTX.BudgetEmergency |   session_id, total_tokens, items_evicted | Hard limit enforced |
-| CTX.SectionTruncated |   section_type, items_dropped, tokens_freed | Items removed during assembly |
+| CTX.WindowInitialized |    session_id, window_id, max_tokens, section_count | Window created |
+| CTX.WindowPulled |    session_id, item_count, total_tokens, expired_count | Snapshot assembled and returned |
+| CTX.WindowClosing |    session_id, item_count, token_usage | Window about to close |
+| CTX.WindowCleared |    session_id, items_flushed, tokens_freed | Window destroyed |
+| CTX.WindowSuspended |    session_id, snapshot_size | Window paused |
+| CTX.WindowRestored |    session_id, turns_missed | Window resumed |
+| CTX.ItemPushed |    item_id, source, item_type, priority, section_type | Item added to window |
+| CTX.BudgetAdjusted |    session_id, old_max, new_max, reason | Token budget changed |
+| CTX.BudgetWarning |    session_id, total_tokens, max_tokens, usage_pct | Warning threshold reached |
+| CTX.BudgetEmergency |    session_id, total_tokens, items_evicted | Hard limit enforced |
+| CTX.SectionTruncated |    section_type, items_dropped, tokens_freed | Items removed during assembly |
 
 ## Invariants
 

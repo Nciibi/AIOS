@@ -537,20 +537,20 @@ PipelineConfig defaultConfig = {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| DEC.PipelineStarted |   pipeline_id, request_id, stage_count, started_at | Pipeline evaluation initiated |
-| DEC.StageStarted |   pipeline_id, stage, started_at | Individual stage begins execution |
-| DEC.StageCompleted |   pipeline_id, stage, duration_ms, result_summary | Stage finished successfully |
-| DEC.StageSkipped |   pipeline_id, stage, error_code, reason | Stage skipped due to error strategy |
-| DEC.StageFailed |   pipeline_id, stage, error_code, attempt | Stage failed after retries exhausted |
-| DEC.StageRetrying |   pipeline_id, stage, attempt, backoff_ms | Stage is being retried |
-| DEC.PipelineCompleted |   pipeline_id, request_id, total_duration_ms, partial | Full pipeline execution finished |
-| DEC.PipelineFailed |   pipeline_id, request_id, failed_stage, error | Pipeline aborted due to unrecoverable error |
-| DEC.PipelineCancelled |   pipeline_id, request_id, reason | Pipeline halted by cancelEvaluation |
-| DEC.PipelineTimedOut |   pipeline_id, request_id, elapsed_ms, timeout_ms | Pipeline exceeded total_timeout |
-| DEC.DecisionFinalized |   request_id, pipeline_id, final_choice, previous_top_rank | Sou recorded final choice |
-| DEC.PartialResultEmitted |   pipeline_id, request_id, completed_stages, failed_stages | Partial results returned |
-| DEC.StageTimeoutExceeded |   pipeline_id, stage, timeout_ms, actual_ms | Individual stage exceeded its timeout |
-| DEC.AllOptionsEliminated |   pipeline_id, request_id, constraint_count | Hard constraints eliminated all options |
+| DEC.PipelineStarted |    pipeline_id, request_id, stage_count, started_at | Pipeline evaluation initiated |
+| DEC.StageStarted |    pipeline_id, stage, started_at | Individual stage begins execution |
+| DEC.StageCompleted |    pipeline_id, stage, duration_ms, result_summary | Stage finished successfully |
+| DEC.StageSkipped |    pipeline_id, stage, error_code, reason | Stage skipped due to error strategy |
+| DEC.StageFailed |    pipeline_id, stage, error_code, attempt | Stage failed after retries exhausted |
+| DEC.StageRetrying |    pipeline_id, stage, attempt, backoff_ms | Stage is being retried |
+| DEC.PipelineCompleted |    pipeline_id, request_id, total_duration_ms, partial | Full pipeline execution finished |
+| DEC.PipelineFailed |    pipeline_id, request_id, failed_stage, error | Pipeline aborted due to unrecoverable error |
+| DEC.PipelineCancelled |    pipeline_id, request_id, reason | Pipeline halted by cancelEvaluation |
+| DEC.PipelineTimedOut |    pipeline_id, request_id, elapsed_ms, timeout_ms | Pipeline exceeded total_timeout |
+| DEC.DecisionFinalized |    request_id, pipeline_id, final_choice, previous_top_rank | Sou recorded final choice |
+| DEC.PartialResultEmitted |    pipeline_id, request_id, completed_stages, failed_stages | Partial results returned |
+| DEC.StageTimeoutExceeded |    pipeline_id, stage, timeout_ms, actual_ms | Individual stage exceeded its timeout |
+| DEC.AllOptionsEliminated |    pipeline_id, request_id, constraint_count | Hard constraints eliminated all options |
 
 ## Invariants
 

@@ -503,15 +503,15 @@ interface TradeOffVisualizer {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| DEC.DECEvent |   request_id, option_count, criteria_count | Trade-off analysis initiated |
-| DEC.DECEvent |   request_id, trade_off_count, frontier_size | Analysis finished |
-| DEC.DECEvent |   request_id, pair_count | All pairwise comparisons done |
-| DEC.DECEvent |   request_id, frontier_options, dominated_options | Pareto frontier calculated |
-| DEC.DECEvent |   request_id, magnitude, criteria_pair, option_pair | Trade-off exceeds high threshold |
-| DEC.DECEvent |   request_id, dominator_id, dominated_id, criteria_superset | Option A dominates Option B |
-| DEC.DECEvent |   request_id, pair_count | No option dominates â€” trade-offs present |
-| DEC.DECEvent |   request_id, criterion_x, criterion_y, label | Custom trade-off type added |
-| DEC.DECEvent |   request_id | All options score identically |
+| DEC.DECEvent |    request_id, option_count, criteria_count | Trade-off analysis initiated |
+| DEC.DECEvent |    request_id, trade_off_count, frontier_size | Analysis finished |
+| DEC.DECEvent |    request_id, pair_count | All pairwise comparisons done |
+| DEC.DECEvent |    request_id, frontier_options, dominated_options | Pareto frontier calculated |
+| DEC.DECEvent |    request_id, magnitude, criteria_pair, option_pair | Trade-off exceeds high threshold |
+| DEC.DECEvent |    request_id, dominator_id, dominated_id, criteria_superset | Option A dominates Option B |
+| DEC.DECEvent |    request_id, pair_count | No option dominates â€” trade-offs present |
+| DEC.DECEvent |    request_id, criterion_x, criterion_y, label | Custom trade-off type added |
+| DEC.DECEvent |    request_id | All options score identically |
 
 ## Invariants
 

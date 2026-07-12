@@ -270,15 +270,15 @@ interface BuildError {
 
 ## Events
 
-| EMB.EventType |   Produced When | Fields |
+| EMB.EventType |    Produced When | Fields |
 |-----------|---------------|--------|
-| EMB.FirmwareProjectCreated |   A new firmware project is initialized from board profile | projectId, boardId, mcuFamily, templateVersion |
-| EMB.HALGenerated |   HAL abstraction layer code is generated | projectId, halVersion, interfaceCount |
-| EMB.DriverWritten |   A device driver is instantiated from template | projectId, driverName, peripheralType |
-| EMB.LinkerConfigured |   Linker script is tailored to target memory map | projectId, regionCount, totalSize |
-| EMB.BuildStarted |   Cross-compilation process begins | projectId, toolchain, targetArch, startTime |
-| EMB.BuildCompleted |   Build finishes with or without errors | projectId, binarySize, warningCount, success |
-| EMB.BuildFailed |   Build terminates due to compilation or linking errors | projectId, errorCount, firstError, logRef |
+| EMB.FirmwareProjectCreated |    A new firmware project is initialized from board profile | projectId, boardId, mcuFamily, templateVersion |
+| EMB.HALGenerated |    HAL abstraction layer code is generated | projectId, halVersion, interfaceCount |
+| EMB.DriverWritten |    A device driver is instantiated from template | projectId, driverName, peripheralType |
+| EMB.LinkerConfigured |    Linker script is tailored to target memory map | projectId, regionCount, totalSize |
+| EMB.BuildStarted |    Cross-compilation process begins | projectId, toolchain, targetArch, startTime |
+| EMB.BuildCompleted |    Build finishes with or without errors | projectId, binarySize, warningCount, success |
+| EMB.BuildFailed |    Build terminates due to compilation or linking errors | projectId, errorCount, firstError, logRef |
 
 ## Error Cases
 
@@ -303,23 +303,21 @@ interface BuildError {
 | EMB-FW-INV-005 | Interrupt vector table must cover all IRQs defined by the MCU profile | Generation uses the profile's IRQ count to size the table |
 | EMB-FW-INV-006 | Linker script memory regions must match the board's memory map exactly | Region bounds are validated against BoardDefinition before script output |
 
-## Design DNA (R1-R6,R9,R10,R13-R15)
+## Design DNA
 
-| Rule | Application |
-|------|-------------|
-| R1 â€” Target Bounded | Firmware generation is scoped to a single board profile; no multi-target abstractions leak |
-| R2 â€” Interchangeable Architecture | Board profiles can be swapped to produce firmware for different hardware without changing application logic |
-| R3 â€” Generic Operations | HAL, driver, and linker generation follow the same pipeline for all MCU families |
-| R4 â€” Composition over Inheritance | Drivers are composed of typed templates rather than inheriting from base classes |
-| R5 â€” Stable Intermediate Representation | FirmwareProject is the canonical IR passed between pipeline stages |
-| R6 â€” Temporal Synchronization | Each stage emits an event; downstream stages wait for prerequisite events before executing |
-| R9 â€” Stateless Verification | BuildCompleted and BuildFailed are deterministic for the same project and toolchain |
-| R10 â€” Capability-Based Routing | Driver selection and optimization level adapt based on available flash and RAM |
-| R13 â€” Event-Driven Consistency | BuildFailed events trigger automatic rollback to last known good configuration |
-| R14 â€” Code as Law | Linker script generation programmatically enforces memory region boundaries |
-| R15 â€” Provably Deterministic | SHA-256 of inputs matches SHA-256 of binary output across all runs |
-
-
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Firmware generation is scoped to a single board profile; no multi-target abstractions leak |
+| R2 - Dependency Order | Board profiles can be swapped to produce firmware for different hardware without changing application logic |
+| R3 - DRY | HAL, driver, and linker generation follow the same pipeline for all MCU families |
+| R4 - Builder Pattern | Drivers are composed of typed templates rather than inheriting from base classes |
+| R5 - Liskov Substitution | FirmwareProject is the canonical IR passed between pipeline stages |
+| R6 - DI over Singletons | Each stage emits an event; downstream stages wait for prerequisite events before executing |
+| R9 - Deterministic | BuildCompleted and BuildFailed are deterministic for the same project and toolchain |
+| R10 - Simpler Over Complex | Driver selection and optimization level adapt based on available flash and RAM |
+| R13 - Design for Failure | BuildFailed events trigger automatic rollback to last known good configuration |
+| R14 - Paved Path | Linker script generation programmatically enforces memory region boundaries |
+| R15 - Open/Closed | SHA-256 of inputs matches SHA-256 of binary output across all runs |
 
 ## Design DNA
 

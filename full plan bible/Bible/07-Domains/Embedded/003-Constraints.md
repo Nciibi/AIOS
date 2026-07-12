@@ -246,15 +246,15 @@ interface OptimizationEngine {
 
 ## Events
 
-| EMB.EventType |   Produced When | Fields |
+| EMB.EventType |    Produced When | Fields |
 |-----------|---------------|--------|
-| EMB.FlashAnalyzed |   Flash usage analysis completes | binaryId, usedFlash, totalFlash, utilizationPct |
-| EMB.RAMProfiled |   RAM profiling completes | binaryId, peakUsage, totalRam, heapFragmentation |
-| EMB.StackDepthChecked |   Stack depth analysis completes | binaryId, maxDepth, confidence, callChainDepth |
-| EMB.PowerEstimated |   Power consumption estimation completes | binaryId, averageMa, batteryHours, operatingMode |
-| EMB.TimingAnalyzed |   Timing analysis completes | binaryId, slack, deadlineMet, criticalPath |
-| EMB.ConstraintViolation |   One or more resource constraints are exceeded | binaryId, violations, category, severity |
-| EMB.OptimizationApplied |   An auto-fix optimization is applied to the project | binaryId, savingBytes, autoFixCount, recommendations |
+| EMB.FlashAnalyzed |    Flash usage analysis completes | binaryId, usedFlash, totalFlash, utilizationPct |
+| EMB.RAMProfiled |    RAM profiling completes | binaryId, peakUsage, totalRam, heapFragmentation |
+| EMB.StackDepthChecked |    Stack depth analysis completes | binaryId, maxDepth, confidence, callChainDepth |
+| EMB.PowerEstimated |    Power consumption estimation completes | binaryId, averageMa, batteryHours, operatingMode |
+| EMB.TimingAnalyzed |    Timing analysis completes | binaryId, slack, deadlineMet, criticalPath |
+| EMB.ConstraintViolation |    One or more resource constraints are exceeded | binaryId, violations, category, severity |
+| EMB.OptimizationApplied |    An auto-fix optimization is applied to the project | binaryId, savingBytes, autoFixCount, recommendations |
 
 ## Error Cases
 
@@ -279,23 +279,21 @@ interface OptimizationEngine {
 | EMB-CON-INV-005 | Timing slack must be non-negative for all critical paths identified | analyze_timing reports violation if slack < 0 |
 | EMB-CON-INV-006 | All optimization recommendations must include an estimated saving | Engine rejects recommendations with null or zero estimatedSaving |
 
-## Design DNA (R1-R6,R9,R10,R13-R15)
+## Design DNA
 
-| Rule | Application |
-|------|-------------|
-| R1 â€” Target Bounded | All constraint analysis is bounded by the target MCU profile's flash, RAM, clock, and power limits |
-| R2 â€” Interchangeable Architecture | Constraint budgets can be swapped by changing the target profile without altering the analysis engine |
-| R3 â€” Generic Operations | Flash, RAM, stack, power, and timing analysis follow the same pipeline for all binary formats |
-| R4 â€” Composition over Inheritance | Reports are composed from independent analyses rather than subclassed from a base report |
-| R5 â€” Stable Intermediate Representation | CombinedReports is the canonical IR passed between analysis stages and into optimization |
-| R6 â€” Temporal Synchronization | Events fire after each analysis completes; optimization waits for all five reports |
-| R9 â€” Stateless Verification | Constraint checks produce identical violations for the same binary and budget every time |
-| R10 â€” Capability-Based Routing | Optimization recommendations are ranked by impact relative to the specific device's capability bounds |
-| R13 â€” Event-Driven Consistency | ConstraintViolation events trigger automatic rollback or alternative generation passes |
-| R14 â€” Code as Law | Constraint budgets are enforced programmatically; no manual overrides bypass analysis |
-| R15 â€” Provably Deterministic | MD5 of binary + budget matches MD5 of all reports across all runs |
-
-
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | All constraint analysis is bounded by the target MCU profile's flash, RAM, clock, and power limits |
+| R2 - Dependency Order | Constraint budgets can be swapped by changing the target profile without altering the analysis engine |
+| R3 - DRY | Flash, RAM, stack, power, and timing analysis follow the same pipeline for all binary formats |
+| R4 - Builder Pattern | Reports are composed from independent analyses rather than subclassed from a base report |
+| R5 - Liskov Substitution | CombinedReports is the canonical IR passed between analysis stages and into optimization |
+| R6 - DI over Singletons | Events fire after each analysis completes; optimization waits for all five reports |
+| R9 - Deterministic | Constraint checks produce identical violations for the same binary and budget every time |
+| R10 - Simpler Over Complex | Optimization recommendations are ranked by impact relative to the specific device's capability bounds |
+| R13 - Design for Failure | ConstraintViolation events trigger automatic rollback or alternative generation passes |
+| R14 - Paved Path | Constraint budgets are enforced programmatically; no manual overrides bypass analysis |
+| R15 - Open/Closed | MD5 of binary + budget matches MD5 of all reports across all runs |
 
 ## Design DNA
 

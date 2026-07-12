@@ -305,16 +305,16 @@ interface InvocationManager {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| TOL.InvocationCreated |   invocation_id, tool_id, execution_type, source | Invocation request created |
-| TOL.InvocationValidated |   invocation_id, validation_result | Parameter validation passed |
-| TOL.InvocationDispatched |   invocation_id, tool_id, endpoint, deadline | Invocation sent to Runtime SDK |
-| TOL.InvocationCompleted |   invocation_id, status, duration_ms, token_cost | Invocation finished successfully |
-| TOL.InvocationFailed |   invocation_id, error_code, stage, error_message | Invocation failed at a stage |
-| TOL.InvocationTimeout |   invocation_id, deadline, elapsed_ms | Invocation exceeded deadline |
-| TOL.InvocationCancelled |   invocation_id, stage, reason | Invocation cancelled by caller |
-| TOL.InvocationRetrying |   invocation_id, attempt, max_retries, delay_ms | Retrying failed invocation |
-| TOL.InvocationQueued |   invocation_id, reason, queue_position | Invocation queued due to rate limit |
-| TOL.RateLimitExceeded |   tool_id, current_usage, limit, reset_in_ms | Rate limit hit for a tool |
+| TOL.InvocationCreated |    invocation_id, tool_id, execution_type, source | Invocation request created |
+| TOL.InvocationValidated |    invocation_id, validation_result | Parameter validation passed |
+| TOL.InvocationDispatched |    invocation_id, tool_id, endpoint, deadline | Invocation sent to Runtime SDK |
+| TOL.InvocationCompleted |    invocation_id, status, duration_ms, token_cost | Invocation finished successfully |
+| TOL.InvocationFailed |    invocation_id, error_code, stage, error_message | Invocation failed at a stage |
+| TOL.InvocationTimeout |    invocation_id, deadline, elapsed_ms | Invocation exceeded deadline |
+| TOL.InvocationCancelled |    invocation_id, stage, reason | Invocation cancelled by caller |
+| TOL.InvocationRetrying |    invocation_id, attempt, max_retries, delay_ms | Retrying failed invocation |
+| TOL.InvocationQueued |    invocation_id, reason, queue_position | Invocation queued due to rate limit |
+| TOL.RateLimitExceeded |    tool_id, current_usage, limit, reset_in_ms | Rate limit hit for a tool |
 
 ## Invariants
 

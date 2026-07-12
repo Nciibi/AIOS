@@ -178,17 +178,17 @@ interface FailureManager {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.MSNEvent |   failure_id, mission_id, method, details | Failure detected |
-| MSN.MSNEvent |   failure_id, category, severity, root_cause | Failure classified |
-| MSN.MSNEvent |   failure_id, attempt_number, backoff_ms | Auto-retry scheduled |
-| MSN.MSNEvent |   failure_id, attempt_number, success | Auto-retry succeeds |
-| MSN.MSNEvent |   failure_id, attempts_made, last_error | All retries exhausted |
-| MSN.MSNEvent |   failure_id, level, escalated_to | Escalation triggered |
-| MSN.MSNEvent |   failure_id, strategy_type, checkpoint_ref | Recovery begins |
-| MSN.MSNEvent |   failure_id, strategy_type, outcome | Recovery succeeds |
-| MSN.MSNEvent |   failure_id, strategy_type, error | Recovery fails |
-| MSN.MSNEvent |   failure_id, failed_count, total_count, isolated_milestones | Partial failure |
-| MSN.MSNEvent |   failure_id, source_mission, affected_missions | Cascading failure |
+| MSN.MSNEvent |    failure_id, mission_id, method, details | Failure detected |
+| MSN.MSNEvent |    failure_id, category, severity, root_cause | Failure classified |
+| MSN.MSNEvent |    failure_id, attempt_number, backoff_ms | Auto-retry scheduled |
+| MSN.MSNEvent |    failure_id, attempt_number, success | Auto-retry succeeds |
+| MSN.MSNEvent |    failure_id, attempts_made, last_error | All retries exhausted |
+| MSN.MSNEvent |    failure_id, level, escalated_to | Escalation triggered |
+| MSN.MSNEvent |    failure_id, strategy_type, checkpoint_ref | Recovery begins |
+| MSN.MSNEvent |    failure_id, strategy_type, outcome | Recovery succeeds |
+| MSN.MSNEvent |    failure_id, strategy_type, error | Recovery fails |
+| MSN.MSNEvent |    failure_id, failed_count, total_count, isolated_milestones | Partial failure |
+| MSN.MSNEvent |    failure_id, source_mission, affected_missions | Cascading failure |
 
 ## Error Cases
 

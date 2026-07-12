@@ -191,16 +191,16 @@ interface ROSInterfaceField {
 
 ## Events
 
-| ROB.EventType |   Produced When | Fields |
+| ROB.EventType |    Produced When | Fields |
 |-----------|--------------|--------|
-| ROB.ROSPackageCreated |   ROS package scaffold is generated | package_id, package_name, version, build_type, node_count, interface_count |
-| ROB.ROSNodeGenerated |   ROS node source code is generated | node_id, node_name, language, package_name, publisher_count, subscriber_count, service_count, action_count |
-| ROB.ROSInterfaceDefined |   ROS msg/srv/action interface is created | interface_id, interface_name, interface_type, field_count, package_name |
-| ROB.ROSGraphUpdated |   ROS topic/service graph is modified | graph_id, node_name, added_topics, removed_topics, added_services, removed_services |
-| ROB.ROSLaunchDeployed |   Launch file is deployed and nodes start | launch_id, launch_file, node_count, target_platform, deployment_time_ms |
-| ROB.ROSSecurityConfigured |   DDS security configuration is applied | config_id, domain_id, transport, security_enabled, package_name |
-| ROB.ROSBuildCompleted |   ROS package build finishes | build_id, package_name, success, error_count, warning_count, build_time_ms |
-| ROB.ROSPackageValidated |   ROS package validation completes | validation_id, package_name, is_valid, errors, warnings |
+| ROB.ROSPackageCreated |    ROS package scaffold is generated | package_id, package_name, version, build_type, node_count, interface_count |
+| ROB.ROSNodeGenerated |    ROS node source code is generated | node_id, node_name, language, package_name, publisher_count, subscriber_count, service_count, action_count |
+| ROB.ROSInterfaceDefined |    ROS msg/srv/action interface is created | interface_id, interface_name, interface_type, field_count, package_name |
+| ROB.ROSGraphUpdated |    ROS topic/service graph is modified | graph_id, node_name, added_topics, removed_topics, added_services, removed_services |
+| ROB.ROSLaunchDeployed |    Launch file is deployed and nodes start | launch_id, launch_file, node_count, target_platform, deployment_time_ms |
+| ROB.ROSSecurityConfigured |    DDS security configuration is applied | config_id, domain_id, transport, security_enabled, package_name |
+| ROB.ROSBuildCompleted |    ROS package build finishes | build_id, package_name, success, error_count, warning_count, build_time_ms |
+| ROB.ROSPackageValidated |    ROS package validation completes | validation_id, package_name, is_valid, errors, warnings |
 
 ## Error Cases
 
@@ -226,23 +226,21 @@ interface ROSInterfaceField {
 | ROB-ROS-I-005 | Launch file completeness â€” every node referenced in a launch file must have a corresponding generated node definition | Cross-reference validation between launch file and package node list. Missing nodes trigger error. |
 | ROB-ROS-I-006 | Security certificate validity â€” DDS security certificates must not be expired at time of deployment | Certificate expiration check before deployment. Expired certificates block deployment and trigger renewal workflow. |
 
-## Design DNA (R1-R6,R9,R10,R13-R15)
+## Design DNA
 
-| Rule | Compliance |
+| Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Each ROS capability (package generation, node generation, interface management, launch generation, DDS config) is a separate module with a single responsibility |
-| R2 (Encapsulation) | ROS package internals (source files, build artifacts) are encapsulated within the package boundary; external access only through defined interfaces |
-| R3 (Orthogonality) | Package generation, node generation, interface definition, launch generation, and DDS configuration are orthogonal â€” any combination can be used independently |
-| R4 (Polymorphism) | Generated nodes support both C++ and Python languages through polymorphic code generation templates |
-| R5 (Liskov) | All generated ROS nodes conform to the ROSNode interface contract regardless of language or execution context |
-| R6 (Interface) | ROS integration exposes narrow interfaces (IPackageGenerator, INodeGenerator) that decouple consumers from generation internals |
-| R9 (Deterministic) | Same ROS specification input produces identical package output every time â€” no randomness in code generation |
-| R10 (Simpler Over Complex) | Use package defaults where possible; only require explicit configuration when deviating from ROS community standards |
-| R13 (Design for Failure) | Package build failures preserve full build logs and intermediate artifacts for debugging; validation catches errors before build |
-| R14 (Paved Path) | Paved path: specify interfaces â†’ generate package â†’ build â†’ validate â†’ deploy. Alternative paths available for advanced use cases |
-| R15 (Testability) | Each generator module has independently testable output; generated nodes can be unit tested without ROS runtime |
-
-
+| R1 - Modulsingularity | Each ROS capability (package generation, node generation, interface management, launch generation, DDS config) is a separate module with a single responsibility |
+| R2 - Dependency Order | ROS package internals (source files, build artifacts) are encapsulated within the package boundary; external access only through defined interfaces |
+| R3 - DRY | Package generation, node generation, interface definition, launch generation, and DDS configuration are orthogonal â€” any combination can be used independently |
+| R4 - Builder Pattern | Generated nodes support both C++ and Python languages through polymorphic code generation templates |
+| R5 - Liskov Substitution | All generated ROS nodes conform to the ROSNode interface contract regardless of language or execution context |
+| R6 - DI over Singletons | ROS integration exposes narrow interfaces (IPackageGenerator, INodeGenerator) that decouple consumers from generation internals |
+| R9 - Deterministic | Same ROS specification input produces identical package output every time â€” no randomness in code generation |
+| R10 - Simpler Over Complex | Use package defaults where possible; only require explicit configuration when deviating from ROS community standards |
+| R13 - Design for Failure | Package build failures preserve full build logs and intermediate artifacts for debugging; validation catches errors before build |
+| R14 - Paved Path | Paved path: specify interfaces â†’ generate package â†’ build â†’ validate â†’ deploy. Alternative paths available for advanced use cases |
+| R15 - Open/Closed | Each generator module has independently testable output; generated nodes can be unit tested without ROS runtime |
 
 ## Design DNA
 

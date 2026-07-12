@@ -282,15 +282,15 @@ interface ProcedureOutcome {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| MEM.MEMEvent |   procedure_id, name, category, domain | New procedure created |
-| MEM.MEMEvent |   procedure_id, version, updated_fields | Procedure content changed |
-| MEM.MEMEvent |   procedure_id, category, reason | Procedure removed |
-| MEM.MEMEvent |   procedure_id, success_rate_after, duration_ms | Procedure was used |
-| MEM.MEMEvent |   procedure_id, outcome, new_success_rate | Outcome recorded |
-| MEM.MEMEvent |   procedure_id, reason, current_success_rate | Procedure needs review |
-| MEM.MEMEvent |   procedure_id, replacement_id?, reason | Procedure retired |
-| MEM.MEMEvent |   template_id, new_procedure_id, parameters | Template expanded |
-| MEM.MEMEvent |   context_signals, results_count, latency_ms | Context-based prefetch |
+| MEM.MEMEvent |    procedure_id, name, category, domain | New procedure created |
+| MEM.MEMEvent |    procedure_id, version, updated_fields | Procedure content changed |
+| MEM.MEMEvent |    procedure_id, category, reason | Procedure removed |
+| MEM.MEMEvent |    procedure_id, success_rate_after, duration_ms | Procedure was used |
+| MEM.MEMEvent |    procedure_id, outcome, new_success_rate | Outcome recorded |
+| MEM.MEMEvent |    procedure_id, reason, current_success_rate | Procedure needs review |
+| MEM.MEMEvent |    procedure_id, replacement_id?, reason | Procedure retired |
+| MEM.MEMEvent |    template_id, new_procedure_id, parameters | Template expanded |
+| MEM.MEMEvent |    context_signals, results_count, latency_ms | Context-based prefetch |
 
 ## Invariants
 

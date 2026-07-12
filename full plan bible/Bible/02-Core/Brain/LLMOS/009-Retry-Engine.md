@@ -199,10 +199,10 @@ interface CircuitBreakerState {
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| LLM.ProviderCalled |   request_id, model_id, provider, attempt_number, is_fallback, latency_ms, tokens_consumed | Each provider API call |
-| LLM.ProviderRetry |   request_id, attempt_number, error_code, backoff_ms, fallback_activated | Before retry attempt |
-| LLM.CircuitBreakerOpened |   model_id, provider, failure_count, opened_at | Circuit opens |
-| LLM.CircuitBreakerClosed |   model_id, provider, recovery_success_count, closed_at | Circuit recovers |
+| LLM.ProviderCalled |    request_id, model_id, provider, attempt_number, is_fallback, latency_ms, tokens_consumed | Each provider API call |
+| LLM.ProviderRetry |    request_id, attempt_number, error_code, backoff_ms, fallback_activated | Before retry attempt |
+| LLM.CircuitBreakerOpened |    model_id, provider, failure_count, opened_at | Circuit opens |
+| LLM.CircuitBreakerClosed |    model_id, provider, recovery_success_count, closed_at | Circuit recovers |
 
 
 ## Cross-Cutting Concerns

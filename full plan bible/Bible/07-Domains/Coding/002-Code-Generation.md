@@ -171,15 +171,15 @@ enum FragmentType {
 
 ## Events
 
-| COD.EventType |   Produced When | Fields |
+| COD.EventType |    Produced When | Fields |
 |-----------|--------------|--------|
-| COD.CodeGenStarted |   A generation request enters the pipeline | request_id, worker_id, language_id, generation_type, estimated_tokens |
-| COD.CodeGenCompleted |   Generation produces output successfully | request_id, language_id, tokens_used, confidence, duration_ms |
-| COD.CodeGenValidated |   Generated output passes syntax validation | request_id, lint_errors, validation_duration_ms |
-| COD.CodeGenFailed |   Generation pipeline encounters an error | request_id, error_code, error_message, retry_count |
-| COD.CodeGenRetried |   Generation is retried after failure | request_id, retry_attempt, adjusted_params |
-| COD.CodeGenOverflow |   Context window limit is exceeded | request_id, context_size, max_size, overflow_strategy |
-| COD.CodeGenFormatted |   Generated code is formatted | request_id, formatter_name, formatting_duration_ms |
+| COD.CodeGenStarted |    A generation request enters the pipeline | request_id, worker_id, language_id, generation_type, estimated_tokens |
+| COD.CodeGenCompleted |    Generation produces output successfully | request_id, language_id, tokens_used, confidence, duration_ms |
+| COD.CodeGenValidated |    Generated output passes syntax validation | request_id, lint_errors, validation_duration_ms |
+| COD.CodeGenFailed |    Generation pipeline encounters an error | request_id, error_code, error_message, retry_count |
+| COD.CodeGenRetried |    Generation is retried after failure | request_id, retry_attempt, adjusted_params |
+| COD.CodeGenOverflow |    Context window limit is exceeded | request_id, context_size, max_size, overflow_strategy |
+| COD.CodeGenFormatted |    Generated code is formatted | request_id, formatter_name, formatting_duration_ms |
 
 ## Error Cases
 

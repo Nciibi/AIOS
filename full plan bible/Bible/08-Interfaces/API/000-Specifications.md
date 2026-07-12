@@ -197,13 +197,13 @@ Every API must have automated conformance tests:
 
 ## Events
 
-| API.EventType |   Produced When | Fields |
+| API.EventType |    Produced When | Fields |
 |-----------|--------------|--------|
-| API.ContractPublished |   New API contract is registered | contract_id, api_name, version, category |
-| API.ContractDeprecated |   API version is deprecated | contract_id, deprecation_date, migration_target |
-| API.RequestProcessed |   API request completes (all categories) | message_id, api_name, duration_ms, status_code |
-| API.RateLimitExceeded |   Entity exceeds API rate limit | entity_id, api_name, limit, period, retry_after |
-| API.SchemaValidationFailed |   Request payload fails schema validation | message_id, api_name, validation_errors |
+| API.ContractPublished |    New API contract is registered | contract_id, api_name, version, category |
+| API.ContractDeprecated |    API version is deprecated | contract_id, deprecation_date, migration_target |
+| API.RequestProcessed |    API request completes (all categories) | message_id, api_name, duration_ms, status_code |
+| API.RateLimitExceeded |    Entity exceeds API rate limit | entity_id, api_name, limit, period, retry_after |
+| API.SchemaValidationFailed |    Request payload fails schema validation | message_id, api_name, validation_errors |
 
 ## API Governance
 

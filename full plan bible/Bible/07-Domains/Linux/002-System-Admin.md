@@ -192,21 +192,21 @@ interface SelinuxContext {
 | SYS-INV-05 | Filesystem state is reconciled against fstab | FsHandler ensures fstab is updated before mount |
 | SYS-INV-06 | Playbook execution produces an auditable RunbookRecord | Engine records every operation outcome with timestamp |
 
-## Design DNA (table with Rule, Assessment â€” include R1,R2,R3,R4,R5,R6,R9,R10,R13,R14,R15)
+## Design DNA
 
 | Rule | Assessment |
-|------|------------|
-| R1 â€” Composition over Inheritance | Playbooks compose individual operations; handlers delegate to platform-specific implementations |
-| R2 â€” Explicit over Implicit | All desired state is declared in resource manifests; no magic defaults |
-| R3 â€” Immutable Artifacts | Package versions pinned by hash or explicit version; playbooks immutable after execution |
-| R4 â€” Stateless Workers | SysAdminWorker is stateless; state lives in resource manifests |
-| R5 â€” Idempotency | Every operation checks current state before applying change |
-| R6 â€” Observability | Every mutation emits a typed event; dry-run provides full diff |
-| R9 â€” Fail Closed | Playbook halts on first error; partial apply requires explicit rollback config |
-| R10 â€” Least Privilege | Each operation runs with minimum required privileges; escalation explicit |
-| R13 â€” Graceful Degradation | If package repo is down, system still serves already-deployed configs |
-| R14 â€” Data Immutability | RunbookRecords are append-only; past operations never mutated |
-| R15 â€” Explicit Errors | Every failure returns structured error code and recovery hint |
+|------|-----------|
+| R1 - Modulsingularity | Playbooks compose individual operations; handlers delegate to platform-specific implementations |
+| R2 - Dependency Order | All desired state is declared in resource manifests; no magic defaults |
+| R3 - DRY | Package versions pinned by hash or explicit version; playbooks immutable after execution |
+| R4 - Builder Pattern | SysAdminWorker is stateless; state lives in resource manifests |
+| R5 - Liskov Substitution | Every operation checks current state before applying change |
+| R6 - DI over Singletons | Every mutation emits a typed event; dry-run provides full diff |
+| R9 - Deterministic | Playbook halts on first error; partial apply requires explicit rollback config |
+| R10 - Simpler Over Complex | Each operation runs with minimum required privileges; escalation explicit |
+| R13 - Design for Failure | If package repo is down, system still serves already-deployed configs |
+| R14 - Paved Path | RunbookRecords are append-only; past operations never mutated |
+| R15 - Open/Closed | Every failure returns structured error code and recovery hint |
 
 ## Related Documents (table)
 

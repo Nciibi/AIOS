@@ -245,20 +245,20 @@ Enforcement Gateway checks budget via checkBudget()
 
 ## Events
 
-| ECON.EventType |   Produced When | Fields |
+| ECON.EventType |    Produced When | Fields |
 |-------|--------|-------------|
-| ECON.BudgetCreated |   budgetId, ownerId, totalAmount | New budget registered |
-| ECON.BudgetActivated |   budgetId, effectiveFrom | Budget entered Active phase |
-| ECON.FundsReserved |   budgetId, amount, consumerId | Funds reserved for upcoming spend |
-| ECON.SpendCommitted |   budgetId, amount, consumerId, resourceType | Actual spending recorded |
-| ECON.BudgetThresholdWarning |   budgetId, spentPercentage, threshold | Spending approached configurable threshold |
-| ECON.BudgetExhausted |   budgetId, totalSpent, totalBudget | Budget fully consumed |
-| ECON.BudgetFrozen |   budgetId, reason | Budget suspended pending review |
-| ECON.BudgetClosed |   budgetId, finalReport | Budget period ended, final report generated |
-| ECON.PriceSheetUpdated |   priceSheetId, effectiveFrom, changes | Resource prices changed |
-| ECON.OverageAllowed |   budgetId, amount | Overage policy triggered |
-| ECON.OverageDenied |   budgetId, amount, consumerId | Spend denied due to insufficient budget |
-| ECON.CostReportGenerated |   reportId, period, totalSpend | Periodic cost report ready |
+| ECON.BudgetCreated |    budgetId, ownerId, totalAmount | New budget registered |
+| ECON.BudgetActivated |    budgetId, effectiveFrom | Budget entered Active phase |
+| ECON.FundsReserved |    budgetId, amount, consumerId | Funds reserved for upcoming spend |
+| ECON.SpendCommitted |    budgetId, amount, consumerId, resourceType | Actual spending recorded |
+| ECON.BudgetThresholdWarning |    budgetId, spentPercentage, threshold | Spending approached configurable threshold |
+| ECON.BudgetExhausted |    budgetId, totalSpent, totalBudget | Budget fully consumed |
+| ECON.BudgetFrozen |    budgetId, reason | Budget suspended pending review |
+| ECON.BudgetClosed |    budgetId, finalReport | Budget period ended, final report generated |
+| ECON.PriceSheetUpdated |    priceSheetId, effectiveFrom, changes | Resource prices changed |
+| ECON.OverageAllowed |    budgetId, amount | Overage policy triggered |
+| ECON.OverageDenied |    budgetId, amount, consumerId | Spend denied due to insufficient budget |
+| ECON.CostReportGenerated |    reportId, period, totalSpend | Periodic cost report ready |
 
 ## Error Cases
 

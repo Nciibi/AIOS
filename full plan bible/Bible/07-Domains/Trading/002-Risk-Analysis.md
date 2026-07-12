@@ -133,15 +133,15 @@ interface CorrelationMatrix {
 
 ## Events
 
-| TRD.EventType |   Produced When | Fields |
+| TRD.EventType |    Produced When | Fields |
 |-------|----------|---------|
-| TRD.RiskMetricsCalculated |   RiskEngine: portfolioId, metrics, method | Published after risk metric computation |
-| TRD.VaRComputed |   VaRCalculator: portfolioId, varResult | Fired when VaR is recalculated |
-| TRD.StressTestRun |   StressTestRunner: portfolioId, scenarios, summary | Emitted after stress test completion |
-| TRD.ExposureUpdated |   ExposureTracker: portfolioId, report | Published on exposure change |
-| TRD.LimitBreached |   LimitEnforcer: limitId, scope, currentValue, maxValue | Fired when any limit threshold is crossed |
-| TRD.LimitRestored |   LimitEnforcer: limitId, scope, currentValue | Fired when a breached limit recovers |
-| TRD.CorrelationUpdated |   RiskEngine: matrixId, pairs | Emitted when correlation matrix is refreshed |
+| TRD.RiskMetricsCalculated |    RiskEngine: portfolioId, metrics, method | Published after risk metric computation |
+| TRD.VaRComputed |    VaRCalculator: portfolioId, varResult | Fired when VaR is recalculated |
+| TRD.StressTestRun |    StressTestRunner: portfolioId, scenarios, summary | Emitted after stress test completion |
+| TRD.ExposureUpdated |    ExposureTracker: portfolioId, report | Published on exposure change |
+| TRD.LimitBreached |    LimitEnforcer: limitId, scope, currentValue, maxValue | Fired when any limit threshold is crossed |
+| TRD.LimitRestored |    LimitEnforcer: limitId, scope, currentValue | Fired when a breached limit recovers |
+| TRD.CorrelationUpdated |    RiskEngine: matrixId, pairs | Emitted when correlation matrix is refreshed |
 
 ## Error Cases
 
@@ -166,21 +166,21 @@ interface CorrelationMatrix {
 | TRD-RSK-INV-005 | Correlation matrix must be recomputed at least once per trading day | Scheduled job in RiskEngine |
 | TRD-RSK-INV-006 | Stress scenarios must cover at least 5 distinct shock types (equity, FX, rates, credit, commodity) | Validation check on scenario registration |
 
-## Design DNA (R1-R6,R9,R10,R13-R15)
+## Design DNA
 
-- **R1 â€” Single Source of Truth**: Position limits and exposure data are sourced from the canonical Portfolio state.
-- **R2 â€” Immutable Event Log**: Every limit breach and risk computation is recorded as an immutable event.
-- **R3 â€” Capability-Based Authorization**: Hard limit override requires RiskAdmin capability; all overrides are logged.
-- **R4 â€” Law of Diminishing Returns**: Computational budget for stress testing is proportional to portfolio complexity.
-- **R5 â€” Deterministic Computation**: VaR and correlation computations are reproducible from identical input snapshots.
-- **R6 â€” Bounded Context**: Risk Analysis owns limits and risk models; portfolio construction belongs to Portfolio Management.
-- **R9 â€” Fail-Fast**: Pre-trade risk checks reject orders immediately; never queue for deferred validation.
-- **R10 â€” Audit Trail**: Every risk decision, limit change, and override is recorded with full identity context.
-- **R13 â€” Defensive Design**: Correlated model failures cause fallback to conservative parametric VaR.
-- **R14 â€” Self-Healing**: On transient correlation matrix failure, the previous valid matrix is reused with a staleness flag.
-- **R15 â€” Backward Compatibility**: Risk metric schemas and scenario definitions maintain versioned migration paths.
-
-
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Design DNA
 

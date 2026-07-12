@@ -137,14 +137,14 @@ enum SupportLevel {
 
 ## Events
 
-| COD.EventType |   Produced When | Fields |
+| COD.EventType |    Produced When | Fields |
 |-----------|--------------|--------|
-| COD.LanguageRegistered |   A new language is added to the registry | language_id, display_name, toolchain_count, support_level |
-| COD.LanguageUnregistered |   A language is removed from the registry | language_id, reason, affected_worker_count |
-| COD.ToolchainVerified |   A toolchain runtime is verified successfully | toolchain_id, language_id, version, platform, duration_ms |
-| COD.ToolchainFailed |   Toolchain verification fails | toolchain_id, language_id, error_output, retry_count |
-| COD.ProfileResolved |   A language profile is resolved for a Worker | worker_id, language_id, toolchain_id, capability_count |
-| COD.RuntimeDetected |   Runtime is auto-detected in a BuildSandbox | sandbox_id, detected_runtimes, version_map |
+| COD.LanguageRegistered |    A new language is added to the registry | language_id, display_name, toolchain_count, support_level |
+| COD.LanguageUnregistered |    A language is removed from the registry | language_id, reason, affected_worker_count |
+| COD.ToolchainVerified |    A toolchain runtime is verified successfully | toolchain_id, language_id, version, platform, duration_ms |
+| COD.ToolchainFailed |    Toolchain verification fails | toolchain_id, language_id, error_output, retry_count |
+| COD.ProfileResolved |    A language profile is resolved for a Worker | worker_id, language_id, toolchain_id, capability_count |
+| COD.RuntimeDetected |    Runtime is auto-detected in a BuildSandbox | sandbox_id, detected_runtimes, version_map |
 
 ## Error Cases
 

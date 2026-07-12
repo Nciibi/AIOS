@@ -150,15 +150,15 @@ interface InheritanceResolver {
 
 ## Events
 
-| UI.EventType |   Produced When | Fields |
+| UI.EventType |    Produced When | Fields |
 |-------|--------|-------------|
-| UI.ThemeDefined |   themeId, name, variant, baseThemeId | New theme variant registered |
-| UI.ThemeApplied |   themeId, resolvedTokens, duration | Theme activated and tokens applied |
-| UI.ThemeSwitched |   fromThemeId, toThemeId, strategy | Theme transition completed |
-| UI.PreferencePersisted |   humanId, themeId, source | User theme choice saved |
-| UI.TokenMissingInTheme |   themeId, tokenName, fallbackValue | Token not defined in theme; falling back to base |
-| UI.InheritanceResolved |   themeId, layers, totalTokens | Inheritance chain computed successfully |
-| UI.ThemeRolledBack |   themeId, previousThemeId, reason | Theme application failed; rolled back |
+| UI.ThemeDefined |    themeId, name, variant, baseThemeId | New theme variant registered |
+| UI.ThemeApplied |    themeId, resolvedTokens, duration | Theme activated and tokens applied |
+| UI.ThemeSwitched |    fromThemeId, toThemeId, strategy | Theme transition completed |
+| UI.PreferencePersisted |    humanId, themeId, source | User theme choice saved |
+| UI.TokenMissingInTheme |    themeId, tokenName, fallbackValue | Token not defined in theme; falling back to base |
+| UI.InheritanceResolved |    themeId, layers, totalTokens | Inheritance chain computed successfully |
+| UI.ThemeRolledBack |    themeId, previousThemeId, reason | Theme application failed; rolled back |
 
 ## Error Cases
 

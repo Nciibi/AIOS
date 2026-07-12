@@ -164,15 +164,15 @@ interface ClockConfiguration {
 
 ## Events
 
-| EMB.EventType |   Produced When | Fields |
+| EMB.EventType |    Produced When | Fields |
 |-----------|---------------|--------|
-| EMB.DeviceRegistered |   A new device is added to the registry | deviceId, boardId, registeredAt, registeredBy |
-| EMB.MCUDetected |   An MCU is detected and profile-matched | profileId, method, confidence, detectedAt |
-| EMB.BSPGenerated |   A board support package is generated | boardId, artifactCount, generationDuration |
-| EMB.PinConflictDetected |   A pin assignment conflict is found | pin, conflictCount, peripheralList |
-| EMB.DeviceTreeCompiled |   Device tree compilation completes | boardId, nodeCount, validationStatus |
-| EMB.PeripheralMismatch |   A peripheral type mismatch is detected | peripheral, expected, actual, severity |
-| EMB.BSPCacheHit |   BSP is retrieved from cache instead of regenerated | boardId, cacheAge, cacheKey |
+| EMB.DeviceRegistered |    A new device is added to the registry | deviceId, boardId, registeredAt, registeredBy |
+| EMB.MCUDetected |    An MCU is detected and profile-matched | profileId, method, confidence, detectedAt |
+| EMB.BSPGenerated |    A board support package is generated | boardId, artifactCount, generationDuration |
+| EMB.PinConflictDetected |    A pin assignment conflict is found | pin, conflictCount, peripheralList |
+| EMB.DeviceTreeCompiled |    Device tree compilation completes | boardId, nodeCount, validationStatus |
+| EMB.PeripheralMismatch |    A peripheral type mismatch is detected | peripheral, expected, actual, severity |
+| EMB.BSPCacheHit |    BSP is retrieved from cache instead of regenerated | boardId, cacheAge, cacheKey |
 
 ## Error Cases
 
@@ -197,23 +197,21 @@ interface ClockConfiguration {
 | EMB-DEV-INV-005 | Memory map regions must not overlap | Region insertion checks for intersection before commit |
 | EMB-DEV-INV-006 | Clock frequency must stay within MCU profile limits | Generation clamps PLL output and divider ratios |
 
-## Design DNA (R1-R6,R9,R10,R13-R15)
+## Design DNA
 
-| Rule | Application |
-|------|-------------|
-| R1 â€” Target Bounded | All device generation is bounded to the target MCU profile; no generic defaults |
-| R2 â€” Interchangeable Architecture | Board definitions can be swapped without changing application logic |
-| R3 â€” Generic Operations | Device detection and BSP generation follow the same pipeline for all families |
-| R4 â€” Composition over Inheritance | Peripheral configs are composed into board definitions rather than subclassed |
-| R5 â€” Stable Intermediate Representation | DeviceTree is the canonical IR passed between stages |
-| R6 â€” Temporal Synchronization | Events fire after each stage completes; downstream stages await their prerequisites |
-| R9 â€” Stateless Verification | Pin verification produces the same result for the same board definition every time |
-| R10 â€” Capability-Based Routing | BSP generation adapts based on available flash, RAM, and peripheral resources |
-| R13 â€” Event-Driven Consistency | PinConflictDetected events trigger automatic reassignment workflows |
-| R14 â€” Code as Law | Device tree compilation enforces binding rules programmatically |
-| R15 â€” Provably Deterministic | MD5 of inputs matches MD5 of BSP output across all runs |
-
-
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | All device generation is bounded to the target MCU profile; no generic defaults |
+| R2 - Dependency Order | Board definitions can be swapped without changing application logic |
+| R3 - DRY | Device detection and BSP generation follow the same pipeline for all families |
+| R4 - Builder Pattern | Peripheral configs are composed into board definitions rather than subclassed |
+| R5 - Liskov Substitution | DeviceTree is the canonical IR passed between stages |
+| R6 - DI over Singletons | Events fire after each stage completes; downstream stages await their prerequisites |
+| R9 - Deterministic | Pin verification produces the same result for the same board definition every time |
+| R10 - Simpler Over Complex | BSP generation adapts based on available flash, RAM, and peripheral resources |
+| R13 - Design for Failure | PinConflictDetected events trigger automatic reassignment workflows |
+| R14 - Paved Path | Device tree compilation enforces binding rules programmatically |
+| R15 - Open/Closed | MD5 of inputs matches MD5 of BSP output across all runs |
 
 ## Design DNA
 

@@ -137,16 +137,16 @@ interface FeedStatus {
 
 ## Events
 
-| TRD.EventType |   Produced When | Fields |
+| TRD.EventType |    Produced When | Fields |
 |-------|----------|---------|
-| TRD.FeedConnected |   FeedManager: feedId, exchange, symbols | Fired when a feed establishes connection |
-| TRD.TickProcessed |   Normalizer: tickId, symbol, exchange | Published for every normalized tick |
-| TRD.BarClosed |   OHLCVBuilder: symbol, timeframe, bar | Emitted when a bar period closes |
-| TRD.DataQualityAlert |   Validator: feedId, symbol, failedChecks[] | Fired when validation rules fail |
-| TRD.FeedDegraded |   FeedManager: feedId, reason, latencyMs | Published on latency or reliability degradation |
-| TRD.FeedDisconnected |   FeedManager: feedId, reason, lastSequence | Fired on unexpected disconnection |
-| TRD.GapDetected |   DataStore: symbol, fromTimestamp, toTimestamp, gapDuration | Emitted when a data gap is found |
-| TRD.OrderBookUpdated |   OrderBookManager: symbol, exchange, sequence, depth | Published on significant order book change |
+| TRD.FeedConnected |    FeedManager: feedId, exchange, symbols | Fired when a feed establishes connection |
+| TRD.TickProcessed |    Normalizer: tickId, symbol, exchange | Published for every normalized tick |
+| TRD.BarClosed |    OHLCVBuilder: symbol, timeframe, bar | Emitted when a bar period closes |
+| TRD.DataQualityAlert |    Validator: feedId, symbol, failedChecks[] | Fired when validation rules fail |
+| TRD.FeedDegraded |    FeedManager: feedId, reason, latencyMs | Published on latency or reliability degradation |
+| TRD.FeedDisconnected |    FeedManager: feedId, reason, lastSequence | Fired on unexpected disconnection |
+| TRD.GapDetected |    DataStore: symbol, fromTimestamp, toTimestamp, gapDuration | Emitted when a data gap is found |
+| TRD.OrderBookUpdated |    OrderBookManager: symbol, exchange, sequence, depth | Published on significant order book change |
 
 ## Error Cases
 
@@ -171,21 +171,21 @@ interface FeedStatus {
 | TRD-MKT-INV-005 | Historical data query must return exactly-once semantics for overlapping time ranges | Deduplication key on (symbol, exchange, timestamp, sequence) |
 | TRD-MKT-INV-006 | Order book bid-ask spread must never be negative | Integrity check after each book update; fail-fast |
 
-## Design DNA (R1-R6,R9,R10,R13-R15)
+## Design DNA
 
-- **R1 â€” Single Source of Truth**: The Normalizer is the sole producer of canonical TickRecords; consumers never interpret raw data.
-- **R2 â€” Immutable Event Log**: Every tick, bar close, and validation event is written to the event log.
-- **R3 â€” Capability-Based Authorization**: Only FeedManager capability may modify feed configuration or lifecycle.
-- **R4 â€” Law of Diminishing Returns**: Historical data retention policies are tuned by the value density of each data type.
-- **R5 â€” Deterministic Computation**: OHLCV bar construction produces identical bars from identical tick sequences.
-- **R6 â€” Bounded Context**: Market Data owns feed ingestion and normalization; derived indicators belong to Algorithms.
-- **R9 â€” Fail-Fast**: Invalid ticks and checksum failures are rejected immediately; never buffered for later validation.
-- **R10 â€” Audit Trail**: Every feed status change, data gap, and quality alert is logged with full context.
-- **R13 â€” Defensive Design**: On feed degradation, systems degrade gracefully using cached or secondary data sources.
-- **R14 â€” Self-Healing**: On transient feed disconnection, automatic reconnection with sequence gap detection and replay.
-- **R15 â€” Backward Compatibility**: Historical data schemas and query interfaces maintain versioned migration paths.
-
-
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Design DNA
 

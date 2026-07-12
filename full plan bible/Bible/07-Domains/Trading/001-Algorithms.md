@@ -127,15 +127,15 @@ interface AlgorithmTemplate {
 
 ## Events
 
-| TRD.EventType |   Produced When | Fields |
+| TRD.EventType |    Produced When | Fields |
 |-------|----------|---------|
-| TRD.AlgorithmImplemented |   StrategyEngine: algorithmId, templateId, version | Fired when a new algorithm is registered |
-| TRD.AlgorithmConfigured |   StrategyEngine: algorithmId, params, hash | Fired after parameter update |
-| TRD.SignalGenerated |   SignalBus: algorithmId, signal, confidence, timestamp | Emitted on each signal computation |
-| TRD.OrderConstructed |   OrderFactory: algorithmId, orderPayload, checksum | Fired when an order is built |
-| TRD.AlgorithmOptimized |   Optimizer: algorithmId, metrics, optimalParams | Fired after optimization run |
-| TRD.AlgorithmDeployed |   StrategyEngine: algorithmId, targetEnv | Fired on promotion to paper/live |
-| TRD.AlgorithmPaused |   StrategyEngine: algorithmId, reason | Fired when algorithm is halted |
+| TRD.AlgorithmImplemented |    StrategyEngine: algorithmId, templateId, version | Fired when a new algorithm is registered |
+| TRD.AlgorithmConfigured |    StrategyEngine: algorithmId, params, hash | Fired after parameter update |
+| TRD.SignalGenerated |    SignalBus: algorithmId, signal, confidence, timestamp | Emitted on each signal computation |
+| TRD.OrderConstructed |    OrderFactory: algorithmId, orderPayload, checksum | Fired when an order is built |
+| TRD.AlgorithmOptimized |    Optimizer: algorithmId, metrics, optimalParams | Fired after optimization run |
+| TRD.AlgorithmDeployed |    StrategyEngine: algorithmId, targetEnv | Fired on promotion to paper/live |
+| TRD.AlgorithmPaused |    StrategyEngine: algorithmId, reason | Fired when algorithm is halted |
 
 ## Error Cases
 
@@ -158,21 +158,21 @@ interface AlgorithmTemplate {
 | TRD-ALG-INV-004 | Every algorithm version must have a corresponding backtest result before live deployment | Gateway check in StrategyEngine deploy pipeline |
 | TRD-ALG-INV-005 | Cooldown period between consecutive signals of same direction must be enforced | Sliding window check in SignalGenerator |
 
-## Design DNA (R1-R6,R9,R10,R13-R15)
+## Design DNA
 
-- **R1 â€” Single Source of Truth**: Strategy parameters live in ParamRegistry; signals and orders are derived.
-- **R2 â€” Immutable Event Log**: Every signal generation and order construction produces an immutable event.
-- **R3 â€” Capability-Based Authorization**: Only the StrategyEngine capability may deploy algorithms to live.
-- **R4 â€” Law of Diminishing Returns**: Optimization penalizes parameter count vs. out-of-sample performance.
-- **R5 â€” Deterministic Computation**: All signal generators are pure functions of market data and parameters.
-- **R6 â€” Bounded Context**: Algorithm templates own their domain; cross-strategy coordination goes through TradingWorker.
-- **R9 â€” Fail-Fast**: Invalid parameters or signals are rejected at the boundary, never silently corrected.
-- **R10 â€” Audit Trail**: Every parameter change, signal, and order construction is logged with timestamp and identity.
-- **R13 â€” Defensive Design**: Stale signals are dropped; missing indicators produce neutral output.
-- **R14 â€” Self-Healing**: On transient indicator failure, signal computation retries once with exponential backoff.
-- **R15 â€” Backward Compatibility**: Algorithm templates and parameter schemas maintain versioned migration paths.
-
-
+| Rule | Assessment |
+|------|-----------|
+| R1 - Modulsingularity | Compliant |
+| R2 - Dependency Order | Compliant |
+| R3 - DRY | Compliant |
+| R4 - Builder Pattern | Compliant |
+| R5 - Liskov Substitution | Compliant |
+| R6 - DI over Singletons | Compliant |
+| R9 - Deterministic | Compliant |
+| R10 - Simpler Over Complex | Compliant |
+| R13 - Design for Failure | Compliant |
+| R14 - Paved Path | Compliant |
+| R15 - Open/Closed | Compliant |
 
 ## Design DNA
 

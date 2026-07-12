@@ -247,15 +247,15 @@ interface TTLScanner {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| MEM.ItemStored |   item_id, memory_type, source, importance | Memory item created |
-| MEM.ItemUpdated |   item_id, memory_type, updated_fields | Item updated |
-| MEM.ItemDeleted |   item_id, memory_type | Item deleted |
-| MEM.ItemExpired |   item_id, memory_type, ttl_policy | Item TTL expired |
-| MEM.QueryExecuted |   query_id, memory_types, result_count, latency | Query completed |
-| MEM.SearchExecuted |   query_id, memory_types, result_count, avg_score | Semantic search completed |
-| MEM.SessionMemoryCleared |   session_id, item_count | Session ended, memory pruned |
-| MEM.TTLSweepCompleted |   expired_count, total_scanned | TTL sweep finished |
-| MEM.ImportancePromoted |   item_id, old_importance, new_importance | Item importance auto-adjusted |
+| MEM.ItemStored |    item_id, memory_type, source, importance | Memory item created |
+| MEM.ItemUpdated |    item_id, memory_type, updated_fields | Item updated |
+| MEM.ItemDeleted |    item_id, memory_type | Item deleted |
+| MEM.ItemExpired |    item_id, memory_type, ttl_policy | Item TTL expired |
+| MEM.QueryExecuted |    query_id, memory_types, result_count, latency | Query completed |
+| MEM.SearchExecuted |    query_id, memory_types, result_count, avg_score | Semantic search completed |
+| MEM.SessionMemoryCleared |    session_id, item_count | Session ended, memory pruned |
+| MEM.TTLSweepCompleted |    expired_count, total_scanned | TTL sweep finished |
+| MEM.ImportancePromoted |    item_id, old_importance, new_importance | Item importance auto-adjusted |
 
 ## Invariants
 
