@@ -197,15 +197,24 @@ Mission Execution → Events → Event Store → ACF Stream → Sou Learning
 | Sou receives conflicting evidence from mission | Evidence from different sources is weighted by source trust. Higher-trust source takes precedence. |
 | Mission exceeds its planned duration significantly | Sou evaluates cause. May propose scope reduction, resource increase, or mission termination. |
 
-## Error Codes (R12)
+## Error Cases
 
-| Code | Description |
-|------|-------------|
-| SOU_MIS_001 | Mission proposal missing required evidence chain |
-| SOU_MIS_002 | Mission goal does not derive from Human Intent (Law 1 violation) |
-| SOU_MIS_003 | Cannot adjust mission in terminal state (Completed / Archived) |
-| SOU_MIS_004 | Mission outcome evaluation missing completion evidence |
-| SOU_MIS_005 | Mission monitor detects unrecoverable state |
+| Condition | Error Code | Severity | Recovery |
+|-----------|------------|----------|----------|
+| Mission proposal missing required evidence chain | SOU_MIS_001 | High | Block proposal; require evidence from Reasoning before submission |
+| Mission goal does not derive from Human Intent (Law 1 violation) | SOU_MIS_002 | Critical | Reject proposal permanently; log constitutional violation for review |
+| Cannot adjust mission in terminal state (Completed / Archived) | SOU_MIS_003 | Medium | Return error; propose new mission if adjustment is necessary |
+| Mission outcome evaluation missing completion evidence | SOU_MIS_004 | High | Evaluate with available evidence; mark gaps and reduce confidence |
+| Mission monitor detects unrecoverable state | SOU_MIS_005 | Critical | Escalate to Security Council; propose mission termination |
+
+## Invariants
+
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| SOU-MIS-001 | Sou is the sole creator of missions in AIOS | Governance — no other component may create missions |
+| SOU-MIS-002 | Sou never executes missions — only creates, monitors, and learns | Architectural — no execution path in Sou |
+| SOU-MIS-003 | Every mission proposal traces to a Human Intent | Schema — Law 1 evidence chain required |
+| SOU-MIS-004 | Mission adjustments are always proposed, never applied directly | API-level — adjustMission produces proposal, not mutation |
 
 ## Cross-Cutting Concerns
 
@@ -233,12 +242,17 @@ All mission-related communication flows through ACF. DGP receives proposals. OSY
 
 | Rule | Compliance |
 |------|-----------|
-| R1 (Modulsingularity) | Missions component focuses solely on mission lifecycle oversight |
-| R3 (DRY) | Mission patterns are captured in Knowledge, not hardcoded |
-| R5 (Liskov) | Mission operations implement the MissionOversight interface |
-| R10 (Simpler Over Complex) | Mission oversight uses the simplest valid supervision strategy |
-| R12 (Embrace Errors) | All errors have unique codes (SOU_MIS_001–005) |
-| R13 (Design for Failure) | Sou monitors missions but does not block on failure — alternative proposals |
+| R1 — Modulsingularity | Missions component focuses solely on mission lifecycle oversight |
+| R2 — Dependency Order | Missions depends on Reasoning, Planner, DGP; no upward dependencies |
+| R3 — DRY | Mission patterns are captured in Knowledge, not hardcoded |
+| R4 — Builder Pattern | Mission proposals are built through the proposeMission pipeline |
+| R5 — Liskov Substitution | Mission operations implement the MissionOversight interface |
+| R6 — DI over Singletons | DGP and LMS clients are injected dependencies |
+| R9 — Deterministic | Same mission evidence produces the same outcome evaluation |
+| R10 — Simpler Over Complex | Mission oversight uses the simplest valid supervision strategy |
+| R13 — Design for Failure | Sou monitors missions but does not block on failure — alternative proposals |
+| R14 — Paved Path | All missions flow through propose → monitor → evaluate → learn |
+| R15 — Open/Closed | New supervision strategies added by extending MissionOversight |
 
 ## Related Documents
 
