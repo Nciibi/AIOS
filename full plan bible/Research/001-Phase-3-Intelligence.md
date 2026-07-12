@@ -7,7 +7,7 @@
 | Version | 0.1 |
 | Category | Research |
 | Document ID | RESEARCH-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 5 — Law of Autonomy |
+| Source Laws | Law 4 — Law of Evidence, Law 5 — Law of Identity |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
