@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 004 — Criteria Registry
+﻿# AIOS Bible â€” Brain
+## 004 â€” Criteria Registry
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Decision |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Decision |
 | Document ID | AIOS-BBL-002-DEC-004 |
-| Source Laws | Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -27,7 +27,7 @@ Every criterion in the registry is a reusable building block. Rather than redefi
 Criterion {
   criterion_id: string
   name: string
-  weight: number               // 0.0–1.0, default weight
+  weight: number               // 0.0â€“1.0, default weight
   scoring_function: "linear" | "threshold" | "boolean" | "custom"
   preferences: PreferenceDirection  // "maximize" | "minimize" | "target"
   category: CriterionCategory
@@ -93,8 +93,8 @@ enum CriterionCategory {
 
 ```typescript
 CriterionConfig {
-  default_weights: Record<string, number>   // criterion_id → default weight
-  scoring_functions: Record<string, string> // criterion_id → function name
+  default_weights: Record<string, number>   // criterion_id â†’ default weight
+  scoring_functions: Record<string, string> // criterion_id â†’ function name
   categories: Record<string, CriterionCategory>
   weight_constraints: {
     min: number       // 0.0
@@ -127,29 +127,29 @@ The Criteria Registry is initialized with the following canonical criteria:
 
 ```
 Registered (system init or Sou add)
-    │
-    ▼
+    â”‚
+    â–¼
 Available
-    │
-    ├── Override weight → Customized
-    │       │
-    │       ├── Session override → Cleared on session end
-    │       └── Global override → Persists in Event Store
-    │
-    ├── Used in evaluation → Activated
-    │       │
-    │       └── Recorded in DecisionRecord.criteria
-    │
-    └── Deprecated → Archived
-            │
-            └── Suppressed by newer criterion; excluded from queries by default
+    â”‚
+    â”œâ”€â”€ Override weight â†’ Customized
+    â”‚       â”‚
+    â”‚       â”œâ”€â”€ Session override â†’ Cleared on session end
+    â”‚       â””â”€â”€ Global override â†’ Persists in Event Store
+    â”‚
+    â”œâ”€â”€ Used in evaluation â†’ Activated
+    â”‚       â”‚
+    â”‚       â””â”€â”€ Recorded in DecisionRecord.criteria
+    â”‚
+    â””â”€â”€ Deprecated â†’ Archived
+            â”‚
+            â””â”€â”€ Suppressed by newer criterion; excluded from queries by default
 ```
 
 | State | Description | Transitions |
 |-------|-------------|-------------|
-| Registered | Criterion added to registry (system init or Sou via `registerCriterion`) | → Available |
-| Available | Criterion is queryable and usable in decisions | → Customized, → Activated, → Archived |
-| Customized | Weight overridden for session or globally | → Available (revert), → Activated |
+| Registered | Criterion added to registry (system init or Sou via `registerCriterion`) | â†’ Available |
+| Available | Criterion is queryable and usable in decisions | â†’ Customized, â†’ Activated, â†’ Archived |
+| Customized | Weight overridden for session or globally | â†’ Available (revert), â†’ Activated |
 | Activated | Criterion used in at least one evaluation this session | Stays active; no special terminal state |
 | Archived | Deprecated criterion, excluded from default queries | Terminal (can be restored via admin action) |
 
@@ -231,7 +231,7 @@ deleteSet(set_id: string): void
 
 ### Template Sets
 
-Template sets have `is_template = true`. They lock their criteria — Sou cannot remove criteria from a template set. Sou can still override individual criterion weights within a template set.
+Template sets have `is_template = true`. They lock their criteria â€” Sou cannot remove criteria from a template set. Sou can still override individual criterion weights within a template set.
 
 ### Custom Sets
 
@@ -351,14 +351,14 @@ interface CriteriaRegistry {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| CR-001 | Every criterion has a unique `criterion_id` | Schema — primary key constraint |
-| CR-002 | Criteria weights always sum to 1.0 after normalization | Algorithmic — `normalizeWeights` called after every override |
-| CR-003 | Archived criteria are excluded from default queries | Algorithmic — `listAvailable` filters by `deprecated_at` |
-| CR-004 | Session overrides are cleared on session end | Architectural — called by Session Manager lifecycle hook |
-| CR-005 | Global overrides survive restarts (persisted in Event Store) | Architectural — replayed from Event Store on init |
-| CR-006 | Template sets never allow criteria removal | Validation — `updateSet` rejects removal from template sets |
-| CR-007 | Locked criteria reject all weight overrides | Validation — `overrideWeight` returns error |
-| CR-008 | Session overrides take precedence over global overrides | Algorithmic — merge order: defaults → global → session |
+| CR-001 | Every criterion has a unique `criterion_id` | Schema â€” primary key constraint |
+| CR-002 | Criteria weights always sum to 1.0 after normalization | Algorithmic â€” `normalizeWeights` called after every override |
+| CR-003 | Archived criteria are excluded from default queries | Algorithmic â€” `listAvailable` filters by `deprecated_at` |
+| CR-004 | Session overrides are cleared on session end | Architectural â€” called by Session Manager lifecycle hook |
+| CR-005 | Global overrides survive restarts (persisted in Event Store) | Architectural â€” replayed from Event Store on init |
+| CR-006 | Template sets never allow criteria removal | Validation â€” `updateSet` rejects removal from template sets |
+| CR-007 | Locked criteria reject all weight overrides | Validation â€” `overrideWeight` returns error |
+| CR-008 | Session overrides take precedence over global overrides | Algorithmic â€” merge order: defaults â†’ global â†’ session |
 
 ## Error Cases
 
@@ -412,27 +412,27 @@ interface CriteriaRegistry {
 
 ```
 1. User tells Sou "I'm on a tight budget today"
-2. Sou overrides cost weight: 0.15 → 0.40 (session scope)
+2. Sou overrides cost weight: 0.15 â†’ 0.40 (session scope)
 3. Registry normalizes: cost=0.40, speed=0.08, quality=0.17, safety=0.21, ...
 4. Sou evaluates all decisions with cost-weighted lens
-5. Session ends → overrides cleared → defaults restored next session
+5. Session ends â†’ overrides cleared â†’ defaults restored next session
 ```
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Criteria Registry handles only criterion storage, query, and lifecycle |
-| R2 — Dependency Order | Depends on Event Store for global overrides; no upward deps |
-| R3 — DRY | Criteria defined once, reused across all decisions and sets |
-| R4 — Builder Pattern | Criteria built by Config → Overrides → Normalization pipeline |
-| R5 — Liskov Substitution | Any CriterionStore implements CriteriaRegistry |
-| R6 — DI over Singletons | Config, override store, and normalization strategy injected |
-| R9 — Deterministic | Same config + overrides = same effective weights |
-| R10 — Simpler Over Complex | Weighted sum with normalization; no adaptive weighting |
-| R13 — Design for Failure | Locked criteria prevent catastrophic override |
-| R14 — Paved Path | All operations flow through registry interface |
-| R15 — Open/Closed | New criteria, sets, and categories added without modifying core |
+| R1 â€” Modulsingularity | Criteria Registry handles only criterion storage, query, and lifecycle |
+| R2 â€” Dependency Order | Depends on Event Store for global overrides; no upward deps |
+| R3 â€” DRY | Criteria defined once, reused across all decisions and sets |
+| R4 â€” Builder Pattern | Criteria built by Config â†’ Overrides â†’ Normalization pipeline |
+| R5 â€” Liskov Substitution | Any CriterionStore implements CriteriaRegistry |
+| R6 â€” DI over Singletons | Config, override store, and normalization strategy injected |
+| R9 â€” Deterministic | Same config + overrides = same effective weights |
+| R10 â€” Simpler Over Complex | Weighted sum with normalization; no adaptive weighting |
+| R13 â€” Design for Failure | Locked criteria prevent catastrophic override |
+| R14 â€” Paved Path | All operations flow through registry interface |
+| R15 â€” Open/Closed | New criteria, sets, and categories added without modifying core |
 
 ## Related Documents
 

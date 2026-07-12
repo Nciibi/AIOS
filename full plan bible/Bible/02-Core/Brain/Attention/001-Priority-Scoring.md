@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — Priority Scoring
+﻿# AIOS Bible â€” Brain
+## 001 â€” Priority Scoring
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Attention |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Attention |
 | Document ID | AIOS-BBL-002-ATT-001 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -17,7 +17,7 @@
 
 Priority Scoring computes a numerical salience score for every incoming signal, determining how relevant each signal is to Sou's current goals and context. The score drives every subsequent attention decision: which signals enter focus, which are snoozed, and which are dropped. Priority Scoring is the gate through which all signals must pass before Sou ever sees them.
 
-Under ATT-003, every signal is evaluated before it can be dropped. Priority Scoring is that evaluation — no signal bypasses scoring.
+Under ATT-003, every signal is evaluated before it can be dropped. Priority Scoring is that evaluation â€” no signal bypasses scoring.
 
 ## Data Model
 
@@ -25,11 +25,11 @@ Under ATT-003, every signal is evaluated before it can be dropped. Priority Scor
 
 ```typescript
 SalienceFactors {
-  goal_alignment: number         // 0.0–1.0 — relevance to active goal
-  urgency: number                // 0.0–1.0 — time-sensitivity
-  source_authority: number       // 0.0–1.0 — trust level of source
-  novelty: number                // 0.0–1.0 — how different from recent signals
-  user_proximity: number         // 0.0–1.0 — how directly related to user
+  goal_alignment: number         // 0.0â€“1.0 â€” relevance to active goal
+  urgency: number                // 0.0â€“1.0 â€” time-sensitivity
+  source_authority: number       // 0.0â€“1.0 â€” trust level of source
+  novelty: number                // 0.0â€“1.0 â€” how different from recent signals
+  user_proximity: number         // 0.0â€“1.0 â€” how directly related to user
 }
 ```
 
@@ -39,8 +39,8 @@ SalienceFactors {
 PriorityScore {
   signal_id: string
   factors: SalienceFactors
-  raw_score: number              // 0.0–1.0 before normalization
-  normalized_score: number       // 0.0–1.0 after normalization
+  raw_score: number              // 0.0â€“1.0 before normalization
+  normalized_score: number       // 0.0â€“1.0 after normalization
   weights_used: WeightsConfig
   override_applied: boolean
   computed_at: timestamp
@@ -65,7 +65,7 @@ WeightsConfig {
 ```typescript
 SalienceOverride {
   source_pattern: string         // Glob or exact source name
-  override_score: number         // 0.0–1.0, fixed score for this source
+  override_score: number         // 0.0â€“1.0, fixed score for this source
   reason: string
   expires_at?: timestamp
   created_by: string
@@ -97,7 +97,7 @@ Raw scores are normalized to prevent any single factor from dominating:
 
 | Method | When Applied | Behavior |
 |--------|-------------|----------|
-| Min-max scaling | Always | Normalize each factor to 0.0–1.0 range |
+| Min-max scaling | Always | Normalize each factor to 0.0â€“1.0 range |
 | Clamping | After computation | Clamp raw_score to [0.0, 1.0] |
 | Histogram equalization | Optional (config) | Spread scores across full range |
 
@@ -137,10 +137,10 @@ The computed score maps to an attention action:
 
 | Score Range | Action | Behavior |
 |-------------|--------|----------|
-| 0.80–1.00 | Focus | Immediately presented to Sou |
-| 0.50–0.79 | Snooze | Added to Snooze Queue with `on_timeout` |
-| 0.30–0.49 | Snooze | Added to Snooze Queue with `on_idle` |
-| 0.00–0.29 | Drop | Signal dropped, source notified |
+| 0.80â€“1.00 | Focus | Immediately presented to Sou |
+| 0.50â€“0.79 | Snooze | Added to Snooze Queue with `on_timeout` |
+| 0.30â€“0.49 | Snooze | Added to Snooze Queue with `on_idle` |
+| 0.00â€“0.29 | Drop | Signal dropped, source notified |
 
 Thresholds are configurable per-session and can be dynamically adjusted when the attention budget is strained.
 
@@ -190,12 +190,12 @@ interface PriorityScorer {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| ATT-PRI-001 | Weights always sum to exactly 1.0 after any adjustment | Algorithmic — `normalizeWeights` called after every update |
-| ATT-PRI-002 | Every signal is scored exactly once, before any attention decision | Architectural — `injectSignal` calls `score` first |
-| ATT-PRI-003 | Per-source overrides take precedence over the weighted model | Algorithmic — override check precedes weight computation |
-| ATT-PRI-004 | An override score of 0.0 does not drop the signal — it must still pass threshold evaluation | API-level — zero override means minimal salience, not signal deletion |
-| ATT-PRI-005 | Normalized score never exceeds the [0.0, 1.0] range | Algorithmic — clamping enforced after every computation |
-| ATT-PRI-006 | Dynamic weight adjustments are monotonic within a single scoring context | Algorithmic — weights are restored after context ends |
+| ATT-PRI-001 | Weights always sum to exactly 1.0 after any adjustment | Algorithmic â€” `normalizeWeights` called after every update |
+| ATT-PRI-002 | Every signal is scored exactly once, before any attention decision | Architectural â€” `injectSignal` calls `score` first |
+| ATT-PRI-003 | Per-source overrides take precedence over the weighted model | Algorithmic â€” override check precedes weight computation |
+| ATT-PRI-004 | An override score of 0.0 does not drop the signal â€” it must still pass threshold evaluation | API-level â€” zero override means minimal salience, not signal deletion |
+| ATT-PRI-005 | Normalized score never exceeds the [0.0, 1.0] range | Algorithmic â€” clamping enforced after every computation |
+| ATT-PRI-006 | Dynamic weight adjustments are monotonic within a single scoring context | Algorithmic â€” weights are restored after context ends |
 
 ## Error Cases
 
@@ -213,17 +213,17 @@ interface PriorityScorer {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Priority Scoring does one thing: compute salience scores |
-| R2 — Dependency Order | Depends on FocusState, Signal Registry; no upward deps |
-| R3 — DRY | Factor definitions stored once in SalienceFactors schema |
-| R4 — Builder Pattern | Score built from Factors → Weighted Sum → Normalization |
-| R5 — Liskov Substitution | Any PriorityScorer implementation satisfies the interface |
-| R6 — DI over Singletons | Weights config and normalization strategy injected |
-| R9 — Deterministic | Same factors + weights produce identical scores |
-| R10 — Simpler Over Complex | Uses weighted linear model, not neural network |
-| R13 — Design for Failure | Invalid factors clamped, never crash |
-| R14 — Paved Path | All signals routed through `score()` entry point |
-| R15 — Open/Closed | New factors added via config, not core scoring logic |
+| R1 â€” Modulsingularity | Priority Scoring does one thing: compute salience scores |
+| R2 â€” Dependency Order | Depends on FocusState, Signal Registry; no upward deps |
+| R3 â€” DRY | Factor definitions stored once in SalienceFactors schema |
+| R4 â€” Builder Pattern | Score built from Factors â†’ Weighted Sum â†’ Normalization |
+| R5 â€” Liskov Substitution | Any PriorityScorer implementation satisfies the interface |
+| R6 â€” DI over Singletons | Weights config and normalization strategy injected |
+| R9 â€” Deterministic | Same factors + weights produce identical scores |
+| R10 â€” Simpler Over Complex | Uses weighted linear model, not neural network |
+| R13 â€” Design for Failure | Invalid factors clamped, never crash |
+| R14 â€” Paved Path | All signals routed through `score()` entry point |
+| R15 â€” Open/Closed | New factors added via config, not core scoring logic |
 
 ## Related Documents
 

@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Decision System
+﻿# AIOS Bible â€” Brain
+## 000 â€” Decision System
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Decision |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Decision |
 | Document ID | AIOS-BBL-002-DEC-000 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,36 +15,36 @@
 
 ## Purpose
 
-The Decision System provides structured, multi-factor decision-making capabilities to Sou. When Sou faces a choice — which action to take, which tool to use, which plan to follow, which trade-off to accept — the Decision System evaluates the options against configurable criteria and produces a ranked, scored recommendation.
+The Decision System provides structured, multi-factor decision-making capabilities to Sou. When Sou faces a choice â€” which action to take, which tool to use, which plan to follow, which trade-off to accept â€” the Decision System evaluates the options against configurable criteria and produces a ranked, scored recommendation.
 
-The Decision System does not make decisions. Sou makes decisions. The Decision System provides the analytical framework — scoring, trade-off analysis, constraint checking — that Sou uses to reach a strategic choice.
+The Decision System does not make decisions. Sou makes decisions. The Decision System provides the analytical framework â€” scoring, trade-off analysis, constraint checking â€” that Sou uses to reach a strategic choice.
 
 ## Architecture
 
 ```
 Sou (consumes recommendation, makes decision)
-   ▲
-   │
-   ▼
-┌────────────────────────────────────────────┐
-│           Decision System                   │
-│                                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐ │
-│  │ Scorer   │  │ Trade-off│  │ Constraint│ │
-│  │ Engine   │─►│ Analyzer │─►│ Checker   │ │
-│  └──────────┘  └──────────┘  └────┬─────┘ │
-│                                    │       │
-│  ┌──────────┐  ┌──────────┐       │       │
-│  │ Criteria │  │ History  │       │       │
-│  │ Registry │  │ Logger   │       │       │
-│  └──────────┘  └──────────┘       │       │
-└────────────────────────────────────┼───────┘
-                                     │
-                                     ▼
-                            ┌──────────────┐
-                            │  Event Store │
-                            │ (evidence)   │
-                            └──────────────┘
+   â–²
+   â”‚
+   â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           Decision System                   â”‚
+â”‚                                            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ Scorer   â”‚  â”‚ Trade-offâ”‚  â”‚ Constraintâ”‚ â”‚
+â”‚  â”‚ Engine   â”‚â”€â–ºâ”‚ Analyzer â”‚â”€â–ºâ”‚ Checker   â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                    â”‚       â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚       â”‚
+â”‚  â”‚ Criteria â”‚  â”‚ History  â”‚       â”‚       â”‚
+â”‚  â”‚ Registry â”‚  â”‚ Logger   â”‚       â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”˜
+                                     â”‚
+                                     â–¼
+                            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                            â”‚  Event Store â”‚
+                            â”‚ (evidence)   â”‚
+                            â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Core Concepts
@@ -80,7 +80,7 @@ DecisionOption {
 DecisionCriterion {
   criterion_id: string
   name: string
-  weight: number            // 0.0–1.0, sum of weights = 1.0
+  weight: number            // 0.0â€“1.0, sum of weights = 1.0
   scoring_function: string  // "linear" | "threshold" | "boolean" | "custom"
   preferences: PreferenceDirection  // "maximize" | "minimize" | "target"
 }
@@ -91,7 +91,7 @@ DecisionRecommendation {
   trade_offs: TradeOff[]
   constraints_satisfied: boolean
   violated_constraints: ViolatedConstraint[]
-  confidence: number       // 0.0–1.0
+  confidence: number       // 0.0â€“1.0
   explanation: string      // Human-readable justification
   created_at: timestamp
 }
@@ -99,7 +99,7 @@ DecisionRecommendation {
 RankedOption {
   option_id: string
   option: DecisionOption
-  weighted_score: number   // 0.0–1.0
+  weighted_score: number   // 0.0â€“1.0
   rank: number             // 1-based ranking
   criterion_scores: Record<criterion_id, number>
   strength: string         // "strong" | "moderate" | "weak"
@@ -121,8 +121,8 @@ Evaluates each option against each criterion to produce a score matrix:
 ```
 ScoreMatrix {
   option_id: string
-  scores: Record<criterion_id, number>  // 0.0–1.0 per criterion
-  weighted_total: number                // sum of (score × weight)
+  scores: Record<criterion_id, number>  // 0.0â€“1.0 per criterion
+  weighted_total: number                // sum of (score Ã— weight)
 }
 ```
 
@@ -144,7 +144,7 @@ TradeOff {
   criteria: [criterion_id, criterion_id]
   options: [option_id, option_id]
   description: string          // "Option A is faster; Option B is cheaper"
-  magnitude: number            // 0.0–1.0, how severe the trade-off
+  magnitude: number            // 0.0â€“1.0, how severe the trade-off
 }
 ```
 
@@ -251,11 +251,11 @@ interface ConstraintExpression {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| DEC-001 | The Decision System recommends; Sou decides | API-level — no auto-execution |
-| DEC-002 | Every decision is recorded as evidence | Architectural — History Logger is mandatory |
-| DEC-003 | Hard constraints always remove non-compliant options | Algorithmic — checked before scoring |
-| DEC-004 | Criteria weights always sum to 1.0 | Validation — enforced on EvaluationRequest |
-| DEC-005 | The Decision System is stateless — history lives in Event Store | Architectural — no internal persistence |
+| DEC-001 | The Decision System recommends; Sou decides | API-level â€” no auto-execution |
+| DEC-002 | Every decision is recorded as evidence | Architectural â€” History Logger is mandatory |
+| DEC-003 | Hard constraints always remove non-compliant options | Algorithmic â€” checked before scoring |
+| DEC-004 | Criteria weights always sum to 1.0 | Validation â€” enforced on EvaluationRequest |
+| DEC-005 | The Decision System is stateless â€” history lives in Event Store | Architectural â€” no internal persistence |
 
 ## Related Documents
 
@@ -280,14 +280,14 @@ interface ConstraintExpression {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Decision System does one thing: structured evaluation |
-| R2 — Dependency Order | Depends on Event Store; no upward deps |
-| R3 — DRY | Criteria defined in Registry, reused across decisions |
-| R4 — Builder Pattern | Recommendation built by Scorer → Trade-off Analyzer → Constraint Checker |
-| R5 — Liskov Substitution | Any ScoringFunction implements the interface |
-| R6 — DI over Singletons | Criteria, scoring functions injected |
-| R9 — Deterministic | Same inputs produce same recommendation (no randomness) |
-| R10 — Simpler Over Complex | Uses weighted sum model (no neural networks or ML) |
-| R13 — Design for Failure | Decision System degrades gracefully — missing criteria trigger fallback scoring, not hard failure |
-| R14 — Paved Path | All evaluation flows through `evaluateOptions` |
-| R15 — Open/Closed | New scoring functions added via Registry, not by modifying core |
+| R1 â€” Modulsingularity | Decision System does one thing: structured evaluation |
+| R2 â€” Dependency Order | Depends on Event Store; no upward deps |
+| R3 â€” DRY | Criteria defined in Registry, reused across decisions |
+| R4 â€” Builder Pattern | Recommendation built by Scorer â†’ Trade-off Analyzer â†’ Constraint Checker |
+| R5 â€” Liskov Substitution | Any ScoringFunction implements the interface |
+| R6 â€” DI over Singletons | Criteria, scoring functions injected |
+| R9 â€” Deterministic | Same inputs produce same recommendation (no randomness) |
+| R10 â€” Simpler Over Complex | Uses weighted sum model (no neural networks or ML) |
+| R13 â€” Design for Failure | Decision System degrades gracefully â€” missing criteria trigger fallback scoring, not hard failure |
+| R14 â€” Paved Path | All evaluation flows through `evaluateOptions` |
+| R15 â€” Open/Closed | New scoring functions added via Registry, not by modifying core |

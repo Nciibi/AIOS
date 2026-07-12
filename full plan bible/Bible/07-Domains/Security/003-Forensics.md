@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Security — 003: Forensics
+﻿# AIOS Bible â€” Domains
+## Security â€” 003: Forensics
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-SEC-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds, Law 8 — Law of Verification-First |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds, Law 8 â€” Law of Verification-First |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/008-Security.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Digital Forensics provides the engine for forensic investigation within AIOS — evidence acquisition, disk imaging, memory analysis, log correlation, timeline reconstruction, and chain of custody management. It is the evidentiary backbone of the Security domain, enabling IncidentResponders and ThreatAnalysts to conduct post-incident investigations with legally admissible evidence.
+Digital Forensics provides the engine for forensic investigation within AIOS â€” evidence acquisition, disk imaging, memory analysis, log correlation, timeline reconstruction, and chain of custody management. It is the evidentiary backbone of the Security domain, enabling IncidentResponders and ThreatAnalysts to conduct post-incident investigations with legally admissible evidence.
 
 Every forensic operation follows Law 4 (Evidence) and the immutable chain of custody principle. Evidence is acquired using write-protected methods, cryptographically hashed at acquisition time, and stored in tamper-evident storage. Every transfer, analysis, and access event is logged to the chain of custody record.
 
@@ -174,14 +174,14 @@ type CaseStatus = 'open' | 'analyzing' | 'completed' | 'sealed' | 'reopened';
 
 | Code | Condition | Severity | Recovery |
 |------|-----------|----------|----------|
-| SEC-FR-001 | Acquisition failure — source device not accessible | High | Halt acquisition, log error, request manual intervention |
-| SEC-FR-002 | Evidence corruption — hash verification failed | Critical | Halt case, isolate corrupted evidence, attempt recovery from copy |
-| SEC-FR-003 | Chain of custody break — missing or invalid entry | Critical | Halt analysis, investigate gap, document discrepancy |
+| SEC-FR-001 | Acquisition failure â€” source device not accessible | High | Halt acquisition, log error, request manual intervention |
+| SEC-FR-002 | Evidence corruption â€” hash verification failed | Critical | Halt case, isolate corrupted evidence, attempt recovery from copy |
+| SEC-FR-003 | Chain of custody break â€” missing or invalid entry | Critical | Halt analysis, investigate gap, document discrepancy |
 | SEC-FR-004 | Storage allocation exceeded for forensic case | Medium | Archive oldest sealed cases, notify storage admin |
-| SEC-FR-005 | Memory analysis — incompatible OS profile | Low | Try alternative profile, fall back to manual analysis |
-| SEC-FR-006 | Timeline reconstruction — contradictory timestamps across evidence | Medium | Flag conflict, use confidence weighting, document anomaly |
+| SEC-FR-005 | Memory analysis â€” incompatible OS profile | Low | Try alternative profile, fall back to manual analysis |
+| SEC-FR-006 | Timeline reconstruction â€” contradictory timestamps across evidence | Medium | Flag conflict, use confidence weighting, document anomaly |
 | SEC-FR-007 | Write blocker verification failed | Critical | Abort acquisition, verify hardware, retry with confirmed blocker |
-| SEC-FR-008 | Evidence already sealed — modification attempted | Critical | Reject modification, log attempt, escalate to Security Council |
+| SEC-FR-008 | Evidence already sealed â€” modification attempted | Critical | Reject modification, log attempt, escalate to Security Council |
 
 ## Invariants
 
@@ -192,7 +192,7 @@ type CaseStatus = 'open' | 'analyzing' | 'completed' | 'sealed' | 'reopened';
 | SEC-FR-I-003 | Complete chain of custody maintained for every evidence item | Immutable append-only custody log with cross-hash chaining |
 | SEC-FR-I-004 | Sealed evidence is immutable and cannot be modified | Cryptographic seal on case close, modification rejection |
 | SEC-FR-I-005 | All forensic actions are logged with actor identity and timestamp | Mandatory audit log on every operation, schema enforcement |
-| SEC-FR-I-006 | Original evidence is never modified — analysis uses verified copies | Copy-on-read analysis, write-protected originals |
+| SEC-FR-I-006 | Original evidence is never modified â€” analysis uses verified copies | Copy-on-read analysis, write-protected originals |
 
 ## Design DNA
 
@@ -202,11 +202,11 @@ type CaseStatus = 'open' | 'analyzing' | 'completed' | 'sealed' | 'reopened';
 | R2 (Capsule) | Each forensic case is an atomic capsule with evidence, timeline, and custody |
 | R3 (Idempotent) | Same evidence and analysis toolset produces identical artifacts and hashes |
 | R4 (Builder) | Case is built incrementally: open -> acquired -> analyzed -> reconstructed -> sealed |
-| R5 (Manual Step) | Evidence sealing is a manual-gated operation — no auto-seal without review |
-| R6 (No Orphans) | Every open case reaches sealed or closed status — no abandoned cases |
+| R5 (Manual Step) | Evidence sealing is a manual-gated operation â€” no auto-seal without review |
+| R6 (No Orphans) | Every open case reaches sealed or closed status â€” no abandoned cases |
 | R9 (Deterministic) | Same memory dump and profile yields identical process and connection lists |
 | R10 (Event Sourcing) | Full case lifecycle reconstructable from forensic event log |
-| R13 (Design for Failure) | Forensics fails safe — corrupted evidence never overwrites original |
+| R13 (Design for Failure) | Forensics fails safe â€” corrupted evidence never overwrites original |
 | R14 (GC) | Sealed cases garbage collected after legal hold and retention period expire |
 | R15 (Auth Chain) | Every custody transfer and analysis action links to authenticated actor |
 
@@ -214,13 +214,13 @@ type CaseStatus = 'open' | 'analyzing' | 'completed' | 'sealed' | 'reopened';
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Security/000-Overview.md | Overview — Forensics is a core Security capability |
-| Bible/07-Domains/Security/001-Network-Scanning.md | Evidence — Network scan evidence ingested into forensic cases |
-| Bible/07-Domains/Security/002-Vulnerability-Analysis.md | Evidence — Vulnerability analysis evidence feeds forensic timeline |
-| Bible/04-Execution/Security/Audit/000-EAS.md | Audit — Evidence Audit Service integrates with chain of custody |
-| Bible/04-Execution/Security/IDS/000-Overview.md | Identity — Forensic actor identity verification |
-| Bible/04-Execution/Security/Crypto/000-CSP.md | Crypto — Cryptographic sealing and hash verification |
-| Bible/04-Execution/Security/Crypto/001-CAM.md | Crypto — Certificate and key management for evidence signing |
-| Bible/04-Execution/Security/CCA/000-CCA.md | Compliance — Chain of custody compliance auditing |
-| Bible/08-Interfaces/SDK/001-Audit-SDK.md | Audit SDK — Forensic evidence audit integration |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — Core principles for evidence preservation |
+| Bible/07-Domains/Security/000-Overview.md | Overview â€” Forensics is a core Security capability |
+| Bible/07-Domains/Security/001-Network-Scanning.md | Evidence â€” Network scan evidence ingested into forensic cases |
+| Bible/07-Domains/Security/002-Vulnerability-Analysis.md | Evidence â€” Vulnerability analysis evidence feeds forensic timeline |
+| Bible/04-Execution/Security/Audit/000-EAS.md | Audit â€” Evidence Audit Service integrates with chain of custody |
+| Bible/04-Execution/Security/IDS/000-Overview.md | Identity â€” Forensic actor identity verification |
+| Bible/04-Execution/Security/Crypto/000-CSP.md | Crypto â€” Cryptographic sealing and hash verification |
+| Bible/04-Execution/Security/Crypto/001-CAM.md | Crypto â€” Certificate and key management for evidence signing |
+| Bible/04-Execution/Security/CCA/000-CCA.md | Compliance â€” Chain of custody compliance auditing |
+| Bible/08-Interfaces/SDK/001-Audit-SDK.md | Audit SDK â€” Forensic evidence audit integration |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” Core principles for evidence preservation |

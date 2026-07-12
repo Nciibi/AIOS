@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Conversation OS
+﻿# AIOS Bible â€” Brain
+## 000 â€” Conversation OS
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Conversation |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Conversation |
 | Document ID | AIOS-BBL-002-CON-000 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Conversation OS manages Sou's dialogue with users. It handles multi-turn conversation context, turn management, user intent routing, modality adaptation, and response delivery. While the Context System manages the global context window (everything Sou is aware of), Conversation OS manages the interactive flow — the back-and-forth between Sou and the user.
+Conversation OS manages Sou's dialogue with users. It handles multi-turn conversation context, turn management, user intent routing, modality adaptation, and response delivery. While the Context System manages the global context window (everything Sou is aware of), Conversation OS manages the interactive flow â€” the back-and-forth between Sou and the user.
 
 Conversation OS is the interface between Sou and the user. It packages Sou's internal reasoning into user-facing messages and delivers user input to Sou.
 
@@ -23,27 +23,27 @@ Conversation OS is the interface between Sou and the user. It packages Sou's int
 
 ```
 User (via any modality: text, voice, API)
-   ▲
-   │
-   ▼
-┌────────────────────────────────────────────┐
-│           Conversation OS                   │
-│                                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐ │
-│  │ Session   │  │ Turn     │  │ Modality  │ │
-│  │ Manager   │─►│ Manager  │─►│ Adapter   │ │
-│  └──────────┘  └──────────┘  └────┬─────┘ │
-│                                    │       │
-│  ┌──────────┐  ┌──────────┐       │       │
-│  │ Intent   │  │ Response │       │       │
-│  │ Router   │  │ Builder  │       │       │
-│  └──────────┘  └──────────┘       │       │
-└────────────────────────────────────┼───────┘
-                                     │
-                                     ▼
-                            ┌──────────────┐
-                            │  Sou via ACF │
-                            └──────────────┘
+   â–²
+   â”‚
+   â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           Conversation OS                   â”‚
+â”‚                                            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ Session   â”‚  â”‚ Turn     â”‚  â”‚ Modality  â”‚ â”‚
+â”‚  â”‚ Manager   â”‚â”€â–ºâ”‚ Manager  â”‚â”€â–ºâ”‚ Adapter   â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                    â”‚       â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚       â”‚
+â”‚  â”‚ Intent   â”‚  â”‚ Response â”‚       â”‚       â”‚
+â”‚  â”‚ Router   â”‚  â”‚ Builder  â”‚       â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”˜
+                                     â”‚
+                                     â–¼
+                            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                            â”‚  Sou via ACF â”‚
+                            â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 Conversation OS is the entry point for user interactions into the Brain. All user input (regardless of modality) enters through Conversation OS, which prepares it for Sou's consumption. All user-facing responses exit through Conversation OS, which adapts them to the appropriate modality.
@@ -80,8 +80,8 @@ ConversationTurn {
   metadata: {
     processing_time_ms: number
     intent?: string
-    sentiment?: number         // -1.0 (negative) – 1.0 (positive)
-    confidence?: number        // 0.0–1.0
+    sentiment?: number         // -1.0 (negative) â€“ 1.0 (positive)
+    confidence?: number        // 0.0â€“1.0
   }
 }
 
@@ -92,8 +92,8 @@ TurnContent {
 }
 
 UserPreferences {
-  formality: number            // 0.0–1.0
-  verbosity: number            // 0.0–1.0
+  formality: number            // 0.0â€“1.0
+  verbosity: number            // 0.0â€“1.0
   preferred_modality: string
   timezone: string
   language: string
@@ -113,9 +113,9 @@ Manages the lifecycle of conversation sessions:
 | ended | Session terminated | User ends or timeout | Session archived |
 
 Session timeout:
-- Idle timeout: 5 minutes of inactivity → auto-pause
-- Absolute timeout: 24 hours → force-end
-- Max idle sessions: 10 per user → oldest auto-ended
+- Idle timeout: 5 minutes of inactivity â†’ auto-pause
+- Absolute timeout: 24 hours â†’ force-end
+- Max idle sessions: 10 per user â†’ oldest auto-ended
 
 Session state is persisted in Memory OS. Active sessions are cached in Conversation OS.
 
@@ -165,7 +165,7 @@ Routes user input based on detected intent before it reaches Sou:
 | system | "Change settings" | Route to Personality/Settings | Setting change request |
 | emergency | "Stop everything" | Interrupt via Attention System | Immediate interrupt |
 
-The Intent Router is lightweight — it classifies intent using a simple rule-based matcher before passing to Sou. Complex intent resolution is handled by Sou via Cognitive OS.
+The Intent Router is lightweight â€” it classifies intent using a simple rule-based matcher before passing to Sou. Complex intent resolution is handled by Sou via Cognitive OS.
 
 ### 5. Response Builder
 
@@ -176,7 +176,7 @@ After Sou produces a response, the Response Builder packages it for delivery:
 | Style application | Apply personality style profile |
 | Formatting | Add markdown, code blocks, lists |
 | Attachment handling | Process file references, images |
-| Modality conversion | Text → speech if voice modality |
+| Modality conversion | Text â†’ speech if voice modality |
 | Length adjustment | Truncate or summarize if exceeds limits |
 | Continuation | Split long responses into chunks |
 | Confidence annotation | Add confidence indicators for uncertain answers |
@@ -200,8 +200,8 @@ After Sou produces a response, the Response Builder packages it for delivery:
 
 | Method | Auth | Description |
 |--------|------|-------------|
-| `deliverInput(session_id, turn)` | Conversation OS → Sou | Deliver parsed user input to Sou |
-| `receiveResponse(session_id, response)` | Sou → Conversation OS | Receive Sou's response for delivery |
+| `deliverInput(session_id, turn)` | Conversation OS â†’ Sou | Deliver parsed user input to Sou |
+| `receiveResponse(session_id, response)` | Sou â†’ Conversation OS | Receive Sou's response for delivery |
 | `getTurnHistory(session_id, limit?)` | Sou only | Get recent turn history |
 | `injectSystemMessage(session_id, content)` | Sou only | Inject system message into conversation |
 | `updatePreferences(session_id, updates)` | Sou only | Update user preferences |
@@ -240,12 +240,12 @@ interface IntentClassifier {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| CONV-001 | Every user message has exactly one response | Algorithmic — turn pairing enforced |
-| CONV-002 | Turn ordering is strictly sequential | Architectural — Turn Manager sequences turns |
-| CONV-003 | Sou processes text internally regardless of modality | Architectural — Modality Adapter normalizes input |
-| CONV-004 | Conversation OS is stateless — sessions live in Memory OS | Architectural — no internal persistence |
-| CONV-005 | User preferences are persistent across sessions | API-level — preferences stored in Memory OS |
-| CONV-006 | Sessions auto-end after 24 hours | Algorithmic — Session Manager enforces timeout |
+| CONV-001 | Every user message has exactly one response | Algorithmic â€” turn pairing enforced |
+| CONV-002 | Turn ordering is strictly sequential | Architectural â€” Turn Manager sequences turns |
+| CONV-003 | Sou processes text internally regardless of modality | Architectural â€” Modality Adapter normalizes input |
+| CONV-004 | Conversation OS is stateless â€” sessions live in Memory OS | Architectural â€” no internal persistence |
+| CONV-005 | User preferences are persistent across sessions | API-level â€” preferences stored in Memory OS |
+| CONV-006 | Sessions auto-end after 24 hours | Algorithmic â€” Session Manager enforces timeout |
 
 ## Related Documents
 
@@ -274,14 +274,14 @@ interface IntentClassifier {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Conversation OS does one thing: manage dialogue flow |
-| R2 — Dependency Order | Depends on Memory OS, Attention System; no upward deps |
-| R3 — DRY | Session model defined once in Conversation Model |
-| R4 — Builder Pattern | Response built by Intent Router → Sou → Response Builder |
-| R5 — Liskov Substitution | Any ModalityCodec implements the interface |
-| R6 — DI over Singletons | Modality codecs and intent classifiers injected |
-| R9 — Deterministic | Same input produces same response (Sou may vary) |
-| R10 — Simpler Over Complex | Turn management uses sequential ordering |
-| R13 — Design for Failure | Turn timeouts always produce user notification |
-| R14 — Paved Path | All user input flows through `receiveMessage` |
-| R15 — Open/Closed | New modalities added via ModalityCodec, not by modifying core |
+| R1 â€” Modulsingularity | Conversation OS does one thing: manage dialogue flow |
+| R2 â€” Dependency Order | Depends on Memory OS, Attention System; no upward deps |
+| R3 â€” DRY | Session model defined once in Conversation Model |
+| R4 â€” Builder Pattern | Response built by Intent Router â†’ Sou â†’ Response Builder |
+| R5 â€” Liskov Substitution | Any ModalityCodec implements the interface |
+| R6 â€” DI over Singletons | Modality codecs and intent classifiers injected |
+| R9 â€” Deterministic | Same input produces same response (Sou may vary) |
+| R10 â€” Simpler Over Complex | Turn management uses sequential ordering |
+| R13 â€” Design for Failure | Turn timeouts always produce user notification |
+| R14 â€” Paved Path | All user input flows through `receiveMessage` |
+| R15 â€” Open/Closed | New modalities added via ModalityCodec, not by modifying core |

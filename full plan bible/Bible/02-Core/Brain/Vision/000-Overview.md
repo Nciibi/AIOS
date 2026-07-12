@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Vision System
+﻿# AIOS Bible â€” Brain
+## 000 â€” Vision System
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Vision |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Vision |
 | Document ID | AIOS-BBL-002-VIS-000 |
-| Source Laws | Law 4 — Law of Evidence, Law 3 — Law of Communication |
+| Source Laws | Law 4 â€” Law of Evidence, Law 3 â€” Law of Communication |
 | Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Vision System provides visual input processing for the Brain. It extracts structured information from images, video frames, and visual documents — converting raw visual data into text and structured data that Sou can reason about. The Vision System is the visual sensory interface of the Brain.
+The Vision System provides visual input processing for the Brain. It extracts structured information from images, video frames, and visual documents â€” converting raw visual data into text and structured data that Sou can reason about. The Vision System is the visual sensory interface of the Brain.
 
 Vision does not interpret context or make decisions about what it sees. It produces structured descriptions and extracted data that Sou consumes through Cognitive OS reasoning.
 
@@ -23,33 +23,33 @@ Vision does not interpret context or make decisions about what it sees. It produ
 
 ```
 Sou (consumes vision output via Cognitive OS)
-    ▲
-    │
-    ▼
-┌────────────────────────────────────────────┐
-│              Vision System                   │
-│                                              │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  │
-│  │  Image    │  │  OCR      │  │  Scene    │  │
-│  │  Analysis │─►│  Engine   │─►│  Describer│  │
-│  └──────────┘  └──────────┘  └──────┬───┘  │
-│                                      │      │
-│  ┌──────────┐  ┌──────────┐         │      │
-│  │  Video    │  │  Frame    │         │      │
-│  │  Processor│  │  Selector │         │      │
-│  └──────────┘  └──────────┘         │      │
-│                                      │      │
-│  ┌──────────┐  ┌──────────┐         │      │
-│  │  Document │  │  Vision   │         │      │
-│  │  Parser   │  │  Router   │         │      │
-│  └──────────┘  └──────────┘         │      │
-└──────────────────────────────────────┼──────┘
-                                       │
-                                       ▼
-                                ┌──────────────┐
-                                │  LLMOS        │
-                                │ (inference)   │
-                                └──────────────┘
+    â–²
+    â”‚
+    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚              Vision System                   â”‚
+â”‚                                              â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+â”‚  â”‚  Image    â”‚  â”‚  OCR      â”‚  â”‚  Scene    â”‚  â”‚
+â”‚  â”‚  Analysis â”‚â”€â–ºâ”‚  Engine   â”‚â”€â–ºâ”‚  Describerâ”‚  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”˜  â”‚
+â”‚                                      â”‚      â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”         â”‚      â”‚
+â”‚  â”‚  Video    â”‚  â”‚  Frame    â”‚         â”‚      â”‚
+â”‚  â”‚  Processorâ”‚  â”‚  Selector â”‚         â”‚      â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜         â”‚      â”‚
+â”‚                                      â”‚      â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”         â”‚      â”‚
+â”‚  â”‚  Document â”‚  â”‚  Vision   â”‚         â”‚      â”‚
+â”‚  â”‚  Parser   â”‚  â”‚  Router   â”‚         â”‚      â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜         â”‚      â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”˜
+                                       â”‚
+                                       â–¼
+                                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                                â”‚  LLMOS        â”‚
+                                â”‚ (inference)   â”‚
+                                â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 Vision System uses LLMOS for AI-powered vision inference (image description, object detection, document parsing). Traditional image processing (resize, format conversion, frame extraction) is handled internally.
@@ -111,7 +111,7 @@ DetectedObject {
 }
 
 BoundingBox {
-  x: number                     // Normalized 0.0–1.0
+  x: number                     // Normalized 0.0â€“1.0
   y: number
   width: number
   height: number
@@ -141,8 +141,8 @@ FaceAttributes {
   age_estimate?: number
   emotion?: string
   glasses?: boolean
-  blur?: number                 // 0.0–1.0
-  exposure?: number             // 0.0–1.0
+  blur?: number                 // 0.0â€“1.0
+  exposure?: number             // 0.0â€“1.0
 }
 
 VideoAnalysisRequest {
@@ -227,11 +227,11 @@ Image preprocessing before LLMOS inference:
 
 | Step | Operation | Configurable |
 |------|-----------|-------------|
-| 1 | Format normalization | Yes — target format |
-| 2 | Resize to model limits | Yes — max dimensions |
-| 3 | Compression for latency | Yes — quality/performance trade-off |
-| 4 | Enhancement | No — auto-applied for low quality |
-| 5 | Face blurring (privacy) | Yes — PII protection |
+| 1 | Format normalization | Yes â€” target format |
+| 2 | Resize to model limits | Yes â€” max dimensions |
+| 3 | Compression for latency | Yes â€” quality/performance trade-off |
+| 4 | Enhancement | No â€” auto-applied for low quality |
+| 5 | Face blurring (privacy) | Yes â€” PII protection |
 
 ### 2. OCR Engine
 
@@ -264,7 +264,7 @@ Processes video content through frame analysis:
 
 | Mode | Behavior | Use Case |
 |------|----------|----------|
-| Summarize | Sample frames → describe key events | Meeting recording review |
+| Summarize | Sample frames â†’ describe key events | Meeting recording review |
 | Detect | Monitor for specific events/objects | Security camera monitoring |
 | Stream | Real-time frame-by-frame analysis | Live video processing |
 
@@ -355,13 +355,13 @@ interface ImagePreprocessor {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| VIS-001 | Vision System extracts features; Sou interprets meaning | Architectural — no auto-decisions on vision output |
-| VIS-002 | All vision processing routes through LLMOS for AI inference | Architectural — Vision System has no embedded vision models |
-| VIS-003 | Image data is ephemeral unless explicitly stored to Memory OS | Architectural — stateless per BRAIN-007 |
-| VIS-004 | Face detection produces bounding boxes only, never identity labels | Constitutional — privacy protection |
-| VIS-005 | Privacy filters are applied before any image leaves the Vision System | Architectural — applied in ImagePreprocessor |
-| VIS-006 | OCR confidence below threshold returns error, never hallucinated text | Schema — minimum confidence enforcement |
-| VIS-007 | Video analysis always has a configurable frame limit | Schema — max_frames prevents unbounded processing |
+| VIS-001 | Vision System extracts features; Sou interprets meaning | Architectural â€” no auto-decisions on vision output |
+| VIS-002 | All vision processing routes through LLMOS for AI inference | Architectural â€” Vision System has no embedded vision models |
+| VIS-003 | Image data is ephemeral unless explicitly stored to Memory OS | Architectural â€” stateless per BRAIN-007 |
+| VIS-004 | Face detection produces bounding boxes only, never identity labels | Constitutional â€” privacy protection |
+| VIS-005 | Privacy filters are applied before any image leaves the Vision System | Architectural â€” applied in ImagePreprocessor |
+| VIS-006 | OCR confidence below threshold returns error, never hallucinated text | Schema â€” minimum confidence enforcement |
+| VIS-007 | Video analysis always has a configurable frame limit | Schema â€” max_frames prevents unbounded processing |
 
 ## Related Documents
 
@@ -392,14 +392,14 @@ interface ImagePreprocessor {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Vision System does one thing: visual input processing |
-| R2 — Dependency Order | Depends on LLMOS, Memory OS; no upward deps |
-| R3 — DRY | Vision models defined once in Vision Model |
-| R4 — Builder Pattern | Analysis built by Preprocessor → Router → Provider |
-| R5 — Liskov Substitution | Any VisionProvider implements the interface |
-| R6 — DI over Singletons | Providers and frame selectors injected |
-| R9 — Deterministic | Same image+config produces same analysis (model-dependent) |
-| R10 — Simpler Over Complex | Clear analysis modes (describe/classify/detect/ocr/full) |
-| R13 — Design for Failure | Provider failover, timeouts, partial results always handled |
-| R14 — Paved Path | All vision analysis flows through `analyzeImage` |
-| R15 — Open/Closed | New analysis modes added via Provider SDK, not by modifying core |
+| R1 â€” Modulsingularity | Vision System does one thing: visual input processing |
+| R2 â€” Dependency Order | Depends on LLMOS, Memory OS; no upward deps |
+| R3 â€” DRY | Vision models defined once in Vision Model |
+| R4 â€” Builder Pattern | Analysis built by Preprocessor â†’ Router â†’ Provider |
+| R5 â€” Liskov Substitution | Any VisionProvider implements the interface |
+| R6 â€” DI over Singletons | Providers and frame selectors injected |
+| R9 â€” Deterministic | Same image+config produces same analysis (model-dependent) |
+| R10 â€” Simpler Over Complex | Clear analysis modes (describe/classify/detect/ocr/full) |
+| R13 â€” Design for Failure | Provider failover, timeouts, partial results always handled |
+| R14 â€” Paved Path | All vision analysis flows through `analyzeImage` |
+| R15 â€” Open/Closed | New analysis modes added via Provider SDK, not by modifying core |

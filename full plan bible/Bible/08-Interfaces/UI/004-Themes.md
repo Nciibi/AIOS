@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## UI — 004: Themes
+﻿# AIOS Bible â€” Interfaces
+## UI â€” 004: Themes
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-UI-004 |
-| Source Laws | Law 1 — Law of Origin, Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 1 â€” Law of Origin, Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -176,28 +176,28 @@ interface InheritanceResolver {
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| THEME-001 | Every theme defines a value for every token in the base theme | Algorithmic — TokenRegistry validates complete coverage |
-| THEME-002 | Theme switching completes within 100ms to prevent visual flicker | Architectural — SwitchEngine enforces timing budget |
-| THEME-003 | User theme preference survives browser restart and session change | Algorithmic — PreferenceStore persists to both localStorage and profile |
-| THEME-004 | Inheritance chains are acyclic | Algorithmic — InheritanceResolver detects and rejects cycles |
-| THEME-005 | High-contrast theme overrides all color tokens to pass WCAG AAA | Algorithmic — ContrastValidator audits all tokens on registration |
-| THEME-006 | System preference detection runs before any manual theme is applied | Architectural — SwitchEngine queries prefers-color-scheme on init |
+| THEME-001 | Every theme defines a value for every token in the base theme | Algorithmic â€” TokenRegistry validates complete coverage |
+| THEME-002 | Theme switching completes within 100ms to prevent visual flicker | Architectural â€” SwitchEngine enforces timing budget |
+| THEME-003 | User theme preference survives browser restart and session change | Algorithmic â€” PreferenceStore persists to both localStorage and profile |
+| THEME-004 | Inheritance chains are acyclic | Algorithmic â€” InheritanceResolver detects and rejects cycles |
+| THEME-005 | High-contrast theme overrides all color tokens to pass WCAG AAA | Algorithmic â€” ContrastValidator audits all tokens on registration |
+| THEME-006 | System preference detection runs before any manual theme is applied | Architectural â€” SwitchEngine queries prefers-color-scheme on init |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Theme system exclusively manages visual presentation; no component defines its own colors |
-| R2 — Dependency Order | Depends on Design System (001), Accessibility (003); no cycles |
-| R3 — DRY | Token values defined once per theme; reused across all components |
-| R4 — Builder Pattern | Theme variants built via inheritance chain with validation |
-| R5 — Law of Demeter | Components interact only with resolved tokens; never with theme definitions |
-| R6 — Encapsulation | Theme internals (inheritance, resolution) hidden behind ThemeApplier interface |
-| R9 — Deterministic | Same theme + same tokens = same visual output every time |
-| R10 — Simpler Over Complex | Light/dark are built-in; custom themes explicitly opt-in |
-| R13 — Design for Failure | Missing token falls back to base theme; never leaves element un-styled |
-| R14 — Paved Path | Light theme is default; dark and high-contrast are predefined variants |
-| R15 — Open/Closed | New variants registered via ThemeRegistry; base theme closed for modification |
+| R1 â€” Modulsingularity | Theme system exclusively manages visual presentation; no component defines its own colors |
+| R2 â€” Dependency Order | Depends on Design System (001), Accessibility (003); no cycles |
+| R3 â€” DRY | Token values defined once per theme; reused across all components |
+| R4 â€” Builder Pattern | Theme variants built via inheritance chain with validation |
+| R5 â€” Law of Demeter | Components interact only with resolved tokens; never with theme definitions |
+| R6 â€” Encapsulation | Theme internals (inheritance, resolution) hidden behind ThemeApplier interface |
+| R9 â€” Deterministic | Same theme + same tokens = same visual output every time |
+| R10 â€” Simpler Over Complex | Light/dark are built-in; custom themes explicitly opt-in |
+| R13 â€” Design for Failure | Missing token falls back to base theme; never leaves element un-styled |
+| R14 â€” Paved Path | Light theme is default; dark and high-contrast are predefined variants |
+| R15 â€” Open/Closed | New variants registered via ThemeRegistry; base theme closed for modification |
 
 ## Related Documents
 

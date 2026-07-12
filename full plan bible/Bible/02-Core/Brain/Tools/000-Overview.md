@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Tool System
+﻿# AIOS Bible â€” Brain
+## 000 â€” Tool System
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Tools |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Tools |
 | Document ID | AIOS-BBL-002-TOL-000 |
-| Source Laws | Law 7 — Law of Capability Bounds, Law 3 — Law of Communication |
+| Source Laws | Law 7 â€” Law of Capability Bounds, Law 3 â€” Law of Communication |
 | Source Physics | Physics/007-Capabilities.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Tool System manages the registry, discovery, and invocation of tools available to Sou. Tools are the mechanism by which Sou interacts with the external world — reading files, querying databases, executing code, making API calls, and performing any action that goes beyond reasoning and language generation.
+The Tool System manages the registry, discovery, and invocation of tools available to Sou. Tools are the mechanism by which Sou interacts with the external world â€” reading files, querying databases, executing code, making API calls, and performing any action that goes beyond reasoning and language generation.
 
 Under Law 7 (Capability Bounds), every tool has a declared capability scope. The Tool System enforces that Sou only invokes tools within its capability bounds, and that tool results are properly validated and returned to the context window.
 
@@ -23,31 +23,31 @@ Under Law 7 (Capability Bounds), every tool has a declared capability scope. The
 
 ```
 Sou (discovers and invokes tools)
-   ▲
-   │
-   ▼
-┌────────────────────────────────────────────┐
-│           Tool System                       │
-│                                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐ │
-│  │ Tool     │  │ Discovery│  │ Invocation│ │
-│  │ Registry │─►│ Engine   │─►│  Manager  │ │
-│  └──────────┘  └──────────┘  └────┬─────┘ │
-│                                    │       │
-│  ┌──────────┐  ┌──────────┐       │       │
-│  │ Schema   │  │ Result   │       │       │
-│  │ Validator│  │ Parser   │       │       │
-│  └──────────┘  └──────────┘       │       │
-└────────────────────────────────────┼───────┘
-                                     │
-                                     ▼
-                            ┌──────────────┐
-                            │  Runtime SDK │
-                            │ (execution)  │
-                            └──────────────┘
+   â–²
+   â”‚
+   â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           Tool System                       â”‚
+â”‚                                            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ Tool     â”‚  â”‚ Discoveryâ”‚  â”‚ Invocationâ”‚ â”‚
+â”‚  â”‚ Registry â”‚â”€â–ºâ”‚ Engine   â”‚â”€â–ºâ”‚  Manager  â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                    â”‚       â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚       â”‚
+â”‚  â”‚ Schema   â”‚  â”‚ Result   â”‚       â”‚       â”‚
+â”‚  â”‚ Validatorâ”‚  â”‚ Parser   â”‚       â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”˜
+                                     â”‚
+                                     â–¼
+                            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                            â”‚  Runtime SDK â”‚
+                            â”‚ (execution)  â”‚
+                            â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
-The Tool System does not execute tools directly. Execution is delegated to the Runtime SDK via the Security Council verification pipeline. The Tool System handles discovery, validation, and result processing — not execution.
+The Tool System does not execute tools directly. Execution is delegated to the Runtime SDK via the Security Council verification pipeline. The Tool System handles discovery, validation, and result processing â€” not execution.
 
 ## Core Concepts
 
@@ -266,12 +266,12 @@ interface ResultParser {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| TLS-001 | All tool invocations pass through the Security Council pipeline | Architectural — Invocation Manager routes through SC |
-| TLS-002 | Sou only invokes tools within its capability bounds | API-level — checked before invocation |
-| TLS-003 | Tools are stateless — all state lives in caller | Architectural — tools are pure functions |
-| TLS-004 | Tool parameters are validated before execution | Algorithmic — Schema Validator runs before dispatch |
-| TLS-005 | Tool results are always returned to Context System | Architectural — result pushed to Context Window |
-| TLS-006 | Every tool has exactly one provider | Registry — verified on registration |
+| TLS-001 | All tool invocations pass through the Security Council pipeline | Architectural â€” Invocation Manager routes through SC |
+| TLS-002 | Sou only invokes tools within its capability bounds | API-level â€” checked before invocation |
+| TLS-003 | Tools are stateless â€” all state lives in caller | Architectural â€” tools are pure functions |
+| TLS-004 | Tool parameters are validated before execution | Algorithmic â€” Schema Validator runs before dispatch |
+| TLS-005 | Tool results are always returned to Context System | Architectural â€” result pushed to Context Window |
+| TLS-006 | Every tool has exactly one provider | Registry â€” verified on registration |
 
 ## Related Documents
 
@@ -301,14 +301,14 @@ interface ResultParser {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Tool System does one thing: manage tool lifecycle and invocation |
-| R2 — Dependency Order | Depends on Runtime SDK, Security Council; no upward deps |
-| R3 — DRY | Tool definitions stored once in Registry |
-| R4 — Builder Pattern | Invocation built by Validator → Capability Check → Dispatch |
-| R5 — Liskov Substitution | Any ResultParser implements the interface |
-| R6 — DI over Singletons | Validators and parsers injected |
-| R9 — Deterministic | Same inputs produce same result (tools may vary) |
-| R10 — Simpler Over Complex | Tools are simple input → output mappings |
-| R13 — Design for Failure | All invocations have deadlines, retries, and fallbacks |
-| R14 — Paved Path | All tool usage flows through `invokeTool` |
-| R15 — Open/Closed | New tool categories added via Registry, not by modifying core |
+| R1 â€” Modulsingularity | Tool System does one thing: manage tool lifecycle and invocation |
+| R2 â€” Dependency Order | Depends on Runtime SDK, Security Council; no upward deps |
+| R3 â€” DRY | Tool definitions stored once in Registry |
+| R4 â€” Builder Pattern | Invocation built by Validator â†’ Capability Check â†’ Dispatch |
+| R5 â€” Liskov Substitution | Any ResultParser implements the interface |
+| R6 â€” DI over Singletons | Validators and parsers injected |
+| R9 â€” Deterministic | Same inputs produce same result (tools may vary) |
+| R10 â€” Simpler Over Complex | Tools are simple input â†’ output mappings |
+| R13 â€” Design for Failure | All invocations have deadlines, retries, and fallbacks |
+| R14 â€” Paved Path | All tool usage flows through `invokeTool` |
+| R15 â€” Open/Closed | New tool categories added via Registry, not by modifying core |

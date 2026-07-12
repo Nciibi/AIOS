@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Trading — 003: Market Data
+﻿# AIOS Bible â€” Domains
+## Trading â€” 003: Market Data
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-TRD-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -173,17 +173,17 @@ interface FeedStatus {
 
 ## Design DNA (R1-R6,R9,R10,R13-R15)
 
-- **R1 — Single Source of Truth**: The Normalizer is the sole producer of canonical TickRecords; consumers never interpret raw data.
-- **R2 — Immutable Event Log**: Every tick, bar close, and validation event is written to the event log.
-- **R3 — Capability-Based Authorization**: Only FeedManager capability may modify feed configuration or lifecycle.
-- **R4 — Law of Diminishing Returns**: Historical data retention policies are tuned by the value density of each data type.
-- **R5 — Deterministic Computation**: OHLCV bar construction produces identical bars from identical tick sequences.
-- **R6 — Bounded Context**: Market Data owns feed ingestion and normalization; derived indicators belong to Algorithms.
-- **R9 — Fail-Fast**: Invalid ticks and checksum failures are rejected immediately; never buffered for later validation.
-- **R10 — Audit Trail**: Every feed status change, data gap, and quality alert is logged with full context.
-- **R13 — Defensive Design**: On feed degradation, systems degrade gracefully using cached or secondary data sources.
-- **R14 — Self-Healing**: On transient feed disconnection, automatic reconnection with sequence gap detection and replay.
-- **R15 — Backward Compatibility**: Historical data schemas and query interfaces maintain versioned migration paths.
+- **R1 â€” Single Source of Truth**: The Normalizer is the sole producer of canonical TickRecords; consumers never interpret raw data.
+- **R2 â€” Immutable Event Log**: Every tick, bar close, and validation event is written to the event log.
+- **R3 â€” Capability-Based Authorization**: Only FeedManager capability may modify feed configuration or lifecycle.
+- **R4 â€” Law of Diminishing Returns**: Historical data retention policies are tuned by the value density of each data type.
+- **R5 â€” Deterministic Computation**: OHLCV bar construction produces identical bars from identical tick sequences.
+- **R6 â€” Bounded Context**: Market Data owns feed ingestion and normalization; derived indicators belong to Algorithms.
+- **R9 â€” Fail-Fast**: Invalid ticks and checksum failures are rejected immediately; never buffered for later validation.
+- **R10 â€” Audit Trail**: Every feed status change, data gap, and quality alert is logged with full context.
+- **R13 â€” Defensive Design**: On feed degradation, systems degrade gracefully using cached or secondary data sources.
+- **R14 â€” Self-Healing**: On transient feed disconnection, automatic reconnection with sequence gap detection and replay.
+- **R15 â€” Backward Compatibility**: Historical data schemas and query interfaces maintain versioned migration paths.
 
 ## Related Documents
 
@@ -192,6 +192,6 @@ interface FeedStatus {
 | Bible/07-Domains/Trading/000-Overview.md | Base Trading domain overview |
 | Bible/07-Domains/Trading/001-Algorithms.md | Algorithms consume market data for signal generation |
 | Bible/07-Domains/Trading/002-Risk-Analysis.md | Risk analysis uses market data for risk model computation |
-| Physics/005-Events.md | Evidence — market data operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — market data capability bounds |
-| Physics/012-Experience.md | Experience — market data outcomes drive feed improvement |
+| Physics/005-Events.md | Evidence â€” market data operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” market data capability bounds |
+| Physics/012-Experience.md | Experience â€” market data outcomes drive feed improvement |

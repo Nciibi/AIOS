@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Context System
+﻿# AIOS Bible â€” Brain
+## 000 â€” Context System
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Context |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Context |
 | Document ID | AIOS-BBL-002-CTX-000 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Context System is the single authority for the global context window within the Brain. It manages what Sou sees, hears, and knows at any moment. Every piece of information entering Sou's awareness — user input, memory recall, tool output, system signals — passes through the Context System, which prioritizes, compresses, and structures it into a coherent context window.
+The Context System is the single authority for the global context window within the Brain. It manages what Sou sees, hears, and knows at any moment. Every piece of information entering Sou's awareness â€” user input, memory recall, tool output, system signals â€” passes through the Context System, which prioritizes, compresses, and structures it into a coherent context window.
 
 Under BRAIN-006, the Context System owns the global context window exclusively. No other component writes to or reads from the context window directly. Sou reads from the context window. Services write to it through the Context System.
 
@@ -23,28 +23,28 @@ Under BRAIN-006, the Context System owns the global context window exclusively. 
 
 ```
 Sou (reads context)
-   ▲
-   │
-   ▼
-┌────────────────────────────────────────────┐
-│           Context System                    │
-│                                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐ │
-│  │ Priority  │  │ Compress │  │ Window   │ │
-│  │ Manager   │─►│ Engine   │─►│ Manager  │ │
-│  └──────────┘  └──────────┘  └────┬─────┘ │
-│                                    │       │
-│  ┌──────────┐  ┌──────────┐       │       │
-│  │ Context  │  │ TTL      │       │       │
-│  │ Registry │  │ Manager  │       │       │
-│  └──────────┘  └──────────┘       │       │
-└────────────────────────────────────┼───────┘
-                                     │
-                                     ▼
-                            ┌──────────────┐
-                            │  Memory OS   │
-                            │ (persistence)│
-                            └──────────────┘
+   â–²
+   â”‚
+   â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           Context System                    â”‚
+â”‚                                            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ Priority  â”‚  â”‚ Compress â”‚  â”‚ Window   â”‚ â”‚
+â”‚  â”‚ Manager   â”‚â”€â–ºâ”‚ Engine   â”‚â”€â–ºâ”‚ Manager  â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                    â”‚       â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚       â”‚
+â”‚  â”‚ Context  â”‚  â”‚ TTL      â”‚       â”‚       â”‚
+â”‚  â”‚ Registry â”‚  â”‚ Manager  â”‚       â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”˜
+                                     â”‚
+                                     â–¼
+                            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                            â”‚  Memory OS   â”‚
+                            â”‚ (persistence)â”‚
+                            â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 The Context System is stateless (per BRAIN-007). All context data is persisted through Memory OS. The Context System owns the *structure and management* of the context window, not the storage.
@@ -70,7 +70,7 @@ WorkingMemory {
   item_id: string
   content: string
   category: "goal" | "task" | "note" | "reference"
-  priority: number      // 0.0–1.0, pinned items maintain priority
+  priority: number      // 0.0â€“1.0, pinned items maintain priority
   created_at: timestamp
 }
 
@@ -87,7 +87,7 @@ MissionState {
   status: "active" | "pending" | "completed" | "failed"
   goal: string
   milestones: MilestoneSummary[]
-  progress: number      // 0.0–1.0
+  progress: number      // 0.0â€“1.0
 }
 
 SystemSignal {
@@ -134,11 +134,11 @@ Not all information has equal importance. The Priority Manager assigns a priorit
 
 | Priority Level | Score Range | Retention | Examples |
 |----------------|-------------|-----------|----------|
-| Critical | 0.9–1.0 | Always included | User input, active mission state, security alerts |
-| High | 0.7–0.9 | Included until resolved | Pinned goals, active tool calls, recent user messages |
-| Medium | 0.4–0.7 | Included if space permits | Conversation history, system notifications |
-| Low | 0.2–0.4 | Included subject to compression | Historical context, verbose tool output |
-| Background | 0.0–0.2 | Excluded unless explicitly requested | Log entries, debug info, stale context |
+| Critical | 0.9â€“1.0 | Always included | User input, active mission state, security alerts |
+| High | 0.7â€“0.9 | Included until resolved | Pinned goals, active tool calls, recent user messages |
+| Medium | 0.4â€“0.7 | Included if space permits | Conversation history, system notifications |
+| Low | 0.2â€“0.4 | Included subject to compression | Historical context, verbose tool output |
+| Background | 0.0â€“0.2 | Excluded unless explicitly requested | Log entries, debug info, stale context |
 
 Priority decay: items lose priority over time. A High-priority item from 10 turns ago may degrade to Medium or Low.
 
@@ -151,12 +151,12 @@ When the context window exceeds the token budget (set by LLMOS Token Budget Mana
 | Strategy | Behavior | Token Savings | Quality Impact |
 |----------|----------|---------------|----------------|
 | Truncation | Drop lowest-priority items | Variable | Loss of low-value context |
-| Summarization | Replace conversation turns with summary | 60–80% | Moderate — summaries lose detail |
-| Deduplication | Remove repeated information | 5–15% | None |
-| Structured Pruning | Remove verbose fields from items | 10–30% | Minimal — metadata preserved |
+| Summarization | Replace conversation turns with summary | 60â€“80% | Moderate â€” summaries lose detail |
+| Deduplication | Remove repeated information | 5â€“15% | None |
+| Structured Pruning | Remove verbose fields from items | 10â€“30% | Minimal â€” metadata preserved |
 | Sliding Window | Keep last N turns, drop earlier | Fixed N | Deterministic but lossy |
 
-The Compression Engine respects Sou's priority overrides — pinned items are never compressed.
+The Compression Engine respects Sou's priority overrides â€” pinned items are never compressed.
 
 ### 4. TTL Management
 
@@ -179,7 +179,7 @@ ContextRegistry {
   item_id: string
   source: string          // Which service produced this item
   item_type: string       // "user_input" | "memory" | "tool_result" | "system_signal"
-  priority: number        // 0.0–1.0
+  priority: number        // 0.0â€“1.0
   token_count: number
   created_at: timestamp
   ttl_turns: number
@@ -258,12 +258,12 @@ ContextItem {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| CTX-001 | Sou is the only reader of the context window | API-level — `pullWindow` is Sou-only |
-| CTX-002 | Services push items; they never write directly | Architectural — no direct context access |
-| CTX-003 | The context window is ephemeral — persistence is Memory OS's responsibility | Architectural — Context System is stateless |
-| CTX-004 | Compression never removes pinned items | Algorithmic — checked during compression |
-| CTX-005 | Every context item has a source and priority | Schema — required fields on push |
-| CTX-006 | Token budget is set by LLMOS, never by the Context System | API-level — `setBudget` is LLMOS-only |
+| CTX-001 | Sou is the only reader of the context window | API-level â€” `pullWindow` is Sou-only |
+| CTX-002 | Services push items; they never write directly | Architectural â€” no direct context access |
+| CTX-003 | The context window is ephemeral â€” persistence is Memory OS's responsibility | Architectural â€” Context System is stateless |
+| CTX-004 | Compression never removes pinned items | Algorithmic â€” checked during compression |
+| CTX-005 | Every context item has a source and priority | Schema â€” required fields on push |
+| CTX-006 | Token budget is set by LLMOS, never by the Context System | API-level â€” `setBudget` is LLMOS-only |
 
 ## Related Documents
 
@@ -290,14 +290,14 @@ ContextItem {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Context System does one thing: manage the context window |
-| R2 — Dependency Order | Depends on Memory OS; no upward deps |
-| R3 — DRY | Context structure defined once in Context Registry |
-| R4 — Builder Pattern | Context window built by Priority Manager + Compression Engine |
-| R5 — Liskov Substitution | Any CompressionStrategy implements the interface |
-| R6 — DI over Singletons | Scorer and compression strategies injected |
-| R9 — Deterministic | Same inputs produce same context window |
-| R10 — Simpler Over Complex | Priority model uses simple 5-tier scale |
-| R13 — Design for Failure | Context System degrades gracefully — stale context is served when a push source is unavailable |
-| R14 — Paved Path | All context flows through push/pull API |
-| R15 — Open/Closed | New item types added via Registry, not by modifying core
+| R1 â€” Modulsingularity | Context System does one thing: manage the context window |
+| R2 â€” Dependency Order | Depends on Memory OS; no upward deps |
+| R3 â€” DRY | Context structure defined once in Context Registry |
+| R4 â€” Builder Pattern | Context window built by Priority Manager + Compression Engine |
+| R5 â€” Liskov Substitution | Any CompressionStrategy implements the interface |
+| R6 â€” DI over Singletons | Scorer and compression strategies injected |
+| R9 â€” Deterministic | Same inputs produce same context window |
+| R10 â€” Simpler Over Complex | Priority model uses simple 5-tier scale |
+| R13 â€” Design for Failure | Context System degrades gracefully â€” stale context is served when a push source is unavailable |
+| R14 â€” Paved Path | All context flows through push/pull API |
+| R15 â€” Open/Closed | New item types added via Registry, not by modifying core

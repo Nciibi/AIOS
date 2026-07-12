@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — Working Memory
+﻿# AIOS Bible â€” Brain
+## 001 â€” Working Memory
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Memory |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Memory |
 | Document ID | AIOS-BBL-002-MEM-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/004-Sessions.md, Physics/006-Lifecycles.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Working Memory holds the active state of Sou's current session — what Sou is doing right now. It is the fastest memory tier, designed for high-throughput read/write access to task state, current goals, pinned references, and the task stack. Working Memory is session-scoped: it is created when a session starts, persists throughout the session, and is cleared when the session ends.
+Working Memory holds the active state of Sou's current session â€” what Sou is doing right now. It is the fastest memory tier, designed for high-throughput read/write access to task state, current goals, pinned references, and the task stack. Working Memory is session-scoped: it is created when a session starts, persists throughout the session, and is cleared when the session ends.
 
 Under MEM-005, Working Memory is strictly session-scoped. No Working Memory item outlives its session.
 
@@ -29,7 +29,7 @@ WorkingMemoryItem {
   session_id: string
   category: "goal" | "task" | "note" | "reference" | "decision" | "pinned"
   content: unknown
-  priority: number               // 0.0–1.0, pinned items maintain priority
+  priority: number               // 0.0â€“1.0, pinned items maintain priority
   parent_id?: string             // For task hierarchy (task stack)
   children: string[]             // Sub-items in the task stack
   created_at: timestamp
@@ -39,7 +39,7 @@ WorkingMemoryItem {
   metadata: {
     source: string               // Which service created this item
     token_estimate: number
-    importance: number           // 0.0–1.0, influences retention
+    importance: number           // 0.0â€“1.0, influences retention
     tags: string[]
   }
 }
@@ -91,18 +91,18 @@ Working Memory is organized into named slots, each with its own capacity and evi
 
 ```
 Slot: task_stack
-  Access: push(task) → pop() → peek()
+  Access: push(task) â†’ pop() â†’ peek()
   Eviction: When full, oldest item at bottom of stack is removed
   Use case: Sou starts task A, within A starts subtask A1, within A1 starts A1a
-    Stack: [A, A1, A1a] → pop A1a → back to A1 → pop A1 → back to A
+    Stack: [A, A1, A1a] â†’ pop A1a â†’ back to A1 â†’ pop A1 â†’ back to A
 
 Slot: recent_decisions
-  Access: append(decision) → getRecent(N)
+  Access: append(decision) â†’ getRecent(N)
   Eviction: When full, oldest decision is removed
   Use case: Sou made 5 decisions, needs to recall the last 2
 
 Slot: pinned_items
-  Access: pin(item) → unpin(item_id) → list()
+  Access: pin(item) â†’ unpin(item_id) â†’ list()
   Eviction: Never (manual only)
   Use case: Sou pins the user's name and project requirements for the session
 ```
@@ -130,10 +130,10 @@ getSessionState(session_id: string): WorkingMemorySession
 peekTaskStack(session_id: string): WorkingMemoryItem | null
 ```
 
-- `get` — direct lookup by item_id across all slots
-- `getSlot` — returns all items in a named slot
-- `getSessionState` — full session snapshot for Context System
-- `peekTaskStack` — returns top of stack without popping
+- `get` â€” direct lookup by item_id across all slots
+- `getSlot` â€” returns all items in a named slot
+- `getSessionState` â€” full session snapshot for Context System
+- `peekTaskStack` â€” returns top of stack without popping
 
 ### Update
 
@@ -145,10 +145,10 @@ pushTask(item: WorkingMemoryItem): void
 popTask(session_id: string): WorkingMemoryItem | null
 ```
 
-- `update` — only mutable fields: `content`, `priority`, `metadata`
-- `pinItem` — moves item to `pinned_items` slot, sets priority
-- `pushTask` — pushes onto `task_stack` slot
-- `popTask` — pops from `task_stack`, returns the task
+- `update` â€” only mutable fields: `content`, `priority`, `metadata`
+- `pinItem` â€” moves item to `pinned_items` slot, sets priority
+- `pushTask` â€” pushes onto `task_stack` slot
+- `popTask` â€” pops from `task_stack`, returns the task
 
 ### Delete
 
@@ -157,8 +157,8 @@ delete(item_id: string): void
 clearSession(session_id: string): void
 ```
 
-- `delete` — removes a single item regardless of slot
-- `clearSession` — clears all slots for a session (called on session end)
+- `delete` â€” removes a single item regardless of slot
+- `clearSession` â€” clears all slots for a session (called on session end)
 
 ## Lifecycle
 
@@ -166,32 +166,32 @@ clearSession(session_id: string): void
 
 ```
 Session Start
-    │
-    ▼
+    â”‚
+    â–¼
 Initialize Working Memory
-    │
-    ├── Create WorkingMemorySession with session_id
-    ├── Initialize all slots with default capacities
-    ├── Set max_tokens from LLMOS configuration
-    └── Load any cross-session pinned items from Episodic Memory
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Create WorkingMemorySession with session_id
+    â”œâ”€â”€ Initialize all slots with default capacities
+    â”œâ”€â”€ Set max_tokens from LLMOS configuration
+    â””â”€â”€ Load any cross-session pinned items from Episodic Memory
+    â”‚
+    â–¼
 Active Session
-    │
-    ├── Sou sets current_goal
-    ├── Tasks pushed/popped from task_stack
-    ├── Items pinned/unpinned
-    ├── Decisions appended to recent_decisions
-    ├── Scratchpad used for temporary state
-    └── priority decays applied periodically
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Sou sets current_goal
+    â”œâ”€â”€ Tasks pushed/popped from task_stack
+    â”œâ”€â”€ Items pinned/unpinned
+    â”œâ”€â”€ Decisions appended to recent_decisions
+    â”œâ”€â”€ Scratchpad used for temporary state
+    â””â”€â”€ priority decays applied periodically
+    â”‚
+    â–¼
 Session End
-    │
-    ├── Convert high-importance items to Episodic Memory
-    ├── Clear all Working Memory slots
-    ├── Emit MEM.SessionMemoryCleared event
-    └── Destroy WorkingMemorySession
+    â”‚
+    â”œâ”€â”€ Convert high-importance items to Episodic Memory
+    â”œâ”€â”€ Clear all Working Memory slots
+    â”œâ”€â”€ Emit MEM.SessionMemoryCleared event
+    â””â”€â”€ Destroy WorkingMemorySession
 ```
 
 ### Priority Decay
@@ -286,19 +286,19 @@ interface WorkingMemoryConfig {
 
 ```
 1. Sou sets current_goal: "Implement user authentication"
-2. Sou pushes task: "Design auth architecture" → task_stack: [Design]
-3. Sou pushes sub-task: "Research auth patterns" → task_stack: [Design, Research]
-4. Sou completes Research → popTask → task_stack: [Design]
-5. Sou pushes next sub-task: "Design database schema" → task_stack: [Design, Schema]
-6. Sou completes Schema → popTask → task_stack: [Design]
-7. Sou completes Design → popTask → task_stack: []
-8. Sou pushes next task: "Implement backend" → task_stack: [Backend]
+2. Sou pushes task: "Design auth architecture" â†’ task_stack: [Design]
+3. Sou pushes sub-task: "Research auth patterns" â†’ task_stack: [Design, Research]
+4. Sou completes Research â†’ popTask â†’ task_stack: [Design]
+5. Sou pushes next sub-task: "Design database schema" â†’ task_stack: [Design, Schema]
+6. Sou completes Schema â†’ popTask â†’ task_stack: [Design]
+7. Sou completes Design â†’ popTask â†’ task_stack: []
+8. Sou pushes next task: "Implement backend" â†’ task_stack: [Backend]
 ```
 
 ### Pattern 2: Decision Tracking
 
 ```
-1. Sou makes decision → append to recent_decisions
+1. Sou makes decision â†’ append to recent_decisions
 2. 3 decisions later, Sou needs to recall earlier choice
 3. Sou queries getSlot("recent_decisions", session_id)
 4. Sliding window shows last 5 decisions with scores
@@ -310,7 +310,7 @@ interface WorkingMemoryConfig {
 1. User says "My name is Alice and I prefer Python"
 2. Sou stores as note, then pins it: pinItem(note_id, priority=0.9)
 3. Throughout session, the pinned reference is always in context
-4. User ends session → pinned items with high importance promoted to Episodic Memory
+4. User ends session â†’ pinned items with high importance promoted to Episodic Memory
 ```
 
 ## Events
@@ -333,12 +333,12 @@ interface WorkingMemoryConfig {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| WM-001 | Every Working Memory item belongs to exactly one session | Schema — `session_id` is required |
-| WM-002 | Working Memory is cleared on session end | Algorithmic — `clearSession` called by Session Manager |
-| WM-003 | The task stack is strictly LIFO | Algorithmic — push/pop enforce stack semantics |
-| WM-004 | Pinned items are never evicted automatically | Algorithmic — eviction skips pinned items |
-| WM-005 | Token budget enforcement never evicts current_goal or active_task | Algorithmic — budget eviction excludes these slots |
-| WM-006 | Priority decay is monotonic (priority only decreases) | Algorithmic — decay never increases priority |
+| WM-001 | Every Working Memory item belongs to exactly one session | Schema â€” `session_id` is required |
+| WM-002 | Working Memory is cleared on session end | Algorithmic â€” `clearSession` called by Session Manager |
+| WM-003 | The task stack is strictly LIFO | Algorithmic â€” push/pop enforce stack semantics |
+| WM-004 | Pinned items are never evicted automatically | Algorithmic â€” eviction skips pinned items |
+| WM-005 | Token budget enforcement never evicts current_goal or active_task | Algorithmic â€” budget eviction excludes these slots |
+| WM-006 | Priority decay is monotonic (priority only decreases) | Algorithmic â€” decay never increases priority |
 
 ## Error Cases
 
@@ -355,17 +355,17 @@ interface WorkingMemoryConfig {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Working Memory handles only session-scoped active state |
-| R2 — Dependency Order | Depends on Memory OS core; no upward deps |
-| R3 — DRY | Slot definitions stored once in WorkingMemoryConfig |
-| R4 — Builder Pattern | Session built by Config → Slot Init → Item Operations |
-| R5 — Liskov Substitution | Any WorkingMemoryStore implements the interface |
-| R6 — DI over Singletons | Config and decay strategies injected |
-| R9 — Deterministic | Same operations produce same state |
-| R10 — Simpler Over Complex | Uses clear slot model with named capacities |
-| R13 — Design for Failure | Eviction protects critical slots from overflow |
-| R14 — Paved Path | All operations flow through store/get/update/delete |
-| R15 — Open/Closed | New slot types added via Config, not by modifying core |
+| R1 â€” Modulsingularity | Working Memory handles only session-scoped active state |
+| R2 â€” Dependency Order | Depends on Memory OS core; no upward deps |
+| R3 â€” DRY | Slot definitions stored once in WorkingMemoryConfig |
+| R4 â€” Builder Pattern | Session built by Config â†’ Slot Init â†’ Item Operations |
+| R5 â€” Liskov Substitution | Any WorkingMemoryStore implements the interface |
+| R6 â€” DI over Singletons | Config and decay strategies injected |
+| R9 â€” Deterministic | Same operations produce same state |
+| R10 â€” Simpler Over Complex | Uses clear slot model with named capacities |
+| R13 â€” Design for Failure | Eviction protects critical slots from overflow |
+| R14 â€” Paved Path | All operations flow through store/get/update/delete |
+| R15 â€” Open/Closed | New slot types added via Config, not by modifying core |
 
 ## Related Documents
 

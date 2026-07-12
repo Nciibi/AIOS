@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## API — 000: Specifications
+﻿# AIOS Bible â€” Interfaces
+## API â€” 000: Specifications
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-API-000 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,9 +15,9 @@
 
 ## Purpose
 
-The API Specifications document defines the canonical framework for all Application Programming Interfaces within AIOS. It establishes the contract for how internal systems, external services, SDK consumers, and domain Workers communicate programmatically. Every API — whether ACF topic-based, RPC-style, RESTful, or streaming — must conform to the specifications defined herein.
+The API Specifications document defines the canonical framework for all Application Programming Interfaces within AIOS. It establishes the contract for how internal systems, external services, SDK consumers, and domain Workers communicate programmatically. Every API â€” whether ACF topic-based, RPC-style, RESTful, or streaming â€” must conform to the specifications defined herein.
 
-This document does not specify individual APIs (those are defined in their respective component documents). Instead, it defines the *framework* — the rules, patterns, schemas, versioning, authentication, error handling, and documentation standards that every AIOS API must follow.
+This document does not specify individual APIs (those are defined in their respective component documents). Instead, it defines the *framework* â€” the rules, patterns, schemas, versioning, authentication, error handling, and documentation standards that every AIOS API must follow.
 
 ## API Categories
 
@@ -79,13 +79,13 @@ Every API must return errors in a standardized format:
 
 | Error Code Range | Category | Example |
 |-----------------|----------|---------|
-| API-001 – API-099 | General | API-001 (InvalidEnvelope), API-002 (SchemaValidationFailed) |
-| API-100 – API-199 | Authentication | API-101 (InvalidToken), API-102 (TokenExpired) |
-| API-200 – API-299 | Authorization | API-201 (UnauthorizedEntity), API-202 (InsufficientPermissions) |
-| API-300 – API-399 | Rate Limiting | API-301 (RateLimitExceeded), API-302 (BudgetExhausted) |
-| API-400 – API-499 | Resource Not Found | API-401 (EntityNotFound), API-402 (SchemaNotFound) |
-| API-500 – API-599 | Business Logic | API-501 (InvalidState), API-502 (Conflict) |
-| API-900 – API-999 | Internal | API-901 (InternalError), API-902 (DependencyFailure) |
+| API-001 â€“ API-099 | General | API-001 (InvalidEnvelope), API-002 (SchemaValidationFailed) |
+| API-100 â€“ API-199 | Authentication | API-101 (InvalidToken), API-102 (TokenExpired) |
+| API-200 â€“ API-299 | Authorization | API-201 (UnauthorizedEntity), API-202 (InsufficientPermissions) |
+| API-300 â€“ API-399 | Rate Limiting | API-301 (RateLimitExceeded), API-302 (BudgetExhausted) |
+| API-400 â€“ API-499 | Resource Not Found | API-401 (EntityNotFound), API-402 (SchemaNotFound) |
+| API-500 â€“ API-599 | Business Logic | API-501 (InvalidState), API-502 (Conflict) |
+| API-900 â€“ API-999 | Internal | API-901 (InternalError), API-902 (DependencyFailure) |
 
 ## API Versioning
 
@@ -225,11 +225,11 @@ Every API request is authenticated and authorized. ACF topic messages use ACF's 
 
 ### Evidence
 
-Every API request and response produces an Event. The complete request lifecycle — received, authenticated, authorized, processed, responded — is recorded in the Event Store. Schema validation failures are logged as Events for audit. Rate limit violations are recorded. (PHI-008)
+Every API request and response produces an Event. The complete request lifecycle â€” received, authenticated, authorized, processed, responded â€” is recorded in the Event Store. Schema validation failures are logged as Events for audit. Rate limit violations are recorded. (PHI-008)
 
 ### Lifecycle
 
-APIs follow a lifecycle: Designed → Contract Drafted → Reviewed → Published → Active → Deprecated → Retired. API versions follow the versioning policy (Foundations/009-Versioning.md). Deprecated APIs have a minimum support window before retirement. (Physics/006-Lifecycles.md)
+APIs follow a lifecycle: Designed â†’ Contract Drafted â†’ Reviewed â†’ Published â†’ Active â†’ Deprecated â†’ Retired. API versions follow the versioning policy (Foundations/009-Versioning.md). Deprecated APIs have a minimum support window before retirement. (Physics/006-Lifecycles.md)
 
 ### Capability Bounds
 
@@ -237,35 +237,35 @@ APIs expose only the capabilities authorized for the requesting entity. No API m
 
 ### Communication
 
-All internal APIs communicate through ACF (Law 3 — Communication). External REST APIs go through API gateways that enforce authentication and route to internal ACF services. Streaming APIs use ACF stream partitions for ordered, durable delivery. (Law 3 — Communication)
+All internal APIs communicate through ACF (Law 3 â€” Communication). External REST APIs go through API gateways that enforce authentication and route to internal ACF services. Streaming APIs use ACF stream partitions for ordered, durable delivery. (Law 3 â€” Communication)
 
 ### Design DNA
 
 | Rule | Compliance |
 |------|-----------|
-| R1 (Modulsingularity) | Each API contract covers exactly one capability — no monolithic APIs |
+| R1 (Modulsingularity) | Each API contract covers exactly one capability â€” no monolithic APIs |
 | R3 (DRY) | Schema components are defined once and referenced across contracts |
 | R5 (Liskov) | All API implementations of the same contract are interchangeable |
 | R7 (Testability) | Every API contract has an automated conformance test suite |
 | R9 (Deterministic) | Same request to same API produces identical response (idempotent where specified) |
-| R10 (Simpler Over Complex) | APIs expose coarse-grained operations — no chatty interfaces |
-| R13 (Design for Failure) | All APIs return structured errors — no silent failures |
-| R14 (Paved Path) | Single paved path: define contract → validate schema → implement → test → publish |
+| R10 (Simpler Over Complex) | APIs expose coarse-grained operations â€” no chatty interfaces |
+| R13 (Design for Failure) | All APIs return structured errors â€” no silent failures |
+| R14 (Paved Path) | Single paved path: define contract â†’ validate schema â†’ implement â†’ test â†’ publish |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/005-Events.md | Evidence — API operations produce Events |
-| Physics/009-Interaction.md | Interaction — API implements AIOS interaction patterns |
-| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK — SDK consumers implement API contracts |
-| Bible/08-Interfaces/SDK/001-Audit-SDK.md | Audit SDK — Audit tooling consumes API Events |
-| Bible/08-Interfaces/SDK/002-Knowledge-SDK.md | Knowledge SDK — Knowledge tools consume Knowledge API |
-| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — Providers implement API contracts |
-| Bible/06-Services/ACF/000-Overview.md | ACF — API transport for internal services |
-| Bible/04-Execution/Security/ATS/000-Auth-Methods.md | ATS — API authentication token standards |
-| Bible/00-Foundations/002-Design-DNA.md | Design DNA — R1–R15 compliance for API design |
-| Bible/00-Foundations/007-Naming-Conventions.md | Naming Conventions — API naming standards |
-| Bible/00-Foundations/009-Versioning.md | Versioning — API semantic versioning policy |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Physics/005-Events.md | Evidence â€” API operations produce Events |
+| Physics/009-Interaction.md | Interaction â€” API implements AIOS interaction patterns |
+| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK â€” SDK consumers implement API contracts |
+| Bible/08-Interfaces/SDK/001-Audit-SDK.md | Audit SDK â€” Audit tooling consumes API Events |
+| Bible/08-Interfaces/SDK/002-Knowledge-SDK.md | Knowledge SDK â€” Knowledge tools consume Knowledge API |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK â€” Providers implement API contracts |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” API transport for internal services |
+| Bible/04-Execution/Security/ATS/000-Auth-Methods.md | ATS â€” API authentication token standards |
+| Bible/00-Foundations/002-Design-DNA.md | Design DNA â€” R1â€“R15 compliance for API design |
+| Bible/00-Foundations/007-Naming-Conventions.md | Naming Conventions â€” API naming standards |
+| Bible/00-Foundations/009-Versioning.md | Versioning â€” API semantic versioning policy |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

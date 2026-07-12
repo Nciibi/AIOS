@@ -1,18 +1,18 @@
-# AIOS Bible — Brain/LLMOS
-## 001 — Model Registry
+﻿# AIOS Bible â€” Brain/LLMOS
+## 001 â€” Model Registry
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-001 |
-| Source Laws | Law 7 — Law of Capability Bounds |
+| Source Laws | Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/007-Capabilities.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 4 — Model Resolution |
+| Pipeline Stage | 4 â€” Model Resolution |
 
 ## Purpose
 
@@ -84,7 +84,7 @@ BIT_FILE_UPLOAD       = 1 << 12
 
 ## Operations
 
-### Register (provider → registry)
+### Register (provider â†’ registry)
 
 Called when a Model Provider initializes or a new model is added:
 
@@ -94,7 +94,7 @@ async function registerModel(entry: ModelEntry): Promise<void>
 
 Validates the entry against schema, checks for duplicate `model_id`, adds to registry, produces `LLMOS.ModelRegistered(model_id, provider, capabilities)` Event.
 
-### Update (provider → registry)
+### Update (provider â†’ registry)
 
 Called when a provider's health or metrics change:
 
@@ -104,7 +104,7 @@ async function updateModel(model_id: string, update: Partial<ModelEntry>): Promi
 
 Only specific fields are mutable post-registration: `health`, `latency_p50`, `latency_p95`, `latency_p99`. All other fields require deregister + re-register.
 
-### Deregister (provider → registry)
+### Deregister (provider â†’ registry)
 
 Called when a provider disconnects or a model is removed:
 
@@ -114,9 +114,9 @@ async function deregisterModel(model_id: string, reason: string): Promise<void>
 
 Produces `LLMOS.ModelDeregistered(model_id, reason)` Event.
 
-### Resolve (pipeline → registry)
+### Resolve (pipeline â†’ registry)
 
-The primary pipeline operation — resolves requirements to candidates:
+The primary pipeline operation â€” resolves requirements to candidates:
 
 ```typescript
 async function resolveModels(requirements: ModelRequirements): Promise<ModelResolveResult>
@@ -129,7 +129,7 @@ Algorithm:
 4. Filter by allow/block lists
 5. Filter by health: only online models (degraded models are included but flagged)
 6. Filter by context window: context_window >= required_context_window
-7. Apply preliminary sort: [cost_efficiency, latency, quality_tier] — this is a heuristic pre-sort to limit candidate count; the Router (Stage 6) performs the final composite scoring with entity-specific weights
+7. Apply preliminary sort: [cost_efficiency, latency, quality_tier] â€” this is a heuristic pre-sort to limit candidate count; the Router (Stage 6) performs the final composite scoring with entity-specific weights
 8. Return top N (default 10) candidates
 
 Returns `ModelResolveResult`:
@@ -174,11 +174,11 @@ async function performHealthCheck(provider: string): Promise<void>
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-REG-001 | Every model in the registry has a unique `model_id` across all providers. | Schema — enforced at registration |
-| LLM-REG-002 | The registry always contains at least one model for every connected provider. | Architectural — lifecycle management |
-| LLM-REG-003 | A model cannot be registered without at least one capability. | Schema — CapabilitySet validation |
-| LLM-REG-004 | Health checks run for every registered provider regardless of usage. | Algorithmic — health check loop |
-| LLM-REG-005 | Resolve never returns an empty list if at least one model matches requirements. | Algorithmic — resolve logic guarantees |
+| LLM-REG-001 | Every model in the registry has a unique `model_id` across all providers. | Schema â€” enforced at registration |
+| LLM-REG-002 | The registry always contains at least one model for every connected provider. | Architectural â€” lifecycle management |
+| LLM-REG-003 | A model cannot be registered without at least one capability. | Schema â€” CapabilitySet validation |
+| LLM-REG-004 | Health checks run for every registered provider regardless of usage. | Algorithmic â€” health check loop |
+| LLM-REG-005 | Resolve never returns an empty list if at least one model matches requirements. | Algorithmic â€” resolve logic guarantees |
 
 ## Events
 
@@ -194,17 +194,17 @@ async function performHealthCheck(provider: string): Promise<void>
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Registry is the sole source of model inventory across all providers |
-| R2 — Dependency Order | Registry precedes Router and Cost Optimizer in pipeline order |
-| R3 — DRY | Single ModelEntry schema used across all components |
-| R4 — Builder Pattern | ModelEntry constructed via builder for validation |
-| R5 — Liskov Substitution | All providers produce ModelEntry uniformly |
-| R6 — DI over Singletons | Registry injected into pipeline stages |
-| R9 — Deterministic | Resolve produces deterministic candidate list for identical input |
-| R10 — Simpler Over Complex | Bitmask capabilities over complex type system |
-| R13 — Design for Failure | Health monitoring with degraded/offline states |
-| R14 — Paved Path | Standardized model registration flow for all providers |
-| R15 — Open/Closed | New providers add entries without changing registry implementation |
+| R1 â€” Modulsingularity | Registry is the sole source of model inventory across all providers |
+| R2 â€” Dependency Order | Registry precedes Router and Cost Optimizer in pipeline order |
+| R3 â€” DRY | Single ModelEntry schema used across all components |
+| R4 â€” Builder Pattern | ModelEntry constructed via builder for validation |
+| R5 â€” Liskov Substitution | All providers produce ModelEntry uniformly |
+| R6 â€” DI over Singletons | Registry injected into pipeline stages |
+| R9 â€” Deterministic | Resolve produces deterministic candidate list for identical input |
+| R10 â€” Simpler Over Complex | Bitmask capabilities over complex type system |
+| R13 â€” Design for Failure | Health monitoring with degraded/offline states |
+| R14 â€” Paved Path | Standardized model registration flow for all providers |
+| R15 â€” Open/Closed | New providers add entries without changing registry implementation |
 
 ## Related Documents
 
@@ -220,4 +220,4 @@ async function performHealthCheck(provider: string): Promise<void>
 |-----------|------------|----------|
 | No models match requirements | LLM-0201 | Return empty candidates; caller receives unsupported error |
 | All matching models offline | LLM-0202 | Return candidates flagging all as offline; Router handles fallback |
-| Provider health check timeout | — | Count as failure, move toward degraded/offline thresholds |
+| Provider health check timeout | â€” | Count as failure, move toward degraded/offline thresholds |

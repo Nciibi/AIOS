@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 002 — Trade-off Analysis
+﻿# AIOS Bible â€” Brain
+## 002 â€” Trade-off Analysis
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Decision |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Decision |
 | Document ID | AIOS-BBL-002-DEC-002 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -33,7 +33,7 @@ TradeOff {
   option_b_label: string
   winner_criterion_1: criterion_id         // Which criterion Option A wins on
   winner_criterion_2: criterion_id         // Which criterion Option B wins on
-  magnitude: number                        // 0.0–1.0
+  magnitude: number                        // 0.0â€“1.0
   magnitude_label: "low" | "medium" | "high"
   description: string                      // "Option A is faster; Option B is cheaper"
   type: TradeOffType
@@ -59,7 +59,7 @@ TradeOffPair {
 CompetingCriteria {
   criterion_x: criterion_id
   criterion_y: criterion_id
-  conflict_strength: number                // 0.0–1.0, how often these conflict
+  conflict_strength: number                // 0.0â€“1.0, how often these conflict
   pair_count: number                       // How many option pairs exhibit this tension
   average_magnitude: number                // Average magnitude across all pairs
   typical_description: string              // Common description template
@@ -93,7 +93,7 @@ ParetoFrontier {
   total_options: number
   efficiency_ratio: number                 // frontier_count / total_options
   trade_off_surface: TradeOff[]            // Trade-offs among frontier options only
-  dominance_chains: DominanceChain[]       // A → B → C chains of domination
+  dominance_chains: DominanceChain[]       // A â†’ B â†’ C chains of domination
 }
 
 DominanceChain {
@@ -133,10 +133,10 @@ TradeOffRecommendation {
 TradeOffConfig {
   magnitude_thresholds: {
     low: number                            // < 0.3
-    medium: number                         // 0.3–0.7
+    medium: number                         // 0.3â€“0.7
     high: number                           // > 0.7
   }
-  max_comparisons: number                  // Cap on pairwise comparisons (O(n²))
+  max_comparisons: number                  // Cap on pairwise comparisons (O(nÂ²))
   include_dominated: boolean               // Whether to report dominated options
   custom_trade_off_types: CustomTradeOffType[]
 }
@@ -163,21 +163,21 @@ For each pair (A, B):
     Determine winner, loser, or tie
 
   If A >= B on all criteria and A > B on at least one:
-    → A dominates B
+    â†’ A dominates B
   If B >= A on all criteria and B > A on at least one:
-    → B dominates A
+    â†’ B dominates A
   If A and B tie on all criteria:
-    → Equal
+    â†’ Equal
   Otherwise:
-    → Non-dominated (trade-off exists)
+    â†’ Non-dominated (trade-off exists)
 ```
 
 ### Pareto Dominance Rule
 
 ```
 Option A dominates Option B iff:
-  ∀ criterion c: score(A, c) >= score(B, c)
-  ∧ ∃ criterion c: score(A, c) > score(B, c)
+  âˆ€ criterion c: score(A, c) >= score(B, c)
+  âˆ§ âˆƒ criterion c: score(A, c) > score(B, c)
 ```
 
 ### Trade-off Identification
@@ -213,10 +213,10 @@ Type identifier: "performance_vs_cost"
 Criterion pair: [performance, cost]
 Behavior:
   - Higher performance typically increases resource consumption
-  - Magnitude scales with performance gain × cost increase
+  - Magnitude scales with performance gain Ã— cost increase
   - Common in: model selection, infrastructure choices, algorithm selection
 Description template: "{OptionA} is {magnitude_label}ly more performant; {OptionB} is proportionally cheaper"
-Example: GPT-4 vs GPT-3.5 — GPT-4 scores 0.9 on performance, 0.2 on cost; GPT-3.5 scores 0.6 on performance, 0.8 on cost
+Example: GPT-4 vs GPT-3.5 â€” GPT-4 scores 0.9 on performance, 0.2 on cost; GPT-3.5 scores 0.6 on performance, 0.8 on cost
 ```
 
 ### 2. Speed vs Quality
@@ -226,10 +226,10 @@ Type identifier: "speed_vs_quality"
 Criterion pair: [speed, quality]
 Behavior:
   - Faster execution often sacrifices thoroughness
-  - Magnitude scales with speed gain × quality loss
+  - Magnitude scales with speed gain Ã— quality loss
   - Common in: summarization depth, analysis detail, retrieval breadth
 Description template: "{OptionA} delivers results {magnitude_label}ly faster; {OptionB} produces higher quality output"
-Example: Quick summary vs deep analysis — quick summary scores 0.9 on speed, 0.4 on quality; deep analysis scores 0.3 on speed, 0.9 on quality
+Example: Quick summary vs deep analysis â€” quick summary scores 0.9 on speed, 0.4 on quality; deep analysis scores 0.3 on speed, 0.9 on quality
 ```
 
 ### 3. Scope vs Depth
@@ -239,7 +239,7 @@ Type identifier: "scope_vs_depth"
 Criterion pair: [scope, depth]
 Behavior:
   - Broad coverage reduces per-item depth
-  - Magnitude scales with coverage breadth × depth loss
+  - Magnitude scales with coverage breadth Ã— depth loss
   - Common in: research approaches, data collection, search strategies
 Description template: "{OptionA} covers {magnitude_label}ly more ground; {OptionB} goes deeper on each item"
 Example: Search 50 sources (scope: 0.9, depth: 0.3) vs deep-dive 5 sources (scope: 0.2, depth: 0.9)
@@ -252,7 +252,7 @@ Type identifier: "safety_vs_autonomy"
 Criterion pair: [safety, autonomy]
 Behavior:
   - More constraints reduce freedom of action
-  - Magnitude scales with safety gain × autonomy loss
+  - Magnitude scales with safety gain Ã— autonomy loss
   - Common in: execution mode selection, approval workflows, permission levels
 Description template: "{OptionA} is {magnitude_label}ly safer and more constrained; {OptionB} is freer but carries more risk"
 Example: Require approval each step (safety: 0.9, autonomy: 0.1) vs unconstrained execution (safety: 0.2, autonomy: 0.9)
@@ -268,7 +268,7 @@ Behavior:
   - Same detection and magnitude logic as built-in types
   - Sou registers custom types via Criteria Registry
 Description template: "{custom_label}: {OptionA} wins on {crit_x_label}; {OptionB} wins on {crit_y_label}"
-Example: "Innovation vs Stability — Option A is more innovative; Option B is more stable"
+Example: "Innovation vs Stability â€” Option A is more innovative; Option B is more stable"
 ```
 
 ## Magnitude Calculation
@@ -277,7 +277,7 @@ Example: "Innovation vs Stability — Option A is more innovative; Option B is m
 
 ```
 magnitude = |score_a_criterion1 - score_b_criterion1|
-          × |score_a_criterion2 - score_b_criterion2|
+          Ã— |score_a_criterion2 - score_b_criterion2|
 ```
 
 Where `criterion1` and `criterion2` are the two criteria in tension.
@@ -297,30 +297,30 @@ magnitude_normalized = magnitude  // Already [0.0, 1.0]
 
 | Label | Range | Interpretation |
 |-------|-------|----------------|
-| Low | < 0.3 | Minor tension — either option is acceptable |
-| Medium | 0.3–0.7 | Significant tension — Sou should consider preferences |
-| High | > 0.7 | Severe tension — this trade-off dominates the decision |
+| Low | < 0.3 | Minor tension â€” either option is acceptable |
+| Medium | 0.3â€“0.7 | Significant tension â€” Sou should consider preferences |
+| High | > 0.7 | Severe tension â€” this trade-off dominates the decision |
 
 ### Examples
 
 ```
 Pair (A, B):
   A: speed=0.9, quality=0.3    B: speed=0.4, quality=0.8
-  magnitude = |0.9 - 0.4| × |0.3 - 0.8|
-            = 0.5 × 0.5
-            = 0.25  → Low
+  magnitude = |0.9 - 0.4| Ã— |0.3 - 0.8|
+            = 0.5 Ã— 0.5
+            = 0.25  â†’ Low
 
 Pair (C, D):
   C: cost=0.9, performance=0.2    D: cost=0.1, performance=0.9
-  magnitude = |0.9 - 0.1| × |0.2 - 0.9|
-            = 0.8 × 0.7
-            = 0.56  → Medium
+  magnitude = |0.9 - 0.1| Ã— |0.2 - 0.9|
+            = 0.8 Ã— 0.7
+            = 0.56  â†’ Medium
 
 Pair (E, F):
   E: speed=0.95, quality=0.1    F: speed=0.05, quality=0.95
-  magnitude = |0.95 - 0.05| × |0.1 - 0.95|
-            = 0.9 × 0.85
-            = 0.765  → High
+  magnitude = |0.95 - 0.05| Ã— |0.1 - 0.95|
+            = 0.9 Ã— 0.85
+            = 0.765  â†’ High
 ```
 
 ## Pareto Analysis
@@ -337,20 +337,20 @@ Algorithm:
        For each option B != A:
          If B dominates A (B >= A on all criteria, B > A on at least one):
            dominated = true
-           Record B → A as a dominance chain
+           Record B â†’ A as a dominance chain
            Break
        If not dominated:
          Add A to frontier
        Else:
          Add A to dominated list
 
-  2. For each dominance chain (dominator → dominated):
+  2. For each dominance chain (dominator â†’ dominated):
        Identify the criteria_superset (where dominator is strictly >)
        Identify the criteria_equal (where dominator == dominated)
 
   3. Among frontier options only:
        Run pairwise trade-off detection
-       → Results form the trade-off surface
+       â†’ Results form the trade-off surface
 
   4. Compute efficiency_ratio = frontier_count / total_options
 ```
@@ -368,18 +368,18 @@ Rank N: Dominated by at least one Rank N-1 option
 
 | Rank | Strength Label | Interpretation |
 |------|---------------|----------------|
-| 0 | "frontier" | On the Pareto frontier — no strictly better option exists |
-| 1 | "weak" | Dominated by a frontier option — dominated on at least one criterion |
-| 2+ | "dominated" | Multiply dominated — strictly worse on multiple criteria |
+| 0 | "frontier" | On the Pareto frontier â€” no strictly better option exists |
+| 1 | "weak" | Dominated by a frontier option â€” dominated on at least one criterion |
+| 2+ | "dominated" | Multiply dominated â€” strictly worse on multiple criteria |
 
 ### Visualization (Text-Based)
 
 #### Trade-off Matrix
 
 ```
-Option × Criterion Scores:
+Option Ã— Criterion Scores:
                     speed    cost    quality    safety
-    ─────────────────────────────────────────────────
+    â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     Option A         0.9     0.2      0.4       0.8
     Option B         0.5     0.8      0.7       0.6
     Option C         0.3     0.9      0.9       0.5
@@ -391,18 +391,18 @@ Option × Criterion Scores:
 ```
 Radar Chart (text):
                       speed
-                      ▲
-                    0.9│  A
-                    0.7│  D
-                    0.5│  B
-                    0.3│  C
-    safety ◄─────────┼──────────► cost
-                    0.3│  C
-                    0.5│  B
-                    0.7│  D
-                    0.9│  A
-                      │
-                      ▼
+                      â–²
+                    0.9â”‚  A
+                    0.7â”‚  D
+                    0.5â”‚  B
+                    0.3â”‚  C
+    safety â—„â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º cost
+                    0.3â”‚  C
+                    0.5â”‚  B
+                    0.7â”‚  D
+                    0.9â”‚  A
+                      â”‚
+                      â–¼
                     quality
 
     A: high speed & safety, low cost & quality
@@ -415,16 +415,16 @@ Radar Chart (text):
 
 ```
 Trade-off: Option A vs Option B
-  ╔══════════════════╦═════════════╦═════════════╗
-  ║ Criterion        ║ Option A    ║ Option B    ║
-  ╠══════════════════╬═════════════╬═════════════╣
-  ║ speed            ║ 0.9 (WIN)   ║ 0.5         ║
-  ║ cost             ║ 0.2         ║ 0.8 (WIN)   ║
-  ║ quality          ║ 0.4         ║ 0.7 (WIN)   ║
-  ║ safety           ║ 0.8 (WIN)   ║ 0.6         ║
-  ╚══════════════════╩═════════════╩═════════════╝
+  â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•¦â•â•â•â•â•â•â•â•â•â•â•â•â•â•¦â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+  â•‘ Criterion        â•‘ Option A    â•‘ Option B    â•‘
+  â• â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•¬â•â•â•â•â•â•â•â•â•â•â•â•â•â•¬â•â•â•â•â•â•â•â•â•â•â•â•â•â•£
+  â•‘ speed            â•‘ 0.9 (WIN)   â•‘ 0.5         â•‘
+  â•‘ cost             â•‘ 0.2         â•‘ 0.8 (WIN)   â•‘
+  â•‘ quality          â•‘ 0.4         â•‘ 0.7 (WIN)   â•‘
+  â•‘ safety           â•‘ 0.8 (WIN)   â•‘ 0.6         â•‘
+  â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•©â•â•â•â•â•â•â•â•â•â•â•â•â•â•©â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-  Result: Non-dominated — trade-off exists
+  Result: Non-dominated â€” trade-off exists
   "Option A wins on speed and safety; Option B wins on cost and quality"
   Magnitude: 0.56 (Medium)
 ```
@@ -432,7 +432,7 @@ Trade-off: Option A vs Option B
 #### Dominance Flag Format
 
 ```
-⚠ Dominated Option: Option C
+âš  Dominated Option: Option C
   Dominated by: Option A
   Superset criteria: speed, cost, quality
   Equal criteria: safety
@@ -509,7 +509,7 @@ interface TradeOffVisualizer {
 | `DEC.TradeOff.ParetoComputed` | request_id, frontier_options, dominated_options | Pareto frontier calculated |
 | `DEC.TradeOff.HighMagnitudeDetected` | request_id, magnitude, criteria_pair, option_pair | Trade-off exceeds high threshold |
 | `DEC.TradeOff.DominanceFound` | request_id, dominator_id, dominated_id, criteria_superset | Option A dominates Option B |
-| `DEC.TradeOff.NoDominance` | request_id, pair_count | No option dominates — trade-offs present |
+| `DEC.TradeOff.NoDominance` | request_id, pair_count | No option dominates â€” trade-offs present |
 | `DEC.TradeOff.CustomTypeRegistered` | request_id, criterion_x, criterion_y, label | Custom trade-off type added |
 | `DEC.TradeOff.AllEqual` | request_id | All options score identically |
 
@@ -517,13 +517,13 @@ interface TradeOffVisualizer {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| TRO-001 | Every TradeOff involves exactly two criteria and two options | Schema — TradeOff.criteria length is 2, options length is 2 |
-| TRO-002 | Magnitude is always in [0.0, 1.0] | Algorithmic — normalized product of differences |
-| TRO-003 | A Pareto frontier always contains at least one option | Algorithmic — at minimum, the highest-scoring option per criterion |
-| TRO-004 | Dominance is transitive: if A dominates B and B dominates C, then A dominates C | Algorithmic — enforced by pairwise comparison closure |
-| TRO-005 | Trade-off analysis is deterministic given identical inputs | Architectural — no randomness in comparison logic |
-| TRO-006 | The report always includes the full pairwise comparison matrix | Architectural — consumers need complete picture |
-| TRO-007 | Dominated options are never silently removed | Architectural — always flagged and explained, never hidden |
+| TRO-001 | Every TradeOff involves exactly two criteria and two options | Schema â€” TradeOff.criteria length is 2, options length is 2 |
+| TRO-002 | Magnitude is always in [0.0, 1.0] | Algorithmic â€” normalized product of differences |
+| TRO-003 | A Pareto frontier always contains at least one option | Algorithmic â€” at minimum, the highest-scoring option per criterion |
+| TRO-004 | Dominance is transitive: if A dominates B and B dominates C, then A dominates C | Algorithmic â€” enforced by pairwise comparison closure |
+| TRO-005 | Trade-off analysis is deterministic given identical inputs | Architectural â€” no randomness in comparison logic |
+| TRO-006 | The report always includes the full pairwise comparison matrix | Architectural â€” consumers need complete picture |
+| TRO-007 | Dominated options are never silently removed | Architectural â€” always flagged and explained, never hidden |
 
 ## Error Cases
 
@@ -563,7 +563,7 @@ interface TradeOffVisualizer {
    - Plan 1 vs Plan 2: Innovation vs Maintainability (magnitude: 0.45 Medium)
    - Plan 2 vs Plan 3: Security vs Speed (magnitude: 0.63 Medium)
    - All 3 options on the Pareto frontier (efficiency_ratio: 1.0)
-5. Trade-off surface shows no dominant option — clear strategic choice required
+5. Trade-off surface shows no dominant option â€” clear strategic choice required
 6. Sou selects Plan 2, balancing innovation and maintainability
 ```
 
@@ -586,17 +586,17 @@ interface TradeOffVisualizer {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Trade-off Analyzer does one thing: surface criterion conflicts |
-| R2 — Dependency Order | Depends on Score Matrix from Scorer Engine; produces input for Constraint Checker |
-| R3 — DRY | Trade-off types defined in config, reused across all comparisons |
-| R4 — Builder Pattern | Report built by Pairwise → Pareto → Competing → Aggregation pipeline |
-| R5 — Liskov Substitution | Any TradeOffConfig with custom types implements the same interface |
-| R6 — DI over Singletons | Thresholds, custom types, comparison limits injected via TradeOffConfig |
-| R9 — Deterministic | Same score matrix and config always produce identical report |
-| R10 — Simpler Over Complex | Uses O(n²) pairwise comparison with Pareto ordering — no ML or heuristics |
-| R13 — Design for Failure | Option sampling protects against combinatorial explosion |
-| R14 — Paved Path | All analysis flows through `analyze(request, scoreMatrix)` |
-| R15 — Open/Closed | New trade-off types added via CustomTradeOffType in config, not by modifying core |
+| R1 â€” Modulsingularity | Trade-off Analyzer does one thing: surface criterion conflicts |
+| R2 â€” Dependency Order | Depends on Score Matrix from Scorer Engine; produces input for Constraint Checker |
+| R3 â€” DRY | Trade-off types defined in config, reused across all comparisons |
+| R4 â€” Builder Pattern | Report built by Pairwise â†’ Pareto â†’ Competing â†’ Aggregation pipeline |
+| R5 â€” Liskov Substitution | Any TradeOffConfig with custom types implements the same interface |
+| R6 â€” DI over Singletons | Thresholds, custom types, comparison limits injected via TradeOffConfig |
+| R9 â€” Deterministic | Same score matrix and config always produce identical report |
+| R10 â€” Simpler Over Complex | Uses O(nÂ²) pairwise comparison with Pareto ordering â€” no ML or heuristics |
+| R13 â€” Design for Failure | Option sampling protects against combinatorial explosion |
+| R14 â€” Paved Path | All analysis flows through `analyze(request, scoreMatrix)` |
+| R15 â€” Open/Closed | New trade-off types added via CustomTradeOffType in config, not by modifying core |
 
 ## Related Documents
 

@@ -1,18 +1,18 @@
-# AIOS Bible — Brain/LLMOS
-## 012 — Response Validator
+﻿# AIOS Bible â€” Brain/LLMOS
+## 012 â€” Response Validator
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-012 |
-| Source Laws | Law 8 — Law of Verification-First |
+| Source Laws | Law 8 â€” Law of Verification-First |
 | Source Physics | Physics/008-Security.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 15 — Response Validation |
+| Pipeline Stage | 15 â€” Response Validation |
 
 ## Purpose
 
@@ -154,11 +154,11 @@ type ValidationRetryStrategy =
 
 ### Retry Flow
 
-1. Validation fails → produce `LLMOS.ResponseValidationFailed` Event
+1. Validation fails â†’ produce `LLMOS.ResponseValidationFailed` Event
 2. If `max_retries > 0` and retries not exhausted:
    a. Apply retry strategy (add instruction, example, or adjust temperature)
    b. Recompile prompt with the adjustment
-   c. Re-run pipeline from Retry Engine (Stage 12) — skips Stages 0-11
+   c. Re-run pipeline from Retry Engine (Stage 12) â€” skips Stages 0-11
 3. If `max_retries` exhausted or retry not configured:
    a. Return validation error to caller with detailed error report
    b. Response is NOT cached (cache storage Stage 16 is skipped)
@@ -191,11 +191,11 @@ interface ValidationWarning {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-VLD-001 | Every response with a defined schema is validated before delivery to caller. | Architectural — pre-delivery validation stage |
-| LLM-VLD-002 | Responses that fail validation are never cached. | Architectural — cache bypass on failure |
-| LLM-VLD-003 | Validation retries re-enter the pipeline at Stage 12, not Stage 0. | Architectural — retry re-entry point |
-| LLM-VLD-004 | Schema validation is strict by default — additional properties cause failure. | Algorithmic — strict mode validation |
-| LLM-VLD-005 | Quality validation requires minimum length > 0 to be enforced. | Algorithmic — minimum threshold check |
+| LLM-VLD-001 | Every response with a defined schema is validated before delivery to caller. | Architectural â€” pre-delivery validation stage |
+| LLM-VLD-002 | Responses that fail validation are never cached. | Architectural â€” cache bypass on failure |
+| LLM-VLD-003 | Validation retries re-enter the pipeline at Stage 12, not Stage 0. | Architectural â€” retry re-entry point |
+| LLM-VLD-004 | Schema validation is strict by default â€” additional properties cause failure. | Algorithmic â€” strict mode validation |
+| LLM-VLD-005 | Quality validation requires minimum length > 0 to be enforced. | Algorithmic â€” minimum threshold check |
 
 ## Events
 
@@ -209,17 +209,17 @@ interface ValidationWarning {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Response Validator is the sole response quality gate |
-| R2 — Dependency Order | Validator depends on Prompt Compiler schemas |
-| R3 — DRY | Validation types defined once, not per provider |
-| R4 — Builder Pattern | ValidationResult built through validation pipeline |
-| R5 — Liskov Substitution | All responses validated uniformly |
-| R6 — DI over Singletons | Validator injected into pipeline |
-| R9 — Deterministic | Same response gets same validation result |
-| R10 — Simpler Over Complex | JSON Schema validation over custom parsers |
-| R13 — Design for Failure | Validation failure triggers retry |
-| R14 — Paved Path | Standard validation types for all responses |
-| R15 — Open/Closed | New validation types added without pipeline changes |
+| R1 â€” Modulsingularity | Response Validator is the sole response quality gate |
+| R2 â€” Dependency Order | Validator depends on Prompt Compiler schemas |
+| R3 â€” DRY | Validation types defined once, not per provider |
+| R4 â€” Builder Pattern | ValidationResult built through validation pipeline |
+| R5 â€” Liskov Substitution | All responses validated uniformly |
+| R6 â€” DI over Singletons | Validator injected into pipeline |
+| R9 â€” Deterministic | Same response gets same validation result |
+| R10 â€” Simpler Over Complex | JSON Schema validation over custom parsers |
+| R13 â€” Design for Failure | Validation failure triggers retry |
+| R14 â€” Paved Path | Standard validation types for all responses |
+| R15 â€” Open/Closed | New validation types added without pipeline changes |
 
 ## Related Documents
 
@@ -235,5 +235,5 @@ interface ValidationWarning {
 |-----------|------------|----------|
 | Output failed schema validation | LLM-0601 | Return validation error with details; retry if configured |
 | Structured output parse failure | LLM-0602 | Return parse error; request retry with relaxed schema |
-| All validation retries exhausted | — | Return final validation error with all failure details |
-| Entity-defined validation crashes | — | Skip custom validation; log error |
+| All validation retries exhausted | â€” | Return final validation error with all failure details |
+| Entity-defined validation crashes | â€” | Skip custom validation; log error |

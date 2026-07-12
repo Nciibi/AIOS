@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Coding — 000: Overview
+﻿# AIOS Bible â€” Domains
+## Coding â€” 000: Overview
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-COD-000 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,9 +15,9 @@
 
 ## Purpose
 
-The Coding domain enables AIOS to plan, generate, modify, review, and verify source code across programming languages and frameworks. It provides the capability set for AI-assisted software development — from single-file edits to multi-repository refactors, from documentation generation to test suite creation.
+The Coding domain enables AIOS to plan, generate, modify, review, and verify source code across programming languages and frameworks. It provides the capability set for AI-assisted software development â€” from single-file edits to multi-repository refactors, from documentation generation to test suite creation.
 
-This domain defines the entities, capabilities, resource profiles, and integration patterns that allow AIOS Workers to operate as software engineering agents. Coding is one of the most resource-intensive domains — it consumes tokens at high velocity, requires context windows large enough to hold codebase fragments, and depends on execution sandboxes for compilation, linting, and testing.
+This domain defines the entities, capabilities, resource profiles, and integration patterns that allow AIOS Workers to operate as software engineering agents. Coding is one of the most resource-intensive domains â€” it consumes tokens at high velocity, requires context windows large enough to hold codebase fragments, and depends on execution sandboxes for compilation, linting, and testing.
 
 ## Domain Entities
 
@@ -51,12 +51,12 @@ Coding operations consume these resource types:
 
 | Resource | Unit | Typical Consumption | Provider Type |
 |----------|------|-------------------|---------------|
-| Tokens (Input) | tokens | 1K–100K per operation | LLM Provider |
-| Tokens (Output) | tokens | 100–10K per operation | LLM Provider |
-| Context Window | tokens | 8K–200K per Worker | LLM Provider |
-| Compute (Build) | CPU-seconds | 1–300 per build | Compute Provider |
-| Storage (Repo clone) | MB | 10–5000 per repo | Storage Provider |
-| Execution Time | seconds | 1–600 per task | Runtime |
+| Tokens (Input) | tokens | 1Kâ€“100K per operation | LLM Provider |
+| Tokens (Output) | tokens | 100â€“10K per operation | LLM Provider |
+| Context Window | tokens | 8Kâ€“200K per Worker | LLM Provider |
+| Compute (Build) | CPU-seconds | 1â€“300 per build | Compute Provider |
+| Storage (Repo clone) | MB | 10â€“5000 per repo | Storage Provider |
+| Execution Time | seconds | 1â€“600 per task | Runtime |
 
 ## Domain Integration with Core
 
@@ -83,23 +83,23 @@ A typical coding workflow in AIOS follows this pattern:
 7. Worker runs build (compile, lint, test)
 8. DTS evaluates confidence in output
 9. CodeReviewer reviews diff (parallel or sequential)
-10. If confidence < threshold → revise loop
-11. If confidence >= threshold → commit/merge
+10. If confidence < threshold â†’ revise loop
+11. If confidence >= threshold â†’ commit/merge
 12. Academy indexes updated codebase
 13. Sou learns from outcome
 ```
 
 ## Invariants
 
-1. **COD-I-001 — Generated Code Is Verified**: Every piece of generated code must pass linting and compilation before being marked as complete. Untested code is not considered delivered.
+1. **COD-I-001 â€” Generated Code Is Verified**: Every piece of generated code must pass linting and compilation before being marked as complete. Untested code is not considered delivered.
 
-2. **COD-I-002 — Deterministic Generation**: The same code plan and context must produce identical code output when the same seed and model are used. Non-deterministic generation is flagged for review.
+2. **COD-I-002 â€” Deterministic Generation**: The same code plan and context must produce identical code output when the same seed and model are used. Non-deterministic generation is flagged for review.
 
-3. **COD-I-003 — Context-Bounded**: A CodeWorker operates only within the code context loaded at session start. It cannot access files outside the authorized repository scope.
+3. **COD-I-003 â€” Context-Bounded**: A CodeWorker operates only within the code context loaded at session start. It cannot access files outside the authorized repository scope.
 
-4. **COD-I-004 — Evidence per Change**: Every code modification produces an Event recording the diff, the originating plan step, and the authorization chain. No change is untracked.
+4. **COD-I-004 â€” Evidence per Change**: Every code modification produces an Event recording the diff, the originating plan step, and the authorization chain. No change is untracked.
 
-5. **COD-I-005 — Review Before Merge**: All generated code must pass review before being committed to a protected branch. Direct commits to protected branches are prohibited.
+5. **COD-I-005 â€” Review Before Merge**: All generated code must pass review before being committed to a protected branch. Direct commits to protected branches are prohibited.
 
 ## Edge Cases
 
@@ -135,7 +135,7 @@ Every code operation produces an Event: generation, review, build, test, commit.
 
 ### Lifecycle
 
-Code Workers follow the canonical Worker lifecycle (Created → Planned → Assigned → Running → Completed → Archived). Codebases follow their own lifecycle through indexing, modification, and archival. Build sandboxes are ephemeral — created per task and destroyed after completion. (Physics/006-Lifecycles.md)
+Code Workers follow the canonical Worker lifecycle (Created â†’ Planned â†’ Assigned â†’ Running â†’ Completed â†’ Archived). Codebases follow their own lifecycle through indexing, modification, and archival. Build sandboxes are ephemeral â€” created per task and destroyed after completion. (Physics/006-Lifecycles.md)
 
 ### Capability Bounds
 
@@ -143,7 +143,7 @@ Coding capabilities are bounded by token budgets, context window limits, and exe
 
 ### Communication
 
-All Coding domain communication flows through ACF. Code plan proposals travel from Sou to DGP to the Coding Organization. Code review results flow back through ACF to the originating Worker. (Law 3 — Communication)
+All Coding domain communication flows through ACF. Code plan proposals travel from Sou to DGP to the Coding Organization. Code review results flow back through ACF to the originating Worker. (Law 3 â€” Communication)
 
 ### Design DNA
 
@@ -152,9 +152,9 @@ All Coding domain communication flows through ACF. Code plan proposals travel fr
 | R1 (Modulsingularity) | Each Coding capability (generate, review, build, analyze) is a separate concern |
 | R5 (Liskov) | All Coding Workers implement the CodeWorker interface with interchangeable backends |
 | R9 (Deterministic) | Code generation with same inputs and seed produces identical output |
-| R10 (Simpler Over Complex) | Code plans use linear step sequences — no branching plans |
+| R10 (Simpler Over Complex) | Code plans use linear step sequences â€” no branching plans |
 | R13 (Design for Failure) | Build failures return partial results; review proceeds on available artifacts |
-| R14 (Paved Path) | Single paved path: plan → generate → build → review → commit |
+| R14 (Paved Path) | Single paved path: plan â†’ generate â†’ build â†’ review â†’ commit |
 
 ## Integration with Execution Pipeline
 
@@ -174,18 +174,18 @@ Coding operations participate in Stage 7 (Execution Authorization) of the verifi
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/0005-Domain-Architecture.md | Domain Architecture — Coding domain structure and taxonomy |
-| Physics/005-Events.md | Evidence — Coding operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — Coding capability bounds and resource profiles |
-| Physics/010-Execution.md | Execution — Coding verification pipeline stage |
-| Physics/012-Experience.md | Experience — Coding outcomes drive Sou learning |
-| Bible/02-Core/Sou/002-Planner.md | Planner — Sou produces code plans |
-| Bible/02-Core/AGS/000-Overview.md | AGS — CodeWorker Genome templates |
-| Bible/02-Core/Academy/000-Overview.md | Academy — Codebase knowledge indexing |
-| Bible/02-Core/DTS/000-Overview.md | DTS — Code quality confidence scoring |
-| Bible/02-Core/ROS/000-Overview.md | ROS — Token and compute budget allocation |
-| Bible/03-Institutions/Workers/005-Playbook-Manager.md | Playbook Manager — Automated code review playbooks |
-| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK — CodeWorker runtime execution |
-| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — LLM provider integration |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Bible/0005-Domain-Architecture.md | Domain Architecture â€” Coding domain structure and taxonomy |
+| Physics/005-Events.md | Evidence â€” Coding operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” Coding capability bounds and resource profiles |
+| Physics/010-Execution.md | Execution â€” Coding verification pipeline stage |
+| Physics/012-Experience.md | Experience â€” Coding outcomes drive Sou learning |
+| Bible/02-Core/Sou/002-Planner.md | Planner â€” Sou produces code plans |
+| Bible/02-Core/AGS/000-Overview.md | AGS â€” CodeWorker Genome templates |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” Codebase knowledge indexing |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” Code quality confidence scoring |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” Token and compute budget allocation |
+| Bible/03-Institutions/Workers/005-Playbook-Manager.md | Playbook Manager â€” Automated code review playbooks |
+| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK â€” CodeWorker runtime execution |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK â€” LLM provider integration |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

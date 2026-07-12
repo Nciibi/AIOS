@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 003 — Metacognition
+﻿# AIOS Bible â€” Brain
+## 003 â€” Metacognition
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Cognitive |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Cognitive |
 | Document ID | AIOS-BBL-002-COG-003 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 9 — Law of Design DNA |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Metacognition is thinking about thinking — monitoring, regulating, and optimizing Sou's cognitive processes. It implements 6 metacognitive functions: confidence calibration, cognitive load monitoring, strategy selection, knowledge gap detection, uncertainty quantification, and progress assessment. Metacognition runs as a feedback loop over active reasoning and reflection, adjusting parameters, suggesting strategy switches, and flagging when Sou needs more information or should defer a decision.
+Metacognition is thinking about thinking â€” monitoring, regulating, and optimizing Sou's cognitive processes. It implements 6 metacognitive functions: confidence calibration, cognitive load monitoring, strategy selection, knowledge gap detection, uncertainty quantification, and progress assessment. Metacognition runs as a feedback loop over active reasoning and reflection, adjusting parameters, suggesting strategy switches, and flagging when Sou needs more information or should defer a decision.
 
 ## Data Model
 
@@ -54,7 +54,7 @@ MetacognitionOutput {
   overall_assessment: {
     health: "healthy" | "strained" | "stuck" | "off_track"
     recommended_action: string         // e.g., "request_more_info", "switch_strategy", "continue", "defer"
-    priority: number                   // 0.0–1.0 urgency of action
+    priority: number                   // 0.0â€“1.0 urgency of action
   }
   feedback_signals: FeedbackSignal[]
   metadata: {
@@ -71,7 +71,7 @@ MetacognitionOutput {
 MetacognitiveResult {
   function: MetacognitiveFunction
   value: number | string | object      // Function-specific output
-  confidence: number                   // 0.0–1.0
+  confidence: number                   // 0.0â€“1.0
   narrative: string                    // Human-readable explanation
   action_suggested?: string
 }
@@ -87,9 +87,9 @@ CognitiveHistoryEntry {
   target_id: string
   metrics: {
     confidence: number
-    cognitive_load: number             // 0.0–1.0
-    progress: number                   // 0.0–1.0
-    uncertainty: number                // 0.0–1.0
+    cognitive_load: number             // 0.0â€“1.0
+    progress: number                   // 0.0â€“1.0
+    uncertainty: number                // 0.0â€“1.0
   }
   action_taken?: string
   outcome?: string
@@ -117,7 +117,7 @@ FeedbackSignal {
 | Function | Input | Algorithm | Output |
 |----------|-------|-----------|--------|
 | Confidence calibration | ThoughtStep confidences + historical accuracy | Compare estimated vs actual accuracy; adjust calibration curve | Calibrated confidence score, calibration offset |
-| Cognitive load monitoring | Step count, depth, branching, complexity | Calculate load = f(tokens, steps, depth, branching, time) | Load score (0.0–1.0), simplification suggestion |
+| Cognitive load monitoring | Step count, depth, branching, complexity | Calculate load = f(tokens, steps, depth, branching, time) | Load score (0.0â€“1.0), simplification suggestion |
 | Strategy selection | Goal type, available evidence, load | Match goal to optimal strategy via rule engine | Recommended strategy + rationale |
 | Knowledge gap detection | Evidence refs, step content, query | Identify claims without supporting evidence; flag missing domains | Gap list with specificity scores |
 | Uncertainty quantification | Step confidences, evidence quality, conflicts | Aggregate uncertainties across chain with Bayesian combination | Uncertainty distribution, confidence interval |
@@ -127,67 +127,67 @@ FeedbackSignal {
 
 ```
 Active Reasoning/Reflection
-        │
-        ▼
-┌─────────────────────────────┐
-│  Metacognition Trigger       │
-│  (periodic / event-based)    │
-└──────────┬──────────────────┘
-           │
-           ▼
-┌─────────────────────────────┐
-│  Function 1: Confidence     │
-│  Calibration                │
-├─────────────────────────────┤
-│  Function 2: Cognitive Load │
-│  Monitoring                 │
-├─────────────────────────────┤
-│  Function 3: Strategy       │
-│  Selection                  │
-├─────────────────────────────┤
-│  Function 4: Knowledge Gap  │
-│  Detection                  │
-├─────────────────────────────┤
-│  Function 5: Uncertainty    │
-│  Quantification             │
-├─────────────────────────────┤
-│  Function 6: Progress       │
-│  Assessment                 │
-└──────────┬──────────────────┘
-           │
-           ▼
-┌─────────────────────────────┐
-│  Feedback Signals Generated  │
-│  ─────────────────────────── │
-│  ● Low confidence?           │──► Request more info
-│  ● High load?                │──► Simplify or switch strategy
-│  ● Knowledge gap?            │──► Seek evidence
-│  ● High uncertainty?         │──► Qualify answer
-│  ● Stalled progress?         │──► Reassess approach
-│  ● Healthy?                  │──► Continue
-└──────────┬──────────────────┘
-           │
-           ▼
+        â”‚
+        â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Metacognition Trigger       â”‚
+â”‚  (periodic / event-based)    â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+           â”‚
+           â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Function 1: Confidence     â”‚
+â”‚  Calibration                â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚  Function 2: Cognitive Load â”‚
+â”‚  Monitoring                 â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚  Function 3: Strategy       â”‚
+â”‚  Selection                  â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚  Function 4: Knowledge Gap  â”‚
+â”‚  Detection                  â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚  Function 5: Uncertainty    â”‚
+â”‚  Quantification             â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚  Function 6: Progress       â”‚
+â”‚  Assessment                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+           â”‚
+           â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Feedback Signals Generated  â”‚
+â”‚  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ â”‚
+â”‚  â— Low confidence?           â”‚â”€â”€â–º Request more info
+â”‚  â— High load?                â”‚â”€â”€â–º Simplify or switch strategy
+â”‚  â— Knowledge gap?            â”‚â”€â”€â–º Seek evidence
+â”‚  â— High uncertainty?         â”‚â”€â”€â–º Qualify answer
+â”‚  â— Stalled progress?         â”‚â”€â”€â–º Reassess approach
+â”‚  â— Healthy?                  â”‚â”€â”€â–º Continue
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+           â”‚
+           â–¼
     Feedback consumed by
     Reasoning Pipeline / Sou
-           │
-           └─────────► Adjustments applied → Loop continues
+           â”‚
+           â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º Adjustments applied â†’ Loop continues
 ```
 
 ### 3. Confidence Calibration Algorithm
 
 ```
 Input: Array of (estimated_confidence, actual_correctness) pairs
-  │
-  ├── Bin estimated confidence into deciles [0.0–0.1, 0.1–0.2, ..., 0.9–1.0]
-  ├── For each bin, calculate actual accuracy = correct_count / total_count
-  ├── Compute calibration error = |estimated_confidence_bin_center - actual_accuracy|
-  │
-  ├── If calibration error > threshold (default 0.15):
-  │     ├── Adjust future confidence estimates by offset
-  │     └── Emit calibration adjustment signal
-  │
-  └── Return calibrated confidence = estimated * (1 - calibration_error)
+  â”‚
+  â”œâ”€â”€ Bin estimated confidence into deciles [0.0â€“0.1, 0.1â€“0.2, ..., 0.9â€“1.0]
+  â”œâ”€â”€ For each bin, calculate actual accuracy = correct_count / total_count
+  â”œâ”€â”€ Compute calibration error = |estimated_confidence_bin_center - actual_accuracy|
+  â”‚
+  â”œâ”€â”€ If calibration error > threshold (default 0.15):
+  â”‚     â”œâ”€â”€ Adjust future confidence estimates by offset
+  â”‚     â””â”€â”€ Emit calibration adjustment signal
+  â”‚
+  â””â”€â”€ Return calibrated confidence = estimated * (1 - calibration_error)
 ```
 
 Calibration improves over time as more accuracy data accumulates. Initial calibration uses default parameters from configuration.
@@ -196,20 +196,20 @@ Calibration improves over time as more accuracy data accumulates. Initial calibr
 
 ```
 Input: Reasoning chain + evidence references + query
-  │
-  ├── Parse each step for factual claims
-  ├── Cross-reference each claim against:
-  │   ├── Evidence Store (does supporting evidence exist?)
-  │   ├── Knowledge Graph (is this a known fact?)
-  │   └── Memory (has this been experienced before?)
-  │
-  ├── For unsubstantiated claims:
-  │     ├── Tag as knowledge gap
-  │     ├── Categorize gap type: "missing_evidence" | "missing_domain_knowledge" | "unsupported_assumption"
-  │     ├── Estimate specificity: how precisely can the gap be described
-  │     └── Rank by impact on conclusion confidence
-  │
-  └── Return gap list with recommendations for evidence retrieval
+  â”‚
+  â”œâ”€â”€ Parse each step for factual claims
+  â”œâ”€â”€ Cross-reference each claim against:
+  â”‚   â”œâ”€â”€ Evidence Store (does supporting evidence exist?)
+  â”‚   â”œâ”€â”€ Knowledge Graph (is this a known fact?)
+  â”‚   â””â”€â”€ Memory (has this been experienced before?)
+  â”‚
+  â”œâ”€â”€ For unsubstantiated claims:
+  â”‚     â”œâ”€â”€ Tag as knowledge gap
+  â”‚     â”œâ”€â”€ Categorize gap type: "missing_evidence" | "missing_domain_knowledge" | "unsupported_assumption"
+  â”‚     â”œâ”€â”€ Estimate specificity: how precisely can the gap be described
+  â”‚     â””â”€â”€ Rank by impact on conclusion confidence
+  â”‚
+  â””â”€â”€ Return gap list with recommendations for evidence retrieval
 ```
 
 ### 5. Progress Assessment
@@ -225,12 +225,12 @@ where criteria_met is evaluated against:
   - All key questions answered
 
 If progress < threshold (default 0.3):
-  → Flag as "stuck"
-  → Suggest alternative approach or more information
+  â†’ Flag as "stuck"
+  â†’ Suggest alternative approach or more information
 
 If progress > threshold (default 0.85):
-  → Flag as "sufficient"
-  → Suggest answer preparation
+  â†’ Flag as "sufficient"
+  â†’ Suggest answer preparation
 ```
 
 ## Internal Interface
@@ -291,14 +291,14 @@ interface KnowledgeGap {
   step_number: number
   claim: string
   gap_type: "missing_evidence" | "missing_domain_knowledge" | "unsupported_assumption"
-  specificity: number               // 0.0–1.0
+  specificity: number               // 0.0â€“1.0
   impact_estimate: number           // How much closing this gap would improve confidence
   suggested_query?: string          // What to search for
 }
 
 interface CognitiveLoadReport {
   pipeline_id: string
-  load_score: number                // 0.0–1.0
+  load_score: number                // 0.0â€“1.0
   load_factors: {
     step_count: number
     depth: number
@@ -312,7 +312,7 @@ interface CognitiveLoadReport {
 
 interface UncertaintyReport {
   pipeline_id: string
-  overall_uncertainty: number       // 0.0–1.0
+  overall_uncertainty: number       // 0.0â€“1.0
   per_step_uncertainty: Map<number, number>
   dominant_source: "evidence_quality" | "conflicting_evidence" | "knowledge_gaps" | "model_stochasticity"
   confidence_interval: [number, number]
@@ -320,7 +320,7 @@ interface UncertaintyReport {
 
 interface ProgressAssessment {
   pipeline_id: string
-  progress: number                  // 0.0–1.0
+  progress: number                  // 0.0â€“1.0
   criteria_met: number
   criteria_total: number
   eta_remaining_ms?: number
@@ -365,14 +365,14 @@ interface StrategySelectionContext {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| COG-META-001 | Metacognition never modifies the reasoning chain it analyzes | Architectural — read-only analysis |
-| COG-META-002 | Confidence calibration error is monotonically non-increasing over time | Algorithmic — calibration only improves |
-| COG-META-003 | Cognitive load scores are bounded [0.0, 1.0] | Schema — clamped at domain boundaries |
-| COG-META-004 | Knowledge gaps always reference a specific step or claim | Schema — required fields |
-| COG-META-005 | Feedback signals are consumed within 1 reasoning cycle or discarded | Algorithmic — TTL enforced |
-| COG-META-006 | Metacognition runs at most once every N steps (configurable frequency) | Algorithmic — rate-limited |
-| COG-META-007 | A strategy recommendation is advisory; Sou must approve changes | Architectural — no auto-switching |
-| COG-META-008 | The calibration curve is session-scoped and resets on new session | Algorithmic — session-scoped state |
+| COG-META-001 | Metacognition never modifies the reasoning chain it analyzes | Architectural â€” read-only analysis |
+| COG-META-002 | Confidence calibration error is monotonically non-increasing over time | Algorithmic â€” calibration only improves |
+| COG-META-003 | Cognitive load scores are bounded [0.0, 1.0] | Schema â€” clamped at domain boundaries |
+| COG-META-004 | Knowledge gaps always reference a specific step or claim | Schema â€” required fields |
+| COG-META-005 | Feedback signals are consumed within 1 reasoning cycle or discarded | Algorithmic â€” TTL enforced |
+| COG-META-006 | Metacognition runs at most once every N steps (configurable frequency) | Algorithmic â€” rate-limited |
+| COG-META-007 | A strategy recommendation is advisory; Sou must approve changes | Architectural â€” no auto-switching |
+| COG-META-008 | The calibration curve is session-scoped and resets on new session | Algorithmic â€” session-scoped state |
 
 ## Error Cases
 
@@ -391,17 +391,17 @@ interface StrategySelectionContext {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Metacognition only monitors and regulates cognitive processes |
-| R2 — Dependency Order | Depends on Reasoning Pipeline, LLMOS, Evidence Store |
-| R3 — DRY | Calibration algorithm defined once; functions as plugins |
-| R4 — Builder Pattern | Output assembled per function, then aggregated into assessment |
-| R5 — Liskov Substitution | Any metacognitive function implements the same result interface |
-| R6 — DI over Singletons | Calibration curves, load monitors, gap detectors injected |
-| R9 — Deterministic | Same cognitive state produces same assessment at temperature=0 |
-| R10 — Simpler Over Complex | Uses 6 explicit functions, not monolithic self-analysis |
-| R13 — Design for Failure | Light assessment available when LLMOS is down |
-| R14 — Paved Path | All metacognition flows through `metacognize` method |
-| R15 — Open/Closed | New metacognitive functions added by registering with engine |
+| R1 â€” Modulsingularity | Metacognition only monitors and regulates cognitive processes |
+| R2 â€” Dependency Order | Depends on Reasoning Pipeline, LLMOS, Evidence Store |
+| R3 â€” DRY | Calibration algorithm defined once; functions as plugins |
+| R4 â€” Builder Pattern | Output assembled per function, then aggregated into assessment |
+| R5 â€” Liskov Substitution | Any metacognitive function implements the same result interface |
+| R6 â€” DI over Singletons | Calibration curves, load monitors, gap detectors injected |
+| R9 â€” Deterministic | Same cognitive state produces same assessment at temperature=0 |
+| R10 â€” Simpler Over Complex | Uses 6 explicit functions, not monolithic self-analysis |
+| R13 â€” Design for Failure | Light assessment available when LLMOS is down |
+| R14 â€” Paved Path | All metacognition flows through `metacognize` method |
+| R15 â€” Open/Closed | New metacognitive functions added by registering with engine |
 
 ## Related Documents
 

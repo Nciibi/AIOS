@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 003 — Interruption Handling
+﻿# AIOS Bible â€” Brain
+## 003 â€” Interruption Handling
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Attention |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Attention |
 | Document ID | AIOS-BBL-002-ATT-003 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 6 — Law of Lifecycle |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Interruption Handling manages time-sensitive signals that demand immediate attention from Sou. Not all signals can wait in the priority queue — security alerts, user inputs, and system errors require immediate routing to Sou's awareness. The Interrupt Manager classifies interrupts by type and priority, enforces cooldown periods to prevent thrashing, queues interrupts when Sou is overloaded, and provides escalation pathways when the interruption rate becomes unsustainable.
+Interruption Handling manages time-sensitive signals that demand immediate attention from Sou. Not all signals can wait in the priority queue â€” security alerts, user inputs, and system errors require immediate routing to Sou's awareness. The Interrupt Manager classifies interrupts by type and priority, enforces cooldown periods to prevent thrashing, queues interrupts when Sou is overloaded, and provides escalation pathways when the interruption rate becomes unsustainable.
 
 Under ATT-001, security alerts always interrupt immediately, bypassing all budget and cooldown checks.
 
@@ -122,11 +122,11 @@ cooldown_ms = base_cooldown_ms * dynamic_multiplier
 Base cooldown: 2000ms (configurable)
 
 Dynamic multiplier based on focus state:
-  Idle:        0.5×  (Sou can handle more)
-  Processing:  1.0×  (standard)
-  Deep Work:   3.0×  (protect focus)
-  Interrupted: 1.5×  (Sou already handling one)
-  Multi-tasking: 2.0× (Sou is busy)
+  Idle:        0.5Ã—  (Sou can handle more)
+  Processing:  1.0Ã—  (standard)
+  Deep Work:   3.0Ã—  (protect focus)
+  Interrupted: 1.5Ã—  (Sou already handling one)
+  Multi-tasking: 2.0Ã— (Sou is busy)
 ```
 
 During cooldown, only Critical-priority interrupts bypass (ATT-001). All other interrupts are queued.
@@ -137,14 +137,14 @@ The Interrupt Manager adjusts cooldown dynamically based on system conditions:
 
 | Condition | Adjustment | Notes |
 |-----------|------------|-------|
-| Consecutive interrupts > 3 | multiplier +1.0× | Sou may be overwhelmed |
-| Switch rate > 12/min | multiplier +0.5× | Too many context switches |
-| High memory pressure | multiplier +0.3× | System resource strain |
-| User has not responded to last 2 interrupts | multiplier +0.5× | User fatigue |
-| Sou has been Idle > 30s | multiplier reset to 0.5× | Ready to respond |
-| Mission-critical flag set | multiplier min 2.0× | Protect mission focus |
+| Consecutive interrupts > 3 | multiplier +1.0Ã— | Sou may be overwhelmed |
+| Switch rate > 12/min | multiplier +0.5Ã— | Too many context switches |
+| High memory pressure | multiplier +0.3Ã— | System resource strain |
+| User has not responded to last 2 interrupts | multiplier +0.5Ã— | User fatigue |
+| Sou has been Idle > 30s | multiplier reset to 0.5Ã— | Ready to respond |
+| Mission-critical flag set | multiplier min 2.0Ã— | Protect mission focus |
 
-Dynamic adjustments are bounded: multiplier is never less than 0.5× or greater than 5.0×.
+Dynamic adjustments are bounded: multiplier is never less than 0.5Ã— or greater than 5.0Ã—.
 
 ### Interrupt Acknowledgment
 
@@ -192,7 +192,7 @@ Security alerts are exempt from all attention budget constraints:
 
 - No cooldown check
 - No Deep Work protection blocking
-- No queueing — always delivered immediately
+- No queueing â€” always delivered immediately
 - Bypasses switch rate limiting
 - Logged as `cooldown_override: true` in event
 
@@ -219,7 +219,7 @@ Escalation actions:
 
 1. Emit `ATT.OverloadEscalation` event
 2. Auto-snooze all non-critical signals with `on_idle` condition
-3. Set cooldown multiplier to 5.0× (maximum)
+3. Set cooldown multiplier to 5.0Ã— (maximum)
 4. Suggest Sou clear queue or delegate tasks
 5. If escalation persists > 30s, log critical warning to System Log
 
@@ -279,13 +279,13 @@ interface InterruptManager {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| ATT-INT-001 | Security alerts (ATT-001) always bypass cooldown and budget checks | Algorithmic — checked before any routing logic |
-| ATT-INT-002 | At most one interrupt is delivered per cooldown period | Algorithmic — enforced by cooldown timer |
-| ATT-INT-003 | Every interrupt must be acknowledged by Sou or expired by TTL | Architectural — requeue/ack/drop is exhaustive |
-| ATT-INT-004 | Cooldown multiplier is bounded between 0.5× and 5.0× | Algorithmic — clamping enforced on every adjustment |
-| ATT-INT-005 | The interrupt queue processes items FIFO within priority bands | Algorithmic — sorted before dequeue |
-| ATT-INT-006 | Overload escalation is idempotent (calling it multiple times is safe) | Architectural — guard on `is_overloaded` flag |
-| ATT-INT-007 | Acknowledgment latency is measured from delivery to ack, never negative | Algorithmic — computed as `max(0, ack_time - deliver_time)` |
+| ATT-INT-001 | Security alerts (ATT-001) always bypass cooldown and budget checks | Algorithmic â€” checked before any routing logic |
+| ATT-INT-002 | At most one interrupt is delivered per cooldown period | Algorithmic â€” enforced by cooldown timer |
+| ATT-INT-003 | Every interrupt must be acknowledged by Sou or expired by TTL | Architectural â€” requeue/ack/drop is exhaustive |
+| ATT-INT-004 | Cooldown multiplier is bounded between 0.5Ã— and 5.0Ã— | Algorithmic â€” clamping enforced on every adjustment |
+| ATT-INT-005 | The interrupt queue processes items FIFO within priority bands | Algorithmic â€” sorted before dequeue |
+| ATT-INT-006 | Overload escalation is idempotent (calling it multiple times is safe) | Architectural â€” guard on `is_overloaded` flag |
+| ATT-INT-007 | Acknowledgment latency is measured from delivery to ack, never negative | Algorithmic â€” computed as `max(0, ack_time - deliver_time)` |
 
 ## Error Cases
 
@@ -304,17 +304,17 @@ interface InterruptManager {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Interruption Handling manages only interrupt lifecycle |
-| R2 — Dependency Order | Depends on Focus Manager for state; no upward deps |
-| R3 — DRY | Interrupt types defined once in InterruptRequest union |
-| R4 — Builder Pattern | Interrupt built from Signal → Classification → Queue/Deliver |
-| R5 — Liskov Substitution | Any InterruptManager implements the interface |
-| R6 — DI over Singletons | Cooldown config and priority rules injected |
-| R9 — Deterministic | Same signals + state produce same interrupt outcome |
-| R10 — Simpler Over Complex | Uses typed priorities and cooldowns, not AI scheduling |
-| R13 — Design for Failure | Escalation pathway prevents cascade failure |
-| R14 — Paved Path | All interrupts flow through `inject()` entry point |
-| R15 — Open/Closed | New interrupt types added via Registry, not core routing |
+| R1 â€” Modulsingularity | Interruption Handling manages only interrupt lifecycle |
+| R2 â€” Dependency Order | Depends on Focus Manager for state; no upward deps |
+| R3 â€” DRY | Interrupt types defined once in InterruptRequest union |
+| R4 â€” Builder Pattern | Interrupt built from Signal â†’ Classification â†’ Queue/Deliver |
+| R5 â€” Liskov Substitution | Any InterruptManager implements the interface |
+| R6 â€” DI over Singletons | Cooldown config and priority rules injected |
+| R9 â€” Deterministic | Same signals + state produce same interrupt outcome |
+| R10 â€” Simpler Over Complex | Uses typed priorities and cooldowns, not AI scheduling |
+| R13 â€” Design for Failure | Escalation pathway prevents cascade failure |
+| R14 â€” Paved Path | All interrupts flow through `inject()` entry point |
+| R15 â€” Open/Closed | New interrupt types added via Registry, not core routing |
 
 ## Related Documents
 

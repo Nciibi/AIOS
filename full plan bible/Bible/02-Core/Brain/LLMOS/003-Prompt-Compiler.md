@@ -1,18 +1,18 @@
-# AIOS Bible — Brain/LLMOS
-## 003 — Prompt Compiler
+﻿# AIOS Bible â€” Brain/LLMOS
+## 003 â€” Prompt Compiler
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-003 |
-| Source Laws | Law 3 — Law of Communication |
+| Source Laws | Law 3 â€” Law of Communication |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 10 — Prompt Compilation |
+| Pipeline Stage | 10 â€” Prompt Compilation |
 
 ## Purpose
 
@@ -166,12 +166,12 @@ interface PromptSection {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-PCP-001 | Every compiled prompt has exactly one system section and at least one message. | Schema — compilation pipeline enforces structure |
-| LLM-PCP-002 | The system prompt is never empty — if none provided, model default is used. | Algorithmic — fallback logic |
-| LLM-PCP-003 | Token count is always estimated before sending to provider. | Algorithmic — pre-flight estimation |
-| LLM-PCP-004 | Tool definitions match the target model's capabilities — no tool calling on models without tool support. | Algorithmic — capability-aware formatting |
-| LLM-PCP-005 | Response schema injection respects the model's structured output capability. | Algorithmic — capability-gated schema injection |
-| LLM-PCP-006 | Compiled prompt never exceeds the model's context window (enforced by Context Builder). | Architectural — upstream enforcement |
+| LLM-PCP-001 | Every compiled prompt has exactly one system section and at least one message. | Schema â€” compilation pipeline enforces structure |
+| LLM-PCP-002 | The system prompt is never empty â€” if none provided, model default is used. | Algorithmic â€” fallback logic |
+| LLM-PCP-003 | Token count is always estimated before sending to provider. | Algorithmic â€” pre-flight estimation |
+| LLM-PCP-004 | Tool definitions match the target model's capabilities â€” no tool calling on models without tool support. | Algorithmic â€” capability-aware formatting |
+| LLM-PCP-005 | Response schema injection respects the model's structured output capability. | Algorithmic â€” capability-gated schema injection |
+| LLM-PCP-006 | Compiled prompt never exceeds the model's context window (enforced by Context Builder). | Architectural â€” upstream enforcement |
 
 ## Events
 
@@ -183,17 +183,17 @@ interface PromptSection {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Compiler is the sole prompt construction authority |
-| R2 — Dependency Order | Compiler depends on Context Builder and Memory Injection |
-| R3 — DRY | Templates centralized in Template Registry |
-| R4 — Builder Pattern | CompiledPrompt built through staged pipeline |
-| R5 — Liskov Substitution | ProviderRequest is provider-agnostic |
-| R6 — DI over Singletons | Compiler injected into pipeline stage |
-| R9 — Deterministic | Same payload produces same compiled prompt |
-| R10 — Simpler Over Complex | Template interpolation over complex DSL |
-| R13 — Design for Failure | Fallback to raw messages when template not found |
-| R14 — Paved Path | Default system prompt when none provided |
-| R15 — Open/Closed | New models add formatting without compiler changes |
+| R1 â€” Modulsingularity | Compiler is the sole prompt construction authority |
+| R2 â€” Dependency Order | Compiler depends on Context Builder and Memory Injection |
+| R3 â€” DRY | Templates centralized in Template Registry |
+| R4 â€” Builder Pattern | CompiledPrompt built through staged pipeline |
+| R5 â€” Liskov Substitution | ProviderRequest is provider-agnostic |
+| R6 â€” DI over Singletons | Compiler injected into pipeline stage |
+| R9 â€” Deterministic | Same payload produces same compiled prompt |
+| R10 â€” Simpler Over Complex | Template interpolation over complex DSL |
+| R13 â€” Design for Failure | Fallback to raw messages when template not found |
+| R14 â€” Paved Path | Default system prompt when none provided |
+| R15 â€” Open/Closed | New models add formatting without compiler changes |
 
 ## Related Documents
 
@@ -208,5 +208,5 @@ interface PromptSection {
 | Condition | Error Code | Behavior |
 |-----------|------------|----------|
 | Template not found | LLM-0301 | Fall back to raw messages; log warning |
-| Template variable undefined | — | Insert empty string; log warning |
-| Tool definition incompatible with model | — | Inline tools as XML; log model compatibility notice |
+| Template variable undefined | â€” | Insert empty string; log warning |
+| Tool definition incompatible with model | â€” | Inline tools as XML; log model compatibility notice |

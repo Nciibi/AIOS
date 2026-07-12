@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Linux — 002: System Administration
+﻿# AIOS Bible â€” Domains
+## Linux â€” 002: System Administration
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-LNX-002 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Enable AIOS to manage Linux system state — users, services, packages, and filesystems — across single nodes or fleets via declarative, idempotent operations.
+Enable AIOS to manage Linux system state â€” users, services, packages, and filesystems â€” across single nodes or fleets via declarative, idempotent operations.
 
 ## Architecture
 
@@ -24,26 +24,26 @@ System administration follows a playbook-driven model. Desired state is defined 
 ### Architecture Flow
 
 ```text
-┌─────────────────────────────────────────────────────────────────┐
-│                     SysAdminWorker Agent                         │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
-│  │ User     │  │ Service  │  │ Package  │  │ Filesys  │        │
-│  │ Handler  │  │ Handler  │  │ Handler  │  │ Handler  │        │
-│  └─────┬────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘        │
-│        │             │             │             │              │
-│  ┌─────▼─────────────▼─────────────▼─────────────▼─────┐       │
-│  │              Playbook Engine                          │       │
-│  │  ┌────────────┐  ┌────────────┐  ┌───────────────┐  │       │
-│  │  │ Dry-Run    │  │ Execution  │  │ Rollback      │  │       │
-│  │  │ Validator  │  │ Runner     │  │ Manager       │  │       │
-│  │  └────────────┘  └────────────┘  └───────────────┘  │       │
-│  └───────────────────────┬──────────────────────────────┘       │
-│                          │                                      │
-│  ┌───────────────────────▼──────────────────────────────┐       │
-│  │              Live System State                        │       │
-│  │  /etc/passwd   systemctl   dpkg/rpm   /etc/fstab     │       │
-│  └──────────────────────────────────────────────────────┘       │
-└─────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                     SysAdminWorker Agent                         â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”‚
+â”‚  â”‚ User     â”‚  â”‚ Service  â”‚  â”‚ Package  â”‚  â”‚ Filesys  â”‚        â”‚
+â”‚  â”‚ Handler  â”‚  â”‚ Handler  â”‚  â”‚ Handler  â”‚  â”‚ Handler  â”‚        â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜        â”‚
+â”‚        â”‚             â”‚             â”‚             â”‚              â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”       â”‚
+â”‚  â”‚              Playbook Engine                          â”‚       â”‚
+â”‚  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚       â”‚
+â”‚  â”‚  â”‚ Dry-Run    â”‚  â”‚ Execution  â”‚  â”‚ Rollback      â”‚  â”‚       â”‚
+â”‚  â”‚  â”‚ Validator  â”‚  â”‚ Runner     â”‚  â”‚ Manager       â”‚  â”‚       â”‚
+â”‚  â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚
+â”‚                          â”‚                                      â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚
+â”‚  â”‚              Live System State                        â”‚       â”‚
+â”‚  â”‚  /etc/passwd   systemctl   dpkg/rpm   /etc/fstab     â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Data Model (TypeScript interfaces)
@@ -121,12 +121,12 @@ interface SelinuxContext {
 
 ## Core Concepts / Operations
 
-- **manage_user(user)** — creates or removes user account with groups, shell, and SSH keys
-- **configure_service(service)** — ensures service is in desired run state and enablement
-- **install_package(manifest)** — installs, removes, or updates a package from repository
-- **mount_filesystem(config)** — mounts or unmounts filesystem per fstab specification
-- **run_playbook(operations, targets)** — executes sequence of operations across hosts with dry-run
-- **dry_run_playbook(operations, targets)** — previews changes without applying them
+- **manage_user(user)** â€” creates or removes user account with groups, shell, and SSH keys
+- **configure_service(service)** â€” ensures service is in desired run state and enablement
+- **install_package(manifest)** â€” installs, removes, or updates a package from repository
+- **mount_filesystem(config)** â€” mounts or unmounts filesystem per fstab specification
+- **run_playbook(operations, targets)** â€” executes sequence of operations across hosts with dry-run
+- **dry_run_playbook(operations, targets)** â€” previews changes without applying them
 
 ### Operations Table
 
@@ -192,21 +192,21 @@ interface SelinuxContext {
 | SYS-INV-05 | Filesystem state is reconciled against fstab | FsHandler ensures fstab is updated before mount |
 | SYS-INV-06 | Playbook execution produces an auditable RunbookRecord | Engine records every operation outcome with timestamp |
 
-## Design DNA (table with Rule, Assessment — include R1,R2,R3,R4,R5,R6,R9,R10,R13,R14,R15)
+## Design DNA (table with Rule, Assessment â€” include R1,R2,R3,R4,R5,R6,R9,R10,R13,R14,R15)
 
 | Rule | Assessment |
 |------|------------|
-| R1 — Composition over Inheritance | Playbooks compose individual operations; handlers delegate to platform-specific implementations |
-| R2 — Explicit over Implicit | All desired state is declared in resource manifests; no magic defaults |
-| R3 — Immutable Artifacts | Package versions pinned by hash or explicit version; playbooks immutable after execution |
-| R4 — Stateless Workers | SysAdminWorker is stateless; state lives in resource manifests |
-| R5 — Idempotency | Every operation checks current state before applying change |
-| R6 — Observability | Every mutation emits a typed event; dry-run provides full diff |
-| R9 — Fail Closed | Playbook halts on first error; partial apply requires explicit rollback config |
-| R10 — Least Privilege | Each operation runs with minimum required privileges; escalation explicit |
-| R13 — Graceful Degradation | If package repo is down, system still serves already-deployed configs |
-| R14 — Data Immutability | RunbookRecords are append-only; past operations never mutated |
-| R15 — Explicit Errors | Every failure returns structured error code and recovery hint |
+| R1 â€” Composition over Inheritance | Playbooks compose individual operations; handlers delegate to platform-specific implementations |
+| R2 â€” Explicit over Implicit | All desired state is declared in resource manifests; no magic defaults |
+| R3 â€” Immutable Artifacts | Package versions pinned by hash or explicit version; playbooks immutable after execution |
+| R4 â€” Stateless Workers | SysAdminWorker is stateless; state lives in resource manifests |
+| R5 â€” Idempotency | Every operation checks current state before applying change |
+| R6 â€” Observability | Every mutation emits a typed event; dry-run provides full diff |
+| R9 â€” Fail Closed | Playbook halts on first error; partial apply requires explicit rollback config |
+| R10 â€” Least Privilege | Each operation runs with minimum required privileges; escalation explicit |
+| R13 â€” Graceful Degradation | If package repo is down, system still serves already-deployed configs |
+| R14 â€” Data Immutability | RunbookRecords are append-only; past operations never mutated |
+| R15 â€” Explicit Errors | Every failure returns structured error code and recovery hint |
 
 ## Related Documents (table)
 
@@ -214,8 +214,8 @@ interface SelinuxContext {
 |----------|-------------|
 | Bible/07-Domains/Linux/000-Overview.md | Parent overview |
 | Bible/07-Domains/Linux/001-Kernel.md | Kernel operations sibling |
-| Bible/07-Laws/Law-004-Evidence.md | Audit trail requirements |
-| Bible/07-Laws/Law-007-Capability-Bounds.md | Capability scoping |
-| Bible/Physics/005-Events.md | Event schema lineage |
-| Bible/Physics/007-Capabilities.md | Capability model |
-| Bible/Physics/010-Execution.md | Execution lifecycle |
+| Physics/000-Laws.md | Audit trail requirements |
+| Physics/000-Laws.md | Capability scoping |
+| Physics/005-Events.md | Event schema lineage |
+| Physics/007-Capabilities.md | Capability model |
+| Physics/010-Execution.md | Execution lifecycle |

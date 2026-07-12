@@ -1,18 +1,18 @@
-# AIOS Bible — Brain/LLMOS
-## 011 — Cache
+﻿# AIOS Bible â€” Brain/LLMOS
+## 011 â€” Cache
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-011 |
-| Source Laws | Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/005-Events.md, Physics/006-Lifecycles.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 7 — Cache Lookup, Stage 16 — Cache Store |
+| Pipeline Stage | 7 â€” Cache Lookup, Stage 16 â€” Cache Store |
 
 ## Purpose
 
@@ -20,7 +20,7 @@ The Cache stores AI model responses for reuse, reducing latency, cost, and provi
 
 ## Cache Key Model
 
-The cache runs at Stage 7, before prompt compilation (Stage 10) and context building (Stage 8). The cache key is derived from the raw request input — not the compiled prompt — to enable early cache lookup without costly pre-processing.
+The cache runs at Stage 7, before prompt compilation (Stage 10) and context building (Stage 8). The cache key is derived from the raw request input â€” not the compiled prompt â€” to enable early cache lookup without costly pre-processing.
 
 ```typescript
 interface CacheKey {
@@ -217,12 +217,12 @@ Entities can pre-warm the cache by submitting requests with `cache_policy.mode =
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-CCH-001 | Cache is checked before every provider call (Stage 7). | Architectural — pre-call stage enforcement |
-| LLM-CCH-002 | Cache is written only after response validation passes (Stage 16). | Architectural — post-validation stage enforcement |
-| LLM-CCH-003 | Cache hits still produce Events with full cost and usage records. | Architectural — event logging invariant |
-| LLM-CCH-004 | Cache keys are unique per (model_id, input_hash, tools_hash, schema_hash, temperature, max_tokens, entity_id). | Algorithmic — composite key uniqueness |
-| LLM-CCH-005 | Semantic cache matches never return results with similarity below the configured threshold. | Algorithmic — threshold-based filtering |
-| LLM-CCH-006 | Cache entries are immutable after creation — no partial updates. | Schema — immutability design |
+| LLM-CCH-001 | Cache is checked before every provider call (Stage 7). | Architectural â€” pre-call stage enforcement |
+| LLM-CCH-002 | Cache is written only after response validation passes (Stage 16). | Architectural â€” post-validation stage enforcement |
+| LLM-CCH-003 | Cache hits still produce Events with full cost and usage records. | Architectural â€” event logging invariant |
+| LLM-CCH-004 | Cache keys are unique per (model_id, input_hash, tools_hash, schema_hash, temperature, max_tokens, entity_id). | Algorithmic â€” composite key uniqueness |
+| LLM-CCH-005 | Semantic cache matches never return results with similarity below the configured threshold. | Algorithmic â€” threshold-based filtering |
+| LLM-CCH-006 | Cache entries are immutable after creation â€” no partial updates. | Schema â€” immutability design |
 
 ## Events
 
@@ -237,17 +237,17 @@ Entities can pre-warm the cache by submitting requests with `cache_policy.mode =
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Cache is the single caching authority in the pipeline |
-| R2 — Dependency Order | Cache lookup precedes pipeline processing (Stage 7) |
-| R3 — DRY | Single cache key model across all entries |
-| R4 — Builder Pattern | CacheEntry built via structured construction |
-| R5 — Liskov Substitution | All responses cached uniformly regardless of provider |
-| R6 — DI over Singletons | CacheManager injected into pipeline |
-| R9 — Deterministic | Same request produces same cache key and lookup result |
-| R10 — Simpler Over Complex | SHA-256 hashing over complex content addressing |
-| R13 — Design for Failure | Cache miss falls through to normal pipeline |
-| R14 — Paved Path | Standard TTL and eviction for all entities |
-| R15 — Open/Closed | New backends added without pipeline changes |
+| R1 â€” Modulsingularity | Cache is the single caching authority in the pipeline |
+| R2 â€” Dependency Order | Cache lookup precedes pipeline processing (Stage 7) |
+| R3 â€” DRY | Single cache key model across all entries |
+| R4 â€” Builder Pattern | CacheEntry built via structured construction |
+| R5 â€” Liskov Substitution | All responses cached uniformly regardless of provider |
+| R6 â€” DI over Singletons | CacheManager injected into pipeline |
+| R9 â€” Deterministic | Same request produces same cache key and lookup result |
+| R10 â€” Simpler Over Complex | SHA-256 hashing over complex content addressing |
+| R13 â€” Design for Failure | Cache miss falls through to normal pipeline |
+| R14 â€” Paved Path | Standard TTL and eviction for all entities |
+| R15 â€” Open/Closed | New backends added without pipeline changes |
 
 ## Related Documents
 
@@ -261,7 +261,7 @@ Entities can pre-warm the cache by submitting requests with `cache_policy.mode =
 
 | Condition | Error Code | Behavior |
 |-----------|------------|----------|
-| Cache backend unavailable | — | Treat all lookups as miss; continue without caching |
-| Embedding service unavailable | — | Disable semantic matching; fall back to exact match only |
-| Cache write fails | — | Log warning; pipeline continues without caching |
-| Semantic match below threshold | — | Return miss; no false positives |
+| Cache backend unavailable | â€” | Treat all lookups as miss; continue without caching |
+| Embedding service unavailable | â€” | Disable semantic matching; fall back to exact match only |
+| Cache write fails | â€” | Log warning; pipeline continues without caching |
+| Semantic match below threshold | â€” | Return miss; no false positives |

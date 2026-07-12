@@ -1,13 +1,13 @@
-# AIOS Bible — Institutions
-## 002 — Mission Execution
+﻿# AIOS Bible â€” Institutions
+## 002 â€” Mission Execution
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Institutions |
+| Version | 1.0.0 |
+| Category | Bible â€” Institutions |
 | Document ID | AIOS-BBL-003-MSN-002 |
-| Source Laws | Law 1 — Law of Origin, Law 4 — Law of Evidence, Law 6 — Law of Lifecycle Compliance |
+| Source Laws | Law 1 â€” Law of Origin, Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle Compliance |
 | Source Physics | Physics/002-Missions.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Manage active Mission execution — worker dispatch, progress tracking, evidence collection, runtime adaptation, and check-in management.
+Manage active Mission execution â€” worker dispatch, progress tracking, evidence collection, runtime adaptation, and check-in management.
 
 ## Architecture
 
@@ -23,17 +23,17 @@ Execution is driven by the LMS in coordination with ROS and Workers. The executi
 
 ```
 Running State Entry
-    │
-    ▼
-Dispatch Workers (LMS → ROS → Worker)
-    │
-    ▼
-[Monitor Progress ← Check-in Collection ← Execute Tasks ← Evidence Recording]
-    │                                      │
-    └── Adaptation Loop ──────────────────┘
-    │
-    ▼
-All Milestones Complete → Transition to Review
+    â”‚
+    â–¼
+Dispatch Workers (LMS â†’ ROS â†’ Worker)
+    â”‚
+    â–¼
+[Monitor Progress â† Check-in Collection â† Execute Tasks â† Evidence Recording]
+    â”‚                                      â”‚
+    â””â”€â”€ Adaptation Loop â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+    â”‚
+    â–¼
+All Milestones Complete â†’ Transition to Review
 ```
 
 Checkpoints are taken at every check-in to enable recovery. The adaptation loop adjusts resources and timelines based on actual progress vs. planned milestones.
@@ -98,11 +98,11 @@ interface CheckInRecord {
 
 ## Core Concepts / Operations
 
-### Worker Dispatch Flow (LMS → ROS → Worker)
+### Worker Dispatch Flow (LMS â†’ ROS â†’ Worker)
 LMS identifies the need for worker dispatch when a Mission enters Running state. LMS requests resources from ROS. ROS allocates Workers from the Organization pool. LMS assigns Workers to milestones and dispatches execution instructions.
 
 ```
-LMS: dispatch request → ROS: allocate worker → Worker: acknowledge → LMS: confirm
+LMS: dispatch request â†’ ROS: allocate worker â†’ Worker: acknowledge â†’ LMS: confirm
 ```
 
 ### Progress Tracking at Milestone Granularity
@@ -162,42 +162,42 @@ interface MissionExecutor {
 
 | Code | Description |
 |------|-------------|
-| MSN_EXEC_001 | Worker dispatch failed — no available Worker with required capability |
-| MSN_EXEC_002 | Evidence integrity check failed — hash mismatch |
-| MSN_EXEC_003 | Resource allocation exceeded — no budget remaining |
+| MSN_EXEC_001 | Worker dispatch failed â€” no available Worker with required capability |
+| MSN_EXEC_002 | Evidence integrity check failed â€” hash mismatch |
+| MSN_EXEC_003 | Resource allocation exceeded â€” no budget remaining |
 | MSN_EXEC_004 | Timeline adjustment violates dependency constraints |
-| MSN_EXEC_005 | Check-in deadline missed — no response within SLA |
-| MSN_EXEC_006 | Heartbeat timeout — worker unreachable |
+| MSN_EXEC_005 | Check-in deadline missed â€” no response within SLA |
+| MSN_EXEC_006 | Heartbeat timeout â€” worker unreachable |
 
 ## Invariants
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| MSN-EXEC-001 | Every dispatched worker must be assigned to at least one milestone | Architectural — WorkerAssignment schema requires milestone_ids |
-| MSN-EXEC-002 | Evidence chain must be append-only and immutable | Architectural — EvidencePackage chain is write-once |
-| MSN-EXEC-003 | Total resource consumption must not exceed allocated budget | Algorithmic — ROS budget enforcement at allocation |
-| MSN-EXEC-004 | Timeline adjustments must preserve milestone DAG ordering | Algorithmic — DAG order validated on every adjustment |
-| MSN-EXEC-005 | Missed check-in must trigger escalation within SLA timeout | Algorithmic — Timer triggers escalation if check-in not received |
+| MSN-EXEC-001 | Every dispatched worker must be assigned to at least one milestone | Architectural â€” WorkerAssignment schema requires milestone_ids |
+| MSN-EXEC-002 | Evidence chain must be append-only and immutable | Architectural â€” EvidencePackage chain is write-once |
+| MSN-EXEC-003 | Total resource consumption must not exceed allocated budget | Algorithmic â€” ROS budget enforcement at allocation |
+| MSN-EXEC-004 | Timeline adjustments must preserve milestone DAG ordering | Algorithmic â€” DAG order validated on every adjustment |
+| MSN-EXEC-005 | Missed check-in must trigger escalation within SLA timeout | Algorithmic â€” Timer triggers escalation if check-in not received |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Execution is a single focused subsystem of the Mission lifecycle |
-| R3 — DRY | Execution reuses types from Physics/002-Missions.md |
-| R9 — Deterministic | Same worker dispatch with same input produces same execution |
-| R10 — Simpler Over Complex | Linear progress model with clear check-in gates |
-| R12 — Embrace Errors | All execution errors have unique codes (MSN_EXEC_001–006) |
-| R13 — Design for Failure | Checkpoints enable recovery; heartbeat detects failure |
+| R1 â€” Modulsingularity | Execution is a single focused subsystem of the Mission lifecycle |
+| R3 â€” DRY | Execution reuses types from Physics/002-Missions.md |
+| R9 â€” Deterministic | Same worker dispatch with same input produces same execution |
+| R10 â€” Simpler Over Complex | Linear progress model with clear check-in gates |
+| R12 â€” Embrace Errors | All execution errors have unique codes (MSN_EXEC_001â€“006) |
+| R13 â€” Design for Failure | Checkpoints enable recovery; heartbeat detects failure |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
 | Missions/000-Lifecycle.md | Base lifecycle doc |
-| Missions/001-Planning.md | Sibling — execution consumes the plan |
-| Missions/003-Delegation.md | Sibling — execution may involve delegation |
-| Missions/004-Failure-Recovery.md | Sibling — failures during execution trigger recovery |
+| Missions/001-Planning.md | Sibling â€” execution consumes the plan |
+| Missions/003-Delegation.md | Sibling â€” execution may involve delegation |
+| Missions/004-Failure-Recovery.md | Sibling â€” failures during execution trigger recovery |
 | Bible/02-Core/ROS/005-Budget.md | Resource budget allocation |
 | Bible/03-Institutions/Workers/000-Overview.md | Worker lifecycle and dispatch |
 | Physics/002-Missions.md | Mission canonical definitions |

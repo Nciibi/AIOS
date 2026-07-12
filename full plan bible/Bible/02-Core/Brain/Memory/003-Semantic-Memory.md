@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 003 — Semantic Memory
+﻿# AIOS Bible â€” Brain
+## 003 â€” Semantic Memory
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Memory |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Memory |
 | Document ID | AIOS-BBL-002-MEM-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 5 — Law of Identity |
+| Source Laws | Law 4 â€” Law of Evidence, Law 5 â€” Law of Identity |
 | Source Physics | Physics/005-Events.md, Physics/001-Identity.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Semantic Memory stores facts, knowledge, concepts, and relationships that Sou has learned and retained. Unlike Episodic Memory (temporal experiences), Semantic Memory is timeless — it holds "what Sou knows" rather than "what Sou experienced." Semantic Memory is the Brain's persistent knowledge base, supporting vector similarity search for context-aware retrieval.
+Semantic Memory stores facts, knowledge, concepts, and relationships that Sou has learned and retained. Unlike Episodic Memory (temporal experiences), Semantic Memory is timeless â€” it holds "what Sou knows" rather than "what Sou experienced." Semantic Memory is the Brain's persistent knowledge base, supporting vector similarity search for context-aware retrieval.
 
 Under MEM-006, all Semantic Memory items are automatically embedded for vector search on creation.
 
@@ -30,7 +30,7 @@ SemanticFact {
   subject: string               // Main entity or concept
   predicate: string             // Relationship or attribute
   object: unknown               // Value, entity, or structure
-  confidence: number            // 0.0–1.0
+  confidence: number            // 0.0â€“1.0
   source: string                // How this fact was acquired
   source_episode?: string       // Episode ID if derived from experience
   embedding: number[]           // Vector embedding for similarity search
@@ -55,7 +55,7 @@ SemanticRelation {
   target_fact_id: string
   relation_type: "is_a" | "part_of" | "related_to" | "causes" | "depends_on" |
                  "contradicts" | "supports" | "example_of"
-  weight: number                // 0.0–1.0, strength of relation
+  weight: number                // 0.0â€“1.0, strength of relation
   created_at: timestamp
 }
 ```
@@ -78,7 +78,7 @@ SemanticRelation {
 | Property | Value |
 |----------|-------|
 | Model | Configured via LLMOS (default: text-embedding-3-large) |
-| Dimensions | Configurable (default: 1536, range: 256–3072) |
+| Dimensions | Configurable (default: 1536, range: 256â€“3072) |
 | Index Type | HNSW (Hierarchical Navigable Small World) |
 | Similarity Metric | Cosine similarity |
 | Auto-embed | Enabled (all Semantic items embedded on creation) |
@@ -100,20 +100,20 @@ HNSWConfig {
 
 ```
 New SemanticFact
-    │
-    ▼
+    â”‚
+    â–¼
 1. Generate embedding via LLMOS embedding endpoint
-    │
-    ▼
+    â”‚
+    â–¼
 2. Store embedding in HNSW index
-    │
-    ▼
+    â”‚
+    â–¼
 3. Store fact + embedding in primary store
-    │
-    ▼
+    â”‚
+    â–¼
 4. Create/update relations
-    │
-    ▼
+    â”‚
+    â–¼
 5. Emit MEM.SM.FactStored
 ```
 
@@ -123,9 +123,9 @@ New SemanticFact
 |--------|------------------------|------------|
 | User conversation | Sou extracts facts from user statements | 0.7 (needs verification) |
 | Academy | Formal knowledge from Academy KMS | 0.9+ |
-| Episodic rollup | Session-end extraction from episodes | 0.6–0.8 |
-| Reflection output | Insights from Cognitive OS reflection | 0.7–0.9 |
-| Federation | Facts shared from other AIOS instances | 0.5–0.8 (source-dependent) |
+| Episodic rollup | Session-end extraction from episodes | 0.6â€“0.8 |
+| Reflection output | Insights from Cognitive OS reflection | 0.7â€“0.9 |
+| Federation | Facts shared from other AIOS instances | 0.5â€“0.8 (source-dependent) |
 | Manual | Sou or human explicitly stores a fact | 1.0 (if human-verified) |
 | Tool results | Structured data from tool invocations | 0.8+ |
 
@@ -205,27 +205,27 @@ On contradiction: flag both facts, increment both contradiction lists, emit aler
 
 ```
 Creation
-    │
-    ▼
+    â”‚
+    â–¼
 Unverified (confidence < 0.8, verified = false)
-    │
-    ├── Sou verifies manually → Verified (confidence = 1.0)
-    ├── Corroborated by multiple sources → Verified (confidence = avg)
-    ├── Contradicted → Flagged for review
-    └── Unaccessed for 90 days → Low-importance, archival candidate
-    │
-    ▼
-Verified (confidence ≥ 0.8, verified = true)
-    │
-    ├── Accessed regularly → Maintained
-    ├── Contradicted by new evidence → Downgraded to Unverified
-    └── Superseded by newer fact → Deprecated
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Sou verifies manually â†’ Verified (confidence = 1.0)
+    â”œâ”€â”€ Corroborated by multiple sources â†’ Verified (confidence = avg)
+    â”œâ”€â”€ Contradicted â†’ Flagged for review
+    â””â”€â”€ Unaccessed for 90 days â†’ Low-importance, archival candidate
+    â”‚
+    â–¼
+Verified (confidence â‰¥ 0.8, verified = true)
+    â”‚
+    â”œâ”€â”€ Accessed regularly â†’ Maintained
+    â”œâ”€â”€ Contradicted by new evidence â†’ Downgraded to Unverified
+    â””â”€â”€ Superseded by newer fact â†’ Deprecated
+    â”‚
+    â–¼
 Deprecated
-    │
-    ├── Still queryable but not returned by default
-    └── Hard-deleted after 1 year (unless referenced)
+    â”‚
+    â”œâ”€â”€ Still queryable but not returned by default
+    â””â”€â”€ Hard-deleted after 1 year (unless referenced)
 ```
 
 ## Conflict Resolution
@@ -330,13 +330,13 @@ interface ReindexReport {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| SM-001 | Every Semantic Fact has exactly one embedding | Architectural — auto-embed on creation |
-| SM-002 | Duplicate facts are not stored (detected before insert) | Algorithmic — checkDuplicate runs before store |
-| SM-003 | Conflicting facts are always flagged to Sou | Architectural — contradiction event emitted |
-| SM-004 | Confidence scores are bounded [0.0, 1.0] | Schema — clamped on update |
-| SM-005 | Facts are immutable after creation (update creates new version) | Architectural — version number incremented |
-| SM-006 | Semantic search always returns results ordered by similarity | Algorithmic — HNSW search ordering |
-| SM-007 | Deprecated facts are excluded from default queries | Algorithmic — filter applied in query |
+| SM-001 | Every Semantic Fact has exactly one embedding | Architectural â€” auto-embed on creation |
+| SM-002 | Duplicate facts are not stored (detected before insert) | Algorithmic â€” checkDuplicate runs before store |
+| SM-003 | Conflicting facts are always flagged to Sou | Architectural â€” contradiction event emitted |
+| SM-004 | Confidence scores are bounded [0.0, 1.0] | Schema â€” clamped on update |
+| SM-005 | Facts are immutable after creation (update creates new version) | Architectural â€” version number incremented |
+| SM-006 | Semantic search always returns results ordered by similarity | Algorithmic â€” HNSW search ordering |
+| SM-007 | Deprecated facts are excluded from default queries | Algorithmic â€” filter applied in query |
 
 ## Error Cases
 
@@ -353,17 +353,17 @@ interface ReindexReport {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Semantic Memory handles only persistent knowledge storage |
-| R2 — Dependency Order | Depends on Memory OS core, LLMOS; no upward deps |
-| R3 — DRY | Fact schema defined once; relations are separate |
-| R4 — Builder Pattern | Knowledge built by Extraction → Embedding → Indexing |
-| R5 — Liskov Substitution | Any SemanticMemoryStore implements the interface |
-| R6 — DI over Singletons | Embedding model and index strategy injected |
-| R9 — Deterministic | Same query returns same results (model-dependent) |
-| R10 — Simpler Over Complex | Subject-predicate-object model with vector search |
-| R13 — Design for Failure | Embedding failures don't block fact storage |
-| R14 — Paved Path | All facts flow through store/search pattern |
-| R15 — Open/Closed | New fact types added via fact_type field, not schema changes |
+| R1 â€” Modulsingularity | Semantic Memory handles only persistent knowledge storage |
+| R2 â€” Dependency Order | Depends on Memory OS core, LLMOS; no upward deps |
+| R3 â€” DRY | Fact schema defined once; relations are separate |
+| R4 â€” Builder Pattern | Knowledge built by Extraction â†’ Embedding â†’ Indexing |
+| R5 â€” Liskov Substitution | Any SemanticMemoryStore implements the interface |
+| R6 â€” DI over Singletons | Embedding model and index strategy injected |
+| R9 â€” Deterministic | Same query returns same results (model-dependent) |
+| R10 â€” Simpler Over Complex | Subject-predicate-object model with vector search |
+| R13 â€” Design for Failure | Embedding failures don't block fact storage |
+| R14 â€” Paved Path | All facts flow through store/search pattern |
+| R15 â€” Open/Closed | New fact types added via fact_type field, not schema changes |
 
 ## Related Documents
 

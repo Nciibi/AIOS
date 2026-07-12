@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Attention System
+﻿# AIOS Bible â€” Brain
+## 000 â€” Attention System
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Attention |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Attention |
 | Document ID | AIOS-BBL-002-ATT-000 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Attention System manages what Sou pays attention to, when, and for how long. In a system where multiple signals compete for Sou's awareness — user input, memory recall, tool output, system alerts, mission status changes, federation messages — the Attention System determines what is salient, what can wait, and what should be ignored.
+The Attention System manages what Sou pays attention to, when, and for how long. In a system where multiple signals compete for Sou's awareness â€” user input, memory recall, tool output, system alerts, mission status changes, federation messages â€” the Attention System determines what is salient, what can wait, and what should be ignored.
 
 The Attention System is the Brain's filter. It prevents Sou from being overwhelmed by information and ensures that Sou's finite cognitive capacity is directed at what matters most at any moment.
 
@@ -23,28 +23,28 @@ The Attention System is the Brain's filter. It prevents Sou from being overwhelm
 
 ```
 Sou (reads attention-gated context, receives interrupt)
-   ▲                                    │
-   │                                    ▼
-   │                         ┌──────────────────────┐
-   │                         │   Interrupt Bus       │
-   │                         │  (time-sensitive)     │
-   │                         └──────────────────────┘
-   │                                    ▲
-   │                                    │
-   ▼                                    │
-┌────────────────────────────────────────┴─────────┐
-│           Attention System                        │
-│                                                  │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
-│  │ Salience  │  │ Focus    │  │ Interrupt │      │
-│  │ Scanner   │─►│ Manager  │─►│  Manager  │       │
-│  └──────────┘  └──────────┘  └──────────┘       │
-│                                                  │
-│  ┌──────────┐  ┌──────────┐                      │
-│  │ Attention │  │ Snooze   │                      │
-│  │ Budget    │  │ Queue    │                      │
-│  └──────────┘  └──────────┘                      │
-└──────────────────────────────────────────────────┘
+   â–²                                    â”‚
+   â”‚                                    â–¼
+   â”‚                         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+   â”‚                         â”‚   Interrupt Bus       â”‚
+   â”‚                         â”‚  (time-sensitive)     â”‚
+   â”‚                         â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+   â”‚                                    â–²
+   â”‚                                    â”‚
+   â–¼                                    â”‚
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           Attention System                        â”‚
+â”‚                                                  â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚
+â”‚  â”‚ Salience  â”‚  â”‚ Focus    â”‚  â”‚ Interrupt â”‚      â”‚
+â”‚  â”‚ Scanner   â”‚â”€â–ºâ”‚ Manager  â”‚â”€â–ºâ”‚  Manager  â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚
+â”‚                                                  â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                      â”‚
+â”‚  â”‚ Attention â”‚  â”‚ Snooze   â”‚                      â”‚
+â”‚  â”‚ Budget    â”‚  â”‚ Queue    â”‚                      â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                      â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 The Attention System sits between the Context System and Sou. Context provides the WINDOW of available information; Attention determines what Sou actually SEES.
@@ -59,8 +59,8 @@ AttentionSignal {
   source: string
   type: "user_input" | "system_alert" | "mission_update" | "memory_recall" |
         "tool_result" | "federation_message" | "internal_thought"
-  salience: number          // 0.0–1.0, computed by Salience Scanner
-  urgency: number           // 0.0–1.0, time-sensitivity of signal
+  salience: number          // 0.0â€“1.0, computed by Salience Scanner
+  urgency: number           // 0.0â€“1.0, time-sensitivity of signal
   payload: unknown
   timestamp: timestamp
   ttl_ms: number            // How long this signal is relevant
@@ -86,7 +86,7 @@ Interrupt {
 
 ### 1. Salience Scanner
 
-Every incoming signal is scored for salience — how relevant it is to Sou's current goals and context:
+Every incoming signal is scored for salience â€” how relevant it is to Sou's current goals and context:
 
 | Factor | Weight | Description |
 |--------|--------|-------------|
@@ -132,11 +132,11 @@ Not all signals can wait. The Interrupt Manager handles time-sensitive signals t
 
 Interrupts follow a cooldown: after an interrupt, the Interrupt Manager waits `interrupt_cooldown_ms` before allowing another. This prevents Sou from being constantly interrupted.
 
-Cooldown values are dynamic — if Sou is in Deep Work, cooldown increases. If Sou is Idle, cooldown is zero.
+Cooldown values are dynamic â€” if Sou is in Deep Work, cooldown increases. If Sou is Idle, cooldown is zero.
 
 ### 4. Attention Budget
 
-Sou has a limited attention budget — it can only process a finite number of signals per unit time:
+Sou has a limited attention budget â€” it can only process a finite number of signals per unit time:
 
 | Resource | Budget | Refill Rate |
 |----------|--------|-------------|
@@ -149,7 +149,7 @@ When the attention budget is exceeded, non-critical signals are snoozed (re-queu
 
 ### 5. Snooze Queue
 
-Signals that are relevant but not urgent can be snoozed — deferred until either a condition is met or a timeout expires:
+Signals that are relevant but not urgent can be snoozed â€” deferred until either a condition is met or a timeout expires:
 
 ```
 SnoozeEntry {
@@ -215,12 +215,12 @@ interface InterruptRouter {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| ATT-001 | Security alerts always interrupt immediately | Algorithmic — Interrupt Manager bypasses budget |
-| ATT-002 | Sou can dismiss any signal at any time | API-level — `dismissSignal` is Sou-only |
-| ATT-003 | Signals are never dropped without being evaluated | Architectural — all signals pass through Salience Scanner |
-| ATT-004 | The Attention System is stateless — signal history lives in Event Store | Architectural — no internal persistence |
-| ATT-005 | Sou cannot be interrupted more than once per cooldown period | Algorithmic — enforced by Interrupt Manager |
-| ATT-006 | Focus state transitions are always recorded as evidence | Architectural — logged to Event Store |
+| ATT-001 | Security alerts always interrupt immediately | Algorithmic â€” Interrupt Manager bypasses budget |
+| ATT-002 | Sou can dismiss any signal at any time | API-level â€” `dismissSignal` is Sou-only |
+| ATT-003 | Signals are never dropped without being evaluated | Architectural â€” all signals pass through Salience Scanner |
+| ATT-004 | The Attention System is stateless â€” signal history lives in Event Store | Architectural â€” no internal persistence |
+| ATT-005 | Sou cannot be interrupted more than once per cooldown period | Algorithmic â€” enforced by Interrupt Manager |
+| ATT-006 | Focus state transitions are always recorded as evidence | Architectural â€” logged to Event Store |
 
 ## Related Documents
 
@@ -246,14 +246,14 @@ interface InterruptRouter {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Attention System does one thing: manage what Sou attends to |
-| R2 — Dependency Order | Depends on Context System, Event Store; no upward deps |
-| R3 — DRY | Signal types defined once in Attention Model |
-| R4 — Builder Pattern | Focus built by Salience Scanner → Focus Manager → Interrupt Manager |
-| R5 — Liskov Substitution | Any SalienceScorer implements the interface |
-| R6 — DI over Singletons | Scoring factors and interrupt routes injected |
-| R9 — Deterministic | Same signals produce same attention outcome |
-| R10 — Simpler Over Complex | Salience uses weighted linear model |
-| R13 — Design for Failure | Interrupt cooldown prevents thrashing |
-| R14 — Paved Path | All signals flow through `injectSignal` |
-| R15 — Open/Closed | New signal sources added via Registry, not by modifying core |
+| R1 â€” Modulsingularity | Attention System does one thing: manage what Sou attends to |
+| R2 â€” Dependency Order | Depends on Context System, Event Store; no upward deps |
+| R3 â€” DRY | Signal types defined once in Attention Model |
+| R4 â€” Builder Pattern | Focus built by Salience Scanner â†’ Focus Manager â†’ Interrupt Manager |
+| R5 â€” Liskov Substitution | Any SalienceScorer implements the interface |
+| R6 â€” DI over Singletons | Scoring factors and interrupt routes injected |
+| R9 â€” Deterministic | Same signals produce same attention outcome |
+| R10 â€” Simpler Over Complex | Salience uses weighted linear model |
+| R13 â€” Design for Failure | Interrupt cooldown prevents thrashing |
+| R14 â€” Paved Path | All signals flow through `injectSignal` |
+| R15 â€” Open/Closed | New signal sources added via Registry, not by modifying core |

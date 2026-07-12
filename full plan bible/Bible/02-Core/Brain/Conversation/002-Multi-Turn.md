@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 002 — Multi-Turn
+﻿# AIOS Bible â€” Brain
+## 002 â€” Multi-Turn
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Conversation |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Conversation |
 | Document ID | AIOS-BBL-002-CON-002 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Multi-Turn management handles the sequential flow of conversation turns — ensuring turns are processed in order, managing turn pairing (user message -> Sou response), enforcing turn timeouts, maintaining a sliding window of turn history, deduplicating identical inputs, and orchestrating concurrent input handling. It is the component within Conversation OS that guarantees every user message receives exactly one response (CONV-001) and that turns proceed in strict sequential order (CONV-002).
+Multi-Turn management handles the sequential flow of conversation turns â€” ensuring turns are processed in order, managing turn pairing (user message -> Sou response), enforcing turn timeouts, maintaining a sliding window of turn history, deduplicating identical inputs, and orchestrating concurrent input handling. It is the component within Conversation OS that guarantees every user message receives exactly one response (CONV-001) and that turns proceed in strict sequential order (CONV-002).
 
 ## Data Model
 
@@ -113,7 +113,7 @@ TimedOutTurn {
 ## Turn Lifecycle
 
 ```
-Receive → Parse → Route → Process → Build → Deliver
+Receive â†’ Parse â†’ Route â†’ Process â†’ Build â†’ Deliver
 ```
 
 Each stage has strict timing requirements and validation:
@@ -130,9 +130,9 @@ Each stage has strict timing requirements and validation:
 ### Stage Transitions
 
 ```
-receive ──► parse ──► route ──► process ──► build ──► deliver
-  │            │         │           │          │           │
-  └── fail ────┴── fail ─┴── fail ──┴── fail ──┴── fail ──┴── fail
+receive â”€â”€â–º parse â”€â”€â–º route â”€â”€â–º process â”€â”€â–º build â”€â”€â–º deliver
+  â”‚            â”‚         â”‚           â”‚          â”‚           â”‚
+  â””â”€â”€ fail â”€â”€â”€â”€â”´â”€â”€ fail â”€â”´â”€â”€ fail â”€â”€â”´â”€â”€ fail â”€â”€â”´â”€â”€ fail â”€â”€â”´â”€â”€ fail
 ```
 
 Transitions only move forward. A failed turn at any stage transitions to `failed` status and cannot resume.
@@ -222,7 +222,7 @@ A content hash comparison prevents the same Sou response from being delivered tw
 ### Timeout Protocol
 
 1. Stage timer starts when stage enters
-2. Timer fires → emit `CONV.TurnTimeout` with stage, elapsed_ms, action
+2. Timer fires â†’ emit `CONV.TurnTimeout` with stage, elapsed_ms, action
 3. Action executed per table above
 4. For Process timeout with "notify" action:
    - User notification: "Sou is taking longer than expected..."
@@ -230,11 +230,11 @@ A content hash comparison prevents the same Sou response from being delivered tw
    - If user chooses interrupt: send interrupt signal to Sou via ACF
    - Sou interrupt flow:
      ```
-     CONV.TurnTimeout → user notified → user interrupts
-       → send ACF.Interrupt(turn_id)
-       → Sou halts processing
-       → Turn marked failed
-       → Queue advanced to next turn
+     CONV.TurnTimeout â†’ user notified â†’ user interrupts
+       â†’ send ACF.Interrupt(turn_id)
+       â†’ Sou halts processing
+       â†’ Turn marked failed
+       â†’ Queue advanced to next turn
      ```
 
 ## Turn History
@@ -301,7 +301,7 @@ Receive stage:
   4. If duplicate found:
      a. Return existing turn_id
      b. Emit CONV.DuplicateSuppressed
-     c. Skip processing — do not re-enter lifecycle
+     c. Skip processing â€” do not re-enter lifecycle
 ```
 
 ### Duplicate Behavior
@@ -319,20 +319,20 @@ Receive stage:
 
 ```
 User sends message M1
-  → M1 enters Receive stage
-  → M1 advances to Process stage → Sou starts processing
+  â†’ M1 enters Receive stage
+  â†’ M1 advances to Process stage â†’ Sou starts processing
   
 User sends message M2 while Sou processes M1
-  → M2 enters Receive stage
-  → Turn Manager detects current_pending_turn !== null
-  → M2 is enqueued with priority "new user input"
-  → User notified: "Message received, waiting for current response..."
-  → Emit CONV.TurnQueued { turn_id: M2.turn_id, position: 1 }
+  â†’ M2 enters Receive stage
+  â†’ Turn Manager detects current_pending_turn !== null
+  â†’ M2 is enqueued with priority "new user input"
+  â†’ User notified: "Message received, waiting for current response..."
+  â†’ Emit CONV.TurnQueued { turn_id: M2.turn_id, position: 1 }
   
 Sou finishes processing M1
-  → M1 advances Build → Deliver
-  → Turn Manager dequeues M2
-  → M2 begins lifecycle at Receive stage
+  â†’ M1 advances Build â†’ Deliver
+  â†’ Turn Manager dequeues M2
+  â†’ M2 begins lifecycle at Receive stage
 ```
 
 ### Queue Management
@@ -352,7 +352,7 @@ function processQueue(session_id: string): void {
 
 User-typing indicators (e.g., WebSocket `typing` frames) do not create turns:
 
-1. `typing` signal received → update `session.last_typing_at` timestamp
+1. `typing` signal received â†’ update `session.last_typing_at` timestamp
 2. No turn record created
 3. If typing persists > 5s without message: emit `CONV.TypingExpired` (no further action)
 4. If message arrives: clear typing timer, proceed with normal receive
@@ -441,13 +441,13 @@ type QueueResult = {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| CONV-001 | Every user message has exactly one Sou response | Algorithmic — TurnPair enforces 1:1 mapping; orphan detection catches violations |
-| CONV-002 | Turn ordering is strictly sequential (turn N completes before N+1 starts) | Architectural — current_pending_turn gate blocks concurrent lifecycle |
-| CONV-007 | Turn stage transitions are monotonic (forward-only, never backwards) | Algorithmic — stage transition validation rejects reverse moves |
-| CONV-008 | No turn is processed more than once (idempotency) | Algorithmic — deduplication via content_hash and idempotency_key |
-| CONV-009 | The turn queue never exceeds max depth | Algorithmic — oldest non-system entry dropped when full |
-| CONV-010 | Every TimedOutTurn has a corresponding action executed | Algorithmic — timeout handler executes action before returning |
-| CONV-011 | Turn IDs are globally unique across all sessions | Schema — UUID v7 generation with collision detection |
+| CONV-001 | Every user message has exactly one Sou response | Algorithmic â€” TurnPair enforces 1:1 mapping; orphan detection catches violations |
+| CONV-002 | Turn ordering is strictly sequential (turn N completes before N+1 starts) | Architectural â€” current_pending_turn gate blocks concurrent lifecycle |
+| CONV-007 | Turn stage transitions are monotonic (forward-only, never backwards) | Algorithmic â€” stage transition validation rejects reverse moves |
+| CONV-008 | No turn is processed more than once (idempotency) | Algorithmic â€” deduplication via content_hash and idempotency_key |
+| CONV-009 | The turn queue never exceeds max depth | Algorithmic â€” oldest non-system entry dropped when full |
+| CONV-010 | Every TimedOutTurn has a corresponding action executed | Algorithmic â€” timeout handler executes action before returning |
+| CONV-011 | Turn IDs are globally unique across all sessions | Schema â€” UUID v7 generation with collision detection |
 
 ## Error Cases
 
@@ -469,72 +469,72 @@ type QueueResult = {
 ```
 User sends: "What is the weather?"
   1. startTurn(session_id, "What is the weather?", "text")
-     → TurnRecord created, status: received
-  2. Parse stage completes → status: parsed
-  3. Route stage → input delivered to Sou → status: routing
-  4. Sou responds → status: processing → processing_completed_at set
+     â†’ TurnRecord created, status: received
+  2. Parse stage completes â†’ status: parsed
+  3. Route stage â†’ input delivered to Sou â†’ status: routing
+  4. Sou responds â†’ status: processing â†’ processing_completed_at set
   5. pairResponse(user_turn_id, sou_response)
-     → TurnPair created, status: active
-  6. Build stage → response formatted → status: built
-  7. Deliver stage → response sent to user → status: delivered
-  8. TurnPair completed → stats recorded
+     â†’ TurnPair created, status: active
+  6. Build stage â†’ response formatted â†’ status: built
+  7. Deliver stage â†’ response sent to user â†’ status: delivered
+  8. TurnPair completed â†’ stats recorded
 ```
 
 ### Pattern 2: Timeout Recovery
 
 ```
 User sends: "Analyze this 100-page document"
-  → Turn enters Process stage
-  → Sou starts processing
-  → 30 seconds pass → Timeout fires
+  â†’ Turn enters Process stage
+  â†’ Sou starts processing
+  â†’ 30 seconds pass â†’ Timeout fires
   
   1. CONV.TurnTimeout emitted
   2. User notified: "Sou is taking longer than expected..."
   3. User offered: wait / retry / skip
   4. User chooses "skip"
   5. interruptSou(session_id, turn_id) called
-     → ACF.Interrupt signal sent to Sou
+     â†’ ACF.Interrupt signal sent to Sou
   6. failTurn(turn_id, "user_skipped_after_timeout")
   7. TurnPair marked failed
-  8. processQueue(session_id) → next turn dequeued and started
+  8. processQueue(session_id) â†’ next turn dequeued and started
 ```
 
 ### Pattern 3: Concurrent Input Queuing
 
 ```
-User sends message A → starts processing
+User sends message A â†’ starts processing
 User sends message B while A is processing:
   1. B turn created, status: received
-  2. enqueueTurn(session_id, B) → QueueResult { position: 1 }
+  2. enqueueTurn(session_id, B) â†’ QueueResult { position: 1 }
   3. CONV.TurnQueued emitted
   4. User sees: "Message received, waiting for current response..."
 
 System message injected during A's processing:
   1. Priority calculated: system > user input
-  2. enqueueTurn(session_id, systemMsg) → QueueResult { position: 0 }
+  2. enqueueTurn(session_id, systemMsg) â†’ QueueResult { position: 0 }
   3. System message jumps ahead of B in queue
 
-A completes → processQueue dequeues system message first
-  → system message processed and delivered
-  → processQueue dequeues B
-  → B begins lifecycle
+A completes â†’ processQueue dequeues system message first
+  â†’ system message processed and delivered
+  â†’ processQueue dequeues B
+  â†’ B begins lifecycle
 ```
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Turn Manager handles only turn lifecycle, sequencing, and pairing |
-| R2 — Dependency Order | Depends on ACF (Sou) and Memory OS; no upward deps |
-| R3 — DRY | Turn model defined once in Data Model; shared across all stages |
-| R4 — Builder Pattern | Turn built through sequential stage transitions, each adding fidelity |
-| R5 — Liskov Substitution | Any TurnManager implementation satisfies the interface |
-| R6 — DI over Singletons | Timeout configs and queue strategies injected |
-| R9 — Deterministic | Same input with same state produces same lifecycle outcome |
-| R10 — Simpler Over Complex | Strict sequential ordering avoids concurrent state complexity |
-| R13 — Design for Failure | Every stage has timeout; failed turns always notify user |
-| R14 — Paved Path | All turns flow through startTurn → stages → complete/fail |
-| R15 — Open/Closed | New stage behaviors added via stage handler config, not by modifying lifecycle core |
+| R1 â€” Modulsingularity | Turn Manager handles only turn lifecycle, sequencing, and pairing |
+| R2 â€” Dependency Order | Depends on ACF (Sou) and Memory OS; no upward deps |
+| R3 â€” DRY | Turn model defined once in Data Model; shared across all stages |
+| R4 â€” Builder Pattern | Turn built through sequential stage transitions, each adding fidelity |
+| R5 â€” Liskov Substitution | Any TurnManager implementation satisfies the interface |
+| R6 â€” DI over Singletons | Timeout configs and queue strategies injected |
+| R9 â€” Deterministic | Same input with same state produces same lifecycle outcome |
+| R10 â€” Simpler Over Complex | Strict sequential ordering avoids concurrent state complexity |
+| R13 â€” Design for Failure | Every stage has timeout; failed turns always notify user |
+| R14 â€” Paved Path | All turns flow through startTurn â†’ stages â†’ complete/fail |
+| R15 â€” Open/Closed | New stage behaviors added via stage handler config, not by modifying lifecycle core |
 
 ## Related Documents
 

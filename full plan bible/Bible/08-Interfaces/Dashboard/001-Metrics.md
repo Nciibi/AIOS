@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## Dashboard — 001: Metrics
+﻿# AIOS Bible â€” Interfaces
+## Dashboard â€” 001: Metrics
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-DB-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 8 — Law of Verification-First, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 4 â€” Law of Evidence, Law 8 â€” Law of Verification-First, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/005-Events.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -112,7 +112,7 @@ Every computed MetricValue carries an evidenceRef pointing to the source event o
 
 ### 5. Staleness Detection
 
-After freshnessCheck fails (current time - lastUpdated > threshold), the metric is marked stale. Stale metrics are never displayed as current — they show a warning state or are omitted until fresh data arrives.
+After freshnessCheck fails (current time - lastUpdated > threshold), the metric is marked stale. Stale metrics are never displayed as current â€” they show a warning state or are omitted until fresh data arrives.
 
 ## Operations
 
@@ -174,27 +174,27 @@ interface StalenessMonitor {
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| DB-007 | Every MetricValue has a non-null evidenceRef | Architectural — bind_evidence required before display |
-| DB-008 | Stale data is never displayed as current | Algorithmic — staleness check gates all widget rendering |
-| DB-009 | Metric definitions are immutable after registration | Architectural — catalog enforces create-only |
-| DB-010 | Aggregation pipeline is deterministic for identical inputs | Algorithmic — same steps + same data = same output |
-| DB-011 | Each metric binds to exactly one data source | Architectural — DataSourceBinding is singular |
+| DB-007 | Every MetricValue has a non-null evidenceRef | Architectural â€” bind_evidence required before display |
+| DB-008 | Stale data is never displayed as current | Algorithmic â€” staleness check gates all widget rendering |
+| DB-009 | Metric definitions are immutable after registration | Architectural â€” catalog enforces create-only |
+| DB-010 | Aggregation pipeline is deterministic for identical inputs | Algorithmic â€” same steps + same data = same output |
+| DB-011 | Each metric binds to exactly one data source | Architectural â€” DataSourceBinding is singular |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Metrics subsystem owns value computation; display is handled by Widgets |
-| R2 — Dependency Order | Depends on AOP, EVS, AUS via DataSourceBinding; no circular deps |
-| R3 — DRY | Metric catalog ensures single definition per metric; widgets reference by ID |
-| R4 — Builder Pattern | AggregationPipeline uses builder for composing steps |
-| R5 — Liskov Substitution | Compliant | Metric definitions are interchangeable through the MetricProvider interface |
-| R6 — Immutability | MetricDefinition is immutable; versions track changes |
-| R9 — Deterministic | Same DataQuery + same evidence = same MetricValue |
-| R10 — Simpler Over Complex | Default metrics (count, avg, latest) cover 80% of use cases |
-| R13 — Design for Failure | Source outage marks stale; stale threshold prevents silent data rot |
-| R14 — Paved Path | Pre-defined health metrics are the default for all views |
-| R15 — Open/Closed | New aggregation methods register via AggregationStep extension |
+| R1 â€” Modulsingularity | Metrics subsystem owns value computation; display is handled by Widgets |
+| R2 â€” Dependency Order | Depends on AOP, EVS, AUS via DataSourceBinding; no circular deps |
+| R3 â€” DRY | Metric catalog ensures single definition per metric; widgets reference by ID |
+| R4 â€” Builder Pattern | AggregationPipeline uses builder for composing steps |
+| R5 â€” Liskov Substitution | Compliant | Metric definitions are interchangeable through the MetricProvider interface |
+| R6 â€” Immutability | MetricDefinition is immutable; versions track changes |
+| R9 â€” Deterministic | Same DataQuery + same evidence = same MetricValue |
+| R10 â€” Simpler Over Complex | Default metrics (count, avg, latest) cover 80% of use cases |
+| R13 â€” Design for Failure | Source outage marks stale; stale threshold prevents silent data rot |
+| R14 â€” Paved Path | Pre-defined health metrics are the default for all views |
+| R15 â€” Open/Closed | New aggregation methods register via AggregationStep extension |
 
 ## Related Documents
 
@@ -208,5 +208,5 @@ interface StalenessMonitor {
 | Bible/08-Interfaces/Dashboard/002-Widgets.md | Widgets consume MetricValue for display |
 | Bible/08-Interfaces/UI/000-Overview.md | UI renders metric visualizations |
 | Bible/08-Interfaces/Console/000-Overview.md | Alerts link to Console for metric review |
-| Physics/005-Events.md | Evidence invariants — metric values are evidence-derived |
+| Physics/005-Events.md | Evidence invariants â€” metric values are evidence-derived |
 | Physics/011-Design-DNA.md | Design DNA rules govern metric construction |

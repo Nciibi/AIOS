@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 005 — Channel Adaptation
+﻿# AIOS Bible â€” Brain
+## 005 â€” Channel Adaptation
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Conversation |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Conversation |
 | Document ID | AIOS-BBL-002-CON-005 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -17,7 +17,7 @@
 
 Channel Adaptation (also Modality Adapter) handles the translation between Sou's internal text-based processing and the user's communication channel. It adapts input from various modalities (text, voice, API, multimodal) into a normalized text format for Sou, and adapts Sou's text responses into the appropriate output format for the user's channel.
 
-Sou is modality-agnostic — it processes text internally. The Channel Adapter is the bridge that translates raw channel input into Sou-bound normalized text and Sou's text responses into channel-specific output. Each channel has its own codec, profile, and constraints.
+Sou is modality-agnostic â€” it processes text internally. The Channel Adapter is the bridge that translates raw channel input into Sou-bound normalized text and Sou's text responses into channel-specific output. Each channel has its own codec, profile, and constraints.
 
 ## Data Model
 
@@ -62,8 +62,8 @@ ChannelProfile {
   profile_id: string
   channel_id: string
   session_id?: string               // null for defaults
-  formality: number                 // 0.0 (casual) – 1.0 (formal)
-  verbosity: number                 // 0.0 (concise) – 1.0 (verbose)
+  formality: number                 // 0.0 (casual) â€“ 1.0 (formal)
+  verbosity: number                 // 0.0 (concise) â€“ 1.0 (verbose)
   emoji_allowed: boolean
   markdown_supported: boolean
   code_block_support: boolean
@@ -86,7 +86,7 @@ EncodedInput {
     client_version?: string
     channel_specific: Record<string, unknown>
     language?: string
-    confidence?: number             // STT confidence, 0.0–1.0
+    confidence?: number             // STT confidence, 0.0â€“1.0
     attachments?: AttachmentRef[]
     raw_length: number
   }
@@ -233,129 +233,129 @@ resolveProfile(channel_id: string, session_id?: string): ChannelProfile
 
 ```
 Raw Input
-    │
-    ▼
-Channel Detection ─── Identify channel_id from connection metadata
-    │
-    ▼
-Modality Decode  ─── codec.decode(input) → TurnContent
-    │
-    ▼
-Text Normalization ── strip markdown, normalize whitespace,
-    │                   language detection, expand links
-    ▼
-Intent Pre-classification ── lightweight intent hint extraction
-    │
-    ▼
+    â”‚
+    â–¼
+Channel Detection â”€â”€â”€ Identify channel_id from connection metadata
+    â”‚
+    â–¼
+Modality Decode  â”€â”€â”€ codec.decode(input) â†’ TurnContent
+    â”‚
+    â–¼
+Text Normalization â”€â”€ strip markdown, normalize whitespace,
+    â”‚                   language detection, expand links
+    â–¼
+Intent Pre-classification â”€â”€ lightweight intent hint extraction
+    â”‚
+    â–¼
 Sou-bound Output (normalized_text + metadata)
 ```
 
 ### Voice Input
 
 ```
-Voice Audio → Voice System STT → Raw text (with confidence scores)
-    → Channel Adaptation: attach confidence, speaker diarization hints
-    → Normalization: remove filler words, repair punctuation
-    → Sou-bound: normalized_text + modality="voice" + confidence
+Voice Audio â†’ Voice System STT â†’ Raw text (with confidence scores)
+    â†’ Channel Adaptation: attach confidence, speaker diarization hints
+    â†’ Normalization: remove filler words, repair punctuation
+    â†’ Sou-bound: normalized_text + modality="voice" + confidence
 ```
 
 ### API Input
 
 ```
-Structured JSON → Parse fields → Extract text payload
-    → Extract structured params (entities, filters, commands)
-    → Normalization: validate JSON, extract from known schemas
-    → Sou-bound: normalized_text + structured_data (passthrough)
+Structured JSON â†’ Parse fields â†’ Extract text payload
+    â†’ Extract structured params (entities, filters, commands)
+    â†’ Normalization: validate JSON, extract from known schemas
+    â†’ Sou-bound: normalized_text + structured_data (passthrough)
 ```
 
 ### Multimodal Input
 
 ```
-Image/Audio + Text → Extract text component
-    → Extract media references → attach as AttachmentRef[]
-    → Normalization: combine text + media descriptions
-    → Sou-bound: normalized_text + attachments metadata
+Image/Audio + Text â†’ Extract text component
+    â†’ Extract media references â†’ attach as AttachmentRef[]
+    â†’ Normalization: combine text + media descriptions
+    â†’ Sou-bound: normalized_text + attachments metadata
 ```
 
 ### Text Normalization Steps
 
 | Step | Operation | Example |
 |------|-----------|---------|
-| Strip HTML | Remove <tags>, decode entities | `&amp;` → `&` |
+| Strip HTML | Remove <tags>, decode entities | `&amp;` â†’ `&` |
 | Normalize Unicode | NFC normalization | Composed characters |
-| Normalize Whitespace | Collapse multiple spaces, trim | `"  hello   world "` → `"hello world"` |
-| Strip Control Chars | Remove non-printable chars | `\x00`–`\x1F` except `\n`, `\t` |
-| Language Detection | Identify language for Sou | `"Bonjour"` → `lang: "fr"` |
-| Expand Shortlinks | Resolve t.co, bit.ly → full URL | Only if enabled |
+| Normalize Whitespace | Collapse multiple spaces, trim | `"  hello   world "` â†’ `"hello world"` |
+| Strip Control Chars | Remove non-printable chars | `\x00`â€“`\x1F` except `\n`, `\t` |
+| Language Detection | Identify language for Sou | `"Bonjour"` â†’ `lang: "fr"` |
+| Expand Shortlinks | Resolve t.co, bit.ly â†’ full URL | Only if enabled |
 | Sanitize | Remove XSS, injection patterns | `<script>` stripped |
 
 ## Output Adaptation Pipeline
 
 ```
 Sou Response (normalized text)
-    │
-    ▼
-Style Application ── Apply personality formality, verbosity
-    │
-    ▼
-Formatting ──────── Add markdown, code blocks, lists, links
-    │
-    ▼
-Modality Encode ─── codec.encode(turn_content) → EncodedOutput
-    │
-    ▼
-Channel-Specific Packaging ── Apply channel constraints, truncation
-    │
-    ▼
-Delivery ────────── Emit EncodedOutput via channel transport
+    â”‚
+    â–¼
+Style Application â”€â”€ Apply personality formality, verbosity
+    â”‚
+    â–¼
+Formatting â”€â”€â”€â”€â”€â”€â”€â”€ Add markdown, code blocks, lists, links
+    â”‚
+    â–¼
+Modality Encode â”€â”€â”€ codec.encode(turn_content) â†’ EncodedOutput
+    â”‚
+    â–¼
+Channel-Specific Packaging â”€â”€ Apply channel constraints, truncation
+    â”‚
+    â–¼
+Delivery â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Emit EncodedOutput via channel transport
 ```
 
 ### Text Output (Web/Mobile)
 
 ```
-Sou text → Style Application → Markdown rendering
-    → Code blocks with syntax highlighting (if supported)
-    → Link rendering as hyperlinks
-    → Emoji passthrough
-    → Length check → truncate or split if exceeds max
-    → Delivery as text/markdown
+Sou text â†’ Style Application â†’ Markdown rendering
+    â†’ Code blocks with syntax highlighting (if supported)
+    â†’ Link rendering as hyperlinks
+    â†’ Emoji passthrough
+    â†’ Length check â†’ truncate or split if exceeds max
+    â†’ Delivery as text/markdown
 ```
 
 ### Voice Output
 
 ```
-Sou text → Style Application → TTS preprocessing
-    → SSML annotation (pauses, emphasis, prosody)
-    → Speech pacing adjustments (slow for complex content)
-    → Code blocks → paraphrase as "code block begins..."
-    → Emoji → spoken description (":smile:" → "smiling face")
-    → Length check → split at sentence boundaries
-    → Delivery via Voice System TTS
+Sou text â†’ Style Application â†’ TTS preprocessing
+    â†’ SSML annotation (pauses, emphasis, prosody)
+    â†’ Speech pacing adjustments (slow for complex content)
+    â†’ Code blocks â†’ paraphrase as "code block begins..."
+    â†’ Emoji â†’ spoken description (":smile:" â†’ "smiling face")
+    â†’ Length check â†’ split at sentence boundaries
+    â†’ Delivery via Voice System TTS
 ```
 
 ### API Output
 
 ```
-Sou text → Style Application (minimal)
-    → Structure into JSON response fields
-    → Typed fields: text, structured_data, confidence
-    → Code blocks → string fields with language tag
-    → No emoji, no markdown formatting
-    → Length check → truncate field values
-    → Delivery as application/json
+Sou text â†’ Style Application (minimal)
+    â†’ Structure into JSON response fields
+    â†’ Typed fields: text, structured_data, confidence
+    â†’ Code blocks â†’ string fields with language tag
+    â†’ No emoji, no markdown formatting
+    â†’ Length check â†’ truncate field values
+    â†’ Delivery as application/json
 ```
 
 ### CLI Output
 
 ```
-Sou text → Style Application (plain)
-    → Plain text, no markdown rendering
-    → Code blocks → indented with line wrapping
-    → Links → displayed as raw URLs
-    → Emoji → stripped entirely
-    → Line-wrap at 80 characters
-    → Length check → split at newline boundaries
-    → Delivery as text/plain
+Sou text â†’ Style Application (plain)
+    â†’ Plain text, no markdown rendering
+    â†’ Code blocks â†’ indented with line wrapping
+    â†’ Links â†’ displayed as raw URLs
+    â†’ Emoji â†’ stripped entirely
+    â†’ Line-wrap at 80 characters
+    â†’ Length check â†’ split at newline boundaries
+    â†’ Delivery as text/plain
 ```
 
 ## Channel Capabilities
@@ -431,7 +431,7 @@ splitLongResponse(text: string, channel_id: string): string[]
 |---------|----------|
 | Web | Render native emoji |
 | API | Strip entirely |
-| Voice | Convert to spoken form (`"🎉"` → "party popper emoji") |
+| Voice | Convert to spoken form (`"ðŸŽ‰"` â†’ "party popper emoji") |
 | Mobile | Render native emoji |
 | CLI | Strip entirely |
 | Slack | Render native emoji |
@@ -563,7 +563,7 @@ interface ChannelRegistry {
 | `CONV.ChannelRegistered` | channel_id, channel_type, modality, capabilities_count | New channel registered with adapter |
 | `CONV.InputAdapted` | channel_id, turn_id, original_length, normalized_length, latency_ms | Raw input adapted to normalized text |
 | `CONV.OutputAdapted` | channel_id, turn_id, original_length, output_length, format, latency_ms | Sou response adapted to channel output |
-| `CONV.ModalityConverted` | channel_id, from_modality, to_modality, turn_id | Modality conversion performed (e.g., text → SSML) |
+| `CONV.ModalityConverted` | channel_id, from_modality, to_modality, turn_id | Modality conversion performed (e.g., text â†’ SSML) |
 | `CONV.FormatApplied` | channel_id, turn_id, from_format, to_format, rules_applied | Response formatting transformation applied |
 | `CONV.LengthTruncated` | channel_id, turn_id, original_length, truncated_length, strategy | Response truncated due to length constraint |
 | `CONV.ChannelCapabilityUsed` | channel_id, capability, turn_id | Channel capability exercised during adaptation |
@@ -575,14 +575,14 @@ interface ChannelRegistry {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| CA-001 | Sou processes only normalized text regardless of input modality | Architectural — Input Adaptation Pipeline strips modality before reaching Sou |
-| CA-002 | Every channel has exactly one active codec at a time | Algorithmic — `registerChannel` replaces previous codec for same channel_id |
-| CA-003 | Output never exceeds channel max_message_length | Algorithmic — `formatResponse` enforces truncation or split |
-| CA-004 | Channel capabilities are immutable for the duration of a session | Architectural — capabilities determined at registration |
-| CA-005 | Rate limits are enforced per channel, never per session | Algorithmic — `RateLimiter` scoped to channel_id |
-| CA-006 | Format conversion is idempotent for text-only channels | Algorithmic — applying format twice yields same result |
-| CA-007 | Unknown capabilities are treated as unsupported (fail closed) | Architectural — `hasCapability` returns false for undefined capabilities |
-| CA-008 | Channel profiles merge by specificity: session > channel > default | Algorithmic — `resolveProfile` applies override cascade |
+| CA-001 | Sou processes only normalized text regardless of input modality | Architectural â€” Input Adaptation Pipeline strips modality before reaching Sou |
+| CA-002 | Every channel has exactly one active codec at a time | Algorithmic â€” `registerChannel` replaces previous codec for same channel_id |
+| CA-003 | Output never exceeds channel max_message_length | Algorithmic â€” `formatResponse` enforces truncation or split |
+| CA-004 | Channel capabilities are immutable for the duration of a session | Architectural â€” capabilities determined at registration |
+| CA-005 | Rate limits are enforced per channel, never per session | Algorithmic â€” `RateLimiter` scoped to channel_id |
+| CA-006 | Format conversion is idempotent for text-only channels | Algorithmic â€” applying format twice yields same result |
+| CA-007 | Unknown capabilities are treated as unsupported (fail closed) | Architectural â€” `hasCapability` returns false for undefined capabilities |
+| CA-008 | Channel profiles merge by specificity: session > channel > default | Algorithmic â€” `resolveProfile` applies override cascade |
 
 ## Error Cases
 
@@ -608,7 +608,7 @@ interface ChannelRegistry {
      { raw: audio_buffer, modality: "voice",
        metadata: { confidence: 0.92, language: "en" } }
 4. Codec.decode(): extracts text "What's the weather in London?"
-5. Normalization: lowercase, trim filler words → "what is the weather in London"
+5. Normalization: lowercase, trim filler words â†’ "what is the weather in London"
 6. Attach metadata: modality="voice", confidence=0.92
 7. Deliver to Sou as TurnContent: { text: "what is the weather in London",
        structured_data: { modality: "voice", confidence: 0.92 } }
@@ -625,10 +625,10 @@ interface ChannelRegistry {
 ```
 1. External service sends POST /api/chat with JSON body:
      { "message": "Create a task", "project_id": "42", "priority": "high" }
-2. Channel Detection → channel_id = "api_gateway_1", type = "api"
+2. Channel Detection â†’ channel_id = "api_gateway_1", type = "api"
 3. Codec.decode():
-     - Extract "message" field → text: "Create a task"
-     - Extract "project_id", "priority" → structured_data
+     - Extract "message" field â†’ text: "Create a task"
+     - Extract "project_id", "priority" â†’ structured_data
 4. Normalization: validate JSON structure, extract known fields
 5. Deliver to Sou: TurnContent with text + structured_data
 6. Sou processes, returns response with structured fields
@@ -652,17 +652,17 @@ interface ChannelRegistry {
 
 ```
 1. Sou produces long response (30,000 chars with code examples, tables, lists)
-2. Channel Detection → channel_id = "mobile_ios_1", type = "mobile"
+2. Channel Detection â†’ channel_id = "mobile_ios_1", type = "mobile"
 3. Channel constraints: max_message_length = 16000, markdown_limited
 4. Profile: emoji_allowed=true, code_block_support=true
 5. Adaptation:
      a. Convert markdown to limited mobile format (no HTML tables)
      b. Apply emoji passthrough
-     c. Code blocks → mobile-friendly monospace rendering
-     d. Length check: 30000 > 16000 → split required
+     c. Code blocks â†’ mobile-friendly monospace rendering
+     d. Length check: 30000 > 16000 â†’ split required
 6. Split response:
-     - Part 1: Introduction + first half (15800 chars) → is_final: false
-     - Part 2: Second half + code blocks + conclusion (14200 chars) → is_final: true
+     - Part 1: Introduction + first half (15800 chars) â†’ is_final: false
+     - Part 2: Second half + code blocks + conclusion (14200 chars) â†’ is_final: true
 7. Emit CONV.LengthTruncated with strategy: "split"
 8. Deliver two EncodedOutputParts sequentially
 9. Mobile client receives two messages with "continue" indicator
@@ -672,17 +672,17 @@ interface ChannelRegistry {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Channel Adaptation does one thing: translate between Sou's text and channel modalities |
-| R2 — Dependency Order | Depends on Voice System, Conversation OS core; no upward deps |
-| R3 — DRY | Channel profiles defined once per channel, merged per session |
-| R4 — Builder Pattern | Output built by Style → Format → Encode → Package pipeline |
-| R5 — Liskov Substitution | Any ModalityCodec implements the encode/decode interface |
-| R6 — DI over Singletons | Codecs and profiles injected per channel registration |
-| R9 — Deterministic | Same input + same channel profile produces same output |
-| R10 — Simpler Over Complex | Uses pipeline stages with clear separation of concerns |
-| R13 — Design for Failure | Codec failures fall back to plain text; rate-limited messages queued |
-| R14 — Paved Path | All channel I/O flows through adaptInput/adaptOutput |
-| R15 — Open/Closed | New channels added via registerChannel, not by modifying pipeline |
+| R1 â€” Modulsingularity | Channel Adaptation does one thing: translate between Sou's text and channel modalities |
+| R2 â€” Dependency Order | Depends on Voice System, Conversation OS core; no upward deps |
+| R3 â€” DRY | Channel profiles defined once per channel, merged per session |
+| R4 â€” Builder Pattern | Output built by Style â†’ Format â†’ Encode â†’ Package pipeline |
+| R5 â€” Liskov Substitution | Any ModalityCodec implements the encode/decode interface |
+| R6 â€” DI over Singletons | Codecs and profiles injected per channel registration |
+| R9 â€” Deterministic | Same input + same channel profile produces same output |
+| R10 â€” Simpler Over Complex | Uses pipeline stages with clear separation of concerns |
+| R13 â€” Design for Failure | Codec failures fall back to plain text; rate-limited messages queued |
+| R14 â€” Paved Path | All channel I/O flows through adaptInput/adaptOutput |
+| R15 â€” Open/Closed | New channels added via registerChannel, not by modifying pipeline |
 
 ## Related Documents
 

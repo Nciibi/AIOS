@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Communication — 002: Messaging
+﻿# AIOS Bible â€” Domains
+## Communication â€” 002: Messaging
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-COM-002 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Messaging layer handles the reliable routing and delivery of messages within AIOS — queue management, delivery guarantee enforcement (at-least-once, exactly-once), priority scheduling, dead-letter handling, message time-to-live, batching, and deduplication. It transforms the parsed envelopes from the Protocols layer into confirmed deliveries, ensuring that every message reaches its intended recipient with the promised reliability level.
+The Messaging layer handles the reliable routing and delivery of messages within AIOS â€” queue management, delivery guarantee enforcement (at-least-once, exactly-once), priority scheduling, dead-letter handling, message time-to-live, batching, and deduplication. It transforms the parsed envelopes from the Protocols layer into confirmed deliveries, ensuring that every message reaches its intended recipient with the promised reliability level.
 
 Messages enter the system through the ingress queue, are classified by priority, routed according to the routing table, delivered through the appropriate channel adapter, and acknowledged by the recipient. Undeliverable messages flow into the dead-letter queue with full context for later analysis. Duplicate messages are detected by deduplication key before they enter the delivery pipeline.
 
@@ -52,7 +52,7 @@ Ingress (from Protocols layer)
                       Analysis / Manual retry / TTL expiry
 ```
 
-Each stage is observable via events. The routing table is dynamic — Workers register and deregister as they come online. Message ordering is preserved within a single priority level per sender queue. Cross-priority ordering is not guaranteed; higher priority messages may jump ahead.
+Each stage is observable via events. The routing table is dynamic â€” Workers register and deregister as they come online. Message ordering is preserved within a single priority level per sender queue. Cross-priority ordering is not guaranteed; higher priority messages may jump ahead.
 
 ## Data Model
 
@@ -164,14 +164,14 @@ type QueueOverflowAction = 'reject_newest' | 'reject_oldest' | 'dead_letter_olde
 
 | Code | Condition | Severity | Recovery |
 |------|-----------|----------|----------|
-| COM-MSG-001 | Queue full — depth exceeds configured maximum | Critical | Apply QueueOverflowAction; reject or dead-letter oldest; emit alert |
-| COM-MSG-002 | Routing table miss — no target for message | Error | Dead-letter with unknown_target reason; notify administrator |
-| COM-MSG-003 | Delivery timeout — ack not received within window | Warning | Retry with backoff up to maxRetries; dead-letter on exhaustion |
-| COM-MSG-004 | Dead-letter queue overflow — depth exceeds max | Critical | Block further dead-letter moves; alert operator; oldest entries archived |
-| COM-MSG-005 | TTL expiry during retry — message age exceeds limit | Warning | Apply TTL action (discard/dead-letter/notify); emit expiry event |
-| COM-MSG-006 | Dedup cache unavailable — cannot verify duplicate | Warning | Bypass dedup for this message; log degraded state; attempt cache restore |
-| COM-MSG-007 | Delivery guarantee downgraded — exactly-once not feasible | Warning | Accept at-least-once delivery; log downgrade with reason and duration |
-| COM-MSG-008 | Batch assembly timeout — partial batch delivered | Low | Deliver partial batch; flush remaining messages in next window |
+| COM-MSG-001 | Queue full â€” depth exceeds configured maximum | Critical | Apply QueueOverflowAction; reject or dead-letter oldest; emit alert |
+| COM-MSG-002 | Routing table miss â€” no target for message | Error | Dead-letter with unknown_target reason; notify administrator |
+| COM-MSG-003 | Delivery timeout â€” ack not received within window | Warning | Retry with backoff up to maxRetries; dead-letter on exhaustion |
+| COM-MSG-004 | Dead-letter queue overflow â€” depth exceeds max | Critical | Block further dead-letter moves; alert operator; oldest entries archived |
+| COM-MSG-005 | TTL expiry during retry â€” message age exceeds limit | Warning | Apply TTL action (discard/dead-letter/notify); emit expiry event |
+| COM-MSG-006 | Dedup cache unavailable â€” cannot verify duplicate | Warning | Bypass dedup for this message; log degraded state; attempt cache restore |
+| COM-MSG-007 | Delivery guarantee downgraded â€” exactly-once not feasible | Warning | Accept at-least-once delivery; log downgrade with reason and duration |
+| COM-MSG-008 | Batch assembly timeout â€” partial batch delivered | Low | Deliver partial batch; flush remaining messages in next window |
 
 ## Invariants
 
@@ -181,8 +181,8 @@ type QueueOverflowAction = 'reject_newest' | 'reject_oldest' | 'dead_letter_olde
 | COM-MSG-I-002 | Message ordering is preserved within priority level per sender | Queue enforces FIFO per (priority, sender_id) partition; cross-priority reordering allowed |
 | COM-MSG-I-003 | Duplicate suppression is at-most-once per dedup key within TTL window | Dedup cache rejects exact matches; Comm.DuplicateSuppressed emitted |
 | COM-MSG-I-004 | Every dead-lettered message retains full original envelope and failure chain | Dead-letter store preserves message, retries, errors, and routing history |
-| COM-MSG-I-005 | Routing table is eventually consistent — stale entries tolerated but flagged | Stale route detection runs on schedule; stale entries serve traffic until verified offline |
-| COM-MSG-I-006 | Message TTL is monotonic — retries never extend beyond original + configured extension | TTL tracker enforces absolute expiry; ttlExtensionPerRetryMs is bounded |
+| COM-MSG-I-005 | Routing table is eventually consistent â€” stale entries tolerated but flagged | Stale route detection runs on schedule; stale entries serve traffic until verified offline |
+| COM-MSG-I-006 | Message TTL is monotonic â€” retries never extend beyond original + configured extension | TTL tracker enforces absolute expiry; ttlExtensionPerRetryMs is bounded |
 
 ## Design DNA
 
@@ -204,13 +204,13 @@ type QueueOverflowAction = 'reject_newest' | 'reject_oldest' | 'dead_letter_olde
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Communication/000-Overview.md | Overview — Messaging is the reliable delivery backbone for all communication |
-| Bible/07-Domains/Communication/001-Protocols.md | Upstream — Consumes parsed MessageEnvelopes from the Protocols layer |
-| Bible/07-Domains/Communication/003-Collaboration.md | Parallel — Collaboration sessions generate messages that flow through messaging |
-| Bible/06-Services/ACF/001-Architecture.md | Transport — ACF carries messages between messaging module and Workers |
-| Bible/06-Services/ACF/002-Messages.md | Messages — ACF message format aligns with Messaging envelope structure |
-| Bible/06-Services/ACF/006-Reliability.md | Reliability — Delivery guarantees and dead-letter policies align with ACF reliability model |
-| Physics/005-Events.md | Evidence — Every queue operation, delivery, and failure produces an Event |
-| Physics/007-Capabilities.md | Capabilities — Message throughput and depth are bounded by capability profiles |
-| Physics/009-Interaction.md | Interaction — Messaging implements reliable human-AIOS message exchange |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — Core principles for reliable messaging |
+| Bible/07-Domains/Communication/000-Overview.md | Overview â€” Messaging is the reliable delivery backbone for all communication |
+| Bible/07-Domains/Communication/001-Protocols.md | Upstream â€” Consumes parsed MessageEnvelopes from the Protocols layer |
+| Bible/07-Domains/Communication/003-Collaboration.md | Parallel â€” Collaboration sessions generate messages that flow through messaging |
+| Bible/06-Services/ACF/001-Architecture.md | Transport â€” ACF carries messages between messaging module and Workers |
+| Bible/06-Services/ACF/002-Messages.md | Messages â€” ACF message format aligns with Messaging envelope structure |
+| Bible/06-Services/ACF/006-Reliability.md | Reliability â€” Delivery guarantees and dead-letter policies align with ACF reliability model |
+| Physics/005-Events.md | Evidence â€” Every queue operation, delivery, and failure produces an Event |
+| Physics/007-Capabilities.md | Capabilities â€” Message throughput and depth are bounded by capability profiles |
+| Physics/009-Interaction.md | Interaction â€” Messaging implements reliable human-AIOS message exchange |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” Core principles for reliable messaging |

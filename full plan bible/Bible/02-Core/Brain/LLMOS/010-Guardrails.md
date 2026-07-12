@@ -1,18 +1,18 @@
-# AIOS Bible — Brain/LLMOS
-## 010 — Guardrails
+﻿# AIOS Bible â€” Brain/LLMOS
+## 010 â€” Guardrails
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-010 |
-| Source Laws | Law 2 — Law of Non-Execution (safety), Law 8 — Law of Verification-First |
+| Source Laws | Law 2 â€” Law of Non-Execution (safety), Law 8 â€” Law of Verification-First |
 | Source Physics | Physics/008-Security.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 11 — Input Guardrail Check and 14 — Output Guardrail Check |
+| Pipeline Stage | 11 â€” Input Guardrail Check and 14 â€” Output Guardrail Check |
 
 ## Purpose
 
@@ -22,21 +22,21 @@ Guardrails enforce content policies on both input (prompts sent to AI models) an
 
 ```
 Input (from Prompt Compiler)          Output (from Provider/Streaming Manager)
-         │                                      │
-         ▼                                      ▼
-┌─────────────────┐                  ┌─────────────────┐
-│  INPUT GUARDRAIL│                  │ OUTPUT GUARDRAIL│
-│  Stage 11       │                  │ Stage 14        │
-├─────────────────┤                  ├─────────────────┤
-│ Rule Engine     │                  │ Rule Engine      │
-│ Policy Matcher  │                  │ Policy Matcher   │
-│ Severity Eval   │                  │ Severity Eval    │
-└─────────────────┘                  └─────────────────┘
-         │                                      │
-         ▼                                      ▼
+         â”‚                                      â”‚
+         â–¼                                      â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  INPUT GUARDRAILâ”‚                  â”‚ OUTPUT GUARDRAILâ”‚
+â”‚  Stage 11       â”‚                  â”‚ Stage 14        â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤                  â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ Rule Engine     â”‚                  â”‚ Rule Engine      â”‚
+â”‚ Policy Matcher  â”‚                  â”‚ Policy Matcher   â”‚
+â”‚ Severity Eval   â”‚                  â”‚ Severity Eval    â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚                                      â”‚
+         â–¼                                      â–¼
    Blocked or Allowed                   Blocked or Allowed
-         │                                      │
-         ▼                                      ▼
+         â”‚                                      â”‚
+         â–¼                                      â–¼
    Pipeline fails (LLM-0401)           Response masked or replaced
    or continues                              or continues
 ```
@@ -199,13 +199,13 @@ If any rule exceeds its max evaluation time, it times out and falls to `audit` s
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-GRD-001 | Every pipeline execution evaluates guardrails twice: input (Stage 11) and output (Stage 14). | Architectural — dual-stage enforcement |
-| LLM-GRD-002 | A `deny` match on input immediately fails the pipeline with LLM-0401. | Algorithmic — fail-fast on match |
-| LLM-GRD-003 | A `deny` match on output blocks delivery and returns error to caller. | Algorithmic — output blocking |
-| LLM-GRD-004 | Entity-specific rules never override global deny rules. | Governance — rule priority hierarchy |
-| LLM-GRD-005 | All guardrail evaluations are logged regardless of match or pass. | Architectural — observability invariant |
-| LLM-GRD-006 | Guardrail rules are immutable once deployed — changes require new rule version. | Governance — immutability policy |
-| LLM-GRD-007 | Classifier-based rules are evaluated asynchronously to avoid blocking the pipeline. | Algorithmic — async evaluation |
+| LLM-GRD-001 | Every pipeline execution evaluates guardrails twice: input (Stage 11) and output (Stage 14). | Architectural â€” dual-stage enforcement |
+| LLM-GRD-002 | A `deny` match on input immediately fails the pipeline with LLM-0401. | Algorithmic â€” fail-fast on match |
+| LLM-GRD-003 | A `deny` match on output blocks delivery and returns error to caller. | Algorithmic â€” output blocking |
+| LLM-GRD-004 | Entity-specific rules never override global deny rules. | Governance â€” rule priority hierarchy |
+| LLM-GRD-005 | All guardrail evaluations are logged regardless of match or pass. | Architectural â€” observability invariant |
+| LLM-GRD-006 | Guardrail rules are immutable once deployed â€” changes require new rule version. | Governance â€” immutability policy |
+| LLM-GRD-007 | Classifier-based rules are evaluated asynchronously to avoid blocking the pipeline. | Algorithmic â€” async evaluation |
 
 ## Events
 
@@ -217,17 +217,17 @@ If any rule exceeds its max evaluation time, it times out and falls to `audit` s
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Guardrails is the sole content policy enforcer |
-| R2 — Dependency Order | Guardrails evaluates after Compiler, before Provider |
-| R3 — DRY | Rule model centralized, not duplicated per direction |
-| R4 — Builder Pattern | GuardrailRule built through configuration |
-| R5 — Liskov Substitution | All rule categories handled uniformly |
-| R6 — DI over Singletons | GuardrailEngine injected into pipeline |
-| R9 — Deterministic | Same content gets same guardrail decision |
-| R10 — Simpler Over Complex | Priority-ordered evaluation over complex ML pipeline |
-| R13 — Design for Failure | Rule timeout falls to audit severity |
-| R14 — Paved Path | Built-in rule categories cover standard policies |
-| R15 — Open/Closed | New rule types added without pipeline changes |
+| R1 â€” Modulsingularity | Guardrails is the sole content policy enforcer |
+| R2 â€” Dependency Order | Guardrails evaluates after Compiler, before Provider |
+| R3 â€” DRY | Rule model centralized, not duplicated per direction |
+| R4 â€” Builder Pattern | GuardrailRule built through configuration |
+| R5 â€” Liskov Substitution | All rule categories handled uniformly |
+| R6 â€” DI over Singletons | GuardrailEngine injected into pipeline |
+| R9 â€” Deterministic | Same content gets same guardrail decision |
+| R10 â€” Simpler Over Complex | Priority-ordered evaluation over complex ML pipeline |
+| R13 â€” Design for Failure | Rule timeout falls to audit severity |
+| R14 â€” Paved Path | Built-in rule categories cover standard policies |
+| R15 â€” Open/Closed | New rule types added without pipeline changes |
 
 ## Related Documents
 
@@ -244,6 +244,6 @@ If any rule exceeds its max evaluation time, it times out and falls to `audit` s
 |-----------|------------|----------|
 | Input blocked by guardrail | LLM-0401 | Return blocked with matched rule details |
 | Output blocked by guardrail | LLM-0402 | Return blocked with matched rule details |
-| Classifier model unavailable | — | Fall to audit severity for classifier rules |
-| Rule timeout | — | Treat as audit; log timeout |
-| Invalid custom rule | — | Skip rule; log for operator review |
+| Classifier model unavailable | â€” | Fall to audit severity for classifier rules |
+| Rule timeout | â€” | Treat as audit; log timeout |
+| Invalid custom rule | â€” | Skip rule; log for operator review |

@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Economic — 000: System
+﻿# AIOS Bible â€” Domains
+## Economic â€” 000: System
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-ECN-000 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle Compliance, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle Compliance, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/010-Execution.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,9 +15,9 @@
 
 ## Purpose
 
-The Economic domain provides the resource economics infrastructure for AIOS — budgeting, cost accounting, resource pricing, and economic modeling. Every Worker consumes resources (compute, memory, storage, network, API calls), and every Organization has budgets that constrain that consumption. The Economic System tracks who spends what, ensures budgets are respected, prices resources consistently, and provides the data needed for economic decision-making.
+The Economic domain provides the resource economics infrastructure for AIOS â€” budgeting, cost accounting, resource pricing, and economic modeling. Every Worker consumes resources (compute, memory, storage, network, API calls), and every Organization has budgets that constrain that consumption. The Economic System tracks who spends what, ensures budgets are respected, prices resources consistently, and provides the data needed for economic decision-making.
 
-The Economic System is not a financial ledger (that is EVS with evidence records) and not resource allocation (that is ROS). It is the economic layer that sits between resource consumption and organizational governance — it answers: how much does this cost, who pays for it, is there budget remaining, and how should we price resources to optimize utilization?
+The Economic System is not a financial ledger (that is EVS with evidence records) and not resource allocation (that is ROS). It is the economic layer that sits between resource consumption and organizational governance â€” it answers: how much does this cost, who pays for it, is there budget remaining, and how should we price resources to optimize utilization?
 
 ## Domain Entities
 
@@ -46,7 +46,7 @@ The Economic System is not a financial ledger (that is EVS with evidence records
 Budgets follow a defined lifecycle from creation through closure:
 
 ```
-Draft → Approved → Active → Frozen → Closed
+Draft â†’ Approved â†’ Active â†’ Frozen â†’ Closed
 ```
 
 | Phase | Description | Actions Allowed |
@@ -77,11 +77,11 @@ Costs are allocated back to the consuming entity. Direct costs (e.g., "Worker A 
 
 ### 5. Budget Enforcement
 
-When a Worker requests resources, the Budget System checks: does the responsible Organization have sufficient budget remaining? If yes, funds are reserved against the budget. If no, the request is denied (unless overage is allowed and configured). Budget enforcement is real-time and constitutional — spending without budget is a violation of Law 7 (Capability Bounds).
+When a Worker requests resources, the Budget System checks: does the responsible Organization have sufficient budget remaining? If yes, funds are reserved against the budget. If no, the request is denied (unless overage is allowed and configured). Budget enforcement is real-time and constitutional â€” spending without budget is a violation of Law 7 (Capability Bounds).
 
 ### 6. Economic Modeling
 
-The Economic System supports what-if analysis: "What if we double the compute budget for Project X?" or "What if we reduce storage prices by 20%?" These models use historical cost data, current pricing, and demand projections to forecast outcomes. Modeling is advisory — it informs decisions but does not enforce them.
+The Economic System supports what-if analysis: "What if we double the compute budget for Project X?" or "What if we reduce storage prices by 20%?" These models use historical cost data, current pricing, and demand projections to forecast outcomes. Modeling is advisory â€” it informs decisions but does not enforce them.
 
 ### 7. Overage and Reallocation
 
@@ -213,7 +213,7 @@ interface EconomicModeler {
 
 | Component | Responsibility |
 |-----------|---------------|
-| Budget Manager | Budget lifecycle — creation, tracking, freeze, close |
+| Budget Manager | Budget lifecycle â€” creation, tracking, freeze, close |
 | Cost Allocator | Records consumption costs, allocates shared costs, generates reports |
 | Pricing Engine | Maintains PriceSheets, computes rates, optimizes pricing |
 | Enforcement Gateway | Real-time budget check before resource allocation |
@@ -224,23 +224,23 @@ interface EconomicModeler {
 
 ```
 Worker requests resource via ROS
-        │
-        ▼
+        â”‚
+        â–¼
 Enforcement Gateway checks budget via checkBudget()
-        │
-        ├── Sufficient budget ──► reserveFunds() ──► Resource allocated
-        │                                │
-        │                                ▼
-        │                         Worker uses resource
-        │                                │
-        │                                ▼
-        │                         commitSpend() ──► CostRecord → EVS
-        │
-        └── Insufficient budget ──► OveragePolicy evaluation
-                                        │
-                                 ├── Allow overage ──► reserve with warning
-                                 │
-                                 └── Deny ──► Resource request rejected
+        â”‚
+        â”œâ”€â”€ Sufficient budget â”€â”€â–º reserveFunds() â”€â”€â–º Resource allocated
+        â”‚                                â”‚
+        â”‚                                â–¼
+        â”‚                         Worker uses resource
+        â”‚                                â”‚
+        â”‚                                â–¼
+        â”‚                         commitSpend() â”€â”€â–º CostRecord â†’ EVS
+        â”‚
+        â””â”€â”€ Insufficient budget â”€â”€â–º OveragePolicy evaluation
+                                        â”‚
+                                 â”œâ”€â”€ Allow overage â”€â”€â–º reserve with warning
+                                 â”‚
+                                 â””â”€â”€ Deny â”€â”€â–º Resource request rejected
 ```
 
 ## Events
@@ -278,28 +278,28 @@ Enforcement Gateway checks budget via checkBudget()
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| ECN-001 | Spending never exceeds the active budget total | Algorithmic — Enforcement Gateway blocks overspend |
-| ECN-002 | Every cost record references a valid evidence record (Law 4) | Architectural — CostRecord requires evidenceRef |
-| ECN-003 | A budget can only transition forward (Draft→Approved→Active→Frozen→Closed) | Algorithmic — state machine rejects backward transitions |
-| ECN-004 | Reserved funds are deducted from available budget immediately | Architectural — reservation reduces available balance atomically |
-| ECN-005 | Unused reserved funds are released when the reservation expires | Algorithmic — reservation TTL triggers automatic release |
-| ECN-006 | Price sheets in the same scope cannot have overlapping effective periods | Algorithmic — validation on PriceSheet creation |
-| ECN-007 | Total spending across all Organizations never exceeds platform-wide resource capacity | Constitutional — enforced by ROS at allocation time |
-| ECN-008 | Overage decisions are always recorded as evidence | Architectural — OverageAllowed/OverageDenied events emitted |
+| ECN-001 | Spending never exceeds the active budget total | Algorithmic â€” Enforcement Gateway blocks overspend |
+| ECN-002 | Every cost record references a valid evidence record (Law 4) | Architectural â€” CostRecord requires evidenceRef |
+| ECN-003 | A budget can only transition forward (Draftâ†’Approvedâ†’Activeâ†’Frozenâ†’Closed) | Algorithmic â€” state machine rejects backward transitions |
+| ECN-004 | Reserved funds are deducted from available budget immediately | Architectural â€” reservation reduces available balance atomically |
+| ECN-005 | Unused reserved funds are released when the reservation expires | Algorithmic â€” reservation TTL triggers automatic release |
+| ECN-006 | Price sheets in the same scope cannot have overlapping effective periods | Algorithmic â€” validation on PriceSheet creation |
+| ECN-007 | Total spending across all Organizations never exceeds platform-wide resource capacity | Constitutional â€” enforced by ROS at allocation time |
+| ECN-008 | Overage decisions are always recorded as evidence | Architectural â€” OverageAllowed/OverageDenied events emitted |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Economic System owns resource economics exclusively; ROS owns resource allocation; EVS owns evidence storage |
-| R2 — Dependency Order | Depends on ROS (consumption data), EVS (evidence), ACF (dispatch); no circular dependencies |
-| R3 — DRY | Resource prices defined once in PriceSheets; all cost computations reference, not duplicate |
-| R4 — Builder Pattern | Budget creation uses builder for complex category limits and overage policy configuration |
-| R9 — Deterministic | Given the same consumption and prices, cost computation produces identical results |
-| R10 — Simpler Over Complex | Flat-rate pricing is default; demand-based dynamic pricing is opt-in |
-| R13 — Design for Failure | Budget exhaustion blocks new spend but preserves existing reservations; cost records are immutable after creation |
-| R14 — Paved Path | Organization-scoped monthly budget with category limits covers 80% of use cases |
-| R15 — Open/Closed | New resource types can be priced by registering in PriceSheets; new allocation strategies are pluggable |
+| R1 â€” Modulsingularity | Economic System owns resource economics exclusively; ROS owns resource allocation; EVS owns evidence storage |
+| R2 â€” Dependency Order | Depends on ROS (consumption data), EVS (evidence), ACF (dispatch); no circular dependencies |
+| R3 â€” DRY | Resource prices defined once in PriceSheets; all cost computations reference, not duplicate |
+| R4 â€” Builder Pattern | Budget creation uses builder for complex category limits and overage policy configuration |
+| R9 â€” Deterministic | Given the same consumption and prices, cost computation produces identical results |
+| R10 â€” Simpler Over Complex | Flat-rate pricing is default; demand-based dynamic pricing is opt-in |
+| R13 â€” Design for Failure | Budget exhaustion blocks new spend but preserves existing reservations; cost records are immutable after creation |
+| R14 â€” Paved Path | Organization-scoped monthly budget with category limits covers 80% of use cases |
+| R15 â€” Open/Closed | New resource types can be priced by registering in PriceSheets; new allocation strategies are pluggable |
 
 ## Related Documents
 

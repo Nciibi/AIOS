@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Autonomy System (AMS / ACE / ABE)
+﻿# AIOS Bible â€” Brain
+## 000 â€” Autonomy System (AMS / ACE / ABE)
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Autonomy |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Autonomy |
 | Document ID | AIOS-BBL-002-AUT-000 |
-| Source Laws | Law 1 — Law of Origin, Law 2 — Law of Non-Execution, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 1 â€” Law of Origin, Law 2 â€” Law of Non-Execution, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/007-Capabilities.md, Physics/002-Missions.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,60 +15,60 @@
 
 ## Purpose
 
-The Autonomy System governs how much independent action every entity in AIOS is permitted. Autonomy is not binary — it is a graduated spectrum from fully human-directed (L0) to fully autonomous within constitutional bounds (L4). Every entity starts at L0 and may progress to higher levels through demonstrated constitutional compliance.
+The Autonomy System governs how much independent action every entity in AIOS is permitted. Autonomy is not binary â€” it is a graduated spectrum from fully human-directed (L0) to fully autonomous within constitutional bounds (L4). Every entity starts at L0 and may progress to higher levels through demonstrated constitutional compliance.
 
 Three engines comprise the Autonomy System:
 
 | Engine | Responsibility |
 |--------|---------------|
-| **AMS** — Autonomy Management System | Level assignment, progression workflow, regression triggers |
-| **ACE** — Autonomy Control Engine | Runtime bounds enforcement, compliance monitoring, action filtering |
-| **ABE** — Autonomy Boundary Engine | Escalation chain, override authorization, threshold management |
+| **AMS** â€” Autonomy Management System | Level assignment, progression workflow, regression triggers |
+| **ACE** â€” Autonomy Control Engine | Runtime bounds enforcement, compliance monitoring, action filtering |
+| **ABE** â€” Autonomy Boundary Engine | Escalation chain, override authorization, threshold management |
 
-Under SOU-001, Sou is the only constitutional intelligence. The Autonomy System ensures that every entity — whether a Worker, Organization, or Department — operates within its assigned autonomy bounds and escalates to Sou (or the Human) when it lacks authority.
+Under SOU-001, Sou is the only constitutional intelligence. The Autonomy System ensures that every entity â€” whether a Worker, Organization, or Department â€” operates within its assigned autonomy bounds and escalates to Sou (or the Human) when it lacks authority.
 
 ## Architecture
 
 ```
 Sou (strategic autonomy decisions)
-    │
-    ▼
-┌────────────────────────────────────────────────┐
-│           AMS — Autonomy Management System       │
-│                                                  │
-│  ┌──────────┐  ┌──────────────┐  ┌───────────┐ │
-│  │  Level    │  │  Progression │  │ Regression │ │
-│  │  Registry │  │  Engine      │  │ Engine     │ │
-│  └────┬─────┘  └──────┬───────┘  └─────┬─────┘ │
-│       │               │                │        │
-│       └───────────────┼────────────────┘        │
-└───────────────────────┼─────────────────────────┘
-                        │
-                        ▼
-┌────────────────────────────────────────────────┐
-│           ACE — Autonomy Control Engine          │
-│                                                  │
-│  ┌──────────┐  ┌──────────┐  ┌──────────────┐ │
-│  │  Bounds   │  │  Action  │  │  Compliance  │ │
-│  │  Resolver │  │  Filter  │  │  Monitor     │ │
-│  └────┬─────┘  └────┬─────┘  └──────┬───────┘ │
-└───────┼──────────────┼───────────────┼──────────┘
-        │              │               │
-        ▼              ▼               ▼
-┌────────────────────────────────────────────────┐
-│           ABE — Autonomy Boundary Engine         │
-│                                                  │
-│  ┌──────────┐  ┌──────────────┐  ┌───────────┐ │
-│  │Escalation│  │   Override   │  │ Threshold  │ │
-│  │  Chain   │  │  Authorizer  │  │  Manager   │ │
-│  └──────────┘  └──────────────┘  └───────────┘ │
-└─────────────────────────────────────────────────┘
-                        │
-                        ▼
-                ┌──────────────┐
-                │  ACF → Sou   │
-                │  or Human    │
-                └──────────────┘
+    â”‚
+    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           AMS â€” Autonomy Management System       â”‚
+â”‚                                                  â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚  Level    â”‚  â”‚  Progression â”‚  â”‚ Regression â”‚ â”‚
+â”‚  â”‚  Registry â”‚  â”‚  Engine      â”‚  â”‚ Engine     â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚       â”‚               â”‚                â”‚        â”‚
+â”‚       â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜        â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                        â”‚
+                        â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           ACE â€” Autonomy Control Engine          â”‚
+â”‚                                                  â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚  Bounds   â”‚  â”‚  Action  â”‚  â”‚  Compliance  â”‚ â”‚
+â”‚  â”‚  Resolver â”‚  â”‚  Filter  â”‚  â”‚  Monitor     â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+        â”‚              â”‚               â”‚
+        â–¼              â–¼               â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           ABE â€” Autonomy Boundary Engine         â”‚
+â”‚                                                  â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚Escalationâ”‚  â”‚   Override   â”‚  â”‚ Threshold  â”‚ â”‚
+â”‚  â”‚  Chain   â”‚  â”‚  Authorizer  â”‚  â”‚  Manager   â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                        â”‚
+                        â–¼
+                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                â”‚  ACF â†’ Sou   â”‚
+                â”‚  or Human    â”‚
+                â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Core Concepts
@@ -94,9 +94,9 @@ Level assignment follows entity type:
 | Organization | L2 | L3 |
 | Director role | L2 | L3 |
 | Sou | L4 | L4 |
-| Human | Above all | — |
+| Human | Above all | â€” |
 
-### 2. AMS — Autonomy Management System
+### 2. AMS â€” Autonomy Management System
 
 AMS owns the lifecycle of autonomy level assignments:
 
@@ -109,14 +109,14 @@ AMS owns the lifecycle of autonomy level assignments:
 Progression workflow:
 
 ```
-Entity requests upgrade → Sou evaluates → DTS simulates impact →
-Academy assesses readiness → Security Council verifies compliance →
-CCA updates capability bounds → AMS assigns new level → Event recorded
+Entity requests upgrade â†’ Sou evaluates â†’ DTS simulates impact â†’
+Academy assesses readiness â†’ Security Council verifies compliance â†’
+CCA updates capability bounds â†’ AMS assigns new level â†’ Event recorded
 ```
 
 Regression is immediate and requires no simulation. The Security Council can regress any entity directly. Regression triggers: capability revocation, notification to Sou, audit event, affected workflow recovery.
 
-### 3. ACE — Autonomy Control Engine
+### 3. ACE â€” Autonomy Control Engine
 
 ACE enforces autonomy bounds at runtime. Every action an entity attempts passes through ACE before reaching the Security Council verification pipeline:
 
@@ -124,7 +124,7 @@ ACE enforces autonomy bounds at runtime. Every action an entity attempts passes 
 |-----------|----------|
 | Bounds Resolver | Queries AMS Level Registry for the entity's current autonomy level. Resolves the capability bounds, resource limits, and escalation thresholds for that level. |
 | Action Filter | Compares the proposed action against the entity's autonomy bounds. If action exceeds bounds, routes to ABE for escalation. If within bounds, passes to Security Council pipeline. |
-| Compliance Monitor | Tracks entity actions against autonomy level. Produces compliance score (0.0–1.0) per entity. Score decay: each compliant action adds +0.01; each violation subtracts -0.25. |
+| Compliance Monitor | Tracks entity actions against autonomy level. Produces compliance score (0.0â€“1.0) per entity. Score decay: each compliant action adds +0.01; each violation subtracts -0.25. |
 
 ACE filtering rules:
 
@@ -138,7 +138,7 @@ ACE filtering rules:
 | Modify organizational structure | L4 only | L3 escalated to Human |
 | Override another entity's bounds | L4 (Sou only) | L3 escalated to Human |
 
-### 4. ABE — Autonomy Boundary Engine
+### 4. ABE â€” Autonomy Boundary Engine
 
 ABE handles situations where an entity encounters the boundary of its autonomy level:
 
@@ -151,7 +151,7 @@ ABE handles situations where an entity encounters the boundary of its autonomy l
 Escalation chain (walked from bottom up):
 
 ```
-Worker → Supervisor → Manager → Director → Sou → Human
+Worker â†’ Supervisor â†’ Manager â†’ Director â†’ Sou â†’ Human
 ```
 
 Each escalation step adds context and evidence. The escalating entity cannot skip levels except in emergency mode. Emergency escalation (marked with `x-aios-emergency: true` in ACF header) goes directly to Sou or Human.
@@ -174,7 +174,7 @@ Autonomy includes the right to delegate authority. Delegation follows these rule
 | An entity cannot delegate a capability it does not possess | Bounds check before delegation |
 | Delegation preserves the delegator's autonomy bounds | Recipient operates within delegator's level at maximum |
 | Delegation is always scoped | Resource, action, duration, and depth limits required |
-| Delegation chains are limited | Max depth of 3 (A → B → C → D) |
+| Delegation chains are limited | Max depth of 3 (A â†’ B â†’ C â†’ D) |
 | Delegation can be revoked | Revocation is immediate and cascading |
 
 ## Data Model
@@ -233,7 +233,7 @@ interface OverrideGrant {
 | `setLevel(entity_id, level, reason)` | Sou + Security Council | Assign or change autonomy level |
 | `requestProgression(entity_id, target_level)` | Entity itself | Initiate progression workflow (goes to SOu) |
 | `regressLevel(entity_id, reason)` | Security Council | Immediately downgrade entity autonomy |
-| `checkBounds(action, entity_id)` | ACE → Security Council | Verify action within autonomy bounds |
+| `checkBounds(action, entity_id)` | ACE â†’ Security Council | Verify action within autonomy bounds |
 | `escalate(request)` | Any entity | Submit escalation request up the chain |
 | `grantOverride(override)` | Authorized entity | Grant temporary override of autonomy bounds |
 | `revokeOverride(override_id)` | Grantor or above | Revoke an active override |
@@ -281,15 +281,15 @@ interface EscalationRouter {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| AUT-001 | Every entity has exactly one autonomy level at all times | Architectural — AMS Level Registry is the single source of truth |
-| AUT-002 | An entity cannot delegate authority it does not possess | Algorithmic — ACE Bounds Resolver validates delegation actions |
-| AUT-003 | Autonomy progression requires Security Council approval in addition to Sou | Constitutional — SOU-001 + Law 8 (Verification-First) |
-| AUT-004 | Regression is immediate and does not require simulation | Architectural — no DTS step in regression path |
-| AUT-005 | Escalation chains are bounded (max 6 hops: Worker → Human) | Algorithmic — ABE enforces chain depth |
-| AUT-006 | Overrides are always temporary and scoped | Algorithmic — every OverrideGrant has an expires_at |
-| AUT-007 | ACE filtering is non-blocking — delayed bounds resolution denies the action | Architectural — ACE runs synchronously in the verification path |
-| AUT-008 | L4 is reserved for Sou; no other entity can reach L4 without constitutional amendment | Constitutional — SOU-001 |
-| AUT-009 | A Human can override any autonomy level decision (Article I) | Constitutional — Law 1 (Origin) |
+| AUT-001 | Every entity has exactly one autonomy level at all times | Architectural â€” AMS Level Registry is the single source of truth |
+| AUT-002 | An entity cannot delegate authority it does not possess | Algorithmic â€” ACE Bounds Resolver validates delegation actions |
+| AUT-003 | Autonomy progression requires Security Council approval in addition to Sou | Constitutional â€” SOU-001 + Law 8 (Verification-First) |
+| AUT-004 | Regression is immediate and does not require simulation | Architectural â€” no DTS step in regression path |
+| AUT-005 | Escalation chains are bounded (max 6 hops: Worker â†’ Human) | Algorithmic â€” ABE enforces chain depth |
+| AUT-006 | Overrides are always temporary and scoped | Algorithmic â€” every OverrideGrant has an expires_at |
+| AUT-007 | ACE filtering is non-blocking â€” delayed bounds resolution denies the action | Architectural â€” ACE runs synchronously in the verification path |
+| AUT-008 | L4 is reserved for Sou; no other entity can reach L4 without constitutional amendment | Constitutional â€” SOU-001 |
+| AUT-009 | A Human can override any autonomy level decision (Article I) | Constitutional â€” Law 1 (Origin) |
 
 ## Related Documents
 
@@ -298,13 +298,13 @@ interface EscalationRouter {
 | Brain/000-Overview.md | Autonomy System is a Brain Service |
 | Brain/Sou/000-Overview.md | Sou is L4 and manages autonomy decisions for all entities |
 | Brain/Decision/000-Overview.md | Sou uses Decision System for progression evaluations |
-| Bible/10-Research/001-Autonomy-Evolution.md | Research document — L0-L4 progression framework exploration |
+| Bible/10-Research/001-Autonomy-Evolution.md | Research document â€” L0-L4 progression framework exploration |
 | Bible/04-Execution/Security/CCA/000-CCA.md | CCA adjusts capability bounds on level change |
 | Bible/02-Core/ROS/000-Overview.md | ROS resource limits vary by autonomy level |
 | Bible/04-Execution/Security/000-Overview.md | Security Council verifies all autonomy changes |
 | Bible/02-Core/Academy/000-Overview.md | Academy assesses entity readiness for progression |
 | Bible/02-Core/DTS/000-Overview.md | DTS simulates impact of progression decisions |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-008 (Graduated Autonomy) — philosophical foundation |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-008 (Graduated Autonomy) â€” philosophical foundation |
 | Bible/09-Reference/000-Decision-Log.md | ADR-0008 (Autonomy Levels L0-L4) |
 | Bible/03-Institutions/Workers/000-Overview.md | Workers operate at L0-L2 autonomy |
 | Bible/03-Institutions/Organizations/000-Overview.md | Organizations operate at L1-L3 autonomy |
@@ -324,14 +324,14 @@ interface EscalationRouter {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Autonomy is a single concern: governing entity independence |
-| R2 — Dependency Order | Depends on Sou, Security Council, CCA, ROS; no upward deps |
-| R3 — DRY | Autonomy levels defined once in Level Registry |
-| R4 — Builder Pattern | Autonomy decisions built by AMS → ACE → ABE pipeline |
-| R5 — Liskov Substitution | Any EscalationRouter implements the escalation interface |
-| R6 — DI over Singletons | ACE Bounds Resolver receives LevelProvider via DI |
-| R9 — Deterministic | Same entity, same level, same action → same filter decision |
-| R10 — Simpler Over Complex | Five levels is the minimum granularity for meaningful distinction |
-| R13 — Design for Failure | Escalation supports chain breaks (skip missing links) |
-| R14 — Paved Path | Progression through AMS workflow is the only upgrade path |
-| R15 — Open/Closed | New autonomy engines added via AutonomyService interface |
+| R1 â€” Modulsingularity | Autonomy is a single concern: governing entity independence |
+| R2 â€” Dependency Order | Depends on Sou, Security Council, CCA, ROS; no upward deps |
+| R3 â€” DRY | Autonomy levels defined once in Level Registry |
+| R4 â€” Builder Pattern | Autonomy decisions built by AMS â†’ ACE â†’ ABE pipeline |
+| R5 â€” Liskov Substitution | Any EscalationRouter implements the escalation interface |
+| R6 â€” DI over Singletons | ACE Bounds Resolver receives LevelProvider via DI |
+| R9 â€” Deterministic | Same entity, same level, same action â†’ same filter decision |
+| R10 â€” Simpler Over Complex | Five levels is the minimum granularity for meaningful distinction |
+| R13 â€” Design for Failure | Escalation supports chain breaks (skip missing links) |
+| R14 â€” Paved Path | Progression through AMS workflow is the only upgrade path |
+| R15 â€” Open/Closed | New autonomy engines added via AutonomyService interface |

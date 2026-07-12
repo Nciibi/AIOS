@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 004 — Schema Validation
+﻿# AIOS Bible â€” Brain
+## 004 â€” Schema Validation
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Tools |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Tools |
 | Document ID | AIOS-BBL-002-TOL-004 |
-| Source Laws | Law 4 — Law of Evidence |
+| Source Laws | Law 4 â€” Law of Evidence |
 | Source Physics | Physics/004-Sessions.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Schema Validation ensures that every tool invocation receives parameters matching its declared schema. It performs type checking, enum validation, range constraint enforcement, pattern matching, required field verification, and supports custom validators. The Schema Validator is the first stage of the invocation pipeline — no tool executes with invalid parameters.
+Schema Validation ensures that every tool invocation receives parameters matching its declared schema. It performs type checking, enum validation, range constraint enforcement, pattern matching, required field verification, and supports custom validators. The Schema Validator is the first stage of the invocation pipeline â€” no tool executes with invalid parameters.
 
 Under Law 4 (Evidence), validation results serve as evidence that the invocation was correctly formed, enabling deterministic debugging and audit trails.
 
@@ -125,32 +125,32 @@ ParameterProperty {
 
 ```
 Parameters Received
-    │
-    ▼
-[1] Schema Structure Check ──── Schema itself is valid?
-    │
-    ▼
-[2] Required Fields ──── All required fields present?
-    │
-    ▼
-[3] Type Checking ──── Each field matches declared type?
-    │
-    ▼
-[4] Enum Validation ──── Value in allowed set?
-    │
-    ▼
-[5] Range Constraints ──── Within min/max bounds?
-    │
-    ▼
-[6] Pattern Matching ──── String matches regex?
-    │
-    ▼
-[7] Format Validation ──── UUID format, email, URI, etc.?
-    │
-    ▼
-[8] Custom Validators ──── Registered custom validation rules?
-    │
-    ▼
+    â”‚
+    â–¼
+[1] Schema Structure Check â”€â”€â”€â”€ Schema itself is valid?
+    â”‚
+    â–¼
+[2] Required Fields â”€â”€â”€â”€ All required fields present?
+    â”‚
+    â–¼
+[3] Type Checking â”€â”€â”€â”€ Each field matches declared type?
+    â”‚
+    â–¼
+[4] Enum Validation â”€â”€â”€â”€ Value in allowed set?
+    â”‚
+    â–¼
+[5] Range Constraints â”€â”€â”€â”€ Within min/max bounds?
+    â”‚
+    â–¼
+[6] Pattern Matching â”€â”€â”€â”€ String matches regex?
+    â”‚
+    â–¼
+[7] Format Validation â”€â”€â”€â”€ UUID format, email, URI, etc.?
+    â”‚
+    â–¼
+[8] Custom Validators â”€â”€â”€â”€ Registered custom validation rules?
+    â”‚
+    â–¼
 ValidationResult
 ```
 
@@ -178,7 +178,7 @@ When strict_mode is false, limited coercion is attempted:
 | string | number | Convert to string representation |
 | number | string | Parse if valid numeric string; else error |
 | boolean | string | Accept "true"/"false" as boolean; else error |
-| number | boolean | Convert true→1, false→0 |
+| number | boolean | Convert trueâ†’1, falseâ†’0 |
 | array | single value | Wrap in array |
 
 Coercion is never applied in strict mode.
@@ -199,9 +199,9 @@ CustomValidator {
 ```
 
 Examples:
-- `file_path_exists` — Validates that a file path parameter refers to an existing file
-- `valid_sql` — Validates that a query parameter contains valid SQL syntax
-- `cross_field_consistency` — Ensures start_date < end_date
+- `file_path_exists` â€” Validates that a file path parameter refers to an existing file
+- `valid_sql` â€” Validates that a query parameter contains valid SQL syntax
+- `cross_field_consistency` â€” Ensures start_date < end_date
 
 ## Operations
 
@@ -305,13 +305,13 @@ interface SchemaValidator {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| VAL-001 | Every tool invocation is validated before execution | Pipeline — Validation is invocation stage 1 |
-| VAL-002 | Validation errors always include field path and expected/received values | Schema — ValidationError requires these fields |
-| VAL-003 | Required fields without defaults must always be provided | Algorithmic — checked before any coercion |
-| VAL-004 | Unknown properties are rejected in strict mode, warned in lenient | Schema — additional_properties defaults to false |
-| VAL-005 | Custom validators cannot modify parameters (read-only) | API — validator signature returns errors only |
-| VAL-006 | Validation is deterministic — same inputs always produce same result | Algorithmic — pure function |
-| VAL-007 | Coercion never changes the semantic type of a value | Algorithmic — only format conversions allowed |
+| VAL-001 | Every tool invocation is validated before execution | Pipeline â€” Validation is invocation stage 1 |
+| VAL-002 | Validation errors always include field path and expected/received values | Schema â€” ValidationError requires these fields |
+| VAL-003 | Required fields without defaults must always be provided | Algorithmic â€” checked before any coercion |
+| VAL-004 | Unknown properties are rejected in strict mode, warned in lenient | Schema â€” additional_properties defaults to false |
+| VAL-005 | Custom validators cannot modify parameters (read-only) | API â€” validator signature returns errors only |
+| VAL-006 | Validation is deterministic â€” same inputs always produce same result | Algorithmic â€” pure function |
+| VAL-007 | Coercion never changes the semantic type of a value | Algorithmic â€” only format conversions allowed |
 
 ## Error Cases
 
@@ -331,17 +331,17 @@ interface SchemaValidator {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Schema Validator handles only parameter validation |
-| R2 — Dependency Order | Depends on nothing beyond types; no upward deps |
-| R3 — DRY | Validation rules defined in ParameterSchema, not in code |
-| R4 — Builder Pattern | ValidationResult built by Stage Pipeline → Error Collect |
-| R5 — Liskov Substitution | Any SchemaValidator implements the interface |
-| R6 — DI over Singletons | Validator stages and custom validators injected |
-| R9 — Deterministic | Same parameters and schema produce same validation result |
-| R10 — Simpler Over Complex | Clear sequential validation stages with typed errors |
-| R13 — Design for Failure | Lenient mode ensures graceful handling of recoverable issues |
-| R14 — Paved Path | All validation flows through validate() |
-| R15 — Open/Closed | Custom validators add new rules without modifying core |
+| R1 â€” Modulsingularity | Schema Validator handles only parameter validation |
+| R2 â€” Dependency Order | Depends on nothing beyond types; no upward deps |
+| R3 â€” DRY | Validation rules defined in ParameterSchema, not in code |
+| R4 â€” Builder Pattern | ValidationResult built by Stage Pipeline â†’ Error Collect |
+| R5 â€” Liskov Substitution | Any SchemaValidator implements the interface |
+| R6 â€” DI over Singletons | Validator stages and custom validators injected |
+| R9 â€” Deterministic | Same parameters and schema produce same validation result |
+| R10 â€” Simpler Over Complex | Clear sequential validation stages with typed errors |
+| R13 â€” Design for Failure | Lenient mode ensures graceful handling of recoverable issues |
+| R14 â€” Paved Path | All validation flows through validate() |
+| R15 â€” Open/Closed | Custom validators add new rules without modifying core |
 
 ## Related Documents
 

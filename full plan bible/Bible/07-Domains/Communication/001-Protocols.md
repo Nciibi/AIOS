@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Communication — 001: Protocols
+﻿# AIOS Bible â€” Domains
+## Communication â€” 001: Protocols
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-COM-001 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Protocols layer defines the communication protocol specifications for AIOS — message format standards, transport bindings, serialization schemes, channel adapter contracts, protocol negotiation, and versioning. It abstracts the detail of how a message is structured and carried from the concern of what the message means, enabling AIOS to bridge heterogeneous external systems (chat platforms, email, voice, APIs) into a unified internal representation.
+The Protocols layer defines the communication protocol specifications for AIOS â€” message format standards, transport bindings, serialization schemes, channel adapter contracts, protocol negotiation, and versioning. It abstracts the detail of how a message is structured and carried from the concern of what the message means, enabling AIOS to bridge heterogeneous external systems (chat platforms, email, voice, APIs) into a unified internal representation.
 
 Every message entering or leaving AIOS passes through this layer. The channel adapter receives raw bytes, the protocol parser validates structure against the declared protocol spec, the normalizer maps platform-specific fields to canonical fields, and the router decides where the message goes next. Protocol negotiation allows two parties to agree on a mutually supported version and serialization format before any application data flows.
 
@@ -183,12 +183,12 @@ interface ProtocolCapability {
 | Code | Condition | Severity | Recovery |
 |------|-----------|----------|----------|
 | COM-PRO-001 | Unknown protocol ID requested for parsing | Error | Reject message; return supported protocol list via error envelope |
-| COM-PRO-002 | Message parse failure — malformed structure | Error | Log raw payload; return structured parse error; increment parse_failure counter |
-| COM-PRO-003 | Serialization error — payload exceeds format limits | Error | Reject with payload_too_large error; suggest chunking or format upgrade |
-| COM-PRO-004 | Protocol version mismatch — no compatible range | Warning | Apply graceful fallback to baseline protocol; log incompatibility |
+| COM-PRO-002 | Message parse failure â€” malformed structure | Error | Log raw payload; return structured parse error; increment parse_failure counter |
+| COM-PRO-003 | Serialization error â€” payload exceeds format limits | Error | Reject with payload_too_large error; suggest chunking or format upgrade |
+| COM-PRO-004 | Protocol version mismatch â€” no compatible range | Warning | Apply graceful fallback to baseline protocol; log incompatibility |
 | COM-PRO-005 | Channel adapter offline or unreachable | Critical | Queue messages with TTL; attempt reconnection with exponential backoff |
 | COM-PRO-006 | Schema validation failure on envelope field | Warning | Reject message with field-level validation errors; log schema drift |
-| COM-PRO-007 | Negotiation timeout — peer unresponsive | Error | Fall back to lowest common protocol version; emit timeout event |
+| COM-PRO-007 | Negotiation timeout â€” peer unresponsive | Error | Fall back to lowest common protocol version; emit timeout event |
 | COM-PRO-008 | Unsupported serialization format requested | Error | Return supported formats list; attempt automatic format downgrade |
 
 ## Invariants
@@ -206,7 +206,7 @@ interface ProtocolCapability {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Protocols layer is a focused module — protocol parsing, serialization, channel adaptation are cleanly separated |
+| R1 (Modulsingularity) | Protocols layer is a focused module â€” protocol parsing, serialization, channel adaptation are cleanly separated |
 | R2 (Capsule) | Each MessageEnvelope is a sealed capsule with immutable protocol metadata and payload |
 | R3 (DRY) | Protocol specs are defined once in registry; all channels reference the same spec definitions |
 | R4 (Builder) | MessageEnvelope is built incrementally through parse -> normalize -> validate pipeline stages |
@@ -222,13 +222,13 @@ interface ProtocolCapability {
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Communication/000-Overview.md | Overview — Protocols layer is the ingress/egress foundation for all communication |
-| Bible/07-Domains/Communication/002-Messaging.md | Downstream — Parsed envelopes feed into message routing and delivery |
-| Bible/07-Domains/Communication/003-Collaboration.md | Downstream — Collaboration sessions use protocol negotiation for participant sync |
-| Bible/06-Services/ACF/001-Architecture.md | Transport — ACF carries normalized envelopes between protocol layer and Workers |
-| Bible/06-Services/ACF/002-Messages.md | Messages — Envelope format aligns with ACF message structure |
-| Bible/06-Services/ACF/003-Routing.md | Routing — Protocol negotiation determines routing decisions |
-| Physics/005-Events.md | Evidence — All protocol and adapter lifecycle steps produce Events |
-| Physics/007-Capabilities.md | Capabilities — Protocol capabilities are bounded by adapter capability scope |
-| Physics/009-Interaction.md | Interaction — Protocols layer implements the constitutional communication invariant |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — Core principles for protocol design |
+| Bible/07-Domains/Communication/000-Overview.md | Overview â€” Protocols layer is the ingress/egress foundation for all communication |
+| Bible/07-Domains/Communication/002-Messaging.md | Downstream â€” Parsed envelopes feed into message routing and delivery |
+| Bible/07-Domains/Communication/003-Collaboration.md | Downstream â€” Collaboration sessions use protocol negotiation for participant sync |
+| Bible/06-Services/ACF/001-Architecture.md | Transport â€” ACF carries normalized envelopes between protocol layer and Workers |
+| Bible/06-Services/ACF/002-Messages.md | Messages â€” Envelope format aligns with ACF message structure |
+| Bible/06-Services/ACF/003-Routing.md | Routing â€” Protocol negotiation determines routing decisions |
+| Physics/005-Events.md | Evidence â€” All protocol and adapter lifecycle steps produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” Protocol capabilities are bounded by adapter capability scope |
+| Physics/009-Interaction.md | Interaction â€” Protocols layer implements the constitutional communication invariant |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” Core principles for protocol design |

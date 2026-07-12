@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Communication — 000: Overview
+﻿# AIOS Bible â€” Domains
+## Communication â€” 000: Overview
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-COM-000 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Communication domain enables AIOS to interact with human users through natural language — chat, messaging, voice, and multimodal interfaces. It provides the capability set for conversational agents, support bots, notification systems, and collaborative communication tools that bridge human intent and AIOS execution.
+The Communication domain enables AIOS to interact with human users through natural language â€” chat, messaging, voice, and multimodal interfaces. It provides the capability set for conversational agents, support bots, notification systems, and collaborative communication tools that bridge human intent and AIOS execution.
 
 Unlike other domains that focus on machine-to-machine operations, Communication is human-facing. It deals with language understanding, dialogue state management, personalization, tone adaptation, and the translation of ambiguous human requests into structured AIOS goals that Sou can process.
 
@@ -50,7 +50,7 @@ The Communication domain provides the following capability groups:
 A Conversation in the Communication domain follows this lifecycle:
 
 ```
-Initiated → Context Established → Active ↔ Waiting → Resolved → Archived
+Initiated â†’ Context Established â†’ Active â†” Waiting â†’ Resolved â†’ Archived
 ```
 
 | State | Description | Worker State |
@@ -81,15 +81,15 @@ When a user message arrives, the Communication domain resolves intent through th
 
 ## Invariants
 
-1. **COM-I-001 — Every Message Is Authenticated**: Every incoming and outgoing message is authenticated per Law 5 (Identity). Anonymous messages are rejected at the gateway.
+1. **COM-I-001 â€” Every Message Is Authenticated**: Every incoming and outgoing message is authenticated per Law 5 (Identity). Anonymous messages are rejected at the gateway.
 
-2. **COM-I-002 — Context Preservation**: Conversation context is preserved across turns within a session. Context loss is a constitutional violation — the user must never need to repeat information.
+2. **COM-I-002 â€” Context Preservation**: Conversation context is preserved across turns within a session. Context loss is a constitutional violation â€” the user must never need to repeat information.
 
-3. **COM-I-003 — Response Bounded**: Responses are bounded by the Worker's capability scope. A ChatWorker may not generate responses outside its authorized domain.
+3. **COM-I-003 â€” Response Bounded**: Responses are bounded by the Worker's capability scope. A ChatWorker may not generate responses outside its authorized domain.
 
-4. **COM-I-004 — Privacy Preservation**: User conversation data is access-controlled per Organization policy. Cross-Organization conversation access requires explicit authorization.
+4. **COM-I-004 â€” Privacy Preservation**: User conversation data is access-controlled per Organization policy. Cross-Organization conversation access requires explicit authorization.
 
-5. **COM-I-005 — Intent Routing**: Every message has exactly one resolved intent. Ambiguous intents are resolved through clarification before routing to Sou.
+5. **COM-I-005 â€” Intent Routing**: Every message has exactly one resolved intent. Ambiguous intents are resolved through clarification before routing to Sou.
 
 ## Edge Cases
 
@@ -130,11 +130,11 @@ Conversations follow a defined lifecycle managed by LMS. Chat Workers follow the
 
 ### Capability Bounds
 
-Communication capabilities are bounded by token budgets per conversation, context window limits, and response time SLAs. A ChatWorker cannot exceed its authorized capability scope — it may not execute commands outside its designated domain. Language support is bounded by loaded language models. (Physics/007-Capabilities.md)
+Communication capabilities are bounded by token budgets per conversation, context window limits, and response time SLAs. A ChatWorker cannot exceed its authorized capability scope â€” it may not execute commands outside its designated domain. Language support is bounded by loaded language models. (Physics/007-Capabilities.md)
 
 ### Communication
 
-The Communication domain both consumes and provides communication services. Internally, all communication flows through ACF (Law 3). Externally, Communication Workers interface with chat platforms, email gateways, voice systems, and API endpoints through adapters registered as resource providers. (Law 3 — Communication)
+The Communication domain both consumes and provides communication services. Internally, all communication flows through ACF (Law 3). Externally, Communication Workers interface with chat platforms, email gateways, voice systems, and API endpoints through adapters registered as resource providers. (Law 3 â€” Communication)
 
 ### Design DNA
 
@@ -142,9 +142,9 @@ The Communication domain both consumes and provides communication services. Inte
 |------|-----------|
 | R1 (Modulsingularity) | Each communication capability (chat, notify, moderate, translate) is a separate concern |
 | R3 (DRY) | User preferences and conversation context are stored once, referenced by session |
-| R6 (DI) | Chat platforms are injected as channel adapters — no hard coupling |
+| R6 (DI) | Chat platforms are injected as channel adapters â€” no hard coupling |
 | R9 (Deterministic) | Intent classification with same input produces same classification |
-| R10 (Simpler Over Complex) | Conversation state machine is linear — no branching complexity |
+| R10 (Simpler Over Complex) | Conversation state machine is linear â€” no branching complexity |
 | R13 (Design for Failure) | Failed response generation returns graceful fallback message; conversation continues |
 
 ## Component Map
@@ -173,19 +173,19 @@ The Communication domain both consumes and provides communication services. Inte
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/0005-Domain-Architecture.md | Domain Architecture — Communication domain structure |
-| Physics/005-Events.md | Evidence — Communication operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — Communication capability bounds |
-| Physics/009-Interaction.md | Interaction — Communication domain implements human-AIOS interaction patterns |
-| Bible/02-Core/Sou/001-Reasoning.md | Reasoning — Intent resolution feeds Sou reasoning |
-| Bible/02-Core/Sou/002-Planner.md | Planner — Communication task planning |
-| Bible/02-Core/AGS/000-Overview.md | AGS — ChatWorker and SupportAgent Genome templates |
-| Bible/02-Core/Academy/000-Overview.md | Academy — User preference learning and conversation analytics |
-| Bible/02-Core/DTS/000-Overview.md | DTS — Intent confidence scoring |
-| Bible/02-Core/ROS/000-Overview.md | ROS — Token budget for chat responses |
-| Bible/06-Services/ACF/000-Overview.md | ACF — Communication transport for all domain operations |
-| Bible/04-Execution/Security/ATS/000-Auth-Methods.md | ATS — User authentication for message ingress |
-| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — User identity for conversation sessions |
-| Bible/08-Interfaces/API/000-Specifications.md | API — Chat API contract specifications |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Bible/0005-Domain-Architecture.md | Domain Architecture â€” Communication domain structure |
+| Physics/005-Events.md | Evidence â€” Communication operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” Communication capability bounds |
+| Physics/009-Interaction.md | Interaction â€” Communication domain implements human-AIOS interaction patterns |
+| Bible/02-Core/Sou/001-Reasoning.md | Reasoning â€” Intent resolution feeds Sou reasoning |
+| Bible/02-Core/Sou/002-Planner.md | Planner â€” Communication task planning |
+| Bible/02-Core/AGS/000-Overview.md | AGS â€” ChatWorker and SupportAgent Genome templates |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” User preference learning and conversation analytics |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” Intent confidence scoring |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” Token budget for chat responses |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” Communication transport for all domain operations |
+| Bible/04-Execution/Security/ATS/000-Auth-Methods.md | ATS â€” User authentication for message ingress |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS â€” User identity for conversation sessions |
+| Bible/08-Interfaces/API/000-Specifications.md | API â€” Chat API contract specifications |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 004 — Cognitive Biases
+﻿# AIOS Bible â€” Brain
+## 004 â€” Cognitive Biases
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Cognitive |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Cognitive |
 | Document ID | AIOS-BBL-002-COG-004 |
-| Source Laws | Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Cognitive Biases identifies, mitigates, and logs systematic deviations from rational reasoning in Sou's cognitive processes. It monitors 6 bias types — confirmation bias, recency bias, anchoring, overconfidence, availability heuristic, and framing effect — during active reasoning and reflection. When biases are detected, the system applies mitigation strategies including debiasing prompts, counterargument generation, and perspective shifting. All bias detections are logged for analysis, pattern tracking, and metacognitive calibration.
+Cognitive Biases identifies, mitigates, and logs systematic deviations from rational reasoning in Sou's cognitive processes. It monitors 6 bias types â€” confirmation bias, recency bias, anchoring, overconfidence, availability heuristic, and framing effect â€” during active reasoning and reflection. When biases are detected, the system applies mitigation strategies including debiasing prompts, counterargument generation, and perspective shifting. All bias detections are logged for analysis, pattern tracking, and metacognitive calibration.
 
 ## Data Model
 
@@ -46,7 +46,7 @@ BiasReport {
   request_id: string
   target_id: string
   detections: BiasDetection[]
-  overall_bias_score: number           // 0.0 (unbiased) – 1.0 (heavily biased)
+  overall_bias_score: number           // 0.0 (unbiased) â€“ 1.0 (heavily biased)
   mitigation_applied: MitigationAction[]
   residual_bias_estimate: number       // Bias remaining after mitigation
   recommendations: string[]
@@ -70,7 +70,7 @@ BiasReport {
 BiasDetection {
   detection_id: string
   bias_type: BiasType
-  confidence: number                   // 0.0–1.0 confidence in detection
+  confidence: number                   // 0.0â€“1.0 confidence in detection
   severity: "low" | "medium" | "high" | "critical"
   location: {
     step_numbers: number[]
@@ -99,7 +99,7 @@ MitigationAction {
   prompt_applied?: string             // The debiasing prompt used
   counterargument_generated?: string  // For anchoring/framing
   alternative_perspective?: string    // For confirmation bias
-  effectiveness: number               // 0.0–1.0 estimated effectiveness
+  effectiveness: number               // 0.0â€“1.0 estimated effectiveness
   outcome: "applied" | "skipped" | "failed"
   applied_at: timestamp
 }
@@ -130,49 +130,49 @@ BiasLog {
 
 | Bias Type | Definition | Detection Method | Typical Severity |
 |-----------|-----------|------------------|-----------------|
-| Confirmation bias | Favoring evidence that supports existing beliefs | Scan for selective evidence引用; check for contradicting evidence dismissal | Medium–High |
+| Confirmation bias | Favoring evidence that supports existing beliefs | Scan for selective evidenceå¼•ç”¨; check for contradicting evidence dismissal | Mediumâ€“High |
 | Recency bias | Overweighting recent information over older data | Analyze evidence age vs. weight; check temporal ordering | Medium |
-| Anchoring | Over-relying on first piece of information encountered | Compare first step influence on later reasoning; detect insufficient adjustment | Low–Medium |
-| Overconfidence | Estimated confidence exceeds actual accuracy | Compare confidence scores against historical calibration curve | High–Critical |
+| Anchoring | Over-relying on first piece of information encountered | Compare first step influence on later reasoning; detect insufficient adjustment | Lowâ€“Medium |
+| Overconfidence | Estimated confidence exceeds actual accuracy | Compare confidence scores against historical calibration curve | Highâ€“Critical |
 | Availability heuristic | Overweighting easily recalled examples over statistical reality | Check if examples are vivid/recent vs. representative | Medium |
-| Framing effect | Drawing different conclusions from same data presented differently | Analyze how problem presentation shapes reasoning direction | Medium–High |
+| Framing effect | Drawing different conclusions from same data presented differently | Analyze how problem presentation shapes reasoning direction | Mediumâ€“High |
 
 ### 2. Bias Detection During Reasoning
 
 ```
 ThoughtStep Chain
-       │
-       ▼
-┌─────────────────────────────┐
-│  Step-by-step scan           │
-│                              │
-│  For each step:              │
-│  ├── Check for confirmation  │
-│  │   bias: selective citing  │
-│  ├── Check recency bias:     │
-│  │   evidence age weighting  │
-│  ├── Check anchoring: first- │
-│  │   step influence          │
-│  ├── Check overconfidence:   │
-│  │   confidence vs accuracy  │
-│  ├── Check availability:     │
-│  │   example                │
-│  │   representativeness      │
-│  └── Check framing: prompt   │
-│      dependency              │
-└──────────┬──────────────────┘
-           │
-           ▼
-┌─────────────────────────────┐
-│  Cross-step pattern analysis │
-│                              │
-│  ├── Temporal dependencies  │
-│  ├── Evidence selection     │
-│  │   patterns               │
-│  └── Confidence trajectory  │
-└──────────┬──────────────────┘
-           │
-           ▼
+       â”‚
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Step-by-step scan           â”‚
+â”‚                              â”‚
+â”‚  For each step:              â”‚
+â”‚  â”œâ”€â”€ Check for confirmation  â”‚
+â”‚  â”‚   bias: selective citing  â”‚
+â”‚  â”œâ”€â”€ Check recency bias:     â”‚
+â”‚  â”‚   evidence age weighting  â”‚
+â”‚  â”œâ”€â”€ Check anchoring: first- â”‚
+â”‚  â”‚   step influence          â”‚
+â”‚  â”œâ”€â”€ Check overconfidence:   â”‚
+â”‚  â”‚   confidence vs accuracy  â”‚
+â”‚  â”œâ”€â”€ Check availability:     â”‚
+â”‚  â”‚   example                â”‚
+â”‚  â”‚   representativeness      â”‚
+â”‚  â””â”€â”€ Check framing: prompt   â”‚
+â”‚      dependency              â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+           â”‚
+           â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Cross-step pattern analysis â”‚
+â”‚                              â”‚
+â”‚  â”œâ”€â”€ Temporal dependencies  â”‚
+â”‚  â”œâ”€â”€ Evidence selection     â”‚
+â”‚  â”‚   patterns               â”‚
+â”‚  â””â”€â”€ Confidence trajectory  â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+           â”‚
+           â–¼
       BiasReport
 ```
 
@@ -215,32 +215,32 @@ Prompts are constructed from templates and parameterized with the detection cont
 
 ```
 BiasDetection
-       │
-       ▼
-┌─────────────────────────────┐
-│  Log Entry                   │
-│  ├── session_id              │
-│  ├── bias_type               │
-│  ├── severity                │
-│  ├── step_numbers            │
-│  ├── confidence              │
-│  ├── mitigation_applied      │
-│  └── recurrence_count        │
-└──────────┬──────────────────┘
-           │
-           ▼
-┌─────────────────────────────┐
-│  Periodic Analysis           │
-│                              │
-│  ├── Per-session bias       │
-│  │   summary                │
-│  ├── Cross-session pattern  │
-│  │   detection              │
-│  ├── Bias type frequency    │
-│  │   distribution           │
-│  └── Mitigation             │
-│      effectiveness tracking │
-└─────────────────────────────┘
+       â”‚
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Log Entry                   â”‚
+â”‚  â”œâ”€â”€ session_id              â”‚
+â”‚  â”œâ”€â”€ bias_type               â”‚
+â”‚  â”œâ”€â”€ severity                â”‚
+â”‚  â”œâ”€â”€ step_numbers            â”‚
+â”‚  â”œâ”€â”€ confidence              â”‚
+â”‚  â”œâ”€â”€ mitigation_applied      â”‚
+â”‚  â””â”€â”€ recurrence_count        â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+           â”‚
+           â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Periodic Analysis           â”‚
+â”‚                              â”‚
+â”‚  â”œâ”€â”€ Per-session bias       â”‚
+â”‚  â”‚   summary                â”‚
+â”‚  â”œâ”€â”€ Cross-session pattern  â”‚
+â”‚  â”‚   detection              â”‚
+â”‚  â”œâ”€â”€ Bias type frequency    â”‚
+â”‚  â”‚   distribution           â”‚
+â”‚  â””â”€â”€ Mitigation             â”‚
+â”‚      effectiveness tracking â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 Bias logs feed into the Reflection Engine's pattern detection and Metacognition's calibration.
@@ -277,7 +277,7 @@ interface BiasDetector {
 }
 
 interface BiasThresholds {
-  detection_confidence_min: number     // 0.0–1.0 (default 0.6)
+  detection_confidence_min: number     // 0.0â€“1.0 (default 0.6)
   severity_low_max: number             // Indicator count (default 2)
   severity_medium_max: number          // (default 4)
   mitigation_trigger_severity: string  // Minimum severity that auto-triggers mitigation
@@ -332,14 +332,14 @@ interface DecisionContext {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| COG-BIAS-001 | Every bias detection includes a specific step or evidence reference | Schema — required location fields |
-| COG-BIAS-002 | Mitigation is never applied without prior detection | Algorithmic — ordered pipeline |
-| COG-BIAS-003 | Bias logging is write-once and immutable | Architectural — append-only log |
-| COG-BIAS-004 | Overconfidence detection always references the calibration curve | Algorithmic — requires calibration data |
-| COG-BIAS-005 | A single step can exhibit multiple bias types simultaneously | Schema — supports multiple detections |
-| COG-BIAS-006 | Bias detection is idempotent — same input produces same report at temperature=0 | Algorithmic — deterministic analysis |
-| COG-BIAS-007 | Mitigation does not modify the original reasoning chain | Architectural — creates advisory output |
-| COG-BIAS-008 | Recurrence patterns require ≥3 occurrences in a session to be logged | Threshold — configurable via BiasThresholds |
+| COG-BIAS-001 | Every bias detection includes a specific step or evidence reference | Schema â€” required location fields |
+| COG-BIAS-002 | Mitigation is never applied without prior detection | Algorithmic â€” ordered pipeline |
+| COG-BIAS-003 | Bias logging is write-once and immutable | Architectural â€” append-only log |
+| COG-BIAS-004 | Overconfidence detection always references the calibration curve | Algorithmic â€” requires calibration data |
+| COG-BIAS-005 | A single step can exhibit multiple bias types simultaneously | Schema â€” supports multiple detections |
+| COG-BIAS-006 | Bias detection is idempotent â€” same input produces same report at temperature=0 | Algorithmic â€” deterministic analysis |
+| COG-BIAS-007 | Mitigation does not modify the original reasoning chain | Architectural â€” creates advisory output |
+| COG-BIAS-008 | Recurrence patterns require â‰¥3 occurrences in a session to be logged | Threshold â€” configurable via BiasThresholds |
 
 ## Error Cases
 
@@ -358,17 +358,17 @@ interface DecisionContext {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Cognitive Biases only detects and mitigates reasoning biases |
-| R2 — Dependency Order | Depends on Reasoning Pipeline, Metacognition, LLMOS |
-| R3 — DRY | Bias detection rules defined once per type in detector registry |
-| R4 — Builder Pattern | BiasReport built from detections → mitigations → recommendations |
-| R5 — Liskov Substitution | Any bias detector implementation is interchangeable |
-| R6 — DI over Singletons | Detection strategies and mitigation templates injected |
-| R9 — Deterministic | Same chain produces same bias report at temperature=0 |
-| R10 — Simpler Over Complex | Uses 6 explicit bias types, not free-form bias detection |
-| R13 — Design for Failure | Partial detection results returned on timeout |
-| R14 — Paved Path | All bias detection flows through `detectBias` method |
-| R15 — Open/Closed | New bias types added by registering detector and mitigation strategy |
+| R1 â€” Modulsingularity | Cognitive Biases only detects and mitigates reasoning biases |
+| R2 â€” Dependency Order | Depends on Reasoning Pipeline, Metacognition, LLMOS |
+| R3 â€” DRY | Bias detection rules defined once per type in detector registry |
+| R4 â€” Builder Pattern | BiasReport built from detections â†’ mitigations â†’ recommendations |
+| R5 â€” Liskov Substitution | Any bias detector implementation is interchangeable |
+| R6 â€” DI over Singletons | Detection strategies and mitigation templates injected |
+| R9 â€” Deterministic | Same chain produces same bias report at temperature=0 |
+| R10 â€” Simpler Over Complex | Uses 6 explicit bias types, not free-form bias detection |
+| R13 â€” Design for Failure | Partial detection results returned on timeout |
+| R14 â€” Paved Path | All bias detection flows through `detectBias` method |
+| R15 â€” Open/Closed | New bias types added by registering detector and mitigation strategy |
 
 ## Related Documents
 

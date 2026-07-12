@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — Reasoning (Delegated to Cognitive OS)
+﻿# AIOS Bible â€” Brain
+## 001 â€” Reasoning (Delegated to Cognitive OS)
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 2.0 |
-| Category | Bible — Brain |
+| Version | 2.0.0 |
+| Category | Bible â€” Brain |
 | Document ID | AIOS-BBL-002-SOU-001 |
-| Source Laws | Law 2 — Law of Non-Execution, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 2 â€” Law of Non-Execution, Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Bible/02-Core/Sou/001-Reasoning.md v1.0 |
 | Superseded By | Nothing |
@@ -15,9 +15,9 @@
 
 ## Purpose
 
-Sou reasons about situations, goals, and strategies by delegating to the **Cognitive OS** — a Brain service that implements reasoning, reflection, and metacognition. Sou frames the problem, Cognitive OS executes the reasoning methods, and Sou evaluates the output.
+Sou reasons about situations, goals, and strategies by delegating to the **Cognitive OS** â€” a Brain service that implements reasoning, reflection, and metacognition. Sou frames the problem, Cognitive OS executes the reasoning methods, and Sou evaluates the output.
 
-Reasoning does not execute — it proposes. All reasoning outputs are routed through DGP (Bible/01-Governance/002-DGP.md) for approval and routing.
+Reasoning does not execute â€” it proposes. All reasoning outputs are routed through DGP (Bible/01-Governance/002-DGP.md) for approval and routing.
 
 In the new paradigm, reasoning is a **capability** Sou exercises through Cognitive OS, not a module Sou implements internally. This separation keeps Sou focused on identity, goals, and decisions while Cognitive OS provides the reasoning infrastructure.
 
@@ -45,7 +45,7 @@ Constraint-based reasons evaluates options within a bounded configuration space 
 | Input | Output |
 |-------|--------|
 | Option set, constraint set (constitutional, capability, resource) | Feasibility matrix, constraint violations, recommended options |
-| Entity autonomy level (L0–L4) | Autonomy-appropriate option rankings |
+| Entity autonomy level (L0â€“L4) | Autonomy-appropriate option rankings |
 
 ### Evidence-Based Reasoning
 
@@ -62,7 +62,7 @@ Evidence-based reasoning consumes Events (Physics/005-Events.md) and Experience 
 
 Used for: interpretation of constitutional constraints, policy compliance verification, ethical boundary assessment.
 
-Constitutional reasons evaluates proposals against the AIOS Constitution (PHI-001), Core Principles (CPR-001–010), and Design DNA rules (R1–R15). It is the highest-priority reasoning method — constitutional constraints cannot be overridden by other reasoning methods.
+Constitutional reasons evaluates proposals against the AIOS Constitution (PHI-001), Core Principles (CPR-001â€“010), and Design DNA rules (R1â€“R15). It is the highest-priority reasoning method â€” constitutional constraints cannot be overridden by other reasoning methods.
 
 | Input | Output |
 |-------|--------|
@@ -77,19 +77,19 @@ Goal: Produce strategic recommendation for resource reallocation
 
 Reasoning Steps:
 1. Evidence-Based: Query Event Store for resource utilization Events (last 30 days)
-   → Found: Worker-A 80% utilization, Worker-B 30% utilization, Worker-C 95% utilization
+   â†’ Found: Worker-A 80% utilization, Worker-B 30% utilization, Worker-C 95% utilization
 
 2. Constraint-Based: Evaluate against capability bounds and policies
-   → Constraint: Workers cannot exceed 100% utilization (Law 5)
-   → Constraint: Worker reallocation requires Security Council approval
+   â†’ Constraint: Workers cannot exceed 100% utilization (Law 5)
+   â†’ Constraint: Worker reallocation requires Security Council approval
 
 3. Goal-Directed: Determine optimal allocation
-   → Option 1: Reallocate Worker-B capacity to Worker-C (high impact, high risk)
-   → Option 2: Scale down Worker-B, scale up Worker-C (medium impact, low risk)
-   → Option 3: Maintain current allocation (no impact, no risk)
+   â†’ Option 1: Reallocate Worker-B capacity to Worker-C (high impact, high risk)
+   â†’ Option 2: Scale down Worker-B, scale up Worker-C (medium impact, low risk)
+   â†’ Option 3: Maintain current allocation (no impact, no risk)
 
 4. Constitutional: Verify options against constitutional constraints
-   → All options comply — no Law violations
+   â†’ All options comply â€” no Law violations
 
 Output: DecisionProposal recommending Option 2 with confidence 0.82
 ```
@@ -101,7 +101,7 @@ All reasoning produces structured outputs:
 | Output | Description | Routed To |
 |--------|-------------|-----------|
 | Decision Proposal | A strategic decision with evidence chain, constitutional analysis, and confidence score | DGP (Bible/01-Governance/002-DGP.md) |
-| Mission Proposal | A proposed mission with goal, milestones, resource estimates, and constitutional check | DGP → OSYS |
+| Mission Proposal | A proposed mission with goal, milestones, resource estimates, and constitutional check | DGP â†’ OSYS |
 | Strategic Recommendation | Advisory output for existing missions or organizations | Sou Knowledge store, ACF to OSYS |
 | Analysis Report | Situation analysis, option evaluation, risk assessment | Sou Knowledge store |
 
@@ -114,7 +114,7 @@ Sou's reasoning is bounded by four constraints:
 | Constitutional Constraints | No proposal may violate a Law or constitutional principle | Constitutional reasoning check (mandatory) |
 | Capability Bounds | Proposals must respect entity capability assignments (Physics/007-Capabilities.md) | Capability registry query before proposal |
 | Available Evidence | Proposals must be supported by evidence (PHI-008) | Evidence chain validation |
-| Entity Autonomy Level | Proposals must respect the autonomy level (L0–L4) of affected entities (PHI-003) | Autonomy registry check before proposal |
+| Entity Autonomy Level | Proposals must respect the autonomy level (L0â€“L4) of affected entities (PHI-003) | Autonomy registry check before proposal |
 
 ## Reasoning Operations
 
@@ -122,16 +122,16 @@ Sou's reasoning is bounded by four constraints:
 
 ```
 Input:  situation_context, goal, evidence_chain, constraint_set
-Process: apply reasoning methods → evaluate options → constitutionally validate
+Process: apply reasoning methods â†’ evaluate options â†’ constitutionally validate
 Output: DecisionProposal { decision_id, type, summary, evidence, confidence, constitutional_check }
-Routed: DGP.DecisionProposed Event → DGP
+Routed: DGP.DecisionProposed Event â†’ DGP
 ```
 
 ### analyzeSituation
 
 ```
 Input:  situation_context, available_evidence
-Process: gather evidence → identify patterns → assess risks → produce analysis
+Process: gather evidence â†’ identify patterns â†’ assess risks â†’ produce analysis
 Output: AnalysisReport { analysis_id, findings, risks, recommendations }
 Stored: Sou Knowledge store
 ```
@@ -140,12 +140,12 @@ Stored: Sou Knowledge store
 
 ```
 Input:  option_set, criteria, constraints
-Process: score each option → rank → filter invalid → produce ranked list
+Process: score each option â†’ rank â†’ filter invalid â†’ produce ranked list
 Output: EvaluatedOptions { evaluation_id, ranked_options, scores, tradeoffs }
 Stored: Sou Knowledge store (temporary, used by Planner)
 ```
 
-## Reasoning — Relationship to DTS
+## Reasoning â€” Relationship to DTS
 
 Sou's Reasoning engine works closely with DTS:
 
@@ -193,7 +193,7 @@ function selectReasoningMethod(problem, evidence, constraints):
 | `Sou.DecisionProposed` | proposeDecision succeeds | decision_id, decision_type, constitutional_score |
 | `Sou.ReasoningConstraintViolation` | A constraint blocks the proposal | reason_id, constraint_type, violation_details |
 
-## Edge Cases — Reasoning
+## Edge Cases â€” Reasoning
 
 | Scenario | Handling |
 |----------|----------|
@@ -222,19 +222,19 @@ function selectReasoningMethod(problem, evidence, constraints):
 | Condition | Error Code | Severity | Recovery |
 |-----------|------------|----------|----------|
 | Insufficient evidence for reasoning method | SOU_RSN_001 | Medium | Fall back to available evidence; flag gaps in output |
-| Constitutional constraint violation — proposal blocked | SOU_RSN_002 | Critical | Block proposal; require constitutional clarification from DGP |
+| Constitutional constraint violation â€” proposal blocked | SOU_RSN_002 | Critical | Block proposal; require constitutional clarification from DGP |
 | Circular reasoning dependency detected | SOU_RSN_003 | High | Break cycle by selecting most authoritative source |
 | Reasoning method not applicable to problem domain | SOU_RSN_004 | Medium | Select alternative reasoning method; log method mismatch |
-| Evidence chain incomplete — missing causal link | SOU_RSN_005 | High | Continue with reduced confidence; flag missing links |
+| Evidence chain incomplete â€” missing causal link | SOU_RSN_005 | High | Continue with reduced confidence; flag missing links |
 
 ## Invariants
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| SOU-RSN-001 | Reasoning never produces executable code | Architectural — no code execution path |
-| SOU-RSN-002 | Every reasoning session produces exactly one proposal or failure event | API-level — event emission enforced |
-| SOU-RSN-003 | Reasoning output is always reviewed by DGP before execution | Governance — DGP pipeline enforcement |
-| SOU-RSN-004 | Constitutional reasoning is always applied to every proposal | Algorithmic — selectReasoningMethod always includes it |
+| SOU-RSN-001 | Reasoning never produces executable code | Architectural â€” no code execution path |
+| SOU-RSN-002 | Every reasoning session produces exactly one proposal or failure event | API-level â€” event emission enforced |
+| SOU-RSN-003 | Reasoning output is always reviewed by DGP before execution | Governance â€” DGP pipeline enforcement |
+| SOU-RSN-004 | Constitutional reasoning is always applied to every proposal | Algorithmic â€” selectReasoningMethod always includes it |
 
 ## Cross-Cutting Concerns
 
@@ -248,7 +248,7 @@ Every reasoning step produces an Event. Reasoning without evidence is prohibited
 
 ### Lifecycle
 
-Reasoning sessions have a defined lifecycle: Initiated → Processing → Completed / Failed. Each session is tracked by LMS. (Physics/006-Lifecycles.md)
+Reasoning sessions have a defined lifecycle: Initiated â†’ Processing â†’ Completed / Failed. Each session is tracked by LMS. (Physics/006-Lifecycles.md)
 
 ### Capability Bounds
 
@@ -256,37 +256,37 @@ Reasoning is bounded by Sou's capabilities. It may reason about any domain but m
 
 ### Communication
 
-Reasoning outputs are communicated via ACF. DGP receives decision proposals. Academy receives learning-related analysis requests. (Law 3 — Communication)
+Reasoning outputs are communicated via ACF. DGP receives decision proposals. Academy receives learning-related analysis requests. (Law 3 â€” Communication)
 
 ## Design DNA
 
 | Rule | Compliance |
 |------|-----------|
-| R1 — Modulsingularity | Reasoning is focused solely on producing reasoned proposals |
-| R2 — Dependency Order | Reasoning depends on Cognitive OS and DGP; no upward dependencies |
-| R3 — DRY | Reasoning methods are defined once in the Reasoner interface |
-| R4 — Builder Pattern | Decision proposals built through the proposeDecision pipeline |
-| R5 — Liskov Substitution | All reasoning methods implement the Reasoner interface |
-| R6 — DI over Singletons | Cognitive OS is injected, not a singleton |
-| R9 — Deterministic | Same evidence and constraints produce the same reasoning output |
-| R10 — Simpler Over Complex | Simplest adequate reasoning method is selected first |
-| R13 — Design for Failure | Reasoning degrades gracefully when evidence is unavailable |
-| R14 — Paved Path | All reasoning flows through proposeDecision → DGP |
-| R15 — Open/Closed | New reasoning methods added by extending Reasoner, not by modifying existing methods |
+| R1 â€” Modulsingularity | Reasoning is focused solely on producing reasoned proposals |
+| R2 â€” Dependency Order | Reasoning depends on Cognitive OS and DGP; no upward dependencies |
+| R3 â€” DRY | Reasoning methods are defined once in the Reasoner interface |
+| R4 â€” Builder Pattern | Decision proposals built through the proposeDecision pipeline |
+| R5 â€” Liskov Substitution | All reasoning methods implement the Reasoner interface |
+| R6 â€” DI over Singletons | Cognitive OS is injected, not a singleton |
+| R9 â€” Deterministic | Same evidence and constraints produce the same reasoning output |
+| R10 â€” Simpler Over Complex | Simplest adequate reasoning method is selected first |
+| R13 â€” Design for Failure | Reasoning degrades gracefully when evidence is unavailable |
+| R14 â€” Paved Path | All reasoning flows through proposeDecision â†’ DGP |
+| R15 â€” Open/Closed | New reasoning methods added by extending Reasoner, not by modifying existing methods |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/005-Events.md | Evidence — reasoning consumes and produces Events |
-| Physics/007-Capabilities.md | Capability bounds — reasoning constrained by capabilities |
-| Physics/012-Experience.md | Experience — reasoning learns from past outcomes |
-| Bible/01-Governance/002-DGP.md | DGP — reasoning proposals are routed through DGP |
-| Bible/02-Core/Brain/Sou/000-Overview.md | Sou overview — reasoning is a capability of the executive intelligence |
-| Bible/02-Core/Brain/Sou/002-Planner.md | Planner — reasoning feeds planning |
-| Bible/02-Core/Brain/Sou/004-Learning.md | Learning — reasoning improves from learning |
-| Bible/02-Core/Brain/Sou/005-Knowledge.md | Knowledge — reasoning reads and writes knowledge |
-| Bible/02-Core/Brain/Context/000-Overview.md | Context System — provides context for reasoning |
-| Bible/02-Core/DTS/004-Confidence.md | Confidence scoring — reasoning produces confidence estimates |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Physics/005-Events.md | Evidence â€” reasoning consumes and produces Events |
+| Physics/007-Capabilities.md | Capability bounds â€” reasoning constrained by capabilities |
+| Physics/012-Experience.md | Experience â€” reasoning learns from past outcomes |
+| Bible/01-Governance/002-DGP.md | DGP â€” reasoning proposals are routed through DGP |
+| Bible/02-Core/Brain/Sou/000-Overview.md | Sou overview â€” reasoning is a capability of the executive intelligence |
+| Bible/02-Core/Brain/Sou/002-Planner.md | Planner â€” reasoning feeds planning |
+| Bible/02-Core/Brain/Sou/004-Learning.md | Learning â€” reasoning improves from learning |
+| Bible/02-Core/Brain/Sou/005-Knowledge.md | Knowledge â€” reasoning reads and writes knowledge |
+| Bible/02-Core/Brain/Context/000-Overview.md | Context System â€” provides context for reasoning |
+| Bible/02-Core/DTS/004-Confidence.md | Confidence scoring â€” reasoning produces confidence estimates |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

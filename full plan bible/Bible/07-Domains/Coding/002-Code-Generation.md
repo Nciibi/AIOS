@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Coding — 002: Code Generation
+﻿# AIOS Bible â€” Domains
+## Coding â€” 002: Code Generation
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-COD-002 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -22,21 +22,21 @@ This component is the highest consumer of token budgets in the Coding domain. Ev
 ## Architecture
 
 ```
-CodePlan (from Sou)  ──▶  Prompt Constructor
-                              │
-                              ▼
-                    Context Assembler  ◀── CodebaseIndex (Academy)
-                              │
-                              ▼
-                    LLM Invocation  ──▶  GenerationTemplate
-                              │
-                              ▼
-                    Output Validator  ◀── LanguageProfile (Registry)
-                              │
-                              ▼
-                    Code Formatter  ──▶  Formatted Code Output
-                              │
-                              ▼
+CodePlan (from Sou)  â”€â”€â–¶  Prompt Constructor
+                              â”‚
+                              â–¼
+                    Context Assembler  â—€â”€â”€ CodebaseIndex (Academy)
+                              â”‚
+                              â–¼
+                    LLM Invocation  â”€â”€â–¶  GenerationTemplate
+                              â”‚
+                              â–¼
+                    Output Validator  â—€â”€â”€ LanguageProfile (Registry)
+                              â”‚
+                              â–¼
+                    Code Formatter  â”€â”€â–¶  Formatted Code Output
+                              â”‚
+                              â–¼
                     CodeGenResult (to Worker)
 ```
 
@@ -209,31 +209,31 @@ enum FragmentType {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Code generation is a single pipeline with clear stage boundaries |
-| R2 — Dependency Order | Pipeline depends on Language Registry for profiles; CodeWorker depends on pipeline |
-| R3 — DRY | Generation templates capture reusable patterns; context deduplication before assembly |
-| R4 — Builder Pattern | Pipeline uses builder stages: construct -> assemble -> invoke -> validate -> format |
-| R5 — Liskov Substitution | All generation backends implement ICodeGenerator interface |
-| R6 — DI over Singletons | Pipeline components are injected; no shared mutable state |
-| R9 — Deterministic | Deterministic generation guaranteed with same inputs and seed value |
-| R10 — Simpler Over Complex | Pipeline uses linear stages with no branching; overflow is a distinct path |
-| R13 — Design for Failure | Validation failures trigger targeted retry with error feedback; timeout returns stub |
-| R14 — Paved Path | Single paved path: request -> construct -> generate -> validate -> format -> return |
-| R15 — Open/Closed | New generation types added via template registration without pipeline modification |
+| R1 â€” Modulsingularity | Code generation is a single pipeline with clear stage boundaries |
+| R2 â€” Dependency Order | Pipeline depends on Language Registry for profiles; CodeWorker depends on pipeline |
+| R3 â€” DRY | Generation templates capture reusable patterns; context deduplication before assembly |
+| R4 â€” Builder Pattern | Pipeline uses builder stages: construct -> assemble -> invoke -> validate -> format |
+| R5 â€” Liskov Substitution | All generation backends implement ICodeGenerator interface |
+| R6 â€” DI over Singletons | Pipeline components are injected; no shared mutable state |
+| R9 â€” Deterministic | Deterministic generation guaranteed with same inputs and seed value |
+| R10 â€” Simpler Over Complex | Pipeline uses linear stages with no branching; overflow is a distinct path |
+| R13 â€” Design for Failure | Validation failures trigger targeted retry with error feedback; timeout returns stub |
+| R14 â€” Paved Path | Single paved path: request -> construct -> generate -> validate -> format -> return |
+| R15 â€” Open/Closed | New generation types added via template registration without pipeline modification |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Coding/000-Overview.md | Coding domain overview — code generation is a core capability |
-| Bible/07-Domains/Coding/001-Languages.md | Language Support Registry — provides language profiles and templates |
-| Bible/07-Domains/Coding/003-Review.md | Code Review — generated code is reviewed by this component |
-| Bible/07-Domains/Coding/004-Refactoring.md | Refactoring — refactoring engine consumes generated code patterns |
-| Physics/005-Events.md | Evidence — all generation operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — generation token budgets bounded by capability profiles |
-| Physics/010-Execution.md | Execution — generation is part of the execution pipeline |
-| Bible/02-Core/Brain/LLMOS/004-Context-Builder.md | Context Builder — assembles LLM input context for generation |
-| Bible/02-Core/Brain/LLMOS/003-Prompt-Compiler.md | Prompt Compiler — compiles structured prompts from templates |
-| Bible/02-Core/DTS/000-Overview.md | DTS — confidence scoring for generated code quality |
-| Bible/02-Core/ROS/000-Overview.md | ROS — token budget allocation for generation operations |
-| Bible/02-Core/Sou/002-Planner.md | Planner — produces code plans that drive generation requests |
+| Bible/07-Domains/Coding/000-Overview.md | Coding domain overview â€” code generation is a core capability |
+| Bible/07-Domains/Coding/001-Languages.md | Language Support Registry â€” provides language profiles and templates |
+| Bible/07-Domains/Coding/003-Review.md | Code Review â€” generated code is reviewed by this component |
+| Bible/07-Domains/Coding/004-Refactoring.md | Refactoring â€” refactoring engine consumes generated code patterns |
+| Physics/005-Events.md | Evidence â€” all generation operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” generation token budgets bounded by capability profiles |
+| Physics/010-Execution.md | Execution â€” generation is part of the execution pipeline |
+| Bible/02-Core/Brain/LLMOS/004-Context-Builder.md | Context Builder â€” assembles LLM input context for generation |
+| Bible/02-Core/Brain/LLMOS/003-Prompt-Compiler.md | Prompt Compiler â€” compiles structured prompts from templates |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” confidence scoring for generated code quality |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” token budget allocation for generation operations |
+| Bible/02-Core/Sou/002-Planner.md | Planner â€” produces code plans that drive generation requests |

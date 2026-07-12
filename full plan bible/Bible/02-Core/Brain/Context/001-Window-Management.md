@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — Context Window Management
+﻿# AIOS Bible â€” Brain
+## 001 â€” Context Window Management
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Context |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Context |
 | Document ID | AIOS-BBL-002-CTX-001 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/004-Sessions.md, Physics/006-Lifecycles.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Context Window Manager owns the structure, lifecycle, and session binding of the global context window. Under BRAIN-006, it enforces that Sou is the sole reader and that all writes flow through the Context System API. It maintains the window's composition — which sections are present, their ordering, and the token budget — and coordinates with the Priority Manager, Compression Engine, TTL Manager, and Registry to produce a coherent snapshot on every pull.
+The Context Window Manager owns the structure, lifecycle, and session binding of the global context window. Under BRAIN-006, it enforces that Sou is the sole reader and that all writes flow through the Context System API. It maintains the window's composition â€” which sections are present, their ordering, and the token budget â€” and coordinates with the Priority Manager, Compression Engine, TTL Manager, and Registry to produce a coherent snapshot on every pull.
 
 ## Data Model
 
@@ -62,7 +62,7 @@ ContextItem {
   item_type: string        // "user_input" | "memory" | "tool_result" | "system_signal"
   content: unknown
   section_type: string
-  priority: number         // 0.0–1.0
+  priority: number         // 0.0â€“1.0
   token_count: number
   pinned: boolean
   source: string           // Which service produced this item
@@ -92,35 +92,35 @@ InputMessage {
 
 ```
 Session Start
-    │
-    ▼
+    â”‚
+    â–¼
 Initialize Window
-    │
-    ├── Create ContextWindow with session_id
-    ├── Set max_tokens from LLMOS setBudget
-    ├── Initialize empty sections in fixed order
-    │   [user_input, working_memory, mission_state,
-    │    conversation_history, tool_results, system_signals]
-    ├── Register window with Context Registry
-    └── Emit CTX.WindowInitialized
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Create ContextWindow with session_id
+    â”œâ”€â”€ Set max_tokens from LLMOS setBudget
+    â”œâ”€â”€ Initialize empty sections in fixed order
+    â”‚   [user_input, working_memory, mission_state,
+    â”‚    conversation_history, tool_results, system_signals]
+    â”œâ”€â”€ Register window with Context Registry
+    â””â”€â”€ Emit CTX.WindowInitialized
+    â”‚
+    â–¼
 Active Window
-    │
-    ├── Items pushed via pushItem → assigned to section
-    ├── Priority scored at insert → Registry updated
-    ├── TTL ticks on each pull → expired items flagged
-    ├── Compression triggered when total_tokens > max_tokens
-    └── Window pulled by Sou → snapshot assembled
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Items pushed via pushItem â†’ assigned to section
+    â”œâ”€â”€ Priority scored at insert â†’ Registry updated
+    â”œâ”€â”€ TTL ticks on each pull â†’ expired items flagged
+    â”œâ”€â”€ Compression triggered when total_tokens > max_tokens
+    â””â”€â”€ Window pulled by Sou â†’ snapshot assembled
+    â”‚
+    â–¼
 Session End
-    │
-    ├── Emit CTX.WindowClosing
-    ├── Flush remaining items to Memory OS (if unpinned)
-    ├── Clear all sections
-    ├── Emit CTX.WindowCleared
-    └── Destroy ContextWindow
+    â”‚
+    â”œâ”€â”€ Emit CTX.WindowClosing
+    â”œâ”€â”€ Flush remaining items to Memory OS (if unpinned)
+    â”œâ”€â”€ Clear all sections
+    â”œâ”€â”€ Emit CTX.WindowCleared
+    â””â”€â”€ Destroy ContextWindow
 ```
 
 ### Section Ordering
@@ -144,9 +144,9 @@ The window operates within a token budget set by LLMOS. Budget enforcement is ch
 interface BudgetConfig {
   max_tokens: number
   hard_limit: number            // Absolute maximum (max_tokens * 1.1)
-  warning_threshold: number     // 0.0–1.0, fraction of max_tokens
-  compression_trigger: number   // 0.0–1.0, fraction of max_tokens
-  emergency_threshold: number   // 0.0–1.0, fraction of max_tokens
+  warning_threshold: number     // 0.0â€“1.0, fraction of max_tokens
+  compression_trigger: number   // 0.0â€“1.0, fraction of max_tokens
+  emergency_threshold: number   // 0.0â€“1.0, fraction of max_tokens
 }
 
 // Default config
@@ -162,10 +162,10 @@ const DEFAULT_BUDGET: BudgetConfig = {
 | Threshold | Action |
 |-----------|--------|
 | total_tokens < warning_threshold | Normal operation |
-| warning_threshold ≤ total_tokens < compression_trigger | Log warning; continue |
-| compression_trigger ≤ total_tokens < emergency_threshold | Trigger compression |
-| emergency_threshold ≤ total_tokens < hard_limit | Force compression with aggressive strategies |
-| total_tokens ≥ hard_limit | Emergency eviction: drop lowest-priority items unconditionally |
+| warning_threshold â‰¤ total_tokens < compression_trigger | Log warning; continue |
+| compression_trigger â‰¤ total_tokens < emergency_threshold | Trigger compression |
+| emergency_threshold â‰¤ total_tokens < hard_limit | Force compression with aggressive strategies |
+| total_tokens â‰¥ hard_limit | Emergency eviction: drop lowest-priority items unconditionally |
 
 ## Pull Mechanics
 
@@ -185,7 +185,7 @@ pullWindow(session_id: string): ContextWindow {
   // 3. Apply priority decay to non-pinned items
   applyPriorityDecay(window)
 
-  // 4. Check budget — compress if needed
+  // 4. Check budget â€” compress if needed
   if (window.totalTokens > maxTokens * compressionTrigger)
     compressWindow(session_id, maxTokens)
 
@@ -258,7 +258,7 @@ pushItem(item, source, priority?): ContextItem {
 
 ## Window Snapshots
 
-Every pull returns a snapshot. Snapshots are not stored — they are assembled on demand:
+Every pull returns a snapshot. Snapshots are not stored â€” they are assembled on demand:
 
 ```typescript
 interface WindowSnapshot {
@@ -342,20 +342,20 @@ interface BudgetStatus {
 1. User sends message
 2. Conversation OS calls pushItem(userMessage, "conversation", priority=0.95)
 3. Item lands in user_input section
-4. Tool calls execute → results pushed to tool_results section
-5. Sou calls pullWindow() → snapshot assembled
+4. Tool calls execute â†’ results pushed to tool_results section
+5. Sou calls pullWindow() â†’ snapshot assembled
 6. Sou processes and responds
 7. Conversation OS pushes response as turn to conversation_history
-8. TTL ticks → some items may expire
+8. TTL ticks â†’ some items may expire
 ```
 
 ### Pattern 2: Budget Recovery
 
 ```
 1. Window reaches 85% of max_tokens (warning threshold)
-2. Next push triggers checkBudget → status = "warning"
+2. Next push triggers checkBudget â†’ status = "warning"
 3. Warning emitted; compression not triggered yet
-4. Next push at 92% → compression_trigger reached
+4. Next push at 92% â†’ compression_trigger reached
 5. CompressWindow called with target = max_tokens
 6. Items with priority < 0.3 summarized or dropped
 7. Tokens reduced to 75% of budget
@@ -366,9 +366,9 @@ interface BudgetStatus {
 
 ```
 1. Sou switches from session A to session B
-2. Window A suspended → snapshot saved to Episodic Memory
-3. Window B initialized → if first time, empty; if resumed, loaded
-4. Sou returns to session A → restoreWindow(A)
+2. Window A suspended â†’ snapshot saved to Episodic Memory
+3. Window B initialized â†’ if first time, empty; if resumed, loaded
+4. Sou returns to session A â†’ restoreWindow(A)
 5. Window A loaded from suspension snapshot
 6. Items restored; TTL adjusted for elapsed time
 ```
@@ -393,14 +393,14 @@ interface BudgetStatus {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| WM-001 | Sou is the sole reader of the context window | API-level — `pullWindow` is Sou-only |
-| WM-002 | Services write only through pushItem | Architectural — no direct context access |
-| WM-003 | The window is ephemeral; persistence is Memory OS's responsibility | Architectural — Context System is stateless |
-| WM-004 | Token budget is set only by LLMOS | API-level — `setBudget` is LLMOS-only |
-| WM-005 | Pinned items survive compression and eviction | Algorithmic — verified during assembly |
-| WM-006 | Window sections are assembled in fixed order | Algorithmic — ordering enforced in assembleSnapshot |
-| WM-007 | Every context item has a unique item_id and source | Schema — required fields on push |
-| WM-008 | User input is always the first section | Algorithmic — ordering = 0, always present |
+| WM-001 | Sou is the sole reader of the context window | API-level â€” `pullWindow` is Sou-only |
+| WM-002 | Services write only through pushItem | Architectural â€” no direct context access |
+| WM-003 | The window is ephemeral; persistence is Memory OS's responsibility | Architectural â€” Context System is stateless |
+| WM-004 | Token budget is set only by LLMOS | API-level â€” `setBudget` is LLMOS-only |
+| WM-005 | Pinned items survive compression and eviction | Algorithmic â€” verified during assembly |
+| WM-006 | Window sections are assembled in fixed order | Algorithmic â€” ordering enforced in assembleSnapshot |
+| WM-007 | Every context item has a unique item_id and source | Schema â€” required fields on push |
+| WM-008 | User input is always the first section | Algorithmic â€” ordering = 0, always present |
 
 ## Error Cases
 
@@ -418,17 +418,17 @@ interface BudgetStatus {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Window Manager handles only window lifecycle and assembly |
-| R2 — Dependency Order | Depends on Context Registry, Memory OS; no upward deps |
-| R3 — DRY | Window structure defined once in Data Model |
-| R4 — Builder Pattern | Snapshot assembled by pull → decay → compress → order |
-| R5 — Liskov Substitution | Any BudgetConfig implements the interface |
-| R6 — DI over Singletons | Budget config and section ordering injected |
-| R9 — Deterministic | Same inputs produce same window (time-dependent decays) |
-| R10 — Simpler Over Complex | Fixed section ordering with clear slot responsibilities |
-| R13 — Design for Failure | Hard limit prevents OOM; emergency eviction always succeeds |
-| R14 — Paved Path | All context flows through push → pull cycle |
-| R15 — Open/Closed | New section types added via config, not by modifying assembly |
+| R1 â€” Modulsingularity | Window Manager handles only window lifecycle and assembly |
+| R2 â€” Dependency Order | Depends on Context Registry, Memory OS; no upward deps |
+| R3 â€” DRY | Window structure defined once in Data Model |
+| R4 â€” Builder Pattern | Snapshot assembled by pull â†’ decay â†’ compress â†’ order |
+| R5 â€” Liskov Substitution | Any BudgetConfig implements the interface |
+| R6 â€” DI over Singletons | Budget config and section ordering injected |
+| R9 â€” Deterministic | Same inputs produce same window (time-dependent decays) |
+| R10 â€” Simpler Over Complex | Fixed section ordering with clear slot responsibilities |
+| R13 â€” Design for Failure | Hard limit prevents OOM; emergency eviction always succeeds |
+| R14 â€” Paved Path | All context flows through push â†’ pull cycle |
+| R15 â€” Open/Closed | New section types added via config, not by modifying assembly |
 
 ## Related Documents
 

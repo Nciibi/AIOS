@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Coding — 001: Language Support Registry
+﻿# AIOS Bible â€” Domains
+## Coding â€” 001: Language Support Registry
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-COD-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -22,20 +22,20 @@ This registry enables AIOS to abstract over language-specific details while main
 ## Architecture
 
 ```
-                ┌─────────────────────────────────┐
-                │     Language Support Registry     │
-                │  (in-memory + persisted to Academy)│
-                └──────┬────────────┬──────────────┘
-                       │            │
-              ┌────────▼──┐  ┌─────▼─────────┐
-              │ Language   │  │ Toolchain     │
-              │ Profiles   │  │ Configurations│
-              └────────┬───┘  └───────┬────────┘
-                       │              │
-              ┌────────▼──────────────▼────────┐
-              │     BuildSandbox Detection      │
-              │  (runtime version verification)  │
-              └────────────────────────────────┘
+                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                â”‚     Language Support Registry     â”‚
+                â”‚  (in-memory + persisted to Academy)â”‚
+                â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                       â”‚            â”‚
+              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+              â”‚ Language   â”‚  â”‚ Toolchain     â”‚
+              â”‚ Profiles   â”‚  â”‚ Configurationsâ”‚
+              â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                       â”‚              â”‚
+              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”
+              â”‚     BuildSandbox Detection      â”‚
+              â”‚  (runtime version verification)  â”‚
+              â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 The registry is organized as a two-level hierarchy: language profiles define the abstract interface for a language, and toolchain configurations define concrete runtime bindings for a specific version and platform. Code Workers request a language profile at session start; the registry resolves the optimal toolchain configuration based on available runtimes and resource constraints.
@@ -172,28 +172,28 @@ enum SupportLevel {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Language registry is a single, focused module with no cross-cutting concerns |
-| R2 — Dependency Order | Registry depends on BuildSandbox for detection; CodeWorker depends on Registry |
-| R3 — DRY | Language profiles are defined once per language; toolchains inherit from profiles |
-| R4 — Builder Pattern | Profile resolution uses builder pattern: profile + platform -> resolved config |
-| R5 — Liskov Substitution | All language profiles implement same LanguageProfile interface |
-| R6 — DI over Singletons | Registry is injected into Workers via ACF; not accessed as global singleton |
-| R9 — Deterministic | Same language_id + platform + toolchain version always produces identical profile |
-| R10 — Simpler Over Complex | Registry uses flat language map with no inheritance between language profiles |
-| R13 — Design for Failure | Missing toolchain returns degraded profile; Workers operate in limited mode |
-| R14 — Paved Path | Single paved path: register -> detect -> verify -> resolve -> use |
-| R15 — Open/Closed | New languages can be added by registering new profiles; registry logic unchanged |
+| R1 â€” Modulsingularity | Language registry is a single, focused module with no cross-cutting concerns |
+| R2 â€” Dependency Order | Registry depends on BuildSandbox for detection; CodeWorker depends on Registry |
+| R3 â€” DRY | Language profiles are defined once per language; toolchains inherit from profiles |
+| R4 â€” Builder Pattern | Profile resolution uses builder pattern: profile + platform -> resolved config |
+| R5 â€” Liskov Substitution | All language profiles implement same LanguageProfile interface |
+| R6 â€” DI over Singletons | Registry is injected into Workers via ACF; not accessed as global singleton |
+| R9 â€” Deterministic | Same language_id + platform + toolchain version always produces identical profile |
+| R10 â€” Simpler Over Complex | Registry uses flat language map with no inheritance between language profiles |
+| R13 â€” Design for Failure | Missing toolchain returns degraded profile; Workers operate in limited mode |
+| R14 â€” Paved Path | Single paved path: register -> detect -> verify -> resolve -> use |
+| R15 â€” Open/Closed | New languages can be added by registering new profiles; registry logic unchanged |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Coding/000-Overview.md | Coding domain overview — language registry is a foundational component |
-| Bible/07-Domains/Coding/002-Code-Generation.md | Code Generation — consumes language profiles for generation templates |
-| Bible/07-Domains/Coding/003-Review.md | Code Review — uses language capabilities to determine review scope |
-| Bible/07-Domains/Coding/004-Refactoring.md | Refactoring — queries registry for language-specific symbol resolution |
-| Physics/005-Events.md | Evidence — all registry changes are recorded as Events |
-| Physics/007-Capabilities.md | Capabilities — toolchain capability bounds are enforced via Physics |
-| Physics/010-Execution.md | Execution — toolchain verification is part of the execution authorization stage |
-| Bible/02-Core/AGS/000-Overview.md | AGS — CodeWorker Genomes reference language capabilities from registry |
-| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — toolchain providers integrate through registry |
+| Bible/07-Domains/Coding/000-Overview.md | Coding domain overview â€” language registry is a foundational component |
+| Bible/07-Domains/Coding/002-Code-Generation.md | Code Generation â€” consumes language profiles for generation templates |
+| Bible/07-Domains/Coding/003-Review.md | Code Review â€” uses language capabilities to determine review scope |
+| Bible/07-Domains/Coding/004-Refactoring.md | Refactoring â€” queries registry for language-specific symbol resolution |
+| Physics/005-Events.md | Evidence â€” all registry changes are recorded as Events |
+| Physics/007-Capabilities.md | Capabilities â€” toolchain capability bounds are enforced via Physics |
+| Physics/010-Execution.md | Execution â€” toolchain verification is part of the execution authorization stage |
+| Bible/02-Core/AGS/000-Overview.md | AGS â€” CodeWorker Genomes reference language capabilities from registry |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK â€” toolchain providers integrate through registry |

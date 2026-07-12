@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 004 — Procedural Memory
+﻿# AIOS Bible â€” Brain
+## 004 â€” Procedural Memory
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Memory |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Memory |
 | Document ID | AIOS-BBL-002-MEM-004 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Procedural Memory stores learned procedures, skills, behavioral patterns, and operational routines that Sou has acquired through experience or instruction. Unlike Semantic Memory (facts about the world), Procedural Memory captures "how to do things" — the sequences, heuristics, and patterns that Sou uses to perform tasks efficiently.
+Procedural Memory stores learned procedures, skills, behavioral patterns, and operational routines that Sou has acquired through experience or instruction. Unlike Semantic Memory (facts about the world), Procedural Memory captures "how to do things" â€” the sequences, heuristics, and patterns that Sou uses to perform tasks efficiently.
 
 Procedural Memory is the least structured memory type. Items may include freetext procedures, step-by-step guides, decision trees, playbook references, or automation scripts.
 
@@ -31,8 +31,8 @@ Procedure {
   category: "skill" | "routine" | "playbook" | "heuristic" | "template" | "checklist"
   domain: string                 // Which domain this applies to (e.g., "coding", "security")
   content: ProcedureContent
-  confidence: number            // 0.0–1.0, how reliable this procedure has proven
-  success_rate: number          // 0.0–1.0, observed success rate
+  confidence: number            // 0.0â€“1.0, how reliable this procedure has proven
+  success_rate: number          // 0.0â€“1.0, observed success rate
   invocation_count: number      // How many times this procedure has been used
   tags: string[]
   prerequisites: string[]       // Required capabilities or knowledge
@@ -46,7 +46,7 @@ Procedure {
     source_episode?: string
     verified: boolean
     requires_approval: boolean  // Does this procedure need Sou approval before use?
-    plasticity: number          // 0.0–1.0, how adaptable this procedure is
+    plasticity: number          // 0.0â€“1.0, how adaptable this procedure is
     related_procedures: string[]
   }
 }
@@ -122,10 +122,10 @@ DecisionBranch {
 Procedures are acquired through multiple channels:
 
 ```
-Experience → Episodic Memory → Pattern Extraction → Procedure Candidate
-Academy   → Formal Training → Procedure Registration
-Manual    → Sou creates procedure explicitly
-Template  → Template Registry → Instantiated Procedure
+Experience â†’ Episodic Memory â†’ Pattern Extraction â†’ Procedure Candidate
+Academy   â†’ Formal Training â†’ Procedure Registration
+Manual    â†’ Sou creates procedure explicitly
+Template  â†’ Template Registry â†’ Instantiated Procedure
 ```
 
 ### Experience-Based Learning
@@ -162,10 +162,10 @@ Procedures with `success_rate < 0.1` are deprecated and archived.
 1. Sou decides to perform system health check
 2. Sou queries Procedural Memory: "morning system health check"
 3. Returns Procedure with steps:
-   Step 1: Check CPU usage → expected: < 80%
-   Step 2: Check memory usage → expected: < 85%
-   Step 3: Check disk space → expected: > 20% free
-   Step 4: Check service status → expected: all running
+   Step 1: Check CPU usage â†’ expected: < 80%
+   Step 2: Check memory usage â†’ expected: < 85%
+   Step 3: Check disk space â†’ expected: > 20% free
+   Step 4: Check service status â†’ expected: all running
 4. Sou executes each step, recording outcomes
 5. If all steps succeed, success_rate is updated
 6. If any step fails, follow error_handling for that step
@@ -177,11 +177,11 @@ Procedures with `success_rate < 0.1` are deprecated and archived.
 1. Security alert: "Unauthorized access detected"
 2. Sou queries Procedural Memory: "security incident response"
 3. Returns Playbook with decision tree:
-   ┌── Is it active? ── Yes ──→ Contain → Investigate → Remediate
-   │                    No  ──→ Investigate → Document
-   └── Severity? ── Critical → Escalate to Human immediately
-                    High     → Escalate to Security Council
-                    Low      → Handle within Sou's authority
+   â”Œâ”€â”€ Is it active? â”€â”€ Yes â”€â”€â†’ Contain â†’ Investigate â†’ Remediate
+   â”‚                    No  â”€â”€â†’ Investigate â†’ Document
+   â””â”€â”€ Severity? â”€â”€ Critical â†’ Escalate to Human immediately
+                    High     â†’ Escalate to Security Council
+                    Low      â†’ Handle within Sou's authority
 4. Sou follows the playbook, navigating decision nodes
 5. Outcome recorded for success_rate update
 ```
@@ -296,12 +296,12 @@ interface ProcedureOutcome {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| PM-001 | Every procedure has a category and domain | Schema — required on creation |
-| PM-002 | Success rate is bounded [0.0, 1.0] | Schema — clamped on update |
-| PM-003 | Procedures with success_rate < 0.1 are auto-deprecated | Algorithmic — checked after every outcome |
-| PM-004 | Procedure steps are sequentially ordered | Schema — step_number is monotonic |
-| PM-005 | Conditional steps must have both if_true and if_false targets | Schema — validated on creation |
-| PM-006 | Templates require parameter substitution before execution | Algorithmic — instantiateTemplate validates all params |
+| PM-001 | Every procedure has a category and domain | Schema â€” required on creation |
+| PM-002 | Success rate is bounded [0.0, 1.0] | Schema â€” clamped on update |
+| PM-003 | Procedures with success_rate < 0.1 are auto-deprecated | Algorithmic â€” checked after every outcome |
+| PM-004 | Procedure steps are sequentially ordered | Schema â€” step_number is monotonic |
+| PM-005 | Conditional steps must have both if_true and if_false targets | Schema â€” validated on creation |
+| PM-006 | Templates require parameter substitution before execution | Algorithmic â€” instantiateTemplate validates all params |
 
 ## Error Cases
 
@@ -318,17 +318,17 @@ interface ProcedureOutcome {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Procedural Memory handles only how-to knowledge |
-| R2 — Dependency Order | Depends on Memory OS core, Academy; no upward deps |
-| R3 — DRY | Procedures stored once; instantiated via templates |
-| R4 — Builder Pattern | Procedure built by Learning → Extraction → Approval |
-| R5 — Liskov Substitution | Any ProceduralMemoryStore implements the interface |
-| R6 — DI over Singletons | Learning pipeline strategies injected |
-| R9 — Deterministic | Same procedure produces same execution |
-| R10 — Simpler Over Complex | Clear category system with success tracking |
-| R13 — Design for Failure | Low success rate → auto-flag for review |
-| R14 — Paved Path | All procedures flow through store → execute → track |
-| R15 — Open/Closed | New procedure formats added via content format field |
+| R1 â€” Modulsingularity | Procedural Memory handles only how-to knowledge |
+| R2 â€” Dependency Order | Depends on Memory OS core, Academy; no upward deps |
+| R3 â€” DRY | Procedures stored once; instantiated via templates |
+| R4 â€” Builder Pattern | Procedure built by Learning â†’ Extraction â†’ Approval |
+| R5 â€” Liskov Substitution | Any ProceduralMemoryStore implements the interface |
+| R6 â€” DI over Singletons | Learning pipeline strategies injected |
+| R9 â€” Deterministic | Same procedure produces same execution |
+| R10 â€” Simpler Over Complex | Clear category system with success tracking |
+| R13 â€” Design for Failure | Low success rate â†’ auto-flag for review |
+| R14 â€” Paved Path | All procedures flow through store â†’ execute â†’ track |
+| R15 â€” Open/Closed | New procedure formats added via content format field |
 
 ## Related Documents
 

@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — Reasoning Pipeline
+﻿# AIOS Bible â€” Brain
+## 001 â€” Reasoning Pipeline
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Cognitive |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Cognitive |
 | Document ID | AIOS-BBL-002-COG-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Reasoning Pipeline is the end-to-end execution engine for structured reasoning within Cognitive OS. It orchestrates 7 reasoning strategies — chain-of-thought, tree-of-thought, abductive, deductive, inductive, analogical, and counterfactual — as ordered sequences of thought steps routed through LLMOS for inference. The pipeline manages strategy selection, step generation, confidence tracking per step, streaming output, and integration with the Reflection and Metacognition engines. It produces reasoning chains that Sou consumes for decision-making.
+The Reasoning Pipeline is the end-to-end execution engine for structured reasoning within Cognitive OS. It orchestrates 7 reasoning strategies â€” chain-of-thought, tree-of-thought, abductive, deductive, inductive, analogical, and counterfactual â€” as ordered sequences of thought steps routed through LLMOS for inference. The pipeline manages strategy selection, step generation, confidence tracking per step, streaming output, and integration with the Reflection and Metacognition engines. It produces reasoning chains that Sou consumes for decision-making.
 
 ## Data Model
 
@@ -49,7 +49,7 @@ ReasoningPipelineState {
 }
 
 ConfidenceSnapshot {
-  per_step: Map<number, number>    // step_number → confidence (0.0–1.0)
+  per_step: Map<number, number>    // step_number â†’ confidence (0.0â€“1.0)
   aggregate: number                // Overall chain confidence
   volatility: number               // Variance across steps
   low_confidence_steps: number[]   // Steps below threshold
@@ -64,7 +64,7 @@ ThoughtStep {
   type: "premise" | "inference" | "evidence_check" | "counterargument" | "synthesis" | "branch" | "revert"
   content: string
   evidence_ref?: string
-  confidence: number                // 0.0–1.0
+  confidence: number                // 0.0â€“1.0
   parent_step?: number             // For tree-of-thought branching
   alternatives?: AlternativeBranch[]
   token_cost: number
@@ -117,31 +117,31 @@ ReasoningStrategy = "chain_of_thought" | "tree_of_thought" | "abductive" | "dedu
 
 | Strategy | Behavior | Step Pattern | Best For |
 |----------|----------|--------------|----------|
-| Chain-of-thought | Sequential step-by-step reasoning | Premise → Inference → Inference → Conclusion | Complex multi-step problems |
-| Tree-of-thought | Branching exploration with backtracking | Premise → Branch A → Branch B → Prune → Select | Open-ended exploration, creativity |
-| Abductive | Infer best explanation from available evidence | Evidence → Hypotheses → Rank → Best Match | Debugging, root cause diagnosis |
-| Deductive | Apply known rules to reach logical conclusion | Rules → Facts → Apply → Logical Conclusion | Compliance checks, math proofs |
-| Inductive | Generalize patterns from specific examples | Examples → Pattern → Hypothesis → Generalize | Learning, pattern recognition |
-| Analogical | Map known solution from source domain to target | Source → Mapping → Analog → Adapt | Transfer learning, novel problems |
-| Counterfactual | Simulate alternative scenarios | Fact → Alter → Simulate → Compare | Planning, risk assessment |
+| Chain-of-thought | Sequential step-by-step reasoning | Premise â†’ Inference â†’ Inference â†’ Conclusion | Complex multi-step problems |
+| Tree-of-thought | Branching exploration with backtracking | Premise â†’ Branch A â†’ Branch B â†’ Prune â†’ Select | Open-ended exploration, creativity |
+| Abductive | Infer best explanation from available evidence | Evidence â†’ Hypotheses â†’ Rank â†’ Best Match | Debugging, root cause diagnosis |
+| Deductive | Apply known rules to reach logical conclusion | Rules â†’ Facts â†’ Apply â†’ Logical Conclusion | Compliance checks, math proofs |
+| Inductive | Generalize patterns from specific examples | Examples â†’ Pattern â†’ Hypothesis â†’ Generalize | Learning, pattern recognition |
+| Analogical | Map known solution from source domain to target | Source â†’ Mapping â†’ Analog â†’ Adapt | Transfer learning, novel problems |
+| Counterfactual | Simulate alternative scenarios | Fact â†’ Alter â†’ Simulate â†’ Compare | Planning, risk assessment |
 
 ### 2. Strategy Selection
 
 ```
 Input: goal, context, problem_type, available_evidence
-  │
-  ├── Analyze problem characteristics
-  │   ├── Well-defined? → Deductive
-  │   ├── Open-ended? → Tree-of-thought
-  │   ├── Evidence-heavy? → Abductive
-  │   ├── Pattern-based? → Inductive
-  │   ├── Known similar problem? → Analogical
-  │   ├── Risk assessment? → Counterfactual
-  │   └── Default → Chain-of-thought
-  │
-  ├── Check selection rules (priority order)
-  ├── Apply confidence threshold filter
-  └── Return selected strategy + rationale
+  â”‚
+  â”œâ”€â”€ Analyze problem characteristics
+  â”‚   â”œâ”€â”€ Well-defined? â†’ Deductive
+  â”‚   â”œâ”€â”€ Open-ended? â†’ Tree-of-thought
+  â”‚   â”œâ”€â”€ Evidence-heavy? â†’ Abductive
+  â”‚   â”œâ”€â”€ Pattern-based? â†’ Inductive
+  â”‚   â”œâ”€â”€ Known similar problem? â†’ Analogical
+  â”‚   â”œâ”€â”€ Risk assessment? â†’ Counterfactual
+  â”‚   â””â”€â”€ Default â†’ Chain-of-thought
+  â”‚
+  â”œâ”€â”€ Check selection rules (priority order)
+  â”œâ”€â”€ Apply confidence threshold filter
+  â””â”€â”€ Return selected strategy + rationale
 ```
 
 ### 3. Thought Step Generation
@@ -155,9 +155,9 @@ For each step in the reasoning chain:
   5. Assign step-level confidence score
   6. Emit ThoughtStepGenerated event
   7. Check for early termination conditions:
-     - Conclusion reached → complete pipeline
-     - Low confidence → flag for metacognition
-     - Timeout → return partial chain
+     - Conclusion reached â†’ complete pipeline
+     - Low confidence â†’ flag for metacognition
+     - Timeout â†’ return partial chain
 ```
 
 ### 4. Streaming Thought Output
@@ -183,9 +183,9 @@ Each step is emitted as it is generated, allowing Sou to display or act on inter
 ### 5. LLMOS Integration
 
 ```
-Pipeline → Strategy Prompt Builder → LLMOS Gateway → Step Parser → ThoughtStep
-                │                          │
-                └── Templates for each      └── Token tracking
+Pipeline â†’ Strategy Prompt Builder â†’ LLMOS Gateway â†’ Step Parser â†’ ThoughtStep
+                â”‚                          â”‚
+                â””â”€â”€ Templates for each      â””â”€â”€ Token tracking
                     strategy                     Cost tracking
                     Context assembly              Streaming support
 ```
@@ -265,14 +265,14 @@ interface ReasoningContext {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| COG-REASON-001 | Every reasoning pipeline has exactly one active strategy | Algorithmic — no hybrid execution |
-| COG-REASON-002 | Step numbers are strictly monotonically increasing | Algorithmic — auto-increment per step |
-| COG-REASON-003 | Every step in a chain has a non-null confidence score | Schema — required field on ThoughtStep |
-| COG-REASON-004 | Pipeline state transitions follow: pending → running → streaming → completed/failed | Algorithmic — state machine enforced |
-| COG-REASON-005 | A completed pipeline cannot be resumed | Algorithmic — immutable after completion |
-| COG-REASON-006 | All reasoning steps are logged to Event Store before emission | Architectural — write-before-emit |
-| COG-REASON-007 | Strategy selection is deterministic for identical inputs at temperature=0 | Algorithmic — selection rules ordered by priority |
-| COG-REASON-008 | Branching depth never exceeds configured branching_limit | Algorithmic — enforced in tree-of-thought executor |
+| COG-REASON-001 | Every reasoning pipeline has exactly one active strategy | Algorithmic â€” no hybrid execution |
+| COG-REASON-002 | Step numbers are strictly monotonically increasing | Algorithmic â€” auto-increment per step |
+| COG-REASON-003 | Every step in a chain has a non-null confidence score | Schema â€” required field on ThoughtStep |
+| COG-REASON-004 | Pipeline state transitions follow: pending â†’ running â†’ streaming â†’ completed/failed | Algorithmic â€” state machine enforced |
+| COG-REASON-005 | A completed pipeline cannot be resumed | Algorithmic â€” immutable after completion |
+| COG-REASON-006 | All reasoning steps are logged to Event Store before emission | Architectural â€” write-before-emit |
+| COG-REASON-007 | Strategy selection is deterministic for identical inputs at temperature=0 | Algorithmic â€” selection rules ordered by priority |
+| COG-REASON-008 | Branching depth never exceeds configured branching_limit | Algorithmic â€” enforced in tree-of-thought executor |
 
 ## Error Cases
 
@@ -293,17 +293,17 @@ interface ReasoningContext {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Reasoning Pipeline only manages step-by-step reasoning |
-| R2 — Dependency Order | Depends on LLMOS, Event Store, Strategy Registry |
-| R3 — DRY | Strategy step patterns defined once per executor |
-| R4 — Builder Pattern | Pipeline built step by step via strategy executor |
-| R5 — Liskov Substitution | Any StrategyExecutor implements the interface |
-| R6 — DI over Singletons | Strategy executors and prompt templates injected |
-| R9 — Deterministic | Same inputs produce same chain at temperature=0 |
-| R10 — Simpler Over Complex | Uses explicit strategy enum, not free-form reasoning |
-| R13 — Design for Failure | Timeouts and partial chains always handled |
-| R14 — Paved Path | All reasoning flows through `reason` method |
-| R15 — Open/Closed | New strategies added by registering an executor |
+| R1 â€” Modulsingularity | Reasoning Pipeline only manages step-by-step reasoning |
+| R2 â€” Dependency Order | Depends on LLMOS, Event Store, Strategy Registry |
+| R3 â€” DRY | Strategy step patterns defined once per executor |
+| R4 â€” Builder Pattern | Pipeline built step by step via strategy executor |
+| R5 â€” Liskov Substitution | Any StrategyExecutor implements the interface |
+| R6 â€” DI over Singletons | Strategy executors and prompt templates injected |
+| R9 â€” Deterministic | Same inputs produce same chain at temperature=0 |
+| R10 â€” Simpler Over Complex | Uses explicit strategy enum, not free-form reasoning |
+| R13 â€” Design for Failure | Timeouts and partial chains always handled |
+| R14 â€” Paved Path | All reasoning flows through `reason` method |
+| R15 â€” Open/Closed | New strategies added by registering an executor |
 
 ## Related Documents
 

@@ -1,13 +1,13 @@
-# AIOS Bible — Institutions
-## Organizations 000 — Overview
+﻿# AIOS Bible â€” Institutions
+## Organizations 000 â€” Overview
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Institutions |
+| Version | 1.0.0 |
+| Category | Bible â€” Institutions |
 | Document ID | AIOS-BBL-003-ORG-000 |
-| Source Laws | Law 2 — Law of Non-Execution, Law 5 — Law of Identity, Law 6 — Law of Lifecycle Compliance, Law 10 — Law of Tenure |
+| Source Laws | Law 2 â€” Law of Non-Execution, Law 5 â€” Law of Identity, Law 6 â€” Law of Lifecycle Compliance, Law 10 â€” Law of Tenure |
 | Source Physics | Physics/003-Organizations.md, Physics/005-Events.md, Physics/006-Lifecycles.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Organizations are the constitutional units of collective action in AIOS. An Organization transforms strategic intent into coordinated execution by owning Missions, employing Workers, managing resources, and governing member entities. Unlike Workers (temporary) and Missions (finite), Organizations endure — they are the permanent operational fabric of AIOS.
+Organizations are the constitutional units of collective action in AIOS. An Organization transforms strategic intent into coordinated execution by owning Missions, employing Workers, managing resources, and governing member entities. Unlike Workers (temporary) and Missions (finite), Organizations endure â€” they are the permanent operational fabric of AIOS.
 
 This volume defines the Organization architecture: how Organizations are structured (OOM), how they stay healthy (OHS), how they are discovered (ODS), how they make decisions (ORG), how they compose sub-units (DOM), how they interact (OIS), how they employ Engines (EEE), and how they are evaluated (OPE).
 
@@ -24,7 +24,7 @@ This volume defines the Organization architecture: how Organizations are structu
 Organizations follow a 7-state lifecycle managed by OSYS (Core/OSYS/002-Org-Lifecycle.md):
 
 ```
-Created → Verified → Active → Suspended → Restored → Dissolved → Archived
+Created â†’ Verified â†’ Active â†’ Suspended â†’ Restored â†’ Dissolved â†’ Archived
 ```
 
 | State | Description | Operational Capability |
@@ -43,14 +43,14 @@ Organizations are categorized by type (from Core/OSYS/000-Overview.md):
 
 | Type | Description | Can Own Missions? | Can Employ Workers? |
 |------|-------------|-------------------|---------------------|
-| **ORG** — Root Organization | Top-level strategic entity | Yes | Yes |
-| **ODS** — Department/Squad | Functional sub-Organization | Yes (within parent bounds) | Yes (within parent bounds) |
-| **OHS** — Hub/Shared Service | Shared capability center | Limited | Yes |
-| **OOM** — Operational Oversight | Monitoring and governance body | No | Yes (limited) |
-| **OPE** — Project/Program Entity | Temporary project structure | Yes | Yes (temporary) |
-| **EEE** — Engine Execution Environment | Engine hosting entity | No | Yes (engines only) |
-| **OIS** — Isolation/Sandbox | Sandboxed execution environment | No | Yes (sandboxed) |
-| **DOM** — Domain Organization | Domain-specific operational unit | Yes | Yes |
+| **ORG** â€” Root Organization | Top-level strategic entity | Yes | Yes |
+| **ODS** â€” Department/Squad | Functional sub-Organization | Yes (within parent bounds) | Yes (within parent bounds) |
+| **OHS** â€” Hub/Shared Service | Shared capability center | Limited | Yes |
+| **OOM** â€” Operational Oversight | Monitoring and governance body | No | Yes (limited) |
+| **OPE** â€” Project/Program Entity | Temporary project structure | Yes | Yes (temporary) |
+| **EEE** â€” Engine Execution Environment | Engine hosting entity | No | Yes (engines only) |
+| **OIS** â€” Isolation/Sandbox | Sandboxed execution environment | No | Yes (sandboxed) |
+| **DOM** â€” Domain Organization | Domain-specific operational unit | Yes | Yes |
 
 ## Hierarchy Rules
 
@@ -58,48 +58,48 @@ The Organization hierarchy enforces strict structural rules:
 
 | Rule | Constraint | Violation Consequence |
 |------|-----------|----------------------|
-| Single Parent | Every Organization has exactly one parent (except root) | OOM_HIE_002 — creation denied |
-| Tree Structure | No cycles or cross-links between branches | OOM_HIE_003 — move denied |
-| Depth Limit | Maximum 7 levels from root to deepest leaf | OOM_HIE_001 — creation denied |
-| Parent Scope | Parent defines policy bounds for children | ORG_GOV_005 — policy rejected |
+| Single Parent | Every Organization has exactly one parent (except root) | OOM_HIE_002 â€” creation denied |
+| Tree Structure | No cycles or cross-links between branches | OOM_HIE_003 â€” move denied |
+| Depth Limit | Maximum 7 levels from root to deepest leaf | OOM_HIE_001 â€” creation denied |
+| Parent Scope | Parent defines policy bounds for children | ORG_GOV_005 â€” policy rejected |
 | Resource Flow | Resources flow from parent to child | ROS allocation enforced |
 
 ## Organization Architecture
 
 ```
-┌────────────────────────────────────────────────────────────────┐
-│                        Organization                              │
-│                                                                │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐            │
-│  │ OOM (001)   │  │ OHS (002)   │  │ ODS (003)   │            │
-│  │ Object Model│  │ Health Svc  │  │ Directory   │            │
-│  │ Structure,  │  │ Monitoring, │  │ Lookup,     │            │
-│  │ Depts, Roles│  │ Self-Healing│  │ Hierarchy   │            │
-│  └─────────────┘  └─────────────┘  └─────────────┘            │
-│                                                                │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐            │
-│  │ ORG (004)   │  │ DOM (005)   │  │ OIS (006)   │            │
-│  │ Governance  │  │ Department  │  │ Interaction │            │
-│  │ Decisions,  │  │ Sub-Org     │  │ Cross-Org   │            │
-│  │ Voting      │  │ Structure   │  │ Comms       │            │
-│  └─────────────┘  └─────────────┘  └─────────────┘            │
-│                                                                │
-│  ┌─────────────┐  ┌─────────────┐                              │
-│  │ EEE (007)   │  │ OPE (008)   │                              │
-│  │ Engine      │  │ Performance │                              │
-│  │ Employment  │  │ Evaluator   │                              │
-│  │ Exchange    │  │ Metrics     │                              │
-│  └─────────────┘  └─────────────┘                              │
-└────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                        Organization                              â”‚
+â”‚                                                                â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”            â”‚
+â”‚  â”‚ OOM (001)   â”‚  â”‚ OHS (002)   â”‚  â”‚ ODS (003)   â”‚            â”‚
+â”‚  â”‚ Object Modelâ”‚  â”‚ Health Svc  â”‚  â”‚ Directory   â”‚            â”‚
+â”‚  â”‚ Structure,  â”‚  â”‚ Monitoring, â”‚  â”‚ Lookup,     â”‚            â”‚
+â”‚  â”‚ Depts, Rolesâ”‚  â”‚ Self-Healingâ”‚  â”‚ Hierarchy   â”‚            â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜            â”‚
+â”‚                                                                â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”            â”‚
+â”‚  â”‚ ORG (004)   â”‚  â”‚ DOM (005)   â”‚  â”‚ OIS (006)   â”‚            â”‚
+â”‚  â”‚ Governance  â”‚  â”‚ Department  â”‚  â”‚ Interaction â”‚            â”‚
+â”‚  â”‚ Decisions,  â”‚  â”‚ Sub-Org     â”‚  â”‚ Cross-Org   â”‚            â”‚
+â”‚  â”‚ Voting      â”‚  â”‚ Structure   â”‚  â”‚ Comms       â”‚            â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜            â”‚
+â”‚                                                                â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                              â”‚
+â”‚  â”‚ EEE (007)   â”‚  â”‚ OPE (008)   â”‚                              â”‚
+â”‚  â”‚ Engine      â”‚  â”‚ Performance â”‚                              â”‚
+â”‚  â”‚ Employment  â”‚  â”‚ Evaluator   â”‚                              â”‚
+â”‚  â”‚ Exchange    â”‚  â”‚ Metrics     â”‚                              â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                              â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Relationship to Core/OSYS
 
-OSYS (Core/OSYS) manages the Organization lifecycle — creation, verification, activation, suspension, restoration, dissolution, and archival. OSYS is the administrative backbone. The Institutions/Organizations volume defines the operational model of Organizations once they are created:
+OSYS (Core/OSYS) manages the Organization lifecycle â€” creation, verification, activation, suspension, restoration, dissolution, and archival. OSYS is the administrative backbone. The Institutions/Organizations volume defines the operational model of Organizations once they are created:
 
 | Aspect | Core/OSYS | Institutions/Organizations |
 |--------|-----------|---------------------------|
-| Lifecycle | Created → Verified → Active → Suspended → Restored → Dissolved → Archived | Uses Active state to operate |
+| Lifecycle | Created â†’ Verified â†’ Active â†’ Suspended â†’ Restored â†’ Dissolved â†’ Archived | Uses Active state to operate |
 | Identity | IDS creates and manages | Uses identity for all operations |
 | Structure | Factory creates skeleton | OOM defines structure, departments, roles |
 | Health | OSYS monitors lifecycle compliance | OHS monitors operational health |
@@ -120,7 +120,7 @@ OSYS (Core/OSYS) manages the Organization lifecycle — creation, verification, 
 
 2. **Hierarchy Without Bypass**: Organizations form a tree hierarchy. Sub-Organizations communicate through their parent. No direct child-to-child communication without parent mediation. Max depth: 7 levels. (Physics/003 Invariant 11)
 
-3. **Lifecycle Compliance**: Every Organization follows the canonical lifecycle: Created → Verified → Active → Suspended → Restored → Dissolved → Archived. All transitions require authorization and produce Events. (PHI-006)
+3. **Lifecycle Compliance**: Every Organization follows the canonical lifecycle: Created â†’ Verified â†’ Active â†’ Suspended â†’ Restored â†’ Dissolved â†’ Archived. All transitions require authorization and produce Events. (PHI-006)
 
 4. **Resource Accountability**: Organizations manage resources through ROS. Resource allocations are tracked per Organization. No resource is unowned. (Physics/003 Invariant 12)
 
@@ -144,37 +144,37 @@ OSYS (Core/OSYS) manages the Organization lifecycle — creation, verification, 
 The following describes how data flows through the Organization components during a typical operation:
 
 ```
-                     ┌─────────────┐
-                     │  External   │
-                     │  Request    │
-                     └──────┬──────┘
-                            │ ACF
-                            ▼
-               ┌───────────────────────┐
-               │   ODS (Directory)     │
-               │   resolveOrg()        │
-               └──────┬────────────────┘
-                      │
-                      ▼
-               ┌───────────────────────┐
-               │   OOM (Object Model)  │
-               │   validate + update   │
-               └──────┬────────────────┘
-                      │
-              ┌───────┼───────┐
-              ▼       ▼       ▼
-       ┌────────┐ ┌────────┐ ┌────────┐
-       │ OHS    │ │ ORG    │ │ DOM    │
-       │ Health │ │Governan│ │Dept    │
-       │ Check  │ │ Auth   │ │ Update │
-       └────┬───┘ └────┬───┘ └────┬───┘
-            │          │          │
-            └──────────┼──────────┘
-                       ▼
-               ┌───────────────────────┐
-               │   OIS / EEE / OPE     │
-               │   cross-cutting ops   │
-               └───────────────────────┘
+                     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                     â”‚  External   â”‚
+                     â”‚  Request    â”‚
+                     â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜
+                            â”‚ ACF
+                            â–¼
+               â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+               â”‚   ODS (Directory)     â”‚
+               â”‚   resolveOrg()        â”‚
+               â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                      â”‚
+                      â–¼
+               â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+               â”‚   OOM (Object Model)  â”‚
+               â”‚   validate + update   â”‚
+               â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                      â”‚
+              â”Œâ”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”
+              â–¼       â–¼       â–¼
+       â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”
+       â”‚ OHS    â”‚ â”‚ ORG    â”‚ â”‚ DOM    â”‚
+       â”‚ Health â”‚ â”‚Governanâ”‚ â”‚Dept    â”‚
+       â”‚ Check  â”‚ â”‚ Auth   â”‚ â”‚ Update â”‚
+       â””â”€â”€â”€â”€â”¬â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”¬â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”¬â”€â”€â”€â”˜
+            â”‚          â”‚          â”‚
+            â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                       â–¼
+               â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+               â”‚   OIS / EEE / OPE     â”‚
+               â”‚   cross-cutting ops   â”‚
+               â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Organization Events
@@ -207,7 +207,7 @@ Organizations have defined capability scopes per their Genome (AGS). An Organiza
 
 ### Communication
 
-All Organization communication flows through ACF. Inter-Organization communication requires parent Organization routing. OIS is the cross-Organization communication service. (Law 3 — Communication)
+All Organization communication flows through ACF. Inter-Organization communication requires parent Organization routing. OIS is the cross-Organization communication service. (Law 3 â€” Communication)
 
 ### Design DNA
 
@@ -216,7 +216,7 @@ All Organization communication flows through ACF. Inter-Organization communicati
 | R1 (Modulsingularity) | Each Organization component (OOM, OHS, ODS, etc.) has a single responsibility |
 | R2 (Dependency Order) | Organizations depend on Core (OSYS, ROS, LMS) which depends on Physics |
 | R5 (Liskov) | All Organization types implement the Organization interface |
-| R10 (Simpler Over Complex) | Organization hierarchy is a tree — no complex graph structures |
+| R10 (Simpler Over Complex) | Organization hierarchy is a tree â€” no complex graph structures |
 | R13 (Design for Failure) | ODS is read-replicated for query availability; OHS degrades gracefully |
 | R14 (Paved Path) | Single paved path for Organization operations |
 
@@ -224,19 +224,19 @@ All Organization communication flows through ACF. Inter-Organization communicati
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/003-Organizations.md | Organizations Physics — canonical definitions and 14 invariants |
-| Physics/005-Events.md | Evidence — all Organization operations produce Events |
-| Physics/006-Lifecycles.md | Lifecycles — Organizations follow canonical lifecycle |
-| Physics/007-Capabilities.md | Capabilities — Organizations are capability containers |
-| Physics/008-Security.md | Security — Organization operations require authorization |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
-| Bible/01-Governance/000-Overview.md | GOV-001–005 — governance identifiers |
-| Bible/02-Core/OSYS/000-Overview.md | OSYS overview — Organization creation and lifecycle |
-| Bible/02-Core/OSYS/001-Architecture.md | OSYS architecture — Factory, Registry, Lifecycle Manager |
-| Bible/02-Core/OSYS/002-Org-Lifecycle.md | Organization lifecycle — 7-state model |
-| Bible/02-Core/AGS/000-Overview.md | AGS — Organization Genomes |
-| Bible/02-Core/ROS/005-Budget.md | ROS — Organization resource budgets |
-| Bible/03-Institutions/Missions/000-Lifecycle.md | Missions — Organizations own Missions |
-| Bible/03-Institutions/Workers/000-Overview.md | Workers — Organizations employ Workers |
-| Bible/04-Execution/Security/IDS | IDS — Organization identity
+| Physics/003-Organizations.md | Organizations Physics â€” canonical definitions and 14 invariants |
+| Physics/005-Events.md | Evidence â€” all Organization operations produce Events |
+| Physics/006-Lifecycles.md | Lifecycles â€” Organizations follow canonical lifecycle |
+| Physics/007-Capabilities.md | Capabilities â€” Organizations are capability containers |
+| Physics/008-Security.md | Security â€” Organization operations require authorization |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |
+| Bible/01-Governance/000-Overview.md | GOV-001â€“005 â€” governance identifiers |
+| Bible/02-Core/OSYS/000-Overview.md | OSYS overview â€” Organization creation and lifecycle |
+| Bible/02-Core/OSYS/001-Architecture.md | OSYS architecture â€” Factory, Registry, Lifecycle Manager |
+| Bible/02-Core/OSYS/002-Org-Lifecycle.md | Organization lifecycle â€” 7-state model |
+| Bible/02-Core/AGS/000-Overview.md | AGS â€” Organization Genomes |
+| Bible/02-Core/ROS/005-Budget.md | ROS â€” Organization resource budgets |
+| Bible/03-Institutions/Missions/000-Lifecycle.md | Missions â€” Organizations own Missions |
+| Bible/03-Institutions/Workers/000-Overview.md | Workers â€” Organizations employ Workers |
+| Bible/04-Execution/Security/IDS | IDS â€” Organization identity

@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — STT Engine
+﻿# AIOS Bible â€” Brain
+## 001 â€” STT Engine
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Voice |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Voice |
 | Document ID | AIOS-BBL-002-VCE-001 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -17,7 +17,7 @@
 
 The STT Engine converts audio input into text for Sou to process. It supports both real-time streaming transcription and batch processing of pre-recorded audio. The STT Engine abstracts provider-specific implementations behind a unified interface, enabling language detection, speaker diarization, custom vocabulary, punctuation restoration, and profanity filtering. All transcription includes confidence scoring and word-level timing for downstream use by Sou's context system.
 
-Under BRAIN-007 and VOI-002, the STT Engine is stateless — audio is ephemeral unless explicitly stored to Memory OS.
+Under BRAIN-007 and VOI-002, the STT Engine is stateless â€” audio is ephemeral unless explicitly stored to Memory OS.
 
 ## Data Model
 
@@ -39,9 +39,9 @@ STTRequest {
 STTResult {
   request_id: string
   transcript: string
-  confidence: number                // 0.0–1.0 overall confidence
+  confidence: number                // 0.0â€“1.0 overall confidence
   language: string
-  language_confidence?: number      // 0.0–1.0, only if detection ran
+  language_confidence?: number      // 0.0â€“1.0, only if detection ran
   words: WordTiming[]
   speaker_labels?: SpeakerLabel[]   // Only if diarization enabled
   duration_ms: number
@@ -58,7 +58,7 @@ WordTiming {
   word: string
   start_ms: number
   end_ms: number
-  confidence: number                // 0.0–1.0 per-word confidence
+  confidence: number                // 0.0â€“1.0 per-word confidence
   speaker_tag?: number              // Speaker label if diarization enabled
 }
 ```
@@ -94,7 +94,7 @@ STTConfig {
 ```typescript
 CustomVocabEntry {
   phrase: string
-  boost: number                     // 1–20 recognition boost
+  boost: number                     // 1â€“20 recognition boost
   sounds_like?: string[]            // Phonetic hints
 }
 ```
@@ -127,7 +127,7 @@ When `source_language` is omitted, the STT Engine auto-detects language from the
 ```typescript
 DetectedLanguage {
   language: string                  // BCP-47 tag
-  confidence: number                // 0.0–1.0
+  confidence: number                // 0.0â€“1.0
   alternatives: { language: string, confidence: number }[]
 }
 ```
@@ -144,9 +144,9 @@ Domain-specific terms are supplied via `custom_vocabulary` entries. Each entry h
 
 | Boost Range | Effect |
 |-------------|--------|
-| 1–5 | Mild preference |
-| 6–10 | Strong preference — likely overrides acoustically similar terms |
-| 11–20 | Explicit override — forces recognition (use with care) |
+| 1â€“5 | Mild preference |
+| 6â€“10 | Strong preference â€” likely overrides acoustically similar terms |
+| 11â€“20 | Explicit override â€” forces recognition (use with care) |
 
 ### Punctuation Restoration
 
@@ -276,7 +276,7 @@ interface ProviderHealth {
   status: "healthy" | "degraded" | "unavailable"
   latency_ms: number
   last_check: timestamp
-  error_rate: number               // 0.0–1.0 over last 100 requests
+  error_rate: number               // 0.0â€“1.0 over last 100 requests
 }
 
 interface STTConfigDefaults {
@@ -316,12 +316,12 @@ type STTErrorCode =
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| STT-001 | Every STT result includes a confidence score between 0.0 and 1.0 | Schema — required field |
-| STT-002 | Audio input format must match the first chunk's format throughout a stream | Algorithmic — format validated on each push |
-| STT-003 | Language detection is idempotent for identical audio | Model-dependent — same input returns same language |
-| STT-004 | Profanity filtering never changes confidence scores | Algorithmic — filter runs post-recognition |
-| STT-005 | Custom vocabulary entries are validated for boost range (1–20) | Schema — boost range enforced at config parse |
-| STT-006 | Streaming results are monotonically additive — later chunks supersede earlier ones | Algorithmic — partial results aggregate forward |
+| STT-001 | Every STT result includes a confidence score between 0.0 and 1.0 | Schema â€” required field |
+| STT-002 | Audio input format must match the first chunk's format throughout a stream | Algorithmic â€” format validated on each push |
+| STT-003 | Language detection is idempotent for identical audio | Model-dependent â€” same input returns same language |
+| STT-004 | Profanity filtering never changes confidence scores | Algorithmic â€” filter runs post-recognition |
+| STT-005 | Custom vocabulary entries are validated for boost range (1â€“20) | Schema â€” boost range enforced at config parse |
+| STT-006 | Streaming results are monotonically additive â€” later chunks supersede earlier ones | Algorithmic â€” partial results aggregate forward |
 
 ## Error Cases
 
@@ -340,17 +340,17 @@ type STTErrorCode =
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | STT Engine handles only speech-to-text conversion |
-| R2 — Dependency Order | Depends on Voice Router for provider selection; no upward deps |
-| R3 — DRY | Audio format validation defined once in shared utilities |
-| R4 — Builder Pattern | Streaming pipeline built by open → push chunks → close |
-| R5 — Liskov Substitution | Any provider adapter implements STTProvider interface |
-| R6 — DI over Singletons | Provider adapters and config injected |
-| R9 — Deterministic | Same audio + config produces same transcript (provider-model-dependent) |
-| R10 — Simpler Over Complex | Clear batch/streaming split with shared config model |
-| R13 — Design for Failure | Stream timeout, low confidence, provider errors all handled gracefully |
-| R14 — Paved Path | All transcription flows through `transcribe()` or `transcribeStream()` |
-| R15 — Open/Closed | New STT providers added via adapter, not by modifying engine core |
+| R1 â€” Modulsingularity | STT Engine handles only speech-to-text conversion |
+| R2 â€” Dependency Order | Depends on Voice Router for provider selection; no upward deps |
+| R3 â€” DRY | Audio format validation defined once in shared utilities |
+| R4 â€” Builder Pattern | Streaming pipeline built by open â†’ push chunks â†’ close |
+| R5 â€” Liskov Substitution | Any provider adapter implements STTProvider interface |
+| R6 â€” DI over Singletons | Provider adapters and config injected |
+| R9 â€” Deterministic | Same audio + config produces same transcript (provider-model-dependent) |
+| R10 â€” Simpler Over Complex | Clear batch/streaming split with shared config model |
+| R13 â€” Design for Failure | Stream timeout, low confidence, provider errors all handled gracefully |
+| R14 â€” Paved Path | All transcription flows through `transcribe()` or `transcribeStream()` |
+| R15 â€” Open/Closed | New STT providers added via adapter, not by modifying engine core |
 
 ## Related Documents
 

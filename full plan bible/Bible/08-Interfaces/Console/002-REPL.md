@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## Console — 002: REPL
+﻿# AIOS Bible â€” Interfaces
+## Console â€” 002: REPL
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-GC-002 |
-| Source Laws | Law 1 — Law of Origin, Law 4 — Law of Evidence, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 1 â€” Law of Origin, Law 4 â€” Law of Evidence, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/006-Lifecycles.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -21,25 +21,25 @@ The REPL (Read-Eval-Print-Loop) provides an interactive, stateful environment fo
 
 ```
 Human input
-    │
-    ▼
-┌──────────────┐
-│  read_input   │  capture input, handle multi-line, history recall
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│  eval_command │  resolve against REPL context, dispatch execution
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│  print_result │  format output for interactive display
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│  update_context│  merge results into REPL session state
-└──────┬───────┘
-       │
-       └──► loop back to read_input
+    â”‚
+    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  read_input   â”‚  capture input, handle multi-line, history recall
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  eval_command â”‚  resolve against REPL context, dispatch execution
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  print_result â”‚  format output for interactive display
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  update_contextâ”‚  merge results into REPL session state
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+       â”‚
+       â””â”€â”€â–º loop back to read_input
 ```
 
 ## Data Model (TypeScript)
@@ -170,40 +170,40 @@ interface HistoryNavigator {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| GC-002-01 | Every REPL evaluation produces an evidence record | Architectural — eval_command records to EVS before returning result |
-| GC-002-02 | EvalContext is validated before every evaluation, never during | Algorithmic — context integrity check runs before eval |
-| GC-002-03 | History entries are immutable after recording | Algorithmic — history is append-only within a session |
-| GC-002-04 | REPL session state is preserved across context corruption via snapshot | Architectural — snapshots taken before each eval |
-| GC-002-05 | Input is validated before dispatch to CLI engine | Algorithmic — read_input normalizes before eval_command |
-| GC-002-06 | Multi-line input has a configurable maximum line count | Algorithmic — input reader enforces line limit |
+| GC-002-01 | Every REPL evaluation produces an evidence record | Architectural â€” eval_command records to EVS before returning result |
+| GC-002-02 | EvalContext is validated before every evaluation, never during | Algorithmic â€” context integrity check runs before eval |
+| GC-002-03 | History entries are immutable after recording | Algorithmic â€” history is append-only within a session |
+| GC-002-04 | REPL session state is preserved across context corruption via snapshot | Architectural â€” snapshots taken before each eval |
+| GC-002-05 | Input is validated before dispatch to CLI engine | Algorithmic â€” read_input normalizes before eval_command |
+| GC-002-06 | Multi-line input has a configurable maximum line count | Algorithmic â€” input reader enforces line limit |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | REPL owns interactive read-eval-print loop; CLI engine owns execution |
-| R2 — Dependency Order | Depends on CLI CommandRegistry, EvalEngine, EVS; no circular deps |
-| R3 — DRY | Command definitions sourced from CLI command registry; REPL does not duplicate |
-| R4 — Builder Pattern | EvalResult built incrementally during evaluation |
-| R5 — Deterministic | Same input with same context produces identical eval outcome |
-| R6 — Single Source | EvalContext is the single source of session state |
-| R9 — Deterministic | Replaying history with same context produces identical results |
-| R10 — Simpler Over Complex | Default print style is compact; full and minimal are opt-in |
-| R13 — Design for Failure | Context corruption triggers snapshot restore; eval failure preserves prior state |
-| R14 — Paved Path | Standard workflow: type command, see result, navigate history |
-| R15 — Open/Closed | New eval features register via EvalEngine extension without modifying REPL loop |
+| R1 â€” Modulsingularity | REPL owns interactive read-eval-print loop; CLI engine owns execution |
+| R2 â€” Dependency Order | Depends on CLI CommandRegistry, EvalEngine, EVS; no circular deps |
+| R3 â€” DRY | Command definitions sourced from CLI command registry; REPL does not duplicate |
+| R4 â€” Builder Pattern | EvalResult built incrementally during evaluation |
+| R5 â€” Deterministic | Same input with same context produces identical eval outcome |
+| R6 â€” Single Source | EvalContext is the single source of session state |
+| R9 â€” Deterministic | Replaying history with same context produces identical results |
+| R10 â€” Simpler Over Complex | Default print style is compact; full and minimal are opt-in |
+| R13 â€” Design for Failure | Context corruption triggers snapshot restore; eval failure preserves prior state |
+| R14 â€” Paved Path | Standard workflow: type command, see result, navigate history |
+| R15 â€” Open/Closed | New eval features register via EvalEngine extension without modifying REPL loop |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/08-Interfaces/Console/000-Overview.md | Governance Console overview — REPL is the interactive mode |
+| Bible/08-Interfaces/Console/000-Overview.md | Governance Console overview â€” REPL is the interactive mode |
 | Bible/08-Interfaces/Console/001-CLI-Commands.md | CLI commands provide the execution layer for REPL evaluations |
 | Bible/08-Interfaces/Console/003-Scripting.md | Scripting engine can drive REPL sessions programmatically |
 | Bible/08-Interfaces/Console/004-AutoComplete.md | Auto-complete powers REPL suggestion engine |
 | Bible/08-Interfaces/Dashboard/000-Overview.md | Dashboard surfaces context that REPL sessions consume |
-| Bible/08-Interfaces/UI/000-Overview.md | General human interface — console is governance-specific |
+| Bible/08-Interfaces/UI/000-Overview.md | General human interface â€” console is governance-specific |
 | Bible/01-Governance/000-Overview.md | Governance services evaluated through REPL commands |
-| Bible/05-Platform/005-AUS.md | Audit System — audit queries executed from REPL |
-| Bible/05-Platform/004-EVS.md | Evidence System — every eval recorded as evidence |
+| Bible/05-Platform/005-AUS.md | Audit System â€” audit queries executed from REPL |
+| Bible/05-Platform/004-EVS.md | Evidence System â€” every eval recorded as evidence |
 | Bible/06-Services/ACF/000-Overview.md | ACF transports all REPL command invocations |

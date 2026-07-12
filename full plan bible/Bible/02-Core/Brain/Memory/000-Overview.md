@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Memory OS
+﻿# AIOS Bible â€” Brain
+## 000 â€” Memory OS
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Memory |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Memory |
 | Document ID | AIOS-BBL-002-MEM-000 |
-| Source Laws | Law 4 — Law of Evidence, Law 5 — Law of Identity, Law 6 — Law of Lifecycle |
+| Source Laws | Law 4 â€” Law of Evidence, Law 5 â€” Law of Identity, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/005-Events.md, Physics/006-Lifecycles.md, Physics/004-Sessions.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Memory OS is the persistence backbone of the Brain. Under BRAIN-007, all Brain services are stateless — every piece of data, every context window, every plan, every conversation turn, every personality trait is persisted through Memory OS. It is the single source of truth for all Brain state.
+Memory OS is the persistence backbone of the Brain. Under BRAIN-007, all Brain services are stateless â€” every piece of data, every context window, every plan, every conversation turn, every personality trait is persisted through Memory OS. It is the single source of truth for all Brain state.
 
 Memory OS manages four types of memory: working memory (active task state), episodic memory (conversation history, experiences), semantic memory (facts, knowledge), and procedural memory (learned patterns, skills). It provides the storage and retrieval APIs that every Brain service consumes.
 
@@ -23,27 +23,27 @@ Memory OS manages four types of memory: working memory (active task state), epis
 
 ```
 Brain Services (Context, Planning, Decision, Tools, Attention, Personality, Conversation, Cognitive)
-   │           │           │           │           │           │           │           │
-   ▼           ▼           ▼           ▼           ▼           ▼           ▼           ▼
-┌─────────────────────────────────────────────────────────────────────────────────────────┐
-│                              Memory OS                                                     │
-│                                                                                            │
-│  ┌──────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────┐        │
-│  │ Working   │  │  Episodic    │  │  Semantic    │  │  Procedural  │  │ Memory   │        │
-│  │ Memory    │─►│  Memory      │─►│  Memory      │─►│  Memory      │─►│ Router   │        │
-│  └──────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └────┬─────┘        │
-│                                                                             │              │
-│  ┌──────────┐  ┌──────────────┐  ┌──────────────┐                          │              │
-│  │ Index    │  │  Vector      │  │  TTL         │                          │              │
-│  │ Store    │  │  Store       │  │  Manager     │                          │              │
-│  └──────────┘  └──────────────┘  └──────────────┘                          │              │
-└─────────────────────────────────────────────────────────────────────────────┼──────────────┘
-                                                                              │
-                                                                              ▼
-                                                                     ┌──────────────┐
-                                                                     │  Event Store │
-                                                                     │ (evidence)   │
-                                                                     └──────────────┘
+   â”‚           â”‚           â”‚           â”‚           â”‚           â”‚           â”‚           â”‚
+   â–¼           â–¼           â–¼           â–¼           â–¼           â–¼           â–¼           â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                              Memory OS                                                     â”‚
+â”‚                                                                                            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”‚
+â”‚  â”‚ Working   â”‚  â”‚  Episodic    â”‚  â”‚  Semantic    â”‚  â”‚  Procedural  â”‚  â”‚ Memory   â”‚        â”‚
+â”‚  â”‚ Memory    â”‚â”€â–ºâ”‚  Memory      â”‚â”€â–ºâ”‚  Memory      â”‚â”€â–ºâ”‚  Memory      â”‚â”€â–ºâ”‚ Router   â”‚        â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜        â”‚
+â”‚                                                                             â”‚              â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                          â”‚              â”‚
+â”‚  â”‚ Index    â”‚  â”‚  Vector      â”‚  â”‚  TTL         â”‚                          â”‚              â”‚
+â”‚  â”‚ Store    â”‚  â”‚  Store       â”‚  â”‚  Manager     â”‚                          â”‚              â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                          â”‚              â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                                                              â”‚
+                                                                              â–¼
+                                                                     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                                                                     â”‚  Event Store â”‚
+                                                                     â”‚ (evidence)   â”‚
+                                                                     â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 Memory OS sits at the foundation of the Brain. Every Brain service depends on it for persistence.
@@ -68,7 +68,7 @@ MemoryMetadata {
   source: string                // Which Brain service created this item
   session_id?: string
   tags: string[]
-  importance: number            // 0.0–1.0, influences retention priority
+  importance: number            // 0.0â€“1.0, influences retention priority
   access_count: number
   last_accessed: timestamp
   version: number
@@ -102,7 +102,7 @@ MemoryQueryResult {
 
 ### 1. Working Memory
 
-Working memory holds the active state of the current session — what Sou is doing right now:
+Working memory holds the active state of the current session â€” what Sou is doing right now:
 
 | Content | Example | TTL | Scope |
 |---------|---------|-----|-------|
@@ -118,7 +118,7 @@ Access pattern: Direct lookup by session_id + key. High throughput, low latency.
 
 ### 2. Episodic Memory
 
-Episodic memory stores past experiences — conversation turns, mission outcomes, user interactions:
+Episodic memory stores past experiences â€” conversation turns, mission outcomes, user interactions:
 
 | Content | Example | TTL | Retention |
 |---------|---------|-----|-----------|
@@ -161,7 +161,7 @@ The Memory Router determines which memory type(s) to query based on the request:
 
 | Query Type | Primary Memory | Secondary Memory |
 |------------|---------------|-----------------|
-| "What am I doing?" | Working | — |
+| "What am I doing?" | Working | â€” |
 | "What happened before?" | Episodic | Working |
 | "What do I know about X?" | Semantic | Episodic |
 | "How do I do X?" | Procedural | Semantic |
@@ -261,12 +261,12 @@ interface TTLScanner {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| MEM-001 | All Brain state is persisted through Memory OS | Architectural — every Brain service depends on Memory OS |
-| MEM-002 | Memory items are immutable after creation (update creates new version) | Architectural — append-only log |
-| MEM-003 | Sou has read access to ALL memories; services have scoped access | API-level — authorization enforced per caller |
-| MEM-004 | Expired items are soft-deleted before hard deletion | Algorithmic — 24-hour grace period |
-| MEM-005 | Working memory is session-scoped and cleared on session end | Algorithmic — TTL policy enforcement |
-| MEM-006 | Semantic memory items are automatically embedded | Architectural — Vector Store is mandatory |
+| MEM-001 | All Brain state is persisted through Memory OS | Architectural â€” every Brain service depends on Memory OS |
+| MEM-002 | Memory items are immutable after creation (update creates new version) | Architectural â€” append-only log |
+| MEM-003 | Sou has read access to ALL memories; services have scoped access | API-level â€” authorization enforced per caller |
+| MEM-004 | Expired items are soft-deleted before hard deletion | Algorithmic â€” 24-hour grace period |
+| MEM-005 | Working memory is session-scoped and cleared on session end | Algorithmic â€” TTL policy enforcement |
+| MEM-006 | Semantic memory items are automatically embedded | Architectural â€” Vector Store is mandatory |
 
 ## Related Documents
 
@@ -297,14 +297,14 @@ interface TTLScanner {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Memory OS does one thing: persistent storage for the Brain |
-| R2 — Dependency Order | Depends on Event Store; no upward deps — all Brain services depend on Memory OS |
-| R3 — DRY | Memory schema defined once in Memory Model |
-| R4 — Builder Pattern | Query built by Router → Index Lookup → Vector Search |
-| R5 — Liskov Substitution | Any MemoryStore implements the interface |
-| R6 — DI over Singletons | Storage backends and index strategies injected |
-| R9 — Deterministic | Same query produces same results (time-dependent data may vary) |
-| R10 — Simpler Over Complex | Uses 4 clear memory types with defined access patterns |
-| R13 — Design for Failure | Soft-delete with 24-hour recovery window |
-| R14 — Paved Path | All persistence flows through `store` and `query` |
-| R15 — Open/Closed | New memory types added via Registry, not by modifying core |
+| R1 â€” Modulsingularity | Memory OS does one thing: persistent storage for the Brain |
+| R2 â€” Dependency Order | Depends on Event Store; no upward deps â€” all Brain services depend on Memory OS |
+| R3 â€” DRY | Memory schema defined once in Memory Model |
+| R4 â€” Builder Pattern | Query built by Router â†’ Index Lookup â†’ Vector Search |
+| R5 â€” Liskov Substitution | Any MemoryStore implements the interface |
+| R6 â€” DI over Singletons | Storage backends and index strategies injected |
+| R9 â€” Deterministic | Same query produces same results (time-dependent data may vary) |
+| R10 â€” Simpler Over Complex | Uses 4 clear memory types with defined access patterns |
+| R13 â€” Design for Failure | Soft-delete with 24-hour recovery window |
+| R14 â€” Paved Path | All persistence flows through `store` and `query` |
+| R15 â€” Open/Closed | New memory types added via Registry, not by modifying core |

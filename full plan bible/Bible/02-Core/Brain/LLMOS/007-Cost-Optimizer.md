@@ -1,18 +1,18 @@
-# AIOS Bible — Brain/LLMOS
-## 007 — Cost Optimizer
+﻿# AIOS Bible â€” Brain/LLMOS
+## 007 â€” Cost Optimizer
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-007 |
-| Source Laws | Law 7 — Law of Capability Bounds (cost constraints) |
+| Source Laws | Law 7 â€” Law of Capability Bounds (cost constraints) |
 | Source Physics | Physics/010-Execution.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 5 — Cost Optimization |
+| Pipeline Stage | 5 â€” Cost Optimization |
 
 ## Purpose
 
@@ -86,7 +86,7 @@ interface CostOptimizationResult {
 }
 ```
 
-Strategies are advisory — the Router may accept or reject the recommendation based on its own scoring.
+Strategies are advisory â€” the Router may accept or reject the recommendation based on its own scoring.
 
 ## Provider-Specific Pricing
 
@@ -124,11 +124,11 @@ interface ModelDiscount {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-CST-001 | Cost estimation is never the sole routing criterion — it contributes to Router scoring. | Architectural — scoring composition |
-| LLM-CST-002 | Cost optimization never suggests a model that violates request model_requirements. | Algorithmic — requirement filtering |
-| LLM-CST-003 | Entity discounts are never exposed to the calling entity (internal only). | Governance — data privacy policy |
-| LLM-CST-004 | Cost estimates are recorded in Events even for cache hits (to preserve cost basis). | Architectural — event logging invariant |
-| LLM-CST-005 | Provider pricing is updated from a central source (ROS billing configuration) — never hardcoded. | Governance — centralized configuration |
+| LLM-CST-001 | Cost estimation is never the sole routing criterion â€” it contributes to Router scoring. | Architectural â€” scoring composition |
+| LLM-CST-002 | Cost optimization never suggests a model that violates request model_requirements. | Algorithmic â€” requirement filtering |
+| LLM-CST-003 | Entity discounts are never exposed to the calling entity (internal only). | Governance â€” data privacy policy |
+| LLM-CST-004 | Cost estimates are recorded in Events even for cache hits (to preserve cost basis). | Architectural â€” event logging invariant |
+| LLM-CST-005 | Provider pricing is updated from a central source (ROS billing configuration) â€” never hardcoded. | Governance â€” centralized configuration |
 
 ## Events
 
@@ -140,17 +140,17 @@ interface ModelDiscount {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Cost Optimizer is the sole cost estimation authority |
-| R2 — Dependency Order | Optimizer depends on Registry pricing data |
-| R3 — DRY | Single estimation algorithm avoids duplication |
-| R4 — Builder Pattern | CostEstimate built through estimation pipeline |
-| R5 — Liskov Substitution | All models cost-estimated uniformly |
-| R6 — DI over Singletons | CostOptimizer injected into pipeline |
-| R9 — Deterministic | Same request produces same cost estimates |
-| R10 — Simpler Over Complex | Linear cost scoring over complex financial models |
-| R13 — Design for Failure | Default pricing when provider data unavailable |
-| R14 — Paved Path | Standard optimization strategies for all entities |
-| R15 — Open/Closed | New strategies added without changing core estimation |
+| R1 â€” Modulsingularity | Cost Optimizer is the sole cost estimation authority |
+| R2 â€” Dependency Order | Optimizer depends on Registry pricing data |
+| R3 â€” DRY | Single estimation algorithm avoids duplication |
+| R4 â€” Builder Pattern | CostEstimate built through estimation pipeline |
+| R5 â€” Liskov Substitution | All models cost-estimated uniformly |
+| R6 â€” DI over Singletons | CostOptimizer injected into pipeline |
+| R9 â€” Deterministic | Same request produces same cost estimates |
+| R10 â€” Simpler Over Complex | Linear cost scoring over complex financial models |
+| R13 â€” Design for Failure | Default pricing when provider data unavailable |
+| R14 â€” Paved Path | Standard optimization strategies for all entities |
+| R15 â€” Open/Closed | New strategies added without changing core estimation |
 
 ## Related Documents
 
@@ -165,6 +165,6 @@ interface ModelDiscount {
 
 | Condition | Error Code | Behavior |
 |-----------|------------|----------|
-| Pricing data unavailable for model | — | Use estimated pricing based on provider average; log warning |
-| Entity discount source unreachable | — | Apply no discount; return estimate with confidence=0.5 |
-| Token estimate uncertain (>20% variance) | — | Return estimate with reduced confidence |
+| Pricing data unavailable for model | â€” | Use estimated pricing based on provider average; log warning |
+| Entity discount source unreachable | â€” | Apply no discount; return estimate with confidence=0.5 |
+| Token estimate uncertain (>20% variance) | â€” | Return estimate with reduced confidence |

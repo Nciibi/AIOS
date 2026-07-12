@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## Dashboard — 002: Widgets
+﻿# AIOS Bible â€” Interfaces
+## Dashboard â€” 002: Widgets
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-DB-002 |
-| Source Laws | Law 4 — Law of Evidence, Law 8 — Law of Verification-First, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 4 â€” Law of Evidence, Law 8 â€” Law of Verification-First, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/005-Events.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Widget system defines how individual visual components are created, configured, bound to data, laid out, and wired for drill-down. Widgets are the visual atoms of the Dashboard — each widget renders one aspect of system state by consuming a MetricValue and presenting it as a metric card, chart, table, alert list, or heatmap.
+The Widget system defines how individual visual components are created, configured, bound to data, laid out, and wired for drill-down. Widgets are the visual atoms of the Dashboard â€” each widget renders one aspect of system state by consuming a MetricValue and presenting it as a metric card, chart, table, alert list, or heatmap.
 
 ## Architecture
 
@@ -176,28 +176,28 @@ interface LayoutManager {
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| DB-012 | Every widget has exactly one data binding | Architectural — WidgetConfig requires metricId or inline query |
-| DB-013 | Widget type must be in supported renderer list | Algorithmic — WidgetRegistry validates type on registration |
-| DB-014 | Drill-down always reaches a verifiable evidence record | Algorithmic — DrillDownLink validated against target registry |
-| DB-015 | Widget layout never exceeds parent view boundaries | Algorithmic — LayoutManager.validate enforces grid constraints |
-| DB-016 | Widgets are composable within views; no circular nesting | Architectural — widget containment is flat per view |
-| DB-017 | Widget settings are type-safe per WidgetType schema | Algorithmic — configure_widget validates against type schema |
+| DB-012 | Every widget has exactly one data binding | Architectural â€” WidgetConfig requires metricId or inline query |
+| DB-013 | Widget type must be in supported renderer list | Algorithmic â€” WidgetRegistry validates type on registration |
+| DB-014 | Drill-down always reaches a verifiable evidence record | Algorithmic â€” DrillDownLink validated against target registry |
+| DB-015 | Widget layout never exceeds parent view boundaries | Algorithmic â€” LayoutManager.validate enforces grid constraints |
+| DB-016 | Widgets are composable within views; no circular nesting | Architectural â€” widget containment is flat per view |
+| DB-017 | Widget settings are type-safe per WidgetType schema | Algorithmic â€” configure_widget validates against type schema |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Widget system owns visualization; metrics own computation |
-| R2 — Dependency Order | Depends on Metrics subsystem and DrillDown Engine; no circular deps |
-| R3 — DRY | Widget configs reference metric IDs; metric definitions are not duplicated |
-| R4 — Builder Pattern | WidgetConfig uses builder for layout and drill-down composition |
-| R5 — Liskov Substitution | Compliant | All widget types implement the WidgetRenderer interface |
-| R6 — DI over Singletons | Compliant | Widget renderers are injected via widget type registry |
-| R9 — Deterministic | Same WidgetConfig + same MetricValue = same rendered output |
-| R10 — Simpler Over Complex | Metric and alert-list widgets cover most use cases; chart is opt-in |
-| R13 — Design for Failure | Data bind failure shows error state with retry, not blank |
-| R14 — Paved Path | Metric-card widgets are the default for all dashboard views |
-| R15 — Open/Closed | New widget types register via WidgetRenderer extension point |
+| R1 â€” Modulsingularity | Widget system owns visualization; metrics own computation |
+| R2 â€” Dependency Order | Depends on Metrics subsystem and DrillDown Engine; no circular deps |
+| R3 â€” DRY | Widget configs reference metric IDs; metric definitions are not duplicated |
+| R4 â€” Builder Pattern | WidgetConfig uses builder for layout and drill-down composition |
+| R5 â€” Liskov Substitution | Compliant | All widget types implement the WidgetRenderer interface |
+| R6 â€” DI over Singletons | Compliant | Widget renderers are injected via widget type registry |
+| R9 â€” Deterministic | Same WidgetConfig + same MetricValue = same rendered output |
+| R10 â€” Simpler Over Complex | Metric and alert-list widgets cover most use cases; chart is opt-in |
+| R13 â€” Design for Failure | Data bind failure shows error state with retry, not blank |
+| R14 â€” Paved Path | Metric-card widgets are the default for all dashboard views |
+| R15 â€” Open/Closed | New widget types register via WidgetRenderer extension point |
 
 ## Related Documents
 
@@ -211,5 +211,5 @@ interface LayoutManager {
 | Bible/08-Interfaces/Console/000-Overview.md | Drill-down links route to Console for governance actions |
 | Bible/05-Platform/Observability/000-AOP.md | AOP provides chart source data |
 | Bible/06-Services/ACF/000-Overview.md | ACF transports widget data queries |
-| Physics/005-Events.md | Evidence invariants — widget values are evidence-derived |
+| Physics/005-Events.md | Evidence invariants â€” widget values are evidence-derived |
 | Physics/011-Design-DNA.md | Design DNA rules govern widget construction |

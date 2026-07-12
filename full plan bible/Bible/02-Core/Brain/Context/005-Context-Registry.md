@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 005 — Context Registry
+﻿# AIOS Bible â€” Brain
+## 005 â€” Context Registry
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Context |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Context |
 | Document ID | AIOS-BBL-002-CTX-005 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Context Registry is the metadata authority for all items in the context window. It maintains a searchable index of every item's origin, type, priority, token cost, content hash, pin state, and eviction phase. Under CTX-003 the Context System is stateless — the Registry is an in-memory index that is rebuilt from Memory OS on session restore. The Registry enables deduplication (via content hash), source accountability, token accounting, and the filtered queries exposed through `getRegistry()`.
+The Context Registry is the metadata authority for all items in the context window. It maintains a searchable index of every item's origin, type, priority, token cost, content hash, pin state, and eviction phase. Under CTX-003 the Context System is stateless â€” the Registry is an in-memory index that is rebuilt from Memory OS on session restore. The Registry enables deduplication (via content hash), source accountability, token accounting, and the filtered queries exposed through `getRegistry()`.
 
 ## Data Model
 
@@ -30,7 +30,7 @@ RegistryEntry {
   item_type: string                 // "user_input" | "memory" | "tool_result" | "system_signal"
   section_type: string              // Which section the item lives in
   content_hash: string              // SHA-256 of normalized content
-  priority: number                  // 0.0–1.0 (live from Priority Manager)
+  priority: number                  // 0.0â€“1.0 (live from Priority Manager)
   tier: string                      // Priority tier label
   token_count: number
   original_token_count: number      // Pre-compression count
@@ -434,13 +434,13 @@ interface TokenBreakdown {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| RG-001 | Every item in the context window has exactly one RegistryEntry | Architectural — register is required on push |
-| RG-002 | Content hashes are unique within a session (for same content) | Algorithmic — findByHash enforces per-session dedup |
-| RG-003 | Registry indexes are kept in sync with item state | Algorithmic — update re-indexes on priority/phase change |
-| RG-004 | Token counts in Registry match the actual window total | Algorithmic — verified on every snapshot |
-| RG-005 | Recovered items are re-indexed as active | Algorithmic — restoreItem updates phase index |
-| RG-006 | Purged entries are removed from all indexes atomically | Algorithmic — delete removes from every index |
-| RG-007 | Registry is scoped per session | Schema — all queries require session_id |
+| RG-001 | Every item in the context window has exactly one RegistryEntry | Architectural â€” register is required on push |
+| RG-002 | Content hashes are unique within a session (for same content) | Algorithmic â€” findByHash enforces per-session dedup |
+| RG-003 | Registry indexes are kept in sync with item state | Algorithmic â€” update re-indexes on priority/phase change |
+| RG-004 | Token counts in Registry match the actual window total | Algorithmic â€” verified on every snapshot |
+| RG-005 | Recovered items are re-indexed as active | Algorithmic â€” restoreItem updates phase index |
+| RG-006 | Purged entries are removed from all indexes atomically | Algorithmic â€” delete removes from every index |
+| RG-007 | Registry is scoped per session | Schema â€” all queries require session_id |
 
 ## Error Cases
 
@@ -458,17 +458,17 @@ interface TokenBreakdown {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Registry handles only metadata indexing and queries |
-| R2 — Dependency Order | Depends on no other Context sub-system; used by all |
-| R3 — DRY | RegistryEntry schema defined once in Data Model |
-| R4 — Builder Pattern | Query results built by constraint intersection |
-| R5 — Liskov Substitution | Any RegistryIndex implementation satisfies the interface |
-| R6 — DI over Singletons | Index implementations injected |
-| R9 — Deterministic | Same query on same state returns same results |
-| R10 — Simpler Over Complex | Multiple specialized indexes over a single generic index |
-| R13 — Design for Failure | Rebuild from Memory OS on session restore |
-| R14 — Paved Path | All items flow through register -> update -> delete |
-| R15 — Open/Closed | New filter dimensions added via new indexes, not by modifying query engine |
+| R1 â€” Modulsingularity | Registry handles only metadata indexing and queries |
+| R2 â€” Dependency Order | Depends on no other Context sub-system; used by all |
+| R3 â€” DRY | RegistryEntry schema defined once in Data Model |
+| R4 â€” Builder Pattern | Query results built by constraint intersection |
+| R5 â€” Liskov Substitution | Any RegistryIndex implementation satisfies the interface |
+| R6 â€” DI over Singletons | Index implementations injected |
+| R9 â€” Deterministic | Same query on same state returns same results |
+| R10 â€” Simpler Over Complex | Multiple specialized indexes over a single generic index |
+| R13 â€” Design for Failure | Rebuild from Memory OS on session restore |
+| R14 â€” Paved Path | All items flow through register -> update -> delete |
+| R15 â€” Open/Closed | New filter dimensions added via new indexes, not by modifying query engine |
 
 ## Related Documents
 

@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — Tool Registry
+﻿# AIOS Bible â€” Brain
+## 001 â€” Tool Registry
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Tools |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Tools |
 | Document ID | AIOS-BBL-002-TOL-001 |
-| Source Laws | Law 7 — Law of Capability Bounds |
+| Source Laws | Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -105,17 +105,17 @@ RegistrySnapshot {
 | Communicate | `send_email`, `post_message`, `notify` | `tool.communicate.*` |
 | System | `list_files`, `get_metrics`, `check_health` | `tool.system.*` |
 
-Categories are disjoint — every tool belongs to exactly one category. The capability_bounds field may specify sub-capabilities within the category (e.g., `tool.read.file` for a more granular permission).
+Categories are disjoint â€” every tool belongs to exactly one category. The capability_bounds field may specify sub-capabilities within the category (e.g., `tool.read.file` for a more granular permission).
 
 ### Tool Status Lifecycle
 
 ```
 Registration
-    │
-    ▼
-Experimental ──► Active ──► Deprecated ──► Deregistered
-    │               │
-    ▼               ▼
+    â”‚
+    â–¼
+Experimental â”€â”€â–º Active â”€â”€â–º Deprecated â”€â”€â–º Deregistered
+    â”‚               â”‚
+    â–¼               â–¼
 (removed)      (removed)
 ```
 
@@ -129,9 +129,9 @@ Experimental ──► Active ──► Deprecated ──► Deregistered
 
 Each registered tool has a health status updated by the Tool Lifecycle Manager:
 
-- **healthy** — Tool responding normally, heartbeat received within window
-- **degraded** — Intermittent failures or slow responses, heartbeat delayed
-- **unavailable** — Tool not responding, heartbeat missed threshold
+- **healthy** â€” Tool responding normally, heartbeat received within window
+- **degraded** â€” Intermittent failures or slow responses, heartbeat delayed
+- **unavailable** â€” Tool not responding, heartbeat missed threshold
 
 Health transitions trigger events and may affect discovery results (unavailable tools are hidden by default).
 
@@ -275,13 +275,13 @@ interface ToolRegistry {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| REG-001 | Every tool_id in the Registry is unique | Algorithmic — collision check on register |
-| REG-002 | Every tool belongs to exactly one category | Schema — category is required, not an array |
-| REG-003 | Every tool has exactly one provider | Registry — verified on registration |
-| REG-004 | A tool's capability_bounds must be a subset of its provider's capabilities | Application-level — validated at registration time |
-| REG-005 | Deregistered tool_ids are never reassigned | Registry — tombstone retained for audit |
-| REG-006 | Health status transitions follow valid paths (healthy↔degraded↔unavailable) | Algorithmic — state machine enforced |
-| REG-007 | Experimental tools are invisible to Sou unless explicitly requested | API-level — list() filters by default |
+| REG-001 | Every tool_id in the Registry is unique | Algorithmic â€” collision check on register |
+| REG-002 | Every tool belongs to exactly one category | Schema â€” category is required, not an array |
+| REG-003 | Every tool has exactly one provider | Registry â€” verified on registration |
+| REG-004 | A tool's capability_bounds must be a subset of its provider's capabilities | Application-level â€” validated at registration time |
+| REG-005 | Deregistered tool_ids are never reassigned | Registry â€” tombstone retained for audit |
+| REG-006 | Health status transitions follow valid paths (healthyâ†”degradedâ†”unavailable) | Algorithmic â€” state machine enforced |
+| REG-007 | Experimental tools are invisible to Sou unless explicitly requested | API-level â€” list() filters by default |
 
 ## Error Cases
 
@@ -299,17 +299,17 @@ interface ToolRegistry {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Registry handles only tool catalog storage and queries |
-| R2 — Dependency Order | Depends on Tool Lifecycle Manager for health; no upward deps |
-| R3 — DRY | Tool definitions stored once, referenced by ID everywhere |
-| R4 — Builder Pattern | Registration built by Definition → Provider → Health Init |
-| R5 — Liskov Substitution | Any ToolRegistry implements the interface |
-| R6 — DI over Singletons | Index implementations and query strategies injected |
-| R9 — Deterministic | Same registry state produces same query results |
-| R10 — Simpler Over Complex | Flat key-value catalog with category indices |
-| R13 — Design for Failure | Health tracking enables automatic recovery or removal |
-| R14 — Paved Path | All tool discovery flows through list() or get() |
-| R15 — Open/Closed | New categories added via config, not by modifying core |
+| R1 â€” Modulsingularity | Registry handles only tool catalog storage and queries |
+| R2 â€” Dependency Order | Depends on Tool Lifecycle Manager for health; no upward deps |
+| R3 â€” DRY | Tool definitions stored once, referenced by ID everywhere |
+| R4 â€” Builder Pattern | Registration built by Definition â†’ Provider â†’ Health Init |
+| R5 â€” Liskov Substitution | Any ToolRegistry implements the interface |
+| R6 â€” DI over Singletons | Index implementations and query strategies injected |
+| R9 â€” Deterministic | Same registry state produces same query results |
+| R10 â€” Simpler Over Complex | Flat key-value catalog with category indices |
+| R13 â€” Design for Failure | Health tracking enables automatic recovery or removal |
+| R14 â€” Paved Path | All tool discovery flows through list() or get() |
+| R15 â€” Open/Closed | New categories added via config, not by modifying core |
 
 ## Related Documents
 

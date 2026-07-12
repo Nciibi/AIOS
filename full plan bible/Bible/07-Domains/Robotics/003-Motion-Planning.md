@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Robotics — 003: Motion Planning
+﻿# AIOS Bible â€” Domains
+## Robotics â€” 003: Motion Planning
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-ROB-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -20,7 +20,7 @@ The Motion Planning subsystem enables AIOS to compute safe, collision-free, and 
 ## Architecture
 
 ```
-Start/Goal → Collision Checking → Kinematics Solver → Trajectory Optimization → Validation → Execution
+Start/Goal â†’ Collision Checking â†’ Kinematics Solver â†’ Trajectory Optimization â†’ Validation â†’ Execution
 ```
 
 | Stage | Input | Output | Worker |
@@ -240,25 +240,25 @@ interface ExecutionStatus {
 
 | Code | Condition | Severity | Recovery |
 |------|-----------|----------|----------|
-| ROB-MOT-001 | IK failure — inverse kinematics solver cannot find a valid joint configuration for the target pose | Error | Report IK failure with residual error. Suggest alternative goal poses within reachable workspace. Log target pose and constraints. |
-| ROB-MOT-002 | Collision unavoidable — no collision-free path exists between start and goal given current obstacles | Critical | Report planning failure. Generate collision report with closest approach distances. Suggest goal relaxation or obstacle removal. |
-| ROB-MOT-003 | Planning timeout — motion planner exceeds configurable time limit | Error | Return best trajectory found so far if valid. If no partial solution exists, report timeout. Increase allocated compute or simplify constraints. |
-| ROB-MOT-004 | Plan validation failure — trajectory fails simulation-based safety validation | Critical | Block execution. Report specific validation failures (collision, joint limit violation, singularity). Require re-plan with corrected constraints. |
-| ROB-MOT-005 | Singularity encountered — robot approaches kinematic singularity during trajectory execution | Warning | Reduce velocity through singularity region. If unrecoverable, abort plan and re-route around singularity. Log singularity configuration for analysis. |
-| ROB-MOT-006 | Path deviation detected — robot deviates from planned trajectory beyond deviation threshold | Warning | Pause execution. Evaluate deviation magnitude. If within replan threshold, trigger local replanning. If exceeded, abort and escalate. |
-| ROB-MOT-007 | Joint limit violation — trajectory exceeds position, velocity, or acceleration joint limits | Error | Clamp trajectory to joint limits during optimization. If violation persists, mark plan as invalid. Require constraint-aware re-plan. |
-| ROB-MOT-008 | Obstacle motion prediction failure — dynamic obstacle trajectory cannot be predicted for collision checking | Warning | Use worst-case obstacle occupancy volume. Increase safety margin. Reduce planning speed. Log prediction failure. |
+| ROB-MOT-001 | IK failure â€” inverse kinematics solver cannot find a valid joint configuration for the target pose | Error | Report IK failure with residual error. Suggest alternative goal poses within reachable workspace. Log target pose and constraints. |
+| ROB-MOT-002 | Collision unavoidable â€” no collision-free path exists between start and goal given current obstacles | Critical | Report planning failure. Generate collision report with closest approach distances. Suggest goal relaxation or obstacle removal. |
+| ROB-MOT-003 | Planning timeout â€” motion planner exceeds configurable time limit | Error | Return best trajectory found so far if valid. If no partial solution exists, report timeout. Increase allocated compute or simplify constraints. |
+| ROB-MOT-004 | Plan validation failure â€” trajectory fails simulation-based safety validation | Critical | Block execution. Report specific validation failures (collision, joint limit violation, singularity). Require re-plan with corrected constraints. |
+| ROB-MOT-005 | Singularity encountered â€” robot approaches kinematic singularity during trajectory execution | Warning | Reduce velocity through singularity region. If unrecoverable, abort plan and re-route around singularity. Log singularity configuration for analysis. |
+| ROB-MOT-006 | Path deviation detected â€” robot deviates from planned trajectory beyond deviation threshold | Warning | Pause execution. Evaluate deviation magnitude. If within replan threshold, trigger local replanning. If exceeded, abort and escalate. |
+| ROB-MOT-007 | Joint limit violation â€” trajectory exceeds position, velocity, or acceleration joint limits | Error | Clamp trajectory to joint limits during optimization. If violation persists, mark plan as invalid. Require constraint-aware re-plan. |
+| ROB-MOT-008 | Obstacle motion prediction failure â€” dynamic obstacle trajectory cannot be predicted for collision checking | Warning | Use worst-case obstacle occupancy volume. Increase safety margin. Reduce planning speed. Log prediction failure. |
 
 ## Invariants
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| ROB-MOT-I-001 | Simulation before execution — no motion plan may execute on physical hardware without passing simulation validation | Validation gate before execution. Simulation failure blocks deployment and triggers re-plan. |
-| ROB-MOT-I-002 | Deterministic planning for safety-critical paths — same input must produce identical trajectory output for safety-critical operations | Seed all RNG in planners deterministically. Use fixed collision mesh sampling. Hash-validation of plans for audit. |
-| ROB-MOT-I-003 | Collision-free guarantee — every executed trajectory must have zero collisions against static and known dynamic obstacles | Collision check at validation stage includes swept-volume analysis. Dynamic obstacles use conservative prediction. |
-| ROB-MOT-I-004 | Joint limit protection — trajectory joint positions, velocities, and accelerations must remain within robot-specified limits | Saturation check at optimization output. Limit violations trigger validation failure. |
-| ROB-MOT-I-005 | Monotonic progress — execution must make monotonic progress along the trajectory; backtracking is prohibited unless in replan | Waypoint index is strictly increasing. Reversal requires full abort and re-plan. |
-| ROB-MOT-I-006 | Bounded replanning — replanning must complete within a configurable deadline to maintain real-time operation | Replan timer guards. Deadline miss triggers fallback to safe stop trajectory. |
+| ROB-MOT-I-001 | Simulation before execution â€” no motion plan may execute on physical hardware without passing simulation validation | Validation gate before execution. Simulation failure blocks deployment and triggers re-plan. |
+| ROB-MOT-I-002 | Deterministic planning for safety-critical paths â€” same input must produce identical trajectory output for safety-critical operations | Seed all RNG in planners deterministically. Use fixed collision mesh sampling. Hash-validation of plans for audit. |
+| ROB-MOT-I-003 | Collision-free guarantee â€” every executed trajectory must have zero collisions against static and known dynamic obstacles | Collision check at validation stage includes swept-volume analysis. Dynamic obstacles use conservative prediction. |
+| ROB-MOT-I-004 | Joint limit protection â€” trajectory joint positions, velocities, and accelerations must remain within robot-specified limits | Saturation check at optimization output. Limit violations trigger validation failure. |
+| ROB-MOT-I-005 | Monotonic progress â€” execution must make monotonic progress along the trajectory; backtracking is prohibited unless in replan | Waypoint index is strictly increasing. Reversal requires full abort and re-plan. |
+| ROB-MOT-I-006 | Bounded replanning â€” replanning must complete within a configurable deadline to maintain real-time operation | Replan timer guards. Deadline miss triggers fallback to safe stop trajectory. |
 
 ## Design DNA (R1-R6,R9,R10,R13-R15)
 
@@ -266,24 +266,24 @@ interface ExecutionStatus {
 |------|-----------|
 | R1 (Modulsingularity) | Each motion planning concern (collision checking, IK, trajectory optimization, validation, execution) is a separate module with a single responsibility |
 | R2 (Encapsulation) | Planner internal state (search trees, optimization variables) is encapsulated; consumers interact through MotionPlan interface only |
-| R3 (Orthogonality) | Collision checking, IK solving, trajectory optimization, and validation are orthogonal — each can be used independently or composed |
+| R3 (Orthogonality) | Collision checking, IK solving, trajectory optimization, and validation are orthogonal â€” each can be used independently or composed |
 | R4 (Polymorphism) | Planner supports polymorphic algorithm selection (CHOMP, STOMP, gradient descent, QP) through a common IPlanner interface |
 | R5 (Liskov) | All IK solver implementations conform to the same IIKSolver interface and produce IKResult regardless of solver type |
 | R6 (Interface) | Motion planning exposes narrow interfaces (ICollisionChecker, IIKSolver, ITrajectoryOptimizer, IPlanValidator) for testability |
 | R9 (Deterministic) | Same planning input must produce identical trajectory output for safety-critical paths; non-deterministic planning prohibited for L4+ paths |
 | R10 (Simpler Over Complex) | Default to joint-space planning with cubic splines. Use Cartesian or hybrid only when end-effector pose constraints require it |
 | R13 (Design for Failure) | Planning failures preserve search state for debugging. IK failure returns best-effort results. Collision-unavoidable returns closest approach analysis |
-| R14 (Paved Path) | Paved path: set goal → check collisions → solve IK → optimize → validate → execute. Alternative planners available for specialized domains |
+| R14 (Paved Path) | Paved path: set goal â†’ check collisions â†’ solve IK â†’ optimize â†’ validate â†’ execute. Alternative planners available for specialized domains |
 | R15 (Testability) | Each planner module has independently testable input/output contracts. Plans are verifiable against ground-truth simulation outcomes |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Robotics/000-Overview.md | Domain overview — Motion Planning is a core Robotics capability |
-| Bible/07-Domains/Robotics/001-ROS-Integration.md | ROS Integration — provides transport for motion plan commands and execution feedback |
-| Bible/07-Domains/Robotics/002-Sensor-Fusion.md | Sensor Fusion — provides state estimates used as input for motion planning |
-| Physics/005-Events.md | Evidence — all motion planning operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — motion planning is a bounded capability with compute limits |
-| Physics/010-Execution.md | Execution — motion plans execute as control loops with real-time constraints |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding for safety-first planning |
+| Bible/07-Domains/Robotics/000-Overview.md | Domain overview â€” Motion Planning is a core Robotics capability |
+| Bible/07-Domains/Robotics/001-ROS-Integration.md | ROS Integration â€” provides transport for motion plan commands and execution feedback |
+| Bible/07-Domains/Robotics/002-Sensor-Fusion.md | Sensor Fusion â€” provides state estimates used as input for motion planning |
+| Physics/005-Events.md | Evidence â€” all motion planning operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” motion planning is a bounded capability with compute limits |
+| Physics/010-Execution.md | Execution â€” motion plans execute as control loops with real-time constraints |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding for safety-first planning |

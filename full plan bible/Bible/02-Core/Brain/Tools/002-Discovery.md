@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 002 — Discovery Engine
+﻿# AIOS Bible â€” Brain
+## 002 â€” Discovery Engine
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Tools |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Tools |
 | Document ID | AIOS-BBL-002-TOL-002 |
-| Source Laws | Law 7 — Law of Capability Bounds |
+| Source Laws | Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Discovery Engine enables Sou to find the right tool for any task. It provides multiple discovery modes — listing all tools, filtering by capability or category, semantic search over tool descriptions, and goal-based recommendation. The Discovery Engine wraps the Tool Registry with intelligence: it ranks results, caches frequent queries, and maps Sou's natural language goals to tool capability requirements.
+The Discovery Engine enables Sou to find the right tool for any task. It provides multiple discovery modes â€” listing all tools, filtering by capability or category, semantic search over tool descriptions, and goal-based recommendation. The Discovery Engine wraps the Tool Registry with intelligence: it ranks results, caches frequent queries, and maps Sou's natural language goals to tool capability requirements.
 
 Under TLS-000, Discovery ensures Sou only discovers tools within its capability bounds. Unavailable or deprecated tools are filtered out unless explicitly requested.
 
@@ -59,7 +59,7 @@ DiscoveryResult {
 ```typescript
 ScoredTool {
   registration: ToolRegistration
-  score: number                        // 0.0–1.0, relevance score
+  score: number                        // 0.0â€“1.0, relevance score
   match_reasons: string[]              // Why this tool matched
   capability_coverage: number          // Fraction of required capabilities satisfied
 }
@@ -97,7 +97,7 @@ CapabilityInference {
 | Filter by capability | `capability` | Return tools matching all required capabilities | Sou needs a specific capability |
 | Filter by category | `category` | Return tools in a named category | Sou wants read/write/compute tools |
 | Semantic search | `query_text` | Embedding similarity over tool descriptions | "Find me a tool that can search the web" |
-| Recommend | `goal` | Goal → capability inference → tool scoring | Sou has a goal but no tool in mind |
+| Recommend | `goal` | Goal â†’ capability inference â†’ tool scoring | Sou has a goal but no tool in mind |
 
 ### Scoring Algorithm
 
@@ -146,7 +146,7 @@ The recommendation mode uses goal-to-capability mapping:
 1. Sou provides a goal: "I need to analyze this dataset"
 2. Recommendation Engine parses the goal for intent keywords
 3. Extracts capability requirements: ["tool.compute.analyze", "tool.read.file"]
-4. Scores tools by capability coverage × description relevance
+4. Scores tools by capability coverage Ã— description relevance
 5. Returns top-N ScoredTools with match reasons
 ```
 
@@ -261,13 +261,13 @@ interface DiscoveryEngine {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| DSC-001 | Discovery never returns unavailable tools | Algorithmic — health filtered by default |
-| DSC-002 | Discovery never returns tools outside Sou's capability bounds | Application-level — capability intersection filter |
-| DSC-003 | Same query with same registry state returns same results | Algorithmic — deterministic scoring |
-| DSC-004 | Cache is invalidated on any Registry mutation | Event-driven — subscribes to Registry events |
-| DSC-005 | ScoredTool scores are always normalized to 0.0–1.0 | Algorithmic — score clamping |
-| DSC-006 | Recommendation results include at least one match_reason | Schema — match_reasons array is never empty |
-| DSC-007 | Experimental tools are excluded unless explicitly requested | API-level — default filter applied |
+| DSC-001 | Discovery never returns unavailable tools | Algorithmic â€” health filtered by default |
+| DSC-002 | Discovery never returns tools outside Sou's capability bounds | Application-level â€” capability intersection filter |
+| DSC-003 | Same query with same registry state returns same results | Algorithmic â€” deterministic scoring |
+| DSC-004 | Cache is invalidated on any Registry mutation | Event-driven â€” subscribes to Registry events |
+| DSC-005 | ScoredTool scores are always normalized to 0.0â€“1.0 | Algorithmic â€” score clamping |
+| DSC-006 | Recommendation results include at least one match_reason | Schema â€” match_reasons array is never empty |
+| DSC-007 | Experimental tools are excluded unless explicitly requested | API-level â€” default filter applied |
 
 ## Error Cases
 
@@ -285,17 +285,17 @@ interface DiscoveryEngine {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Discovery Engine handles only tool finding and ranking |
-| R2 — Dependency Order | Depends on Tool Registry; no upward deps |
-| R3 — DRY | Scoring logic defined once, applied to all modes |
-| R4 — Builder Pattern | DiscoveryResult built by Query → Match → Score → Cache |
-| R5 — Liskov Substitution | Any DiscoveryEngine implements the interface |
-| R6 — DI over Singletons | Scorer, embedder, and cache strategies injected |
-| R9 — Deterministic | Same query and registry state produce same results |
-| R10 — Simpler Over Complex | Flat set of discovery modes with clear input/output |
-| R13 — Design for Failure | Cache and fallback modes ensure graceful degradation |
-| R14 — Paved Path | All discovery flows through discover(), search(), or recommend() |
-| R15 — Open/Closed | New discovery modes added via mode plugins |
+| R1 â€” Modulsingularity | Discovery Engine handles only tool finding and ranking |
+| R2 â€” Dependency Order | Depends on Tool Registry; no upward deps |
+| R3 â€” DRY | Scoring logic defined once, applied to all modes |
+| R4 â€” Builder Pattern | DiscoveryResult built by Query â†’ Match â†’ Score â†’ Cache |
+| R5 â€” Liskov Substitution | Any DiscoveryEngine implements the interface |
+| R6 â€” DI over Singletons | Scorer, embedder, and cache strategies injected |
+| R9 â€” Deterministic | Same query and registry state produce same results |
+| R10 â€” Simpler Over Complex | Flat set of discovery modes with clear input/output |
+| R13 â€” Design for Failure | Cache and fallback modes ensure graceful degradation |
+| R14 â€” Paved Path | All discovery flows through discover(), search(), or recommend() |
+| R15 â€” Open/Closed | New discovery modes added via mode plugins |
 
 ## Related Documents
 

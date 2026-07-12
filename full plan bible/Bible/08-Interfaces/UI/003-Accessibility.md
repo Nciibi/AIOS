@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## UI — 003: Accessibility
+﻿# AIOS Bible â€” Interfaces
+## UI â€” 003: Accessibility
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-UI-003 |
-| Source Laws | Law 1 — Law of Origin, Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 1 â€” Law of Origin, Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Accessibility system ensures every human interface in AIOS meets WCAG 2.1 AA compliance as a minimum, with AAA as the target for all core interaction paths. It enforces screen reader support, keyboard-only navigation, sufficient color contrast, predictable focus management, correct ARIA attribute usage, and continuous accessibility testing. Every human — regardless of ability — must be able to interact with AIOS through any channel.
+The Accessibility system ensures every human interface in AIOS meets WCAG 2.1 AA compliance as a minimum, with AAA as the target for all core interaction paths. It enforces screen reader support, keyboard-only navigation, sufficient color contrast, predictable focus management, correct ARIA attribute usage, and continuous accessibility testing. Every human â€” regardless of ability â€” must be able to interact with AIOS through any channel.
 
 ## Architecture
 
@@ -35,7 +35,7 @@ Monitoring (continuous CI/CD gate, usage telemetry)
 Compliance Reporting (WCAG level score, exception log, roadmap)
 ```
 
-Audit runs on every component registration and every production build. Remediation is gated — violations above threshold block deployment. Monitoring runs continuously in production, reporting real-time accessibility health.
+Audit runs on every component registration and every production build. Remediation is gated â€” violations above threshold block deployment. Monitoring runs continuously in production, reporting real-time accessibility health.
 
 ## Data Model
 
@@ -169,28 +169,28 @@ interface ContrastValidator {
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| A11Y-001 | Every interactive element is reachable via keyboard only | Algorithmic — Focus Manager validates tabIndex chain |
-| A11Y-002 | Focus indicator is always visible with 3:1 contrast minimum | Algorithmic — AccessibilityAuditor checks focus styles |
-| A11Y-003 | All non-text content has a text alternative (WCAG 1.1.1) | Algorithmic — screen reader test validates all alt attributes |
-| A11Y-004 | Color is never the sole means of conveying information | Algorithmic — AccessibilityAuditor flags color-only states |
-| A11Y-005 | All touch targets are at least 44x44 CSS pixels | Algorithmic — LayoutEngine measures and validates targets |
-| A11Y-006 | Error suggestions are programmatically associated with inputs | Algorithmic — ARIA describedBy required on error state |
+| A11Y-001 | Every interactive element is reachable via keyboard only | Algorithmic â€” Focus Manager validates tabIndex chain |
+| A11Y-002 | Focus indicator is always visible with 3:1 contrast minimum | Algorithmic â€” AccessibilityAuditor checks focus styles |
+| A11Y-003 | All non-text content has a text alternative (WCAG 1.1.1) | Algorithmic â€” screen reader test validates all alt attributes |
+| A11Y-004 | Color is never the sole means of conveying information | Algorithmic â€” AccessibilityAuditor flags color-only states |
+| A11Y-005 | All touch targets are at least 44x44 CSS pixels | Algorithmic â€” LayoutEngine measures and validates targets |
+| A11Y-006 | Error suggestions are programmatically associated with inputs | Algorithmic â€” ARIA describedBy required on error state |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Accessibility is a first-class concern owned by this system; no component bypasses it |
-| R2 — Dependency Order | Depends on Components (002), Design System (001); no cycles |
-| R3 — DRY | WCAG criteria defined once; referenced by all audit checks |
-| R4 — Builder Pattern | Violation remediation built stepwise with audit at each stage |
-| R5 — Liskov Substitution | Compliant | Accessibility providers are interchangeable through the AccessibilityProvider interface |
-| R6 — Encapsulation | A11Y concerns encapsulated within AccessibilityEngine; components opt in via props |
-| R9 — Deterministic | Same component + same audit = same violation set |
-| R10 — Simpler Over Complex | AA compliance is default; AAA is opt-in per component |
-| R13 — Design for Failure | Screen reader failure degrades to visible text; never silent |
-| R14 — Paved Path | Use predefined focus order; custom ordering requires explicit override |
-| R15 — Open/Closed | New WCAG criteria registered via new check definitions; existing checks immutable |
+| R1 â€” Modulsingularity | Accessibility is a first-class concern owned by this system; no component bypasses it |
+| R2 â€” Dependency Order | Depends on Components (002), Design System (001); no cycles |
+| R3 â€” DRY | WCAG criteria defined once; referenced by all audit checks |
+| R4 â€” Builder Pattern | Violation remediation built stepwise with audit at each stage |
+| R5 â€” Liskov Substitution | Compliant | Accessibility providers are interchangeable through the AccessibilityProvider interface |
+| R6 â€” Encapsulation | A11Y concerns encapsulated within AccessibilityEngine; components opt in via props |
+| R9 â€” Deterministic | Same component + same audit = same violation set |
+| R10 â€” Simpler Over Complex | AA compliance is default; AAA is opt-in per component |
+| R13 â€” Design for Failure | Screen reader failure degrades to visible text; never silent |
+| R14 â€” Paved Path | Use predefined focus order; custom ordering requires explicit override |
+| R15 â€” Open/Closed | New WCAG criteria registered via new check definitions; existing checks immutable |
 
 ## Related Documents
 

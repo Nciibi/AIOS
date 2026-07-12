@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 002 — TTS Engine
+﻿# AIOS Bible â€” Brain
+## 002 â€” TTS Engine
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Voice |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Voice |
 | Document ID | AIOS-BBL-002-VCE-002 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -17,7 +17,7 @@
 
 The TTS Engine converts Sou's text responses into spoken audio for delivery to the user. It supports neural and concatenative synthesis across configurable quality levels, multiple voice profiles, and style controls (conversational, announcement, neutral). Audio output can be streamed in chunks for long-form responses, and each utterance supports per-word timing for synchronization with other modalities. Text normalization runs before synthesis to ensure numbers, dates, abbreviations, and special characters are spoken correctly.
 
-Under VOI-004, the TTS Engine never modifies Sou's text content — the semantic meaning passes through verbatim.
+Under VOI-004, the TTS Engine never modifies Sou's text content â€” the semantic meaning passes through verbatim.
 
 ## Data Model
 
@@ -76,9 +76,9 @@ AudioOutput {
 TTSConfig {
   model: string                     // Provider-specific model ID
   quality: "high" | "standard" | "low"
-  speed: number                     // 0.5–2.0 speech rate multiplier
-  pitch: number                     // -0.5–0.5 semitone adjustment
-  volume: number                    // 0.0–1.0
+  speed: number                     // 0.5â€“2.0 speech rate multiplier
+  pitch: number                     // -0.5â€“0.5 semitone adjustment
+  volume: number                    // 0.0â€“1.0
   style: "neutral" | "conversational" | "announcement"
   emphasis?: "strong" | "moderate" | "reduced"
   ssml?: boolean                    // Interpret text as SSML
@@ -134,11 +134,11 @@ VoiceSelection {
 
 | Parameter | Range | Step | Effect |
 |-----------|-------|------|--------|
-| speed | 0.5–2.0 | 0.1 | Speech rate multiplier (1.0 = normal) |
-| pitch | -0.5–0.5 | 0.1 | Semitone adjustment from baseline |
-| volume | 0.0–1.0 | 0.1 | Output gain, 1.0 = full volume |
+| speed | 0.5â€“2.0 | 0.1 | Speech rate multiplier (1.0 = normal) |
+| pitch | -0.5â€“0.5 | 0.1 | Semitone adjustment from baseline |
+| volume | 0.0â€“1.0 | 0.1 | Output gain, 1.0 = full volume |
 
-Adjustments are applied at the provider level. Some providers may not support full ranges — `getCapabilities()` reports supported ranges per voice.
+Adjustments are applied at the provider level. Some providers may not support full ranges â€” `getCapabilities()` reports supported ranges per voice.
 
 ### SSML Support
 
@@ -158,7 +158,7 @@ When `config.ssml` is true, the text is interpreted as SSML (Speech Synthesis Ma
 | `<audio>` | Full | Embed audio clip inline |
 | `<sub>` | Full | Substitution alias |
 
-Malformed SSML returns `VOI_TTS_INVALID_SSML` — the engine does not attempt recovery.
+Malformed SSML returns `VOI_TTS_INVALID_SSML` â€” the engine does not attempt recovery.
 
 ### Word-Level Timing
 
@@ -347,13 +347,13 @@ type TTSErrorCode =
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| TTS-001 | TTS output never alters the semantic content of Sou's text | Architectural — text passes through verbatim; normalization only adjusts surface form |
-| TTS-002 | Audio format is consistent across all chunks in a stream | Algorithmic — format locked on first chunk |
-| TTS-003 | Word timings are monotonically increasing and non-overlapping | Algorithmic — each word.start_ms >= previous.end_ms |
-| TTS-004 | Quality level fallback never downgrades more than one level | Algorithmic — high→standard→low; never skips |
-| TTS-005 | SSML parsing fails closed — invalid SSML returns error, not raw text | Algorithmic — pre-validated before synthesis |
-| TTS-006 | Streaming cancellation produces no further audio after cancel() returns | Algorithmic — cancel flushes buffer and terminates |
-| TTS-007 | Speed, pitch, and volume are clamped to provider-supported ranges | Algorithmic — values capped at min/max before dispatch |
+| TTS-001 | TTS output never alters the semantic content of Sou's text | Architectural â€” text passes through verbatim; normalization only adjusts surface form |
+| TTS-002 | Audio format is consistent across all chunks in a stream | Algorithmic â€” format locked on first chunk |
+| TTS-003 | Word timings are monotonically increasing and non-overlapping | Algorithmic â€” each word.start_ms >= previous.end_ms |
+| TTS-004 | Quality level fallback never downgrades more than one level | Algorithmic â€” highâ†’standardâ†’low; never skips |
+| TTS-005 | SSML parsing fails closed â€” invalid SSML returns error, not raw text | Algorithmic â€” pre-validated before synthesis |
+| TTS-006 | Streaming cancellation produces no further audio after cancel() returns | Algorithmic â€” cancel flushes buffer and terminates |
+| TTS-007 | Speed, pitch, and volume are clamped to provider-supported ranges | Algorithmic â€” values capped at min/max before dispatch |
 
 ## Error Cases
 
@@ -372,17 +372,17 @@ type TTSErrorCode =
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | TTS Engine handles only text-to-speech synthesis |
-| R2 — Dependency Order | Depends on Voice Profile Manager for voice resolution; no upward deps |
-| R3 — DRY | Quality level behavior defined once in config schema |
-| R4 — Builder Pattern | Streaming pipeline built by request → normalize → synthesize → chunk |
-| R5 — Liskov Substitution | Any provider adapter implements TTSProvider interface |
-| R6 — DI over Singletons | Provider adapters, normalizer, and config injected |
-| R9 — Deterministic | Same text + config produces same audio (provider-model-dependent) |
-| R10 — Simpler Over Complex | Clear quality tier system with explicit fallback chain |
-| R13 — Design for Failure | Quality fallback and stream cancellation always handled |
-| R14 — Paved Path | All synthesis flows through `synthesize()` or `synthesizeStream()` |
-| R15 — Open/Closed | New TTS providers added via adapter, not by modifying engine core |
+| R1 â€” Modulsingularity | TTS Engine handles only text-to-speech synthesis |
+| R2 â€” Dependency Order | Depends on Voice Profile Manager for voice resolution; no upward deps |
+| R3 â€” DRY | Quality level behavior defined once in config schema |
+| R4 â€” Builder Pattern | Streaming pipeline built by request â†’ normalize â†’ synthesize â†’ chunk |
+| R5 â€” Liskov Substitution | Any provider adapter implements TTSProvider interface |
+| R6 â€” DI over Singletons | Provider adapters, normalizer, and config injected |
+| R9 â€” Deterministic | Same text + config produces same audio (provider-model-dependent) |
+| R10 â€” Simpler Over Complex | Clear quality tier system with explicit fallback chain |
+| R13 â€” Design for Failure | Quality fallback and stream cancellation always handled |
+| R14 â€” Paved Path | All synthesis flows through `synthesize()` or `synthesizeStream()` |
+| R15 â€” Open/Closed | New TTS providers added via adapter, not by modifying engine core |
 
 ## Related Documents
 

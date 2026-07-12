@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 004 — Progress Tracking
+﻿# AIOS Bible â€” Brain
+## 004 â€” Progress Tracking
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Planning |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Planning |
 | Document ID | AIOS-BBL-002-PLN-004 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Progress Tracking monitors the execution status of approved plans in real-time. It aggregates milestone status events from Institution OS into meaningful progress metrics — completion percentage, blocked count, resource consumption vs estimates, and timeline variance. Progress snapshots are periodically pushed to the Context System so Sou maintains situational awareness. The Progress Tracker is stateless (state lives in Event Store) — it reads events to compute metrics on demand or on schedule. It also produces progress visualization data for the plan rendering pipeline, enabling Sou to assess plan health at a glance.
+Progress Tracking monitors the execution status of approved plans in real-time. It aggregates milestone status events from Institution OS into meaningful progress metrics â€” completion percentage, blocked count, resource consumption vs estimates, and timeline variance. Progress snapshots are periodically pushed to the Context System so Sou maintains situational awareness. The Progress Tracker is stateless (state lives in Event Store) â€” it reads events to compute metrics on demand or on schedule. It also produces progress visualization data for the plan rendering pipeline, enabling Sou to assess plan health at a glance.
 
 ## Data Model
 
@@ -39,7 +39,7 @@ PlanProgress {
 
 ```typescript
 ProgressMetrics {
-  completion_percentage: number     // 0.0–100.0
+  completion_percentage: number     // 0.0â€“100.0
   total_milestones: number
   completed_milestones: number
   in_progress_milestones: number
@@ -215,8 +215,8 @@ consumption_percentage = (total_tokens_consumed / total_tokens_budgeted) * 100
 Tracks which milestones are blocked and why. Block chains are computed by following `blocking_dependencies` recursively:
 
 ```
-Milestone C blocked by B → B blocked by A → A blocked by (missing resource)
-Chain visualization: C → B → A → root cause
+Milestone C blocked by B â†’ B blocked by A â†’ A blocked by (missing resource)
+Chain visualization: C â†’ B â†’ A â†’ root cause
 ```
 
 ## Progress Events & Context System Integration
@@ -280,42 +280,42 @@ interface MilestoneEvent {
 
 ```
 Plan Approved
-    │
-    ▼
+    â”‚
+    â–¼
 Initialize Progress (first snapshot)
-    │
-    ├── Set initial metrics (0% complete)
-    ├── Compute estimated timeline
-    ├── Start heartbeat timer
-    └── Push initial state to Context System
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Set initial metrics (0% complete)
+    â”œâ”€â”€ Compute estimated timeline
+    â”œâ”€â”€ Start heartbeat timer
+    â””â”€â”€ Push initial state to Context System
+    â”‚
+    â–¼
 Active Monitoring (event-driven + heartbeat)
-    │
-    ├── Milestone started → update milestone state, recalculate metrics
-    ├── Milestone completed → record actual duration, update %, check timeline
-    ├── Milestone blocked → flag risk, compute block chain
-    ├── Milestone failed → flag risk, check plan health
-    ├── Heartbeat tick → take snapshot, check thresholds
-    └── Push updates to Context System
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Milestone started â†’ update milestone state, recalculate metrics
+    â”œâ”€â”€ Milestone completed â†’ record actual duration, update %, check timeline
+    â”œâ”€â”€ Milestone blocked â†’ flag risk, compute block chain
+    â”œâ”€â”€ Milestone failed â†’ flag risk, check plan health
+    â”œâ”€â”€ Heartbeat tick â†’ take snapshot, check thresholds
+    â””â”€â”€ Push updates to Context System
+    â”‚
+    â–¼
 Risk Detection
-    │
-    ├── Timeline variance > threshold → generate risk indicator
-    ├── Resource consumption > 80% → generate risk indicator
-    ├── Blocked count > 3 → generate risk indicator
-    └── Failed milestone → generate risk indicator
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Timeline variance > threshold â†’ generate risk indicator
+    â”œâ”€â”€ Resource consumption > 80% â†’ generate risk indicator
+    â”œâ”€â”€ Blocked count > 3 â†’ generate risk indicator
+    â””â”€â”€ Failed milestone â†’ generate risk indicator
+    â”‚
+    â–¼
 Plan Completed / Failed / Cancelled
-    │
-    ├── Take final snapshot
-    ├── Stop heartbeat
-    ├── Compute final metrics and variance
-    ├── Emit PLN.PlanCompleted or PLN.PlanFailed
-    ├── Push final state to Episodic Memory
-    └── Remove from active tracking
+    â”‚
+    â”œâ”€â”€ Take final snapshot
+    â”œâ”€â”€ Stop heartbeat
+    â”œâ”€â”€ Compute final metrics and variance
+    â”œâ”€â”€ Emit PLN.PlanCompleted or PLN.PlanFailed
+    â”œâ”€â”€ Push final state to Episodic Memory
+    â””â”€â”€ Remove from active tracking
 ```
 
 ## Events
@@ -337,14 +337,14 @@ Plan Completed / Failed / Cancelled
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| PT-001 | Completion percentage is always 0.0–100.0 | Algorithmic — clamped on calculation |
-| PT-002 | Timeline variance is computed only from completed milestones | Algorithmic — excludes in-progress estimates |
-| PT-003 | The progress tracker is stateless — all state derived from Event Store | Architectural — no internal persistence |
-| PT-004 | A plan's progress is monotonically non-decreasing (completion never goes down) | Algorithmic — checked on each update |
-| PT-005 | Each milestone has exactly one status at any time | Schema — union type constraint |
-| PT-006 | Risk indicators are automatically resolved when condition clears | Algorithmic — evaluated on each snapshot |
-| PT-007 | Heartbeat timer is stopped when plan reaches terminal state | Algorithmic — checked on plan completion/failure |
-| PT-008 | Resource consumption ratios never exceed 100% of budget | Algorithmic — hard cap; further consumption flagged separately |
+| PT-001 | Completion percentage is always 0.0â€“100.0 | Algorithmic â€” clamped on calculation |
+| PT-002 | Timeline variance is computed only from completed milestones | Algorithmic â€” excludes in-progress estimates |
+| PT-003 | The progress tracker is stateless â€” all state derived from Event Store | Architectural â€” no internal persistence |
+| PT-004 | A plan's progress is monotonically non-decreasing (completion never goes down) | Algorithmic â€” checked on each update |
+| PT-005 | Each milestone has exactly one status at any time | Schema â€” union type constraint |
+| PT-006 | Risk indicators are automatically resolved when condition clears | Algorithmic â€” evaluated on each snapshot |
+| PT-007 | Heartbeat timer is stopped when plan reaches terminal state | Algorithmic â€” checked on plan completion/failure |
+| PT-008 | Resource consumption ratios never exceed 100% of budget | Algorithmic â€” hard cap; further consumption flagged separately |
 
 ## Error Cases
 
@@ -363,17 +363,17 @@ Plan Completed / Failed / Cancelled
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Progress Tracking handles only monitoring and metrics |
-| R2 — Dependency Order | Depends on Event Store for state; Context System for push |
-| R3 — DRY | Metric calculations defined once in ProgressMetrics |
-| R4 — Builder Pattern | Progress built from events → aggregation → snapshot |
-| R5 — Liskov Substitution | Any ProgressStore implements the storage interface |
-| R6 — DI over Singletons | Event source and context pusher injectable |
-| R9 — Deterministic | Same events produce same metrics |
-| R10 — Simpler Over Complex | Uses flat progress metrics, not earned value management |
-| R13 — Design for Failure | Risk indicators raised proactively; stale heartbeat detection |
-| R14 — Paved Path | All tracking flows through milestone events → getProgress |
-| R15 — Open/Closed | New metrics added by extending ProgressMetrics schema |
+| R1 â€” Modulsingularity | Progress Tracking handles only monitoring and metrics |
+| R2 â€” Dependency Order | Depends on Event Store for state; Context System for push |
+| R3 â€” DRY | Metric calculations defined once in ProgressMetrics |
+| R4 â€” Builder Pattern | Progress built from events â†’ aggregation â†’ snapshot |
+| R5 â€” Liskov Substitution | Any ProgressStore implements the storage interface |
+| R6 â€” DI over Singletons | Event source and context pusher injectable |
+| R9 â€” Deterministic | Same events produce same metrics |
+| R10 â€” Simpler Over Complex | Uses flat progress metrics, not earned value management |
+| R13 â€” Design for Failure | Risk indicators raised proactively; stale heartbeat detection |
+| R14 â€” Paved Path | All tracking flows through milestone events â†’ getProgress |
+| R15 â€” Open/Closed | New metrics added by extending ProgressMetrics schema |
 
 ## Related Documents
 

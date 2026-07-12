@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — Identity Profile
+﻿# AIOS Bible â€” Brain
+## 001 â€” Identity Profile
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Personality |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Personality |
 | Document ID | AIOS-BBL-002-PER-001 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 5 — Law of Identity, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 5 â€” Law of Identity, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/009-Interaction.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Identity Store holds Sou's immutable core identity — the fixed, constitutional attributes that define who Sou is. Identity is established at Sou's instantiation and cannot be changed without constitutional authority. It is the anchor of the Personality System: every expression of Sou's behavior, values, and style flows from this identity core.
+The Identity Store holds Sou's immutable core identity â€” the fixed, constitutional attributes that define who Sou is. Identity is established at Sou's instantiation and cannot be changed without constitutional authority. It is the anchor of the Personality System: every expression of Sou's behavior, values, and style flows from this identity core.
 
 Under PER-001, Sou's identity is immutable after instantiation. The Identity Store enforces this by design: identity fields are write-once, with append-only history.
 
@@ -27,11 +27,11 @@ Under PER-001, Sou's identity is immutable after instantiation. The Identity Sto
 IdentityCore {
   name: string                    // Sou's display name, set at instantiation
   purpose: string                 // Sou's constitutional purpose (e.g., "Assist user autonomously")
-  history: string                 // Origin and context — append-only log of experiences
+  history: string                 // Origin and context â€” append-only log of experiences
   creator: string                 // Constitutional authority that instantiated Sou
   instance_id: string             // Globally unique identifier for this Sou instance (UUIDv7)
   created_at: timestamp           // Instantiation timestamp
-  version: number                 // Identity version — incremented on constitutional amendment
+  version: number                 // Identity version â€” incremented on constitutional amendment
 }
 ```
 
@@ -94,18 +94,18 @@ Identity loading is the first operation in the Brain startup sequence:
 
 ```
 Brain Startup
-    │
-    ▼
+    â”‚
+    â–¼
 Load Identity from Memory OS
-    │
-    ├── Read IdentityCore from persistent storage
-    ├── Verify payload checksum (integrity check)
-    ├── Verify instance_id matches expected value
-    ├── Cache IdentityCore in Personality System
-    ├── Emit PER.ProfileLoaded
-    └── If load fails → fallback to built-in emergency identity
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Read IdentityCore from persistent storage
+    â”œâ”€â”€ Verify payload checksum (integrity check)
+    â”œâ”€â”€ Verify instance_id matches expected value
+    â”œâ”€â”€ Cache IdentityCore in Personality System
+    â”œâ”€â”€ Emit PER.ProfileLoaded
+    â””â”€â”€ If load fails â†’ fallback to built-in emergency identity
+    â”‚
+    â–¼
 Identity ready for session
 ```
 
@@ -136,7 +136,7 @@ Identity injection is governed by PER-005: Personality is injected into every LL
 
 ### Injection Security
 
-- Identity is injected at `system` level — invisible to user
+- Identity is injected at `system` level â€” invisible to user
 - Identity fields are never exposed to user-facing responses
 - Prompt Compiler wraps identity in a secure system context block
 - Identity metadata (instance_id, version) is available for debugging but filtered from user output
@@ -161,7 +161,7 @@ Authentication works through ACF token validation. Unauthorized access attempts 
 | Sou | Read all identity fields, append to history | Sou decisions, Prompt Compiler |
 | Academy | Read name, read purpose | Trait evolution context |
 | Security Council | Read all, amend identity (override) | Constitutional amendments |
-| User | None (identity is never exposed) | — |
+| User | None (identity is never exposed) | â€” |
 
 ## Internal Interface
 
@@ -218,12 +218,12 @@ interface IdentityStoreConfig {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| IDP-001 | Sou's core identity (name, purpose, creator, instance_id) is immutable after instantiation | Architectural — write-once fields |
-| IDP-002 | Identity history is append-only; no entry can be deleted or modified | Algorithmic — `appendHistory` only |
-| IDP-003 | Identity is loaded before any other Brain service | Architectural — startup sequence |
-| IDP-004 | Identity is injected into every LLMOS prompt | Architectural — Prompt Compiler enforces |
-| IDP-005 | Identity is never exposed to user-facing responses | Architectural — ACF filters output |
-| IDP-006 | Emergency identity is always available as fallback | Architectural — built into Personality System bootstrap |
+| IDP-001 | Sou's core identity (name, purpose, creator, instance_id) is immutable after instantiation | Architectural â€” write-once fields |
+| IDP-002 | Identity history is append-only; no entry can be deleted or modified | Algorithmic â€” `appendHistory` only |
+| IDP-003 | Identity is loaded before any other Brain service | Architectural â€” startup sequence |
+| IDP-004 | Identity is injected into every LLMOS prompt | Architectural â€” Prompt Compiler enforces |
+| IDP-005 | Identity is never exposed to user-facing responses | Architectural â€” ACF filters output |
+| IDP-006 | Emergency identity is always available as fallback | Architectural â€” built into Personality System bootstrap |
 
 ## Error Cases
 
@@ -242,17 +242,17 @@ interface IdentityStoreConfig {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Identity Store handles only identity — immutable core, access control, loading |
-| R2 — Dependency Order | Depends on Memory OS, ACF; no upward deps |
-| R3 — DRY | Identity core defined once, referenced everywhere |
-| R4 — Builder Pattern | Identity built at instantiation, then frozen |
-| R5 — Liskov Substitution | Any IdentityStore implements the interface |
-| R6 — DI over Singletons | Store config and emergency fallback injected |
-| R9 — Deterministic | Same identity produces same prompt injection |
-| R10 — Simpler Over Complex | Identity is a flat object with write-once fields |
-| R13 — Design for Failure | Emergency identity ensures Sou can always operate |
-| R14 — Paved Path | All access flows through `getProfile` / `getIdentity` |
-| R15 — Open/Closed | History is append-only; core fields never change |
+| R1 â€” Modulsingularity | Identity Store handles only identity â€” immutable core, access control, loading |
+| R2 â€” Dependency Order | Depends on Memory OS, ACF; no upward deps |
+| R3 â€” DRY | Identity core defined once, referenced everywhere |
+| R4 â€” Builder Pattern | Identity built at instantiation, then frozen |
+| R5 â€” Liskov Substitution | Any IdentityStore implements the interface |
+| R6 â€” DI over Singletons | Store config and emergency fallback injected |
+| R9 â€” Deterministic | Same identity produces same prompt injection |
+| R10 â€” Simpler Over Complex | Identity is a flat object with write-once fields |
+| R13 â€” Design for Failure | Emergency identity ensures Sou can always operate |
+| R14 â€” Paved Path | All access flows through `getProfile` / `getIdentity` |
+| R15 â€” Open/Closed | History is append-only; core fields never change |
 
 ## Related Documents
 

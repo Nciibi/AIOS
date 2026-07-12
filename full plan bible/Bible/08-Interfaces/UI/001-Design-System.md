@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## UI — 001: Design System
+﻿# AIOS Bible â€” Interfaces
+## UI â€” 001: Design System
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-UI-001 |
-| Source Laws | Law 1 — Law of Origin, Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 1 â€” Law of Origin, Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The UI Design System provides a unified component architecture, design tokens, layout system, responsive breakpoints, interaction patterns, and accessibility foundations for all human interface surfaces. It ensures every visual element — from the Conversational Channel to the Dashboard — is consistent, accessible, and maintainable across all AIOS touch points. The design system is the single source of truth for visual identity.
+The UI Design System provides a unified component architecture, design tokens, layout system, responsive breakpoints, interaction patterns, and accessibility foundations for all human interface surfaces. It ensures every visual element â€” from the Conversational Channel to the Dashboard â€” is consistent, accessible, and maintainable across all AIOS touch points. The design system is the single source of truth for visual identity.
 
 ## Architecture
 
@@ -35,7 +35,7 @@ Documentation (usage guidelines, examples, rationale)
 Versioning (semantic versioning, changelog, migration)
 ```
 
-The token layer feeds into components, which compose into patterns, which are documented and versioned. Changes propagate downward — a token update cascades through every component that references it.
+The token layer feeds into components, which compose into patterns, which are documented and versioned. Changes propagate downward â€” a token update cascades through every component that references it.
 
 ## Data Model
 
@@ -163,28 +163,28 @@ interface PatternLibrary {
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| DS-001 | Every token name is unique within its category | Algorithmic — registry rejects duplicates |
-| DS-002 | Every component resolves all referenced tokens | Algorithmic — build fails on missing token |
-| DS-003 | Layout grids align to gutter boundaries exactly | Algorithmic — grid engine enforces gutter math |
-| DS-004 | At least one breakpoint matches any viewport width | Architectural — breakpoint set covers 320px-2560px |
-| DS-005 | Component specs are immutable after registration | Algorithmic — new version creates new spec |
-| DS-006 | Deprecated tokens include a migration path | Algorithmic — replacement field required on deprecation |
+| DS-001 | Every token name is unique within its category | Algorithmic â€” registry rejects duplicates |
+| DS-002 | Every component resolves all referenced tokens | Algorithmic â€” build fails on missing token |
+| DS-003 | Layout grids align to gutter boundaries exactly | Algorithmic â€” grid engine enforces gutter math |
+| DS-004 | At least one breakpoint matches any viewport width | Architectural â€” breakpoint set covers 320px-2560px |
+| DS-005 | Component specs are immutable after registration | Algorithmic â€” new version creates new spec |
+| DS-006 | Deprecated tokens include a migration path | Algorithmic â€” replacement field required on deprecation |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Design system is the single source of visual truth; no other subsystem defines tokens |
-| R2 — Dependency Order | Depends on Physics/009-Interaction.md, Physics/005-Events.md; no cycles |
-| R3 — DRY | Tokens defined once, referenced by ID; no hardcoded values in components |
-| R4 — Builder Pattern | Components built via factory with validation; not constructed directly |
-| R5 — Law of Demeter | Components interact only with tokens they explicitly reference |
-| R6 — Encapsulation | Component internals hidden behind slots and props interface |
-| R9 — Deterministic | Same token set + same spec = identical rendered component |
-| R10 — Simpler Over Complex | Token-first design; inline overrides only for exceptional cases |
-| R13 — Design for Failure | Missing token fails at build time, not runtime |
-| R14 — Paved Path | Use predefined token categories; custom categories reviewed |
-| R15 — Open/Closed | New token categories registered via extension; existing tokens closed for modification |
+| R1 â€” Modulsingularity | Design system is the single source of visual truth; no other subsystem defines tokens |
+| R2 â€” Dependency Order | Depends on Physics/009-Interaction.md, Physics/005-Events.md; no cycles |
+| R3 â€” DRY | Tokens defined once, referenced by ID; no hardcoded values in components |
+| R4 â€” Builder Pattern | Components built via factory with validation; not constructed directly |
+| R5 â€” Law of Demeter | Components interact only with tokens they explicitly reference |
+| R6 â€” Encapsulation | Component internals hidden behind slots and props interface |
+| R9 â€” Deterministic | Same token set + same spec = identical rendered component |
+| R10 â€” Simpler Over Complex | Token-first design; inline overrides only for exceptional cases |
+| R13 â€” Design for Failure | Missing token fails at build time, not runtime |
+| R14 â€” Paved Path | Use predefined token categories; custom categories reviewed |
+| R15 â€” Open/Closed | New token categories registered via extension; existing tokens closed for modification |
 
 ## Related Documents
 

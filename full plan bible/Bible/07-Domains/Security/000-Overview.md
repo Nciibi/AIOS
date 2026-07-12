@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Security — 000: Overview
+﻿# AIOS Bible â€” Domains
+## Security â€” 000: Overview
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-SEC-000 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds, Law 8 — Law of Verification-First |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds, Law 8 â€” Law of Verification-First |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/008-Security.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Security domain enables AIOS to perform security operations — vulnerability assessment, penetration testing, threat detection, incident response, security monitoring, and compliance auditing. It provides the capability set for proactive security analysis and reactive incident handling across all AIOS domains and infrastructure.
+The Security domain enables AIOS to perform security operations â€” vulnerability assessment, penetration testing, threat detection, incident response, security monitoring, and compliance auditing. It provides the capability set for proactive security analysis and reactive incident handling across all AIOS domains and infrastructure.
 
 Security is a cross-cutting domain with unique constraints. Unlike other domains where the goal is to produce artifacts or complete tasks, Security's goal is to identify risk, prevent harm, and maintain constitutional compliance. Security operations follow a verification-first approach (Law 8): every finding is verified, every exploit is confirmed in a safe environment before reporting, and every remediation is tested before deployment.
 
@@ -54,7 +54,7 @@ All Security domain operations comply with Law 8 (Verification-First). No action
 |-------|-------------|-------------------|
 | Reconnaissance | Gather information about target | Verify information sources are authorized |
 | Analysis | Identify potential vulnerabilities | Verify findings in sandbox before reporting |
-| Exploit Verification | Confirm a vulnerability is real | Verify in isolated environment — never on production |
+| Exploit Verification | Confirm a vulnerability is real | Verify in isolated environment â€” never on production |
 | Reporting | Document findings | Verify findings against evidence before publication |
 | Remediation | Fix the vulnerability | Verify fix in test environment before deployment |
 | Re-testing | Confirm remediation effectiveness | Verify the same test passes after fix |
@@ -66,7 +66,7 @@ A Security Worker that identifies a potential vulnerability must first reproduce
 Security incidents follow the NIST-based lifecycle:
 
 ```
-Preparation → Detection → Analysis → Containment → Eradication → Recovery → Post-Mortem
+Preparation â†’ Detection â†’ Analysis â†’ Containment â†’ Eradication â†’ Recovery â†’ Post-Mortem
 ```
 
 | Phase | Description | Domain Activity |
@@ -81,15 +81,15 @@ Preparation → Detection → Analysis → Containment → Eradication → Recov
 
 ## Invariants
 
-1. **SEC-I-001 — Verify Before Report**: No vulnerability may be reported without being verified in a sandbox environment. Unverified findings are provisional only and must be clearly marked as such.
+1. **SEC-I-001 â€” Verify Before Report**: No vulnerability may be reported without being verified in a sandbox environment. Unverified findings are provisional only and must be clearly marked as such.
 
-2. **SEC-I-002 — Least Privilege**: Security Workers operate with the minimum permissions necessary for their assigned task. Penetration testing capabilities are tightly scoped and time-limited.
+2. **SEC-I-002 â€” Least Privilege**: Security Workers operate with the minimum permissions necessary for their assigned task. Penetration testing capabilities are tightly scoped and time-limited.
 
-3. **SEC-I-003 — No Production Exploitation**: Exploit verification must occur exclusively in sandbox or test environments. Production exploitation is prohibited regardless of authorization level.
+3. **SEC-I-003 â€” No Production Exploitation**: Exploit verification must occur exclusively in sandbox or test environments. Production exploitation is prohibited regardless of authorization level.
 
-4. **SEC-I-004 — Chain of Evidence**: Every security operation produces an immutable evidence chain. The complete investigation trail — from initial finding through verification through remediation — must be preserved.
+4. **SEC-I-004 â€” Chain of Evidence**: Every security operation produces an immutable evidence chain. The complete investigation trail â€” from initial finding through verification through remediation â€” must be preserved.
 
-5. **SEC-I-005 — Escalation on Certainty**: Verified critical vulnerabilities must be escalated to the Security Council within 15 minutes of verification. Delayed escalation is a constitutional violation.
+5. **SEC-I-005 â€” Escalation on Certainty**: Verified critical vulnerabilities must be escalated to the Security Council within 15 minutes of verification. Delayed escalation is a constitutional violation.
 
 ## Edge Cases
 
@@ -118,7 +118,7 @@ Preparation → Detection → Analysis → Containment → Eradication → Recov
 
 ### Security
 
-The Security domain is itself governed by security controls. Security Workers operate under the principle of least privilege — a PenTestWorker may execute exploits only in designated sandbox environments. All Security domain operations are logged to the Security Council. No Security Worker may override security controls without authorization. (Physics/008-Security.md)
+The Security domain is itself governed by security controls. Security Workers operate under the principle of least privilege â€” a PenTestWorker may execute exploits only in designated sandbox environments. All Security domain operations are logged to the Security Council. No Security Worker may override security controls without authorization. (Physics/008-Security.md)
 
 ### Evidence
 
@@ -126,15 +126,15 @@ Evidence is the foundation of all Security domain operations. Every scan, test, 
 
 ### Lifecycle
 
-Security Workers follow the canonical Worker lifecycle. Vulnerability findings follow a lifecycle: Found → Verified → Reported → Triaged → Fixed → Re-tested → Closed. Incidents follow the IR lifecycle. Threat intelligence follows the Academy knowledge lifecycle. (Physics/006-Lifecycles.md)
+Security Workers follow the canonical Worker lifecycle. Vulnerability findings follow a lifecycle: Found â†’ Verified â†’ Reported â†’ Triaged â†’ Fixed â†’ Re-tested â†’ Closed. Incidents follow the IR lifecycle. Threat intelligence follows the Academy knowledge lifecycle. (Physics/006-Lifecycles.md)
 
 ### Capability Bounds
 
-Security capabilities are tightly bounded. No Security Worker may execute exploits outside authorized sandbox environments. Penetration testing requires explicit authorization from Security Council for each target scope. Incident responders operate within pre-approved playbooks — novel response actions require authorization. (Physics/007-Capabilities.md)
+Security capabilities are tightly bounded. No Security Worker may execute exploits outside authorized sandbox environments. Penetration testing requires explicit authorization from Security Council for each target scope. Incident responders operate within pre-approved playbooks â€” novel response actions require authorization. (Physics/007-Capabilities.md)
 
 ### Communication
 
-All Security domain communication flows through ACF with high-priority classification. Security events are broadcast on high-priority ACF topics with guaranteed delivery. Incident notifications bypass normal routing and are delivered directly to the Security Council. Threat intelligence is distributed through restricted Academy channels. (Law 3 — Communication)
+All Security domain communication flows through ACF with high-priority classification. Security events are broadcast on high-priority ACF topics with guaranteed delivery. Incident notifications bypass normal routing and are delivered directly to the Security Council. Threat intelligence is distributed through restricted Academy channels. (Law 3 â€” Communication)
 
 ### Design DNA
 
@@ -145,7 +145,7 @@ All Security domain communication flows through ACF with high-priority classific
 | R7 (Testability) | Every security finding must be reproducible in a test environment |
 | R8 (Single Source) | All vulnerability data is normalized to a single finding schema |
 | R9 (Deterministic) | Same target and toolset produces identical scan results |
-| R13 (Design for Failure) | Security operations fail closed — deny on uncertainty, preserve evidence |
+| R13 (Design for Failure) | Security operations fail closed â€” deny on uncertainty, preserve evidence |
 
 ## Component Map
 
@@ -174,20 +174,20 @@ All Security domain communication flows through ACF with high-priority classific
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/0005-Domain-Architecture.md | Domain Architecture — Security domain structure |
-| Physics/005-Events.md | Evidence — Security operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — Security capability bounds and verification-first approach |
-| Physics/008-Security.md | Security — Security domain implements AIOS security model |
-| Bible/01-Governance/002-DGP.md | DGP — Security-related decision routing |
-| Bible/02-Core/Sou/001-Reasoning.md | Reasoning — Security findings inform Sou's risk assessment |
-| Bible/02-Core/AGS/000-Overview.md | AGS — SecurityWorker and PenTestWorker Genome templates |
-| Bible/02-Core/Academy/000-Overview.md | Academy — Vulnerability and threat intelligence knowledge management |
-| Bible/02-Core/DTS/000-Overview.md | DTS — Risk assessment for vulnerability prioritization |
-| Bible/04-Execution/Security/000-Overview.md | Execution Security — Runtime security enforcement |
-| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — Identity integrity verification |
-| Bible/04-Execution/Security/ATS/000-Auth-Methods.md | ATS — Authentication security analysis |
-| Bible/04-Execution/Security/Audit/000-EAS.md | Audit — Evidence Audit Service integration |
-| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — Identity integrity verification |
-| Bible/08-Interfaces/SDK/001-Audit-SDK.md | Audit SDK — Security evidence audit integration |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Bible/0005-Domain-Architecture.md | Domain Architecture â€” Security domain structure |
+| Physics/005-Events.md | Evidence â€” Security operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” Security capability bounds and verification-first approach |
+| Physics/008-Security.md | Security â€” Security domain implements AIOS security model |
+| Bible/01-Governance/002-DGP.md | DGP â€” Security-related decision routing |
+| Bible/02-Core/Sou/001-Reasoning.md | Reasoning â€” Security findings inform Sou's risk assessment |
+| Bible/02-Core/AGS/000-Overview.md | AGS â€” SecurityWorker and PenTestWorker Genome templates |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” Vulnerability and threat intelligence knowledge management |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” Risk assessment for vulnerability prioritization |
+| Bible/04-Execution/Security/000-Overview.md | Execution Security â€” Runtime security enforcement |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS â€” Identity integrity verification |
+| Bible/04-Execution/Security/ATS/000-Auth-Methods.md | ATS â€” Authentication security analysis |
+| Bible/04-Execution/Security/Audit/000-EAS.md | Audit â€” Evidence Audit Service integration |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS â€” Identity integrity verification |
+| Bible/08-Interfaces/SDK/001-Audit-SDK.md | Audit SDK â€” Security evidence audit integration |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

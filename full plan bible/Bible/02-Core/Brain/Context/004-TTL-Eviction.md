@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 004 — TTL & Eviction Management
+﻿# AIOS Bible â€” Brain
+## 004 â€” TTL & Eviction Management
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Context |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Context |
 | Document ID | AIOS-BBL-002-CTX-004 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/006-Lifecycles.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The TTL Manager owns the lifecycle of every item in the context window — tracking time-to-live, detecting expiry, executing eviction, and managing the soft-delete recovery window. Under CTX-003 the context window is ephemeral; the TTL Manager ensures items don't outlive their relevance. It coordinates with the Priority Manager (expired items below priority thresholds are evicted first) and the Compression Engine (expired items are purged before compression runs).
+The TTL Manager owns the lifecycle of every item in the context window â€” tracking time-to-live, detecting expiry, executing eviction, and managing the soft-delete recovery window. Under CTX-003 the context window is ephemeral; the TTL Manager ensures items don't outlive their relevance. It coordinates with the Priority Manager (expired items below priority thresholds are evicted first) and the Compression Engine (expired items are purged before compression runs).
 
 ## Data Model
 
@@ -59,7 +59,7 @@ ItemTTLConfig {
   ttl_duration_ms: number | null
   extendible: boolean
   max_extensions: number
-  eviction_priority: number        // Lower = evicted first (1–100)
+  eviction_priority: number        // Lower = evicted first (1â€“100)
 }
 ```
 
@@ -69,7 +69,7 @@ ItemTTLConfig {
 |-----------|--------|-------|------------|----------------|-------------------|
 | User input | Turns | 1 | No | 0 | 100 (never evicted by TTL) |
 | Sou response | Turns | 5 | Yes | 2 | 80 |
-| Working memory (goal) | Session | — | No | 0 | 90 |
+| Working memory (goal) | Session | â€” | No | 0 | 90 |
 | Working memory (task) | Turns | 10 | Yes | 3 | 70 |
 | Working memory (note) | Turns | 5 | Yes | 1 | 40 |
 | Working memory (reference) | Turns | 15 | Yes | 3 | 75 |
@@ -78,7 +78,7 @@ ItemTTLConfig {
 | System signal (critical) | Duration | 300000 (5min) | No | 0 | 95 |
 | System signal (warning) | Turns | 5 | No | 0 | 50 |
 | System signal (info) | Turns | 2 | No | 0 | 20 |
-| Mission state | Session | — | No | 0 | 90 |
+| Mission state | Session | â€” | No | 0 | 90 |
 | Compressed summary | Turns | 20 | Yes | 2 | 40 |
 | Dedup reference | Turns | 50 | Yes | 3 | 30 |
 
@@ -88,24 +88,24 @@ Items progress through a phased eviction lifecycle:
 
 ```
 Insert
-  │
-  ▼
+  â”‚
+  â–¼
 Active (item is in the context window, TTL counting down)
-  │
-  ├── TTL expires → marked expired
-  │
-  ▼
+  â”‚
+  â”œâ”€â”€ TTL expires â†’ marked expired
+  â”‚
+  â–¼
 Expired (item flagged, remains in window until next pull)
-  │
-  ├── Next pull sweep detects expiry
-  │
-  ▼
-Recovery (soft-delete — item is out of window but recoverable)
-  │
-  ├── Recovery window expires (24h default)
-  │
-  ▼
-Purged (hard-delete — item removed from Registry, memory freed)
+  â”‚
+  â”œâ”€â”€ Next pull sweep detects expiry
+  â”‚
+  â–¼
+Recovery (soft-delete â€” item is out of window but recoverable)
+  â”‚
+  â”œâ”€â”€ Recovery window expires (24h default)
+  â”‚
+  â–¼
+Purged (hard-delete â€” item removed from Registry, memory freed)
 ```
 
 ### Phase 1: Active
@@ -423,9 +423,9 @@ interface PurgeReport {
 
 ```
 1. Tool result pushed with TTL = 3 turns
-2. Turn 1: TTL = 3 → 2 (decremented on pull)
-3. Turn 2: TTL = 2 → 1
-4. Turn 3: TTL = 1 → 0 → expired
+2. Turn 1: TTL = 3 â†’ 2 (decremented on pull)
+3. Turn 2: TTL = 2 â†’ 1
+4. Turn 3: TTL = 1 â†’ 0 â†’ expired
 5. Next pull: sweep detects expiry, removes from window
 6. Item moved to recovery phase (24h)
 7. If Sou doesn't restore: purged after 24h
@@ -436,8 +436,8 @@ interface PurgeReport {
 ```
 1. Working memory goal pushed with policy = "session"
 2. Goal remains active for entire session (100+ turns)
-3. Session ends → closeWindow → all session items flushed
-4. Session-scoped items are NOT moved to recovery — directly purged
+3. Session ends â†’ closeWindow â†’ all session items flushed
+4. Session-scoped items are NOT moved to recovery â€” directly purged
 5. High-importance items may be promoted to Episodic Memory first
 ```
 
@@ -460,8 +460,8 @@ interface PurgeReport {
 2. Compression failed to bring it under limit
 3. emergencyEvict called with target = 8192
 4. Items sorted by eviction priority: [info:20, conversation:30, note:40, signal:50, ...]
-5. First pass: remove info-tier items (2 items, -300 tokens) → 9200
-6. Still over → remove oldest conversation turns (5 turns, -1500 tokens) → 7700
+5. First pass: remove info-tier items (2 items, -300 tokens) â†’ 9200
+6. Still over â†’ remove oldest conversation turns (5 turns, -1500 tokens) â†’ 7700
 7. Under budget: 7700 < 8192
 8. 7 items evicted, all moved to recovery
 9. CTX.EmergencyEvictionCompleted emitted
@@ -486,14 +486,14 @@ interface PurgeReport {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| TE-001 | Pinned items are never TTL-expired | Algorithmic — TTL decrement skips pinned items |
-| TE-002 | Items with indefinite TTL never expire | Algorithmic — checkExpired returns false for indefinite |
-| TE-003 | Session-scoped items are purged on session end | Architectural — closeWindow triggers purge |
-| TE-004 | Expired items have a 24-hour recovery window before purge | Algorithmic — purgeExpiredRecords enforces window |
-| TE-005 | TTL decrement is monotonic (turns_remaining only decreases) | Algorithmic — decrement never increases |
-| TE-006 | Emergency eviction never targets pinned or Critical items | Algorithmic — emergencyEvict skips these |
-| TE-007 | Each item has exactly one active TTLRecord | Schema — one-to-one with ContextItem |
-| TE-008 | Items in recovery phase are not visible in normal pulls | Architectural — filter by phase in assembly |
+| TE-001 | Pinned items are never TTL-expired | Algorithmic â€” TTL decrement skips pinned items |
+| TE-002 | Items with indefinite TTL never expire | Algorithmic â€” checkExpired returns false for indefinite |
+| TE-003 | Session-scoped items are purged on session end | Architectural â€” closeWindow triggers purge |
+| TE-004 | Expired items have a 24-hour recovery window before purge | Algorithmic â€” purgeExpiredRecords enforces window |
+| TE-005 | TTL decrement is monotonic (turns_remaining only decreases) | Algorithmic â€” decrement never increases |
+| TE-006 | Emergency eviction never targets pinned or Critical items | Algorithmic â€” emergencyEvict skips these |
+| TE-007 | Each item has exactly one active TTLRecord | Schema â€” one-to-one with ContextItem |
+| TE-008 | Items in recovery phase are not visible in normal pulls | Architectural â€” filter by phase in assembly |
 
 ## Error Cases
 
@@ -511,17 +511,17 @@ interface PurgeReport {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | TTL Manager handles only item lifecycle and eviction |
-| R2 — Dependency Order | Depends on Context Registry, Priority Manager; no upward deps |
-| R3 — DRY | TTL config defined once in TTLConfig.defaults |
-| R4 — Builder Pattern | Eviction built by expire → remove → recover → purge |
-| R5 — Liskov Substitution | Any TTLConfig implements the interface |
-| R6 — DI over Singletons | TTL defaults and sweep interval injected |
-| R9 — Deterministic | Same TTL inputs produce same expiry timeline |
-| R10 — Simpler Over Complex | Clear phase model with graduated severity |
-| R13 — Design for Failure | Emergency eviction always succeeds; recovery window prevents data loss |
-| R14 — Paved Path | All items flow through createRecord → decrement → expire → purge |
-| R15 — Open/Closed | New item types added via TTLConfig.defaults, not by modifying evictor |
+| R1 â€” Modulsingularity | TTL Manager handles only item lifecycle and eviction |
+| R2 â€” Dependency Order | Depends on Context Registry, Priority Manager; no upward deps |
+| R3 â€” DRY | TTL config defined once in TTLConfig.defaults |
+| R4 â€” Builder Pattern | Eviction built by expire â†’ remove â†’ recover â†’ purge |
+| R5 â€” Liskov Substitution | Any TTLConfig implements the interface |
+| R6 â€” DI over Singletons | TTL defaults and sweep interval injected |
+| R9 â€” Deterministic | Same TTL inputs produce same expiry timeline |
+| R10 â€” Simpler Over Complex | Clear phase model with graduated severity |
+| R13 â€” Design for Failure | Emergency eviction always succeeds; recovery window prevents data loss |
+| R14 â€” Paved Path | All items flow through createRecord â†’ decrement â†’ expire â†’ purge |
+| R15 â€” Open/Closed | New item types added via TTLConfig.defaults, not by modifying evictor |
 
 ## Related Documents
 

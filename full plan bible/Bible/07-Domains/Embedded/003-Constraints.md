@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Embedded — 003: Resource Constraints
+﻿# AIOS Bible â€” Domains
+## Embedded â€” 003: Resource Constraints
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-EMB-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -283,25 +283,25 @@ interface OptimizationEngine {
 
 | Rule | Application |
 |------|-------------|
-| R1 — Target Bounded | All constraint analysis is bounded by the target MCU profile's flash, RAM, clock, and power limits |
-| R2 — Interchangeable Architecture | Constraint budgets can be swapped by changing the target profile without altering the analysis engine |
-| R3 — Generic Operations | Flash, RAM, stack, power, and timing analysis follow the same pipeline for all binary formats |
-| R4 — Composition over Inheritance | Reports are composed from independent analyses rather than subclassed from a base report |
-| R5 — Stable Intermediate Representation | CombinedReports is the canonical IR passed between analysis stages and into optimization |
-| R6 — Temporal Synchronization | Events fire after each analysis completes; optimization waits for all five reports |
-| R9 — Stateless Verification | Constraint checks produce identical violations for the same binary and budget every time |
-| R10 — Capability-Based Routing | Optimization recommendations are ranked by impact relative to the specific device's capability bounds |
-| R13 — Event-Driven Consistency | ConstraintViolation events trigger automatic rollback or alternative generation passes |
-| R14 — Code as Law | Constraint budgets are enforced programmatically; no manual overrides bypass analysis |
-| R15 — Provably Deterministic | MD5 of binary + budget matches MD5 of all reports across all runs |
+| R1 â€” Target Bounded | All constraint analysis is bounded by the target MCU profile's flash, RAM, clock, and power limits |
+| R2 â€” Interchangeable Architecture | Constraint budgets can be swapped by changing the target profile without altering the analysis engine |
+| R3 â€” Generic Operations | Flash, RAM, stack, power, and timing analysis follow the same pipeline for all binary formats |
+| R4 â€” Composition over Inheritance | Reports are composed from independent analyses rather than subclassed from a base report |
+| R5 â€” Stable Intermediate Representation | CombinedReports is the canonical IR passed between analysis stages and into optimization |
+| R6 â€” Temporal Synchronization | Events fire after each analysis completes; optimization waits for all five reports |
+| R9 â€” Stateless Verification | Constraint checks produce identical violations for the same binary and budget every time |
+| R10 â€” Capability-Based Routing | Optimization recommendations are ranked by impact relative to the specific device's capability bounds |
+| R13 â€” Event-Driven Consistency | ConstraintViolation events trigger automatic rollback or alternative generation passes |
+| R14 â€” Code as Law | Constraint budgets are enforced programmatically; no manual overrides bypass analysis |
+| R15 â€” Provably Deterministic | MD5 of binary + budget matches MD5 of all reports across all runs |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/0000-Master-Architecture-Plan.md | Master Architecture Plan — constraint analysis in AIOS context |
+| Bible/0000-Master-Architecture-Plan.md | Master Architecture Plan â€” constraint analysis in AIOS context |
 | Bible/07-Domains/Embedded/000-Overview.md | Base Embedded domain overview |
 | Bible/07-Domains/Embedded/001-Devices.md | Device profiles provide resource budgets for constraint checking |
 | Bible/07-Domains/Embedded/002-Firmware.md | Firmware generator produces the binaries that constraint analysis validates |
-| Bible/06-Services/ACF/000-Overview.md | ACF — analysis event transport |
-| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — analysis tool adapter interface |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” analysis event transport |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK â€” analysis tool adapter interface |

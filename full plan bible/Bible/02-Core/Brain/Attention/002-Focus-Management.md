@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 002 — Focus Management
+﻿# AIOS Bible â€” Brain
+## 002 â€” Focus Management
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Attention |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Attention |
 | Document ID | AIOS-BBL-002-ATT-002 |
-| Source Laws | Law 3 — Law of Communication, Law 6 — Law of Lifecycle |
+| Source Laws | Law 3 â€” Law of Communication, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/009-Interaction.md, Physics/006-Lifecycles.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -101,37 +101,37 @@ Sou operates in one of five focus states:
 Transitions are directional and guarded:
 
 ```
-                ┌─────────────────────────────────────┐
-                │                                     │
-                ▼                                     │
-┌────────┐   signal    ┌──────────┐   complete   ┌────┴───────┐
-│  Idle  │ ──────►──── │Processing│ ──────►──────│    Idle    │
-└────────┘             └──────────┘              └────────────┘
-    ▲                       │   │                        ▲
-    │                       │   │                        │
-    │                timeout│   │interrupt               │
-    │                       │   │                        │
-    │                       ▼   ▼                        │
-    │                ┌──────────────┐    resume          │
-    │                │ Interrupted  │ ────────►───────────┘
-    │                └──────────────┘
-    │                       ▲
-    │                       │
-    │                critical│interrupt
-    │                       │
-    │                ┌──────────┐
-    │                │Deep Work │
-    │                └──────────┘
-    │                       │
-    │                ┌──────────────┐
-    │                │Multi-tasking │
-    │                └──────────────┘
-    │                       │
-    └───────────────────────┘
+                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                â”‚                                     â”‚
+                â–¼                                     â”‚
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”   signal    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   complete   â”Œâ”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Idle  â”‚ â”€â”€â”€â”€â”€â”€â–ºâ”€â”€â”€â”€ â”‚Processingâ”‚ â”€â”€â”€â”€â”€â”€â–ºâ”€â”€â”€â”€â”€â”€â”‚    Idle    â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜             â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜              â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+    â–²                       â”‚   â”‚                        â–²
+    â”‚                       â”‚   â”‚                        â”‚
+    â”‚                timeoutâ”‚   â”‚interrupt               â”‚
+    â”‚                       â”‚   â”‚                        â”‚
+    â”‚                       â–¼   â–¼                        â”‚
+    â”‚                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    resume          â”‚
+    â”‚                â”‚ Interrupted  â”‚ â”€â”€â”€â”€â”€â”€â”€â”€â–ºâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+    â”‚                â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+    â”‚                       â–²
+    â”‚                       â”‚
+    â”‚                criticalâ”‚interrupt
+    â”‚                       â”‚
+    â”‚                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚                â”‚Deep Work â”‚
+    â”‚                â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+    â”‚                       â”‚
+    â”‚                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚                â”‚Multi-tasking â”‚
+    â”‚                â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+    â”‚                       â”‚
+    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
           all resolved
 ```
 
-Transitions are rejected if they violate focus state guards (e.g. Idle → Interrupted is invalid without passing through Processing first).
+Transitions are rejected if they violate focus state guards (e.g. Idle â†’ Interrupted is invalid without passing through Processing first).
 
 ### Context Switch Tracking
 
@@ -269,13 +269,13 @@ interface FocusManager {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| ATT-FOC-001 | Sou is always in exactly one focus state | Algorithmic — state is mutually exclusive |
-| ATT-FOC-002 | Focus transitions are always logged as evidence | Architectural — every transition emits an event |
-| ATT-FOC-003 | Deep work protection guarantees a minimum uninterrupted window | Algorithmic — enforced before any interrupt is routed |
-| ATT-FOC-004 | Switch rate is computed over a sliding 60-second window | Algorithmic — rolling window, not fixed interval |
-| ATT-FOC-005 | State duration limits are advisory; no forced state change on exceed | API-level — emit event, do not force exit |
-| ATT-FOC-006 | Focus state is per-session and is cleared when the session ends | Architectural — `clearFocus` called by Session Manager |
-| ATT-FOC-007 | Context switch cost is monotonic (switch cost never decreases within a transition) | Algorithmic — cost is computed before the switch |
+| ATT-FOC-001 | Sou is always in exactly one focus state | Algorithmic â€” state is mutually exclusive |
+| ATT-FOC-002 | Focus transitions are always logged as evidence | Architectural â€” every transition emits an event |
+| ATT-FOC-003 | Deep work protection guarantees a minimum uninterrupted window | Algorithmic â€” enforced before any interrupt is routed |
+| ATT-FOC-004 | Switch rate is computed over a sliding 60-second window | Algorithmic â€” rolling window, not fixed interval |
+| ATT-FOC-005 | State duration limits are advisory; no forced state change on exceed | API-level â€” emit event, do not force exit |
+| ATT-FOC-006 | Focus state is per-session and is cleared when the session ends | Architectural â€” `clearFocus` called by Session Manager |
+| ATT-FOC-007 | Context switch cost is monotonic (switch cost never decreases within a transition) | Algorithmic â€” cost is computed before the switch |
 
 ## Error Cases
 
@@ -293,17 +293,17 @@ interface FocusManager {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Focus Management handles only focus state and transitions |
-| R2 — Dependency Order | Depends on Interrupt Manager for interrupt classification; no upward deps |
-| R3 — DRY | Focus states defined once in FocusState union type |
-| R4 — Builder Pattern | Focus built by explicit transitions through state machine |
-| R5 — Liskov Substitution | Any FocusManager implements the interface |
-| R6 — DI over Singletons | State guards and rate limit config injected |
-| R9 — Deterministic | Same signals + state produce same transitions |
-| R10 — Simpler Over Complex | Finite state machine with 5 states, not probabilistic model |
-| R13 — Design for Failure | Switch rate limiting prevents thrashing |
-| R14 — Paved Path | All focus changes flow through `setFocus` or `switchFocus` |
-| R15 — Open/Closed | New states added via state machine config, not core logic |
+| R1 â€” Modulsingularity | Focus Management handles only focus state and transitions |
+| R2 â€” Dependency Order | Depends on Interrupt Manager for interrupt classification; no upward deps |
+| R3 â€” DRY | Focus states defined once in FocusState union type |
+| R4 â€” Builder Pattern | Focus built by explicit transitions through state machine |
+| R5 â€” Liskov Substitution | Any FocusManager implements the interface |
+| R6 â€” DI over Singletons | State guards and rate limit config injected |
+| R9 â€” Deterministic | Same signals + state produce same transitions |
+| R10 â€” Simpler Over Complex | Finite state machine with 5 states, not probabilistic model |
+| R13 â€” Design for Failure | Switch rate limiting prevents thrashing |
+| R14 â€” Paved Path | All focus changes flow through `setFocus` or `switchFocus` |
+| R15 â€” Open/Closed | New states added via state machine config, not core logic |
 
 ## Related Documents
 

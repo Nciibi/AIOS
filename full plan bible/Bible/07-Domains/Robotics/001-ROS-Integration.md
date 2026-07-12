@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Robotics — 001: ROS/ROS2 Integration
+﻿# AIOS Bible â€” Domains
+## Robotics â€” 001: ROS/ROS2 Integration
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-ROB-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -20,7 +20,7 @@ The ROS/ROS2 Integration subsystem enables AIOS to generate, configure, build, a
 ## Architecture
 
 ```
-Requirements → Package Scaffold → Node Templates → Topic/Service Config → Build → Deploy
+Requirements â†’ Package Scaffold â†’ Node Templates â†’ Topic/Service Config â†’ Build â†’ Deploy
 ```
 
 | Stage | Input | Output | Worker |
@@ -206,25 +206,25 @@ interface ROSInterfaceField {
 
 | Code | Condition | Severity | Recovery |
 |------|-----------|----------|----------|
-| ROB-ROS-001 | Node naming conflict — two nodes with the same name in the same namespace | Error | Reject generation. Prompt user to rename node or change namespace. |
-| ROB-ROS-002 | Topic type mismatch — publisher and subscriber on same topic have different message types | Error | Detect during validation. Flag mismatch with topic name and conflicting types. Block build until resolved. |
-| ROB-ROS-003 | DDS discovery failure — nodes cannot discover each other across the DDS network | Warning | Retry discovery with increased timeout. Fall back to static endpoint discovery. Log topology for debugging. |
-| ROB-ROS-004 | Package build failure — compilation or dependency resolution error | Error | Capture build logs. Identify root cause (missing dependency, syntax error, type mismatch). Report actionable error to developer. |
-| ROB-ROS-005 | Interface type undefined — referenced .msg/.srv/.action file not found | Error | Fail validation. List missing interface files. Suggest package dependencies required to resolve. |
-| ROB-ROS-006 | QoS profile incompatibility — publisher/subscriber QoS settings are incompatible | Warning | Detect during graph validation. Report incompatible QoS pairs. Suggest compatible QoS profiles. |
-| ROB-ROS-007 | Launch file syntax error — malformed XML/Python/YAML launch configuration | Error | Parse and validate launch file during generation. Report exact line and syntax issue. |
-| ROB-ROS-008 | DDS security misconfiguration — missing or invalid security certificate files | Critical | Halt deployment. Report missing or expired certificates. Require Security Council re-authorization. |
+| ROB-ROS-001 | Node naming conflict â€” two nodes with the same name in the same namespace | Error | Reject generation. Prompt user to rename node or change namespace. |
+| ROB-ROS-002 | Topic type mismatch â€” publisher and subscriber on same topic have different message types | Error | Detect during validation. Flag mismatch with topic name and conflicting types. Block build until resolved. |
+| ROB-ROS-003 | DDS discovery failure â€” nodes cannot discover each other across the DDS network | Warning | Retry discovery with increased timeout. Fall back to static endpoint discovery. Log topology for debugging. |
+| ROB-ROS-004 | Package build failure â€” compilation or dependency resolution error | Error | Capture build logs. Identify root cause (missing dependency, syntax error, type mismatch). Report actionable error to developer. |
+| ROB-ROS-005 | Interface type undefined â€” referenced .msg/.srv/.action file not found | Error | Fail validation. List missing interface files. Suggest package dependencies required to resolve. |
+| ROB-ROS-006 | QoS profile incompatibility â€” publisher/subscriber QoS settings are incompatible | Warning | Detect during graph validation. Report incompatible QoS pairs. Suggest compatible QoS profiles. |
+| ROB-ROS-007 | Launch file syntax error â€” malformed XML/Python/YAML launch configuration | Error | Parse and validate launch file during generation. Report exact line and syntax issue. |
+| ROB-ROS-008 | DDS security misconfiguration â€” missing or invalid security certificate files | Critical | Halt deployment. Report missing or expired certificates. Require Security Council re-authorization. |
 
 ## Invariants
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| ROB-ROS-I-001 | Deterministic node generation — identical NodeSpec input must produce identical source code output | Hash comparison on generated source files. Non-determinism triggers DTS incident. |
-| ROB-ROS-I-002 | Topic type consistency — a topic name must map to exactly one message type across all nodes in the same ROS graph | Graph validation before build. Type mismatch blocks package generation. |
-| ROB-ROS-I-003 | DDS QoS compliance — generated QoS profiles must be compatible within each publisher-subscriber pair | QoS compatibility matrix check during validation. Incompatible pairs reported as errors. |
-| ROB-ROS-I-004 | Interface uniqueness — no two .msg/.srv/.action definitions within a package may share the same name and type | Package validation enforces unique interface names. Duplicates rejected during scaffold. |
-| ROB-ROS-I-005 | Launch file completeness — every node referenced in a launch file must have a corresponding generated node definition | Cross-reference validation between launch file and package node list. Missing nodes trigger error. |
-| ROB-ROS-I-006 | Security certificate validity — DDS security certificates must not be expired at time of deployment | Certificate expiration check before deployment. Expired certificates block deployment and trigger renewal workflow. |
+| ROB-ROS-I-001 | Deterministic node generation â€” identical NodeSpec input must produce identical source code output | Hash comparison on generated source files. Non-determinism triggers DTS incident. |
+| ROB-ROS-I-002 | Topic type consistency â€” a topic name must map to exactly one message type across all nodes in the same ROS graph | Graph validation before build. Type mismatch blocks package generation. |
+| ROB-ROS-I-003 | DDS QoS compliance â€” generated QoS profiles must be compatible within each publisher-subscriber pair | QoS compatibility matrix check during validation. Incompatible pairs reported as errors. |
+| ROB-ROS-I-004 | Interface uniqueness â€” no two .msg/.srv/.action definitions within a package may share the same name and type | Package validation enforces unique interface names. Duplicates rejected during scaffold. |
+| ROB-ROS-I-005 | Launch file completeness â€” every node referenced in a launch file must have a corresponding generated node definition | Cross-reference validation between launch file and package node list. Missing nodes trigger error. |
+| ROB-ROS-I-006 | Security certificate validity â€” DDS security certificates must not be expired at time of deployment | Certificate expiration check before deployment. Expired certificates block deployment and trigger renewal workflow. |
 
 ## Design DNA (R1-R6,R9,R10,R13-R15)
 
@@ -232,24 +232,24 @@ interface ROSInterfaceField {
 |------|-----------|
 | R1 (Modulsingularity) | Each ROS capability (package generation, node generation, interface management, launch generation, DDS config) is a separate module with a single responsibility |
 | R2 (Encapsulation) | ROS package internals (source files, build artifacts) are encapsulated within the package boundary; external access only through defined interfaces |
-| R3 (Orthogonality) | Package generation, node generation, interface definition, launch generation, and DDS configuration are orthogonal — any combination can be used independently |
+| R3 (Orthogonality) | Package generation, node generation, interface definition, launch generation, and DDS configuration are orthogonal â€” any combination can be used independently |
 | R4 (Polymorphism) | Generated nodes support both C++ and Python languages through polymorphic code generation templates |
 | R5 (Liskov) | All generated ROS nodes conform to the ROSNode interface contract regardless of language or execution context |
 | R6 (Interface) | ROS integration exposes narrow interfaces (IPackageGenerator, INodeGenerator) that decouple consumers from generation internals |
-| R9 (Deterministic) | Same ROS specification input produces identical package output every time — no randomness in code generation |
+| R9 (Deterministic) | Same ROS specification input produces identical package output every time â€” no randomness in code generation |
 | R10 (Simpler Over Complex) | Use package defaults where possible; only require explicit configuration when deviating from ROS community standards |
 | R13 (Design for Failure) | Package build failures preserve full build logs and intermediate artifacts for debugging; validation catches errors before build |
-| R14 (Paved Path) | Paved path: specify interfaces → generate package → build → validate → deploy. Alternative paths available for advanced use cases |
+| R14 (Paved Path) | Paved path: specify interfaces â†’ generate package â†’ build â†’ validate â†’ deploy. Alternative paths available for advanced use cases |
 | R15 (Testability) | Each generator module has independently testable output; generated nodes can be unit tested without ROS runtime |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Robotics/000-Overview.md | Domain overview — ROS Integration is a core Robotics capability |
-| Bible/07-Domains/Robotics/002-Sensor-Fusion.md | Sensor Fusion — consumes ROS topics generated by ROS Integration |
-| Bible/07-Domains/Robotics/003-Motion-Planning.md | Motion Planning — depends on ROS topics and services for trajectory commands |
-| Physics/005-Events.md | Evidence — all ROS generation operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — ROS node generation is a bounded capability |
-| Physics/010-Execution.md | Execution — ROS nodes execute as Workers within the AIOS execution model |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding for deterministic code generation |
+| Bible/07-Domains/Robotics/000-Overview.md | Domain overview â€” ROS Integration is a core Robotics capability |
+| Bible/07-Domains/Robotics/002-Sensor-Fusion.md | Sensor Fusion â€” consumes ROS topics generated by ROS Integration |
+| Bible/07-Domains/Robotics/003-Motion-Planning.md | Motion Planning â€” depends on ROS topics and services for trajectory commands |
+| Physics/005-Events.md | Evidence â€” all ROS generation operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” ROS node generation is a bounded capability |
+| Physics/010-Execution.md | Execution â€” ROS nodes execute as Workers within the AIOS execution model |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding for deterministic code generation |

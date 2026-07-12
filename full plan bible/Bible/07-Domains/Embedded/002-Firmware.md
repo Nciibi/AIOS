@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Embedded — 002: Firmware
+﻿# AIOS Bible â€” Domains
+## Embedded â€” 002: Firmware
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-EMB-002 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -307,25 +307,25 @@ interface BuildError {
 
 | Rule | Application |
 |------|-------------|
-| R1 — Target Bounded | Firmware generation is scoped to a single board profile; no multi-target abstractions leak |
-| R2 — Interchangeable Architecture | Board profiles can be swapped to produce firmware for different hardware without changing application logic |
-| R3 — Generic Operations | HAL, driver, and linker generation follow the same pipeline for all MCU families |
-| R4 — Composition over Inheritance | Drivers are composed of typed templates rather than inheriting from base classes |
-| R5 — Stable Intermediate Representation | FirmwareProject is the canonical IR passed between pipeline stages |
-| R6 — Temporal Synchronization | Each stage emits an event; downstream stages wait for prerequisite events before executing |
-| R9 — Stateless Verification | BuildCompleted and BuildFailed are deterministic for the same project and toolchain |
-| R10 — Capability-Based Routing | Driver selection and optimization level adapt based on available flash and RAM |
-| R13 — Event-Driven Consistency | BuildFailed events trigger automatic rollback to last known good configuration |
-| R14 — Code as Law | Linker script generation programmatically enforces memory region boundaries |
-| R15 — Provably Deterministic | SHA-256 of inputs matches SHA-256 of binary output across all runs |
+| R1 â€” Target Bounded | Firmware generation is scoped to a single board profile; no multi-target abstractions leak |
+| R2 â€” Interchangeable Architecture | Board profiles can be swapped to produce firmware for different hardware without changing application logic |
+| R3 â€” Generic Operations | HAL, driver, and linker generation follow the same pipeline for all MCU families |
+| R4 â€” Composition over Inheritance | Drivers are composed of typed templates rather than inheriting from base classes |
+| R5 â€” Stable Intermediate Representation | FirmwareProject is the canonical IR passed between pipeline stages |
+| R6 â€” Temporal Synchronization | Each stage emits an event; downstream stages wait for prerequisite events before executing |
+| R9 â€” Stateless Verification | BuildCompleted and BuildFailed are deterministic for the same project and toolchain |
+| R10 â€” Capability-Based Routing | Driver selection and optimization level adapt based on available flash and RAM |
+| R13 â€” Event-Driven Consistency | BuildFailed events trigger automatic rollback to last known good configuration |
+| R14 â€” Code as Law | Linker script generation programmatically enforces memory region boundaries |
+| R15 â€” Provably Deterministic | SHA-256 of inputs matches SHA-256 of binary output across all runs |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/0000-Master-Architecture-Plan.md | Master Architecture Plan — firmware generation in AIOS context |
+| Bible/0000-Master-Architecture-Plan.md | Master Architecture Plan â€” firmware generation in AIOS context |
 | Bible/07-Domains/Embedded/000-Overview.md | Base Embedded domain overview |
 | Bible/07-Domains/Embedded/001-Devices.md | Device registry provides MCU profiles for firmware generation |
 | Bible/07-Domains/Embedded/003-Constraints.md | Constraint analysis validates firmware resource usage |
-| Bible/06-Services/ACF/000-Overview.md | ACF — build event transport |
-| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — toolchain adapter interface |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” build event transport |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK â€” toolchain adapter interface |

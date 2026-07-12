@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## SDK — 002: Knowledge SDK
+﻿# AIOS Bible â€” Interfaces
+## SDK â€” 002: Knowledge SDK
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-SDK-002 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,9 +15,9 @@
 
 ## Purpose
 
-The Knowledge SDK provides the standard interface for knowledge-aware tools and applications to interact with the Academy — AIOS's learning and knowledge management system. It defines how tools propose, query, validate, compose, and execute knowledge artifacts within the AIOS knowledge ecosystem.
+The Knowledge SDK provides the standard interface for knowledge-aware tools and applications to interact with the Academy â€” AIOS's learning and knowledge management system. It defines how tools propose, query, validate, compose, and execute knowledge artifacts within the AIOS knowledge ecosystem.
 
-Knowledge is a first-class concept in AIOS. The Academy transforms raw evidence into structured, validated, distributable knowledge. The Knowledge SDK exposes this capability to Workers, Organizations, and external tools, enabling them to participate in the knowledge lifecycle — from evidence ingestion through knowledge distribution and execution.
+Knowledge is a first-class concept in AIOS. The Academy transforms raw evidence into structured, validated, distributable knowledge. The Knowledge SDK exposes this capability to Workers, Organizations, and external tools, enabling them to participate in the knowledge lifecycle â€” from evidence ingestion through knowledge distribution and execution.
 
 ## Knowledge Provider Interface
 
@@ -156,7 +156,7 @@ The Knowledge SDK supports these artifact types, each with a defined schema for 
 |------|--------------------|---------|
 | `insight` | structured_observation, evidence_chain, confidence | "Token usage peaks between 2-4 PM" |
 | `model` | model_parameters, training_data_hash, performance_metrics | "Anomaly detection model v2.1" |
-| `pattern` | pattern_definition, trigger_conditions, frequency | "Three consecutive build failures → toolchain issue" |
+| `pattern` | pattern_definition, trigger_conditions, frequency | "Three consecutive build failures â†’ toolchain issue" |
 | `procedure` | step_list, preconditions, postconditions, risk_level | "Certificate rotation procedure" |
 | `reference` | source_url, content_hash, summary, tags | "RFC 8446 TLS 1.3 specification" |
 
@@ -167,9 +167,9 @@ Knowledge execution (via KEE) follows this protocol:
 ```
 1. Request: executeKnowledge(knowledgeId, context)
 2. Knowledge SDK validates:
-   └─ Knowledge is in Published status
-   └─ Requesting entity has execution authorization
-   └─ Context contains required parameters
+   â””â”€ Knowledge is in Published status
+   â””â”€ Requesting entity has execution authorization
+   â””â”€ Context contains required parameters
 3. KEE loads knowledge artifact
 4. KEE prepares execution environment
 5. KEE executes knowledge-driven action
@@ -211,11 +211,11 @@ Knowledge access is scoped by Organization policy. A Worker may only query knowl
 
 ### Evidence
 
-Every Knowledge SDK operation produces an Event — queries, proposals, validations, compositions, and executions. Knowledge artifacts include full provenance chains linking back to source evidence Events. Knowledge execution outcomes produce new evidence for further learning. (PHI-008)
+Every Knowledge SDK operation produces an Event â€” queries, proposals, validations, compositions, and executions. Knowledge artifacts include full provenance chains linking back to source evidence Events. Knowledge execution outcomes produce new evidence for further learning. (PHI-008)
 
 ### Lifecycle
 
-Knowledge artifacts follow the AKM lifecycle (Governance/006-AKM.md): Generated → Proposed → Validated → Accepted → Published → Deprecated → Archived. The Knowledge SDK provides methods for each lifecycle stage. Compositions follow a sub-lifecycle within the broader artifact lifecycle. (Physics/006-Lifecycles.md)
+Knowledge artifacts follow the AKM lifecycle (Governance/006-AKM.md): Generated â†’ Proposed â†’ Validated â†’ Accepted â†’ Published â†’ Deprecated â†’ Archived. The Knowledge SDK provides methods for each lifecycle stage. Compositions follow a sub-lifecycle within the broader artifact lifecycle. (Physics/006-Lifecycles.md)
 
 ### Capability Bounds
 
@@ -223,32 +223,32 @@ Knowledge SDK capabilities are bounded by the requesting entity's knowledge acce
 
 ### Communication
 
-All Knowledge SDK communication flows through ACF. Knowledge queries, proposals, and subscriptions use ACF RPC patterns. Knowledge distribution uses ACF pub/sub for push notifications. Knowledge execution results stream through ACF streaming topics. (Law 3 — Communication)
+All Knowledge SDK communication flows through ACF. Knowledge queries, proposals, and subscriptions use ACF RPC patterns. Knowledge distribution uses ACF pub/sub for push notifications. Knowledge execution results stream through ACF streaming topics. (Law 3 â€” Communication)
 
 ### Design DNA
 
 | Rule | Compliance |
 |------|-----------|
-| R1 (Modulsingularity) | Knowledge SDK covers only knowledge operations — no runtime or audit concerns |
+| R1 (Modulsingularity) | Knowledge SDK covers only knowledge operations â€” no runtime or audit concerns |
 | R3 (DRY) | Knowledge artifacts are stored once in Academy Registry, queried by reference |
 | R5 (Liskov) | All knowledge-aware tools implement the same KnowledgeProvider interface |
 | R9 (Deterministic) | Same knowledge query and input produces identical results |
-| R10 (Simpler Over Complex) | Knowledge execution is linear — no branching execution plans |
+| R10 (Simpler Over Complex) | Knowledge execution is linear â€” no branching execution plans |
 | R13 (Design for Failure) | Knowledge query degradation returns partial results; knowledge execution failures return with error evidence |
-| R14 (Paved Path) | Paved path: query → validate → propose → compose → execute |
+| R14 (Paved Path) | Paved path: query â†’ validate â†’ propose â†’ compose â†’ execute |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/005-Events.md | Evidence — Knowledge SDK operations produce Events |
-| Physics/012-Experience.md | Experience — Knowledge SDK enables experience-driven learning |
-| Bible/08-Interfaces/API/000-Specifications.md | API — Knowledge SDK uses ACF API contracts |
-| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK — Knowledge execution requires Runtime SDK session |
-| Bible/02-Core/Academy/000-Overview.md | Academy — Knowledge SDK implements Academy interface |
-| Bible/02-Core/Academy/013-KEE.md | KEE — Knowledge Execution Engine |
-| Bible/02-Core/Academy/014-KCE.md | KCE — Knowledge Composition Engine |
-| Bible/02-Core/Academy/015-Knowledge-SDK.md | Academy Knowledge SDK — Detailed API specification |
-| Bible/01-Governance/006-AKM.md | AKM — Knowledge lifecycle governance |
-| Bible/00-Foundations/002-Design-DNA.md | Design DNA — R1–R15 compliance for knowledge tools |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Physics/005-Events.md | Evidence â€” Knowledge SDK operations produce Events |
+| Physics/012-Experience.md | Experience â€” Knowledge SDK enables experience-driven learning |
+| Bible/08-Interfaces/API/000-Specifications.md | API â€” Knowledge SDK uses ACF API contracts |
+| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK â€” Knowledge execution requires Runtime SDK session |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” Knowledge SDK implements Academy interface |
+| Bible/02-Core/Academy/013-KEE.md | KEE â€” Knowledge Execution Engine |
+| Bible/02-Core/Academy/014-KCE.md | KCE â€” Knowledge Composition Engine |
+| Bible/02-Core/Academy/015-Knowledge-SDK.md | Academy Knowledge SDK â€” Detailed API specification |
+| Bible/01-Governance/006-AKM.md | AKM â€” Knowledge lifecycle governance |
+| Bible/00-Foundations/002-Design-DNA.md | Design DNA â€” R1â€“R15 compliance for knowledge tools |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

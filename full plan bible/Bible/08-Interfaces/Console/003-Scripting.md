@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## Console — 003: Scripting
+﻿# AIOS Bible â€” Interfaces
+## Console â€” 003: Scripting
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-GC-003 |
-| Source Laws | Law 1 — Law of Origin, Law 4 — Law of Evidence, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 1 â€” Law of Origin, Law 4 â€” Law of Evidence, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/006-Lifecycles.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -21,30 +21,30 @@ The Scripting engine enables automation of governance workflows through defined 
 
 ```
 script definition (YAML/JSON)
-    │
-    ▼
-┌──────────────────┐
-│  parse_script     │  validate syntax, resolve step references
-└──────┬───────────┘
-       ▼
-┌──────────────────┐
-│  resolve_variables│  substitute script variables and context values
-└──────┬───────────┘
-       ▼
-┌──────────────────┐
-│  execute_steps    │  run each step, evaluate conditions, handle errors
-└──────┬───────────┘
-       │
-       ├──► step complete ──► record evidence ──► next step
-       │
-       ├──► condition met ──► branch to conditional path
-       │
-       └──► error ──► error handler ──► recover or abort
-              │
-              ▼
-┌──────────────────┐
-│  complete_script  │  finalize, record evidence, notify
-└──────────────────┘
+    â”‚
+    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  parse_script     â”‚  validate syntax, resolve step references
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  resolve_variablesâ”‚  substitute script variables and context values
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  execute_steps    â”‚  run each step, evaluate conditions, handle errors
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+       â”‚
+       â”œâ”€â”€â–º step complete â”€â”€â–º record evidence â”€â”€â–º next step
+       â”‚
+       â”œâ”€â”€â–º condition met â”€â”€â–º branch to conditional path
+       â”‚
+       â””â”€â”€â–º error â”€â”€â–º error handler â”€â”€â–º recover or abort
+              â”‚
+              â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  complete_script  â”‚  finalize, record evidence, notify
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Data Model (TypeScript)
@@ -128,7 +128,7 @@ interface StepResult {
 
 ### define_script
 
-Accepts a script definition (YAML or JSON) and registers it in the script registry. Validates structure, resolves step references, and assigns a unique scriptId. Scripts are immutable after definition — changes require a new version.
+Accepts a script definition (YAML or JSON) and registers it in the script registry. Validates structure, resolves step references, and assigns a unique scriptId. Scripts are immutable after definition â€” changes require a new version.
 
 ### parse_script
 
@@ -208,40 +208,40 @@ interface Scheduler {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| GC-003-01 | Every script execution produces step-level evidence records | Architectural — each step records to EVS before proceeding |
-| GC-003-02 | Script execution is deterministic — same inputs produce same step sequence | Algorithmic — variable resolution is deterministic |
-| GC-003-03 | Total execution time is bounded by maxExecutionSeconds | Algorithmic — executor enforces hard timeout |
-| GC-003-04 | Scripts are immutable after definition — changes create new versions | Architectural — registry enforces append-only versioning |
-| GC-003-05 | Scheduled scripts enforce maxConcurrentExecutions | Algorithmic — scheduler checks before firing |
-| GC-003-06 | Step dependencies form a directed acyclic graph | Algorithmic — parser validates acyclic structure |
+| GC-003-01 | Every script execution produces step-level evidence records | Architectural â€” each step records to EVS before proceeding |
+| GC-003-02 | Script execution is deterministic â€” same inputs produce same step sequence | Algorithmic â€” variable resolution is deterministic |
+| GC-003-03 | Total execution time is bounded by maxExecutionSeconds | Algorithmic â€” executor enforces hard timeout |
+| GC-003-04 | Scripts are immutable after definition â€” changes create new versions | Architectural â€” registry enforces append-only versioning |
+| GC-003-05 | Scheduled scripts enforce maxConcurrentExecutions | Algorithmic â€” scheduler checks before firing |
+| GC-003-06 | Step dependencies form a directed acyclic graph | Algorithmic â€” parser validates acyclic structure |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Scripting owns automation orchestration; CLI engine owns individual command execution |
-| R2 — Dependency Order | Depends on CLI CommandRegistry, EVS, Scheduler; no circular deps |
-| R3 — DRY | Steps reference CLI commands by name; script does not re-implement command logic |
-| R4 — Builder Pattern | ScriptExecution built incrementally with each StepResult |
-| R5 — Deterministic | Same script with same variables produces identical execution sequence |
-| R6 — Single Source | Script definition is the single source of workflow specification |
-| R9 — Deterministic | Replaying script execution from evidence produces identical step sequence |
-| R10 — Simpler Over Complex | Default execution is linear; conditions and branching are opt-in |
-| R13 — Design for Failure | Error handlers provide structured recovery paths for every failure mode |
-| R14 — Paved Path | Standard scripts for override management, certification review, and audit export |
-| R15 — Open/Closed | New error handler actions and step types register via extensions |
+| R1 â€” Modulsingularity | Scripting owns automation orchestration; CLI engine owns individual command execution |
+| R2 â€” Dependency Order | Depends on CLI CommandRegistry, EVS, Scheduler; no circular deps |
+| R3 â€” DRY | Steps reference CLI commands by name; script does not re-implement command logic |
+| R4 â€” Builder Pattern | ScriptExecution built incrementally with each StepResult |
+| R5 â€” Deterministic | Same script with same variables produces identical execution sequence |
+| R6 â€” Single Source | Script definition is the single source of workflow specification |
+| R9 â€” Deterministic | Replaying script execution from evidence produces identical step sequence |
+| R10 â€” Simpler Over Complex | Default execution is linear; conditions and branching are opt-in |
+| R13 â€” Design for Failure | Error handlers provide structured recovery paths for every failure mode |
+| R14 â€” Paved Path | Standard scripts for override management, certification review, and audit export |
+| R15 â€” Open/Closed | New error handler actions and step types register via extensions |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/08-Interfaces/Console/000-Overview.md | Governance Console overview — scripting automates governance workflows |
+| Bible/08-Interfaces/Console/000-Overview.md | Governance Console overview â€” scripting automates governance workflows |
 | Bible/08-Interfaces/Console/001-CLI-Commands.md | CLI commands define the atomic operations that scripts compose |
 | Bible/08-Interfaces/Console/002-REPL.md | REPL can execute scripts interactively or inspect script state |
 | Bible/08-Interfaces/Console/004-AutoComplete.md | Auto-complete assists script definition authoring |
 | Bible/08-Interfaces/Dashboard/000-Overview.md | Dashboard displays script execution status and schedules |
-| Bible/08-Interfaces/UI/000-Overview.md | General human interface — console is governance-specific |
+| Bible/08-Interfaces/UI/000-Overview.md | General human interface â€” console is governance-specific |
 | Bible/01-Governance/000-Overview.md | Governance services that scripts automate |
-| Bible/05-Platform/005-AUS.md | Audit System — script execution trails for audit |
-| Bible/05-Platform/004-EVS.md | Evidence System — step-level evidence recording |
+| Bible/05-Platform/005-AUS.md | Audit System â€” script execution trails for audit |
+| Bible/05-Platform/004-EVS.md | Evidence System â€” step-level evidence recording |
 | Bible/06-Services/ACF/000-Overview.md | ACF transports all script command invocations |

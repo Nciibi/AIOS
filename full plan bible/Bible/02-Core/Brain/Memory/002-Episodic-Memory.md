@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 002 — Episodic Memory
+﻿# AIOS Bible â€” Brain
+## 002 â€” Episodic Memory
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Memory |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Memory |
 | Document ID | AIOS-BBL-002-MEM-002 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Episodic Memory stores Sou's past experiences — conversation turns, mission outcomes, user interactions, system events, and notable occurrences. Unlike Working Memory (current state) or Semantic Memory (facts/knowledge), Episodic Memory is temporal and sequential: it records what happened, when it happened, and in what context.
+Episodic Memory stores Sou's past experiences â€” conversation turns, mission outcomes, user interactions, system events, and notable occurrences. Unlike Working Memory (current state) or Semantic Memory (facts/knowledge), Episodic Memory is temporal and sequential: it records what happened, when it happened, and in what context.
 
 Episodic Memory is the primary source for the Reflection Engine (Cognitive OS). When Sou reflects on past experiences, it queries Episodic Memory for relevant episodes.
 
@@ -32,7 +32,7 @@ Episode {
   timestamp: timestamp
   sequence_number: number        // Monotonically increasing within session
   content: EpisodeContent
-  importance: number             // 0.0–1.0, computed or Sou-assigned
+  importance: number             // 0.0â€“1.0, computed or Sou-assigned
   tags: string[]
   context_hash: string           // Hash of context at episode time
   parent_episode?: string        // episode_id this is a response to
@@ -198,7 +198,7 @@ Monthly archival cron:
 
 ## Pruning Strategy
 
-### Soft Delete → Hard Delete
+### Soft Delete â†’ Hard Delete
 
 ```
 1. Episode expires (TTL reached)
@@ -227,9 +227,9 @@ Session End Rollup:
   1. Collect all episodes from the session
   2. Identify high-importance episodes (importance > 0.7)
   3. For each high-importance episode, check if content is:
-     a. Already known (exists in Semantic Memory) → skip
-     b. Novel information → propose to Semantic Memory
-     c. Behavioral pattern → propose to Procedural Memory
+     a. Already known (exists in Semantic Memory) â†’ skip
+     b. Novel information â†’ propose to Semantic Memory
+     c. Behavioral pattern â†’ propose to Procedural Memory
   4. Generate session summary via LLMOS
   5. Archive remaining episodes
 ```
@@ -310,12 +310,12 @@ interface RollupReport {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| EP-001 | Every episode has a timestamp and sequence number | Schema — required fields |
-| EP-002 | Episodes are immutable after storage (update creates new version) | Architectural — append-only log |
-| EP-003 | Conversation turns are archived before hard deletion | Algorithmic — summary generated first |
-| EP-004 | Deleted episodes have 24-hour recovery window | Algorithmic — soft-delete period |
-| EP-005 | Importance scores are bounded [0.0, 1.0] | Schema — clamped on update |
-| EP-006 | Sliding window always keeps the most recent N turns | Algorithmic — oldest evicted on insert |
+| EP-001 | Every episode has a timestamp and sequence number | Schema â€” required fields |
+| EP-002 | Episodes are immutable after storage (update creates new version) | Architectural â€” append-only log |
+| EP-003 | Conversation turns are archived before hard deletion | Algorithmic â€” summary generated first |
+| EP-004 | Deleted episodes have 24-hour recovery window | Algorithmic â€” soft-delete period |
+| EP-005 | Importance scores are bounded [0.0, 1.0] | Schema â€” clamped on update |
+| EP-006 | Sliding window always keeps the most recent N turns | Algorithmic â€” oldest evicted on insert |
 
 ## Error Cases
 
@@ -332,17 +332,17 @@ interface RollupReport {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Episodic Memory handles only temporal experience storage |
-| R2 — Dependency Order | Depends on Memory OS core, LLMOS; no upward deps |
-| R3 — DRY | Episode schema defined once in Data Model |
-| R4 — Builder Pattern | Archive built by Summarization → Soft Delete → Hard Delete |
-| R5 — Liskov Substitution | Any EpisodicMemoryStore implements the interface |
-| R6 — DI over Singletons | Archival and pruning strategies injected |
-| R9 — Deterministic | Same query returns same results (time-dependent) |
-| R10 — Simpler Over Complex | Clear type-based retention with graduated archival |
-| R13 — Design for Failure | Summarization failures don't block archival |
-| R14 — Paved Path | All episodes flow through store/query/archive |
-| R15 — Open/Closed | New episode types added via tags, not by modifying schema |
+| R1 â€” Modulsingularity | Episodic Memory handles only temporal experience storage |
+| R2 â€” Dependency Order | Depends on Memory OS core, LLMOS; no upward deps |
+| R3 â€” DRY | Episode schema defined once in Data Model |
+| R4 â€” Builder Pattern | Archive built by Summarization â†’ Soft Delete â†’ Hard Delete |
+| R5 â€” Liskov Substitution | Any EpisodicMemoryStore implements the interface |
+| R6 â€” DI over Singletons | Archival and pruning strategies injected |
+| R9 â€” Deterministic | Same query returns same results (time-dependent) |
+| R10 â€” Simpler Over Complex | Clear type-based retention with graduated archival |
+| R13 â€” Design for Failure | Summarization failures don't block archival |
+| R14 â€” Paved Path | All episodes flow through store/query/archive |
+| R15 â€” Open/Closed | New episode types added via tags, not by modifying schema |
 
 ## Related Documents
 

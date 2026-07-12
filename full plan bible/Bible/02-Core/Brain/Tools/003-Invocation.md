@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 003 — Invocation Manager
+﻿# AIOS Bible â€” Brain
+## 003 â€” Invocation Manager
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Tools |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Tools |
 | Document ID | AIOS-BBL-002-TOL-003 |
-| Source Laws | Law 7 — Law of Capability Bounds, Law 3 — Law of Communication |
+| Source Laws | Law 7 â€” Law of Capability Bounds, Law 3 â€” Law of Communication |
 | Source Physics | Physics/007-Capabilities.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Invocation Manager orchestrates the full lifecycle of a tool call — from parameter validation through capability and rate-limit checking, Security Council routing, Runtime SDK execution, and result parsing. It supports three execution types (sync, async, stream), provides invocation tracking with status queries and cancellation, enforces rate limits and timeouts, and ensures every invocation is observable through events.
+The Invocation Manager orchestrates the full lifecycle of a tool call â€” from parameter validation through capability and rate-limit checking, Security Council routing, Runtime SDK execution, and result parsing. It supports three execution types (sync, async, stream), provides invocation tracking with status queries and cancellation, enforces rate limits and timeouts, and ensures every invocation is observable through events.
 
 Under TLS-000, the Invocation Manager is the sole entry point for tool execution. No tool is invoked without passing through its pipeline.
 
@@ -119,30 +119,30 @@ RateLimitState {
 
 ```
 InvocationRequest
-    │
-    ▼
-[1] Validate Parameters ──── Failure → Return error
-    │
-    ▼
-[2] Check Capability Bounds ── Denied → Return TLS_CAPABILITY_DENIED
-    │
-    ▼
-[3] Check Rate Limits ──── Exceeded → Return TLS_RATE_LIMITED
-    │
-    ▼
-[4] Route through Security Council ── Denied → Ret urn security error
-    │
-    ▼
+    â”‚
+    â–¼
+[1] Validate Parameters â”€â”€â”€â”€ Failure â†’ Return error
+    â”‚
+    â–¼
+[2] Check Capability Bounds â”€â”€ Denied â†’ Return TLS_CAPABILITY_DENIED
+    â”‚
+    â–¼
+[3] Check Rate Limits â”€â”€â”€â”€ Exceeded â†’ Return TLS_RATE_LIMITED
+    â”‚
+    â–¼
+[4] Route through Security Council â”€â”€ Denied â†’ Ret urn security error
+    â”‚
+    â–¼
 [5] Execute via Runtime SDK
-    │
-    ├── Sync: Wait for result
-    ├── Async: Return invocation_id, poll later
-    └── Stream: Return async iterator
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Sync: Wait for result
+    â”œâ”€â”€ Async: Return invocation_id, poll later
+    â””â”€â”€ Stream: Return async iterator
+    â”‚
+    â–¼
 [6] Parse Result
-    │
-    ▼
+    â”‚
+    â–¼
 InvocationResult
 ```
 
@@ -320,13 +320,13 @@ interface InvocationManager {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| INV-001 | Every invocation has a unique invocation_id | Algorithmic — UUID v4 generation |
-| INV-002 | Every invocation passes through all pipeline stages | Architectural — pipeline is sequential |
-| INV-003 | Rate limits are enforced before execution begins | Algorithmic — checked before dispatch |
-| INV-004 | No invocation can be cancelled after terminal state | Algorithmic — terminal check on cancel |
-| INV-005 | Every invocation has a deadline; none execute indefinitely | API-level — deadline required in context |
-| INV-006 | Sync invocations block until completion or timeout | Algorithmic — synchronous wait with timeout |
-| INV-007 | Capability bounds are checked before rate limits | Pipeline-ordering — stage sequence enforced |
+| INV-001 | Every invocation has a unique invocation_id | Algorithmic â€” UUID v4 generation |
+| INV-002 | Every invocation passes through all pipeline stages | Architectural â€” pipeline is sequential |
+| INV-003 | Rate limits are enforced before execution begins | Algorithmic â€” checked before dispatch |
+| INV-004 | No invocation can be cancelled after terminal state | Algorithmic â€” terminal check on cancel |
+| INV-005 | Every invocation has a deadline; none execute indefinitely | API-level â€” deadline required in context |
+| INV-006 | Sync invocations block until completion or timeout | Algorithmic â€” synchronous wait with timeout |
+| INV-007 | Capability bounds are checked before rate limits | Pipeline-ordering â€” stage sequence enforced |
 
 ## Error Cases
 
@@ -345,17 +345,17 @@ interface InvocationManager {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Invocation Manager handles only tool execution lifecycle |
-| R2 — Dependency Order | Depends on Registry, Validator, Security Council, Runtime SDK |
-| R3 — DRY | Invocation pipeline steps defined once in ordered stages |
-| R4 — Builder Pattern | Invocation built by Pipeline Stages → Execution → Result |
-| R5 — Liskov Substitution | Any InvocationManager implements the interface |
-| R6 — DI over Singletons | Pipeline stages, validators, and rate limiters injected |
-| R9 — Deterministic | Same inputs and registry state produce same result |
-| R10 — Simpler Over Complex | Three clear execution types with explicit lifecycle |
-| R13 — Design for Failure | Timeouts, retries, cancellation, and fallbacks at every stage |
-| R14 — Paved Path | All invocations flow through invoke() |
-| R15 — Open/Closed | New execution types added via strategy injection |
+| R1 â€” Modulsingularity | Invocation Manager handles only tool execution lifecycle |
+| R2 â€” Dependency Order | Depends on Registry, Validator, Security Council, Runtime SDK |
+| R3 â€” DRY | Invocation pipeline steps defined once in ordered stages |
+| R4 â€” Builder Pattern | Invocation built by Pipeline Stages â†’ Execution â†’ Result |
+| R5 â€” Liskov Substitution | Any InvocationManager implements the interface |
+| R6 â€” DI over Singletons | Pipeline stages, validators, and rate limiters injected |
+| R9 â€” Deterministic | Same inputs and registry state produce same result |
+| R10 â€” Simpler Over Complex | Three clear execution types with explicit lifecycle |
+| R13 â€” Design for Failure | Timeouts, retries, cancellation, and fallbacks at every stage |
+| R14 â€” Paved Path | All invocations flow through invoke() |
+| R15 â€” Open/Closed | New execution types added via strategy injection |
 
 ## Related Documents
 

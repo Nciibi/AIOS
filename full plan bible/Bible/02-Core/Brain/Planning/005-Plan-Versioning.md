@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 005 — Plan Versioning
+﻿# AIOS Bible â€” Brain
+## 005 â€” Plan Versioning
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Planning |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Planning |
 | Document ID | AIOS-BBL-002-PLN-005 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Plan Versioning manages the lifecycle of plan revisions — from initial draft through approval, execution, and eventual completion or cancellation. Every modification to a plan creates a new version, preserving a complete audit trail of changes. This module supports approval workflows (Sou must approve before execution), version diffing (to review what changed between revisions), plan rollback (to revert to a previous approved state), and concurrent modification prevention (optimistic locking). Versioning ensures that Sou never executes an unapproved plan and can always trace how a plan evolved over time.
+Plan Versioning manages the lifecycle of plan revisions â€” from initial draft through approval, execution, and eventual completion or cancellation. Every modification to a plan creates a new version, preserving a complete audit trail of changes. This module supports approval workflows (Sou must approve before execution), version diffing (to review what changed between revisions), plan rollback (to revert to a previous approved state), and concurrent modification prevention (optimistic locking). Versioning ensures that Sou never executes an unapproved plan and can always trace how a plan evolved over time.
 
 ## Data Model
 
@@ -45,35 +45,35 @@ type PlanVersionStatus = "draft" | "approved" | "active" | "completed" | "failed
 ### Status Transitions
 
 ```
-             ┌───────┐
-             │ Draft │
-             └───┬───┘
-                 │ Sou approves
-                 ▼
-           ┌──────────┐
-           │ Approved  │
-           └────┬─────┘
-                │ execution starts
-                ▼
-            ┌────────┐
-            │ Active  │
-            └───┬────┘
-                │
-      ┌─────────┼─────────┐
-      ▼         ▼         ▼
- ┌─────────┐ ┌─────────┐ ┌──────────┐
- │Complete │ │ Failed  │ │ Cancelled │
- └─────────┘ └─────────┘ └──────────┘
+             â”Œâ”€â”€â”€â”€â”€â”€â”€â”
+             â”‚ Draft â”‚
+             â””â”€â”€â”€â”¬â”€â”€â”€â”˜
+                 â”‚ Sou approves
+                 â–¼
+           â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+           â”‚ Approved  â”‚
+           â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜
+                â”‚ execution starts
+                â–¼
+            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”
+            â”‚ Active  â”‚
+            â””â”€â”€â”€â”¬â”€â”€â”€â”€â”˜
+                â”‚
+      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+      â–¼         â–¼         â–¼
+ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+ â”‚Complete â”‚ â”‚ Failed  â”‚ â”‚ Cancelled â”‚
+ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 Transition rules:
-- `draft` → `approved`: Sou explicitly approves via `approvePlan()`
-- `approved` → `active`: Execution begins (Institution OS picks up the plan)
-- `active` → `completed`: All milestones finished successfully
-- `active` → `failed`: A milestone failed with no recovery path
-- `active` → `cancelled`: Sou cancels the plan mid-execution
-- `draft` → `cancelled`: Plan abandoned before approval
-- `approved` → `cancelled`: Plan abandoned after approval but before execution
+- `draft` â†’ `approved`: Sou explicitly approves via `approvePlan()`
+- `approved` â†’ `active`: Execution begins (Institution OS picks up the plan)
+- `active` â†’ `completed`: All milestones finished successfully
+- `active` â†’ `failed`: A milestone failed with no recovery path
+- `active` â†’ `cancelled`: Sou cancels the plan mid-execution
+- `draft` â†’ `cancelled`: Plan abandoned before approval
+- `approved` â†’ `cancelled`: Plan abandoned after approval but before execution
 - No transitions out of `completed`, `failed`, or `cancelled` (terminal states)
 
 ### PlanSnapshot
@@ -203,19 +203,19 @@ function modifyPlan(plan_id: string, modifications: PlanModification): PlanVersi
 
 ```
 Draft version created
-    │
-    ▼
+    â”‚
+    â–¼
 Sou reviews plan (via diff from parent if available)
-    │
-    ├── Approve → status = "approved"
-    │   ├── Lock the version
-    │   ├── Emit PLN.VER.PlanApproved
-    │   └── (if previous active exists, it remains active until new execution starts)
-    │
-    └── Reject → status remains "draft"
-        ├── Sou provides rejection reason
-        ├── Emit PLN.VER.PlanRejected
-        └── Sou may modify and resubmit
+    â”‚
+    â”œâ”€â”€ Approve â†’ status = "approved"
+    â”‚   â”œâ”€â”€ Lock the version
+    â”‚   â”œâ”€â”€ Emit PLN.VER.PlanApproved
+    â”‚   â””â”€â”€ (if previous active exists, it remains active until new execution starts)
+    â”‚
+    â””â”€â”€ Reject â†’ status remains "draft"
+        â”œâ”€â”€ Sou provides rejection reason
+        â”œâ”€â”€ Emit PLN.VER.PlanRejected
+        â””â”€â”€ Sou may modify and resubmit
 ```
 
 ### Concurrent Modification Prevention
@@ -250,10 +250,10 @@ interface PlanVersionManager {
 
   approvePlan(version_id: string, notes?: string): PlanVersion
   rejectPlan(version_id: string, reason: string): PlanVersion
-  activatePlan(version_id: string): PlanVersion               // status: draft → active
-  completePlan(plan_id: string): PlanVersion                  // status: active → completed
-  failPlan(plan_id: string, reason: string): PlanVersion      // status: active → failed
-  cancelPlan(plan_id: string, reason: string): PlanVersion    // any → cancelled
+  activatePlan(version_id: string): PlanVersion               // status: draft â†’ active
+  completePlan(plan_id: string): PlanVersion                  // status: active â†’ completed
+  failPlan(plan_id: string, reason: string): PlanVersion      // status: active â†’ failed
+  cancelPlan(plan_id: string, reason: string): PlanVersion    // any â†’ cancelled
 
   diffVersions(version_a_id: string, version_b_id: string): PlanDiff
   rollback(plan_id: string, target_version_id: string, reason: string): PlanVersion
@@ -288,48 +288,48 @@ interface PlanModification {
 
 ```
 Plan Created (initial decomposition)
-    │
-    ▼
+    â”‚
+    â–¼
 Version 1 (draft)
-    │
-    ├── Sou reviews plan
-    ├── Sou requests changes
-    │   └── Version 2 (draft) — diff: modified milestones
-    │       └── Sou requests more changes
-    │           └── Version 3 (draft) — diff: added dependencies
-    │
-    ▼
-Sou approves (Version 3 → approved)
-    │
-    ├── Version 3 locked
-    └── Emit PLN.VER.PlanApproved
-    │
-    ▼
-Execution starts (Version 3 → active)
-    │
-    ├── Institution OS begins milestone execution
-    ├── Progress Tracking starts monitoring
-    │
-    ├── ISSUE: mid-execution replan needed
-    │   └── Version 4 (draft) — based on active snapshot
-    │       ├── Sou reviews diff
-    │       ├── Sou approves → Version 4 (approved → active)
-    │       └── Old Version 3 archived
-    │
-    ├── Plan completed
-    │   └── Version 4 → completed
-    │       ├── Emit PLN.PlanCompleted
-    │       └── Final version locked
-    │
-    ├── Plan failed
-    │   └── Version 4 → failed
-    │       ├── Emit PLN.PlanFailed
-    │       └── Sou may create new plan based on failed version
-    │
-    └── Plan cancelled
-        └── Version 4 → cancelled
-            ├── Emit PLN.PlanCancelled
-            └── Version remains for audit
+    â”‚
+    â”œâ”€â”€ Sou reviews plan
+    â”œâ”€â”€ Sou requests changes
+    â”‚   â””â”€â”€ Version 2 (draft) â€” diff: modified milestones
+    â”‚       â””â”€â”€ Sou requests more changes
+    â”‚           â””â”€â”€ Version 3 (draft) â€” diff: added dependencies
+    â”‚
+    â–¼
+Sou approves (Version 3 â†’ approved)
+    â”‚
+    â”œâ”€â”€ Version 3 locked
+    â””â”€â”€ Emit PLN.VER.PlanApproved
+    â”‚
+    â–¼
+Execution starts (Version 3 â†’ active)
+    â”‚
+    â”œâ”€â”€ Institution OS begins milestone execution
+    â”œâ”€â”€ Progress Tracking starts monitoring
+    â”‚
+    â”œâ”€â”€ ISSUE: mid-execution replan needed
+    â”‚   â””â”€â”€ Version 4 (draft) â€” based on active snapshot
+    â”‚       â”œâ”€â”€ Sou reviews diff
+    â”‚       â”œâ”€â”€ Sou approves â†’ Version 4 (approved â†’ active)
+    â”‚       â””â”€â”€ Old Version 3 archived
+    â”‚
+    â”œâ”€â”€ Plan completed
+    â”‚   â””â”€â”€ Version 4 â†’ completed
+    â”‚       â”œâ”€â”€ Emit PLN.PlanCompleted
+    â”‚       â””â”€â”€ Final version locked
+    â”‚
+    â”œâ”€â”€ Plan failed
+    â”‚   â””â”€â”€ Version 4 â†’ failed
+    â”‚       â”œâ”€â”€ Emit PLN.PlanFailed
+    â”‚       â””â”€â”€ Sou may create new plan based on failed version
+    â”‚
+    â””â”€â”€ Plan cancelled
+        â””â”€â”€ Version 4 â†’ cancelled
+            â”œâ”€â”€ Emit PLN.PlanCancelled
+            â””â”€â”€ Version remains for audit
 ```
 
 ### Rollback
@@ -397,14 +397,14 @@ function rollback(plan_id: string, target_version_id: string, reason: string): P
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| VER-001 | Version numbers are monotonically increasing per plan | Algorithmic — checked on `createVersion` |
-| VER-002 | Only one version can be `active` per plan at any time | Algorithmic — `activatePlan` deactivates previous |
-| VER-003 | A draft version must be approved before it can become active | Algorithmic — `activatePlan` requires `approved` status |
-| VER-004 | Terminal statuses (`completed`, `failed`, `cancelled`) are irreversible | Algorithmic — state machine enforces no outgoing transitions |
-| VER-005 | Every version is a complete snapshot of the plan at a point in time | Schema — `plan_snapshot` is required, never partial |
-| VER-006 | Concurrent modifications are prevented via optimistic locking | Algorithmic — `expected_version_id` validated on write |
-| VER-007 | Only Sou can approve a plan | API-level — `approved_by` must be "sou" |
-| VER-008 | Rollback always creates a new draft version (history is append-only) | Algorithmic — rollback never mutates existing versions |
+| VER-001 | Version numbers are monotonically increasing per plan | Algorithmic â€” checked on `createVersion` |
+| VER-002 | Only one version can be `active` per plan at any time | Algorithmic â€” `activatePlan` deactivates previous |
+| VER-003 | A draft version must be approved before it can become active | Algorithmic â€” `activatePlan` requires `approved` status |
+| VER-004 | Terminal statuses (`completed`, `failed`, `cancelled`) are irreversible | Algorithmic â€” state machine enforces no outgoing transitions |
+| VER-005 | Every version is a complete snapshot of the plan at a point in time | Schema â€” `plan_snapshot` is required, never partial |
+| VER-006 | Concurrent modifications are prevented via optimistic locking | Algorithmic â€” `expected_version_id` validated on write |
+| VER-007 | Only Sou can approve a plan | API-level â€” `approved_by` must be "sou" |
+| VER-008 | Rollback always creates a new draft version (history is append-only) | Algorithmic â€” rollback never mutates existing versions |
 
 ## Error Cases
 
@@ -424,17 +424,17 @@ function rollback(plan_id: string, target_version_id: string, reason: string): P
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Plan Versioning handles only version lifecycle and history |
-| R2 — Dependency Order | Depends on snapshot of full plan; no upward deps |
-| R3 — DRY | Diff algorithm defined once; reused for rollback and review |
-| R4 — Builder Pattern | Versions built by snapshot → diff → metadata → storage |
-| R5 — Liskov Substitution | Any VersionStore implements the storage interface |
-| R6 — DI over Singletons | Diff strategy and lock mechanism injectable |
-| R9 — Deterministic | Same snapshots produce same diffs |
-| R10 — Simpler Over Complex | Linear version history, not branching/merging |
-| R13 — Design for Failure | Concurrent modification detection prevents data loss; integrity checksums catch corruption |
-| R14 — Paved Path | All changes flow through createVersion → approve → activate |
-| R15 — Open/Closed | New version statuses added via state machine extension |
+| R1 â€” Modulsingularity | Plan Versioning handles only version lifecycle and history |
+| R2 â€” Dependency Order | Depends on snapshot of full plan; no upward deps |
+| R3 â€” DRY | Diff algorithm defined once; reused for rollback and review |
+| R4 â€” Builder Pattern | Versions built by snapshot â†’ diff â†’ metadata â†’ storage |
+| R5 â€” Liskov Substitution | Any VersionStore implements the storage interface |
+| R6 â€” DI over Singletons | Diff strategy and lock mechanism injectable |
+| R9 â€” Deterministic | Same snapshots produce same diffs |
+| R10 â€” Simpler Over Complex | Linear version history, not branching/merging |
+| R13 â€” Design for Failure | Concurrent modification detection prevents data loss; integrity checksums catch corruption |
+| R14 â€” Paved Path | All changes flow through createVersion â†’ approve â†’ activate |
+| R15 â€” Open/Closed | New version statuses added via state machine extension |
 
 ## Related Documents
 

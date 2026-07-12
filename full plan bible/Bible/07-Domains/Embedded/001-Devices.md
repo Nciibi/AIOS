@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Embedded — 001: Devices
+﻿# AIOS Bible â€” Domains
+## Embedded â€” 001: Devices
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-EMB-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -201,25 +201,25 @@ interface ClockConfiguration {
 
 | Rule | Application |
 |------|-------------|
-| R1 — Target Bounded | All device generation is bounded to the target MCU profile; no generic defaults |
-| R2 — Interchangeable Architecture | Board definitions can be swapped without changing application logic |
-| R3 — Generic Operations | Device detection and BSP generation follow the same pipeline for all families |
-| R4 — Composition over Inheritance | Peripheral configs are composed into board definitions rather than subclassed |
-| R5 — Stable Intermediate Representation | DeviceTree is the canonical IR passed between stages |
-| R6 — Temporal Synchronization | Events fire after each stage completes; downstream stages await their prerequisites |
-| R9 — Stateless Verification | Pin verification produces the same result for the same board definition every time |
-| R10 — Capability-Based Routing | BSP generation adapts based on available flash, RAM, and peripheral resources |
-| R13 — Event-Driven Consistency | PinConflictDetected events trigger automatic reassignment workflows |
-| R14 — Code as Law | Device tree compilation enforces binding rules programmatically |
-| R15 — Provably Deterministic | MD5 of inputs matches MD5 of BSP output across all runs |
+| R1 â€” Target Bounded | All device generation is bounded to the target MCU profile; no generic defaults |
+| R2 â€” Interchangeable Architecture | Board definitions can be swapped without changing application logic |
+| R3 â€” Generic Operations | Device detection and BSP generation follow the same pipeline for all families |
+| R4 â€” Composition over Inheritance | Peripheral configs are composed into board definitions rather than subclassed |
+| R5 â€” Stable Intermediate Representation | DeviceTree is the canonical IR passed between stages |
+| R6 â€” Temporal Synchronization | Events fire after each stage completes; downstream stages await their prerequisites |
+| R9 â€” Stateless Verification | Pin verification produces the same result for the same board definition every time |
+| R10 â€” Capability-Based Routing | BSP generation adapts based on available flash, RAM, and peripheral resources |
+| R13 â€” Event-Driven Consistency | PinConflictDetected events trigger automatic reassignment workflows |
+| R14 â€” Code as Law | Device tree compilation enforces binding rules programmatically |
+| R15 â€” Provably Deterministic | MD5 of inputs matches MD5 of BSP output across all runs |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/0000-Master-Architecture-Plan.md | Master Architecture Plan — device support in AIOS context |
+| Bible/0000-Master-Architecture-Plan.md | Master Architecture Plan â€” device support in AIOS context |
 | Bible/07-Domains/Embedded/000-Overview.md | Base Embedded domain overview |
 | Bible/07-Domains/Embedded/002-Firmware.md | Firmware generation downstream consumer of device data |
 | Bible/07-Domains/Embedded/003-Constraints.md | Resource constraint analysis depends on device profiles |
-| Bible/06-Services/ACF/000-Overview.md | ACF — device discovery event transport |
-| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — hardware probe adapter interface |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” device discovery event transport |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK â€” hardware probe adapter interface |

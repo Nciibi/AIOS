@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## UI — 000: Human Interface
+﻿# AIOS Bible â€” Interfaces
+## UI â€” 000: Human Interface
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-UI-000 |
-| Source Laws | Law 1 — Law of Origin, Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 1 â€” Law of Origin, Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -17,37 +17,37 @@
 
 The Human Interface is the general-purpose interaction layer between humans and AIOS. Where the Governance Console is for governance-critical actions, the Human Interface is for everything else: conversing with Sou, issuing commands, receiving notifications, approving routine requests, and visualizing system state. It is the primary surface through which humans experience AIOS.
 
-Every human interaction through this interface is a first-class communication that flows through ACF (Law 3) and produces evidence (Law 4). The Human Interface is not a side channel — it is a constitutional communication path with the same observability guarantees as any inter-entity message.
+Every human interaction through this interface is a first-class communication that flows through ACF (Law 3) and produces evidence (Law 4). The Human Interface is not a side channel â€” it is a constitutional communication path with the same observability guarantees as any inter-entity message.
 
 ## Architecture
 
 ```
-┌────────────────────────────────────────────────────────┐
-│                  Human Interface                        │
-│                                                         │
-│  ┌────────────┐  ┌────────────┐  ┌──────────────────┐  │
-│  │ Conversational│ │  Command   │  │   Notification    │  │
-│  │   Channel   │  │  Channel   │  │   Channel        │  │
-│  └─────┬──────┘  └─────┬──────┘  └────────┬─────────┘  │
-│        │                │                 │            │
-│  ┌─────▼──────┐  ┌─────▼──────┐  ┌────────▼─────────┐  │
-│  │  Approval   │  │  Request   │  │   Visualization   │  │
-│  │   Channel   │  │  Formatter │  │   Channel        │  │
-│  └─────┬──────┘  └─────┬──────┘  └────────┬─────────┘  │
-│        │                │                 │            │
-│        └────────────────┼─────────────────┘            │
-│                         │                              │
-│                ┌────────▼────────┐                     │
-│                │  Interface Hub   │                     │
-│                │  (ACF-backed)    │                     │
-│                └────────┬────────┘                     │
-└─────────────────────────┼──────────────────────────────┘
-                          │
-                          ▼
-        ┌─────────────────────────────────────────┐
-        │ Brain (Sou, Conversation OS), ACF,       │
-        │ Notification System, Dashboard           │
-        └─────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                  Human Interface                        â”‚
+â”‚                                                         â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+â”‚  â”‚ Conversationalâ”‚ â”‚  Command   â”‚  â”‚   Notification    â”‚  â”‚
+â”‚  â”‚   Channel   â”‚  â”‚  Channel   â”‚  â”‚   Channel        â”‚  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+â”‚        â”‚                â”‚                 â”‚            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+â”‚  â”‚  Approval   â”‚  â”‚  Request   â”‚  â”‚   Visualization   â”‚  â”‚
+â”‚  â”‚   Channel   â”‚  â”‚  Formatter â”‚  â”‚   Channel        â”‚  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+â”‚        â”‚                â”‚                 â”‚            â”‚
+â”‚        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜            â”‚
+â”‚                         â”‚                              â”‚
+â”‚                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”                     â”‚
+â”‚                â”‚  Interface Hub   â”‚                     â”‚
+â”‚                â”‚  (ACF-backed)    â”‚                     â”‚
+â”‚                â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”˜                     â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                          â”‚
+                          â–¼
+        â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+        â”‚ Brain (Sou, Conversation OS), ACF,       â”‚
+        â”‚ Notification System, Dashboard           â”‚
+        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Core Concepts
@@ -62,11 +62,11 @@ A structured, typed interface for precise operations: "create mission X", "pause
 
 ### 3. Notification Channel
 
-AIOS-initiated messages to humans: "Mission X completed", "Agent Y requests promotion", "Budget Z at 90%". Notifications are prioritized, actionable (may include inline approve/deny), and deduplicated. They never bypass the evidence chain — each notification references its source event.
+AIOS-initiated messages to humans: "Mission X completed", "Agent Y requests promotion", "Budget Z at 90%". Notifications are prioritized, actionable (may include inline approve/deny), and deduplicated. They never bypass the evidence chain â€” each notification references its source event.
 
 ### 4. Approval Channel
 
-Human-in-the-loop confirmation for routine decisions that require human sign-off but are not governance-critical: approving a workflow gate, confirming a resource allocation, acknowledging a risk. Distinct from the Governance Console's override/certification — these are operational approvals, not constitutional ones.
+Human-in-the-loop confirmation for routine decisions that require human sign-off but are not governance-critical: approving a workflow gate, confirming a resource allocation, acknowledging a risk. Distinct from the Governance Console's override/certification â€” these are operational approvals, not constitutional ones.
 
 ### 5. Visualization Channel
 
@@ -187,23 +187,23 @@ interface ApprovalBroker {
 
 ```
 Human sends message via channel
-        │
-        ▼
+        â”‚
+        â–¼
 Interface Hub receives via ACF
-        │
-        ▼
+        â”‚
+        â–¼
 Intent Parser parses and validates
-        │
-        ├── Conversational ──► Conversation OS ──► Sou responds
-        │
-        ├── Command ──► Verification Pipeline ──► Execution
-        │
-        └── Approval/Notification ──► Broker/Dispatcher
-        │
-        ▼
+        â”‚
+        â”œâ”€â”€ Conversational â”€â”€â–º Conversation OS â”€â”€â–º Sou responds
+        â”‚
+        â”œâ”€â”€ Command â”€â”€â–º Verification Pipeline â”€â”€â–º Execution
+        â”‚
+        â””â”€â”€ Approval/Notification â”€â”€â–º Broker/Dispatcher
+        â”‚
+        â–¼
 Response formatted by Interface Hub
-        │
-        ▼
+        â”‚
+        â–¼
 Delivered to human; evidence recorded (Law 4)
 ```
 
@@ -238,27 +238,27 @@ Delivered to human; evidence recorded (Law 4)
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| UI-001 | Every human message flows through ACF (Law 3) | Architectural — Interface Hub uses ACF transport |
-| UI-002 | Every human interaction produces evidence (Law 4) | Architectural — messages logged to EVS |
-| UI-003 | Humans are authenticated before any action | Constitutional — no anonymous interaction |
-| UI-004 | Commands are validated before execution | Algorithmic — Intent Parser validates against schemas |
-| UI-005 | Approval requests are idempotent | Architectural — decision state is terminal |
-| UI-006 | Notifications reference their source event | Algorithmic — sourceEventRef required on dispatch |
-| UI-007 | Sessions expire after idle timeout | Algorithmic — Session Manager enforces timeout |
+| UI-001 | Every human message flows through ACF (Law 3) | Architectural â€” Interface Hub uses ACF transport |
+| UI-002 | Every human interaction produces evidence (Law 4) | Architectural â€” messages logged to EVS |
+| UI-003 | Humans are authenticated before any action | Constitutional â€” no anonymous interaction |
+| UI-004 | Commands are validated before execution | Algorithmic â€” Intent Parser validates against schemas |
+| UI-005 | Approval requests are idempotent | Architectural â€” decision state is terminal |
+| UI-006 | Notifications reference their source event | Algorithmic â€” sourceEventRef required on dispatch |
+| UI-007 | Sessions expire after idle timeout | Algorithmic â€” Session Manager enforces timeout |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | UI owns human interaction exclusively; Brain owns responses; ACF owns transport |
-| R2 — Dependency Order | Depends on Conversation OS, ACF, Notification System, Dashboard; no cycles |
-| R3 — DRY | Message schemas defined via IOP contracts; UI renders, does not redefine |
-| R4 — Builder Pattern | Approval requests and notifications use builder for validation |
-| R9 — Deterministic | Same command + same state = same result; conversations are logged for replay |
-| R10 — Simpler Over Complex | Conversational + command channels cover most needs; advanced views opt-in |
-| R13 — Design for Failure | Parse failure requests clarification; auth failure preserves session context |
-| R14 — Paved Path | Conversational chat is the default human entry point |
-| R15 — Open/Closed | New channels register via Interface Hub extension |
+| R1 â€” Modulsingularity | UI owns human interaction exclusively; Brain owns responses; ACF owns transport |
+| R2 â€” Dependency Order | Depends on Conversation OS, ACF, Notification System, Dashboard; no cycles |
+| R3 â€” DRY | Message schemas defined via IOP contracts; UI renders, does not redefine |
+| R4 â€” Builder Pattern | Approval requests and notifications use builder for validation |
+| R9 â€” Deterministic | Same command + same state = same result; conversations are logged for replay |
+| R10 â€” Simpler Over Complex | Conversational + command channels cover most needs; advanced views opt-in |
+| R13 â€” Design for Failure | Parse failure requests clarification; auth failure preserves session context |
+| R14 â€” Paved Path | Conversational chat is the default human entry point |
+| R15 â€” Open/Closed | New channels register via Interface Hub extension |
 
 ## Related Documents
 
@@ -268,9 +268,9 @@ Delivered to human; evidence recorded (Law 4)
 | Bible/02-Core/Brain/Sou/000-Overview.md | Sou is the strategic authority humans converse with |
 | Bible/06-Services/ACF/000-Overview.md | ACF is the transport for all human messages |
 | Bible/06-Services/Interop/000-Overview.md | IOP contracts define message schemas UI validates against |
-| Bible/08-Interfaces/Console/000-Overview.md | Governance Console — governance-critical human actions |
-| Bible/08-Interfaces/Dashboard/000-Overview.md | Dashboard — visualization backend for the visualization channel |
+| Bible/08-Interfaces/Console/000-Overview.md | Governance Console â€” governance-critical human actions |
+| Bible/08-Interfaces/Dashboard/000-Overview.md | Dashboard â€” visualization backend for the visualization channel |
 | Bible/05-Platform/004-EVS.md | EVS stores human interaction evidence |
 | Bible/05-Platform/Observability/000-AOP.md | AOP monitors human interaction health |
-| Physics/009-Interaction.md | Interaction invariants — human is an interaction participant |
-| Physics/005-Events.md | Evidence invariants — every interaction is logged |
+| Physics/009-Interaction.md | Interaction invariants â€” human is an interaction participant |
+| Physics/005-Events.md | Evidence invariants â€” every interaction is logged |

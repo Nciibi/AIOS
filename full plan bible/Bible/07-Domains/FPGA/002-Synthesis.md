@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## FPGA — 002: Synthesis
+﻿# AIOS Bible â€” Domains
+## FPGA â€” 002: Synthesis
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-FPGA-002 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -161,13 +161,13 @@ interface CongestionReport {
 
 | Code | Condition | Severity | Recovery |
 |------|-----------|----------|----------|
-| FPGA-SYN-001 | Synthesis failure — tool exits with non-zero code or internal error | HIGH | Return full tool log, preserve intermediate files, trigger debug workflow |
-| FPGA-SYN-002 | Mapping overflow — technology mapping exceeds device LUT or FF capacity | HIGH | Report overflow by resource type, suggest device upgrade, abort P&R |
-| FPGA-SYN-003 | Placement congestion — placement fails to legalize all cells within density limits | HIGH | Run congestion-aware placement pass, relax density target, report if still failing |
-| FPGA-SYN-004 | Routing unroutable — routing fails to complete all net connections | HIGH | Identify unroutable nets, suggest floorplan changes, escalate to HDL redesign |
-| FPGA-SYN-005 | Timing violation — worst negative slack below threshold after optimization | MEDIUM | Report violating paths, attempt constraint relaxation, trigger RTL redesign if persistent |
-| FPGA-SYN-006 | Toolchain version mismatch — installed tool version differs from pinned version | HIGH | Block execution, trigger toolchain verification workflow |
-| FPGA-SYN-007 | License unavailable — EDA tool license cannot be acquired | MEDIUM | Queue job, retry with backoff, fail after TTL expiry |
+| FPGA-SYN-001 | Synthesis failure â€” tool exits with non-zero code or internal error | HIGH | Return full tool log, preserve intermediate files, trigger debug workflow |
+| FPGA-SYN-002 | Mapping overflow â€” technology mapping exceeds device LUT or FF capacity | HIGH | Report overflow by resource type, suggest device upgrade, abort P&R |
+| FPGA-SYN-003 | Placement congestion â€” placement fails to legalize all cells within density limits | HIGH | Run congestion-aware placement pass, relax density target, report if still failing |
+| FPGA-SYN-004 | Routing unroutable â€” routing fails to complete all net connections | HIGH | Identify unroutable nets, suggest floorplan changes, escalate to HDL redesign |
+| FPGA-SYN-005 | Timing violation â€” worst negative slack below threshold after optimization | MEDIUM | Report violating paths, attempt constraint relaxation, trigger RTL redesign if persistent |
+| FPGA-SYN-006 | Toolchain version mismatch â€” installed tool version differs from pinned version | HIGH | Block execution, trigger toolchain verification workflow |
+| FPGA-SYN-007 | License unavailable â€” EDA tool license cannot be acquired | MEDIUM | Queue job, retry with backoff, fail after TTL expiry |
 
 ## Invariants
 
@@ -181,17 +181,17 @@ interface CongestionReport {
 
 ## Design DNA (R1-R6,R9,R10,R13-R15)
 
-- **R1 — Single Source of Truth**: SynthesisConfig is the sole configuration source for all P&R operations.
-- **R2 — Immutable Event Log**: Every synthesis, placement, routing, and timing event is recorded immutably.
-- **R3 — Capability-Based Authorization**: Only SynthesisWorker capability may invoke SynthesisEngine operations.
-- **R4 — Law of Diminishing Returns**: P&R stops after 5 iterations with less than 1% improvement; premature closure avoided.
-- **R5 — Deterministic Computation**: Same RTL, toolchain, and seed produces identical routed netlist.
-- **R6 — Bounded Context**: Synthesis owns the P&R pipeline; timing analysis results are shared via Events.
-- **R9 — Fail-Fast**: Toolchain mismatch and license errors are detected pre-execution, not mid-synthesis.
-- **R10 — Audit Trail**: Every P&R iteration, timing analysis, and optimization step is logged with timestamps.
-- **R13 — Defensive Design**: DRC and LVS checks run between P&R stages; partial results preserved on failure.
-- **R14 — Self-Healing**: On placement congestion, Placer retries with relaxed density target up to 3 times.
-- **R15 — Backward Compatibility**: Synthesis configs from older toolchain versions have migration paths documented.
+- **R1 â€” Single Source of Truth**: SynthesisConfig is the sole configuration source for all P&R operations.
+- **R2 â€” Immutable Event Log**: Every synthesis, placement, routing, and timing event is recorded immutably.
+- **R3 â€” Capability-Based Authorization**: Only SynthesisWorker capability may invoke SynthesisEngine operations.
+- **R4 â€” Law of Diminishing Returns**: P&R stops after 5 iterations with less than 1% improvement; premature closure avoided.
+- **R5 â€” Deterministic Computation**: Same RTL, toolchain, and seed produces identical routed netlist.
+- **R6 â€” Bounded Context**: Synthesis owns the P&R pipeline; timing analysis results are shared via Events.
+- **R9 â€” Fail-Fast**: Toolchain mismatch and license errors are detected pre-execution, not mid-synthesis.
+- **R10 â€” Audit Trail**: Every P&R iteration, timing analysis, and optimization step is logged with timestamps.
+- **R13 â€” Defensive Design**: DRC and LVS checks run between P&R stages; partial results preserved on failure.
+- **R14 â€” Self-Healing**: On placement congestion, Placer retries with relaxed density target up to 3 times.
+- **R15 â€” Backward Compatibility**: Synthesis configs from older toolchain versions have migration paths documented.
 
 ## Related Documents
 
@@ -200,7 +200,7 @@ interface CongestionReport {
 | Bible/07-Domains/FPGA/000-Overview.md | Base FPGA domain overview |
 | Bible/07-Domains/FPGA/001-Architecture.md | Architecture defines device constraints for synthesis |
 | Bible/07-Domains/FPGA/003-Verification.md | Verification validates synthesis output |
-| Bible/06-Services/ACF/000-Overview.md | ACF — synthesis job event transport |
-| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — EDA tool adapter interface |
-| Bible/02-Core/DTS/000-Overview.md | DTS — design confidence scoring |
-| Bible/02-Core/ROS/000-Overview.md | ROS — compute budgets for P&R operations |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” synthesis job event transport |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK â€” EDA tool adapter interface |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” design confidence scoring |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” compute budgets for P&R operations |

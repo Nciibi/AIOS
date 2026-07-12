@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — Dialogue State
+﻿# AIOS Bible â€” Brain
+## 001 â€” Dialogue State
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Conversation |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Conversation |
 | Document ID | AIOS-BBL-002-CON-001 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 6 — Law of Lifecycle |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/004-Sessions.md, Physics/006-Lifecycles.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Dialogue State tracks the current state of a conversation — active topic, user intent, conversational context beyond turn history, pending questions, clarification state, and conversation flow phase. It is the session-level representation of "where are we in this conversation?" While Turn History records what was said, Dialogue State records what it means — the semantic and pragmatic progress of the interaction. Dialogue State is session-scoped: created on session init, mutated on every turn, and archived on session end.
+Dialogue State tracks the current state of a conversation â€” active topic, user intent, conversational context beyond turn history, pending questions, clarification state, and conversation flow phase. It is the session-level representation of "where are we in this conversation?" While Turn History records what was said, Dialogue State records what it means â€” the semantic and pragmatic progress of the interaction. Dialogue State is session-scoped: created on session init, mutated on every turn, and archived on session end.
 
 Under CONV-003 and CONV-004, Dialogue State is the authoritative source for conversational context. No intent, topic, or phase information lives outside this component.
 
@@ -32,12 +32,12 @@ DialogueState {
   pending_clarifications: ClarificationState[]
   conversation_phase: ConversationPhase
   flow_state: FlowState
-  user_intent_stack: IntentState[]      // LIFO — nested/overlapping intents
+  user_intent_stack: IntentState[]      // LIFO â€” nested/overlapping intents
   metadata: {
     turn_count: number
     state_version: number               // Monotonic version for optimistic concurrency
     last_updated: timestamp
-    sou_confidence: number              // 0.0–1.0, Sou's confidence in current understanding
+    sou_confidence: number              // 0.0â€“1.0, Sou's confidence in current understanding
     active_duration_ms: number
     tags: string[]
   }
@@ -57,7 +57,7 @@ Topic {
   is_active: boolean
   turn_count: number                    // Turns spent on this topic
   depth: number                         // 0 for root, 1 for child, etc.
-  confidence: number                    // 0.0–1.0, how sure we are this is the topic
+  confidence: number                    // 0.0â€“1.0, how sure we are this is the topic
 }
 ```
 
@@ -68,7 +68,7 @@ IntentState {
   intent_id: string
   intent_type: string                   // e.g. "create_task", "ask_question", "update_setting"
   parameters: Record<string, ParameterState>
-  confidence: number                    // 0.0–1.0
+  confidence: number                    // 0.0â€“1.0
   status: "pending" | "active" | "resolved" | "abandoned"
   detected_at: timestamp
   last_updated: timestamp
@@ -158,22 +158,22 @@ Dialogue State is organized into logical slots that map to distinct aspects of c
 
 ```
 Slot: intent_stack
-  Access: pushIntent(intent) → popIntent() → peekIntent()
+  Access: pushIntent(intent) â†’ popIntent() â†’ peekIntent()
   Eviction: When full, lowest-confidence pending intent is abandoned
-  Use case: User asks "Create a task" → while gathering params, asks "What tasks exist?"
+  Use case: User asks "Create a task" â†’ while gathering params, asks "What tasks exist?"
     Stack: [create_task_intent, query_tasks_intent]
-    → pop query_tasks (resolved) → back to create_task
+    â†’ pop query_tasks (resolved) â†’ back to create_task
 
 Slot: topic_history
-  Access: recordTopic(topic) → getTopicSequence() → getTopicDepth(topic_id)
+  Access: recordTopic(topic) â†’ getTopicSequence() â†’ getTopicDepth(topic_id)
   Eviction: When full, oldest topic is pruned (summary retained in metadata)
-  Use case: User shifts from "Project Setup" → "Dependencies" → "Testing"
+  Use case: User shifts from "Project Setup" â†’ "Dependencies" â†’ "Testing"
     History: [Project Setup, Dependencies, Testing]
 
 Slot: pending_clarifications
-  Access: addClarification(q) → resolveClarification(id, answer) → getOpenQuestions()
+  Access: addClarification(q) â†’ resolveClarification(id, answer) â†’ getOpenQuestions()
   Eviction: When full, oldest unresolved clarification is auto-resolved as "user skipped"
-  Use case: Sou asks "Which priority?" → user talks about something else → clarification times out
+  Use case: Sou asks "Which priority?" â†’ user talks about something else â†’ clarification times out
 ```
 
 ## Dialogue State Lifecycle
@@ -182,81 +182,81 @@ Slot: pending_clarifications
 
 ```
 Session Init
-    │
-    ▼
+    â”‚
+    â–¼
 State Created
-    │
-    ├── Create DialogueState with session_id
-    ├── Set conversation_phase = "greeting"
-    ├── Initialize empty topic_history, intent_stack, pending_clarifications
-    ├── Set flow_state with default constraints
-    └── Emit CONV.DialogueStateUpdated
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Create DialogueState with session_id
+    â”œâ”€â”€ Set conversation_phase = "greeting"
+    â”œâ”€â”€ Initialize empty topic_history, intent_stack, pending_clarifications
+    â”œâ”€â”€ Set flow_state with default constraints
+    â””â”€â”€ Emit CONV.DialogueStateUpdated
+    â”‚
+    â–¼
 Active Session (per turn)
-    │
-    ├── Topic Tracking
-    │   ├── Detect topic from user input
-    │   ├── Check for topic shift (threshold: N turns on new subject)
-    │   ├── Update topic depth if navigating subtopics
-    │   ├── Detect topic return (user revisits previous topic)
-    │   └── Emit CONV.TopicShifted / CONV.TopicDepthChanged / CONV.TopicReturned
-    │
-    ├── Intent Tracking
-    │   ├── Detect intent from user input
-    │   ├── Push to intent_stack if nested
-    │   ├── Update parameter resolution status
-    │   ├── Resolve intent if all required parameters gathered
-    │   ├── Abandon intent if user changes subject
-    │   └── Emit CONV.IntentDetected / CONV.IntentResolved / CONV.IntentAbandoned
-    │
-    ├── Phase Transitions
-    │   ├── Evaluate phase transition conditions
-    │   ├── Transition to new phase if conditions met
-    │   ├── Update flow_state constraints for new phase
-    │   └── Emit CONV.PhaseTransitioned
-    │
-    └── Clarification Management
-        ├── If ambiguity detected, create ClarificationState
-        ├── Add to pending_clarifications
-        ├── Emit CONV.ClarificationAsked
-        ├── On user response, resolve clarification
-        ├── Update related intent parameter if applicable
-        └── Emit CONV.ClarificationResolved
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Topic Tracking
+    â”‚   â”œâ”€â”€ Detect topic from user input
+    â”‚   â”œâ”€â”€ Check for topic shift (threshold: N turns on new subject)
+    â”‚   â”œâ”€â”€ Update topic depth if navigating subtopics
+    â”‚   â”œâ”€â”€ Detect topic return (user revisits previous topic)
+    â”‚   â””â”€â”€ Emit CONV.TopicShifted / CONV.TopicDepthChanged / CONV.TopicReturned
+    â”‚
+    â”œâ”€â”€ Intent Tracking
+    â”‚   â”œâ”€â”€ Detect intent from user input
+    â”‚   â”œâ”€â”€ Push to intent_stack if nested
+    â”‚   â”œâ”€â”€ Update parameter resolution status
+    â”‚   â”œâ”€â”€ Resolve intent if all required parameters gathered
+    â”‚   â”œâ”€â”€ Abandon intent if user changes subject
+    â”‚   â””â”€â”€ Emit CONV.IntentDetected / CONV.IntentResolved / CONV.IntentAbandoned
+    â”‚
+    â”œâ”€â”€ Phase Transitions
+    â”‚   â”œâ”€â”€ Evaluate phase transition conditions
+    â”‚   â”œâ”€â”€ Transition to new phase if conditions met
+    â”‚   â”œâ”€â”€ Update flow_state constraints for new phase
+    â”‚   â””â”€â”€ Emit CONV.PhaseTransitioned
+    â”‚
+    â””â”€â”€ Clarification Management
+        â”œâ”€â”€ If ambiguity detected, create ClarificationState
+        â”œâ”€â”€ Add to pending_clarifications
+        â”œâ”€â”€ Emit CONV.ClarificationAsked
+        â”œâ”€â”€ On user response, resolve clarification
+        â”œâ”€â”€ Update related intent parameter if applicable
+        â””â”€â”€ Emit CONV.ClarificationResolved
+    â”‚
+    â–¼
 Session End
-    │
-    ├── Emit CONV.DialogueArchived
-    ├── Write final DialogueState to Episodic Memory for post-session analysis
-    └── Destroy in-memory state
+    â”‚
+    â”œâ”€â”€ Emit CONV.DialogueArchived
+    â”œâ”€â”€ Write final DialogueState to Episodic Memory for post-session analysis
+    â””â”€â”€ Destroy in-memory state
 ```
 
 ### Phase State Machine
 
 ```
-                    ┌─────────────────────────────────────┐
-                    │                                     │
-                    ▼                                     │
-              ┌──────────┐      ┌────────────────────┐    │
-  Start ──►   │ greeting │──────► information_gathering │──┘
-              └──────────┘      └────────┬───────────┘
-                                         │
-                    ┌────────────────────┼────────────────────┐
-                    ▼                    ▼                    ▼
-              ┌──────────┐        ┌────────────┐       ┌──────────┐
-              │clarification│◄───────│task_execution│──────►│confirmation│
-              └──────────┘        └──────┬─────┘       └─────┬────┘
-                    ▲                    │                    │
-                    │                    ▼                    │
-                    │              ┌──────────┐              │
-                    └──────────────│ response │◄─────────────┘
-                                   └────┬─────┘
-                                        │
-                                        ▼
-                                   ┌──────────┐
-                                   │  closing  │ ──► End
-                                   └──────────┘
+                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                    â”‚                                     â”‚
+                    â–¼                                     â”‚
+              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”      â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”‚
+  Start â”€â”€â–º   â”‚ greeting â”‚â”€â”€â”€â”€â”€â”€â–º information_gathering â”‚â”€â”€â”˜
+              â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜      â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                         â”‚
+                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                    â–¼                    â–¼                    â–¼
+              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+              â”‚clarificationâ”‚â—„â”€â”€â”€â”€â”€â”€â”€â”‚task_executionâ”‚â”€â”€â”€â”€â”€â”€â–ºâ”‚confirmationâ”‚
+              â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜        â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜       â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜
+                    â–²                    â”‚                    â”‚
+                    â”‚                    â–¼                    â”‚
+                    â”‚              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”              â”‚
+                    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚ response â”‚â—„â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                   â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜
+                                        â”‚
+                                        â–¼
+                                   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                                   â”‚  closing  â”‚ â”€â”€â–º End
+                                   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 #### Phase Transition Rules
@@ -284,7 +284,7 @@ Session End
 
 ### Topic Detection
 
-Topic is extracted from each user turn using lightweight classification. The topic space is open-ended — topics are derived from user input content, not from a predefined list.
+Topic is extracted from each user turn using lightweight classification. The topic space is open-ended â€” topics are derived from user input content, not from a predefined list.
 
 ```
 detectTopic(turn_content, context):
@@ -301,7 +301,7 @@ A topic shift is declared when the user spends N consecutive turns on a differen
 
 | Threshold | Value | Behavior |
 |-----------|-------|----------|
-| `shift_turns` | 2 | Consecutive turns on new subject → shift |
+| `shift_turns` | 2 | Consecutive turns on new subject â†’ shift |
 | `shift_confidence` | 0.6 | Topic confidence must exceed threshold |
 | `shift_cooldown` | 3 | Min turns before another shift can be declared |
 
@@ -324,9 +324,9 @@ Topics form a tree. Depth is calculated as distance from the root topic:
 
 ```
 Root Topic (depth 0): "Project Planning"
-  └─ Subtopic (depth 1): "Architecture"
-      └─ Subtopic (depth 2): "Database Schema"
-          └─ Subtopic (depth 3): "Table Design"
+  â””â”€ Subtopic (depth 1): "Architecture"
+      â””â”€ Subtopic (depth 2): "Database Schema"
+          â””â”€ Subtopic (depth 3): "Table Design"
 ```
 
 Depth is bounded at 5 levels. Going deeper than 5 flattens to depth 5 with a parent reference to depth 4.
@@ -340,9 +340,9 @@ Topic Return:
   If new_topic matches any topic in topic_history (by topic_id):
     AND topic already visited and not current_topic:
     AND topic.last_active was at least 2 shifts ago:
-    → Emit CONV.TopicReturned
-    → Restore subtopic context from history
-    → Set current_topic to the matched topic (not a new instance)
+    â†’ Emit CONV.TopicReturned
+    â†’ Restore subtopic context from history
+    â†’ Set current_topic to the matched topic (not a new instance)
 ```
 
 ### Topic Hierarchy
@@ -350,10 +350,10 @@ Topic Return:
 ```
 Topic Hierarchy within a session:
   session_topics: Map<topic_id, Topic>
-  adjacency_list: Map<topic_id, topic_id[]>  // parent → children
+  adjacency_list: Map<topic_id, topic_id[]>  // parent â†’ children
   root_topics: topic_id[]                    // Topics with parent_topic = null
 
-  getTopicPath(topic_id): Topic[]            // Root → ... → topic
+  getTopicPath(topic_id): Topic[]            // Root â†’ ... â†’ topic
   getSubtopicTree(topic_id): TreeNode        // Full subtree
   getSiblingTopics(topic_id): Topic[]        // Same parent
 ```
@@ -437,7 +437,7 @@ Pending clarifications are maintained as a prioritized list:
 
 ```
 Pending Clarifications:
-  Ordered by: asked_at (ascending — FIFO)
+  Ordered by: asked_at (ascending â€” FIFO)
   Priority: clarification with associated active_intent > clarification without
   Display: Only the top 5 are surfaced to Sou
 ```
@@ -449,10 +449,10 @@ Clarifications are scoped to topics and intents:
 ```
 Scope-based Clarification:
   Topic-scoped: "Which part of the architecture do you mean?"
-    → context.topic_id = current_topic.topic_id
+    â†’ context.topic_id = current_topic.topic_id
   Intent-scoped: "What priority should this task have?"
-    → context.intent_id = active_intent.intent_id
-    → context.parameter = "priority"
+    â†’ context.intent_id = active_intent.intent_id
+    â†’ context.parameter = "priority"
 ```
 
 ### Clarification Resolution Flow
@@ -466,16 +466,16 @@ Clarification Resolution:
   5. FlowState sets expected_next_input_type = "clarification_response"
   6. Wait for user response:
      a. User provides clarifying information
-        → Resolve clarification
-        → Update related intent parameter if applicable
-        → Emit CONV.ClarificationResolved
-        → Transition back to previous phase
+        â†’ Resolve clarification
+        â†’ Update related intent parameter if applicable
+        â†’ Emit CONV.ClarificationResolved
+        â†’ Transition back to previous phase
      b. User changes topic
-        → Clarification remains pending (retry_count + 1)
-        → If retry_count > 3, auto-resolve as "user abandoned"
+        â†’ Clarification remains pending (retry_count + 1)
+        â†’ If retry_count > 3, auto-resolve as "user abandoned"
      c. Timeout (30 seconds)
-        → Auto-resolve as "timeout"
-        → Emit CONV.ClarificationResolved with resolution = "timeout"
+        â†’ Auto-resolve as "timeout"
+        â†’ Emit CONV.ClarificationResolved with resolution = "timeout"
 ```
 
 ## CRUD Operations
@@ -503,13 +503,13 @@ getTopicHistory(session_id: string): Topic[]
 getIntentStack(session_id: string): IntentState[]
 ```
 
-- `getState` — full state snapshot
-- `getCurrentTopic` — convenience accessor for active topic
-- `getActiveIntent` — convenience accessor for active intent
-- `getPendingClarifications` — unresolved clarifications only
-- `getConversationPhase` — current phase string
-- `getTopicHistory` — full ordered topic history
-- `getIntentStack` — current intent stack (LIFO order)
+- `getState` â€” full state snapshot
+- `getCurrentTopic` â€” convenience accessor for active topic
+- `getActiveIntent` â€” convenience accessor for active intent
+- `getPendingClarifications` â€” unresolved clarifications only
+- `getConversationPhase` â€” current phase string
+- `getTopicHistory` â€” full ordered topic history
+- `getIntentStack` â€” current intent stack (LIFO order)
 
 ### Update
 
@@ -526,16 +526,16 @@ pushIntent(session_id: string, intent: IntentState): void
 popIntent(session_id: string): IntentState | null
 ```
 
-- `updateTopic` — updates current topic or initiates topic shift
-- `setIntent` — sets active intent (replaces current)
-- `updateIntentParams` — resolves specific parameters by name
-- `resolveIntent` — marks intent as resolved, pops from stack
-- `abandonIntent` — marks intent as abandoned, pops from stack
-- `addClarification` — creates and appends a ClarificationState
-- `resolveClarification` — marks clarification resolved with user response
-- `transitionPhase` — validates and executes phase transition
-- `pushIntent` — pushes onto intent stack (nested intent)
-- `popIntent` — pops from intent stack
+- `updateTopic` â€” updates current topic or initiates topic shift
+- `setIntent` â€” sets active intent (replaces current)
+- `updateIntentParams` â€” resolves specific parameters by name
+- `resolveIntent` â€” marks intent as resolved, pops from stack
+- `abandonIntent` â€” marks intent as abandoned, pops from stack
+- `addClarification` â€” creates and appends a ClarificationState
+- `resolveClarification` â€” marks clarification resolved with user response
+- `transitionPhase` â€” validates and executes phase transition
+- `pushIntent` â€” pushes onto intent stack (nested intent)
+- `popIntent` â€” pops from intent stack
 
 ### Delete
 
@@ -544,8 +544,8 @@ removeClarification(session_id: string, clarification_id: string): void
 archiveState(session_id: string): void
 ```
 
-- `removeClarification` — removes a clarification (resolved or abandoned)
-- `archiveState` — serializes final state to Episodic Memory, destroys in-memory state
+- `removeClarification` â€” removes a clarification (resolved or abandoned)
+- `archiveState` â€” serializes final state to Episodic Memory, destroys in-memory state
 
 ## Internal Interfaces
 
@@ -603,53 +603,53 @@ interface ClarificationContext {
 ```
 1. User: "Create a task called 'Write docs'"
 2. Dialogue State: IntentDetected { intent_type: "create_task", parameters: { title: "Write docs" } }
-   → Missing: priority, due_date, assignee
-   → Phase transitions: information_gathering → clarification
-   → ClarificationAsked: "What priority should this task have?"
+   â†’ Missing: priority, due_date, assignee
+   â†’ Phase transitions: information_gathering â†’ clarification
+   â†’ ClarificationAsked: "What priority should this task have?"
 3. User: "High priority"
-   → resolveParameter("priority", "high")
-   → Missing: due_date, assignee
-   → ClarificationAsked: "When is this due?"
+   â†’ resolveParameter("priority", "high")
+   â†’ Missing: due_date, assignee
+   â†’ ClarificationAsked: "When is this due?"
 4. User: "Tomorrow"
-   → resolveParameter("due_date", "tomorrow")
-   → Missing: assignee
-   → ClarificationAsked: "Who should be assigned?"
+   â†’ resolveParameter("due_date", "tomorrow")
+   â†’ Missing: assignee
+   â†’ ClarificationAsked: "Who should be assigned?"
 5. User: "Me"
-   → resolveParameter("assignee", "me")
-   → All required parameters resolved → IntentResolved
-   → Phase transitions: clarification → task_execution
+   â†’ resolveParameter("assignee", "me")
+   â†’ All required parameters resolved â†’ IntentResolved
+   â†’ Phase transitions: clarification â†’ task_execution
 ```
 
 ### Pattern 2: Topic Shift and Return
 
 ```
-1. User discusses "Project Architecture" → Topic: Architecture (depth 0)
+1. User discusses "Project Architecture" â†’ Topic: Architecture (depth 0)
 2. User goes deeper: "Let's talk about the database layer"
-   → Subtopic: Database (depth 1, parent: Architecture)
+   â†’ Subtopic: Database (depth 1, parent: Architecture)
 3. User goes deeper: "Specifically the Postgres schema"
-   → Subtopic: Postgres Schema (depth 2, parent: Database)
+   â†’ Subtopic: Postgres Schema (depth 2, parent: Database)
 4. User: "Anyway, getting back to the overall architecture..."
-   → TopicReturn detected: Architecture (depth 0)
-   → TopicDepthChanged: depth 2 → depth 0
+   â†’ TopicReturn detected: Architecture (depth 0)
+   â†’ TopicDepthChanged: depth 2 â†’ depth 0
 5. User: "And about the database..."
-   → TopicShift: Database (depth 1) — not a return, within topic tree
+   â†’ TopicShift: Database (depth 1) â€” not a return, within topic tree
 ```
 
 ### Pattern 3: Nested Intent with Interruption
 
 ```
 1. User: "Can you help me plan my week?"
-   → Intent: plan_week (pending)
+   â†’ Intent: plan_week (pending)
 2. User: "First, what meetings do I have tomorrow?"
-   → pushIntent: query_meetings (nested within plan_week)
-   → Stack: [plan_week, query_meetings]
+   â†’ pushIntent: query_meetings (nested within plan_week)
+   â†’ Stack: [plan_week, query_meetings]
 3. Sou responds with meeting list
-   → resolveIntent: query_meetings
-   → popIntent → back to plan_week
-   → Stack: [plan_week]
+   â†’ resolveIntent: query_meetings
+   â†’ popIntent â†’ back to plan_week
+   â†’ Stack: [plan_week]
 4. User: "Actually, never mind, I'll do it later"
-   → abandonIntent: plan_week
-   → Stack: []
+   â†’ abandonIntent: plan_week
+   â†’ Stack: []
 ```
 
 ## Events
@@ -674,14 +674,14 @@ interface ClarificationContext {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| DIAL-001 | Every Dialogue State is associated with exactly one session | Schema — `session_id` is required and unique |
-| DIAL-002 | At most one active topic exists at any time | Algorithmic — `updateTopic` deactivates previous topic |
-| DIAL-003 | At most one active intent exists at any time (intent stack top) | Algorithmic — push/pop enforces single active intent |
-| DIAL-004 | Phase transitions follow the defined state machine (no illegal transitions) | Algorithmic — `transitionPhase` validates against transition table |
-| DIAL-005 | Pending clarifications are resolved or removed before the associated intent is resolved | Algorithmic — `resolveIntent` checks for open clarifications; if any exist, intent cannot resolve |
-| DIAL-006 | Dialogue State version is strictly monotonic | Algorithmic — `state_version` incremented on every write; concurrent write with stale version is rejected |
-| DIAL-007 | Topic depth never exceeds 5 | Algorithmic — `updateTopic` flattens beyond depth 5 |
-| DIAL-008 | Clarification retry count is bounded at 3 | Algorithmic — `addClarification` with retry_count >= 3 auto-resolves |
+| DIAL-001 | Every Dialogue State is associated with exactly one session | Schema â€” `session_id` is required and unique |
+| DIAL-002 | At most one active topic exists at any time | Algorithmic â€” `updateTopic` deactivates previous topic |
+| DIAL-003 | At most one active intent exists at any time (intent stack top) | Algorithmic â€” push/pop enforces single active intent |
+| DIAL-004 | Phase transitions follow the defined state machine (no illegal transitions) | Algorithmic â€” `transitionPhase` validates against transition table |
+| DIAL-005 | Pending clarifications are resolved or removed before the associated intent is resolved | Algorithmic â€” `resolveIntent` checks for open clarifications; if any exist, intent cannot resolve |
+| DIAL-006 | Dialogue State version is strictly monotonic | Algorithmic â€” `state_version` incremented on every write; concurrent write with stale version is rejected |
+| DIAL-007 | Topic depth never exceeds 5 | Algorithmic â€” `updateTopic` flattens beyond depth 5 |
+| DIAL-008 | Clarification retry count is bounded at 3 | Algorithmic â€” `addClarification` with retry_count >= 3 auto-resolves |
 
 ## Error Cases
 
@@ -700,17 +700,17 @@ interface ClarificationContext {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Dialogue State handles only conversation-level semantic state, not turn history or session lifecycle |
-| R2 — Dependency Order | Depends on Memory OS for persistence; depends on Conversation OS for turn events; no upward deps |
-| R3 — DRY | Topic, Intent, Clarification models defined once in Data Model |
-| R4 — Builder Pattern | State built by initializeState → per-turn mutation → archiveState |
-| R5 — Liskov Substitution | Any DialogueStateManager implements the interface |
-| R6 — DI over Singletons | Topic classifier, intent classifier, phase transition rules injected |
-| R9 — Deterministic | Same sequence of inputs and state produces same state transitions |
-| R10 — Simpler Over Complex | Uses stack-based intent model and explicit phase state machine |
-| R13 — Design for Failure | Stale version detection prevents concurrent corruption; clarification timeout prevents deadlock |
-| R14 — Paved Path | All state mutations flow through DialogueStateManager interface |
-| R15 — Open/Closed | New conversation phases, intent types, and topic classifiers added via config, not by modifying core |
+| R1 â€” Modulsingularity | Dialogue State handles only conversation-level semantic state, not turn history or session lifecycle |
+| R2 â€” Dependency Order | Depends on Memory OS for persistence; depends on Conversation OS for turn events; no upward deps |
+| R3 â€” DRY | Topic, Intent, Clarification models defined once in Data Model |
+| R4 â€” Builder Pattern | State built by initializeState â†’ per-turn mutation â†’ archiveState |
+| R5 â€” Liskov Substitution | Any DialogueStateManager implements the interface |
+| R6 â€” DI over Singletons | Topic classifier, intent classifier, phase transition rules injected |
+| R9 â€” Deterministic | Same sequence of inputs and state produces same state transitions |
+| R10 â€” Simpler Over Complex | Uses stack-based intent model and explicit phase state machine |
+| R13 â€” Design for Failure | Stale version detection prevents concurrent corruption; clarification timeout prevents deadlock |
+| R14 â€” Paved Path | All state mutations flow through DialogueStateManager interface |
+| R15 â€” Open/Closed | New conversation phases, intent types, and topic classifiers added via config, not by modifying core |
 
 ## Related Documents
 

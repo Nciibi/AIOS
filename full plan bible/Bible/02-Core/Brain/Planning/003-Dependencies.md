@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 003 — Dependency Resolution
+﻿# AIOS Bible â€” Brain
+## 003 â€” Dependency Resolution
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Planning |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Planning |
 | Document ID | AIOS-BBL-002-PLN-003 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 2 — Law of Non-Execution, Law 4 — Law of Evidence |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 2 â€” Law of Non-Execution, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Dependency Resolution analyzes milestone dependencies and produces a validated execution graph. This module enforces DAG (Directed Acyclic Graph) structure, detects and reports cycles, calculates the critical path, and validates that all dependency constraints are satisfiable. Conditional dependencies are evaluated against the current decision context to determine which branches are active. The resolved ExecutionGraph is the authoritative execution blueprint — it determines milestone ordering, parallel execution opportunities, and schedule-critical paths. Dependency visualization data is also produced for the Context System to render plan structure to Sou.
+Dependency Resolution analyzes milestone dependencies and produces a validated execution graph. This module enforces DAG (Directed Acyclic Graph) structure, detects and reports cycles, calculates the critical path, and validates that all dependency constraints are satisfiable. Conditional dependencies are evaluated against the current decision context to determine which branches are active. The resolved ExecutionGraph is the authoritative execution blueprint â€” it determines milestone ordering, parallel execution opportunities, and schedule-critical paths. Dependency visualization data is also produced for the Context System to render plan structure to Sou.
 
 ## Data Model
 
@@ -31,7 +31,7 @@ Dependency {
   condition?: string                // Evaluable expression for conditional deps
   label?: string                    // Human-readable description
   metadata: {
-    weight: number                  // 0.0–1.0, influence on critical path
+    weight: number                  // 0.0â€“1.0, influence on critical path
     optional: boolean               // If true, soft dependency (advisory only)
     created_at: timestamp
   }
@@ -74,7 +74,7 @@ ExecutionNode {
   earliest_finish: number
   latest_start: number              // Calculated via backward pass
   latest_finish: number
-  slack: number                     // Float — delay without affecting critical path
+  slack: number                     // Float â€” delay without affecting critical path
   dependencies: string[]            // Incoming edge milestone IDs
   dependents: string[]              // Outgoing edge milestone IDs
   on_critical_path: boolean
@@ -134,10 +134,10 @@ ConditionalDependencyEvaluation {
 B cannot start until A completes. This is the default dependency type:
 
 ```
-A ──→ B ──→ C
+A â”€â”€â†’ B â”€â”€â†’ C
 
 Meaning: A must finish before B starts; B must finish before C starts.
-Enforced at execution by Institution OS — missions scheduled in order.
+Enforced at execution by Institution OS â€” missions scheduled in order.
 ```
 
 ### Parallel Dependency
@@ -145,9 +145,9 @@ Enforced at execution by Institution OS — missions scheduled in order.
 A and B have no ordering constraint and may execute concurrently:
 
 ```
-A ──┐
-    ├──→ C
-B ──┘
+A â”€â”€â”
+    â”œâ”€â”€â†’ C
+B â”€â”€â”˜
 
 Meaning: A and B run in parallel; C waits for both.
 Allows the scheduler to maximize resource utilization.
@@ -158,8 +158,8 @@ Allows the scheduler to maximize resource utilization.
 B starts only if A produces a result that satisfies a condition:
 
 ```
-A ──[if result.passed]──→ B
-  └─[if result.failed]──→ C
+A â”€â”€[if result.passed]â”€â”€â†’ B
+  â””â”€[if result.failed]â”€â”€â†’ C
 
 Meaning: If A's output passes validation, execute B; otherwise execute C.
 Condition is evaluated as an expression against the source milestone's result.
@@ -195,7 +195,7 @@ function detectCycle(graph: ExecutionGraph): CycleInfo | null {
 
     for (const dep_id of node.dependents) {
       if (color[dep_id] === GRAY) {
-        // Back edge found — cycle detected
+        // Back edge found â€” cycle detected
         let current = node_id
         while (current !== dep_id) {
           cycle_nodes.unshift(current)
@@ -325,44 +325,44 @@ interface GraphVisualization {
 
 ```
 Milestones + Raw Dependencies (from planner / user)
-    │
-    ▼
+    â”‚
+    â–¼
 Build ExecutionGraph (resolve)
-    │
-    ├── Create nodes from milestones
-    ├── Add edges from dependencies
-    └── Identify entry/exit nodes
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Create nodes from milestones
+    â”œâ”€â”€ Add edges from dependencies
+    â””â”€â”€ Identify entry/exit nodes
+    â”‚
+    â–¼
 Cycle Detection (detectCycle)
-    │
-    ├── DFS over graph
-    ├── If cycle found → return CycleInfo with suggestion
-    └── If no cycle → proceed
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ DFS over graph
+    â”œâ”€â”€ If cycle found â†’ return CycleInfo with suggestion
+    â””â”€â”€ If no cycle â†’ proceed
+    â”‚
+    â–¼
 Validation (validate)
-    │
-    ├── Check all milestones are reachable
-    ├── Evaluate conditional conditions if context available
-    ├── Detect orphaned milestones
-    └── Check for redundant/contradictory edges
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Check all milestones are reachable
+    â”œâ”€â”€ Evaluate conditional conditions if context available
+    â”œâ”€â”€ Detect orphaned milestones
+    â””â”€â”€ Check for redundant/contradictory edges
+    â”‚
+    â–¼
 Critical Path Calculation (getCriticalPath)
-    │
-    ├── Forward pass (earliest times)
-    ├── Backward pass (latest times)
-    ├── Compute slack for each node
-    └── Identify critical path nodes (slack = 0)
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Forward pass (earliest times)
+    â”œâ”€â”€ Backward pass (latest times)
+    â”œâ”€â”€ Compute slack for each node
+    â””â”€â”€ Identify critical path nodes (slack = 0)
+    â”‚
+    â–¼
 Parallel Group Detection (getParallelGroups)
-    │
-    ├── Group independent sibling chains
-    └── Label groups for scheduler
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Group independent sibling chains
+    â””â”€â”€ Label groups for scheduler
+    â”‚
+    â–¼
 Validated ExecutionGraph (output to Progress Tracker, Institution OS)
 ```
 
@@ -386,14 +386,14 @@ Validated ExecutionGraph (output to Progress Tracker, Institution OS)
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| DEP-001 | The execution graph is always a DAG — no cycles allowed | Algorithmic — checked on every `resolve()` |
-| DEP-002 | Every non-entry milestone has at least one incoming dependency | Validation — flagged as orphan |
-| DEP-003 | Every non-exit milestone has at least one outgoing dependency | Validation — flagged as dangling |
-| DEP-004 | Conditional dependencies are only traversed if condition evaluates to true | Algorithmic — evaluated in `getCriticalPath` |
-| DEP-005 | Parallel dependency implies neither A→B nor B→A ordering | Validation — cross-checked |
-| DEP-006 | The critical path is unique and deterministic for a given graph | Algorithmic — forward/backward pass is deterministic |
-| DEP-007 | Optional dependencies do not block execution when unsatisfied | Algorithmic — excluded from critical path |
-| DEP-008 | A milestone cannot depend on itself | Schema — `from !== to` enforced |
+| DEP-001 | The execution graph is always a DAG â€” no cycles allowed | Algorithmic â€” checked on every `resolve()` |
+| DEP-002 | Every non-entry milestone has at least one incoming dependency | Validation â€” flagged as orphan |
+| DEP-003 | Every non-exit milestone has at least one outgoing dependency | Validation â€” flagged as dangling |
+| DEP-004 | Conditional dependencies are only traversed if condition evaluates to true | Algorithmic â€” evaluated in `getCriticalPath` |
+| DEP-005 | Parallel dependency implies neither Aâ†’B nor Bâ†’A ordering | Validation â€” cross-checked |
+| DEP-006 | The critical path is unique and deterministic for a given graph | Algorithmic â€” forward/backward pass is deterministic |
+| DEP-007 | Optional dependencies do not block execution when unsatisfied | Algorithmic â€” excluded from critical path |
+| DEP-008 | A milestone cannot depend on itself | Schema â€” `from !== to` enforced |
 
 ## Error Cases
 
@@ -412,17 +412,17 @@ Validated ExecutionGraph (output to Progress Tracker, Institution OS)
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Dependency Resolver handles only graph analysis; no execution |
-| R2 — Dependency Order | Depends on Milestone Planner for nodes; no upward deps |
-| R3 — DRY | Graph algorithms (DFS, topological sort) defined once |
-| R4 — Builder Pattern | Graph built in stages: nodes → edges → validate → critical path |
-| R5 — Liskov Substitution | Any cycle detection strategy implements the interface |
-| R6 — DI over Singletons | Condition evaluator injectable |
-| R9 — Deterministic | Same milestones + dependencies produce same graph |
-| R10 — Simpler Over Complex | Uses CPM (Critical Path Method), not generalized PERT |
-| R13 — Design for Failure | Cycles caught early; orphan detection prevents stalled execution |
-| R14 — Paved Path | All dependency analysis flows through resolve() → validate() |
-| R15 — Open/Closed | New dependency types added via registry |
+| R1 â€” Modulsingularity | Dependency Resolver handles only graph analysis; no execution |
+| R2 â€” Dependency Order | Depends on Milestone Planner for nodes; no upward deps |
+| R3 â€” DRY | Graph algorithms (DFS, topological sort) defined once |
+| R4 â€” Builder Pattern | Graph built in stages: nodes â†’ edges â†’ validate â†’ critical path |
+| R5 â€” Liskov Substitution | Any cycle detection strategy implements the interface |
+| R6 â€” DI over Singletons | Condition evaluator injectable |
+| R9 â€” Deterministic | Same milestones + dependencies produce same graph |
+| R10 â€” Simpler Over Complex | Uses CPM (Critical Path Method), not generalized PERT |
+| R13 â€” Design for Failure | Cycles caught early; orphan detection prevents stalled execution |
+| R14 â€” Paved Path | All dependency analysis flows through resolve() â†’ validate() |
+| R15 â€” Open/Closed | New dependency types added via registry |
 
 ## Related Documents
 

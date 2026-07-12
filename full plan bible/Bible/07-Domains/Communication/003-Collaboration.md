@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Communication — 003: Collaboration
+﻿# AIOS Bible â€” Domains
+## Communication â€” 003: Collaboration
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-COM-003 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,9 +15,9 @@
 
 ## Purpose
 
-Collaboration enables multi-user interaction within AIOS — shared sessions, workspace management, presence detection, typing indicators, concurrent state editing, and session handoff between Workers. It extends the Communication domain from one-to-one chat to many-to-many collaborative environments where human users and AIOS Workers share a common workspace, observe each other's presence, and synchronize state in near real time.
+Collaboration enables multi-user interaction within AIOS â€” shared sessions, workspace management, presence detection, typing indicators, concurrent state editing, and session handoff between Workers. It extends the Communication domain from one-to-one chat to many-to-many collaborative environments where human users and AIOS Workers share a common workspace, observe each other's presence, and synchronize state in near real time.
 
-A CollaborationSession represents a shared context that persists across participant join and leave events. Participants include both human users (authenticated via IDS) and AIOS Workers (SupportAgent, ChatWorker). Presence tracking broadcasts live status changes — online, idle, focusing, typing. Workspace state is synchronized through ordered SyncEvent messages that each participant applies to their local replica, ensuring eventual consistency without requiring a central state store for every interaction.
+A CollaborationSession represents a shared context that persists across participant join and leave events. Participants include both human users (authenticated via IDS) and AIOS Workers (SupportAgent, ChatWorker). Presence tracking broadcasts live status changes â€” online, idle, focusing, typing. Workspace state is synchronized through ordered SyncEvent messages that each participant applies to their local replica, ensuring eventual consistency without requiring a central state store for every interaction.
 
 ## Architecture
 
@@ -59,7 +59,7 @@ State synchronization flow per participant:
 +---------------------+
 ```
 
-Each participant maintains an independent local replica. Mutations are broadcast as SyncEvents with a vector clock for conflict detection. On conflict, the last-writer-wins strategy is applied with a divergence boundary check — if clock skew exceeds the threshold, a full state resync is triggered.
+Each participant maintains an independent local replica. Mutations are broadcast as SyncEvents with a vector clock for conflict detection. On conflict, the last-writer-wins strategy is applied with a divergence boundary check â€” if clock skew exceeds the threshold, a full state resync is triggered.
 
 ## Data Model
 
@@ -194,13 +194,13 @@ interface SessionPolicy {
 | Code | Condition | Severity | Recovery |
 |------|-----------|----------|----------|
 | COM-COL-001 | Session at maximum participant capacity | Error | Reject join with session_full reason; offer to create sub-session or wait-list |
-| COM-COL-002 | Participant authentication failure — invalid token | Critical | Reject join; emit auth failure event; log identity for Security Council |
-| COM-COL-003 | Sync conflict — concurrent mutations with divergent vector clocks | Warning | Apply last-writer-wins; log conflict; resync if divergence exceeds threshold |
-| COM-COL-004 | Session handoff timeout — target Worker not ready | Error | Abort handoff; reinstate source Worker; emit handoff_timeout; retry with backoff |
+| COM-COL-002 | Participant authentication failure â€” invalid token | Critical | Reject join; emit auth failure event; log identity for Security Council |
+| COM-COL-003 | Sync conflict â€” concurrent mutations with divergent vector clocks | Warning | Apply last-writer-wins; log conflict; resync if divergence exceeds threshold |
+| COM-COL-004 | Session handoff timeout â€” target Worker not ready | Error | Abort handoff; reinstate source Worker; emit handoff_timeout; retry with backoff |
 | COM-COL-005 | State divergence beyond recovery threshold | Critical | Trigger full state resync from authoritative snapshot; all participants reload |
-| COM-COL-006 | Presence heartbeat timeout — participant presumed disconnected | Warning | Mark presence as away; start idle timer; retain session slot for grace period |
+| COM-COL-006 | Presence heartbeat timeout â€” participant presumed disconnected | Warning | Mark presence as away; start idle timer; retain session slot for grace period |
 | COM-COL-007 | Unsupported participant role requested | Error | Assign default viewer role; log role escalation attempt for audit |
-| COM-COL-008 | SyncEvent sequence gap detected — missing intermediate events | Error | Request missing events from sender; if unavailable, trigger partial state resync |
+| COM-COL-008 | SyncEvent sequence gap detected â€” missing intermediate events | Error | Request missing events from sender; if unavailable, trigger partial state resync |
 
 ## Invariants
 
@@ -233,15 +233,15 @@ interface SessionPolicy {
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Communication/000-Overview.md | Overview — Collaboration extends communication from one-to-one to many-to-many |
-| Bible/07-Domains/Communication/001-Protocols.md | Upstream — Collaboration uses protocol negotiation for participant sync channels |
-| Bible/07-Domains/Communication/002-Messaging.md | Downstream — Collaboration participant messages flow through messaging for delivery |
-| Bible/06-Services/ACF/004-Subscriptions.md | Subscriptions — Presence and sync events use ACF subscription model for real-time broadcast |
-| Bible/06-Services/ACF/005-Streaming.md | Streaming — SyncEvent stream uses ACF streaming for ordered event delivery |
-| Physics/005-Events.md | Evidence — All session lifecycle and sync operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — Session size, sync frequency, and state complexity are bounded by capability profiles |
-| Physics/009-Interaction.md | Interaction — Collaboration implements multi-participant human-AIOS interaction patterns |
-| Bible/02-Core/Sou/001-Reasoning.md | Reasoning — Sou provides session handoff decisions and conflict resolution guidance |
-| Bible/02-Core/AGS/000-Overview.md | AGS — ChatWorker and SupportAgent Genome templates include collaboration capabilities |
-| Bible/04-Execution/Security/IDS/000-Overview.md | IDS — Participant identity verification for session access |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — Core principles for collaborative interaction |
+| Bible/07-Domains/Communication/000-Overview.md | Overview â€” Collaboration extends communication from one-to-one to many-to-many |
+| Bible/07-Domains/Communication/001-Protocols.md | Upstream â€” Collaboration uses protocol negotiation for participant sync channels |
+| Bible/07-Domains/Communication/002-Messaging.md | Downstream â€” Collaboration participant messages flow through messaging for delivery |
+| Bible/06-Services/ACF/004-Subscriptions.md | Subscriptions â€” Presence and sync events use ACF subscription model for real-time broadcast |
+| Bible/06-Services/ACF/005-Streaming.md | Streaming â€” SyncEvent stream uses ACF streaming for ordered event delivery |
+| Physics/005-Events.md | Evidence â€” All session lifecycle and sync operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” Session size, sync frequency, and state complexity are bounded by capability profiles |
+| Physics/009-Interaction.md | Interaction â€” Collaboration implements multi-participant human-AIOS interaction patterns |
+| Bible/02-Core/Sou/001-Reasoning.md | Reasoning â€” Sou provides session handoff decisions and conflict resolution guidance |
+| Bible/02-Core/AGS/000-Overview.md | AGS â€” ChatWorker and SupportAgent Genome templates include collaboration capabilities |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS â€” Participant identity verification for session access |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” Core principles for collaborative interaction |

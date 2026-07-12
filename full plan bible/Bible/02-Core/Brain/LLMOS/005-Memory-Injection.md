@@ -1,22 +1,22 @@
-# AIOS Bible — Brain/LLMOS
-## 005 — Memory Injection
+﻿# AIOS Bible â€” Brain/LLMOS
+## 005 â€” Memory Injection
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-005 |
-| Source Laws | Law 3 — Law of Communication (conversation memory) |
+| Source Laws | Law 3 â€” Law of Communication (conversation memory) |
 | Source Physics | Physics/005-Events.md, Physics/006-Lifecycles.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 9 — Memory Injection |
+| Pipeline Stage | 9 â€” Memory Injection |
 
 ## Purpose
 
-Memory Injection retrieves relevant memories from the Memory OS and inserts them into the LLMOS context pipeline. This provides the AI model with conversation history, semantic memories, episodic memories, and working memory — all within the token budget allocated by Context Builder (Stage 8). The injection happens after context is built but before the prompt is compiled.
+Memory Injection retrieves relevant memories from the Memory OS and inserts them into the LLMOS context pipeline. This provides the AI model with conversation history, semantic memories, episodic memories, and working memory â€” all within the token budget allocated by Context Builder (Stage 8). The injection happens after context is built but before the prompt is compiled.
 
 ## Memory Sources
 
@@ -46,7 +46,7 @@ interface RetrievalConfig {
 
 ### Algorithm Steps
 
-1. **Determine slot allocation** — split `max_tokens` across enabled sources based on `recency_bias`:
+1. **Determine slot allocation** â€” split `max_tokens` across enabled sources based on `recency_bias`:
    - `recency_bias < 0.3`: bias toward conversation history (60%) over semantic (40%)
    - `recency_bias > 0.7`: bias toward semantic (60%) over conversation (40%)
    - Otherwise: equal split (50/50)
@@ -58,9 +58,9 @@ interface RetrievalConfig {
    - Semantic Memory: Vector search with requester query text, threshold check
    - Episodic Memory: Vector search + session/entity metadata filter, threshold check
 
-3. **Rank and trim per source** — within each source's allocated token budget, rank by relevance score (vector similarity for semantic/episodic, recency for conversation), keep highest-ranked items until budget is consumed
+3. **Rank and trim per source** â€” within each source's allocated token budget, rank by relevance score (vector similarity for semantic/episodic, recency for conversation), keep highest-ranked items until budget is consumed
 
-4. **Merge into ordered block** — place memories in order: Working Memory → Conversation History (most recent first) → Episodic (highest relevance first) → Semantic (highest relevance first)
+4. **Merge into ordered block** â€” place memories in order: Working Memory â†’ Conversation History (most recent first) â†’ Episodic (highest relevance first) â†’ Semantic (highest relevance first)
 
 ## Memory Block Schema
 
@@ -96,7 +96,7 @@ Memories are injected as structured content blocks with semantic markers:
 ```
 <memories>
   <working_memory>
-    [Working memory content — current task state]
+    [Working memory content â€” current task state]
   </working_memory>
 
   <conversation_history>
@@ -117,7 +117,7 @@ Memories are injected as structured content blocks with semantic markers:
 </memories>
 ```
 
-The XML structure is for semantic tagging — the Prompt Compiler (Stage 10) may reformat based on provider convention.
+The XML structure is for semantic tagging â€” the Prompt Compiler (Stage 10) may reformat based on provider convention.
 
 ## Binding to ROS
 
@@ -143,12 +143,12 @@ interface MemoryOperation {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-MEM-001 | Injected memory never exceeds the `max_memory_tokens` allocated by Context Builder. | Algorithmic — token budget enforcement |
-| LLM-MEM-002 | Memory from a non-enabled source (according to `memory_config`) is never injected. | Schema — source enablement gating |
-| LLM-MEM-003 | Working memory is always loaded — it is not subject to `recency_bias` for inclusion decisions. | Algorithmic — unconditional working memory load |
-| LLM-MEM-004 | Conversation history maintains message ordering — oldest messages may be truncated but ordering is preserved. | Algorithmic — ordered merge logic |
-| LLM-MEM-005 | Semantic and episodic memories below the similarity threshold are never injected. | Algorithmic — threshold-based filtering |
-| LLM-MEM-006 | Memory retrieval is a side-effect-free read — it never mutates memory state. | Architectural — read-only operation |
+| LLM-MEM-001 | Injected memory never exceeds the `max_memory_tokens` allocated by Context Builder. | Algorithmic â€” token budget enforcement |
+| LLM-MEM-002 | Memory from a non-enabled source (according to `memory_config`) is never injected. | Schema â€” source enablement gating |
+| LLM-MEM-003 | Working memory is always loaded â€” it is not subject to `recency_bias` for inclusion decisions. | Algorithmic â€” unconditional working memory load |
+| LLM-MEM-004 | Conversation history maintains message ordering â€” oldest messages may be truncated but ordering is preserved. | Algorithmic â€” ordered merge logic |
+| LLM-MEM-005 | Semantic and episodic memories below the similarity threshold are never injected. | Algorithmic â€” threshold-based filtering |
+| LLM-MEM-006 | Memory retrieval is a side-effect-free read â€” it never mutates memory state. | Architectural â€” read-only operation |
 
 ## Events
 
@@ -160,17 +160,17 @@ interface MemoryOperation {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Memory Injection is the sole memory retrieval point in the pipeline |
-| R2 — Dependency Order | Memory Injection depends on Context Builder budget allocation |
-| R3 — DRY | Retrieval logic centralized in single algorithm |
-| R4 — Builder Pattern | InjectedMemoryBlock built through retrieval pipeline |
-| R5 — Liskov Substitution | All memory sources interchangeable via MemorySource abstraction |
-| R6 — DI over Singletons | MemoryOS injected as dependency |
-| R9 — Deterministic | Same session produces same memory retrieval |
-| R10 — Simpler Over Complex | Structured XML tagging over complex formatting |
-| R13 — Design for Failure | Empty memory block on source failure |
-| R14 — Paved Path | Default retrieval config for all sessions |
-| R15 — Open/Closed | New memory sources added without pipeline changes |
+| R1 â€” Modulsingularity | Memory Injection is the sole memory retrieval point in the pipeline |
+| R2 â€” Dependency Order | Memory Injection depends on Context Builder budget allocation |
+| R3 â€” DRY | Retrieval logic centralized in single algorithm |
+| R4 â€” Builder Pattern | InjectedMemoryBlock built through retrieval pipeline |
+| R5 â€” Liskov Substitution | All memory sources interchangeable via MemorySource abstraction |
+| R6 â€” DI over Singletons | MemoryOS injected as dependency |
+| R9 â€” Deterministic | Same session produces same memory retrieval |
+| R10 â€” Simpler Over Complex | Structured XML tagging over complex formatting |
+| R13 â€” Design for Failure | Empty memory block on source failure |
+| R14 â€” Paved Path | Default retrieval config for all sessions |
+| R15 â€” Open/Closed | New memory sources added without pipeline changes |
 
 ## Related Documents
 
@@ -185,7 +185,7 @@ interface MemoryOperation {
 
 | Condition | Error Code | Behavior |
 |-----------|------------|----------|
-| Memory OS unavailable | — | Skip memory injection; produce warning in Events |
-| Memory retrieval timeout (>5s) | — | Use whatever memories were retrieved within timeout |
-| Session not found | — | Skip conversation history; log warning |
-| All memory sources return empty | — | Inject empty memories block; continue normally |
+| Memory OS unavailable | â€” | Skip memory injection; produce warning in Events |
+| Memory retrieval timeout (>5s) | â€” | Use whatever memories were retrieved within timeout |
+| Session not found | â€” | Skip conversation history; log warning |
+| All memory sources return empty | â€” | Inject empty memories block; continue normally |

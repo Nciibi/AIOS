@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 005 — Index Store
+﻿# AIOS Bible â€” Brain
+## 005 â€” Index Store
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Memory |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Memory |
 | Document ID | AIOS-BBL-002-MEM-005 |
-| Source Laws | Law 4 — Law of Evidence |
+| Source Laws | Law 4 â€” Law of Evidence |
 | Source Physics | Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Index Store provides the indexing infrastructure for all Memory OS types. It maintains secondary indexes — session, source, tag, time, and importance — that enable efficient memory retrieval across millions of items. Without the Index Store, every memory query would require a full scan of all stored items.
+The Index Store provides the indexing infrastructure for all Memory OS types. It maintains secondary indexes â€” session, source, tag, time, and importance â€” that enable efficient memory retrieval across millions of items. Without the Index Store, every memory query would require a full scan of all stored items.
 
 The Index Store is a supporting subsystem of Memory OS. It is not a memory type itself; it is the retrieval optimization layer that all four memory types (Working, Episodic, Semantic, Procedural) depend on.
 
@@ -23,26 +23,26 @@ The Index Store is a supporting subsystem of Memory OS. It is not a memory type 
 
 ```
 Memory OS Query
-    │
-    ▼
-┌─────────────────────────────┐
-│       Index Store           │
-│                             │
-│  ┌────────┐ ┌────────┐     │
-│  │ Session │ │ Source │     │
-│  │ Index   │ │ Index  │     │
-│  └────────┘ └────────┘     │
-│  ┌────────┐ ┌────────┐     │
-│  │ Tag     │ │ Time   │     │
-│  │ Index   │ │ Index  │     │
-│  └────────┘ └────────┘     │
-│  ┌────────┐ ┌────────┐     │
-│  │Importan │ │Memory  │     │
-│  │ce Index│ │Type    │     │
-│  └────────┘ └────────┘     │
-└───────────────┬─────────────┘
-                │
-                ▼
+    â”‚
+    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚       Index Store           â”‚
+â”‚                             â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”     â”‚
+â”‚  â”‚ Session â”‚ â”‚ Source â”‚     â”‚
+â”‚  â”‚ Index   â”‚ â”‚ Index  â”‚     â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜     â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”     â”‚
+â”‚  â”‚ Tag     â”‚ â”‚ Time   â”‚     â”‚
+â”‚  â”‚ Index   â”‚ â”‚ Index  â”‚     â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜     â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”     â”‚
+â”‚  â”‚Importan â”‚ â”‚Memory  â”‚     â”‚
+â”‚  â”‚ce Indexâ”‚ â”‚Type    â”‚     â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜     â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                â”‚
+                â–¼
         Primary Memory Store
         (actual item data)
 ```
@@ -51,7 +51,7 @@ Memory OS Query
 
 ### 1. Session Index
 
-Maps session_id → all memory items belonging to that session.
+Maps session_id â†’ all memory items belonging to that session.
 
 ```typescript
 SessionIndex {
@@ -77,7 +77,7 @@ SessionIndex {
 
 ### 2. Source Index
 
-Maps source service → all items created by that service.
+Maps source service â†’ all items created by that service.
 
 ```typescript
 SourceIndex {
@@ -101,7 +101,7 @@ SourceIndex {
 
 ### 3. Tag Index
 
-Inverted index mapping tags → items. An item can have multiple tags.
+Inverted index mapping tags â†’ items. An item can have multiple tags.
 
 ```typescript
 TagIndex {
@@ -130,7 +130,7 @@ TagIndex {
 
 ### 4. Time Index
 
-B-tree index mapping timestamp → items. Enables efficient time-range queries.
+B-tree index mapping timestamp â†’ items. Enables efficient time-range queries.
 
 ```typescript
 TimeIndex {
@@ -157,12 +157,12 @@ TimeIndex {
 
 ### 5. Importance Index
 
-Sorted set mapping importance → items. Items with high importance are prioritized.
+Sorted set mapping importance â†’ items. Items with high importance are prioritized.
 
 ```typescript
 ImportanceIndex {
   type: "sorted_set"                 // Skip list or B-tree on importance
-  key: importance: number (0.0–1.0)
+  key: importance: number (0.0â€“1.0)
   value: Set<item_id>
   
   operations: {
@@ -184,7 +184,7 @@ ImportanceIndex {
 
 ### 6. Memory Type Index
 
-Maps memory_type → items, enabling type-scoped queries.
+Maps memory_type â†’ items, enabling type-scoped queries.
 
 ```typescript
 MemoryTypeIndex {
@@ -323,12 +323,12 @@ function rebuildIndexes(): RebuildReport {
 
 | Operation | Target Latency | Target Throughput |
 |-----------|---------------|-------------------|
-| Single index lookup | < 10μs | 100,000/sec |
-| Composite query (3 filters) | < 100μs | 10,000/sec |
-| Composite query (5 filters) | < 500μs | 2,000/sec |
-| Index insert | < 50μs | 20,000/sec |
-| Index update (importance) | < 100μs | 10,000/sec |
-| Index delete | < 50μs | 20,000/sec |
+| Single index lookup | < 10Î¼s | 100,000/sec |
+| Composite query (3 filters) | < 100Î¼s | 10,000/sec |
+| Composite query (5 filters) | < 500Î¼s | 2,000/sec |
+| Index insert | < 50Î¼s | 20,000/sec |
+| Index update (importance) | < 100Î¼s | 10,000/sec |
+| Index delete | < 50Î¼s | 20,000/sec |
 | Full rebuild (1M items) | < 10s | N/A |
 
 ## Memory Budget
@@ -429,12 +429,12 @@ interface RebuildReport {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| IDX-001 | Every stored memory item exists in all applicable indexes | Algorithmic — insertToIndexes runs on every store |
-| IDX-002 | Deleted memory items are removed from all indexes | Algorithmic — removeFromIndexes runs on every delete |
-| IDX-003 | Index updates are atomic per item | Architectural — all-or-nothing index update |
-| IDX-004 | The Index Store is rebuildable from the primary store | Architectural — full scan on rebuild |
-| IDX-005 | Composite queries use the most selective index first | Algorithmic — query planner sorts by selectivity |
-| IDX-006 | Time index uses nanosecond precision | Schema — prevents timestamp collisions |
+| IDX-001 | Every stored memory item exists in all applicable indexes | Algorithmic â€” insertToIndexes runs on every store |
+| IDX-002 | Deleted memory items are removed from all indexes | Algorithmic â€” removeFromIndexes runs on every delete |
+| IDX-003 | Index updates are atomic per item | Architectural â€” all-or-nothing index update |
+| IDX-004 | The Index Store is rebuildable from the primary store | Architectural â€” full scan on rebuild |
+| IDX-005 | Composite queries use the most selective index first | Algorithmic â€” query planner sorts by selectivity |
+| IDX-006 | Time index uses nanosecond precision | Schema â€” prevents timestamp collisions |
 
 ## Error Cases
 
@@ -451,17 +451,17 @@ interface RebuildReport {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Index Store does one thing: efficient memory retrieval |
-| R2 — Dependency Order | Depends on primary store for rebuild; no upward deps |
-| R3 — DRY | Index schemas defined once per index type |
-| R4 — Builder Pattern | Query built by Planner → Index Lookup → Intersection |
-| R5 — Liskov Substitution | Any Index implementation follows the interface |
-| R6 — DI over Singletons | Index implementations injected |
-| R9 — Deterministic | Same query + same data = same results |
-| R10 — Simpler Over Complex | 6 focused index types, each with one access pattern |
-| R13 — Design for Failure | Rebuildable from primary store on corruption |
-| R14 — Paved Path | All queries flow through executeQuery |
-| R15 — Open/Closed | New index types added by implementing the Index interface, not by modifying the query executor |
+| R1 â€” Modulsingularity | Index Store does one thing: efficient memory retrieval |
+| R2 â€” Dependency Order | Depends on primary store for rebuild; no upward deps |
+| R3 â€” DRY | Index schemas defined once per index type |
+| R4 â€” Builder Pattern | Query built by Planner â†’ Index Lookup â†’ Intersection |
+| R5 â€” Liskov Substitution | Any Index implementation follows the interface |
+| R6 â€” DI over Singletons | Index implementations injected |
+| R9 â€” Deterministic | Same query + same data = same results |
+| R10 â€” Simpler Over Complex | 6 focused index types, each with one access pattern |
+| R13 â€” Design for Failure | Rebuildable from primary store on corruption |
+| R14 â€” Paved Path | All queries flow through executeQuery |
+| R15 â€” Open/Closed | New index types added by implementing the Index interface, not by modifying the query executor |
 
 ## Related Documents
 

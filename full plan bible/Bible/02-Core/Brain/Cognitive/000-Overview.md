@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Cognitive OS
+﻿# AIOS Bible â€” Brain
+## 000 â€” Cognitive OS
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Cognitive |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Cognitive |
 | Document ID | AIOS-BBL-002-COG-000 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Cognitive OS is Sou's reasoning engine. It implements the cognitive processes that Sou delegates to — reasoning, reflection, metacognition, and synthesis. When Sou needs to think through a problem, evaluate evidence, reflect on past experiences, or generate insights, it delegates to Cognitive OS.
+Cognitive OS is Sou's reasoning engine. It implements the cognitive processes that Sou delegates to â€” reasoning, reflection, metacognition, and synthesis. When Sou needs to think through a problem, evaluate evidence, reflect on past experiences, or generate insights, it delegates to Cognitive OS.
 
 Cognitive OS does not make decisions. It produces reasoning chains that Sou consumes. Sou decides; Cognitive OS thinks.
 
@@ -23,31 +23,31 @@ Cognitive OS does not make decisions. It produces reasoning chains that Sou cons
 
 ```
 Sou (reasons, reflects, synthesizes via delegation)
-   ▲
-   │
-   ▼
-┌────────────────────────────────────────────┐
-│           Cognitive OS                      │
-│                                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐ │
-│  │ Reasoning │  │ Reflection│  │ Metacog-  │ │
-│  │ Engine    │─►│ Engine   │─►│ nition    │ │
-│  └──────────┘  └──────────┘  │ Engine    │ │
-│                              └──────────┘ │
-│  ┌──────────┐  ┌──────────┐               │
-│  │ Synthesis│  │ Evidence  │               │
-│  │ Engine   │  │ Evaluator │               │
-│  └──────────┘  └──────────┘               │
-└────────────────────────────────────────────┘
-                    │
-                    ▼
-             ┌──────────────┐
-             │  LLMOS       │
-             │ (inference)  │
-             └──────────────┘
+   â–²
+   â”‚
+   â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           Cognitive OS                      â”‚
+â”‚                                            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ Reasoning â”‚  â”‚ Reflectionâ”‚  â”‚ Metacog-  â”‚ â”‚
+â”‚  â”‚ Engine    â”‚â”€â–ºâ”‚ Engine   â”‚â”€â–ºâ”‚ nition    â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚ Engine    â”‚ â”‚
+â”‚                              â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”               â”‚
+â”‚  â”‚ Synthesisâ”‚  â”‚ Evidence  â”‚               â”‚
+â”‚  â”‚ Engine   â”‚  â”‚ Evaluator â”‚               â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜               â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”‚
+                    â–¼
+             â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+             â”‚  LLMOS       â”‚
+             â”‚ (inference)  â”‚
+             â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
-Cognitive OS is the primary consumer of LLMOS within the Brain. All reasoning, reflection, and metacognition routes through LLMOS for AI inference. Cognitive OS does not contain AI models — it orchestrates the thinking process.
+Cognitive OS is the primary consumer of LLMOS within the Brain. All reasoning, reflection, and metacognition routes through LLMOS for AI inference. Cognitive OS does not contain AI models â€” it orchestrates the thinking process.
 
 ## Core Concepts
 
@@ -63,7 +63,7 @@ ReasoningRequest {
     query: string
     evidence: EvidenceRef[]
     constraints: string[]
-    temperature: number       // 0.0 (deterministic) – 1.0 (creative)
+    temperature: number       // 0.0 (deterministic) â€“ 1.0 (creative)
   }
 }
 
@@ -71,7 +71,7 @@ ReasoningOutput {
   request_id: string
   chain: ThoughtStep[]
   conclusion: string
-  confidence: number          // 0.0–1.0
+  confidence: number          // 0.0â€“1.0
   alternative_viewpoints: AlternativeViewpoint[]
   uncertainty_zones: string[] // Areas where reasoning is weak
   llmos_usage: {
@@ -86,7 +86,7 @@ ThoughtStep {
   type: "premise" | "inference" | "evidence_check" | "counterargument" | "synthesis"
   content: string
   evidence_ref?: string       // Links to evidence in Evidence Store
-  confidence: number          // 0.0–1.0
+  confidence: number          // 0.0â€“1.0
   alternatives?: string[]     // Alternative conclusions at this step
 }
 ```
@@ -123,7 +123,7 @@ Reflection results are stored in the Evidence Store and can be consumed by Acade
 
 ### 3. Metacognition Engine
 
-Metacognition is thinking about thinking — monitoring and regulating cognitive processes:
+Metacognition is thinking about thinking â€” monitoring and regulating cognitive processes:
 
 | Function | Behavior |
 |----------|----------|
@@ -204,12 +204,12 @@ interface EvidenceScorer {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| COG-001 | Cognitive OS reasons; Sou decides | API-level — no auto-execution of conclusions |
-| COG-002 | All reasoning routes through LLMOS | Architectural — Cognitive OS has no embedded models |
-| COG-003 | Reasoning chains are always logged as evidence | Architectural — every output is recorded |
-| COG-004 | Cognitive OS is stateless — chains live in Event Store | Architectural — no internal persistence |
-| COG-005 | Every reasoning step has a confidence score | Schema — required field on ThoughtStep |
-| COG-006 | Evidence must be evaluated before it can inform reasoning | Algorithmic — enforced in Evidence Evaluator |
+| COG-001 | Cognitive OS reasons; Sou decides | API-level â€” no auto-execution of conclusions |
+| COG-002 | All reasoning routes through LLMOS | Architectural â€” Cognitive OS has no embedded models |
+| COG-003 | Reasoning chains are always logged as evidence | Architectural â€” every output is recorded |
+| COG-004 | Cognitive OS is stateless â€” chains live in Event Store | Architectural â€” no internal persistence |
+| COG-005 | Every reasoning step has a confidence score | Schema â€” required field on ThoughtStep |
+| COG-006 | Evidence must be evaluated before it can inform reasoning | Algorithmic â€” enforced in Evidence Evaluator |
 
 ## Related Documents
 
@@ -237,14 +237,14 @@ interface EvidenceScorer {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Cognitive OS does one thing: structured thinking |
-| R2 — Dependency Order | Depends on LLMOS, Event Store; no upward deps |
-| R3 — DRY | Reasoning strategies defined once in Strategy Registry |
-| R4 — Builder Pattern | Reasoning chain built step by step |
-| R5 — Liskov Substitution | Any ReasoningStrategy implements the interface |
-| R6 — DI over Singletons | Strategies and evidence scorers injected |
-| R9 — Deterministic | Same inputs produce same reasoning at temperature=0 |
-| R10 — Simpler Over Complex | Uses explicit reasoning strategies, not free-form generation |
-| R13 — Design for Failure | Timeouts and partial results always handled |
-| R14 — Paved Path | All reasoning flows through `reason` method |
-| R15 — Open/Closed | New reasoning strategies added via Registry |
+| R1 â€” Modulsingularity | Cognitive OS does one thing: structured thinking |
+| R2 â€” Dependency Order | Depends on LLMOS, Event Store; no upward deps |
+| R3 â€” DRY | Reasoning strategies defined once in Strategy Registry |
+| R4 â€” Builder Pattern | Reasoning chain built step by step |
+| R5 â€” Liskov Substitution | Any ReasoningStrategy implements the interface |
+| R6 â€” DI over Singletons | Strategies and evidence scorers injected |
+| R9 â€” Deterministic | Same inputs produce same reasoning at temperature=0 |
+| R10 â€” Simpler Over Complex | Uses explicit reasoning strategies, not free-form generation |
+| R13 â€” Design for Failure | Timeouts and partial results always handled |
+| R14 â€” Paved Path | All reasoning flows through `reason` method |
+| R15 â€” Open/Closed | New reasoning strategies added via Registry |

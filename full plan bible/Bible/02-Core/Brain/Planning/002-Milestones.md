@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 002 — Milestone Planning
+﻿# AIOS Bible â€” Brain
+## 002 â€” Milestone Planning
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Planning |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Planning |
 | Document ID | AIOS-BBL-002-PLN-002 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 2 — Law of Non-Execution |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 2 â€” Law of Non-Execution |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Milestone Planning takes the decomposed goal tree from Goal Decomposition and produces an ordered, sequenced collection of milestones ready for dependency resolution and execution. This module manages the full milestone lifecycle — creation, status transitions, hierarchical structuring, parallelization support, and metadata enrichment (effort estimates, risk scores, capability requirements). Milestones are the atomic units of execution in the Planning System; each milestone maps to exactly one mission when delegated to Institution OS. The Milestone Planner provides tree traversal, reordering, and status aggregation capabilities used by Progress Tracking and the Context System.
+Milestone Planning takes the decomposed goal tree from Goal Decomposition and produces an ordered, sequenced collection of milestones ready for dependency resolution and execution. This module manages the full milestone lifecycle â€” creation, status transitions, hierarchical structuring, parallelization support, and metadata enrichment (effort estimates, risk scores, capability requirements). Milestones are the atomic units of execution in the Planning System; each milestone maps to exactly one mission when delegated to Institution OS. The Milestone Planner provides tree traversal, reordering, and status aggregation capabilities used by Progress Tracking and the Context System.
 
 ## Data Model
 
@@ -54,23 +54,23 @@ type MilestoneStatus = "pending" | "in_progress" | "completed" | "blocked" | "fa
 ### MilestoneState Transitions
 
 ```
-               ┌─────────┐
-               │ Pending │
-               └────┬────┘
-                    │ mission assigned
-                    ▼
-             ┌────────────┐
-             │ In Progress │
-             └──────┬─────┘
-                    │
-         ┌──────────┼──────────┐
-         ▼          ▼          ▼
-   ┌─────────┐ ┌─────────┐ ┌────────┐
-   │ Blocked │ │Complete │ │ Failed │
-   └─────────┘ └─────────┘ └────────┘
-         │
-         │ dependency resolved
-         ▼
+               â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+               â”‚ Pending â”‚
+               â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜
+                    â”‚ mission assigned
+                    â–¼
+             â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+             â”‚ In Progress â”‚
+             â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜
+                    â”‚
+         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+         â–¼          â–¼          â–¼
+   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”
+   â”‚ Blocked â”‚ â”‚Complete â”‚ â”‚ Failed â”‚
+   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â”‚ dependency resolved
+         â–¼
      (back to In Progress)
 ```
 
@@ -84,7 +84,7 @@ EffortEstimate {
   estimated_duration_ms: number
   required_capabilities: string[]
   estimated_cost: number
-  risk_score: number                // 0.0–1.0
+  risk_score: number                // 0.0â€“1.0
   confidence_interval: {
     low: number                     // Pessimistic estimate
     high: number                    // Optimistic estimate
@@ -98,7 +98,7 @@ EffortEstimate {
 MilestoneMetadata {
   source: string                    // "decomposition" | "template" | "manual"
   tags: string[]
-  priority: number                  // 0.0–1.0, relative importance
+  priority: number                  // 0.0â€“1.0, relative importance
   effort_level: "trivial" | "small" | "medium" | "large" | "epic"
   risk_factors: string[]
   success_criteria: string[]        // Objective pass/fail conditions
@@ -144,21 +144,21 @@ Milestones form a tree where parent milestones represent higher-level objectives
 
 ```
 Milestone: "Implement Auth System" (level 0)
-├── Milestone: "Design Auth Architecture" (level 1)
-│   ├── "Research auth patterns" (level 2)
-│   └── "Design database schema" (level 2)
-├── Milestone: "Build Backend Auth" (level 1)
-│   ├── "User model & migrations" (level 2)
-│   ├── "Registration endpoint" (level 2)
-│   └── "Login endpoint" (level 2)
-└── Milestone: "Build Frontend Auth" (level 1)
-    ├── "Login form component" (level 2)
-    └── "Registration form component" (level 2)
+â”œâ”€â”€ Milestone: "Design Auth Architecture" (level 1)
+â”‚   â”œâ”€â”€ "Research auth patterns" (level 2)
+â”‚   â””â”€â”€ "Design database schema" (level 2)
+â”œâ”€â”€ Milestone: "Build Backend Auth" (level 1)
+â”‚   â”œâ”€â”€ "User model & migrations" (level 2)
+â”‚   â”œâ”€â”€ "Registration endpoint" (level 2)
+â”‚   â””â”€â”€ "Login endpoint" (level 2)
+â””â”€â”€ Milestone: "Build Frontend Auth" (level 1)
+    â”œâ”€â”€ "Login form component" (level 2)
+    â””â”€â”€ "Registration form component" (level 2)
 ```
 
 Rules:
 - Parent milestone status is derived from children: `completed` when all children complete, `failed` if any child fails, `blocked` if any child is blocked.
-- Leaf milestones (no children) are executable — they receive mission assignments.
+- Leaf milestones (no children) are executable â€” they receive mission assignments.
 - Parent milestones are not directly executable; they serve as groupings.
 
 ### Ordering & Sequencing
@@ -178,11 +178,11 @@ Milestones marked `parallelizable: true` can execute concurrently with their sib
 
 ```
 Sequential (parallelizable = false):
-  M1 → M2 → M3 → Done
+  M1 â†’ M2 â†’ M3 â†’ Done
 
 Parallel (M2 and M3 parallelizable):
-  M1 ─┬→ M2 ─┬→ Done
-       └→ M3 ┘
+  M1 â”€â”¬â†’ M2 â”€â”¬â†’ Done
+       â””â†’ M3 â”˜
 ```
 
 Parallel execution requires:
@@ -234,36 +234,36 @@ interface CreateMilestoneInput {
 
 ```
 Milestone Created (createMilestone)
-    │
-    ▼
-┌─────────┐
-│ Pending │ ← status: "pending"
-└────┬────┘
-     │ Sou approves plan
-     ▼
-┌────────────┐
-│ Pending    │ (ready for execution)
-└────┬───────┘
-     │ mission assigned via Institution OS
-     ▼
-┌────────────┐
-│ In Progress│ ← status: "in_progress"
-└──────┬─────┘
-       │
-       ├── dependency blocks → "blocked" → dependency resolved → back to "in_progress"
-       ├── completed → "completed" → emit PLN.MilestoneCompleted
-       └── failed → "failed" → emit PLN.MilestoneFailed
+    â”‚
+    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Pending â”‚ â† status: "pending"
+â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜
+     â”‚ Sou approves plan
+     â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Pending    â”‚ (ready for execution)
+â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+     â”‚ mission assigned via Institution OS
+     â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ In Progressâ”‚ â† status: "in_progress"
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜
+       â”‚
+       â”œâ”€â”€ dependency blocks â†’ "blocked" â†’ dependency resolved â†’ back to "in_progress"
+       â”œâ”€â”€ completed â†’ "completed" â†’ emit PLN.MilestoneCompleted
+       â””â”€â”€ failed â†’ "failed" â†’ emit PLN.MilestoneFailed
 ```
 
 ### Parent Status Aggregation
 
 ```
 Parent status is derived from children:
-  - Any child failed → parent = "failed"
-  - Any child blocked → parent = "blocked"
-  - Any child in_progress → parent = "in_progress"
-  - All children completed → parent = "completed"
-  - No children → parent = "pending" (leaf, executable)
+  - Any child failed â†’ parent = "failed"
+  - Any child blocked â†’ parent = "blocked"
+  - Any child in_progress â†’ parent = "in_progress"
+  - All children completed â†’ parent = "completed"
+  - No children â†’ parent = "pending" (leaf, executable)
 ```
 
 ## Events
@@ -288,14 +288,14 @@ Parent status is derived from children:
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| MS-001 | Every milestone belongs to exactly one plan | Schema — `plan_id` is required |
-| MS-002 | Milestone IDs are unique within a plan | Schema — primary key constraint |
-| MS-003 | A milestone's parent must exist in the same plan | Referential — checked on `setParentChild` |
-| MS-004 | Only leaf milestones (no children) are directly executable | Algorithmic — `getLeafMilestones` enforced at mission assignment |
-| MS-005 | `completed` and `failed` are terminal states — no further transitions | Algorithmic — `updateStatus` rejects transitions out of terminal states |
-| MS-006 | Parent milestone status is always derived from children, never set directly | Algorithmic — `updateStatus` on parent returns error |
-| MS-007 | Parallelizable milestones must have no dependency path between them | Validation — checked on `setParallelizable` |
-| MS-008 | Order values within the same parent are unique | Validation — checked on `reorderMilestones` |
+| MS-001 | Every milestone belongs to exactly one plan | Schema â€” `plan_id` is required |
+| MS-002 | Milestone IDs are unique within a plan | Schema â€” primary key constraint |
+| MS-003 | A milestone's parent must exist in the same plan | Referential â€” checked on `setParentChild` |
+| MS-004 | Only leaf milestones (no children) are directly executable | Algorithmic â€” `getLeafMilestones` enforced at mission assignment |
+| MS-005 | `completed` and `failed` are terminal states â€” no further transitions | Algorithmic â€” `updateStatus` rejects transitions out of terminal states |
+| MS-006 | Parent milestone status is always derived from children, never set directly | Algorithmic â€” `updateStatus` on parent returns error |
+| MS-007 | Parallelizable milestones must have no dependency path between them | Validation â€” checked on `setParallelizable` |
+| MS-008 | Order values within the same parent are unique | Validation â€” checked on `reorderMilestones` |
 
 ## Error Cases
 
@@ -314,17 +314,17 @@ Parent status is derived from children:
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Milestone Planner handles only milestone CRUD and lifecycle |
-| R2 — Dependency Order | Depends on Goal Decomposition for input; no upward deps |
-| R3 — DRY | Status transition logic defined once in state machine |
-| R4 — Builder Pattern | Milestones built via CreateMilestoneInput → validation → storage |
-| R5 — Liskov Substitution | Any MilestoneStore implements the storage interface |
-| R6 — DI over Singletons | Storage backend and state machine injectable |
-| R9 — Deterministic | Same inputs produce same milestone structure |
-| R10 — Simpler Over Complex | Tree hierarchy with parent rollup, not generalized work breakdown |
-| R13 — Design for Failure | Blocked status automatically resolves; failed children propagate to parent |
-| R14 — Paved Path | All operations through createMilestone → updateStatus → aggregateStatus |
-| R15 — Open/Closed | New milestone metadata fields added via schema extension |
+| R1 â€” Modulsingularity | Milestone Planner handles only milestone CRUD and lifecycle |
+| R2 â€” Dependency Order | Depends on Goal Decomposition for input; no upward deps |
+| R3 â€” DRY | Status transition logic defined once in state machine |
+| R4 â€” Builder Pattern | Milestones built via CreateMilestoneInput â†’ validation â†’ storage |
+| R5 â€” Liskov Substitution | Any MilestoneStore implements the storage interface |
+| R6 â€” DI over Singletons | Storage backend and state machine injectable |
+| R9 â€” Deterministic | Same inputs produce same milestone structure |
+| R10 â€” Simpler Over Complex | Tree hierarchy with parent rollup, not generalized work breakdown |
+| R13 â€” Design for Failure | Blocked status automatically resolves; failed children propagate to parent |
+| R14 â€” Paved Path | All operations through createMilestone â†’ updateStatus â†’ aggregateStatus |
+| R15 â€” Open/Closed | New milestone metadata fields added via schema extension |
 
 ## Related Documents
 

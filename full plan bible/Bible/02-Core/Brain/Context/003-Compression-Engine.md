@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 003 — Compression Engine
+﻿# AIOS Bible â€” Brain
+## 003 â€” Compression Engine
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Context |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Context |
 | Document ID | AIOS-BBL-002-CTX-003 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Compression Engine reduces the context window's token count when it exceeds the budget set by LLMOS. It applies a ranked set of compression strategies — from least to most destructive — to bring the window within budget while preserving the maximum possible information value. Under CTX-004, compression never removes pinned items. The Compression Engine is stateless: it operates on window snapshots and returns compressed snapshots.
+The Compression Engine reduces the context window's token count when it exceeds the budget set by LLMOS. It applies a ranked set of compression strategies â€” from least to most destructive â€” to bring the window within budget while preserving the maximum possible information value. Under CTX-004, compression never removes pinned items. The Compression Engine is stateless: it operates on window snapshots and returns compressed snapshots.
 
 ## Data Model
 
@@ -29,9 +29,9 @@ CompressionRequest {
   target_tokens: number
   strategies: CompressionStrategy[]
   priority_thresholds: {
-    always_include: number     // 0.7 — items above this are never compressed
-    compress_eligible: number  // 0.4 — items below this are primary targets
-    exclude_threshold: number  // 0.0 — background items excluded first
+    always_include: number     // 0.7 â€” items above this are never compressed
+    compress_eligible: number  // 0.4 â€” items below this are primary targets
+    exclude_threshold: number  // 0.0 â€” background items excluded first
   }
   pinned_item_ids: string[]
   metadata: {
@@ -99,7 +99,7 @@ CompressedContent {
   type: "summary" | "deduped_reference" | "truncated" | "pruned"
   summary?: string                // For summarization strategy
   key_points?: string[]           // Extracted key information
-  duplicate_of?: string           // For deduplication — item_id kept
+  duplicate_of?: string           // For deduplication â€” item_id kept
   preserved_fields?: string[]     // Fields retained after structured pruning
 }
 ```
@@ -113,8 +113,8 @@ Strategies are applied in order from least to most destructive. Each strategy ta
 ```
 Target: Items with priority < 0.2 (Background tier)
 Behavior: Remove all background-tier items from the window
-Token Savings: 5–15%
-Quality Impact: None — background items are not needed for normal operation
+Token Savings: 5â€“15%
+Quality Impact: None â€” background items are not needed for normal operation
 Execution:
   1. Scan all items with priority < 0.2
   2. Remove them from their sections
@@ -126,15 +126,15 @@ Execution:
 ```
 Target: Items with identical content hash
 Behavior: Remove duplicate items; keep the highest-priority instance
-Token Savings: 5–15%
-Quality Impact: None — no information lost
+Token Savings: 5â€“15%
+Quality Impact: None â€” no information lost
 Execution:
   1. Group items by content hash
   2. For each group with count > 1:
      a. Keep item with highest priority
      b. For duplicates: if priority < kept item priority, drop;
         if priority equal, keep oldest
-  3. Update Registry — link dropped items to kept item
+  3. Update Registry â€” link dropped items to kept item
 ```
 
 ### Strategy 3: Structured Pruning
@@ -142,10 +142,10 @@ Execution:
 ```
 Target: Items with verbose metadata fields
 Behavior: Remove non-essential fields from items while preserving core content
-Token Savings: 10–30%
-Quality Impact: Minimal — core content preserved, metadata trimmed
+Token Savings: 10â€“30%
+Quality Impact: Minimal â€” core content preserved, metadata trimmed
 Execution:
-  1. For each eligible item (priority ≥ compress_eligible):
+  1. For each eligible item (priority â‰¥ compress_eligible):
      a. Remove metadata fields not in PRESERVED_FIELDS
      b. Truncate messages > MAX_ITEM_TOKENS (default: 1024)
      c. Preserve: item_id, item_type, content.text, priority, source
@@ -160,8 +160,8 @@ PRESERVED_FIELDS = ["item_id", "item_type", "content", "priority", "source", "pi
 ```
 Target: Conversation history turns (oldest first)
 Behavior: Replace groups of N consecutive turns with a single summary item
-Token Savings: 60–80% on affected turns
-Quality Impact: Moderate — summaries lose detail but preserve key information
+Token Savings: 60â€“80% on affected turns
+Quality Impact: Moderate â€” summaries lose detail but preserve key information
 Execution:
   1. Identify oldest conversation turns in conversation_history section
   2. Group by N = 5 (configurable)
@@ -191,8 +191,8 @@ extractiveSummarize(turns, N):
 ```
 Target: Conversation history (oldest turns)
 Behavior: Drop oldest conversation turns beyond the sliding window limit
-Token Savings: Fixed — depends on window size
-Quality Impact: Moderate — oldest context lost
+Token Savings: Fixed â€” depends on window size
+Quality Impact: Moderate â€” oldest context lost
 Execution:
   1. Calculate current conversation turn count
   2. If count > MAX_SLIDING_WINDOW (default: 50):
@@ -207,7 +207,7 @@ Execution:
 Target: Items with priority < compress_eligible (0.4)
 Behavior: Drop items in ascending priority order
 Token Savings: Variable
-Quality Impact: Significant — low-value context lost
+Quality Impact: Significant â€” low-value context lost
 Execution:
   1. Collect all items with priority < compress_eligible, sorted ascending
   2. Drop items one at a time until budget is met or no more eligible items
@@ -219,16 +219,16 @@ Execution:
 
 ```
 Target: Any item not pinned or Critical
-Behavior: Aggressive sequential strategy — drop, summarize, and prune
+Behavior: Aggressive sequential strategy â€” drop, summarize, and prune
 Token Savings: Maximum
-Quality Impact: Significant — may lose useful context
+Quality Impact: Significant â€” may lose useful context
 Execution:
   1. Remove all Background tier items
   2. Summarize all conversation turns (group by 10)
   3. Prune all non-critical fields
   4. Drop any item with priority < 0.4
   5. If still over budget: drop items with priority < 0.6
-  6. If STILL over budget: return error — CTX_COMPRESSION_FAILED
+  6. If STILL over budget: return error â€” CTX_COMPRESSION_FAILED
 ```
 
 ## Strategy Selection
@@ -261,12 +261,12 @@ selectStrategies(request: CompressionRequest): CompressionStrategy[] {
 
 | Deficit Ratio | Strategies Applied | Expected Savings |
 |---------------|-------------------|-----------------|
-| < 10% | Background Exclusion + Deduplication | 5–15% |
-| 10–20% | + Structured Pruning | 15–40% |
-| 20–30% | + Conversation Summarization | 40–70% |
-| 30–40% | + Sliding Window | 50–80% |
-| > 40% | + Low-Priority Eviction | 60–95% |
-| Emergency | Emergency Compression | 70–99% |
+| < 10% | Background Exclusion + Deduplication | 5â€“15% |
+| 10â€“20% | + Structured Pruning | 15â€“40% |
+| 20â€“30% | + Conversation Summarization | 40â€“70% |
+| 30â€“40% | + Sliding Window | 50â€“80% |
+| > 40% | + Low-Priority Eviction | 60â€“95% |
+| Emergency | Emergency Compression | 70â€“99% |
 
 ## Compression Pipeline
 
@@ -364,11 +364,11 @@ interface EstimationReport {
 ### Pattern 1: Turn-End Compression
 
 ```
-1. Turn completes → new items pushed (Sou response, tool results)
+1. Turn completes â†’ new items pushed (Sou response, tool results)
 2. total_tokens = 7500, max_tokens = 8192
-3. Usage = 91.5% → compression_trigger exceeded
+3. Usage = 91.5% â†’ compression_trigger exceeded
 4. Compression called with target = 8192
-5. Deficit = -692 (8.4% over) → only Background Exclusion + Deduplication needed
+5. Deficit = -692 (8.4% over) â†’ only Background Exclusion + Deduplication needed
 6. Background items removed: saved 400 tokens
 7. Deduplication removes 2 duplicate items: saved 300 tokens
 8. Final: 6800 tokens (83% of budget)
@@ -388,8 +388,8 @@ interface EstimationReport {
    - Conversation Summarization: -8000 (10000)
    - Sliding Window (50): -500 (9500)
    - Low-Priority Eviction: -1308 (8192)
-5. Final: 8192 tokens — exactly at budget
-6. Items summarized: 40 turns → 8 summary items
+5. Final: 8192 tokens â€” exactly at budget
+6. Items summarized: 40 turns â†’ 8 summary items
 7. Items dropped: 23 (background + low-priority + duplicates)
 8. Pinned items retained: 5
 ```
@@ -425,13 +425,13 @@ interface EstimationReport {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| CP-001 | Pinned items are never compressed or removed | Algorithmic — verified before every strategy |
-| CP-002 | Critical-tier items are never compressed or removed | Algorithmic — priority check in all strategies |
-| CP-003 | Strategies are applied in deterministic order (least→most destructive) | Algorithmic — strategy.priority order enforced |
-| CP-004 | Compression never increases token count | Algorithmic — verified on result |
-| CP-005 | Deduplication preserves the highest-priority instance | Algorithmic — priority comparison |
-| CP-006 | Emergency compression always produces a result (even if over budget) | Architectural — last resort always executes |
-| CP-007 | Summarization failures fall back to extractive method | Algorithmic — fallback chain defined |
+| CP-001 | Pinned items are never compressed or removed | Algorithmic â€” verified before every strategy |
+| CP-002 | Critical-tier items are never compressed or removed | Algorithmic â€” priority check in all strategies |
+| CP-003 | Strategies are applied in deterministic order (leastâ†’most destructive) | Algorithmic â€” strategy.priority order enforced |
+| CP-004 | Compression never increases token count | Algorithmic â€” verified on result |
+| CP-005 | Deduplication preserves the highest-priority instance | Algorithmic â€” priority comparison |
+| CP-006 | Emergency compression always produces a result (even if over budget) | Architectural â€” last resort always executes |
+| CP-007 | Summarization failures fall back to extractive method | Algorithmic â€” fallback chain defined |
 
 ## Error Cases
 
@@ -448,17 +448,17 @@ interface EstimationReport {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Compression Engine handles only reducing token count |
-| R2 — Dependency Order | Depends on Context Registry, LLMOS (optional); no upward deps |
-| R3 — DRY | Compression strategies defined once in strategy registry |
-| R4 — Builder Pattern | Result built by applying strategies in fixed order |
-| R5 — Liskov Substitution | Any CompressionStrategy implements the interface |
-| R6 — DI over Singletons | Strategy list and order injected at initialization |
-| R9 — Deterministic | Same inputs produce same compression result |
-| R10 — Simpler Over Complex | Clear strategy priority with graduated destructiveness |
-| R13 — Design for Failure | Emergency compression always executes; LLMOS failure has fallback |
-| R14 — Paved Path | All compression flows through compressWindow → strategies |
-| R15 — Open/Closed | New compression strategies implemented via CompressionStrategy interface |
+| R1 â€” Modulsingularity | Compression Engine handles only reducing token count |
+| R2 â€” Dependency Order | Depends on Context Registry, LLMOS (optional); no upward deps |
+| R3 â€” DRY | Compression strategies defined once in strategy registry |
+| R4 â€” Builder Pattern | Result built by applying strategies in fixed order |
+| R5 â€” Liskov Substitution | Any CompressionStrategy implements the interface |
+| R6 â€” DI over Singletons | Strategy list and order injected at initialization |
+| R9 â€” Deterministic | Same inputs produce same compression result |
+| R10 â€” Simpler Over Complex | Clear strategy priority with graduated destructiveness |
+| R13 â€” Design for Failure | Emergency compression always executes; LLMOS failure has fallback |
+| R14 â€” Paved Path | All compression flows through compressWindow â†’ strategies |
+| R15 â€” Open/Closed | New compression strategies implemented via CompressionStrategy interface |
 
 ## Related Documents
 

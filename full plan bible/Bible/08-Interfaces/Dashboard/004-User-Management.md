@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## Dashboard — 004: User Management
+﻿# AIOS Bible â€” Interfaces
+## Dashboard â€” 004: User Management
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-DB-004 |
-| Source Laws | Law 4 — Law of Evidence, Law 8 — Law of Verification-First, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 4 â€” Law of Evidence, Law 8 â€” Law of Verification-First, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/005-Events.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -122,7 +122,7 @@ Saved views can be shared with other users with specified access levels: view (r
 
 ### 5. Customization
 
-Users can customize widget layouts within their allowed views. Customization is purely visual — all data remains evidence-backed and permission-gated. Custom layouts are stored as UserPreference entries and do not alter the underlying view definition.
+Users can customize widget layouts within their allowed views. Customization is purely visual â€” all data remains evidence-backed and permission-gated. Custom layouts are stored as UserPreference entries and do not alter the underlying view definition.
 
 ## Operations
 
@@ -189,28 +189,28 @@ interface SavedViewManager {
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| DB-024 | All dashboard access is permission-based, never open | Architectural — PermissionEvaluator gates every resource |
-| DB-025 | User preferences are isolated per user; no cross-user leakage | Architectural — UserPreferenceStore keys by userId |
-| DB-026 | Customization is visual only; data remains evidence-backed | Architectural — customize_view changes layout, not data source |
-| DB-027 | Saved views are private unless explicitly shared | Algorithmic — SavedViewManager enforces owner-only listing |
-| DB-028 | Share access level never exceeds owner's own access level | Algorithmic — PermissionEvaluator enforces access level ceiling |
-| DB-029 | Identity mismatch triggers full access denial and escalation | Constitutional — DB_USER_IDENTITY_MISMATCH escalates to security |
+| DB-024 | All dashboard access is permission-based, never open | Architectural â€” PermissionEvaluator gates every resource |
+| DB-025 | User preferences are isolated per user; no cross-user leakage | Architectural â€” UserPreferenceStore keys by userId |
+| DB-026 | Customization is visual only; data remains evidence-backed | Architectural â€” customize_view changes layout, not data source |
+| DB-027 | Saved views are private unless explicitly shared | Algorithmic â€” SavedViewManager enforces owner-only listing |
+| DB-028 | Share access level never exceeds owner's own access level | Algorithmic â€” PermissionEvaluator enforces access level ceiling |
+| DB-029 | Identity mismatch triggers full access denial and escalation | Constitutional â€” DB_USER_IDENTITY_MISMATCH escalates to security |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | User Management owns preferences and permissions; views own definitions |
-| R2 — Dependency Order | Depends on Identity system; no circular deps |
-| R3 — DRY | User preferences reference view IDs; view definitions are not duplicated |
-| R4 — Builder Pattern | SavedView uses builder for widget composition and filter config |
-| R5 — Liskov Substitution | Compliant | Permission providers implement the AccessControl interface with interchangeable backends |
-| R6 — Immutability | View definitions immutable; customization stored as user overlay |
-| R9 — Deterministic | Same user + same saved view = same rendered output |
-| R10 — Simpler Over Complex | Default view for all users; customization is opt-in per user |
-| R13 — Design for Failure | Preference save failure returns last known state; never blank |
-| R14 — Paved Path | Health view is default for all new users |
-| R15 — Open/Closed | New preference types register via UserPreference extension |
+| R1 â€” Modulsingularity | User Management owns preferences and permissions; views own definitions |
+| R2 â€” Dependency Order | Depends on Identity system; no circular deps |
+| R3 â€” DRY | User preferences reference view IDs; view definitions are not duplicated |
+| R4 â€” Builder Pattern | SavedView uses builder for widget composition and filter config |
+| R5 â€” Liskov Substitution | Compliant | Permission providers implement the AccessControl interface with interchangeable backends |
+| R6 â€” Immutability | View definitions immutable; customization stored as user overlay |
+| R9 â€” Deterministic | Same user + same saved view = same rendered output |
+| R10 â€” Simpler Over Complex | Default view for all users; customization is opt-in per user |
+| R13 â€” Design for Failure | Preference save failure returns last known state; never blank |
+| R14 â€” Paved Path | Health view is default for all new users |
+| R15 â€” Open/Closed | New preference types register via UserPreference extension |
 
 ## Related Documents
 
@@ -224,5 +224,5 @@ interface SavedViewManager {
 | Bible/08-Interfaces/Console/000-Overview.md | Console shares user identity for permission checks |
 | Bible/01-Governance/001-CLS.md | Constitutional limits on data access govern permissions |
 | Bible/06-Services/ACF/000-Overview.md | ACF transports permission check requests |
-| Physics/005-Events.md | Evidence invariants — all viewed data is evidence-backed |
+| Physics/005-Events.md | Evidence invariants â€” all viewed data is evidence-backed |
 | Physics/011-Design-DNA.md | Design DNA rules govern user management construction |

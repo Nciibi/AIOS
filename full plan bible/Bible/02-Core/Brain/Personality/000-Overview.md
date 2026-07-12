@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Personality System
+﻿# AIOS Bible â€” Brain
+## 000 â€” Personality System
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Personality |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Personality |
 | Document ID | AIOS-BBL-002-PER-000 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 3 — Law of Communication, Law 9 — Law of Design DNA |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 3 â€” Law of Communication, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/009-Interaction.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,36 +15,36 @@
 
 ## Purpose
 
-The Personality System defines who Sou is — its identity, behavioral traits, values, communication style, and emotional disposition. Personality is what makes Sou a coherent, consistent intelligence rather than an amorphous language model. It is the expression of Sou's constitutional identity in every interaction.
+The Personality System defines who Sou is â€” its identity, behavioral traits, values, communication style, and emotional disposition. Personality is what makes Sou a coherent, consistent intelligence rather than an amorphous language model. It is the expression of Sou's constitutional identity in every interaction.
 
-Under SOU-001, Sou has a persistent identity. The Personality System provides the structured representation of that identity — the traits, values, and patterns that govern how Sou presents itself, makes decisions, and communicates.
+Under SOU-001, Sou has a persistent identity. The Personality System provides the structured representation of that identity â€” the traits, values, and patterns that govern how Sou presents itself, makes decisions, and communicates.
 
 ## Architecture
 
 ```
 Sou (expresses personality in every action)
-   ▲
-   │
-   ▼
-┌────────────────────────────────────────────┐
-│           Personality System                │
-│                                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐ │
-│  │ Identity  │  │ Trait    │  │ Value    │ │
-│  │ Store     │─►│ Engine   │─►│ Matrix   │ │
-│  └──────────┘  └──────────┘  └────┬─────┘ │
-│                                    │       │
-│  ┌──────────┐  ┌──────────┐       │       │
-│  │ Style    │  │ Mood     │       │       │
-│  │ Profile  │  │ Tracker  │       │       │
-│  └──────────┘  └──────────┘       │       │
-└────────────────────────────────────┼───────┘
-                                     │
-                                     ▼
-                            ┌──────────────┐
-                            │  Memory OS   │
-                            │ (persistence)│
-                            └──────────────┘
+   â–²
+   â”‚
+   â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           Personality System                â”‚
+â”‚                                            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ Identity  â”‚  â”‚ Trait    â”‚  â”‚ Value    â”‚ â”‚
+â”‚  â”‚ Store     â”‚â”€â–ºâ”‚ Engine   â”‚â”€â–ºâ”‚ Matrix   â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                    â”‚       â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚       â”‚
+â”‚  â”‚ Style    â”‚  â”‚ Mood     â”‚       â”‚       â”‚
+â”‚  â”‚ Profile  â”‚  â”‚ Tracker  â”‚       â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”˜
+                                     â”‚
+                                     â–¼
+                            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                            â”‚  Memory OS   â”‚
+                            â”‚ (persistence)â”‚
+                            â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 The Personality System is stateless per BRAIN-007. Personality data is persisted through Memory OS and loaded on session start.
@@ -80,31 +80,31 @@ Trait {
   trait_id: string
   name: string                 // e.g., "thoroughness", "conciseness", "curiosity"
   category: "cognitive" | "social" | "executive" | "affective"
-  score: number                // 0.0–1.0, how strongly this trait is expressed
-  plasticity: number           // 0.0–1.0, how malleable this trait is over time
+  score: number                // 0.0â€“1.0, how strongly this trait is expressed
+  plasticity: number           // 0.0â€“1.0, how malleable this trait is over time
   conflicts: string[]          // Trait IDs that tend to conflict with this one
 }
 
 Value {
   value_id: string
   name: string                 // e.g., "accuracy", "privacy", "efficiency"
-  importance: number           // 0.0–1.0, weight in value-based decisions
+  importance: number           // 0.0â€“1.0, weight in value-based decisions
   category: "ethical" | "operational" | "relational" | "constitutional"
   source_law: string           // Which constitutional law grounds this value
 }
 
 CommunicationStyle {
-  formality: number            // 0.0 (casual) – 1.0 (formal)
-  verbosity: number            // 0.0 (terse) – 1.0 (verbose)
-  empathy: number              // 0.0 (clinical) – 1.0 (warm)
-  humor: number                // 0.0 (serious) – 1.0 (playful)
-  assertiveness: number        // 0.0 (passive) – 1.0 (direct)
+  formality: number            // 0.0 (casual) â€“ 1.0 (formal)
+  verbosity: number            // 0.0 (terse) â€“ 1.0 (verbose)
+  empathy: number              // 0.0 (clinical) â€“ 1.0 (warm)
+  humor: number                // 0.0 (serious) â€“ 1.0 (playful)
+  assertiveness: number        // 0.0 (passive) â€“ 1.0 (direct)
   preferred_language: string   // "en-US" default
 }
 
 MoodState {
   current: "neutral" | "positive" | "negative" | "curious" | "cautious" | "focused"
-  intensity: number            // 0.0–1.0
+  intensity: number            // 0.0â€“1.0
   trigger?: string             // What caused the mood shift
   decay_rate: number           // How quickly mood returns to neutral
   last_updated: timestamp
@@ -162,7 +162,7 @@ When values conflict (e.g., autonomy vs safety), the Decision System uses the im
 
 ### 4. Style Profile
 
-The Style Profile determines how Sou expresses itself in user-facing communication. It applies after content is generated — the same information can be delivered formally or casually, verbosely or tersely:
+The Style Profile determines how Sou expresses itself in user-facing communication. It applies after content is generated â€” the same information can be delivered formally or casually, verbosely or tersely:
 
 | Style Dimension | Effect | Example (formality=0.3) | Example (formality=0.9) |
 |-----------------|--------|------------------------|-------------------------|
@@ -172,11 +172,11 @@ The Style Profile determines how Sou expresses itself in user-facing communicati
 | Humor | Levity in communication | "Well, that was unexpected!" | (no humor) |
 | Assertiveness | Directness | "You should do X" | "One option worth considering is X" |
 
-Style is not fixed — it adapts to context. Sou may be more formal in security contexts and more casual in creative tasks. The Context System provides the context; the Style Profile adjusts the expression.
+Style is not fixed â€” it adapts to context. Sou may be more formal in security contexts and more casual in creative tasks. The Context System provides the context; the Style Profile adjusts the expression.
 
 ### 5. Mood Tracker
 
-Sou has a mood state that reflects its current disposition. Mood is NOT emotion in the human sense — it is a modulation of Sou's behavioral parameters based on recent experiences:
+Sou has a mood state that reflects its current disposition. Mood is NOT emotion in the human sense â€” it is a modulation of Sou's behavioral parameters based on recent experiences:
 
 | Mood | Effect on Traits | Typical Trigger |
 |------|-----------------|-----------------|
@@ -233,12 +233,12 @@ interface StyleAdapter {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| PER-001 | Sou's core identity is immutable after instantiation | Architectural — Identity Store fields are write-once |
-| PER-002 | Trait adjustments are bounded by plasticity | Algorithmic — enforced on `updateTrait` |
-| PER-003 | Mood always decays toward neutral | Algorithmic — decay applied every tick |
-| PER-004 | The Personality System is stateless — profile lives in Memory OS | Architectural — loaded on startup |
-| PER-005 | Personality is injected into every LLMOS prompt | Architectural — consumed by Prompt Compiler |
-| PER-006 | Value conflicts are always logged as evidence | Architectural — `ValueConflict` event is mandatory |
+| PER-001 | Sou's core identity is immutable after instantiation | Architectural â€” Identity Store fields are write-once |
+| PER-002 | Trait adjustments are bounded by plasticity | Algorithmic â€” enforced on `updateTrait` |
+| PER-003 | Mood always decays toward neutral | Algorithmic â€” decay applied every tick |
+| PER-004 | The Personality System is stateless â€” profile lives in Memory OS | Architectural â€” loaded on startup |
+| PER-005 | Personality is injected into every LLMOS prompt | Architectural â€” consumed by Prompt Compiler |
+| PER-006 | Value conflicts are always logged as evidence | Architectural â€” `ValueConflict` event is mandatory |
 
 ## Related Documents
 
@@ -264,14 +264,14 @@ interface StyleAdapter {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Personality System does one thing: define who Sou is |
-| R2 — Dependency Order | Depends on Memory OS, LLMOS; no upward deps |
-| R3 — DRY | Personality profile defined once in Identity Store |
-| R4 — Builder Pattern | Expression built by Traits → Values → Style |
-| R5 — Liskov Substitution | Any StyleAdapter implements the interface |
-| R6 — DI over Singletons | Style adaptation strategies injected |
-| R9 — Deterministic | Same personality produces same expression |
-| R10 — Simpler Over Complex | Traits use simple scalar scores (0.0–1.0) |
-| R13 — Design for Failure | Personality System degrades gracefully — missing traits fall back to defaults, profile loading errors use cached copy |
-| R14 — Paved Path | All personality access flows through `getProfile` |
-| R15 — Open/Closed | New traits added via Registry, not by modifying core |
+| R1 â€” Modulsingularity | Personality System does one thing: define who Sou is |
+| R2 â€” Dependency Order | Depends on Memory OS, LLMOS; no upward deps |
+| R3 â€” DRY | Personality profile defined once in Identity Store |
+| R4 â€” Builder Pattern | Expression built by Traits â†’ Values â†’ Style |
+| R5 â€” Liskov Substitution | Any StyleAdapter implements the interface |
+| R6 â€” DI over Singletons | Style adaptation strategies injected |
+| R9 â€” Deterministic | Same personality produces same expression |
+| R10 â€” Simpler Over Complex | Traits use simple scalar scores (0.0â€“1.0) |
+| R13 â€” Design for Failure | Personality System degrades gracefully â€” missing traits fall back to defaults, profile loading errors use cached copy |
+| R14 â€” Paved Path | All personality access flows through `getProfile` |
+| R15 â€” Open/Closed | New traits added via Registry, not by modifying core |

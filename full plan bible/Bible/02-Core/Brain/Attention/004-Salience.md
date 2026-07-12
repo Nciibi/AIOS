@@ -4,7 +4,7 @@
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
+| Version | 1.0.0 |
 | Category | Bible — Brain/Attention |
 | Document ID | AIOS-BBL-002-ATT-004 |
 | Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |

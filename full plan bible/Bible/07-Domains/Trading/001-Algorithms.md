@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Trading — 001: Algorithms
+﻿# AIOS Bible â€” Domains
+## Trading â€” 001: Algorithms
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-TRD-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -160,17 +160,17 @@ interface AlgorithmTemplate {
 
 ## Design DNA (R1-R6,R9,R10,R13-R15)
 
-- **R1 — Single Source of Truth**: Strategy parameters live in ParamRegistry; signals and orders are derived.
-- **R2 — Immutable Event Log**: Every signal generation and order construction produces an immutable event.
-- **R3 — Capability-Based Authorization**: Only the StrategyEngine capability may deploy algorithms to live.
-- **R4 — Law of Diminishing Returns**: Optimization penalizes parameter count vs. out-of-sample performance.
-- **R5 — Deterministic Computation**: All signal generators are pure functions of market data and parameters.
-- **R6 — Bounded Context**: Algorithm templates own their domain; cross-strategy coordination goes through TradingWorker.
-- **R9 — Fail-Fast**: Invalid parameters or signals are rejected at the boundary, never silently corrected.
-- **R10 — Audit Trail**: Every parameter change, signal, and order construction is logged with timestamp and identity.
-- **R13 — Defensive Design**: Stale signals are dropped; missing indicators produce neutral output.
-- **R14 — Self-Healing**: On transient indicator failure, signal computation retries once with exponential backoff.
-- **R15 — Backward Compatibility**: Algorithm templates and parameter schemas maintain versioned migration paths.
+- **R1 â€” Single Source of Truth**: Strategy parameters live in ParamRegistry; signals and orders are derived.
+- **R2 â€” Immutable Event Log**: Every signal generation and order construction produces an immutable event.
+- **R3 â€” Capability-Based Authorization**: Only the StrategyEngine capability may deploy algorithms to live.
+- **R4 â€” Law of Diminishing Returns**: Optimization penalizes parameter count vs. out-of-sample performance.
+- **R5 â€” Deterministic Computation**: All signal generators are pure functions of market data and parameters.
+- **R6 â€” Bounded Context**: Algorithm templates own their domain; cross-strategy coordination goes through TradingWorker.
+- **R9 â€” Fail-Fast**: Invalid parameters or signals are rejected at the boundary, never silently corrected.
+- **R10 â€” Audit Trail**: Every parameter change, signal, and order construction is logged with timestamp and identity.
+- **R13 â€” Defensive Design**: Stale signals are dropped; missing indicators produce neutral output.
+- **R14 â€” Self-Healing**: On transient indicator failure, signal computation retries once with exponential backoff.
+- **R15 â€” Backward Compatibility**: Algorithm templates and parameter schemas maintain versioned migration paths.
 
 ## Related Documents
 
@@ -179,6 +179,6 @@ interface AlgorithmTemplate {
 | Bible/07-Domains/Trading/000-Overview.md | Base Trading domain overview |
 | Bible/07-Domains/Trading/002-Risk-Analysis.md | Risk analysis validates algorithm risk parameters |
 | Bible/07-Domains/Trading/003-Market-Data.md | Market data feeds algorithm signal generation |
-| Physics/005-Events.md | Evidence — algorithm operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — algorithm capability bounds |
-| Physics/012-Experience.md | Experience — algorithm outcomes drive strategy improvement |
+| Physics/005-Events.md | Evidence â€” algorithm operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” algorithm capability bounds |
+| Physics/012-Experience.md | Experience â€” algorithm outcomes drive strategy improvement |

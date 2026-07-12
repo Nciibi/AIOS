@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 005 — Decision Pipeline
+﻿# AIOS Bible â€” Brain
+## 005 â€” Decision Pipeline
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Decision |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Decision |
 | Document ID | AIOS-BBL-002-DEC-005 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Decision Pipeline orchestrates the end-to-end decision evaluation flow — from receiving a `DecisionRequest` to returning a `DecisionRecommendation`. It coordinates the Constraint Checker, Scoring Engine, and Trade-off Analyzer in the correct order, handles error recovery at each stage, and logs the final decision to the History Logger. The pipeline ensures that every evaluation is reproducible, traceable, and resilient to partial failure.
+The Decision Pipeline orchestrates the end-to-end decision evaluation flow â€” from receiving a `DecisionRequest` to returning a `DecisionRecommendation`. It coordinates the Constraint Checker, Scoring Engine, and Trade-off Analyzer in the correct order, handles error recovery at each stage, and logs the final decision to the History Logger. The pipeline ensures that every evaluation is reproducible, traceable, and resilient to partial failure.
 
 ## Data Model
 
@@ -144,24 +144,24 @@ PipelineReport {
 
 The pipeline executes seven stages in strict sequential order:
 
-### Stage 0 — Validate
+### Stage 0 â€” Validate
 
 Validates the incoming `DecisionRequest` structure before any processing begins.
 
 ```
 Checklist:
-  ☐ request_id is present and non-empty
-  ☐ options is non-empty
-  ☐ each option has option_id and label
-  ☐ criteria is non-empty
-  ☐ each criterion has criterion_id, name, weight, scoring_function
-  ☐ sum of criteria weights ≈ 1.0 (± 0.001 tolerance)
-  ☐ constraints array present (may be empty)
+  â˜ request_id is present and non-empty
+  â˜ options is non-empty
+  â˜ each option has option_id and label
+  â˜ criteria is non-empty
+  â˜ each criterion has criterion_id, name, weight, scoring_function
+  â˜ sum of criteria weights â‰ˆ 1.0 (Â± 0.001 tolerance)
+  â˜ constraints array present (may be empty)
 
 On failure: Return DEC_INVALID_REQUEST error
 ```
 
-### Stage 1 — Constraint Check
+### Stage 1 â€” Constraint Check
 
 Runs all hard constraints against every option. Non-compliant options are eliminated.
 
@@ -182,7 +182,7 @@ Post-check:
     Pipeline enters partial completion path
 ```
 
-### Stage 2 — Score
+### Stage 2 â€” Score
 
 Computes the score matrix for all surviving options against all criteria.
 
@@ -206,7 +206,7 @@ On scoring function resolution failure:
   If fail_pipeline: abort, return partial matrix
 ```
 
-### Stage 3 — Trade-off Analyze
+### Stage 3 â€” Trade-off Analyze
 
 Identifies trade-offs between surviving options based on their score profiles.
 
@@ -216,14 +216,14 @@ For each pair (option_a, option_b) in surviving_options:
   For each conflicting criterion pair (c_i, c_j):
     If delta(score_a_i - score_b_i) * delta(score_a_j - score_b_j) < 0:
       Trade-off detected between criteria c_i and c_j
-      magnitude = abs(delta(score_a_i - score_b_i)) × weight_i
-                 + abs(delta(score_a_j - score_b_j)) × weight_j
+      magnitude = abs(delta(score_a_i - score_b_i)) Ã— weight_i
+                 + abs(delta(score_a_j - score_b_j)) Ã— weight_j
       Append TradeOff to trade_offs
 
 Emit DEC.TradeOffIdentified for each discovered trade-off
 ```
 
-### Stage 4 — Rank
+### Stage 4 â€” Rank
 
 Sorts surviving options by `weighted_total` descending and assigns ranks.
 
@@ -235,7 +235,7 @@ For i, row in enumerate(ranked):
   row.weakness = lowestScoreCriterion(row.scores)
 ```
 
-### Stage 5 — Recommend
+### Stage 5 â€” Recommend
 
 Packages the final recommendation with a human-readable explanation.
 
@@ -258,7 +258,7 @@ recommendation = {
 }
 ```
 
-### Stage 6 — Log
+### Stage 6 â€” Log
 
 Records the complete evaluation in the History Logger.
 
@@ -284,10 +284,10 @@ Emit DEC.EvaluationCompleted
 
 ### Execution Order
 
-Stages execute strictly sequentially — each stage depends on the output of the previous stage:
+Stages execute strictly sequentially â€” each stage depends on the output of the previous stage:
 
 ```
-Validate → ConstraintCheck → Score → TradeoffAnalyze → Rank → Recommend → Log
+Validate â†’ ConstraintCheck â†’ Score â†’ TradeoffAnalyze â†’ Rank â†’ Recommend â†’ Log
 ```
 
 No stage begins until the previous stage reports `completed`. The pipeline maintains a running `PipelineState` that accumulates results across stages.
@@ -351,7 +351,7 @@ If (now() - state.started_at) > PipelineConfig.total_timeout:
 Errors propagate through the pipeline state and are aggregated into the final `PipelineReport`:
 
 ```
-Stage Error → PipelineState.error → PipelineReport.errors
+Stage Error â†’ PipelineState.error â†’ PipelineReport.errors
 ```
 
 ## History Logger Integration
@@ -491,7 +491,7 @@ interface DecisionPipeline {
   getStageResult(pipeline_id: string, stage: PipelineStage): StageResult | null
 
   recordFinalChoice(request_id: string, option_id: string): DecisionRecord
-  // Sou's actual choice — may differ from recommendation
+  // Sou's actual choice â€” may differ from recommendation
 
   getHistory(filters: HistoryFilter): DecisionRecord[]
   // Query decision history by session_id, criterion_id, option_type
@@ -556,21 +556,21 @@ PipelineConfig defaultConfig = {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| DEC-PL-001 | Stages execute strictly in order (0 → 1 → 2 → 3 → 4 → 5 → 6) | Algorithmic — no stage starts before previous completes |
-| DEC-PL-002 | Every pipeline produces at most one DecisionRecord | Algorithmic — Log stage runs once per pipeline |
-| DEC-PL-003 | Partial results are never returned with confidence > 0.5 | Algorithmic — partial results capped at 0.5 confidence |
-| DEC-PL-004 | A cancelled pipeline always returns partial results | Algorithmic — cancelEvaluation builds partial recommendation |
-| DEC-PL-005 | Pipeline timeout never destroys already-completed stage results | Architectural — completed stages preserved in state |
-| DEC-PL-006 | `recordFinalChoice` only writes to existing DecisionRecords | Validation — request_id must reference a completed pipeline |
-| DEC-PL-007 | Eliminated options are never scored or ranked | Algorithmic — ConstraintCheck runs before Score |
-| DEC-PL-008 | The Validate stage always runs with `fail_pipeline` strategy | Config — overrides must not downgrade validation |
+| DEC-PL-001 | Stages execute strictly in order (0 â†’ 1 â†’ 2 â†’ 3 â†’ 4 â†’ 5 â†’ 6) | Algorithmic â€” no stage starts before previous completes |
+| DEC-PL-002 | Every pipeline produces at most one DecisionRecord | Algorithmic â€” Log stage runs once per pipeline |
+| DEC-PL-003 | Partial results are never returned with confidence > 0.5 | Algorithmic â€” partial results capped at 0.5 confidence |
+| DEC-PL-004 | A cancelled pipeline always returns partial results | Algorithmic â€” cancelEvaluation builds partial recommendation |
+| DEC-PL-005 | Pipeline timeout never destroys already-completed stage results | Architectural â€” completed stages preserved in state |
+| DEC-PL-006 | `recordFinalChoice` only writes to existing DecisionRecords | Validation â€” request_id must reference a completed pipeline |
+| DEC-PL-007 | Eliminated options are never scored or ranked | Algorithmic â€” ConstraintCheck runs before Score |
+| DEC-PL-008 | The Validate stage always runs with `fail_pipeline` strategy | Config â€” overrides must not downgrade validation |
 
 ## Error Cases
 
 | Condition | Error Code | Behavior |
 |-----------|------------|----------|
 | Empty options array | `DEC_PL_NO_OPTIONS` | Pipeline aborts in Validate stage; return error |
-| Criteria weights sum outside 0.999–1.001 | `DEC_PL_INVALID_WEIGHTS` | Normalize weights and proceed with warning; emit DEC.PreferenceOverridden |
+| Criteria weights sum outside 0.999â€“1.001 | `DEC_PL_INVALID_WEIGHTS` | Normalize weights and proceed with warning; emit DEC.PreferenceOverridden |
 | Unknown scoring function in criterion | `DEC_PL_UNKNOWN_FUNCTION` | If Score stage strategy is skip_stage: omit criterion; if fail_pipeline: abort |
 | All options eliminated by hard constraints | `DEC_PL_ALL_ELIMINATED` | Return empty recommendation with explanation; pipeline completes |
 | Stage exceeds per-stage timeout | `DEC_PL_STAGE_TIMEOUT` | Apply per-stage error strategy; emit DEC.StageTimeoutExceeded |
@@ -588,7 +588,7 @@ PipelineConfig defaultConfig = {
 1. Sou faces a choice (e.g., "which tool to use for code generation")
 2. Sou builds DecisionRequest with 3 options and 5 criteria
 3. Sou calls pipeline.evaluateOptions(request)
-4. Pipeline runs Validate → ConstraintCheck → Score → TradeoffAnalyze → Rank → Recommend → Log
+4. Pipeline runs Validate â†’ ConstraintCheck â†’ Score â†’ TradeoffAnalyze â†’ Rank â†’ Recommend â†’ Log
 5. Sou receives DecisionRecommendation with ranked options and trade-offs
 6. Sou reviews recommendation, makes final choice
 7. Sou calls pipeline.recordFinalChoice(request_id, chosen_option_id)
@@ -629,17 +629,17 @@ PipelineConfig defaultConfig = {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Pipeline handles only orchestration; delegates to specialized engines |
-| R2 — Dependency Order | Depends on Constraint Checker, Scorer, Trade-off Analyzer, History Logger |
-| R3 — DRY | Stage handlers defined once in pipeline config |
-| R4 — Builder Pattern | State built stage-by-stage, accumulated into final recommendation |
-| R5 — Liskov Substitution | Any StageHandler implements the same signature |
-| R6 — DI over Singletons | Config, error strategies, timeout values injected |
-| R9 — Deterministic | Same input + same completion level produces same output |
-| R10 — Simpler Over Complex | Sequential pipeline with clear stage boundaries |
-| R13 — Design for Failure | Per-stage error strategies, partial results, graceful degradation |
-| R14 — Paved Path | `evaluateOptions` is the single entry point for all evaluations |
-| R15 — Open/Closed | New stages added by extending PipelineStage enum and providing handler |
+| R1 â€” Modulsingularity | Pipeline handles only orchestration; delegates to specialized engines |
+| R2 â€” Dependency Order | Depends on Constraint Checker, Scorer, Trade-off Analyzer, History Logger |
+| R3 â€” DRY | Stage handlers defined once in pipeline config |
+| R4 â€” Builder Pattern | State built stage-by-stage, accumulated into final recommendation |
+| R5 â€” Liskov Substitution | Any StageHandler implements the same signature |
+| R6 â€” DI over Singletons | Config, error strategies, timeout values injected |
+| R9 â€” Deterministic | Same input + same completion level produces same output |
+| R10 â€” Simpler Over Complex | Sequential pipeline with clear stage boundaries |
+| R13 â€” Design for Failure | Per-stage error strategies, partial results, graceful degradation |
+| R14 â€” Paved Path | `evaluateOptions` is the single entry point for all evaluations |
+| R15 â€” Open/Closed | New stages added by extending PipelineStage enum and providing handler |
 
 ## Related Documents
 

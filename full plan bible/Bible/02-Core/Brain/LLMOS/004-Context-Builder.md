@@ -1,18 +1,18 @@
-# AIOS Bible — Brain/LLMOS
-## 004 — Context Builder
+﻿# AIOS Bible â€” Brain/LLMOS
+## 004 â€” Context Builder
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-004 |
-| Source Laws | Law 7 — Law of Capability Bounds (context window) |
+| Source Laws | Law 7 â€” Law of Capability Bounds (context window) |
 | Source Physics | Physics/004-Sessions.md, Physics/008-Security.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 8 — Context Building |
+| Pipeline Stage | 8 â€” Context Building |
 
 ## Purpose
 
@@ -22,39 +22,39 @@ The Context Builder manages the model context window. It receives raw input (mes
 
 ```
 Raw Input (messages + context + system prompt + memories)
-         │
-         ▼
-┌─────────────────────────────────────────────┐
-│          CONTEXT SIZER                      │
-│  - Tokenize all content                     │
-│  - Classify content by category             │
-│  - Measure each category's token footprint  │
-└─────────────────────────────────────────────┘
-         │
-         ▼
-┌─────────────────────────────────────────────┐
-│          PRIORITY ASSIGNER                  │
-│  - Assign priority tiers to each section    │
-│  - Mark critical, high, normal, low, optional│
-└─────────────────────────────────────────────┘
-         │
-         ▼
-┌─────────────────────────────────────────────┐
-│          WINDOW FITTER                      │
-│  - Check total vs model context window      │
-│  - Apply truncation strategies              │
-│  - Allocate tokens per category             │
-└─────────────────────────────────────────────┘
-         │
-         ▼
-┌─────────────────────────────────────────────┐
-│          OVERFLOW HANDLER                   │
-│  - Handle overflow gracefully               │
-│  - Return truncated sections manifest       │
-│  - Flag for caller feedback                 │
-└─────────────────────────────────────────────┘
-         │
-         ▼
+         â”‚
+         â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚          CONTEXT SIZER                      â”‚
+â”‚  - Tokenize all content                     â”‚
+â”‚  - Classify content by category             â”‚
+â”‚  - Measure each category's token footprint  â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚          PRIORITY ASSIGNER                  â”‚
+â”‚  - Assign priority tiers to each section    â”‚
+â”‚  - Mark critical, high, normal, low, optionalâ”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚          WINDOW FITTER                      â”‚
+â”‚  - Check total vs model context window      â”‚
+â”‚  - Apply truncation strategies              â”‚
+â”‚  - Allocate tokens per category             â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚          OVERFLOW HANDLER                   â”‚
+â”‚  - Handle overflow gracefully               â”‚
+â”‚  - Return truncated sections manifest       â”‚
+â”‚  - Flag for caller feedback                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
         ContextPayload (to Memory Injection Stage 9)
 ```
 
@@ -64,11 +64,11 @@ Raw Input (messages + context + system prompt + memories)
 
 | Tier | Color | Guarantee | Examples |
 |------|-------|-----------|----------|
-| critical | 🔴 | Always included — never truncated | System prompt, current user message |
-| high | 🟠 | Included until 80% of window full | Direct instructions, required context |
-| normal | 🟡 | Included until 90% of window full | Task-relevant context, recent history |
-| low | 🟢 | Included if space permits, first to truncate | Retrieved documents, peripheral context |
-| optional | ⚪ | Only included if window utilization < 60% | Reference material, verbose examples |
+| critical | ðŸ”´ | Always included â€” never truncated | System prompt, current user message |
+| high | ðŸŸ  | Included until 80% of window full | Direct instructions, required context |
+| normal | ðŸŸ¡ | Included until 90% of window full | Task-relevant context, recent history |
+| low | ðŸŸ¢ | Included if space permits, first to truncate | Retrieved documents, peripheral context |
+| optional | âšª | Only included if window utilization < 60% | Reference material, verbose examples |
 
 ### Default Allocation
 
@@ -78,12 +78,12 @@ Assumes a 100K token context window:
 |----------|-----------|----------|---------------------|
 | System Prompt | 4K | critical | Error if exceeded (config too large) |
 | Current Message | 16K | critical | Truncate from center |
-| Conversation History | 32K | high | Snippet from end — keep last N turns |
+| Conversation History | 32K | high | Snippet from end â€” keep last N turns |
 | Context Documents | 24K | normal | Remove lowest relevance documents first |
 | Injected Memories | 12K | low | Remove lowest weight memories first |
 | Tool Definitions | 8K | normal | Remove least-used tools first |
 | Response Schema | 2K | normal | Error if exceeded (schema too large) |
-| Reserve | 2K | — | Headroom for prompt formatting overhead |
+| Reserve | 2K | â€” | Headroom for prompt formatting overhead |
 
 Allocations are dynamic based on model context window size.
 
@@ -145,11 +145,11 @@ interface TruncatedSection {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-CTX-001 | The total context payload never exceeds the model's context window minus 2K reserve. | Algorithmic — window fitter enforces budget |
-| LLM-CTX-002 | Critical-tier content is never truncated — if critical content exceeds its category max, the pipeline fails with LLM-0302. | Algorithmic — priority-based truncation |
-| LLM-CTX-003 | Every truncation decision is recorded in the `truncated_sections` manifest. | Architectural — observability invariant |
-| LLM-CTX-004 | Context Builder runs before Memory Injection — memories are treated as a content category within the budget. | Architectural — pipeline stage ordering |
-| LLM-CTX-005 | The same input produces the same context output (deterministic truncation). | Algorithmic — deterministic truncation strategy |
+| LLM-CTX-001 | The total context payload never exceeds the model's context window minus 2K reserve. | Algorithmic â€” window fitter enforces budget |
+| LLM-CTX-002 | Critical-tier content is never truncated â€” if critical content exceeds its category max, the pipeline fails with LLM-0302. | Algorithmic â€” priority-based truncation |
+| LLM-CTX-003 | Every truncation decision is recorded in the `truncated_sections` manifest. | Architectural â€” observability invariant |
+| LLM-CTX-004 | Context Builder runs before Memory Injection â€” memories are treated as a content category within the budget. | Architectural â€” pipeline stage ordering |
+| LLM-CTX-005 | The same input produces the same context output (deterministic truncation). | Algorithmic â€” deterministic truncation strategy |
 
 ## Events
 
@@ -161,17 +161,17 @@ interface TruncatedSection {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Context Builder is the sole context window manager |
-| R2 — Dependency Order | Context Builder precedes Memory Injection and Prompt Compiler |
-| R3 — DRY | Truncation strategies defined once, applied consistently |
-| R4 — Builder Pattern | ContextPayload built through staged pipeline architecture |
-| R5 — Liskov Substitution | Content categories interchangeable within budget |
-| R6 — DI over Singletons | ContextBuilder injected as pipeline service |
-| R9 — Deterministic | Same input produces same truncation decisions |
-| R10 — Simpler Over Complex | Priority tiers over complex allocation algorithms |
-| R13 — Design for Failure | Overflow handled gracefully with truncated sections manifest |
-| R14 — Paved Path | Default allocation provides safe baseline for all entities |
-| R15 — Open/Closed | New content categories added without rebuilding pipeline |
+| R1 â€” Modulsingularity | Context Builder is the sole context window manager |
+| R2 â€” Dependency Order | Context Builder precedes Memory Injection and Prompt Compiler |
+| R3 â€” DRY | Truncation strategies defined once, applied consistently |
+| R4 â€” Builder Pattern | ContextPayload built through staged pipeline architecture |
+| R5 â€” Liskov Substitution | Content categories interchangeable within budget |
+| R6 â€” DI over Singletons | ContextBuilder injected as pipeline service |
+| R9 â€” Deterministic | Same input produces same truncation decisions |
+| R10 â€” Simpler Over Complex | Priority tiers over complex allocation algorithms |
+| R13 â€” Design for Failure | Overflow handled gracefully with truncated sections manifest |
+| R14 â€” Paved Path | Default allocation provides safe baseline for all entities |
+| R15 â€” Open/Closed | New content categories added without rebuilding pipeline |
 
 ## Related Documents
 
@@ -187,4 +187,4 @@ interface TruncatedSection {
 |-----------|------------|----------|
 | Critical content exceeds category max | LLM-0302 | Pipeline fails; return context overflow error |
 | Requested context exceeds model window entirely | LLM-0302 | Pipeline fails; suggest larger context model |
-| Token estimation fails | — | Use character-based estimation; log warning |
+| Token estimation fails | â€” | Use character-based estimation; log warning |

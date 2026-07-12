@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 005 — Document Parser
+﻿# AIOS Bible â€” Brain
+## 005 â€” Document Parser
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Vision |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Vision |
 | Document ID | AIOS-BBL-002-VIS-005 |
-| Source Laws | Law 4 — Law of Evidence, Law 3 — Law of Communication |
+| Source Laws | Law 4 â€” Law of Evidence, Law 3 â€” Law of Communication |
 | Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,9 +15,9 @@
 
 ## Purpose
 
-The Document Parser extracts structured data from document images — invoices, receipts, forms, identity documents, and generic documents. It combines OCR output with type-specific field extraction to produce structured, validated results with per-field confidence scores. When a document type is not recognized, it falls back to generic parsing (all detected text with layout).
+The Document Parser extracts structured data from document images â€” invoices, receipts, forms, identity documents, and generic documents. It combines OCR output with type-specific field extraction to produce structured, validated results with per-field confidence scores. When a document type is not recognized, it falls back to generic parsing (all detected text with layout).
 
-The Document Parser is how Sou reads and extracts meaning from visual documents — converting scanned paper into structured data that can be stored, queried, and reasoned about.
+The Document Parser is how Sou reads and extracts meaning from visual documents â€” converting scanned paper into structured data that can be stored, queried, and reasoned about.
 
 ## Data Model
 
@@ -68,7 +68,7 @@ DocumentParseResult {
 ParsedField {
   name: string                     // Field identifier, e.g. "invoice_number"
   value: string
-  confidence: number               // 0.0–1.0
+  confidence: number               // 0.0â€“1.0
   bounding_box?: BoundingBox
   field_type: "text" | "number" | "date" | "currency" | "email" | "phone" | "checkbox" | "signature" | "barcode"
   is_required: boolean
@@ -121,7 +121,7 @@ TableCell {
 ```typescript
 DocumentTypeDetection {
   detected_type: string
-  confidence: number               // 0.0–1.0
+  confidence: number               // 0.0â€“1.0
   alternatives: DocumentTypeAlternative[]
   method: "layout" | "content" | "barcode" | "user_specified"
 }
@@ -178,20 +178,20 @@ When `document_type` is `"auto"`, the Document Parser detects the type:
 Algorithm:
   1. Run OCR to extract all text and layout
   2. Analyze layout features:
-     ┌────────────────────────────────────────────┐
-     │ Invoice:  header area, line items table,    │
-     │           totals, invoice number pattern    │
-     │ Receipt:  merchant name, items, total,      │
-     │           date, payment method              │
-     │ Form:     labeled fields, checkboxes,       │
-     │           signature line                    │
-     │ Identity: photo area, document number,      │
-     │           name, date of birth, expiry       │
-     │ Generic:  no clear type pattern             │
-     └────────────────────────────────────────────┘
+     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+     â”‚ Invoice:  header area, line items table,    â”‚
+     â”‚           totals, invoice number pattern    â”‚
+     â”‚ Receipt:  merchant name, items, total,      â”‚
+     â”‚           date, payment method              â”‚
+     â”‚ Form:     labeled fields, checkboxes,       â”‚
+     â”‚           signature line                    â”‚
+     â”‚ Identity: photo area, document number,      â”‚
+     â”‚           name, date of birth, expiry       â”‚
+     â”‚ Generic:  no clear type pattern             â”‚
+     â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
   3. Score each type based on layout + content
   4. Return highest-confidence match
-  5. If no type exceeds threshold → fall back to "generic"
+  5. If no type exceeds threshold â†’ fall back to "generic"
 ```
 
 ### Document Types and Field Extraction
@@ -205,7 +205,7 @@ Each document type has a defined set of fields:
 | invoice_number | text | Yes | Non-empty, alphanumeric |
 | date | date | Yes | Valid date format |
 | vendor_name | text | Yes | Non-empty |
-| vendor_address | text | No | — |
+| vendor_address | text | No | â€” |
 | customer_name | text | Yes | Non-empty |
 | line_items | table | Yes | At least one line item |
 | subtotal | currency | Yes | Positive number |
@@ -218,20 +218,20 @@ Each document type has a defined set of fields:
 | Field | Type | Required | Validation |
 |-------|------|----------|------------|
 | merchant_name | text | Yes | Non-empty |
-| merchant_address | text | No | — |
+| merchant_address | text | No | â€” |
 | date | date | Yes | Valid date |
 | items | table | Yes | At least one item |
 | subtotal | currency | Yes | Positive number |
 | tax | currency | No | Positive number |
 | total | currency | Yes | Matches subtotal + tax |
 | payment_method | text | No | e.g. "credit", "cash", "card" |
-| tip | currency | No | — |
+| tip | currency | No | â€” |
 
 #### Form
 
 | Field | Type | Required | Validation |
 |-------|------|----------|------------|
-| form_title | text | No | — |
+| form_title | text | No | â€” |
 | fields[] | text | Varies | Per-field validation rules |
 | checkboxes[] | checkbox | No | Boolean (checked/unchecked) |
 | signature | signature | No | Must be non-empty if present |
@@ -246,8 +246,8 @@ Each document type has a defined set of fields:
 | date_of_birth | date | Yes | Valid date, not in future |
 | date_of_expiry | date | Yes | Valid date |
 | nationality | text | Yes | Valid country code |
-| gender | text | No | — |
-| address | text | Varies | — |
+| gender | text | No | â€” |
+| address | text | Varies | â€” |
 | photo_present | checkbox | No | Boolean from layout detection |
 
 #### Generic
@@ -263,39 +263,39 @@ Field extraction follows a multi-stage pipeline:
 
 ```
 Document Image
-    │
-    ▼
+    â”‚
+    â–¼
 Step 1: OCR
-    │   Extract all text with positions (OCR Engine)
-    │   Detect layout regions and tables
-    │
-    ▼
+    â”‚   Extract all text with positions (OCR Engine)
+    â”‚   Detect layout regions and tables
+    â”‚
+    â–¼
 Step 2: Type Detection
-    │   Identify document type (or use user-specified)
-    │   If auto: score types → pick best
-    │   If unknown: fall back to generic
-    │
-    ▼
+    â”‚   Identify document type (or use user-specified)
+    â”‚   If auto: score types â†’ pick best
+    â”‚   If unknown: fall back to generic
+    â”‚
+    â–¼
 Step 3: Field Extraction
-    │   Load type-specific field templates
-    │   Map text regions to field names
-    │   Extract values with confidence
-    │   Handle multi-value (line items, tables)
-    │
-    ▼
+    â”‚   Load type-specific field templates
+    â”‚   Map text regions to field names
+    â”‚   Extract values with confidence
+    â”‚   Handle multi-value (line items, tables)
+    â”‚
+    â–¼
 Step 4: Validation
-    │   Apply type-specific validation rules
-    │   Check required fields
-    │   Validate formats (date, currency, patterns)
-    │   Flag missing/invalid fields
-    │
-    ▼
+    â”‚   Apply type-specific validation rules
+    â”‚   Check required fields
+    â”‚   Validate formats (date, currency, patterns)
+    â”‚   Flag missing/invalid fields
+    â”‚
+    â–¼
 Step 5: Assembly
-    │   Package into DocumentParseResult
-    │   Calculate overall_confidence
-    │   Emit VIS.DocumentParsed event
-    │
-    ▼
+    â”‚   Package into DocumentParseResult
+    â”‚   Calculate overall_confidence
+    â”‚   Emit VIS.DocumentParsed event
+    â”‚
+    â–¼
 DocumentParseResult
 ```
 
@@ -304,25 +304,25 @@ DocumentParseResult
 Layout analysis identifies structural regions in the document:
 
 ```
-┌──────────────────────────────┐
-│  INVOICE                     │  ← header region
-│  Invoice #: INV-2024-001     │
-│  Date: 2024-03-15            │
-├──────────────────────────────┤
-│  Bill To:                    │  ← body region (vendor info)
-│  Acme Corp                   │
-│  123 Main St                 │
-├──────────────────────────────┤
-│  Item       Qty  Price  Total│  ← table region
-│  Widget A    2   25.00  50.00│
-│  Widget B    1   75.00  75.00│
-├──────────────────────────────┤
-│  Subtotal:         125.00    │  ← totals region
-│  Tax (10%):         12.50    │
-│  Total:            137.50    │
-├──────────────────────────────┤
-│  Payment Terms: Net 30       │  ← footer region
-└──────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  INVOICE                     â”‚  â† header region
+â”‚  Invoice #: INV-2024-001     â”‚
+â”‚  Date: 2024-03-15            â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚  Bill To:                    â”‚  â† body region (vendor info)
+â”‚  Acme Corp                   â”‚
+â”‚  123 Main St                 â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚  Item       Qty  Price  Totalâ”‚  â† table region
+â”‚  Widget A    2   25.00  50.00â”‚
+â”‚  Widget B    1   75.00  75.00â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚  Subtotal:         125.00    â”‚  â† totals region
+â”‚  Tax (10%):         12.50    â”‚
+â”‚  Total:            137.50    â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚  Payment Terms: Net 30       â”‚  â† footer region
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Table Extraction
@@ -365,12 +365,12 @@ When type-specific extraction fails, the Document Parser falls back:
 
 ```
 Conditions for fallback:
-  ┌─────────────────────────────────┐
-  │ Type detection confidence < 0.5 │
-  │ Required field extraction fails  │
-  │ Validation produces > 50% errors │
-  │ config.fallback_to_generic=true  │
-  └─────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚ Type detection confidence < 0.5 â”‚
+  â”‚ Required field extraction fails  â”‚
+  â”‚ Validation produces > 50% errors â”‚
+  â”‚ config.fallback_to_generic=true  â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
 Fallback behavior:
   1. Return all OCR text blocks as ParsedFields (name = block_type)
@@ -457,14 +457,14 @@ interface LayoutAnalyzer {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| DOC-001 | Every parsed field has a name, value, and confidence score | Schema — required fields on ParsedField |
-| DOC-002 | Document type detection always returns a result (never null) | Algorithmic — falls back to "generic" if no match |
-| DOC-003 | Field validation runs after extraction, never before | Algorithmic — pipeline order enforced |
-| DOC-004 | Required fields are validated; missing required fields are flagged | Algorithmic — validation report includes missing list |
-| DOC-005 | Table extraction preserves row/column positional alignment | Algorithmic — cell grid validation |
-| DOC-006 | Fallback to generic does not lose extracted data | Architectural — generic output contains all text blocks |
-| DOC-007 | Auto-detection runs only when document_type is "auto" | Schema — explicit conditional |
-| DOC-008 | Currency fields validate as positive decimal numbers | Algorithmic — type-specific validation rules |
+| DOC-001 | Every parsed field has a name, value, and confidence score | Schema â€” required fields on ParsedField |
+| DOC-002 | Document type detection always returns a result (never null) | Algorithmic â€” falls back to "generic" if no match |
+| DOC-003 | Field validation runs after extraction, never before | Algorithmic â€” pipeline order enforced |
+| DOC-004 | Required fields are validated; missing required fields are flagged | Algorithmic â€” validation report includes missing list |
+| DOC-005 | Table extraction preserves row/column positional alignment | Algorithmic â€” cell grid validation |
+| DOC-006 | Fallback to generic does not lose extracted data | Architectural â€” generic output contains all text blocks |
+| DOC-007 | Auto-detection runs only when document_type is "auto" | Schema â€” explicit conditional |
+| DOC-008 | Currency fields validate as positive decimal numbers | Algorithmic â€” type-specific validation rules |
 
 ## Error Cases
 
@@ -487,17 +487,17 @@ interface LayoutAnalyzer {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Document Parser handles only document-structured visual input |
-| R2 — Dependency Order | Depends on OCR Engine, LLMOS; no upward deps |
-| R3 — DRY | Field templates defined once per document type |
-| R4 — Builder Pattern | Parsing built by OCR → Type Detection → Field Extraction → Validation |
-| R5 — Liskov Substitution | Any FieldExtractor, FieldValidator implements its interface |
-| R6 — DI over Singletons | Type detectors, field extractors, validators injected |
-| R9 — Deterministic | Same document + config produces same fields (model-dependent) |
-| R10 — Simpler Over Complex | Type-specific templates; fallback to generic |
-| R13 — Design for Failure | Fallback to generic; validation errors non-fatal; partial results |
-| R14 — Paved Path | All document parsing flows through `parse()` |
-| R15 — Open/Closed | New document types added via FieldExtractor, not by modifying core |
+| R1 â€” Modulsingularity | Document Parser handles only document-structured visual input |
+| R2 â€” Dependency Order | Depends on OCR Engine, LLMOS; no upward deps |
+| R3 â€” DRY | Field templates defined once per document type |
+| R4 â€” Builder Pattern | Parsing built by OCR â†’ Type Detection â†’ Field Extraction â†’ Validation |
+| R5 â€” Liskov Substitution | Any FieldExtractor, FieldValidator implements its interface |
+| R6 â€” DI over Singletons | Type detectors, field extractors, validators injected |
+| R9 â€” Deterministic | Same document + config produces same fields (model-dependent) |
+| R10 â€” Simpler Over Complex | Type-specific templates; fallback to generic |
+| R13 â€” Design for Failure | Fallback to generic; validation errors non-fatal; partial results |
+| R14 â€” Paved Path | All document parsing flows through `parse()` |
+| R15 â€” Open/Closed | New document types added via FieldExtractor, not by modifying core |
 
 ## Related Documents
 

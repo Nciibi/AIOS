@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — Scoring Engine
+﻿# AIOS Bible â€” Brain
+## 001 â€” Scoring Engine
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Decision |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Decision |
 | Document ID | AIOS-BBL-002-DEC-001 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -44,9 +44,9 @@ ScoredOption {
   option: DecisionOption
   criterion_scores: CriterionScore[]
   raw_total: number           // Sum of raw scores before weighting
-  weighted_total: number      // Sum of (score × weight)
+  weighted_total: number      // Sum of (score Ã— weight)
   rank: number                // 1-based, descending by weighted_total
-  confidence: number          // 0.0–1.0 per-option confidence
+  confidence: number          // 0.0â€“1.0 per-option confidence
 }
 ```
 
@@ -58,7 +58,7 @@ CriterionScore {
   criterion_name: string
   raw_score: number           // Pre-normalization output of scoring function
   normalized_score: number    // After normalization to [0.0, 1.0]
-  weighted_score: number      // normalized_score × criterion.weight
+  weighted_score: number      // normalized_score Ã— criterion.weight
   weight: number              // Copied from criterion at evaluation time
 }
 ```
@@ -139,21 +139,21 @@ Linear scoring maps a numeric attribute value to a score using direct proportion
 Linear (maximize):
   score = value / max_value
   Use case: Speed, throughput, reliability
-  Example: latency = 50ms, max_value = 200ms → score = 0.25
+  Example: latency = 50ms, max_value = 200ms â†’ score = 0.25
 
 Linear (minimize):
   score = 1 - (value / max_value)
   Use case: Cost, resource usage, error rate
-  Example: cost = $10, max_value = $50 → score = 0.80
+  Example: cost = $10, max_value = $50 â†’ score = 0.80
 
 Linear (target):
-  score = exp(-0.5 × ((value - target) / sigma)²)
+  score = exp(-0.5 Ã— ((value - target) / sigma)Â²)
   (Gaussian centered at target value)
   Use case: Ideal operating point, preferred configuration
-  Example: workers = 8, target = 10, sigma = 2 → score = 0.88
+  Example: workers = 8, target = 10, sigma = 2 â†’ score = 0.88
 
-Edge: value > max_value → score clamped to 1.0 (maximize) or 0.0 (minimize)
-Edge: max_value = 0 → score = 0.0 (division by zero guard)
+Edge: value > max_value â†’ score clamped to 1.0 (maximize) or 0.0 (minimize)
+Edge: max_value = 0 â†’ score = 0.0 (division by zero guard)
 ```
 
 ### 2. Threshold
@@ -162,17 +162,17 @@ Threshold scoring is a step function that assigns a pass or fail score based on 
 
 ```
 Threshold (above):
-  if value >= threshold → pass_score (1.0)
-  else → fail_score (0.0)
+  if value >= threshold â†’ pass_score (1.0)
+  else â†’ fail_score (0.0)
   Use case: Minimum quality gate, compliance check
 
 Threshold (below):
-  if value <= threshold → pass_score (1.0)
-  else → fail_score (0.0)
+  if value <= threshold â†’ pass_score (1.0)
+  else â†’ fail_score (0.0)
   Use case: Maximum cost cap, time limit
 
-Edge: value equals threshold exactly → pass_score
-Edge: threshold is NaN → fail_score
+Edge: value equals threshold exactly â†’ pass_score
+Edge: threshold is NaN â†’ fail_score
 ```
 
 ### 3. Boolean
@@ -181,12 +181,12 @@ Boolean scoring maps an exact truth value to a binary score:
 
 ```
 Boolean:
-  if value === true → true_score (1.0)
-  if value === false → false_score (0.0)
+  if value === true â†’ true_score (1.0)
+  if value === false â†’ false_score (0.0)
   Use case: Capability presence, feature flag, compatibility check
 
-Edge: value is undefined or null → false_score
-Edge: value is truthy but not boolean → treated as true (coerced)
+Edge: value is undefined or null â†’ false_score
+Edge: value is truthy but not boolean â†’ treated as true (coerced)
 ```
 
 ### 4. Custom
@@ -203,8 +203,8 @@ Contract:
   - Output: number in [0.0, 1.0] (must be clamped by implementation)
   - Registered via ScoringEngine.registerFunction()
 
-Edge: function_id not found → throw DEC_UNKNOWN_FUNCTION
-Edge: function throws → score defaults to 0.0, error logged
+Edge: function_id not found â†’ throw DEC_UNKNOWN_FUNCTION
+Edge: function throws â†’ score defaults to 0.0, error logged
 ```
 
 ## Score Matrix Computation
@@ -213,7 +213,7 @@ The Scoring Engine computes a complete score matrix in five phases:
 
 ### Phase 1: Raw Score Computation
 
-For each (option × criterion) pair, compute the raw score using the criterion's scoring function:
+For each (option Ã— criterion) pair, compute the raw score using the criterion's scoring function:
 
 ```
 For each option in request.options:
@@ -254,7 +254,7 @@ If normalizer.method is "none":
 
 ```
 For each CriterionScore:
-  weighted_score = normalized_score × criterion.weight
+  weighted_score = normalized_score Ã— criterion.weight
 ```
 
 ### Phase 4: Total and Rank
@@ -283,30 +283,30 @@ For each ScoredOption:
 All scores must be on [0.0, 1.0] scale before weighting. The Scoring Engine applies normalization as the first step in aggregation (AggregationConfig.normalize_first = true).
 
 ```
-Guarantee: Every CriterionScore.normalized_score ∈ [0.0, 1.0]
+Guarantee: Every CriterionScore.normalized_score âˆˆ [0.0, 1.0]
 Enforcement: ScoreNormalizer clamps final output to [clamp_min, clamp_max]
 ```
 
 ### Weight Application
 
 ```
-weighted_score = normalized_score × criterion.weight
+weighted_score = normalized_score Ã— criterion.weight
 
 Weight properties:
-  - criterion.weight ∈ [0.0, 1.0]
-  - Higher weight → greater influence on weighted_total
-  - weight = 0.0 → criterion has no effect (can be used for tracking only)
+  - criterion.weight âˆˆ [0.0, 1.0]
+  - Higher weight â†’ greater influence on weighted_total
+  - weight = 0.0 â†’ criterion has no effect (can be used for tracking only)
 ```
 
 ### Summation
 
 ```
-weighted_total = Σ (normalized_score_i × weight_i) for i = 1 to N criteria
+weighted_total = Î£ (normalized_score_i Ã— weight_i) for i = 1 to N criteria
 
 Properties:
-  - weighted_total ∈ [0.0, 1.0] (since normalized_score ∈ [0,1], weights sum to 1.0)
-  - weighted_total = 1.0 → all criteria maximally satisfied
-  - weighted_total = 0.0 → all criteria minimally satisfied
+  - weighted_total âˆˆ [0.0, 1.0] (since normalized_score âˆˆ [0,1], weights sum to 1.0)
+  - weighted_total = 1.0 â†’ all criteria maximally satisfied
+  - weighted_total = 0.0 â†’ all criteria minimally satisfied
 ```
 
 ### Weight Verification
@@ -315,7 +315,7 @@ Per DEC-004, the sum of all criterion weights must equal 1.0:
 
 ```
 On EvaluationRequest validation:
-  weight_sum = Σ criterion.weight for all criteria in request
+  weight_sum = Î£ criterion.weight for all criteria in request
   If abs(weight_sum - 1.0) > EPSILON (1e-6):
     If AggregationConfig.weight_verification is true:
       Normalize: criterion.weight = criterion.weight / weight_sum
@@ -330,7 +330,7 @@ Confidence reflects how reliable the scored recommendation is. It is computed pe
 ### Confidence Formula
 
 ```
-confidence = completeness × coverage × (1 - variance_penalty)
+confidence = completeness Ã— coverage Ã— (1 - variance_penalty)
 
 Where:
   completeness      = fraction of criteria that have non-null attribute values for this option
@@ -343,7 +343,7 @@ Where:
 | Range | Label | Interpretation |
 |-------|-------|---------------|
 | > 0.8 | High | Strong recommendation; all criteria scored, low variance |
-| 0.5–0.8 | Medium | Moderate confidence; some data gaps or moderate variance |
+| 0.5â€“0.8 | Medium | Moderate confidence; some data gaps or moderate variance |
 | < 0.5 | Low | Weak recommendation; significant data missing or high variance |
 
 ### Per-Component Details
@@ -365,7 +365,7 @@ Variance Penalty:
   if len(scores) <= 1: variance_penalty = 0
   else:
     mean = average(scores)
-    variance = sum((s - mean)² for s in scores) / len(scores)
+    variance = sum((s - mean)Â² for s in scores) / len(scores)
     variance_penalty = min(variance, 1.0)
 ```
 
@@ -441,7 +441,7 @@ interface ScoringEngine {
 ```
 score(request):
   - Validates criteria weights sum to 1.0 (DEC-004)
-  - Iterates over all option × criterion pairs
+  - Iterates over all option Ã— criterion pairs
   - Applies scoring function, normalization, weighting, ranking
   - Computes confidence estimates
   - Returns ScoreMatrix
@@ -488,14 +488,14 @@ getRegisteredFunctions():
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| DEC-001 | The Decision System recommends; Sou decides | API-level — ScoringEngine never auto-executes |
-| DEC-004 | Criteria weights always sum to 1.0 | Validation — enforced on score() entry |
-| DEC-SC-001 | Every normalized score is in [0.0, 1.0] | Algorithmic — ScoreNormalizer clamps output |
-| DEC-SC-002 | Every weighted_total is in [0.0, 1.0] | Mathematical — sum of (score ∈ [0,1] × weight ∈ [0,1]) where Σ weight = 1 |
-| DEC-SC-003 | Rank order is deterministic for identical inputs | Algorithmic — no randomness in scoring pipeline |
-| DEC-SC-004 | Custom scoring functions cannot modify internal state | Architectural — functions receive values, return scores |
-| DEC-SC-005 | Confidence never exceeds 1.0 | Algorithmic — confidence = product of three [0,1] factors |
-| DEC-SC-006 | ScoreMatrix is immutable after computation | API-level — no update methods exposed |
+| DEC-001 | The Decision System recommends; Sou decides | API-level â€” ScoringEngine never auto-executes |
+| DEC-004 | Criteria weights always sum to 1.0 | Validation â€” enforced on score() entry |
+| DEC-SC-001 | Every normalized score is in [0.0, 1.0] | Algorithmic â€” ScoreNormalizer clamps output |
+| DEC-SC-002 | Every weighted_total is in [0.0, 1.0] | Mathematical â€” sum of (score âˆˆ [0,1] Ã— weight âˆˆ [0,1]) where Î£ weight = 1 |
+| DEC-SC-003 | Rank order is deterministic for identical inputs | Algorithmic â€” no randomness in scoring pipeline |
+| DEC-SC-004 | Custom scoring functions cannot modify internal state | Architectural â€” functions receive values, return scores |
+| DEC-SC-005 | Confidence never exceeds 1.0 | Algorithmic â€” confidence = product of three [0,1] factors |
+| DEC-SC-006 | ScoreMatrix is immutable after computation | API-level â€” no update methods exposed |
 
 ## Error Cases
 
@@ -519,9 +519,9 @@ getRegisteredFunctions():
 1. Sou needs to choose a tool: SearchWeb, ReadFile, or ExecuteCommand
 2. Criteria: speed (maximize), cost (minimize), safety (boolean)
 3. Scoring Engine evaluates each tool:
-   - SearchWeb:   speed=0.3, cost=0.8, safety=1.0 → weighted_total=0.70
-   - ReadFile:    speed=0.9, cost=1.0, safety=0.0 → weighted_total=0.63
-   - ExecCommand: speed=0.5, cost=0.6, safety=0.0 → weighted_total=0.37
+   - SearchWeb:   speed=0.3, cost=0.8, safety=1.0 â†’ weighted_total=0.70
+   - ReadFile:    speed=0.9, cost=1.0, safety=0.0 â†’ weighted_total=0.63
+   - ExecCommand: speed=0.5, cost=0.6, safety=0.0 â†’ weighted_total=0.37
 4. Ranked: [1] SearchWeb (0.70), [2] ReadFile (0.63), [3] ExecCommand (0.37)
 5. Sou reviews, considers safety trade-off, selects SearchWeb
 ```
@@ -532,9 +532,9 @@ getRegisteredFunctions():
 1. Sou has two plan paths for "Implement auth": Path A (OAuth) and Path B (JWT)
 2. Criteria: security (threshold), effort (minimize), maintainability (linear maximize)
 3. Scoring:
-   - Path A: security=1.0, effort=0.4, maintainability=0.8 → weighted_total=0.73
-   - Path B: security=0.0, effort=0.7, maintainability=0.6 → weighted_total=0.43
-4. Path A ranked first; confidence = 0.85 (high — all criteria scored, low variance)
+   - Path A: security=1.0, effort=0.4, maintainability=0.8 â†’ weighted_total=0.73
+   - Path B: security=0.0, effort=0.7, maintainability=0.6 â†’ weighted_total=0.43
+4. Path A ranked first; confidence = 0.85 (high â€” all criteria scored, low variance)
 5. Sou chooses Path A; decision logged for future plan similarity matching
 ```
 
@@ -545,9 +545,9 @@ getRegisteredFunctions():
 2. Criteria: user_value (linear maximize), complexity (linear minimize), reuse (boolean)
 3. Custom scoring function "value_complexity_ratio" applied for user_value
 4. ScoreMatrix reveals:
-   - caching:    high value, medium complexity, reusable → rank 1
-   - retry:      medium value, low complexity, reusable → rank 2
-   - logging:    low value, low complexity, not reusable → rank 3
+   - caching:    high value, medium complexity, reusable â†’ rank 1
+   - retry:      medium value, low complexity, reusable â†’ rank 2
+   - logging:    low value, low complexity, not reusable â†’ rank 3
 5. Confidence for caching = 0.92 (high); retry = 0.88 (high); logging = 0.75 (medium)
 6. Sou decides: implement caching first, retry second, defer logging
 ```
@@ -567,17 +567,17 @@ getRegisteredFunctions():
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Scoring Engine handles only scoring, normalization, and aggregation |
-| R2 — Dependency Order | Depends on Decision System models; no upward deps |
-| R3 — DRY | Scoring functions defined once in Registry, referenced by name |
-| R4 — Builder Pattern | ScoreMatrix built incrementally: score → normalize → weight → rank |
-| R5 — Liskov Substitution | Any ScoringFunction implements the interface |
-| R6 — DI over Singletons | Scoring functions, normalizer, aggregator injected |
-| R9 — Deterministic | Same inputs, same ScoreMatrix (no randomness) |
-| R10 — Simpler Over Complex | Weighted sum model; no ML, neural networks, or probabilistic models |
-| R13 — Design for Failure | Normalization errors fall back to uniform scores; custom function errors logged |
-| R14 — Paved Path | All scoring flows through score() → scoreMatrix() |
-| R15 — Open/Closed | New scoring functions via registerFunction(); no engine modification |
+| R1 â€” Modulsingularity | Scoring Engine handles only scoring, normalization, and aggregation |
+| R2 â€” Dependency Order | Depends on Decision System models; no upward deps |
+| R3 â€” DRY | Scoring functions defined once in Registry, referenced by name |
+| R4 â€” Builder Pattern | ScoreMatrix built incrementally: score â†’ normalize â†’ weight â†’ rank |
+| R5 â€” Liskov Substitution | Any ScoringFunction implements the interface |
+| R6 â€” DI over Singletons | Scoring functions, normalizer, aggregator injected |
+| R9 â€” Deterministic | Same inputs, same ScoreMatrix (no randomness) |
+| R10 â€” Simpler Over Complex | Weighted sum model; no ML, neural networks, or probabilistic models |
+| R13 â€” Design for Failure | Normalization errors fall back to uniform scores; custom function errors logged |
+| R14 â€” Paved Path | All scoring flows through score() â†’ scoreMatrix() |
+| R15 â€” Open/Closed | New scoring functions via registerFunction(); no engine modification |
 
 ## Related Documents
 

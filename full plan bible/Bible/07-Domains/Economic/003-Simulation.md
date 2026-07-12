@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Economic — 003: Economic Simulation
+﻿# AIOS Bible â€” Domains
+## Economic â€” 003: Economic Simulation
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-ECN-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle Compliance, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle Compliance, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/010-Execution.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,23 +15,23 @@
 
 ## Purpose
 
-The Economic Simulation sub-domain provides the what-if analysis and scenario modeling infrastructure for AIOS — budget scenario modeling, resource pricing impact assessment, demand elasticity testing, market condition simulation, and comparative outcome analysis. Simulations consume economic models (Economic/001-Models.md), cost analysis data (Economic/002-Analysis.md), and base Economic types (Economic/000-Overview.md) to project outcomes under alternative conditions. Simulations are advisory (Law 6) and all simulation outputs must be traceable to input parameters and evidence (Law 4). Simulations are bounded by capability constraints to prevent runaway computation (Law 7).
+The Economic Simulation sub-domain provides the what-if analysis and scenario modeling infrastructure for AIOS â€” budget scenario modeling, resource pricing impact assessment, demand elasticity testing, market condition simulation, and comparative outcome analysis. Simulations consume economic models (Economic/001-Models.md), cost analysis data (Economic/002-Analysis.md), and base Economic types (Economic/000-Overview.md) to project outcomes under alternative conditions. Simulations are advisory (Law 6) and all simulation outputs must be traceable to input parameters and evidence (Law 4). Simulations are bounded by capability constraints to prevent runaway computation (Law 7).
 
 ## Architecture
 
 ```
-Scenario Definition ──► Parameter Configuration ──► Simulation Execution ──► Outcome Analysis
-        │                        │                          │                     │
-        ▼                        ▼                          ▼                     ▼
+Scenario Definition â”€â”€â–º Parameter Configuration â”€â”€â–º Simulation Execution â”€â”€â–º Outcome Analysis
+        â”‚                        â”‚                          â”‚                     â”‚
+        â–¼                        â–¼                          â–¼                     â–¼
 Scenario Store            Parameter Bounds            Execution Engine      Comparison Reports
-                                                                                  │
-                                                                                  ▼
+                                                                                  â”‚
+                                                                                  â–¼
                                                                            Sensitivity Report
 ```
 
 Users define scenarios by specifying what changes relative to a baseline (e.g., budget amount, resource price, demand level). Parameters are validated against bounds. The simulation engine runs the model with the modified parameters, collects outcomes, and produces comparison reports against the baseline. Sensitivity analysis varies parameters systematically to quantify impact.
 
-## Data Model (TypeScript — extend the base doc types from Economic/000-Overview.md)
+## Data Model (TypeScript â€” extend the base doc types from Economic/000-Overview.md)
 
 ```typescript
 interface EconomicScenario {
@@ -265,34 +265,34 @@ interface WhatIfEngine {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| ECN-SIM-001 | Identical scenario parameters and seed produce identical outcomes | Algorithmic — seeded RNG ensures deterministic simulation |
-| ECN-SIM-002 | Every simulation outcome references its scenario definition | Architectural — SimulationOutcome.scenarioId is required |
-| ECN-SIM-003 | Scenarios cannot be executed without validation passing | Algorithmic — ScenarioManager.execute checks status |
-| ECN-SIM-004 | Simulation parameter exploration is bounded by capability constraints | Algorithmic — bounds checked before execution |
-| ECN-SIM-005 | All simulation outputs reference input evidence records (Law 4) | Architectural — evidenceRef required on every scenario and outcome |
-| ECN-SIM-006 | Comparisons are based on aligned time periods and resource scopes | Algorithmic — ComparisonEngine validates baseline compatibility |
+| ECN-SIM-001 | Identical scenario parameters and seed produce identical outcomes | Algorithmic â€” seeded RNG ensures deterministic simulation |
+| ECN-SIM-002 | Every simulation outcome references its scenario definition | Architectural â€” SimulationOutcome.scenarioId is required |
+| ECN-SIM-003 | Scenarios cannot be executed without validation passing | Algorithmic â€” ScenarioManager.execute checks status |
+| ECN-SIM-004 | Simulation parameter exploration is bounded by capability constraints | Algorithmic â€” bounds checked before execution |
+| ECN-SIM-005 | All simulation outputs reference input evidence records (Law 4) | Architectural â€” evidenceRef required on every scenario and outcome |
+| ECN-SIM-006 | Comparisons are based on aligned time periods and resource scopes | Algorithmic â€” ComparisonEngine validates baseline compatibility |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Simulation owns what-if analysis and scenario modeling; Models owns forecasting engine; Analysis owns cost allocation |
-| R2 — Dependency Order | Depends on Economic (Budget, CostRecord, PriceSheet), Models (DemandForecast, CostProjection), Analysis (VarianceReport), ACF (dispatch) |
-| R3 — DRY | Scenario parameters are defined once and reused across simulation runs; comparison logic is shared across all scenario types |
-| R4 — Builder Pattern | EconomicScenario uses builder for complex multi-change scenario definition |
-| R5 — Stateless | Simulation execution is stateless given the same inputs; scenario state is metadata |
-| R6 — Evident Complete | Every scenario definition, simulation run, and comparison produces evidence |
-| R9 — Deterministic | Same scenario parameters and seed produce identical simulation outcomes |
-| R10 — Simpler Over Complex | Single-parameter sensitivity is default; multi-parameter interaction testing is opt-in |
-| R13 — Design for Failure | Diverging simulations are terminated early; unstable outcomes carry confidence warnings |
-| R14 — Paved Path | Budget amount what-if with 30-day horizon and 100 iterations covers 80% of simulation use cases |
-| R15 — Open/Closed | New scenario change types and simulation models can be registered without changing the engine |
+| R1 â€” Modulsingularity | Simulation owns what-if analysis and scenario modeling; Models owns forecasting engine; Analysis owns cost allocation |
+| R2 â€” Dependency Order | Depends on Economic (Budget, CostRecord, PriceSheet), Models (DemandForecast, CostProjection), Analysis (VarianceReport), ACF (dispatch) |
+| R3 â€” DRY | Scenario parameters are defined once and reused across simulation runs; comparison logic is shared across all scenario types |
+| R4 â€” Builder Pattern | EconomicScenario uses builder for complex multi-change scenario definition |
+| R5 â€” Stateless | Simulation execution is stateless given the same inputs; scenario state is metadata |
+| R6 â€” Evident Complete | Every scenario definition, simulation run, and comparison produces evidence |
+| R9 â€” Deterministic | Same scenario parameters and seed produce identical simulation outcomes |
+| R10 â€” Simpler Over Complex | Single-parameter sensitivity is default; multi-parameter interaction testing is opt-in |
+| R13 â€” Design for Failure | Diverging simulations are terminated early; unstable outcomes carry confidence warnings |
+| R14 â€” Paved Path | Budget amount what-if with 30-day horizon and 100 iterations covers 80% of simulation use cases |
+| R15 â€” Open/Closed | New scenario change types and simulation models can be registered without changing the engine |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/07-Domains/Economic/000-Overview.md | Base Economic System — defines Budget, CostRecord, PriceSheet base types |
+| Bible/07-Domains/Economic/000-Overview.md | Base Economic System â€” defines Budget, CostRecord, PriceSheet base types |
 | Bible/07-Domains/Economic/001-Models.md | Economic Models provides the forecast engines that simulation drives |
 | Bible/07-Domains/Economic/002-Analysis.md | Cost Analysis provides variance and trend data for scenario baselines |
 | Bible/04-Execution/Simulation/000-Overview.md | Execution simulation framework; Economic Simulation integrates as a domain-specific simulation type |

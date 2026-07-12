@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Robotics — 002: Sensor Fusion
+﻿# AIOS Bible â€” Domains
+## Robotics â€” 002: Sensor Fusion
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-ROB-002 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -20,7 +20,7 @@ The Sensor Fusion subsystem enables AIOS to ingest, synchronize, and fuse data f
 ## Architecture
 
 ```
-Sensor Drivers → Preprocessing → Time Synchronization → Fusion Algorithm → State Estimation → Uncertainty Output
+Sensor Drivers â†’ Preprocessing â†’ Time Synchronization â†’ Fusion Algorithm â†’ State Estimation â†’ Uncertainty Output
 ```
 
 | Stage | Input | Output | Worker |
@@ -263,25 +263,25 @@ interface Point3D {
 
 | Code | Condition | Severity | Recovery |
 |------|-----------|----------|----------|
-| ROB-FUS-001 | Sensor dropout — a subscribed sensor stops publishing data for longer than maxSensorLatencyMs | Warning | Mark sensor as unavailable. Continue fusion with remaining sensors. Trigger calibration re-check. Escalate if critical sensor. |
-| ROB-FUS-002 | Calibration drift — sensor calibration accuracy degrades below acceptable threshold | Warning | Flag for recalibration. Apply last known good calibration with increased uncertainty bounds. Schedule calibration routine. |
-| ROB-FUS-003 | Timestamp desynchronization — sensor timestamps drift more than timeSyncWindowMs from reference clock | Error | Attempt clock synchronization via ROS clock or NTP. If unresolved, exclude drifting sensor from fusion. Log desync magnitude. |
-| ROB-FUS-004 | Fusion divergence — filter innovation exceeds threshold for multiple consecutive steps | Critical | Reset filter to initial state. Log divergence metrics. Trigger root cause analysis. Fall back to last valid estimate with increased covariance. |
-| ROB-FUS-005 | NaN/Inf in state estimate — filter produces non-finite values in state or covariance | Critical | Halt filter update. Restore last valid state. Reset covariance. Trigger diagnostic event. Escalate to Security Council if persistent. |
-| ROB-FUS-006 | Sensor type conflict — multiple sensors claim the same frame_id with conflicting transforms | Error | Detect during calibration validation. Flag conflicting transforms. Require manual resolution before fusion resumes. |
-| ROB-FUS-007 | Outlier storm — more than 50% of readings rejected as outliers in a single update window | Warning | Reduce outlier rejection threshold. Log sensor batch quality metric. Escalate to sensor diagnostics pipeline. |
-| ROB-FUS-008 | Configuration mismatch — FusionConfig state dimension does not match initialized filter state | Error | Reject configuration update. Log mismatch details. Require filter re-initialization with corrected dimensions. |
+| ROB-FUS-001 | Sensor dropout â€” a subscribed sensor stops publishing data for longer than maxSensorLatencyMs | Warning | Mark sensor as unavailable. Continue fusion with remaining sensors. Trigger calibration re-check. Escalate if critical sensor. |
+| ROB-FUS-002 | Calibration drift â€” sensor calibration accuracy degrades below acceptable threshold | Warning | Flag for recalibration. Apply last known good calibration with increased uncertainty bounds. Schedule calibration routine. |
+| ROB-FUS-003 | Timestamp desynchronization â€” sensor timestamps drift more than timeSyncWindowMs from reference clock | Error | Attempt clock synchronization via ROS clock or NTP. If unresolved, exclude drifting sensor from fusion. Log desync magnitude. |
+| ROB-FUS-004 | Fusion divergence â€” filter innovation exceeds threshold for multiple consecutive steps | Critical | Reset filter to initial state. Log divergence metrics. Trigger root cause analysis. Fall back to last valid estimate with increased covariance. |
+| ROB-FUS-005 | NaN/Inf in state estimate â€” filter produces non-finite values in state or covariance | Critical | Halt filter update. Restore last valid state. Reset covariance. Trigger diagnostic event. Escalate to Security Council if persistent. |
+| ROB-FUS-006 | Sensor type conflict â€” multiple sensors claim the same frame_id with conflicting transforms | Error | Detect during calibration validation. Flag conflicting transforms. Require manual resolution before fusion resumes. |
+| ROB-FUS-007 | Outlier storm â€” more than 50% of readings rejected as outliers in a single update window | Warning | Reduce outlier rejection threshold. Log sensor batch quality metric. Escalate to sensor diagnostics pipeline. |
+| ROB-FUS-008 | Configuration mismatch â€” FusionConfig state dimension does not match initialized filter state | Error | Reject configuration update. Log mismatch details. Require filter re-initialization with corrected dimensions. |
 
 ## Invariants
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| ROB-FUS-I-001 | Sensor validity check — every sensor reading must pass validity verification (non-stale, signal quality above threshold) before entering fusion pipeline | Validity gate at preprocessing stage. Invalid readings are dropped with logged reason. |
-| ROB-FUS-I-002 | Graceful degradation on sensor loss — fusion must produce a valid estimate with bounded uncertainty even when one or more sensors are lost | Degraded mode logic reduces dimensionality. Uncertainty bounds increase proportionally to lost information. |
-| ROB-FUS-I-003 | Timestamp monotonicity — fused estimates must have monotonically increasing timestamps; non-monotonic sequences trigger filter reset | Timestamp ordering enforced at fusion output. Reordering detected and logged before publish. |
-| ROB-FUS-I-004 | Covariance symmetry and positive definiteness — all covariance matrices must be symmetric positive-definite | Matrix validation before each filter step. Non-PSD matrices are regularized or trigger filter reset. |
-| ROB-FUS-I-005 | Bounded computation time — filter update must complete within 1/fusion_update_rate to maintain real-time operation | Timing guard at each pipeline stage. Deadline miss degrades to lower update rate. |
-| ROB-FUS-I-006 | Sensor exclusion atomicity — adding or removing a sensor from the fusion pipeline must be an atomic operation with consistent state | Transactional sensor registry updates. Failure during add/remove rolls back to previous valid configuration. |
+| ROB-FUS-I-001 | Sensor validity check â€” every sensor reading must pass validity verification (non-stale, signal quality above threshold) before entering fusion pipeline | Validity gate at preprocessing stage. Invalid readings are dropped with logged reason. |
+| ROB-FUS-I-002 | Graceful degradation on sensor loss â€” fusion must produce a valid estimate with bounded uncertainty even when one or more sensors are lost | Degraded mode logic reduces dimensionality. Uncertainty bounds increase proportionally to lost information. |
+| ROB-FUS-I-003 | Timestamp monotonicity â€” fused estimates must have monotonically increasing timestamps; non-monotonic sequences trigger filter reset | Timestamp ordering enforced at fusion output. Reordering detected and logged before publish. |
+| ROB-FUS-I-004 | Covariance symmetry and positive definiteness â€” all covariance matrices must be symmetric positive-definite | Matrix validation before each filter step. Non-PSD matrices are regularized or trigger filter reset. |
+| ROB-FUS-I-005 | Bounded computation time â€” filter update must complete within 1/fusion_update_rate to maintain real-time operation | Timing guard at each pipeline stage. Deadline miss degrades to lower update rate. |
+| ROB-FUS-I-006 | Sensor exclusion atomicity â€” adding or removing a sensor from the fusion pipeline must be an atomic operation with consistent state | Transactional sensor registry updates. Failure during add/remove rolls back to previous valid configuration. |
 
 ## Design DNA (R1-R6,R9,R10,R13-R15)
 
@@ -289,24 +289,24 @@ interface Point3D {
 |------|-----------|
 | R1 (Modulsingularity) | Each sensor fusion concern (preprocessing, sync, algorithm, calibration, uncertainty) is a separate module with single responsibility |
 | R2 (Encapsulation) | Filter internal state (Kalman gains, particle weights) is encapsulated; external consumers interact only through FusedEstimate |
-| R3 (Orthogonality) | Sensor preprocessing, time synchronization, and fusion algorithm selection are orthogonal — any combination is valid |
+| R3 (Orthogonality) | Sensor preprocessing, time synchronization, and fusion algorithm selection are orthogonal â€” any combination is valid |
 | R4 (Polymorphism) | Fusion algorithm module supports polymorphic algorithm selection (Kalman, particle, complementary, Mahony) through a common interface |
 | R5 (Liskov) | All fusion algorithm implementations conform to the same IFusionAlgorithm interface and produce FusedEstimate output |
 | R6 (Interface) | Fusion pipeline exposes narrow interfaces (ISensorDriver, IPreprocessor, ITimeSynchronizer, IFusionAlgorithm) for testability and swap-ability |
-| R9 (Deterministic) | Same sensor readings and FusionConfig input must produce identical state estimate output — no randomness in Kalman filter; particle filters use seeded RNG |
+| R9 (Deterministic) | Same sensor readings and FusionConfig input must produce identical state estimate output â€” no randomness in Kalman filter; particle filters use seeded RNG |
 | R10 (Simpler Over Complex) | Default to Kalman filter (simplest adequate). Use particle filtering only when non-Gaussian uncertainty or multi-modal state distribution requires it |
 | R13 (Design for Failure) | Fusion filter detects divergence and resets automatically. Sensor dropout triggers graceful degradation not crash. NaN detection halts update without propagating bad state |
-| R14 (Paved Path) | Paved path: configure sensors → calibrate → synchronize → fuse → estimate → publish. Alternative algorithms available for specialized needs |
+| R14 (Paved Path) | Paved path: configure sensors â†’ calibrate â†’ synchronize â†’ fuse â†’ estimate â†’ publish. Alternative algorithms available for specialized needs |
 | R15 (Testability) | Each pipeline stage has independently testable input/output contracts. Filter behavior verifiable against known ground-truth trajectories |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Robotics/000-Overview.md | Domain overview — Sensor Fusion is a core Robotics capability |
-| Bible/07-Domains/Robotics/001-ROS-Integration.md | ROS Integration — provides the topic infrastructure for sensor data transport |
-| Bible/07-Domains/Robotics/003-Motion-Planning.md | Motion Planning — consumes fused state estimates for trajectory planning |
-| Physics/005-Events.md | Evidence — all fusion operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — sensor fusion is a bounded capability with computational limits |
-| Physics/010-Execution.md | Execution — fusion pipeline executes as a real-time control loop |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding for uncertainty quantification |
+| Bible/07-Domains/Robotics/000-Overview.md | Domain overview â€” Sensor Fusion is a core Robotics capability |
+| Bible/07-Domains/Robotics/001-ROS-Integration.md | ROS Integration â€” provides the topic infrastructure for sensor data transport |
+| Bible/07-Domains/Robotics/003-Motion-Planning.md | Motion Planning â€” consumes fused state estimates for trajectory planning |
+| Physics/005-Events.md | Evidence â€” all fusion operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” sensor fusion is a bounded capability with computational limits |
+| Physics/010-Execution.md | Execution â€” fusion pipeline executes as a real-time control loop |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding for uncertainty quantification |

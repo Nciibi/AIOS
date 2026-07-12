@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Embedded — 000: Overview
+﻿# AIOS Bible â€” Domains
+## Embedded â€” 000: Overview
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-EMB-000 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Embedded domain enables AIOS to develop, compile, flash, test, and monitor firmware and software for embedded systems — microcontrollers, RTOS-based devices, IoT endpoints, and system-on-chip (SoC) platforms. It provides the capability set for bare-metal and RTOS development, hardware abstraction layer (HAL) generation, peripheral configuration, and resource-constrained optimization.
+The Embedded domain enables AIOS to develop, compile, flash, test, and monitor firmware and software for embedded systems â€” microcontrollers, RTOS-based devices, IoT endpoints, and system-on-chip (SoC) platforms. It provides the capability set for bare-metal and RTOS development, hardware abstraction layer (HAL) generation, peripheral configuration, and resource-constrained optimization.
 
 Embedded development differs fundamentally from application-level coding: resources are severely constrained (KB of RAM, MHz of clock), cross-compilation toolchains are required, hardware-in-the-loop testing is often necessary, and the impact of bugs can be physical (bricked devices, safety hazards). The Embedded domain accounts for these constraints in its capability profiles and safety protocols.
 
@@ -49,11 +49,11 @@ The Embedded domain operates under constraints not present in other domains:
 
 | Constraint | Typical Range | Impact on Capabilities |
 |------------|--------------|----------------------|
-| Flash Memory | 16 KB – 2 MB | Code size must be optimized; dead code elimination required |
-| RAM | 2 KB – 512 KB | Stack and heap are tightly bounded; dynamic allocation discouraged |
-| Clock Speed | 8 MHz – 400 MHz | Algorithm choice affects timing; real-time guarantees needed |
-| Power Budget | µW – mW | Sleep modes, clock gating, and duty cycling may be required |
-| Peripheral Count | 2–50 | Driver generation must match exact hardware configuration |
+| Flash Memory | 16 KB â€“ 2 MB | Code size must be optimized; dead code elimination required |
+| RAM | 2 KB â€“ 512 KB | Stack and heap are tightly bounded; dynamic allocation discouraged |
+| Clock Speed | 8 MHz â€“ 400 MHz | Algorithm choice affects timing; real-time guarantees needed |
+| Power Budget | ÂµW â€“ mW | Sleep modes, clock gating, and duty cycling may be required |
+| Peripheral Count | 2â€“50 | Driver generation must match exact hardware configuration |
 | Toolchain Diversity | ARM GCC, RISC-V GCC, IAR, Keil | Multiple compiler backends with different optimizations |
 
 ## Development Flow
@@ -69,8 +69,8 @@ Embedded development in AIOS follows this workflow:
 6. Application logic generated
 7. Cross-compilation in BuildCross sandbox
 8. Static analysis (stack depth, memory bounds, timing)
-9. If hardware available → flash and HIL test
-10. If hardware unavailable → simulation testing
+9. If hardware available â†’ flash and HIL test
+10. If hardware unavailable â†’ simulation testing
 11. DTS confidence evaluation
 12. Firmware artifact signed and published
 13. Academy indexes new board-support knowledge
@@ -78,15 +78,15 @@ Embedded development in AIOS follows this workflow:
 
 ## Invariants
 
-1. **EMB-I-001 — Target-Bounded**: A FirmwareWorker may only generate code for MCU targets that are registered and verified in its Genome. Cross-target code generation is prohibited.
+1. **EMB-I-001 â€” Target-Bounded**: A FirmwareWorker may only generate code for MCU targets that are registered and verified in its Genome. Cross-target code generation is prohibited.
 
-2. **EMB-I-002 — Toolchain Verified**: Every cross-compilation uses a pinned, verified toolchain. Toolchains are cryptographically hashed and compared against known-good hashes before use.
+2. **EMB-I-002 â€” Toolchain Verified**: Every cross-compilation uses a pinned, verified toolchain. Toolchains are cryptographically hashed and compared against known-good hashes before use.
 
-3. **EMB-I-003 — Resource-Constrained Design**: Generated firmware must not exceed the target device's flash and RAM bounds. Violations cause build failure.
+3. **EMB-I-003 â€” Resource-Constrained Design**: Generated firmware must not exceed the target device's flash and RAM bounds. Violations cause build failure.
 
-4. **EMB-I-004 — Hardware Safety**: Hardware-in-the-loop tests require physical safety verification before execution. High-power or hazardous hardware tests require Security Council authorization.
+4. **EMB-I-004 â€” Hardware Safety**: Hardware-in-the-loop tests require physical safety verification before execution. High-power or hazardous hardware tests require Security Council authorization.
 
-5. **EMB-I-005 — Deterministic Build**: Same source, toolchain, and configuration always produces identical binary output. Build reproducibility is verified by checksum.
+5. **EMB-I-005 â€” Deterministic Build**: Same source, toolchain, and configuration always produces identical binary output. Build reproducibility is verified by checksum.
 
 ## Edge Cases
 
@@ -117,11 +117,11 @@ Firmware Workers operate in sandboxed build environments. Cross-compilation tool
 
 ### Evidence
 
-Every embedded operation produces an Event — code generation, compilation, flashing, testing. Build artifacts are stored with their source Event chain. Hardware probe results are recorded for audit and reproducibility. (PHI-008)
+Every embedded operation produces an Event â€” code generation, compilation, flashing, testing. Build artifacts are stored with their source Event chain. Hardware probe results are recorded for audit and reproducibility. (PHI-008)
 
 ### Lifecycle
 
-Firmware Workers follow the canonical lifecycle. Hardware sessions are ephemeral — created for a test session and destroyed. Board-support knowledge follows the Academy knowledge lifecycle. Firmware releases follow versioning per Foundations/009-Versioning.md. (Physics/006-Lifecycles.md)
+Firmware Workers follow the canonical lifecycle. Hardware sessions are ephemeral â€” created for a test session and destroyed. Board-support knowledge follows the Academy knowledge lifecycle. Firmware releases follow versioning per Foundations/009-Versioning.md. (Physics/006-Lifecycles.md)
 
 ### Capability Bounds
 
@@ -129,7 +129,7 @@ Embedded capabilities are bounded by the available toolchains, hardware targets,
 
 ### Communication
 
-All Embedded domain communication flows through ACF. Hardware test fixtures communicate through serial adapters abstracted as resource providers. Flash operations use provider-specific protocols abstracted through the Provider SDK. (Law 3 — Communication)
+All Embedded domain communication flows through ACF. Hardware test fixtures communicate through serial adapters abstracted as resource providers. Flash operations use provider-specific protocols abstracted through the Provider SDK. (Law 3 â€” Communication)
 
 ### Design DNA
 
@@ -138,9 +138,9 @@ All Embedded domain communication flows through ACF. Hardware test fixtures comm
 | R1 (Modulsingularity) | Each embedded capability (firmware, cross-compile, HIL, analysis) is a separate concern |
 | R5 (Liskov) | All toolchain adapters implement the CrossCompiler interface |
 | R9 (Deterministic) | Same source and toolchain version produces identical binaries |
-| R10 (Simpler Over Complex) | Firmware uses linear build pipelines — no branching complexity |
+| R10 (Simpler Over Complex) | Firmware uses linear build pipelines â€” no branching complexity |
 | R13 (Design for Failure) | HIL test failures preserve partial results; build failures return complete logs |
-| R14 (Paved Path) | Paved path: generate → cross-compile → test → flash → verify |
+| R14 (Paved Path) | Paved path: generate â†’ cross-compile â†’ test â†’ flash â†’ verify |
 
 ## Component Map
 
@@ -167,16 +167,16 @@ All Embedded domain communication flows through ACF. Hardware test fixtures comm
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/0005-Domain-Architecture.md | Domain Architecture — Embedded domain structure |
-| Physics/005-Events.md | Evidence — Embedded operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — Embedded capability bounds and resource profiles |
-| Physics/010-Execution.md | Execution — Embedded build pipeline execution model |
-| Bible/02-Core/Sou/002-Planner.md | Planner — Sou produces firmware development plans |
-| Bible/02-Core/AGS/000-Overview.md | AGS — FirmwareWorker and BuildCross Genome templates |
-| Bible/02-Core/Academy/000-Overview.md | Academy — Board-support knowledge management |
-| Bible/02-Core/DTS/000-Overview.md | DTS — Firmware quality confidence scoring |
-| Bible/02-Core/ROS/000-Overview.md | ROS — Compute and storage budget for cross-compilation |
-| Bible/06-Services/ACF/000-Overview.md | ACF — Communication for hardware adapter control |
-| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — Hardware adapter provider interface |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Bible/0005-Domain-Architecture.md | Domain Architecture â€” Embedded domain structure |
+| Physics/005-Events.md | Evidence â€” Embedded operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” Embedded capability bounds and resource profiles |
+| Physics/010-Execution.md | Execution â€” Embedded build pipeline execution model |
+| Bible/02-Core/Sou/002-Planner.md | Planner â€” Sou produces firmware development plans |
+| Bible/02-Core/AGS/000-Overview.md | AGS â€” FirmwareWorker and BuildCross Genome templates |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” Board-support knowledge management |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” Firmware quality confidence scoring |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” Compute and storage budget for cross-compilation |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” Communication for hardware adapter control |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK â€” Hardware adapter provider interface |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Linux — 004: Power Management
+﻿# AIOS Bible â€” Domains
+## Linux â€” 004: Power Management
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-LNX-004 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Enable AIOS to manage Linux power states — suspend/resume, CPU frequency scaling, ACPI configuration, and thermal monitoring — to optimize energy consumption while preserving system stability.
+Enable AIOS to manage Linux power states â€” suspend/resume, CPU frequency scaling, ACPI configuration, and thermal monitoring â€” to optimize energy consumption while preserving system stability.
 
 ## Architecture
 
@@ -24,27 +24,27 @@ Power management is modeled as a state machine with transitions between S0 (work
 ### Architecture Flow
 
 ```text
-┌─────────────────────────────────────────────────────────────────┐
-│                      PowerManager Agent                          │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
-│  │ Governor  │  │ Suspend  │  │ Thermal  │  │ Wakeup   │        │
-│  │ Handler   │  │ Handler  │  │ Handler  │  │ Handler  │        │
-│  └─────┬────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘        │
-│        │             │             │             │              │
-│  ┌─────▼─────────────▼─────────────▼─────────────▼─────┐       │
-│  │              Profile & State Machine                  │       │
-│  │  ┌────────────┐  ┌────────────┐  ┌───────────────┐  │       │
-│  │  │ Power      │  │ S0-S5      │  │ Thermal       │  │       │
-│  │  │ Profile    │  │ Transitions│  │ Thresholds    │  │       │
-│  │  └────────────┘  └────────────┘  └───────────────┘  │       │
-│  └───────────────────────┬──────────────────────────────┘       │
-│                          │                                      │
-│  ┌───────────────────────▼──────────────────────────────┐       │
-│  │              Hardware / Kernel Interface              │       │
-│  │  /sys/devices/system/cpu   /sys/class/thermal/       │       │
-│  │  /sys/power/state          /proc/acpi/wakeup         │       │
-│  └──────────────────────────────────────────────────────┘       │
-└─────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                      PowerManager Agent                          â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”‚
+â”‚  â”‚ Governor  â”‚  â”‚ Suspend  â”‚  â”‚ Thermal  â”‚  â”‚ Wakeup   â”‚        â”‚
+â”‚  â”‚ Handler   â”‚  â”‚ Handler  â”‚  â”‚ Handler  â”‚  â”‚ Handler  â”‚        â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜        â”‚
+â”‚        â”‚             â”‚             â”‚             â”‚              â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”       â”‚
+â”‚  â”‚              Profile & State Machine                  â”‚       â”‚
+â”‚  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚       â”‚
+â”‚  â”‚  â”‚ Power      â”‚  â”‚ S0-S5      â”‚  â”‚ Thermal       â”‚  â”‚       â”‚
+â”‚  â”‚  â”‚ Profile    â”‚  â”‚ Transitionsâ”‚  â”‚ Thresholds    â”‚  â”‚       â”‚
+â”‚  â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚
+â”‚                          â”‚                                      â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚
+â”‚  â”‚              Hardware / Kernel Interface              â”‚       â”‚
+â”‚  â”‚  /sys/devices/system/cpu   /sys/class/thermal/       â”‚       â”‚
+â”‚  â”‚  /sys/power/state          /proc/acpi/wakeup         â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Data Model (TypeScript interfaces)
@@ -129,13 +129,13 @@ interface PowerAuditEntry {
 
 ## Core Concepts / Operations
 
-- **set_power_profile(profile)** — applies named power profile across all CPUs and devices
-- **switch_governor(id, governor)** — changes CPU frequency scaling governor
-- **configure_suspend(config)** — sets suspend/hibernate timeouts and wakeup sources
-- **initiate_suspend(mode)** — triggers S3 suspend or S4 hibernate with pre-save checks
-- **initiate_resume()** — triggers resume from suspend or hibernate
-- **manage_thermal(zone, action)** — sets thermal trip points or enables cooling device
-- **list_wakeup_sources()** — enumerates devices that can wake the system
+- **set_power_profile(profile)** â€” applies named power profile across all CPUs and devices
+- **switch_governor(id, governor)** â€” changes CPU frequency scaling governor
+- **configure_suspend(config)** â€” sets suspend/hibernate timeouts and wakeup sources
+- **initiate_suspend(mode)** â€” triggers S3 suspend or S4 hibernate with pre-save checks
+- **initiate_resume()** â€” triggers resume from suspend or hibernate
+- **manage_thermal(zone, action)** â€” sets thermal trip points or enables cooling device
+- **list_wakeup_sources()** â€” enumerates devices that can wake the system
 
 ### Operations Table
 
@@ -201,21 +201,21 @@ interface PowerAuditEntry {
 | PWR-INV-05 | Power profile changes are reverted on failure | ProfileHandler rolls back to previous profile if apply fails |
 | PWR-INV-06 | Suspend is not initiated while critical thermal event active | PowerManager blocks suspend when thermal state is critical |
 
-## Design DNA (table with Rule, Assessment — include R1,R2,R3,R4,R5,R6,R9,R10,R13,R14,R15)
+## Design DNA (table with Rule, Assessment â€” include R1,R2,R3,R4,R5,R6,R9,R10,R13,R14,R15)
 
 | Rule | Assessment |
 |------|------------|
-| R1 — Composition over Inheritance | PowerProfile composes governor, thermal, and wakeup settings; agent composes handlers |
-| R2 — Explicit over Implicit | All power states and governors explicitly declared; no automatic fallback without log |
-| R3 — Immutable Artifacts | Saved suspend state is immutable snapshot; power profiles versioned |
-| R4 — Stateless Workers | PowerManager is stateless; state held in PowerProfile resources |
-| R5 — Idempotency | Applying same power profile twice is no-op; governor switch idempotent |
-| R6 — Observability | Every power state transition and thermal event emits structured event |
-| R9 — Fail Closed | On resume failure, system halts to safe recovery state; no partial boot |
-| R10 — Least Privilege | Suspend and governor changes require elevated capability grants |
-| R13 — Graceful Degradation | If preferred governor unsupported, fall back to nearest alternative |
-| R14 — Data Immutability | Power profile history preserved; previous profile snapshots retained |
-| R15 — Explicit Errors | Every failure returns typed code with recovery action |
+| R1 â€” Composition over Inheritance | PowerProfile composes governor, thermal, and wakeup settings; agent composes handlers |
+| R2 â€” Explicit over Implicit | All power states and governors explicitly declared; no automatic fallback without log |
+| R3 â€” Immutable Artifacts | Saved suspend state is immutable snapshot; power profiles versioned |
+| R4 â€” Stateless Workers | PowerManager is stateless; state held in PowerProfile resources |
+| R5 â€” Idempotency | Applying same power profile twice is no-op; governor switch idempotent |
+| R6 â€” Observability | Every power state transition and thermal event emits structured event |
+| R9 â€” Fail Closed | On resume failure, system halts to safe recovery state; no partial boot |
+| R10 â€” Least Privilege | Suspend and governor changes require elevated capability grants |
+| R13 â€” Graceful Degradation | If preferred governor unsupported, fall back to nearest alternative |
+| R14 â€” Data Immutability | Power profile history preserved; previous profile snapshots retained |
+| R15 â€” Explicit Errors | Every failure returns typed code with recovery action |
 
 ## Related Documents (table)
 
@@ -224,8 +224,8 @@ interface PowerAuditEntry {
 | Bible/07-Domains/Linux/000-Overview.md | Parent overview |
 | Bible/07-Domains/Linux/001-Kernel.md | Kernel parameters for CPU scaling and ACPI |
 | Bible/07-Domains/Linux/002-System-Admin.md | System administration sibling |
-| Bible/07-Laws/Law-004-Evidence.md | Audit trail for power events |
-| Bible/07-Laws/Law-007-Capability-Bounds.md | Capability scoping for power ops |
-| Bible/Physics/005-Events.md | Event schema lineage |
-| Bible/Physics/007-Capabilities.md | Capability model |
-| Bible/Physics/010-Execution.md | Execution lifecycle |
+| Physics/000-Laws.md | Audit trail for power events |
+| Physics/000-Laws.md | Capability scoping for power ops |
+| Physics/005-Events.md | Event schema lineage |
+| Physics/007-Capabilities.md | Capability model |
+| Physics/010-Execution.md | Execution lifecycle |

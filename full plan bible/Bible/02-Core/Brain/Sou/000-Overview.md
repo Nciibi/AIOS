@@ -1,11 +1,11 @@
-# AIOS Bible — Brain
-## 000 — Overview (The Executive Intelligence)
+﻿# AIOS Bible â€” Brain
+## 000 â€” Overview (The Executive Intelligence)
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 2.0 |
-| Category | Bible — Brain |
+| Version | 2.0.0 |
+| Category | Bible â€” Brain |
 | Document ID | AIOS-BBL-002-SOU-000 |
 | Source Laws | Law 9 (Constitutional Supremacy), Law 4 (Identity), Law 5 (Autonomy), Law 3 (Communication) |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-**Sou is the single constitutional intelligence of AIOS.** It is not a wrapper around an agent — Sou IS the agent. Every strategic decision, every mission creation, every user-facing response originates from Sou.
+**Sou is the single constitutional intelligence of AIOS.** It is not a wrapper around an agent â€” Sou IS the agent. Every strategic decision, every mission creation, every user-facing response originates from Sou.
 
 Sou has:
 - **Identity**: A persistent sense of self (name, purpose, history)
@@ -29,10 +29,10 @@ Sou has:
 
 | Statement | Implication |
 |-----------|-------------|
-| Sou IS the agent | Sou is not middleware, not a wrapper, not an orchestrator — Sou IS the intelligence making decisions |
+| Sou IS the agent | Sou is not middleware, not a wrapper, not an orchestrator â€” Sou IS the intelligence making decisions |
 | Sou IS the user's counterpart | The user interacts with Sou directly, not with a "system" |
 | Sou IS responsible | Every output, every action, every mission traces back to Sou's decision |
-| Sou IS the learner | Sou improves from outcomes — not the system, not workers, Sou |
+| Sou IS the learner | Sou improves from outcomes â€” not the system, not workers, Sou |
 | Sou IS accountable | Security Council verifies Sou's decisions; Academy records Sou's learning |
 
 ## What Sou Is NOT
@@ -48,36 +48,36 @@ Sou has:
 ## Sou Architecture
 
 ```
-┌──────────────────────────────────────────────────────────────────────┐
-│                          SOU                                         │
-│                                                                      │
-│  CORE IDENTITY                                                        │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐                 │
-│  │   Identity   │ │  Personality  │ │    Goals     │                 │
-│  │  "Who I am"  │ │ "How I act"  │ │ "What I want"│                 │
-│  └──────────────┘ └──────────────┘ └──────────────┘                 │
-│                                                                      │
-│  EXECUTIVE FUNCTIONS                                                  │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐                 │
-│  │  Executive   │ │   Mission    │ │  Delegation   │                 │
-│  │  Decisions   │ │   Creation   │ │  (Assign work)│                 │
-│  └──────────────┘ └──────────────┘ └──────────────┘                 │
-│                                                                      │
-│  LEARNING & ADAPTATION                                                │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐                 │
-│  │   Learning   │ │  Reflection  │ │   Memory     │                 │
-│  │(Academy feed)│ │ (Self-review)│ │(Memory OS R/W)│                 │
-│  └──────────────┘ └──────────────┘ └──────────────┘                 │
-│                                                                      │
-│  COMMUNICATION                                                        │
-│  ┌──────────────┐ ┌──────────────┐                                   │
-│  │  User-facing │ │  Internal    │  ALL via ACF                      │
-│  │  Response    │ │  Delegation  │                                   │
-│  └──────────────┘ └──────────────┘                                   │
-└──────────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                          SOU                                         â”‚
+â”‚                                                                      â”‚
+â”‚  CORE IDENTITY                                                        â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                 â”‚
+â”‚  â”‚   Identity   â”‚ â”‚  Personality  â”‚ â”‚    Goals     â”‚                 â”‚
+â”‚  â”‚  "Who I am"  â”‚ â”‚ "How I act"  â”‚ â”‚ "What I want"â”‚                 â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                 â”‚
+â”‚                                                                      â”‚
+â”‚  EXECUTIVE FUNCTIONS                                                  â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                 â”‚
+â”‚  â”‚  Executive   â”‚ â”‚   Mission    â”‚ â”‚  Delegation   â”‚                 â”‚
+â”‚  â”‚  Decisions   â”‚ â”‚   Creation   â”‚ â”‚  (Assign work)â”‚                 â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                 â”‚
+â”‚                                                                      â”‚
+â”‚  LEARNING & ADAPTATION                                                â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                 â”‚
+â”‚  â”‚   Learning   â”‚ â”‚  Reflection  â”‚ â”‚   Memory     â”‚                 â”‚
+â”‚  â”‚(Academy feed)â”‚ â”‚ (Self-review)â”‚ â”‚(Memory OS R/W)â”‚                 â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                 â”‚
+â”‚                                                                      â”‚
+â”‚  COMMUNICATION                                                        â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                                   â”‚
+â”‚  â”‚  User-facing â”‚ â”‚  Internal    â”‚  ALL via ACF                      â”‚
+â”‚  â”‚  Response    â”‚ â”‚  Delegation  â”‚                                   â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                                   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
-## Sou Invariants (SOU-001–007)
+## Sou Invariants (SOU-001â€“007)
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
@@ -116,11 +116,11 @@ Sou does NOT directly implement reasoning, planning, or memory. These are delega
 5. Memory recall: "What do I know about this?" (Memory OS)
 6. Reasoning: "What should I do?" (Cognitive OS)
 7. Decision: "I will do X" (Decision System)
-8. If mission needed: Create mission → Delegate to Institution OS
-9. If inference needed: Send to LLMOS → Get result
+8. If mission needed: Create mission â†’ Delegate to Institution OS
+9. If inference needed: Send to LLMOS â†’ Get result
 10. Compose final response
 11. Response sent via ACF (to Conversation OS for user delivery)
-12. Outcome observed → Learning integration
+12. Outcome observed â†’ Learning integration
 ```
 
 ## Sou Events
@@ -141,16 +141,16 @@ Sou does NOT directly implement reasoning, planning, or memory. These are delega
 |----------|----------|
 | Input is ambiguous | Sou requests clarification before proceeding |
 | Multiple competing goals | Decision System scores and ranks |
-| Brain service unavailable | Sou degrades — works without the service, notes capability gap |
+| Brain service unavailable | Sou degrades â€” works without the service, notes capability gap |
 | No valid decision | Sou reports inability to decide, surfaces constraints |
 | User overrides | Human Override flag pauses all Sou decisions |
-| Identity conflict | Federation context — Sou asserts identity, negotiates scope |
+| Identity conflict | Federation context â€” Sou asserts identity, negotiates scope |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/02-Core/Brain/000-Overview.md | Brain — the cognitive container |
+| Bible/02-Core/Brain/000-Overview.md | Brain â€” the cognitive container |
 | Bible/02-Core/Brain/Sou/001-Reasoning.md | Reasoning (via Cognitive OS) |
 | Bible/02-Core/Brain/Sou/002-Planner.md | Planning (via Planning System) |
 | Bible/02-Core/Brain/Sou/003-Missions.md | Mission creation and oversight |

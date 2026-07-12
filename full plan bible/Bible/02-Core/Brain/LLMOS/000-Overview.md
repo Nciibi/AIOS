@@ -1,13 +1,13 @@
-# AIOS Bible — Brain/LLMOS
-## 000 — LLMOS: Large Language Model Operating System
+﻿# AIOS Bible â€” Brain/LLMOS
+## 000 â€” LLMOS: Large Language Model Operating System
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-000 |
-| Source Laws | Law 2 — Law of Non-Execution, Law 3 — Law of Communication, Law 7 — Law of Capability Bounds, Law 8 — Law of Verification-First |
+| Source Laws | Law 2 â€” Law of Non-Execution, Law 3 â€” Law of Communication, Law 7 â€” Law of Capability Bounds, Law 8 â€” Law of Verification-First |
 | Source Physics | Physics/010-Execution.md, Physics/007-Capabilities.md, Physics/009-Interaction.md |
 | Supersedes | Bible/04-Execution/LLMOS/000-Overview.md (moved to Brain) |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-LLMOS is the dedicated AI inference operating system within AIOS. Every request to an AI model — whether for reasoning, generation, embedding, or classification — routes through LLMOS. No Worker, Engine, or Service calls an AI provider directly. LLMOS owns model selection, prompt compilation, context management, memory injection, token budgeting, cost optimization, streaming, retry, guardrails, caching, and response validation.
+LLMOS is the dedicated AI inference operating system within AIOS. Every request to an AI model â€” whether for reasoning, generation, embedding, or classification â€” routes through LLMOS. No Worker, Engine, or Service calls an AI provider directly. LLMOS owns model selection, prompt compilation, context management, memory injection, token budgeting, cost optimization, streaming, retry, guardrails, caching, and response validation.
 
 LLMOS transforms AI inference from a direct provider call into a managed, observable, policy-governed subsystem with the same operational rigor as any other AIOS platform service.
 
@@ -23,55 +23,55 @@ LLMOS transforms AI inference from a direct provider call into a managed, observ
 
 ```
 Sou / Brain Service
-         │
-         ▼  (via ACF — acf://llmos/inference)
-┌────────────────────────────────────────────────────────────────┐
-│                        LLMOS GATEWAY                           │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌───────────────┐  │
-│  │ Request   │  │ Security │  │ Rate     │  │ Token Budget  │  │
-│  │ Receiver  │  │ Check    │  │ Limiter  │  │ Check         │  │
-│  └──────────┘  └──────────┘  └──────────┘  └───────────────┘  │
-└────────────────────────────────────────────────────────────────┘
-         │
-         ▼
-┌────────────────────────────────────────────────────────────────┐
-│                      LLMOS PIPELINE                            │
-│                                                               │
-│  ┌──────────┐    ┌──────────┐    ┌──────────┐               │
-│  │ MODEL    │───►│ COST     │───►│ ROUTER   │               │
-│  │ REGISTRY │    │ OPTIMIZER│    │          │               │
-│  └──────────┘    └──────────┘    └──────────┘               │
-│                                      │                       │
-│                                      ▼                       │
-│  ┌──────────┐    ┌──────────┐    ┌──────────┐               │
-│  │ CACHE    │───►│ CONTEXT  │───►│ MEMORY   │               │
-│  │ (lookup) │    │ BUILDER  │    │ INJECTION│               │
-│  └──────────┘    └──────────┘    └──────────┘               │
-│       │               │               │                       │
-│       ▼               ▼               ▼                       │
-│  ┌──────────┐    ┌──────────┐    ┌──────────┐               │
-│  │ PROMPT   │───►│ GUARDRAIL│───►│ RETRY    │               │
-│  │ COMPILER │    │  CHECK   │    │ ENGINE   │               │
-│  └──────────┘    └──────────┘    └──────────┘               │
-│                        │            │                        │
-│                        ▼            ▼                        │
-│  ┌──────────┐    ┌──────────┐    ┌──────────┐               │
-│  │ STREAM   │───►│ GUARDRAIL│───►│ RESPONSE │               │
-│  │ MANAGER  │    │ (output) │    │ VALIDATOR│               │
-│  └──────────┘    └──────────┘    └──────────┘               │
-│       │                                      │               │
-│       ▼                                      ▼               │
-│  ┌──────────┐                          ┌──────────┐         │
-│  │ PROVIDER │                          │ CACHE    │         │
-│  │ SDK LAYER│                          │ (store)  │         │
-│  └──────────┘                          └──────────┘         │
-│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌──────────┐  │   │
-│  │  │ Claude  │ │  Codex  │ │ Ollama  │ │ (future) │  │   │
-│  │  └─────────┘ └─────────┘ └─────────┘ └──────────┘  │   │
-│  └──────────────────────────────────────────────────────┘   │
-└────────────────────────────────────────────────────────────────┘
-         │
-         ▼
+         â”‚
+         â–¼  (via ACF â€” acf://llmos/inference)
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                        LLMOS GATEWAY                           â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+â”‚  â”‚ Request   â”‚  â”‚ Security â”‚  â”‚ Rate     â”‚  â”‚ Token Budget  â”‚  â”‚
+â”‚  â”‚ Receiver  â”‚  â”‚ Check    â”‚  â”‚ Limiter  â”‚  â”‚ Check         â”‚  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                      LLMOS PIPELINE                            â”‚
+â”‚                                                               â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”               â”‚
+â”‚  â”‚ MODEL    â”‚â”€â”€â”€â–ºâ”‚ COST     â”‚â”€â”€â”€â–ºâ”‚ ROUTER   â”‚               â”‚
+â”‚  â”‚ REGISTRY â”‚    â”‚ OPTIMIZERâ”‚    â”‚          â”‚               â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜               â”‚
+â”‚                                      â”‚                       â”‚
+â”‚                                      â–¼                       â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”               â”‚
+â”‚  â”‚ CACHE    â”‚â”€â”€â”€â–ºâ”‚ CONTEXT  â”‚â”€â”€â”€â–ºâ”‚ MEMORY   â”‚               â”‚
+â”‚  â”‚ (lookup) â”‚    â”‚ BUILDER  â”‚    â”‚ INJECTIONâ”‚               â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜               â”‚
+â”‚       â”‚               â”‚               â”‚                       â”‚
+â”‚       â–¼               â–¼               â–¼                       â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”               â”‚
+â”‚  â”‚ PROMPT   â”‚â”€â”€â”€â–ºâ”‚ GUARDRAILâ”‚â”€â”€â”€â–ºâ”‚ RETRY    â”‚               â”‚
+â”‚  â”‚ COMPILER â”‚    â”‚  CHECK   â”‚    â”‚ ENGINE   â”‚               â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜               â”‚
+â”‚                        â”‚            â”‚                        â”‚
+â”‚                        â–¼            â–¼                        â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”               â”‚
+â”‚  â”‚ STREAM   â”‚â”€â”€â”€â–ºâ”‚ GUARDRAILâ”‚â”€â”€â”€â–ºâ”‚ RESPONSE â”‚               â”‚
+â”‚  â”‚ MANAGER  â”‚    â”‚ (output) â”‚    â”‚ VALIDATORâ”‚               â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜               â”‚
+â”‚       â”‚                                      â”‚               â”‚
+â”‚       â–¼                                      â–¼               â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”         â”‚
+â”‚  â”‚ PROVIDER â”‚                          â”‚ CACHE    â”‚         â”‚
+â”‚  â”‚ SDK LAYERâ”‚                          â”‚ (store)  â”‚         â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜         â”‚
+â”‚  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚   â”‚
+â”‚  â”‚  â”‚ Claude  â”‚ â”‚  Codex  â”‚ â”‚ Ollama  â”‚ â”‚ (future) â”‚  â”‚   â”‚
+â”‚  â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚   â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
   AI Provider API (Anthropic, OpenAI, Ollama, etc.)
 ```
 
@@ -152,7 +152,7 @@ For streaming requests, LLMOS returns a stream of `LLMOSChunk` objects:
 | `sequence` | u64 | Monotonic chunk sequence number |
 | `request_id` | UUIDv7 | Matching request identifier |
 | `delta` | string | Text delta for this chunk |
-| `finish_reason` | string | Present only on final chunk — stop, length, content_filter |
+| `finish_reason` | string | Present only on final chunk â€” stop, length, content_filter |
 | `usage` | TokenUsage | Cumulative token usage at this point |
 | `metrics` | StreamMetrics | Cumulative latency, token rate |
 
@@ -253,9 +253,9 @@ Controls what memory LLMOS injects into the context:
 
 - LLM-INV-001: Every request produces exactly one terminal Event (Completed or Failed).
 - LLM-INV-002: Pipeline stages execute in order; no stage may be skipped.
-- LLM-INV-003: No Worker or Engine calls an AI provider directly — all AI traffic passes through LLMOS.
+- LLM-INV-003: No Worker or Engine calls an AI provider directly â€” all AI traffic passes through LLMOS.
 - LLM-INV-004: Gate stages (0-3) run before any model selection occurs.
-- LLM-INV-005: Guardrails run twice — on input (Stage 11) and on output (Stage 14).
+- LLM-INV-005: Guardrails run twice â€” on input (Stage 11) and on output (Stage 14).
 - LLM-INV-006: Cache is checked before provider call; cache is written after response validation.
 - LLM-INV-007: Cost optimization never selects a model that violates the requester's constraints.
 - LLM-INV-008: Memory injection never exceeds the configured `max_memory_tokens`.
@@ -265,7 +265,7 @@ Controls what memory LLMOS injects into the context:
 
 ### Security
 
-Every LLMOS request carries an execution token validated by the Security Council pipeline (7-stage). LLMOS itself authenticates to ACF with its own identity. Provider API credentials are managed by SSM and resolved at invocation time — never stored in LLMOS memory between requests. All provider communication uses TLS 1.3. LLMOS enforces data residency constraints when routing to cloud providers.
+Every LLMOS request carries an execution token validated by the Security Council pipeline (7-stage). LLMOS itself authenticates to ACF with its own identity. Provider API credentials are managed by SSM and resolved at invocation time â€” never stored in LLMOS memory between requests. All provider communication uses TLS 1.3. LLMOS enforces data residency constraints when routing to cloud providers.
 
 ### Evidence
 
@@ -273,7 +273,7 @@ Every pipeline stage produces at least one Event. The terminal Event (Completed/
 
 ### Lifecycle
 
-LLMOS has no persistent state — it is stateless across requests. The Model Registry is rebuilt on startup from provider health checks. The Cache is backed by EVS for persistence. Per-entity token budgets are managed by ROS and consulted at Stage 3.
+LLMOS has no persistent state â€” it is stateless across requests. The Model Registry is rebuilt on startup from provider health checks. The Cache is backed by EVS for persistence. Per-entity token budgets are managed by ROS and consulted at Stage 3.
 
 ### Capability Bounds
 
@@ -287,21 +287,21 @@ Workers and Engines communicate with LLMOS over ACF using the `acf://llmos/infer
 
 | Rule | Assessment |
 |------|------------|
-| R1 — Modulsingularity | LLMOS does one thing: manage AI model inference through a standardized pipeline. |
-| R2 — Dependency Order | LLMOS depends on ACF (communication), EVS (events), SSM (secrets), ROS (budgets). No cycles. |
-| R3 — DRY | Model selection, prompt compilation, guardrails, caching are in LLMOS — not duplicated across providers or Workers. |
-| R4 — Builder Pattern | The final provider request is built incrementally through Context Builder, Memory Injection, and Prompt Compiler. |
-| R5 — Liskov Substitution | Every Model Provider implements the same `ModelProvider` interface. Providers are drop-in replaceable. |
-| R6 — DI over Singletons | Model Provider dependencies (API keys, endpoints) are injected through the SDK's `initialize()` method. |
-| R7 — Tests Exist | Every pipeline component has unit tests. Integration tests route through a mock Provider SDK. |
-| R8 — Fast Tests | Pipeline tests complete in < 100ms using in-memory mock providers and cache backends. |
-| R9 — Deterministic | Model selection is deterministic for the same inputs. Provider nondeterminism is contained in Stage 12. |
-| R10 — Simpler Over Complex | The pipeline is sequential and linear. No branching except for streaming vs. non-streaming. |
-| R11 — Refactor over Rewrite | New pipeline stages can be inserted without modifying existing stages. New providers implement existing interfaces. |
-| R12 — Embrace Errors | Every error has a unique LLM-NNNN code with stage, condition, and recovery path. |
-| R13 — Design for Failure | Retry Engine handles provider failures. Fallback chains handle model unavailability. Cache provides degradation path. |
-| R14 — Paved Path | The paved path is Stages 0-17 in order. No alternative pipeline flow. |
-| R15 — Open/Closed | New AI providers implement the `ModelProvider` interface without modifying the LLMOS pipeline. |
+| R1 â€” Modulsingularity | LLMOS does one thing: manage AI model inference through a standardized pipeline. |
+| R2 â€” Dependency Order | LLMOS depends on ACF (communication), EVS (events), SSM (secrets), ROS (budgets). No cycles. |
+| R3 â€” DRY | Model selection, prompt compilation, guardrails, caching are in LLMOS â€” not duplicated across providers or Workers. |
+| R4 â€” Builder Pattern | The final provider request is built incrementally through Context Builder, Memory Injection, and Prompt Compiler. |
+| R5 â€” Liskov Substitution | Every Model Provider implements the same `ModelProvider` interface. Providers are drop-in replaceable. |
+| R6 â€” DI over Singletons | Model Provider dependencies (API keys, endpoints) are injected through the SDK's `initialize()` method. |
+| R7 â€” Tests Exist | Every pipeline component has unit tests. Integration tests route through a mock Provider SDK. |
+| R8 â€” Fast Tests | Pipeline tests complete in < 100ms using in-memory mock providers and cache backends. |
+| R9 â€” Deterministic | Model selection is deterministic for the same inputs. Provider nondeterminism is contained in Stage 12. |
+| R10 â€” Simpler Over Complex | The pipeline is sequential and linear. No branching except for streaming vs. non-streaming. |
+| R11 â€” Refactor over Rewrite | New pipeline stages can be inserted without modifying existing stages. New providers implement existing interfaces. |
+| R12 â€” Embrace Errors | Every error has a unique LLM-NNNN code with stage, condition, and recovery path. |
+| R13 â€” Design for Failure | Retry Engine handles provider failures. Fallback chains handle model unavailability. Cache provides degradation path. |
+| R14 â€” Paved Path | The paved path is Stages 0-17 in order. No alternative pipeline flow. |
+| R15 â€” Open/Closed | New AI providers implement the `ModelProvider` interface without modifying the LLMOS pipeline. |
 
 ## Relationship to Runtime SDK
 

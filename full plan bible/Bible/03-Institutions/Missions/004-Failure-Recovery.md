@@ -1,13 +1,13 @@
-# AIOS Bible — Institutions
-## 004 — Mission Failure & Recovery
+﻿# AIOS Bible â€” Institutions
+## 004 â€” Mission Failure & Recovery
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Institutions |
+| Version | 1.0.0 |
+| Category | Bible â€” Institutions |
 | Document ID | AIOS-BBL-003-MSN-004 |
-| Source Laws | Law 1 — Law of Origin, Law 4 — Law of Evidence, Law 6 — Law of Lifecycle Compliance |
+| Source Laws | Law 1 â€” Law of Origin, Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle Compliance |
 | Source Physics | Physics/002-Missions.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Handle Mission failures gracefully — detection, classification, escalation paths, and recovery strategies while maintaining evidence integrity.
+Handle Mission failures gracefully â€” detection, classification, escalation paths, and recovery strategies while maintaining evidence integrity.
 
 ## Architecture
 
@@ -23,26 +23,26 @@ Failure recovery follows a detect-classify-escalate-recover pipeline. Detection 
 
 ```
 Failure Event
-    │
-    ▼
+    â”‚
+    â–¼
 Detection (timeout / error / heartbeat / evidence / contract)
-    │
-    ▼
+    â”‚
+    â–¼
 Classification (transient / systemic / constitutional / cascading)
-    │
-    ▼
+    â”‚
+    â–¼
 Escalation Decision
-    ├── Auto-Retry ──► Success → Resume
-    │                  └── Exhausted → Escalate
-    ├── Supervisor ──► Recovery Strategy Proposed
-    ├── Security Council
-    └── Console
-           │
-           ▼
+    â”œâ”€â”€ Auto-Retry â”€â”€â–º Success â†’ Resume
+    â”‚                  â””â”€â”€ Exhausted â†’ Escalate
+    â”œâ”€â”€ Supervisor â”€â”€â–º Recovery Strategy Proposed
+    â”œâ”€â”€ Security Council
+    â””â”€â”€ Console
+           â”‚
+           â–¼
     Recovery Execution (retry / rollback / failover / degrade / abort)
-           │
-           ├── Success → Resume Mission
-           └── Failure → Escalate to Next Level
+           â”‚
+           â”œâ”€â”€ Success â†’ Resume Mission
+           â””â”€â”€ Failure â†’ Escalate to Next Level
 ```
 
 Every step produces evidence for audit and maintains the evidence chain integrity invariant.
@@ -118,7 +118,7 @@ interface RecoveryExecution {
 
 ### Escalation Paths
 ```
-Auto-Retry → Supervisor → Security Council → Console
+Auto-Retry â†’ Supervisor â†’ Security Council â†’ Console
 ```
 
 1. **Auto-Retry**: Automatic retry with backoff (transient failures only). Configurable max attempts.
@@ -137,8 +137,8 @@ Auto-Retry → Supervisor → Security Council → Console
 
 ### Recovery Execution State Machine
 ```
-Pending → Approved → Running → [Completed | Failed]
-                      ↓
+Pending â†’ Approved â†’ Running â†’ [Completed | Failed]
+                      â†“
                   Rejected (by approver)
 ```
 - **Pending**: Strategy proposed, awaiting approval.
@@ -194,44 +194,44 @@ interface FailureManager {
 
 | Code | Description |
 |------|-------------|
-| MSN_FAIL_001 | Unknown failure type — cannot classify |
-| MSN_FAIL_002 | Retry limit exceeded — all auto-retry attempts exhausted |
-| MSN_FAIL_003 | Escalation timeout — no response at current level |
-| MSN_FAIL_004 | Recovery strategy not approved — cannot execute |
-| MSN_FAIL_005 | Rollback checkpoint not found — state unrecoverable |
-| MSN_FAIL_006 | Cascading failure containment failed — propagation not stopped |
-| MSN_FAIL_007 | Recovery execution failed — strategy unsuccessful |
+| MSN_FAIL_001 | Unknown failure type â€” cannot classify |
+| MSN_FAIL_002 | Retry limit exceeded â€” all auto-retry attempts exhausted |
+| MSN_FAIL_003 | Escalation timeout â€” no response at current level |
+| MSN_FAIL_004 | Recovery strategy not approved â€” cannot execute |
+| MSN_FAIL_005 | Rollback checkpoint not found â€” state unrecoverable |
+| MSN_FAIL_006 | Cascading failure containment failed â€” propagation not stopped |
+| MSN_FAIL_007 | Recovery execution failed â€” strategy unsuccessful |
 
 ## Invariants
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| MSN-FAIL-001 | Every failure must be classified before recovery can begin | Algorithmic — Recovery rejected without classification |
-| MSN-FAIL-002 | Auto-retry is only permitted for transient failures | Architectural — RetryHandler checks classification category |
-| MSN-FAIL-003 | Recovery approval must come from level above current escalation | Algorithmic — Approval authorization check |
-| MSN-FAIL-004 | Evidence integrity must be preserved through all recovery actions | Architectural — Evidence chain is append-only during recovery |
-| MSN-FAIL-005 | Cascading failure must isolate affected Missions before propagation | Algorithmic — Containment check before recovery execution |
+| MSN-FAIL-001 | Every failure must be classified before recovery can begin | Algorithmic â€” Recovery rejected without classification |
+| MSN-FAIL-002 | Auto-retry is only permitted for transient failures | Architectural â€” RetryHandler checks classification category |
+| MSN-FAIL-003 | Recovery approval must come from level above current escalation | Algorithmic â€” Approval authorization check |
+| MSN-FAIL-004 | Evidence integrity must be preserved through all recovery actions | Architectural â€” Evidence chain is append-only during recovery |
+| MSN-FAIL-005 | Cascading failure must isolate affected Missions before propagation | Algorithmic â€” Containment check before recovery execution |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Failure and recovery is a single focused concern |
-| R3 — DRY | Recovery state machine follows same pattern as Mission lifecycle |
-| R9 — Deterministic | Same failure with same strategy produces same recovery outcome |
-| R10 — Simpler Over Complex | Clear escalation ladder with defined gates |
-| R12 — Embrace Errors | All recovery errors have unique codes (MSN_FAIL_001–007) |
-| R13 — Design for Failure | Every failure mode has a defined detection and recovery path |
+| R1 â€” Modulsingularity | Failure and recovery is a single focused concern |
+| R3 â€” DRY | Recovery state machine follows same pattern as Mission lifecycle |
+| R9 â€” Deterministic | Same failure with same strategy produces same recovery outcome |
+| R10 â€” Simpler Over Complex | Clear escalation ladder with defined gates |
+| R12 â€” Embrace Errors | All recovery errors have unique codes (MSN_FAIL_001â€“007) |
+| R13 â€” Design for Failure | Every failure mode has a defined detection and recovery path |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
 | Missions/000-Lifecycle.md | Base lifecycle doc |
-| Missions/001-Planning.md | Sibling — risk assessment informs recovery |
-| Missions/002-Execution.md | Sibling — failures originate during execution |
-| Missions/003-Delegation.md | Sibling — delegation failures trigger recovery |
-| Bible/02-Core/OSYS/002-Org-Lifecycle.md | Organization lifecycle — failure containment |
+| Missions/001-Planning.md | Sibling â€” risk assessment informs recovery |
+| Missions/002-Execution.md | Sibling â€” failures originate during execution |
+| Missions/003-Delegation.md | Sibling â€” delegation failures trigger recovery |
+| Bible/02-Core/OSYS/002-Org-Lifecycle.md | Organization lifecycle â€” failure containment |
 | Bible/04-Execution/Security/000-Overview.md | Security Council escalation |
 | Physics/002-Missions.md | Mission canonical definitions |
 | Physics/005-Events.md | Event system |

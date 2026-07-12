@@ -1,13 +1,13 @@
-# AIOS Bible — Brain/LLMOS
-## 013 — Provider SDK
+﻿# AIOS Bible â€” Brain/LLMOS
+## 013 â€” Provider SDK
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-013 |
-| Source Laws | Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -16,7 +16,7 @@
 
 ## Purpose
 
-The Provider SDK defines the contract that every AI model provider must implement to integrate with LLMOS. Any provider implementing the `ModelProvider` interface is a drop-in replacement — the LLMOS pipeline operates identically regardless of which provider is behind the interface. This document specifies the interface, lifecycle, error model, and implementation requirements.
+The Provider SDK defines the contract that every AI model provider must implement to integrate with LLMOS. Any provider implementing the `ModelProvider` interface is a drop-in replacement â€” the LLMOS pipeline operates identically regardless of which provider is behind the interface. This document specifies the interface, lifecycle, error model, and implementation requirements.
 
 ## ModelProvider Interface
 
@@ -85,7 +85,7 @@ interface CredentialResolution {
   ssm_path: string | null;                   // e.g., "/aios/providers/claude/api_key"
   env_var: string | null;                    // e.g., "ANTHROPIC_API_KEY"
   file_path: string | null;                  // e.g., "/etc/aios/secrets/claude.key"
-  resolved_value: string | null;             // Populated at initialization — never serialized
+  resolved_value: string | null;             // Populated at initialization â€” never serialized
 }
 ```
 
@@ -194,7 +194,7 @@ interface EmbeddingResult {
 }
 ```
 
-Embeddings are optional — providers that don't support them return an empty result with `usage.tokens = 0`.
+Embeddings are optional â€” providers that don't support them return an empty result with `usage.tokens = 0`.
 
 ## Token Counting
 
@@ -267,17 +267,17 @@ class ProviderError extends Error {
 }
 
 type ProviderErrorCode =
-  | "AUTH_ERROR"              // 401, 403 — not retryable
-  | "RATE_LIMITED"            // 429 — retryable with retry_after
-  | "TIMEOUT"                 // Connection or read timeout — retryable
-  | "UNAVAILABLE"             // 502, 503 — retryable
-  | "OVERLOADED"              // 529 — retryable
-  | "INVALID_REQUEST"         // 400, 422 — not retryable
-  | "CONTENT_FILTERED"        // Content blocked — not retryable
-  | "MODEL_NOT_FOUND"         // Model does not exist — not retryable
-  | "CONTEXT_TOO_LARGE"       // Context exceeds limit — not retryable
-  | "INTERNAL_ERROR"          // 500 — retryable
-  | "NETWORK_ERROR"           // DNS, TLS, connection — retryable
+  | "AUTH_ERROR"              // 401, 403 â€” not retryable
+  | "RATE_LIMITED"            // 429 â€” retryable with retry_after
+  | "TIMEOUT"                 // Connection or read timeout â€” retryable
+  | "UNAVAILABLE"             // 502, 503 â€” retryable
+  | "OVERLOADED"              // 529 â€” retryable
+  | "INVALID_REQUEST"         // 400, 422 â€” not retryable
+  | "CONTENT_FILTERED"        // Content blocked â€” not retryable
+  | "MODEL_NOT_FOUND"         // Model does not exist â€” not retryable
+  | "CONTEXT_TOO_LARGE"       // Context exceeds limit â€” not retryable
+  | "INTERNAL_ERROR"          // 500 â€” retryable
+  | "NETWORK_ERROR"           // DNS, TLS, connection â€” retryable
   | "UNKNOWN";                // Fallback
 ```
 
@@ -292,7 +292,7 @@ Every `ModelProvider` implementation MUST:
 1. Implement ALL methods in the `ModelProvider` interface (embed may be empty)
 2. Handle credential resolution through SSM (env var fallback for local dev)
 3. Use TLS 1.3 for all API communications
-4. Implement proper error mapping → `ProviderError` codes
+4. Implement proper error mapping â†’ `ProviderError` codes
 5. Support both `execute` and `executeStream` (stream may fall back to buffered)
 6. Provide accurate token counting via `countTokens`
 7. Implement `healthCheck` that completes in < 5s
@@ -338,7 +338,7 @@ The existing `ExecutionProvider` interface (Runtime/001-SDK.md) and `ModelProvid
 | Purpose | Runtime action execution | AI model inference |
 | Methods | `execute(action, params)`, `executeStream(action, params)` | `execute(request)`, `executeStream(request)` |
 | Domain | Browser, Trading, Robotics, CLI | Claude, Codex, Ollama, GPT |
-| Route | RuntimeManager → ExecutionProvider | LLMOS Pipeline → ModelProvider |
+| Route | RuntimeManager â†’ ExecutionProvider | LLMOS Pipeline â†’ ModelProvider |
 | Schema | Action-based payload | Chat completion / embedding payload |
 | Streaming | Event-based action progress | Token-by-token text generation |
 
@@ -348,14 +348,14 @@ Dual-implementation providers (Claude, Codex, Ollama) implement both interfaces.
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-SDK-001 | Every `ModelProvider` implementation has a unique `provider_name`. | Schema — registration uniqueness |
-| LLM-SDK-002 | `initialize()` must resolve credentials before any other method is called. | Architectural — lifecycle ordering |
-| LLM-SDK-003 | `healthCheck()` is called within 5 seconds or times out to `degraded`. | Algorithmic — timeout enforcement |
-| LLM-SDK-004 | Provider errors are always wrapped in `ProviderError` with a valid code. | Schema — error type enforcement |
-| LLM-SDK-005 | Streaming is always supported — `executeStream` may delegate to `execute` + synthetic stream if provider does not support native streaming. | Algorithmic — fallback streaming |
-| LLM-SDK-006 | `shutdown()` is idempotent — calling it multiple times has no effect. | Algorithmic — idempotency design |
-| LLM-SDK-007 | Credentials are never logged, serialized, or exposed outside the `initialize()` scope. | Governance — security policy |
-| LLM-SDK-008 | Token counting never throws — returns 0 on failure. | Algorithmic — safe fallback |
+| LLM-SDK-001 | Every `ModelProvider` implementation has a unique `provider_name`. | Schema â€” registration uniqueness |
+| LLM-SDK-002 | `initialize()` must resolve credentials before any other method is called. | Architectural â€” lifecycle ordering |
+| LLM-SDK-003 | `healthCheck()` is called within 5 seconds or times out to `degraded`. | Algorithmic â€” timeout enforcement |
+| LLM-SDK-004 | Provider errors are always wrapped in `ProviderError` with a valid code. | Schema â€” error type enforcement |
+| LLM-SDK-005 | Streaming is always supported â€” `executeStream` may delegate to `execute` + synthetic stream if provider does not support native streaming. | Algorithmic â€” fallback streaming |
+| LLM-SDK-006 | `shutdown()` is idempotent â€” calling it multiple times has no effect. | Algorithmic â€” idempotency design |
+| LLM-SDK-007 | Credentials are never logged, serialized, or exposed outside the `initialize()` scope. | Governance â€” security policy |
+| LLM-SDK-008 | Token counting never throws â€” returns 0 on failure. | Algorithmic â€” safe fallback |
 
 ## Events (Provider-Level)
 
@@ -369,17 +369,17 @@ Dual-implementation providers (Claude, Codex, Ollama) implement both interfaces.
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Provider SDK is the sole provider interface definition |
-| R2 — Dependency Order | Provider SDK implementations consumed by Registry and Retry Engine |
-| R3 — DRY | Single interface for all providers |
-| R4 — Builder Pattern | ProviderRequest/ProviderResponse built through typed interfaces |
-| R5 — Liskov Substitution | All providers are drop-in replacements via the interface |
-| R6 — DI over Singletons | Provider instances injected via ProviderFactory |
-| R9 — Deterministic | Same request produces same response for same model |
-| R10 — Simpler Over Complex | Minimal interface surface over provider-specific SDKs |
-| R13 — Design for Failure | ProviderError model covers all failure modes |
-| R14 — Paved Path | Standardized interface defines paved path for provider integration |
-| R15 — Open/Closed | New providers implement existing interface without SDK changes |
+| R1 â€” Modulsingularity | Provider SDK is the sole provider interface definition |
+| R2 â€” Dependency Order | Provider SDK implementations consumed by Registry and Retry Engine |
+| R3 â€” DRY | Single interface for all providers |
+| R4 â€” Builder Pattern | ProviderRequest/ProviderResponse built through typed interfaces |
+| R5 â€” Liskov Substitution | All providers are drop-in replacements via the interface |
+| R6 â€” DI over Singletons | Provider instances injected via ProviderFactory |
+| R9 â€” Deterministic | Same request produces same response for same model |
+| R10 â€” Simpler Over Complex | Minimal interface surface over provider-specific SDKs |
+| R13 â€” Design for Failure | ProviderError model covers all failure modes |
+| R14 â€” Paved Path | Standardized interface defines paved path for provider integration |
+| R15 â€” Open/Closed | New providers implement existing interface without SDK changes |
 
 ## Related Documents
 
@@ -397,8 +397,8 @@ Dual-implementation providers (Claude, Codex, Ollama) implement both interfaces.
 
 | Condition | Error Code | Behavior |
 |-----------|------------|----------|
-| Provider not in FACTORIES | — | LLMOS startup fails; log configuration error |
-| Credential resolution fails | — | `initialize()` throws; provider not registered |
-| healthCheck() times out | — | Status returned as `degraded` with timeout error |
-| Provider returns unexpected response | — | Map to `UNKNOWN` error code; log full response for debugging |
-| Token counter fails | — | Return 0; log error; pipeline uses fallback estimation |
+| Provider not in FACTORIES | â€” | LLMOS startup fails; log configuration error |
+| Credential resolution fails | â€” | `initialize()` throws; provider not registered |
+| healthCheck() times out | â€” | Status returned as `degraded` with timeout error |
+| Provider returns unexpected response | â€” | Map to `UNKNOWN` error code; log full response for debugging |
+| Token counter fails | â€” | Return 0; log error; pipeline uses fallback estimation |

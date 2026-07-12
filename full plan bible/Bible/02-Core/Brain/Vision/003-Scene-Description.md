@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 003 — Scene Describer
+﻿# AIOS Bible â€” Brain
+## 003 â€” Scene Describer
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Vision |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Vision |
 | Document ID | AIOS-BBL-002-VIS-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 3 — Law of Communication |
+| Source Laws | Law 4 â€” Law of Evidence, Law 3 â€” Law of Communication |
 | Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Scene Describer generates natural language descriptions of image content. It produces structured, multi-dimensional descriptions covering subjects, actions, environment, attributes, and visible text. Scene descriptions are the primary way Sou gains qualitative understanding of visual input — converting pixels into narrative context that can be reasoned about.
+The Scene Describer generates natural language descriptions of image content. It produces structured, multi-dimensional descriptions covering subjects, actions, environment, attributes, and visible text. Scene descriptions are the primary way Sou gains qualitative understanding of visual input â€” converting pixels into narrative context that can be reasoned about.
 
 Under VIS-001, the Scene Describer extracts features only; Sou interprets meaning. Descriptions are factual observations, not interpretations, judgments, or decisions.
 
@@ -69,7 +69,7 @@ SceneSubject {
   attributes: string[]            // e.g. ["wearing blue suit", "standing"]
   position?: string               // e.g. "center", "left foreground", "background"
   relative_size: "dominant" | "large" | "medium" | "small"
-  confidence: number              // 0.0–1.0
+  confidence: number              // 0.0â€“1.0
 }
 
 SceneAction {
@@ -105,7 +105,7 @@ SceneText {
 
 ```typescript
 DescriptionConfidence {
-  overall: number                 // 0.0–1.0
+  overall: number                 // 0.0â€“1.0
   subject_confidence: number
   action_confidence: number
   environment_confidence: number
@@ -172,9 +172,9 @@ detailed:
 
 | Level | Tokens (approx) | Use Case |
 |-------|-----------------|----------|
-| brief | 10–30 | Quick thumbnail understanding |
-| normal | 50–150 | General image comprehension |
-| detailed | 150–500 | Rich context for detailed reasoning |
+| brief | 10â€“30 | Quick thumbnail understanding |
+| normal | 50â€“150 | General image comprehension |
+| detailed | 150â€“500 | Rich context for detailed reasoning |
 
 ### Natural Language Generation
 
@@ -190,7 +190,7 @@ Image: [image input]
 Detail Level: [brief/normal/detailed]
 
 Output:
-  For brief: 1–2 sentences covering the most salient elements.
+  For brief: 1â€“2 sentences covering the most salient elements.
   For normal: paragraph with subject, action, environment, key attributes.
   For detailed: structured breakdown of all visible elements.
 ```
@@ -233,7 +233,7 @@ For scenes with multiple subjects, the Scene Describer applies:
 |----------|----------|
 | Prioritization | Most prominent subjects described first (by size/position) |
 | Max limit | `max_subjects` cap prevents description overload |
-| Positional ordering | Foreground → background; center → periphery |
+| Positional ordering | Foreground â†’ background; center â†’ periphery |
 | Grouping | Similar objects grouped (e.g., "a group of people" not 20 individuals) |
 
 ### Description Confidence
@@ -242,20 +242,20 @@ Confidence is computed per-dimension and aggregated to overall:
 
 ```
 Factors affecting confidence:
-  ┌────────────────────────────────┐
-  │ Image Quality                  │ ← blur, noise, low resolution
-  │ Subject Occlusion              │ ← partially hidden subjects
-  │ Lighting Conditions            │ ← low light, backlight, shadows
-  │ Subject Familiarity            │ ← common objects score higher
-  │ Ambiguity                      │ ← unclear actions or environment
-  └────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚ Image Quality                  â”‚ â† blur, noise, low resolution
+  â”‚ Subject Occlusion              â”‚ â† partially hidden subjects
+  â”‚ Lighting Conditions            â”‚ â† low light, backlight, shadows
+  â”‚ Subject Familiarity            â”‚ â† common objects score higher
+  â”‚ Ambiguity                      â”‚ â† unclear actions or environment
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
 Thresholding:
   If dimension.confidence < config.min_confidence:
-    → Exclude dimension from description
-    → Record reason in confidence.uncertainty_reason
+    â†’ Exclude dimension from description
+    â†’ Record reason in confidence.uncertainty_reason
   If overall.confidence < 0.3:
-    → Return low-confidence warning in result
+    â†’ Return low-confidence warning in result
 ```
 
 ## Internal Interface
@@ -324,14 +324,14 @@ interface DimensionAnalyzer {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| SCE-001 | Descriptions are factual observations, never interpretations or judgments | Constitutional — prompt-enforced; no inference of intent |
-| SCE-002 | Every description has a detail level (brief/normal/detailed) | Schema — detail_level is required |
-| SCE-003 | Dimensions below min_confidence are excluded from description | Algorithmic — threshold enforced before NLG |
-| SCE-004 | Structured description always accompanies natural language output | Algorithmic — both generated from single LLMOS call |
-| SCE-005 | Subject count never exceeds max_subjects | Algorithmic — truncation applied |
-| SCE-006 | Text content in description references only visible text | Constitutional — no hallucinated text |
-| SCE-007 | Multi-subject scenes describe subjects in prominence order | Algorithmic — sorting by size/position |
-| SCE-008 | Description confidence is computed per-dimension and aggregated | Schema — per-dimension confidence in StructuredDescription |
+| SCE-001 | Descriptions are factual observations, never interpretations or judgments | Constitutional â€” prompt-enforced; no inference of intent |
+| SCE-002 | Every description has a detail level (brief/normal/detailed) | Schema â€” detail_level is required |
+| SCE-003 | Dimensions below min_confidence are excluded from description | Algorithmic â€” threshold enforced before NLG |
+| SCE-004 | Structured description always accompanies natural language output | Algorithmic â€” both generated from single LLMOS call |
+| SCE-005 | Subject count never exceeds max_subjects | Algorithmic â€” truncation applied |
+| SCE-006 | Text content in description references only visible text | Constitutional â€” no hallucinated text |
+| SCE-007 | Multi-subject scenes describe subjects in prominence order | Algorithmic â€” sorting by size/position |
+| SCE-008 | Description confidence is computed per-dimension and aggregated | Schema â€” per-dimension confidence in StructuredDescription |
 
 ## Error Cases
 
@@ -352,17 +352,17 @@ interface DimensionAnalyzer {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Scene Describer handles only natural language description |
-| R2 — Dependency Order | Depends on LLMOS; no upward deps |
-| R3 — DRY | Description models and config defined once in Vision Model |
-| R4 — Builder Pattern | Description built by Dimension Analysis → NLG → Structure Parser |
-| R5 — Liskov Substitution | Any DescriptionProvider implements the interface |
-| R6 — DI over Singletons | Providers, dimension analyzers, parsers injected |
-| R9 — Deterministic | Same image + config produces same description (model-dependent) |
-| R10 — Simpler Over Complex | Three detail levels; structured + natural language in one output |
-| R13 — Design for Failure | Low confidence produces warning; timeout returns partial results |
-| R14 — Paved Path | All descriptions flow through describe() |
-| R15 — Open/Closed | New description dimensions added via provider SDK |
+| R1 â€” Modulsingularity | Scene Describer handles only natural language description |
+| R2 â€” Dependency Order | Depends on LLMOS; no upward deps |
+| R3 â€” DRY | Description models and config defined once in Vision Model |
+| R4 â€” Builder Pattern | Description built by Dimension Analysis â†’ NLG â†’ Structure Parser |
+| R5 â€” Liskov Substitution | Any DescriptionProvider implements the interface |
+| R6 â€” DI over Singletons | Providers, dimension analyzers, parsers injected |
+| R9 â€” Deterministic | Same image + config produces same description (model-dependent) |
+| R10 â€” Simpler Over Complex | Three detail levels; structured + natural language in one output |
+| R13 â€” Design for Failure | Low confidence produces warning; timeout returns partial results |
+| R14 â€” Paved Path | All descriptions flow through describe() |
+| R15 â€” Open/Closed | New description dimensions added via provider SDK |
 
 ## Related Documents
 

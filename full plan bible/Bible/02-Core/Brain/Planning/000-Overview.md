@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Planning System
+﻿# AIOS Bible â€” Brain
+## 000 â€” Planning System
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Planning |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Planning |
 | Document ID | AIOS-BBL-002-PLN-000 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 2 — Law of Non-Execution, Law 4 — Law of Evidence |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 2 â€” Law of Non-Execution, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Planning System enables Sou to decompose strategic goals into actionable plans. It handles goal decomposition, milestone definition, dependency mapping, resource estimation, and progress tracking. When Sou decides WHAT to do, the Planning System figures out HOW to do it — breaking high-level objectives into concrete, ordered steps that can be executed as missions.
+The Planning System enables Sou to decompose strategic goals into actionable plans. It handles goal decomposition, milestone definition, dependency mapping, resource estimation, and progress tracking. When Sou decides WHAT to do, the Planning System figures out HOW to do it â€” breaking high-level objectives into concrete, ordered steps that can be executed as missions.
 
 The Planning System does not execute plans. Execution is delegated to Institution OS (missions, workers). The Planning System produces plan blueprints that Sou approves before execution begins.
 
@@ -23,28 +23,28 @@ The Planning System does not execute plans. Execution is delegated to Institutio
 
 ```
 Sou (approves plan, monitors progress)
-   ▲
-   │
-   ▼
-┌────────────────────────────────────────────┐
-│           Planning System                   │
-│                                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐ │
-│  │ Goal     │  │ Milestone│  │ Dependency│ │
-│  │ Decompose│─►│ Planner  │─►│ Resolver  │ │
-│  └──────────┘  └──────────┘  └────┬─────┘ │
-│                                    │       │
-│  ┌──────────┐  ┌──────────┐       │       │
-│  │ Resource │  │ Progress │       │       │
-│  │ Estimator│  │ Tracker  │       │       │
-│  └──────────┘  └──────────┘       │       │
-└────────────────────────────────────┼───────┘
-                                     │
-                                     ▼
-                            ┌──────────────┐
-                            │  Event Store │
-                            │ (evidence)   │
-                            └──────────────┘
+   â–²
+   â”‚
+   â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚           Planning System                   â”‚
+â”‚                                            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ Goal     â”‚  â”‚ Milestoneâ”‚  â”‚ Dependencyâ”‚ â”‚
+â”‚  â”‚ Decomposeâ”‚â”€â–ºâ”‚ Planner  â”‚â”€â–ºâ”‚ Resolver  â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                    â”‚       â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚       â”‚
+â”‚  â”‚ Resource â”‚  â”‚ Progress â”‚       â”‚       â”‚
+â”‚  â”‚ Estimatorâ”‚  â”‚ Tracker  â”‚       â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”˜
+                                     â”‚
+                                     â–¼
+                            â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                            â”‚  Event Store â”‚
+                            â”‚ (evidence)   â”‚
+                            â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Core Concepts
@@ -90,7 +90,7 @@ ResourceEstimate {
   estimated_duration_ms: number
   required_capabilities: string[]
   estimated_cost: number
-  risk_score: number               // 0.0–1.0
+  risk_score: number               // 0.0â€“1.0
 }
 ```
 
@@ -109,16 +109,16 @@ Decomposition produces a milestone tree:
 
 ```
 Goal: "Implement user authentication system"
-├── Milestone 1: Design auth architecture
-│   ├── Subtask 1.1: Research auth patterns
-│   └── Subtask 1.2: Design database schema
-├── Milestone 2: Implement backend
-│   ├── Subtask 2.1: Create user model
-│   ├── Subtask 2.2: Implement registration endpoint
-│   └── Subtask 2.3: Implement login endpoint
-└── Milestone 3: Implement frontend
-    ├── Subtask 3.1: Build login form
-    └── Subtask 3.2: Build registration form
+â”œâ”€â”€ Milestone 1: Design auth architecture
+â”‚   â”œâ”€â”€ Subtask 1.1: Research auth patterns
+â”‚   â””â”€â”€ Subtask 1.2: Design database schema
+â”œâ”€â”€ Milestone 2: Implement backend
+â”‚   â”œâ”€â”€ Subtask 2.1: Create user model
+â”‚   â”œâ”€â”€ Subtask 2.2: Implement registration endpoint
+â”‚   â””â”€â”€ Subtask 2.3: Implement login endpoint
+â””â”€â”€ Milestone 3: Implement frontend
+    â”œâ”€â”€ Subtask 3.1: Build login form
+    â””â”€â”€ Subtask 3.2: Build registration form
 ```
 
 ### 2. Milestone Planning
@@ -131,7 +131,7 @@ Each milestone is assigned metadata that Sou uses for resource allocation and se
 | `estimated_effort` | Time, tokens, cost projection |
 | `dependencies` | Prerequisites that must complete |
 | `required_capabilities` | Worker capabilities needed |
-| `risk_score` | Likelihood of issues (0.0–1.0) |
+| `risk_score` | Likelihood of issues (0.0â€“1.0) |
 | `parallelizable` | Can this run in parallel with siblings? |
 
 ### 3. Dependency Resolution
@@ -140,7 +140,7 @@ The Dependency Resolver analyzes milestone dependencies and produces an executio
 
 | Dependency Type | Meaning | Example |
 |----------------|---------|---------|
-| Sequential | B cannot start until A completes | Design → Implement → Test |
+| Sequential | B cannot start until A completes | Design â†’ Implement â†’ Test |
 | Parallel | A and B can run simultaneously | Frontend + Backend development |
 | Conditional | B starts only if A produces result X | If design approved, then implement |
 
@@ -237,11 +237,11 @@ interface ResourceEstimator {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| PLN-001 | Plans must be DAGs — no circular dependencies | Algorithmic — checked on create |
-| PLN-002 | Plans require Sou approval before execution | API-level — milestones not created until `approvePlan` |
-| PLN-003 | Milestone status is reported by Institution OS | API-level — only Institution OS can update |
-| PLN-004 | The Planning System is stateless — plans live in Memory OS | Architectural — no internal persistence |
-| PLN-005 | Every plan milestone maps to exactly one mission | Architectural — verified on approval |
+| PLN-001 | Plans must be DAGs â€” no circular dependencies | Algorithmic â€” checked on create |
+| PLN-002 | Plans require Sou approval before execution | API-level â€” milestones not created until `approvePlan` |
+| PLN-003 | Milestone status is reported by Institution OS | API-level â€” only Institution OS can update |
+| PLN-004 | The Planning System is stateless â€” plans live in Memory OS | Architectural â€” no internal persistence |
+| PLN-005 | Every plan milestone maps to exactly one mission | Architectural â€” verified on approval |
 
 ## Related Documents
 
@@ -269,14 +269,14 @@ interface ResourceEstimator {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Planning System does one thing: plan creation and tracking |
-| R2 — Dependency Order | Depends on Event Store, ROS; no upward deps |
-| R3 — DRY | Plan templates defined once in Template Registry |
-| R4 — Builder Pattern | Plan built by Decomposer → Planner → Resolver |
-| R5 — Liskov Substitution | Any DecompositionStrategy implements the interface |
-| R6 — DI over Singletons | Strategies injected at plan creation |
-| R9 — Deterministic | Same goal + context produces same plan (unless strategy includes randomness) |
-| R10 — Simpler Over Complex | Uses milestone tree, not generalized PERT/CPM |
-| R13 — Design for Failure | Planning System degrades gracefully — resource estimates use cached data when ROS is unavailable |
-| R14 — Paved Path | All planning flows through `createPlan` → `approvePlan` |
-| R15 — Open/Closed | New decomposition strategies added via Registry |
+| R1 â€” Modulsingularity | Planning System does one thing: plan creation and tracking |
+| R2 â€” Dependency Order | Depends on Event Store, ROS; no upward deps |
+| R3 â€” DRY | Plan templates defined once in Template Registry |
+| R4 â€” Builder Pattern | Plan built by Decomposer â†’ Planner â†’ Resolver |
+| R5 â€” Liskov Substitution | Any DecompositionStrategy implements the interface |
+| R6 â€” DI over Singletons | Strategies injected at plan creation |
+| R9 â€” Deterministic | Same goal + context produces same plan (unless strategy includes randomness) |
+| R10 â€” Simpler Over Complex | Uses milestone tree, not generalized PERT/CPM |
+| R13 â€” Design for Failure | Planning System degrades gracefully â€” resource estimates use cached data when ROS is unavailable |
+| R14 â€” Paved Path | All planning flows through `createPlan` â†’ `approvePlan` |
+| R15 â€” Open/Closed | New decomposition strategies added via Registry |

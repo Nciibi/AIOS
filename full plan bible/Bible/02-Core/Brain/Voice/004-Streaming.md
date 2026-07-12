@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 004 — Streaming
+﻿# AIOS Bible â€” Brain
+## 004 â€” Streaming
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Voice |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Voice |
 | Document ID | AIOS-BBL-002-VCE-004 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Streaming system provides the architectural foundation for real-time, chunked audio processing in both STT and TTS pipelines. It manages stream lifecycle (open → data → close), handles backpressure between audio producers and consumers, supports mid-stream cancellation, enforces stream timeouts, and provides error recovery strategies during active streams. The Streaming system ensures that voice I/O is responsive, resource-efficient, and robust in the face of network interruptions or provider failures.
+The Streaming system provides the architectural foundation for real-time, chunked audio processing in both STT and TTS pipelines. It manages stream lifecycle (open â†’ data â†’ close), handles backpressure between audio producers and consumers, supports mid-stream cancellation, enforces stream timeouts, and provides error recovery strategies during active streams. The Streaming system ensures that voice I/O is responsive, resource-efficient, and robust in the face of network interruptions or provider failures.
 
 Under VOI-006, all streams are cancellable mid-stream. No stream holds resources indefinitely.
 
@@ -91,17 +91,17 @@ StreamChunk {
 
 | Type | Direction | Data Flow | Consumer |
 |------|-----------|-----------|----------|
-| STT Stream | Audio → Text | Client pushes audio, STT emits text transcripts | Sou / Conversation OS |
-| TTS Stream | Text → Audio | TTS emits audio chunks from text input | User / Audio output device |
+| STT Stream | Audio â†’ Text | Client pushes audio, STT emits text transcripts | Sou / Conversation OS |
+| TTS Stream | Text â†’ Audio | TTS emits audio chunks from text input | User / Audio output device |
 
 ### Stream Lifecycle
 
 ```
-Open ──→ Active ──→ Closing ──→ Closed
-  │                    │
-  ├── Timeout          ├── Error ──→ Errored
-  │                    │
-  └── Cancel ──→ Cancelled
+Open â”€â”€â†’ Active â”€â”€â†’ Closing â”€â”€â†’ Closed
+  â”‚                    â”‚
+  â”œâ”€â”€ Timeout          â”œâ”€â”€ Error â”€â”€â†’ Errored
+  â”‚                    â”‚
+  â””â”€â”€ Cancel â”€â”€â†’ Cancelled
 ```
 
 | State | Description | Allowed Actions |
@@ -149,8 +149,8 @@ Each partial result supersedes the previous. The final result is authoritative.
 Audio chunks are emitted as they are synthesized. Word timing events fire in real-time:
 
 ```
-Chunk 1 [0–500ms]:  "Hello there"   words: [hello(0–200), there(201–500)]
-Chunk 2 [501–900ms]: "how are you"  words: [how(501–620), are(621–750), you(751–900)]
+Chunk 1 [0â€“500ms]:  "Hello there"   words: [hello(0â€“200), there(201â€“500)]
+Chunk 2 [501â€“900ms]: "how are you"  words: [how(501â€“620), are(621â€“750), you(751â€“900)]
 ...
 Done:   total_duration_ms: 3200
 ```
@@ -280,7 +280,7 @@ interface StreamMetrics {
   avg_chunk_size_bytes: number
   avg_processing_time_ms: number
   total_idle_time_ms: number
-  buffer_utilization: number        // 0.0–1.0
+  buffer_utilization: number        // 0.0â€“1.0
   backpressure_events: number
   timeouts_fired: number
 }
@@ -338,13 +338,13 @@ type StreamErrorCode =
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| STM-001 | Every stream has exactly one lifecycle: open → active → (closed \| cancelled \| errored) | Algorithmic — state transitions enforced by FSM |
-| STM-002 | Stream sequence numbers are monotonically increasing with no gaps | Algorithmic — sequence assigned on write/emit |
-| STM-003 | Audio format is consistent across all chunks in a stream | Algorithmic — format validated on each writeChunk |
-| STM-004 | A cancelled stream emits no further events after cancellation | Algorithmic — cancel flushes event queue |
-| STM-005 | Streams are automatically cleaned up when their owning session ends | Lifecycle — `cleanSessionStreams` called by Session Manager |
-| STM-006 | Backpressure never causes data corruption (only loss under `drop` strategy) | Architectural — buffer operations are atomic |
-| STM-007 | Timeout timer resets on every successful writeChunk or readChunk call | Algorithmic — `last_activity` updated on each operation |
+| STM-001 | Every stream has exactly one lifecycle: open â†’ active â†’ (closed \| cancelled \| errored) | Algorithmic â€” state transitions enforced by FSM |
+| STM-002 | Stream sequence numbers are monotonically increasing with no gaps | Algorithmic â€” sequence assigned on write/emit |
+| STM-003 | Audio format is consistent across all chunks in a stream | Algorithmic â€” format validated on each writeChunk |
+| STM-004 | A cancelled stream emits no further events after cancellation | Algorithmic â€” cancel flushes event queue |
+| STM-005 | Streams are automatically cleaned up when their owning session ends | Lifecycle â€” `cleanSessionStreams` called by Session Manager |
+| STM-006 | Backpressure never causes data corruption (only loss under `drop` strategy) | Architectural â€” buffer operations are atomic |
+| STM-007 | Timeout timer resets on every successful writeChunk or readChunk call | Algorithmic â€” `last_activity` updated on each operation |
 
 ## Error Cases
 
@@ -364,17 +364,17 @@ type StreamErrorCode =
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Streaming manages only stream lifecycle and data flow for voice |
-| R2 — Dependency Order | Depends on STT Engine and TTS Engine for provider streams; no upward deps |
-| R3 — DRY | Stream lifecycle FSM defined once in StreamManager core |
-| R4 — Builder Pattern | Stream built by open → configure → data flow → close |
-| R5 — Liskov Substitution | Any StreamDriver implementation works with StreamManager |
-| R6 — DI over Singletons | Stream drivers, configs, and timeout strategies injected |
-| R9 — Deterministic | Same inputs + same timing produce same stream behavior |
-| R10 — Simpler Over Complex | Clear FSM with explicit state transitions and backpressure strategies |
-| R13 — Design for Failure | Timeouts, cancellations, provider errors all handled without data corruption |
-| R14 — Paved Path | All streaming flows through openStream → writeChunk/readChunk → closeStream |
-| R15 — Open/Closed | New backpressure strategies added by extending strategy enum and driver |
+| R1 â€” Modulsingularity | Streaming manages only stream lifecycle and data flow for voice |
+| R2 â€” Dependency Order | Depends on STT Engine and TTS Engine for provider streams; no upward deps |
+| R3 â€” DRY | Stream lifecycle FSM defined once in StreamManager core |
+| R4 â€” Builder Pattern | Stream built by open â†’ configure â†’ data flow â†’ close |
+| R5 â€” Liskov Substitution | Any StreamDriver implementation works with StreamManager |
+| R6 â€” DI over Singletons | Stream drivers, configs, and timeout strategies injected |
+| R9 â€” Deterministic | Same inputs + same timing produce same stream behavior |
+| R10 â€” Simpler Over Complex | Clear FSM with explicit state transitions and backpressure strategies |
+| R13 â€” Design for Failure | Timeouts, cancellations, provider errors all handled without data corruption |
+| R14 â€” Paved Path | All streaming flows through openStream â†’ writeChunk/readChunk â†’ closeStream |
+| R15 â€” Open/Closed | New backpressure strategies added by extending strategy enum and driver |
 
 ## Related Documents
 

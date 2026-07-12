@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Security — 001: Network Scanning
+﻿# AIOS Bible â€” Domains
+## Security â€” 001: Network Scanning
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-SEC-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds, Law 8 — Law of Verification-First |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds, Law 8 â€” Law of Verification-First |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/008-Security.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Network Scanning provides the scanning engine for AIOS security operations — port scanning, service discovery, OS fingerprinting, banner grabbing, and vulnerability matching. It is the primary reconnaissance capability within the Security domain, enabling SecurityWorkers to map target surfaces and identify potential entry points before deeper analysis.
+Network Scanning provides the scanning engine for AIOS security operations â€” port scanning, service discovery, OS fingerprinting, banner grabbing, and vulnerability matching. It is the primary reconnaissance capability within the Security domain, enabling SecurityWorkers to map target surfaces and identify potential entry points before deeper analysis.
 
 The engine operates under strict authorization controls (Law 7). Every scan target must be explicitly authorized by the Security Council or a delegated authority before any packet is sent. Unauthorized targets are blocked at the engine boundary regardless of the scanning mode or intensity selected.
 
@@ -151,14 +151,14 @@ interface RateLimitConfig {
 
 | Code | Condition | Severity | Recovery |
 |------|-----------|----------|----------|
-| SEC-NS-001 | Target unreachable — no response to probes | Low | Skip host, continue scan, flag in results |
+| SEC-NS-001 | Target unreachable â€” no response to probes | Low | Skip host, continue scan, flag in results |
 | SEC-NS-002 | Scan timeout exceeded per-target limit | Medium | Abort target, preserve partial results, continue |
-| SEC-NS-003 | Rate limit exceeded — target defensive threshold | Medium | Back off, apply exponential delay, resume |
+| SEC-NS-003 | Rate limit exceeded â€” target defensive threshold | Medium | Back off, apply exponential delay, resume |
 | SEC-NS-004 | Unauthorized target detected in scope | Critical | Halt scan immediately, escalate to Security Council |
 | SEC-NS-005 | CVE database unavailable for matching | Low | Complete scan without vuln matching, flag for retry |
-| SEC-NS-006 | Stealth profile violation — IDS/IPS detected | High | Switch to lower-profile mode, log detection event |
-| SEC-NS-007 | Scan engine internal error — packet send failure | Medium | Retry stage up to 3 times, fail target on exhaustion |
-| SEC-NS-008 | Banner buffer overflow — malformed response | Low | Truncate banner, continue enumeration |
+| SEC-NS-006 | Stealth profile violation â€” IDS/IPS detected | High | Switch to lower-profile mode, log detection event |
+| SEC-NS-007 | Scan engine internal error â€” packet send failure | Medium | Retry stage up to 3 times, fail target on exhaustion |
+| SEC-NS-008 | Banner buffer overflow â€” malformed response | Low | Truncate banner, continue enumeration |
 
 ## Invariants
 
@@ -177,26 +177,26 @@ interface RateLimitConfig {
 |------|------------|
 | R1 (Modulsingularity) | Each pipeline stage (discovery, fingerprinting, vuln matching) is a separate module with well-defined interfaces |
 | R2 (Capsule) | Scan config, targets, results, and evidence sealed as an atomic scan capsule |
-| R3 (Idempotent) | Identical targets and config produce identical scan results — deterministic fingerprinting |
-| R4 (Builder) | Scan result is built incrementally through pipeline stages — immutable stage outputs |
-| R5 (Manual Step) | Scan authorization is a manual gate — no automated scan without explicit approval |
-| R6 (No Orphans) | Halted scans preserve partial results — no unreclaimed scan resources |
+| R3 (Idempotent) | Identical targets and config produce identical scan results â€” deterministic fingerprinting |
+| R4 (Builder) | Scan result is built incrementally through pipeline stages â€” immutable stage outputs |
+| R5 (Manual Step) | Scan authorization is a manual gate â€” no automated scan without explicit approval |
+| R6 (No Orphans) | Halted scans preserve partial results â€” no unreclaimed scan resources |
 | R9 (Deterministic) | Same CPE fingerprint and CVE DB version yields identical match set |
-| R10 (Event Sourcing) | Every probe, match, and block produces an event — full reconstruction from event log |
-| R13 (Design for Failure) | Engine fails closed — unauthorized targets never probed even on internal error |
+| R10 (Event Sourcing) | Every probe, match, and block produces an event â€” full reconstruction from event log |
+| R13 (Design for Failure) | Engine fails closed â€” unauthorized targets never probed even on internal error |
 | R14 (GC) | Scan artifacts retained for audit window, then garbage collected |
-| R15 (Auth Chain) | Every scan links to authorization chain — verified at each stage boundary |
+| R15 (Auth Chain) | Every scan links to authorization chain â€” verified at each stage boundary |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Security/000-Overview.md | Overview — Network scanning is a core vulnerability assessment capability |
-| Bible/07-Domains/Security/002-Vulnerability-Analysis.md | Downstream — Vulnerability matches feed into analysis engine |
-| Bible/07-Domains/Security/003-Forensics.md | Evidence — Scan evidence feeds forensic timeline reconstruction |
-| Bible/04-Execution/Security/000-Overview.md | Runtime — Scan engine execution authorization |
-| Bible/04-Execution/Security/Pentest/000-Overview.md | Pentest — Network scanning is primary pentest reconnaissance tool |
-| Bible/04-Execution/Security/Sandbox/000-Isolation.md | Verification — Vulnerability matches verified in sandbox |
-| Bible/04-Execution/Security/AZS/000-RBAC.md | Authorization — RBAC policies govern scan target authorization |
-| Bible/04-Execution/Security/Audit/000-EAS.md | Audit — Evidence Audit Service records all scan operations |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — Core principles governing security operations |
+| Bible/07-Domains/Security/000-Overview.md | Overview â€” Network scanning is a core vulnerability assessment capability |
+| Bible/07-Domains/Security/002-Vulnerability-Analysis.md | Downstream â€” Vulnerability matches feed into analysis engine |
+| Bible/07-Domains/Security/003-Forensics.md | Evidence â€” Scan evidence feeds forensic timeline reconstruction |
+| Bible/04-Execution/Security/000-Overview.md | Runtime â€” Scan engine execution authorization |
+| Bible/04-Execution/Security/Pentest/000-Overview.md | Pentest â€” Network scanning is primary pentest reconnaissance tool |
+| Bible/04-Execution/Security/Sandbox/000-Isolation.md | Verification â€” Vulnerability matches verified in sandbox |
+| Bible/04-Execution/Security/AZS/000-RBAC.md | Authorization â€” RBAC policies govern scan target authorization |
+| Bible/04-Execution/Security/Audit/000-EAS.md | Audit â€” Evidence Audit Service records all scan operations |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” Core principles governing security operations |

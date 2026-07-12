@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 003 — Behavior Patterns
+﻿# AIOS Bible â€” Brain
+## 003 â€” Behavior Patterns
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Personality |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Personality |
 | Document ID | AIOS-BBL-002-PER-003 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 6 — Law of Lifecycle |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/009-Interaction.md, Physics/006-Lifecycles.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Trait Engine defines and manages Sou's behavioral traits — measurable dimensions of cognition, social interaction, executive function, and affect that govern how Sou approaches problems, communicates, and makes decisions. Traits are the behavioral expression of Sou's personality: they determine whether Sou is thorough or concise, curious or skeptical, decisive or patient.
+The Trait Engine defines and manages Sou's behavioral traits â€” measurable dimensions of cognition, social interaction, executive function, and affect that govern how Sou approaches problems, communicates, and makes decisions. Traits are the behavioral expression of Sou's personality: they determine whether Sou is thorough or concise, curious or skeptical, decisive or patient.
 
 Under PER-002, trait adjustments are bounded by plasticity. The Trait Engine ensures that no trait changes more than its plasticity allows, preventing wild personality swings while allowing gradual adaptation through experience.
 
@@ -28,8 +28,8 @@ Trait {
   trait_id: string
   name: string                   // e.g., "thoroughness", "conciseness", "curiosity"
   category: "cognitive" | "social" | "executive" | "affective"
-  score: number                  // 0.0–1.0, how strongly this trait is expressed
-  plasticity: number             // 0.0–1.0, max allowed delta per adjustment
+  score: number                  // 0.0â€“1.0, how strongly this trait is expressed
+  plasticity: number             // 0.0â€“1.0, max allowed delta per adjustment
   conflicts: string[]            // Trait IDs that tend to conflict with this one
   description: string            // What this trait means in practice
   adjustment_history: TraitAdjustment[]
@@ -60,7 +60,7 @@ TraitConflict {
   conflict_id: string
   trait_a: string
   trait_b: string
-  severity: number               // 0.0–1.0, how strongly these traits conflict
+  severity: number               // 0.0â€“1.0, how strongly these traits conflict
   context: string
   resolution: "trait_a_dominates" | "trait_b_dominates" | "balanced" | "contextual"
   resolved_at: timestamp
@@ -73,7 +73,7 @@ TraitConflict {
 TraitInfluence {
   trait_id: string
   dimension: string              // e.g., "verbosity", "risk_tolerance", "exploration_rate"
-  influence: number              // -1.0–1.0, direction and magnitude of influence
+  influence: number              // -1.0â€“1.0, direction and magnitude of influence
   description: string
 }
 ```
@@ -130,43 +130,43 @@ updateTrait(trait_id: string, desired_score: number): Trait
 
 | Plasticity Range | Interpretation | Examples |
 |-----------------|----------------|----------|
-| 0.0–0.2 | Fixed — trait never changes | Core constitutional traits |
-| 0.3–0.5 | Flexible — changes gradually over time | Most behavioral traits |
-| 0.6–0.8 | Malleable — changes significantly through learning | Curiosity, adaptability |
-| 0.9–1.0 | Fluid — high adaptability (used with caution) | Reserved for experimental traits |
+| 0.0â€“0.2 | Fixed â€” trait never changes | Core constitutional traits |
+| 0.3â€“0.5 | Flexible â€” changes gradually over time | Most behavioral traits |
+| 0.6â€“0.8 | Malleable â€” changes significantly through learning | Curiosity, adaptability |
+| 0.9â€“1.0 | Fluid â€” high adaptability (used with caution) | Reserved for experimental traits |
 
 ### Cooldown Period
 
 Each trait has a cooldown period between adjustments to prevent oscillation:
 
-- Low plasticity (0.0–0.3): cooldown of 10 cycles
-- Medium plasticity (0.4–0.6): cooldown of 5 cycles
-- High plasticity (0.7–1.0): cooldown of 2 cycles
+- Low plasticity (0.0â€“0.3): cooldown of 10 cycles
+- Medium plasticity (0.4â€“0.6): cooldown of 5 cycles
+- High plasticity (0.7â€“1.0): cooldown of 2 cycles
 
 ## Trait Conflicts
 
 When two traits have opposing tendencies, a conflict is registered:
 
 ```
-thoroughness ↔ conciseness
-    → Thorough analysis requires depth; conciseness requires brevity
-    → Resolution: contextual — thorough for complex problems, concise for simple ones
+thoroughness â†” conciseness
+    â†’ Thorough analysis requires depth; conciseness requires brevity
+    â†’ Resolution: contextual â€” thorough for complex problems, concise for simple ones
 
-skepticism ↔ cooperation
-    → Skepticism resists accepting others' claims; cooperation seeks alignment
-    → Resolution: balanced — verify first, then collaborate
+skepticism â†” cooperation
+    â†’ Skepticism resists accepting others' claims; cooperation seeks alignment
+    â†’ Resolution: balanced â€” verify first, then collaborate
 
-adaptability ↔ decisiveness
-    → Adaptability wants to keep options open; decisiveness wants to commit
-    → Resolution: contextual — adapt during exploration, decide during execution
+adaptability â†” decisiveness
+    â†’ Adaptability wants to keep options open; decisiveness wants to commit
+    â†’ Resolution: contextual â€” adapt during exploration, decide during execution
 
-curiosity ↔ patience
-    → Curiosity wants to explore; patience tolerates staying on task
-    → Resolution: contextual — explore when time permits, stay focused when constrained
+curiosity â†” patience
+    â†’ Curiosity wants to explore; patience tolerates staying on task
+    â†’ Resolution: contextual â€” explore when time permits, stay focused when constrained
 
-transparency ↔ conciseness
-    → Transparency wants to share full reasoning; conciseness wants brevity
-    → Resolution: balanced — share complete reasoning when asked, concise summary otherwise
+transparency â†” conciseness
+    â†’ Transparency wants to share full reasoning; conciseness wants brevity
+    â†’ Resolution: balanced â€” share complete reasoning when asked, concise summary otherwise
 ```
 
 ## Trait Influence on Behavior
@@ -175,13 +175,13 @@ Traits influence behavior across multiple dimensions:
 
 | Influence Dimension | Traits Involved | Effect on Behavior |
 |--------------------|----------------|-------------------|
-| Analysis depth | thoroughness, skepticism | More thorough → deeper analysis, more verification steps |
-| Output length | conciseness, curiosity, patience | More concise → shorter responses, less tangential detail |
-| Exploration rate | curiosity, decisiveness, patience | More curious → more alternatives explored before deciding |
-| Risk tolerance | skepticism, assertiveness | More skeptical → higher evidence bar for risky decisions |
-| Response speed | decisiveness, thoroughness | More decisive → faster conclusions, may skip edge cases |
-| Collaboration | cooperation, assertiveness | More cooperative → more deferential, less confrontational |
-| Reasoning transparency | transparency, conciseness | More transparent → more explanation of thought process |
+| Analysis depth | thoroughness, skepticism | More thorough â†’ deeper analysis, more verification steps |
+| Output length | conciseness, curiosity, patience | More concise â†’ shorter responses, less tangential detail |
+| Exploration rate | curiosity, decisiveness, patience | More curious â†’ more alternatives explored before deciding |
+| Risk tolerance | skepticism, assertiveness | More skeptical â†’ higher evidence bar for risky decisions |
+| Response speed | decisiveness, thoroughness | More decisive â†’ faster conclusions, may skip edge cases |
+| Collaboration | cooperation, assertiveness | More cooperative â†’ more deferential, less confrontational |
+| Reasoning transparency | transparency, conciseness | More transparent â†’ more explanation of thought process |
 
 The Trait Engine computes influence on each decision:
 
@@ -266,13 +266,13 @@ interface TraitEngineConfig {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| TRT-001 | Every trait belongs to exactly one category | Schema — `category` is required |
-| TRT-002 | Trait score is always in 0.0–1.0 range | Algorithmic — clamped on every update |
-| TRT-003 | Trait plasticity is always in 0.0–1.0 range | Algorithmic — set at instantiation |
-| TRT-004 | Trait adjustment delta never exceeds plasticity | Algorithmic — clamped on `updateTrait` |
-| TRT-005 | Trait scores return to baseline after mood modulation decays | Algorithmic — Mood Tracker clears modulations |
-| TRT-006 | Trait cooldown prevents consecutive adjustments | Algorithmic — cooldown enforced per trait |
-| TRT-007 | Default trait scores are always recoverable | Architectural — `resetTraitToDefault` available |
+| TRT-001 | Every trait belongs to exactly one category | Schema â€” `category` is required |
+| TRT-002 | Trait score is always in 0.0â€“1.0 range | Algorithmic â€” clamped on every update |
+| TRT-003 | Trait plasticity is always in 0.0â€“1.0 range | Algorithmic â€” set at instantiation |
+| TRT-004 | Trait adjustment delta never exceeds plasticity | Algorithmic â€” clamped on `updateTrait` |
+| TRT-005 | Trait scores return to baseline after mood modulation decays | Algorithmic â€” Mood Tracker clears modulations |
+| TRT-006 | Trait cooldown prevents consecutive adjustments | Algorithmic â€” cooldown enforced per trait |
+| TRT-007 | Default trait scores are always recoverable | Architectural â€” `resetTraitToDefault` available |
 
 ## Error Cases
 
@@ -291,17 +291,17 @@ interface TraitEngineConfig {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Trait Engine handles only behavioral traits — scores, plasticity, conflicts, influence |
-| R2 — Dependency Order | Depends on Mood Tracker, Academy; no upward deps |
-| R3 — DRY | Traits defined once in TraitEngine, consumed by Expression and Decision |
-| R4 — Builder Pattern | Behavior built by Traits → Conflicts → Influence → Expression |
-| R5 — Liskov Substitution | Any TraitEngine implements the interface |
-| R6 — DI over Singletons | Plasticity strategies and conflict resolvers injected |
-| R9 — Deterministic | Same traits and context produce same influence scores |
-| R10 — Simpler Over Complex | Traits use simple scalar scores (0.0–1.0) with plasticity bounds |
-| R13 — Design for Failure | TraitEngine handles missing traits and disabled features gracefully |
-| R14 — Paved Path | All trait access flows through `getTraits`/`updateTrait` |
-| R15 — Open/Closed | New traits added via Registry, not by modifying core engine |
+| R1 â€” Modulsingularity | Trait Engine handles only behavioral traits â€” scores, plasticity, conflicts, influence |
+| R2 â€” Dependency Order | Depends on Mood Tracker, Academy; no upward deps |
+| R3 â€” DRY | Traits defined once in TraitEngine, consumed by Expression and Decision |
+| R4 â€” Builder Pattern | Behavior built by Traits â†’ Conflicts â†’ Influence â†’ Expression |
+| R5 â€” Liskov Substitution | Any TraitEngine implements the interface |
+| R6 â€” DI over Singletons | Plasticity strategies and conflict resolvers injected |
+| R9 â€” Deterministic | Same traits and context produce same influence scores |
+| R10 â€” Simpler Over Complex | Traits use simple scalar scores (0.0â€“1.0) with plasticity bounds |
+| R13 â€” Design for Failure | TraitEngine handles missing traits and disabled features gracefully |
+| R14 â€” Paved Path | All trait access flows through `getTraits`/`updateTrait` |
+| R15 â€” Open/Closed | New traits added via Registry, not by modifying core engine |
 
 ## Related Documents
 

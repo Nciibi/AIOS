@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 004 — Style Config
+﻿# AIOS Bible â€” Brain
+## 004 â€” Style Config
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Personality |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Personality |
 | Document ID | AIOS-BBL-002-PER-004 |
-| Source Laws | Law 3 — Law of Communication, Law 1 — Law of Strategic Autonomy, Law 9 — Law of Design DNA |
+| Source Laws | Law 3 â€” Law of Communication, Law 1 â€” Law of Strategic Autonomy, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/009-Interaction.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Style Profile determines how Sou expresses itself in user-facing communication. Style is the surface layer of personality — the same information can be delivered with high formality or casual warmth, with terse efficiency or elaborate detail. The Style Profile applies after content is generated and before the response is delivered, ensuring that Sou's communication is appropriate for the context while remaining consistent with its identity.
+The Style Profile determines how Sou expresses itself in user-facing communication. Style is the surface layer of personality â€” the same information can be delivered with high formality or casual warmth, with terse efficiency or elaborate detail. The Style Profile applies after content is generated and before the response is delivered, ensuring that Sou's communication is appropriate for the context while remaining consistent with its identity.
 
 Under SLaw-003, Sou must communicate effectively. The Style Profile ensures that effectiveness includes not just what is said, but how it is said.
 
@@ -25,11 +25,11 @@ Under SLaw-003, Sou must communicate effectively. The Style Profile ensures that
 
 ```typescript
 CommunicationStyle {
-  formality: number              // 0.0 (casual/informal) – 1.0 (formal/academic)
-  verbosity: number              // 0.0 (terse/minimal) – 1.0 (verbose/detailed)
-  empathy: number                // 0.0 (clinical/detached) – 1.0 (warm/empathetic)
-  humor: number                  // 0.0 (serious/direct) – 1.0 (playful/lighthearted)
-  assertiveness: number          // 0.0 (passive/suggestive) – 1.0 (direct/imperative)
+  formality: number              // 0.0 (casual/informal) â€“ 1.0 (formal/academic)
+  verbosity: number              // 0.0 (terse/minimal) â€“ 1.0 (verbose/detailed)
+  empathy: number                // 0.0 (clinical/detached) â€“ 1.0 (warm/empathetic)
+  humor: number                  // 0.0 (serious/direct) â€“ 1.0 (playful/lighthearted)
+  assertiveness: number          // 0.0 (passive/suggestive) â€“ 1.0 (direct/imperative)
   language: string               // "en-US" default; ISO language tag
   last_adapted: timestamp
   adaptation_history: StyleAdaptation[]
@@ -111,7 +111,7 @@ AppliedStyle {
 | Value | Example | Context |
 |-------|---------|---------|
 | 0.2 | "The code has a bug on line 42." | Code review |
-| 0.5 | "I see the issue — there's a bug on line 42. Let me explain what's happening." | Supportive debugging |
+| 0.5 | "I see the issue â€” there's a bug on line 42. Let me explain what's happening." | Supportive debugging |
 | 0.9 | "I understand how frustrating this must be. You've put a lot of work in, and this bug on line 42 is the culprit. Let me help you fix it." | Emotional support |
 
 #### Humor
@@ -119,7 +119,7 @@ AppliedStyle {
 | Value | Example | Context |
 |-------|---------|---------|
 | 0.1 | "That configuration is incorrect." | Serious error |
-| 0.5 | "Well, that configuration isn't quite right — but we can fix it!" | Light correction |
+| 0.5 | "Well, that configuration isn't quite right â€” but we can fix it!" | Light correction |
 | 0.9 | "That configuration is about as correct as a screen door on a submarine. Let's sort it out!" | Playful mood |
 
 #### Assertiveness
@@ -132,7 +132,7 @@ AppliedStyle {
 
 ## Style Adaptation to Context
 
-The Style Profile is not static — it adapts based on context. Adaptation is driven by the Context System and modulated by traits and mood:
+The Style Profile is not static â€” it adapts based on context. Adaptation is driven by the Context System and modulated by traits and mood:
 
 ```typescript
 adaptStyle(context: DecisionContext): CommunicationStyle
@@ -161,7 +161,7 @@ adaptStyle(context: DecisionContext): CommunicationStyle
     adapted.formality += 0.2
     adapted.assertiveness -= 0.1
   
-  // 4. Clamp all dimensions to 0.0–1.0
+  // 4. Clamp all dimensions to 0.0â€“1.0
   clamp(adapted)
   
   return adapted
@@ -184,34 +184,34 @@ Style is applied as a post-processing layer in the response pipeline:
 
 ```
 Content Generation (LLMOS)
-    │
-    ▼
+    â”‚
+    â–¼
 Raw Response
-    │
-    ▼
+    â”‚
+    â–¼
 Style Application
-    │
-    ├── Adapt style to current context
-    ├── Apply formality transformations
-    │     ├── Contractions → full forms (high formality)
-    │     └── Casual phrases → formal equivalents
-    ├── Apply verbosity adjustments
-    │     ├── Expansion: add examples, caveats, detail (high verbosity)
-    │     └── Compression: remove digressions, single sentences (low verbosity)
-    ├── Apply empathy framing
-    │     ├── Add sentiment acknowledgment phrases
-    │     └── Warm closing statements
-    ├── Apply humor where appropriate
-    │     ├── Relevant analogies or wordplay
-    │     └── Light tone markers
-    └── Apply assertiveness level
-          ├── Direct imperatives vs. hedged suggestions
-          └── Degree of certainty markers
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Adapt style to current context
+    â”œâ”€â”€ Apply formality transformations
+    â”‚     â”œâ”€â”€ Contractions â†’ full forms (high formality)
+    â”‚     â””â”€â”€ Casual phrases â†’ formal equivalents
+    â”œâ”€â”€ Apply verbosity adjustments
+    â”‚     â”œâ”€â”€ Expansion: add examples, caveats, detail (high verbosity)
+    â”‚     â””â”€â”€ Compression: remove digressions, single sentences (low verbosity)
+    â”œâ”€â”€ Apply empathy framing
+    â”‚     â”œâ”€â”€ Add sentiment acknowledgment phrases
+    â”‚     â””â”€â”€ Warm closing statements
+    â”œâ”€â”€ Apply humor where appropriate
+    â”‚     â”œâ”€â”€ Relevant analogies or wordplay
+    â”‚     â””â”€â”€ Light tone markers
+    â””â”€â”€ Apply assertiveness level
+          â”œâ”€â”€ Direct imperatives vs. hedged suggestions
+          â””â”€â”€ Degree of certainty markers
+    â”‚
+    â–¼
 Styled Response
-    │
-    ▼
+    â”‚
+    â–¼
 Deliver to User
 ```
 
@@ -334,27 +334,27 @@ interface StyleConfig {
 | `PER.StyleMoodModulated` | dimension, mood, modulation_value | Mood modulated a style dimension |
 | `PER.StylePersisted` | version, dimension_count | Style saved to Memory OS |
 | `PER.StyleAdaptationExpired` | adaptation_id, dimension, reverted_value | Temporary adaptation expired |
-| `PER.StyleDimensionClamped` | dimension, attempted_value, clamped_value | Dimension value clamped to 0.0–1.0 |
+| `PER.StyleDimensionClamped` | dimension, attempted_value, clamped_value | Dimension value clamped to 0.0â€“1.0 |
 | `PER.StyleLanguageChanged` | old_language, new_language | Language preference changed |
 
 ## Invariants
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| STY-001 | All style dimensions are bounded to 0.0–1.0 | Algorithmic — clamped on every set/adapt |
-| STY-002 | Style adaptation is non-destructive to base profile | Architectural — base is immutable during session |
-| STY-003 | Temporary adaptations expire and revert to base | Algorithmic — `expires_at` enforced |
-| STY-004 | Style is loaded from persistent storage on session start | Architectural — `loadStyle` called by Personality System |
-| STY-005 | Style is always applied after content generation, never before | Architectural — response pipeline ordering |
-| STY-006 | Each style dimension has a defined effect on response output | Architectural — `StyleDimensionDefinition` required |
-| STY-007 | Adaptation events are always recorded | Architectural — mandatory `StyleAdaptation` logging |
+| STY-001 | All style dimensions are bounded to 0.0â€“1.0 | Algorithmic â€” clamped on every set/adapt |
+| STY-002 | Style adaptation is non-destructive to base profile | Architectural â€” base is immutable during session |
+| STY-003 | Temporary adaptations expire and revert to base | Algorithmic â€” `expires_at` enforced |
+| STY-004 | Style is loaded from persistent storage on session start | Architectural â€” `loadStyle` called by Personality System |
+| STY-005 | Style is always applied after content generation, never before | Architectural â€” response pipeline ordering |
+| STY-006 | Each style dimension has a defined effect on response output | Architectural â€” `StyleDimensionDefinition` required |
+| STY-007 | Adaptation events are always recorded | Architectural â€” mandatory `StyleAdaptation` logging |
 
 ## Error Cases
 
 | Condition | Error Code | Behavior |
 |-----------|------------|----------|
 | Unknown style dimension | `PER_STYLE_UNKNOWN_DIMENSION` | Return error; list valid dimensions |
-| Dimension value outside 0.0–1.0 | `PER_STYLE_VALUE_OUT_OF_RANGE` | Clamp to valid range; log warning |
+| Dimension value outside 0.0â€“1.0 | `PER_STYLE_VALUE_OUT_OF_RANGE` | Clamp to valid range; log warning |
 | Style application on empty content | `PER_STYLE_EMPTY_CONTENT` | Return original content; no error |
 | Maximum session adaptations exceeded | `PER_STYLE_MAX_ADAPTATIONS` | Deny adaptation; use current style |
 | Adaptation on disabled feature | `PER_STYLE_ADAPTATION_DISABLED` | Deny; use base style without adaptation |
@@ -366,17 +366,17 @@ interface StyleConfig {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Style Profile handles only communication style — dimensions, adaptation, application |
-| R2 — Dependency Order | Depends on Mood Tracker, Trait Engine; no upward deps |
-| R3 — DRY | Style dimensions defined once in StyleProfile, applied by Response Builder |
-| R4 — Builder Pattern | Response built by Content → Style Adaptation → Styled Output |
-| R5 — Liskov Substitution | Any StyleProfile implements the interface |
-| R6 — DI over Singletons | Adaptation strategies injected |
-| R9 — Deterministic | Same style and context produce same styled output |
-| R10 — Simpler Over Complex | Style uses scalar dimension scores (0.0–1.0) |
-| R13 — Design for Failure | Style application handles empty content, unknown dimensions gracefully |
-| R14 — Paved Path | All responses flow through `applyStyleToResponse` |
-| R15 — Open/Closed | New style dimensions added via Config, not by modifying core |
+| R1 â€” Modulsingularity | Style Profile handles only communication style â€” dimensions, adaptation, application |
+| R2 â€” Dependency Order | Depends on Mood Tracker, Trait Engine; no upward deps |
+| R3 â€” DRY | Style dimensions defined once in StyleProfile, applied by Response Builder |
+| R4 â€” Builder Pattern | Response built by Content â†’ Style Adaptation â†’ Styled Output |
+| R5 â€” Liskov Substitution | Any StyleProfile implements the interface |
+| R6 â€” DI over Singletons | Adaptation strategies injected |
+| R9 â€” Deterministic | Same style and context produce same styled output |
+| R10 â€” Simpler Over Complex | Style uses scalar dimension scores (0.0â€“1.0) |
+| R13 â€” Design for Failure | Style application handles empty content, unknown dimensions gracefully |
+| R14 â€” Paved Path | All responses flow through `applyStyleToResponse` |
+| R15 â€” Open/Closed | New style dimensions added via Config, not by modifying core |
 
 ## Related Documents
 

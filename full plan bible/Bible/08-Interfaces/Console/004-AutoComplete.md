@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## Console — 004: Auto-Complete
+﻿# AIOS Bible â€” Interfaces
+## Console â€” 004: Auto-Complete
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-GC-004 |
-| Source Laws | Law 1 — Law of Origin, Law 4 — Law of Evidence, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 1 â€” Law of Origin, Law 4 â€” Law of Evidence, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/006-Lifecycles.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -21,23 +21,23 @@ The Auto-Complete engine accelerates governance console interaction by providing
 
 ```
 input prefix (partial input string)
-    │
-    ▼
-┌──────────────────┐
-│  context analysis │  parse current state, position, partial tokens
-└──────┬───────────┘
-       ▼
-┌──────────────────┐
-│ candidate gen     │  collect candidates from commands, args, values, history
-└──────┬───────────┘
-       ▼
-┌──────────────────┐
-│  scoring & ranking│  score by relevance, recency, frequency, match quality
-└──────┬───────────┘
-       ▼
-┌──────────────────┐
-│  presentation     │  display ranked suggestions with descriptions
-└──────────────────┘
+    â”‚
+    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  context analysis â”‚  parse current state, position, partial tokens
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ candidate gen     â”‚  collect candidates from commands, args, values, history
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  scoring & rankingâ”‚  score by relevance, recency, frequency, match quality
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  presentation     â”‚  display ranked suggestions with descriptions
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Data Model (TypeScript)
@@ -100,7 +100,7 @@ Performs fuzzy matching of the partial input against candidate texts. Returns ma
 
 ### show_help
 
-Displays the HelpEntry for a selected candidate. Shows summary, usage syntax, examples, and related topics. Integrates with the command registry to display argument specs and default values. Help is context-sensitive — it shows the most relevant help based on current input.
+Displays the HelpEntry for a selected candidate. Shows summary, usage syntax, examples, and related topics. Integrates with the command registry to display argument specs and default values. Help is context-sensitive â€” it shows the most relevant help based on current input.
 
 ### complete_parameter
 
@@ -167,39 +167,39 @@ interface ParameterCompleter {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| GC-004-01 | Suggestions are always context-aware — same prefix in different contexts may yield different candidates | Algorithmic — CompletionContext includes token position and session state |
-| GC-004-02 | Candidate ordering is deterministic for the same input and context | Algorithmic — scoring uses consistent weight configuration |
-| GC-004-03 | Auto-complete response time is bounded by a configurable budget | Algorithmic — fuzzy matching and dynamic queries have timeouts |
-| GC-004-04 | Help entries are sourced from command definitions, never hardcoded | Architectural — HelpProvider reads from CommandRegistry |
-| GC-004-05 | Fuzzy matching is typo-tolerant up to a configurable edit distance | Algorithmic — matcher enforces maximum edit distance |
-| GC-004-06 | Candidate overflow is handled gracefully without crashing the UI | Architectural — overflow trigger returns capped set |
+| GC-004-01 | Suggestions are always context-aware â€” same prefix in different contexts may yield different candidates | Algorithmic â€” CompletionContext includes token position and session state |
+| GC-004-02 | Candidate ordering is deterministic for the same input and context | Algorithmic â€” scoring uses consistent weight configuration |
+| GC-004-03 | Auto-complete response time is bounded by a configurable budget | Algorithmic â€” fuzzy matching and dynamic queries have timeouts |
+| GC-004-04 | Help entries are sourced from command definitions, never hardcoded | Architectural â€” HelpProvider reads from CommandRegistry |
+| GC-004-05 | Fuzzy matching is typo-tolerant up to a configurable edit distance | Algorithmic â€” matcher enforces maximum edit distance |
+| GC-004-06 | Candidate overflow is handled gracefully without crashing the UI | Architectural â€” overflow trigger returns capped set |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Auto-Complete owns suggestion generation only; command definitions owned by CLI registry |
-| R2 — Dependency Order | Depends on CLI CommandRegistry, REPL session, EVS; no circular deps |
-| R3 — DRY | Command names and argument specs sourced from CLICommand definitions; no duplication |
-| R4 — Builder Pattern | CompletionContext built incrementally from input state |
-| R5 — Deterministic | Same input and context always produce identical candidate ranking |
-| R6 — Single Source | Command registry is the authoritative source for command metadata |
-| R9 — Deterministic | Replaying autocomplete session with same input produces same suggestions |
-| R10 — Simpler Over Complex | Default suggestion set is command names; context-aware and fuzzy are opt-in layers |
-| R13 — Design for Failure | Dynamic value provider failure degrades gracefully to static values only |
-| R14 — Paved Path | Standard completion flow: type prefix, see suggestions, accept with Tab |
-| R15 — Open/Closed | New candidate providers register without modifying the auto-complete engine |
+| R1 â€” Modulsingularity | Auto-Complete owns suggestion generation only; command definitions owned by CLI registry |
+| R2 â€” Dependency Order | Depends on CLI CommandRegistry, REPL session, EVS; no circular deps |
+| R3 â€” DRY | Command names and argument specs sourced from CLICommand definitions; no duplication |
+| R4 â€” Builder Pattern | CompletionContext built incrementally from input state |
+| R5 â€” Deterministic | Same input and context always produce identical candidate ranking |
+| R6 â€” Single Source | Command registry is the authoritative source for command metadata |
+| R9 â€” Deterministic | Replaying autocomplete session with same input produces same suggestions |
+| R10 â€” Simpler Over Complex | Default suggestion set is command names; context-aware and fuzzy are opt-in layers |
+| R13 â€” Design for Failure | Dynamic value provider failure degrades gracefully to static values only |
+| R14 â€” Paved Path | Standard completion flow: type prefix, see suggestions, accept with Tab |
+| R15 â€” Open/Closed | New candidate providers register without modifying the auto-complete engine |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/08-Interfaces/Console/000-Overview.md | Governance Console overview — auto-complete enhances all console modes |
+| Bible/08-Interfaces/Console/000-Overview.md | Governance Console overview â€” auto-complete enhances all console modes |
 | Bible/08-Interfaces/Console/001-CLI-Commands.md | CLI commands provide the metadata for auto-complete suggestions |
 | Bible/08-Interfaces/Console/002-REPL.md | REPL integration provides context and history for scoring |
 | Bible/08-Interfaces/Console/003-Scripting.md | Scripting engine can use auto-complete during script authoring |
 | Bible/08-Interfaces/Dashboard/000-Overview.md | Dashboard surfaces commands that auto-complete indexes |
-| Bible/08-Interfaces/UI/000-Overview.md | General human interface — console is governance-specific |
+| Bible/08-Interfaces/UI/000-Overview.md | General human interface â€” console is governance-specific |
 | Bible/01-Governance/000-Overview.md | Governance services provide dynamic entity values for parameter completion |
-| Bible/05-Platform/005-AUS.md | Audit System — auto-complete assists audit query construction |
+| Bible/05-Platform/005-AUS.md | Audit System â€” auto-complete assists audit query construction |
 | Bible/06-Services/ACF/000-Overview.md | ACF transports auto-complete dynamic value queries |

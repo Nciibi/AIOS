@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Linux — 003: Networking
+﻿# AIOS Bible â€” Domains
+## Linux â€” 003: Networking
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-LNX-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Enable AIOS to declaratively manage Linux networking — interfaces, firewalls, DNS, routing, VPN, and link aggregation — ensuring connectivity is verifiable, atomic, and auditable.
+Enable AIOS to declaratively manage Linux networking â€” interfaces, firewalls, DNS, routing, VPN, and link aggregation â€” ensuring connectivity is verifiable, atomic, and auditable.
 
 ## Architecture
 
@@ -24,26 +24,26 @@ Networking is modeled as a layered stack. At the physical/link layer, interfaces
 ### Architecture Flow
 
 ```text
-┌─────────────────────────────────────────────────────────────────┐
-│                     NetworkManager Agent                         │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
-│  │ Interface│  │ Firewall │  │ Route    │  │ DNS      │        │
-│  │ Handler  │  │ Handler  │  │ Handler  │  │ Handler  │        │
-│  └─────┬────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘        │
-│        │             │             │             │              │
-│  ┌─────▼─────────────▼─────────────▼─────────────▼─────┐       │
-│  │            Transaction Manager                       │       │
-│  │  ┌────────────┐  ┌────────────┐  ┌───────────────┐  │       │
-│  │  │ Stage      │  │ Verify     │  │ Rollback      │  │       │
-│  │  │ Changes    │  │ Connect.   │  │ on Fail       │  │       │
-│  │  └────────────┘  └────────────┘  └───────────────┘  │       │
-│  └───────────────────────┬──────────────────────────────┘       │
-│                          │                                      │
-│  ┌───────────────────────▼──────────────────────────────┐       │
-│  │              Live Network State                       │       │
-│  │  ip link   nftables   /etc/resolv.conf   route -n   │       │
-│  └──────────────────────────────────────────────────────┘       │
-└─────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                     NetworkManager Agent                         â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”‚
+â”‚  â”‚ Interfaceâ”‚  â”‚ Firewall â”‚  â”‚ Route    â”‚  â”‚ DNS      â”‚        â”‚
+â”‚  â”‚ Handler  â”‚  â”‚ Handler  â”‚  â”‚ Handler  â”‚  â”‚ Handler  â”‚        â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜        â”‚
+â”‚        â”‚             â”‚             â”‚             â”‚              â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”       â”‚
+â”‚  â”‚            Transaction Manager                       â”‚       â”‚
+â”‚  â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚       â”‚
+â”‚  â”‚  â”‚ Stage      â”‚  â”‚ Verify     â”‚  â”‚ Rollback      â”‚  â”‚       â”‚
+â”‚  â”‚  â”‚ Changes    â”‚  â”‚ Connect.   â”‚  â”‚ on Fail       â”‚  â”‚       â”‚
+â”‚  â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚
+â”‚                          â”‚                                      â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”       â”‚
+â”‚  â”‚              Live Network State                       â”‚       â”‚
+â”‚  â”‚  ip link   nftables   /etc/resolv.conf   route -n   â”‚       â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Data Model (TypeScript interfaces)
@@ -139,14 +139,14 @@ interface DhcpRelayConfig {
 
 ## Core Concepts / Operations
 
-- **configure_interface(iface)** — applies IP addressing, MTU, bonding, and link state
-- **add_firewall_rule(rule)** — inserts rule into nftables/iptables chain at priority
-- **remove_firewall_rule(ruleId)** — deletes rule by ID
-- **set_dns(entry)** — configures DNS resolution for hostname or search domain
-- **add_route(route)** — adds route to routing table with metric
-- **remove_route(destination)** — removes route from routing table
-- **setup_vpn(config)** — establishes VPN tunnel with key material
-- **verify_connectivity(targets)** — pings or probes endpoints after change
+- **configure_interface(iface)** â€” applies IP addressing, MTU, bonding, and link state
+- **add_firewall_rule(rule)** â€” inserts rule into nftables/iptables chain at priority
+- **remove_firewall_rule(ruleId)** â€” deletes rule by ID
+- **set_dns(entry)** â€” configures DNS resolution for hostname or search domain
+- **add_route(route)** â€” adds route to routing table with metric
+- **remove_route(destination)** â€” removes route from routing table
+- **setup_vpn(config)** â€” establishes VPN tunnel with key material
+- **verify_connectivity(targets)** â€” pings or probes endpoints after change
 
 ### Operations Table
 
@@ -215,21 +215,21 @@ interface DhcpRelayConfig {
 | NET-INV-05 | Interface IP addresses do not conflict within subnet | InterfaceHandler validates IP uniqueness on subnet |
 | NET-INV-06 | VPN private key references are never logged or exposed | VpnHandler stores keys in secret store, uses reference |
 
-## Design DNA (table with Rule, Assessment — include R1,R2,R3,R4,R5,R6,R9,R10,R13,R14,R15)
+## Design DNA (table with Rule, Assessment â€” include R1,R2,R3,R4,R5,R6,R9,R10,R13,R14,R15)
 
 | Rule | Assessment |
 |------|------------|
-| R1 — Composition over Inheritance | Network stack layers compose; interfaces contain slaves and bond options |
-| R2 — Explicit over Implicit | Every IP, route, and rule is explicitly declared; no DHCP assumptions |
-| R3 — Immutable Artifacts | Firewall rule sets are immutable once applied; changes create new revision |
-| R4 — Stateless Workers | NetworkManager agent is stateless; desired state lives in manifests |
-| R5 — Idempotency | All network operations are idempotent; same config applied twice is no-op |
-| R6 — Observability | Every network change emits events; connectivity probes provide live status |
-| R9 — Fail Closed | Connectivity failure triggers rollback; network stays at last known good state |
-| R10 — Least Privilege | Firewall and route changes require elevated capability grants |
-| R13 — Graceful Degradation | If DNS resolver fails, cached entries serve until fallback activated |
-| R14 — Data Immutability | Network config history is append-only; rollbacks restore prior immutable snapshot |
-| R15 — Explicit Errors | Every failure includes typed error code and recovery action |
+| R1 â€” Composition over Inheritance | Network stack layers compose; interfaces contain slaves and bond options |
+| R2 â€” Explicit over Implicit | Every IP, route, and rule is explicitly declared; no DHCP assumptions |
+| R3 â€” Immutable Artifacts | Firewall rule sets are immutable once applied; changes create new revision |
+| R4 â€” Stateless Workers | NetworkManager agent is stateless; desired state lives in manifests |
+| R5 â€” Idempotency | All network operations are idempotent; same config applied twice is no-op |
+| R6 â€” Observability | Every network change emits events; connectivity probes provide live status |
+| R9 â€” Fail Closed | Connectivity failure triggers rollback; network stays at last known good state |
+| R10 â€” Least Privilege | Firewall and route changes require elevated capability grants |
+| R13 â€” Graceful Degradation | If DNS resolver fails, cached entries serve until fallback activated |
+| R14 â€” Data Immutability | Network config history is append-only; rollbacks restore prior immutable snapshot |
+| R15 â€” Explicit Errors | Every failure includes typed error code and recovery action |
 
 ## Related Documents (table)
 
@@ -237,8 +237,8 @@ interface DhcpRelayConfig {
 |----------|-------------|
 | Bible/07-Domains/Linux/000-Overview.md | Parent overview |
 | Bible/07-Domains/Linux/002-System-Admin.md | System administration sibling |
-| Bible/07-Laws/Law-004-Evidence.md | Audit trail for network changes |
-| Bible/07-Laws/Law-007-Capability-Bounds.md | Capability scoping for network ops |
-| Bible/Physics/005-Events.md | Event schema lineage |
-| Bible/Physics/007-Capabilities.md | Capability model |
-| Bible/Physics/010-Execution.md | Execution lifecycle |
+| Physics/000-Laws.md | Audit trail for network changes |
+| Physics/000-Laws.md | Capability scoping for network ops |
+| Physics/005-Events.md | Event schema lineage |
+| Physics/007-Capabilities.md | Capability model |
+| Physics/010-Execution.md | Execution lifecycle |

@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — Image Analysis
+﻿# AIOS Bible â€” Brain
+## 001 â€” Image Analysis
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Vision |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Vision |
 | Document ID | AIOS-BBL-002-VIS-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 3 — Law of Communication |
+| Source Laws | Law 4 â€” Law of Evidence, Law 3 â€” Law of Communication |
 | Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,9 +15,9 @@
 
 ## Purpose
 
-Image Analysis processes static images to extract structured information. It is the primary entry point for visual input into the Brain — converting raw image bytes into labels, descriptions, objects, text, and face data that Sou can reason about. Image Analysis supports five distinct modes (describe, classify, detect, ocr, full) and applies a preprocessing pipeline (normalization, resize, compression, enhancement, privacy) before any LLMOS inference call.
+Image Analysis processes static images to extract structured information. It is the primary entry point for visual input into the Brain â€” converting raw image bytes into labels, descriptions, objects, text, and face data that Sou can reason about. Image Analysis supports five distinct modes (describe, classify, detect, ocr, full) and applies a preprocessing pipeline (normalization, resize, compression, enhancement, privacy) before any LLMOS inference call.
 
-Under VIS-003, image data is ephemeral unless explicitly persisted to Memory OS. Under VIS-004, face detection produces bounding boxes only — never identity labels. Under VIS-005, privacy filters are applied before any image leaves the Vision System.
+Under VIS-003, image data is ephemeral unless explicitly persisted to Memory OS. Under VIS-004, face detection produces bounding boxes only â€” never identity labels. Under VIS-005, privacy filters are applied before any image leaves the Vision System.
 
 ## Data Model
 
@@ -86,7 +86,7 @@ ImageAnalysisResult {
 ```typescript
 Label {
   name: string
-  confidence: number              // 0.0–1.0
+  confidence: number              // 0.0â€“1.0
   category?: string
   taxonomy_id?: string            // Reference to classification taxonomy node
 }
@@ -97,7 +97,7 @@ Label {
 ```typescript
 DetectedObject {
   name: string
-  confidence: number              // 0.0–1.0
+  confidence: number              // 0.0â€“1.0
   bounding_box: BoundingBox
   instance_id?: string            // For tracking objects across frames
   attributes?: Record<string, string>
@@ -108,7 +108,7 @@ DetectedObject {
 
 ```typescript
 BoundingBox {
-  x: number                       // Normalized 0.0–1.0
+  x: number                       // Normalized 0.0â€“1.0
   y: number
   width: number
   height: number
@@ -120,7 +120,7 @@ BoundingBox {
 ```typescript
 ExtractedText {
   text: string
-  confidence: number              // 0.0–1.0
+  confidence: number              // 0.0â€“1.0
   bounding_box?: BoundingBox
   language?: string
   is_handwriting: boolean
@@ -155,8 +155,8 @@ FaceAttributes {
   age_estimate?: number
   emotion?: string
   glasses?: boolean
-  blur?: number                   // 0.0–1.0
-  exposure?: number               // 0.0–1.0
+  blur?: number                   // 0.0â€“1.0
+  exposure?: number               // 0.0â€“1.0
 }
 ```
 
@@ -167,7 +167,7 @@ PreprocessingConfig {
   target_format: "png" | "jpg" | "webp"
   max_width: number               // Default: 2048
   max_height: number              // Default: 2048
-  compression_quality: number     // 1–100, default: 85
+  compression_quality: number     // 1â€“100, default: 85
   enhance_low_quality: boolean    // Default: true
   privacy_filter: {
     enabled: boolean
@@ -210,37 +210,37 @@ All images pass through a deterministic preprocessing pipeline before LLMOS infe
 
 ```
 Raw Input
-    │
-    ▼
+    â”‚
+    â–¼
 Step 1: Format Normalization
-    │   Convert to target format (default: png)
-    │   Unsupported formats → VIS_UNSUPPORTED_FORMAT
-    │
-    ▼
+    â”‚   Convert to target format (default: png)
+    â”‚   Unsupported formats â†’ VIS_UNSUPPORTED_FORMAT
+    â”‚
+    â–¼
 Step 2: Resize
-    │   Scale to fit within max_width × max_height
-    │   Maintains aspect ratio; pads if needed
-    │   Exceeds limit × 2 → VIS_IMAGE_TOO_LARGE
-    │
-    ▼
+    â”‚   Scale to fit within max_width Ã— max_height
+    â”‚   Maintains aspect ratio; pads if needed
+    â”‚   Exceeds limit Ã— 2 â†’ VIS_IMAGE_TOO_LARGE
+    â”‚
+    â–¼
 Step 3: Compression
-    │   Apply compression_quality setting
-    │   Trade-off: lower quality = faster inference
-    │
-    ▼
+    â”‚   Apply compression_quality setting
+    â”‚   Trade-off: lower quality = faster inference
+    â”‚
+    â–¼
 Step 4: Enhancement
-    │   Auto-applied for low-quality images
-    │   Adjusts brightness, contrast, sharpness
-    │   Skip if enhance_low_quality = false
-    │
-    ▼
+    â”‚   Auto-applied for low-quality images
+    â”‚   Adjusts brightness, contrast, sharpness
+    â”‚   Skip if enhance_low_quality = false
+    â”‚
+    â–¼
 Step 5: Privacy Filter
-    │   Face blurring/pixelation (configurable)
-    │   Region redaction (configurable)
-    │   Applied before any external output
-    │
-    ▼
-Processed Image → LLMOS Inference
+    â”‚   Face blurring/pixelation (configurable)
+    â”‚   Region redaction (configurable)
+    â”‚   Applied before any external output
+    â”‚
+    â–¼
+Processed Image â†’ LLMOS Inference
 ```
 
 ### Face Detection
@@ -257,7 +257,7 @@ Face detection follows VIS-004 constraints:
 Privacy filtration is mandatory and non-bypassable:
 1. Face blurring applied at preprocessing stage
 2. Region redaction removes user-specified bounding boxes
-3. Filtered image is used for LLMOS inference — provider never sees raw faces
+3. Filtered image is used for LLMOS inference â€” provider never sees raw faces
 4. If all content is redacted, returns `VIS_ALL_CONTENT_BLOCKED`
 5. Filter application is logged via `VIS.PrivacyFilterApplied` event
 
@@ -267,19 +267,19 @@ Batch processing handles multiple images efficiently:
 
 ```
 Batch Request
-    │
-    ├── Validate all requests → reject invalid upfront
-    ├── Apply preprocessing per image (parallel)
-    ├── Dispatch to LLMOS with concurrency limit
-    │
-    ├── On individual failure:
-    │   fail_on_error=true  → abort entire batch
-    │   fail_on_error=false → collect partial results
-    │
-    └── Return BatchAnalysisResult
-          ├── results: ImageAnalysisResult[]
-          ├── errors: AnalysisError[]
-          └── summary: { total, succeeded, failed, total_time_ms }
+    â”‚
+    â”œâ”€â”€ Validate all requests â†’ reject invalid upfront
+    â”œâ”€â”€ Apply preprocessing per image (parallel)
+    â”œâ”€â”€ Dispatch to LLMOS with concurrency limit
+    â”‚
+    â”œâ”€â”€ On individual failure:
+    â”‚   fail_on_error=true  â†’ abort entire batch
+    â”‚   fail_on_error=false â†’ collect partial results
+    â”‚
+    â””â”€â”€ Return BatchAnalysisResult
+          â”œâ”€â”€ results: ImageAnalysisResult[]
+          â”œâ”€â”€ errors: AnalysisError[]
+          â””â”€â”€ summary: { total, succeeded, failed, total_time_ms }
 ```
 
 ## Internal Interface
@@ -399,21 +399,21 @@ interface AnalysisError {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| IMA-001 | Every analysis request has exactly one analysis_type | Schema — analysis_type is required and validated |
-| IMA-002 | Preprocessing always runs before LLMOS inference | Algorithmic — pipeline stages are sequential and mandatory |
-| IMA-003 | Face detection never returns identity labels | Constitutional — VIS-004; bounding boxes only |
-| IMA-004 | Privacy filter is always applied before image leaves Vision System | Algorithmic — filter runs in ImagePreprocessor, cannot be skipped |
-| IMA-005 | Preprocessing output dimensions never exceed max_width × max_height | Algorithmic — resize enforces hard limits |
-| IMA-006 | Batch processing respects concurrency limit to prevent LLMOS overload | Algorithmic — semaphore-controlled dispatch |
-| IMA-007 | Image data is ephemeral unless explicitly stored to Memory OS | Architectural — no automatic persistence |
-| IMA-008 | All faces in an image are returned in a single result (no paging) | Schema — face array contains all detections |
+| IMA-001 | Every analysis request has exactly one analysis_type | Schema â€” analysis_type is required and validated |
+| IMA-002 | Preprocessing always runs before LLMOS inference | Algorithmic â€” pipeline stages are sequential and mandatory |
+| IMA-003 | Face detection never returns identity labels | Constitutional â€” VIS-004; bounding boxes only |
+| IMA-004 | Privacy filter is always applied before image leaves Vision System | Algorithmic â€” filter runs in ImagePreprocessor, cannot be skipped |
+| IMA-005 | Preprocessing output dimensions never exceed max_width Ã— max_height | Algorithmic â€” resize enforces hard limits |
+| IMA-006 | Batch processing respects concurrency limit to prevent LLMOS overload | Algorithmic â€” semaphore-controlled dispatch |
+| IMA-007 | Image data is ephemeral unless explicitly stored to Memory OS | Architectural â€” no automatic persistence |
+| IMA-008 | All faces in an image are returned in a single result (no paging) | Schema â€” face array contains all detections |
 
 ## Error Cases
 
 | Condition | Error Code | Behavior |
 |-----------|------------|----------|
 | Unsupported image format | `VIS_UNSUPPORTED_FORMAT` | Return error; list supported formats in message |
-| Image exceeds max dimensions × 2 | `VIS_IMAGE_TOO_LARGE` | Return error; suggest compression before retry |
+| Image exceeds max dimensions Ã— 2 | `VIS_IMAGE_TOO_LARGE` | Return error; suggest compression before retry |
 | Invalid analysis_type | `VIS_INVALID_ANALYSIS_TYPE` | Return error; list valid modes |
 | Privacy filter blocked all content | `VIS_ALL_CONTENT_BLOCKED` | Return "content not available" with filter details |
 | No objects detected (detect mode) | `VIS_NO_OBJECTS_DETECTED` | Return empty array; not an error |
@@ -428,17 +428,17 @@ interface AnalysisError {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Image Analysis handles only static image processing |
-| R2 — Dependency Order | Depends on LLMOS for inference; no upward deps |
-| R3 — DRY | All analysis modes share preprocessing pipeline |
-| R4 — Builder Pattern | Analysis built by Preprocessor → Provider → Result Aggregator |
-| R5 — Liskov Substitution | Any VisionProvider implements the interface |
-| R6 — DI over Singletons | Providers and preprocessing config injected |
-| R9 — Deterministic | Same image + config produces same analysis (model-dependent) |
-| R10 — Simpler Over Complex | Five clear modes; full mode composes sub-modes |
-| R13 — Design for Failure | Provider timeouts, partial results, batch error collection |
-| R14 — Paved Path | `analyze()` is the single entry point for all modes |
-| R15 — Open/Closed | New analysis modes added via provider, not by modifying ImageAnalyzer |
+| R1 â€” Modulsingularity | Image Analysis handles only static image processing |
+| R2 â€” Dependency Order | Depends on LLMOS for inference; no upward deps |
+| R3 â€” DRY | All analysis modes share preprocessing pipeline |
+| R4 â€” Builder Pattern | Analysis built by Preprocessor â†’ Provider â†’ Result Aggregator |
+| R5 â€” Liskov Substitution | Any VisionProvider implements the interface |
+| R6 â€” DI over Singletons | Providers and preprocessing config injected |
+| R9 â€” Deterministic | Same image + config produces same analysis (model-dependent) |
+| R10 â€” Simpler Over Complex | Five clear modes; full mode composes sub-modes |
+| R13 â€” Design for Failure | Provider timeouts, partial results, batch error collection |
+| R14 â€” Paved Path | `analyze()` is the single entry point for all modes |
+| R15 â€” Open/Closed | New analysis modes added via provider, not by modifying ImageAnalyzer |
 
 ## Related Documents
 

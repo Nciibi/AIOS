@@ -1,13 +1,13 @@
-# AIOS Bible — Institutions
-## 003 — Mission Delegation
+﻿# AIOS Bible â€” Institutions
+## 003 â€” Mission Delegation
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Institutions |
+| Version | 1.0.0 |
+| Category | Bible â€” Institutions |
 | Document ID | AIOS-BBL-003-MSN-003 |
-| Source Laws | Law 1 — Law of Origin, Law 4 — Law of Evidence, Law 6 — Law of Lifecycle Compliance |
+| Source Laws | Law 1 â€” Law of Origin, Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle Compliance |
 | Source Physics | Physics/002-Missions.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Delegate Mission tasks to sub-Missions, Workers, Organizations, or external systems — with clear contracts, accountability, and result verification.
+Delegate Mission tasks to sub-Missions, Workers, Organizations, or external systems â€” with clear contracts, accountability, and result verification.
 
 ## Architecture
 
@@ -23,16 +23,16 @@ Delegation follows a contract-based pattern where the source Mission defines sco
 
 ```
 Source Mission               Delegate
-    │                           │
-    ├── createDelegation() ────►│
-    │                           ├── accept / reject
-    │◄── acceptance             │
-    │                           │
-    │   [delegated execution]   │
-    │                           │
-    │◄── result + evidence ─────┤
-    │                           │
-    └── verifyResult() ────────┘
+    â”‚                           â”‚
+    â”œâ”€â”€ createDelegation() â”€â”€â”€â”€â–ºâ”‚
+    â”‚                           â”œâ”€â”€ accept / reject
+    â”‚â—„â”€â”€ acceptance             â”‚
+    â”‚                           â”‚
+    â”‚   [delegated execution]   â”‚
+    â”‚                           â”‚
+    â”‚â—„â”€â”€ result + evidence â”€â”€â”€â”€â”€â”¤
+    â”‚                           â”‚
+    â””â”€â”€ verifyResult() â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 Accountability is maintained through an immutable chain recording the source Mission, contract, delegate, and verification result. Escalation paths exist for failures at any stage.
@@ -101,7 +101,7 @@ interface ResultVerification {
 | Terms | Yes | Conditions, constraints, SLA requirements |
 
 ### Accountability Chain
-Each delegation creates an accountability chain: source Mission → contract → target. The source Mission retains ultimate accountability. The delegate assumes execution accountability. Chain is recorded immutably in the Event Store.
+Each delegation creates an accountability chain: source Mission â†’ contract â†’ target. The source Mission retains ultimate accountability. The delegate assumes execution accountability. Chain is recorded immutably in the Event Store.
 
 ### Result Verification at Handback
 When delegated work completes, results are verified against the contract's success criteria. Verification produces a ResultVerification record. Verification may be:
@@ -155,37 +155,37 @@ interface MissionDelegator {
 | MSN_DEL_001 | Delegation target does not exist or is unreachable |
 | MSN_DEL_002 | Contract scope overlaps with existing delegation |
 | MSN_DEL_003 | Budget exceeds remaining Mission allocation |
-| MSN_DEL_004 | Result verification failed — acceptance criteria not met |
-| MSN_DEL_005 | Delegation timeout — no response within SLA |
+| MSN_DEL_004 | Result verification failed â€” acceptance criteria not met |
+| MSN_DEL_005 | Delegation timeout â€” no response within SLA |
 
 ## Invariants
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| MSN-DEL-001 | Every delegation must have a signed contract before execution begins | Architectural — Contract status must be 'accepted' before work starts |
-| MSN-DEL-002 | A Mission cannot delegate its entire scope — must retain at least one milestone | Algorithmic — Validation rejects delegation of all milestones |
-| MSN-DEL-003 | Delegated budget must not exceed parent Mission's allocated budget | Algorithmic — Budget cross-check against parent allocation |
-| MSN-DEL-004 | Accountability chain must be recorded before any work is transferred | Architectural — Event store write precedes worker dispatch |
+| MSN-DEL-001 | Every delegation must have a signed contract before execution begins | Architectural â€” Contract status must be 'accepted' before work starts |
+| MSN-DEL-002 | A Mission cannot delegate its entire scope â€” must retain at least one milestone | Algorithmic â€” Validation rejects delegation of all milestones |
+| MSN-DEL-003 | Delegated budget must not exceed parent Mission's allocated budget | Algorithmic â€” Budget cross-check against parent allocation |
+| MSN-DEL-004 | Accountability chain must be recorded before any work is transferred | Architectural â€” Event store write precedes worker dispatch |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Delegation is a single focused concern within the Mission system |
-| R3 — DRY | Delegation contracts follow the same pattern as Mission plans |
-| R9 — Deterministic | Same delegation contract with same target produces same outcome |
-| R10 — Simpler Over Complex | Clear contract format with well-defined acceptance/rejection flow |
-| R12 — Embrace Errors | All delegation errors have unique codes (MSN_DEL_001–005) |
-| R13 — Design for Failure | Escalation paths defined for all delegation failure modes |
+| R1 â€” Modulsingularity | Delegation is a single focused concern within the Mission system |
+| R3 â€” DRY | Delegation contracts follow the same pattern as Mission plans |
+| R9 â€” Deterministic | Same delegation contract with same target produces same outcome |
+| R10 â€” Simpler Over Complex | Clear contract format with well-defined acceptance/rejection flow |
+| R12 â€” Embrace Errors | All delegation errors have unique codes (MSN_DEL_001â€“005) |
+| R13 â€” Design for Failure | Escalation paths defined for all delegation failure modes |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
 | Missions/000-Lifecycle.md | Base lifecycle doc |
-| Missions/001-Planning.md | Sibling — delegation may be part of the plan |
-| Missions/002-Execution.md | Sibling — delegated tasks execute in sub-Missions |
-| Missions/004-Failure-Recovery.md | Sibling — delegation failures trigger recovery |
+| Missions/001-Planning.md | Sibling â€” delegation may be part of the plan |
+| Missions/002-Execution.md | Sibling â€” delegated tasks execute in sub-Missions |
+| Missions/004-Failure-Recovery.md | Sibling â€” delegation failures trigger recovery |
 | Bible/03-Institutions/Organizations/000-Overview.md | Cross-Organization delegation |
 | Bible/03-Institutions/Workers/000-Overview.md | Worker delegation |
 | Physics/002-Missions.md | Mission canonical definitions |

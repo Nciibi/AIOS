@@ -1,22 +1,22 @@
-# AIOS Bible — Brain/LLMOS
-## 002 — Router
+﻿# AIOS Bible â€” Brain/LLMOS
+## 002 â€” Router
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-002 |
-| Source Laws | Law 7 — Law of Capability Bounds |
+| Source Laws | Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/010-Execution.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 6 — Model Selection |
+| Pipeline Stage | 6 â€” Model Selection |
 
 ## Purpose
 
-The Router selects the optimal model for a given request from the candidate list produced by the Model Registry (Stage 4) with cost estimates from the Cost Optimizer (Stage 5). Selection decisions balance cost, latency, capability, and entity-specific preferences. The Router is the central intelligence for model routing — it is the only component that decides which model serves which request.
+The Router selects the optimal model for a given request from the candidate list produced by the Model Registry (Stage 4) with cost estimates from the Cost Optimizer (Stage 5). Selection decisions balance cost, latency, capability, and entity-specific preferences. The Router is the central intelligence for model routing â€” it is the only component that decides which model serves which request.
 
 ## Selection Algorithm
 
@@ -48,10 +48,10 @@ function computeScore(candidate: CandidateModel, request: InferenceRequest, conf
 
 Each raw metric is normalized to [0.0, 1.0] where 1.0 is best:
 
-- **Cost**: `1.0 - (estimated_cost / max_cost_in_candidates)` — cheapest model scores 1.0
-- **Latency**: `1.0 - (estimated_latency / max_latency_in_candidates)` — fastest model scores 1.0
+- **Cost**: `1.0 - (estimated_cost / max_cost_in_candidates)` â€” cheapest model scores 1.0
+- **Latency**: `1.0 - (estimated_latency / max_latency_in_candidates)` â€” fastest model scores 1.0
 - **Quality**: Numeric mapping of QualityTier: fast=0.25, balanced=0.50, high=0.75, premium=1.0
-- **Reliability**: `1.0 - (failure_count_in_window / max_acceptable_failures)` — health score based on recent failure rate
+- **Reliability**: `1.0 - (failure_count_in_window / max_acceptable_failures)` â€” health score based on recent failure rate
 
 ### Entity-Specific Overrides
 
@@ -110,11 +110,11 @@ interface RoutingDecision {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-RTR-001 | Every request produces exactly one routing decision. | Architectural — one decision per request |
-| LLM-RTR-002 | Router never selects a model from outside the Model Registry candidate list. | API-level — candidate list enforced at boundary |
-| LLM-RTR-003 | Router never selects a blocked model or provider regardless of score. | Algorithmic — allow/block list filtering |
-| LLM-RTR-004 | Manual routing bypasses scoring but enforces allow/block lists. | Algorithmic — mode-specific routing logic |
-| LLM-RTR-005 | Router selection is deterministic for identical input (mode, candidates, config). | Algorithmic — deterministic scoring function |
+| LLM-RTR-001 | Every request produces exactly one routing decision. | Architectural â€” one decision per request |
+| LLM-RTR-002 | Router never selects a model from outside the Model Registry candidate list. | API-level â€” candidate list enforced at boundary |
+| LLM-RTR-003 | Router never selects a blocked model or provider regardless of score. | Algorithmic â€” allow/block list filtering |
+| LLM-RTR-004 | Manual routing bypasses scoring but enforces allow/block lists. | Algorithmic â€” mode-specific routing logic |
+| LLM-RTR-005 | Router selection is deterministic for identical input (mode, candidates, config). | Algorithmic â€” deterministic scoring function |
 
 ## Events
 
@@ -126,17 +126,17 @@ interface RoutingDecision {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Router is the sole decision-maker for model selection |
-| R2 — Dependency Order | Router depends on Registry candidates and Cost Optimizer estimates |
-| R3 — DRY | Scoring logic centralized in Router, not duplicated across consumers |
-| R4 — Builder Pattern | SelectionConfig built via builder with entity overrides |
-| R5 — Liskov Substitution | All models interchangeable via normalized scoring |
-| R6 — DI over Singletons | Router injected as service into pipeline |
-| R9 — Deterministic | Scoring produces identical results for identical inputs |
-| R10 — Simpler Over Complex | Weighted linear scoring over complex ML-based routing |
-| R13 — Design for Failure | Fallback to first candidate when all score 0.0 |
-| R14 — Paved Path | Predefined routing modes cover common patterns |
-| R15 — Open/Closed | Entity overrides extend routing without modifying core |
+| R1 â€” Modulsingularity | Router is the sole decision-maker for model selection |
+| R2 â€” Dependency Order | Router depends on Registry candidates and Cost Optimizer estimates |
+| R3 â€” DRY | Scoring logic centralized in Router, not duplicated across consumers |
+| R4 â€” Builder Pattern | SelectionConfig built via builder with entity overrides |
+| R5 â€” Liskov Substitution | All models interchangeable via normalized scoring |
+| R6 â€” DI over Singletons | Router injected as service into pipeline |
+| R9 â€” Deterministic | Scoring produces identical results for identical inputs |
+| R10 â€” Simpler Over Complex | Weighted linear scoring over complex ML-based routing |
+| R13 â€” Design for Failure | Fallback to first candidate when all score 0.0 |
+| R14 â€” Paved Path | Predefined routing modes cover common patterns |
+| R15 â€” Open/Closed | Entity overrides extend routing without modifying core |
 
 ## Related Documents
 
@@ -150,6 +150,6 @@ interface RoutingDecision {
 
 | Condition | Error Code | Behavior |
 |-----------|------------|----------|
-| No candidates provided | — | Internal error; pipeline fails with LLM-9999 |
+| No candidates provided | â€” | Internal error; pipeline fails with LLM-9999 |
 | Manual route to unknown model | LLM-0202 | Return model unavailable; suggest available alternatives |
-| All candidates score 0.0 | — | Select first candidate as fallback; log warning |
+| All candidates score 0.0 | â€” | Select first candidate as fallback; log warning |

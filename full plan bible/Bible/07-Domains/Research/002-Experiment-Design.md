@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Research — 002: Experiment Design
+﻿# AIOS Bible â€” Domains
+## Research â€” 002: Experiment Design
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-RES-002 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -20,8 +20,8 @@ The Experiment Design engine enables AIOS to formalize hypotheses, identify vari
 ## Architecture
 
 ```
-hypothesis_formalization ──> variable_definition ──> design_selection ──> sample_calculation ──> protocol_generation ──> ethics_review
-        │                          │                        │                     │                      │                   │
+hypothesis_formalization â”€â”€> variable_definition â”€â”€> design_selection â”€â”€> sample_calculation â”€â”€> protocol_generation â”€â”€> ethics_review
+        â”‚                          â”‚                        â”‚                     â”‚                      â”‚                   â”‚
         v                          v                        v                     v                      v                   v
    Hypothesis               VariableDef             ExperimentDesign         SampleSizeCalc          Protocol           EthicsApproval
 ```
@@ -296,14 +296,14 @@ interface ConfoundingControl {
 
 | Document | Relationship |
 |---------|-------------|
-| Research/000-Overview.md | Research domain overview — entities, capabilities, methodology |
-| Research/001-Literature-Review.md | Literature Review — hypothesis generation from gap analysis |
-| Research/003-Data-Analysis.md | Data Analysis — experiment data processing and statistical testing |
-| Physics/005-Events.md | Evidence — all experiment design operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — compute bounds for power analysis |
-| Physics/012-Experience.md | Experience — experiment outcomes contribute to AIOS learning |
-| Bible/02-Core/Academy/000-Overview.md | Academy — experiment designs and protocols stored as knowledge artifacts |
-| Bible/02-Core/DTS/000-Overview.md | DTS — confidence scoring for experimental results |
-| Bible/02-Core/ROS/000-Overview.md | ROS — resource allocation for experiment execution |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding for empirical research |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles applied to experiment design |
+| Research/000-Overview.md | Research domain overview â€” entities, capabilities, methodology |
+| Research/001-Literature-Review.md | Literature Review â€” hypothesis generation from gap analysis |
+| Research/003-Data-Analysis.md | Data Analysis â€” experiment data processing and statistical testing |
+| Physics/005-Events.md | Evidence â€” all experiment design operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” compute bounds for power analysis |
+| Physics/012-Experience.md | Experience â€” experiment outcomes contribute to AIOS learning |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” experiment designs and protocols stored as knowledge artifacts |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” confidence scoring for experimental results |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” resource allocation for experiment execution |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding for empirical research |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles applied to experiment design |

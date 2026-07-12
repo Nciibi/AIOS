@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## UI — 002: Components
+﻿# AIOS Bible â€” Interfaces
+## UI â€” 002: Components
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-UI-002 |
-| Source Laws | Law 1 — Law of Origin, Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 1 â€” Law of Origin, Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -99,7 +99,7 @@ interface AccessibilityProps {
 | apply_accessibility | Attach ARIA attributes and focus management to rendered tree |
 | test_component | Run component through unit, visual, and accessibility test suites |
 
-Render computes a virtual DOM diff, applies only changed nodes. Events bubble through the handler chain from child to parent. State transitions are immutable — each update produces a new state snapshot.
+Render computes a virtual DOM diff, applies only changed nodes. Events bubble through the handler chain from child to parent. State transitions are immutable â€” each update produces a new state snapshot.
 
 ## Internal Interfaces
 
@@ -165,34 +165,34 @@ interface AccessibilityEngine {
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| COMP-001 | Every component renders deterministically from the same state | Algorithmic — render engine validates output identity |
-| COMP-002 | All state transitions produce an immutable snapshot | Algorithmic — State Manager freezes state on set |
-| COMP-003 | Every interactive component supports keyboard navigation | Algorithmic — Accessibility Engine validates tabIndex |
-| COMP-004 | Events bubble from child to parent; never skip a level | Architectural — Event Bus enforces strict hierarchy |
-| COMP-005 | Components reference registered design system specs only | Algorithmic — ComponentRegistry validates specRef |
-| COMP-006 | Lazy-hydrated components render placeholder synchronously | Architectural — Render Engine guarantees fallback |
+| COMP-001 | Every component renders deterministically from the same state | Algorithmic â€” render engine validates output identity |
+| COMP-002 | All state transitions produce an immutable snapshot | Algorithmic â€” State Manager freezes state on set |
+| COMP-003 | Every interactive component supports keyboard navigation | Algorithmic â€” Accessibility Engine validates tabIndex |
+| COMP-004 | Events bubble from child to parent; never skip a level | Architectural â€” Event Bus enforces strict hierarchy |
+| COMP-005 | Components reference registered design system specs only | Algorithmic â€” ComponentRegistry validates specRef |
+| COMP-006 | Lazy-hydrated components render placeholder synchronously | Architectural â€” Render Engine guarantees fallback |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Components are the exclusive atomic unit of UI rendering |
-| R2 — Dependency Order | Depends on Design System (001), Interface Hub, Intent Parser; no cycles |
-| R3 — DRY | Component logic defined once; reused via composition, not inheritance |
-| R4 — Builder Pattern | Components built via ComponentFactory with validation |
-| R5 — Law of Demeter | Components interact only with their direct children and own state |
-| R6 — Encapsulation | Component internals hidden; interface via props, events, slots |
-| R9 — Deterministic | Same props + same state = same render output every time |
-| R10 — Simpler Over Complex | Prefer atoms over molecules; compose up only when necessary |
-| R13 — Design for Failure | Render failure degrades to plain text, never blank screen |
-| R14 — Paved Path | Default event handling via Event Bus; custom handlers are explicit opt-in |
-| R15 — Open/Closed | New component types register via ComponentRegistry; existing types closed |
+| R1 â€” Modulsingularity | Components are the exclusive atomic unit of UI rendering |
+| R2 â€” Dependency Order | Depends on Design System (001), Interface Hub, Intent Parser; no cycles |
+| R3 â€” DRY | Component logic defined once; reused via composition, not inheritance |
+| R4 â€” Builder Pattern | Components built via ComponentFactory with validation |
+| R5 â€” Law of Demeter | Components interact only with their direct children and own state |
+| R6 â€” Encapsulation | Component internals hidden; interface via props, events, slots |
+| R9 â€” Deterministic | Same props + same state = same render output every time |
+| R10 â€” Simpler Over Complex | Prefer atoms over molecules; compose up only when necessary |
+| R13 â€” Design for Failure | Render failure degrades to plain text, never blank screen |
+| R14 â€” Paved Path | Default event handling via Event Bus; custom handlers are explicit opt-in |
+| R15 â€” Open/Closed | New component types register via ComponentRegistry; existing types closed |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/08-Interfaces/UI/000-Overview.md | Base UI document — Interface Hub and IntentParser that components integrate with |
+| Bible/08-Interfaces/UI/000-Overview.md | Base UI document â€” Interface Hub and IntentParser that components integrate with |
 | Bible/08-Interfaces/UI/001-Design-System.md | Design system defines tokens and specs that components are built from |
 | Bible/08-Interfaces/UI/003-Accessibility.md | Accessibility engine validates every component on render |
 | Bible/08-Interfaces/UI/004-Themes.md | Theme system provides token overrides components consume |

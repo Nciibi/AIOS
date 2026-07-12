@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Research — 000: Overview
+﻿# AIOS Bible â€” Domains
+## Research â€” 000: Overview
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-RES-000 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,9 +15,9 @@
 
 ## Purpose
 
-The Research domain enables AIOS to conduct systematic investigation — gathering information, analyzing data, synthesizing findings, and producing evidence-backed conclusions. It provides the capability set for literature review, data analysis, experiment design, hypothesis testing, and knowledge synthesis across any subject domain.
+The Research domain enables AIOS to conduct systematic investigation â€” gathering information, analyzing data, synthesizing findings, and producing evidence-backed conclusions. It provides the capability set for literature review, data analysis, experiment design, hypothesis testing, and knowledge synthesis across any subject domain.
 
-Research is a meta-domain: it operates across all other domains by consuming their outputs and producing new knowledge. Unlike domains that produce executable artifacts (code, firmware, configurations), Research produces knowledge artifacts — reports, analyses, models, and recommendations that feed back into Sou's reasoning and the Academy's knowledge base.
+Research is a meta-domain: it operates across all other domains by consuming their outputs and producing new knowledge. Unlike domains that produce executable artifacts (code, firmware, configurations), Research produces knowledge artifacts â€” reports, analyses, models, and recommendations that feed back into Sou's reasoning and the Academy's knowledge base.
 
 ## Domain Entities
 
@@ -51,23 +51,23 @@ Research in AIOS follows a structured methodology:
 
 ```
 1. Question Formulation
-   └─ Research question defined with scope, constraints, and success criteria
+   â””â”€ Research question defined with scope, constraints, and success criteria
 2. Literature Review
-   └─ Existing knowledge retrieved from Academy + external sources
+   â””â”€ Existing knowledge retrieved from Academy + external sources
 3. Hypothesis Generation
-   └─ Falsifiable hypothesis produced from literature gap analysis
+   â””â”€ Falsifiable hypothesis produced from literature gap analysis
 4. Data Collection
-   └─ Evidence gathered (web search, dataset analysis, experiment, simulation)
+   â””â”€ Evidence gathered (web search, dataset analysis, experiment, simulation)
 5. Analysis
-   └─ Statistical analysis, pattern detection, evidence weighting
+   â””â”€ Statistical analysis, pattern detection, evidence weighting
 6. Conclusion
-   └─ Findings synthesized, confidence intervals reported, limitations documented
+   â””â”€ Findings synthesized, confidence intervals reported, limitations documented
 7. Knowledge Production
-   └─ Research artifact submitted to Academy for validation and acceptance
+   â””â”€ Research artifact submitted to Academy for validation and acceptance
 8. Review
-   └─ Academy Validator and Verifier process the artifact
+   â””â”€ Academy Validator and Verifier process the artifact
 9. Publication
-   └─ Accepted knowledge published via Knowledge Distribution
+   â””â”€ Accepted knowledge published via Knowledge Distribution
 ```
 
 ## Evidence Quality Framework
@@ -76,27 +76,27 @@ Research Workers evaluate evidence quality on multiple dimensions:
 
 | Dimension | Description | Scale |
 |-----------|-------------|-------|
-| Source Authority | Credibility and expertise of the source | 0.0–1.0 |
-| Methodology Rigor | Strength of the research methodology used | 0.0–1.0 |
-| Reproducibility | Whether findings have been independently reproduced | 0.0–1.0 |
-| Recency | Age of the evidence (newer is higher quality) | 0.0–1.0 (decay over time) |
-| Relevance | Directness of evidence to the research question | 0.0–1.0 |
-| Consistency | Agreement with other evidence on the same topic | 0.0–1.0 |
-| Independence | Whether the source has conflicts of interest | 0.0–1.0 |
+| Source Authority | Credibility and expertise of the source | 0.0â€“1.0 |
+| Methodology Rigor | Strength of the research methodology used | 0.0â€“1.0 |
+| Reproducibility | Whether findings have been independently reproduced | 0.0â€“1.0 |
+| Recency | Age of the evidence (newer is higher quality) | 0.0â€“1.0 (decay over time) |
+| Relevance | Directness of evidence to the research question | 0.0â€“1.0 |
+| Consistency | Agreement with other evidence on the same topic | 0.0â€“1.0 |
+| Independence | Whether the source has conflicts of interest | 0.0â€“1.0 |
 
 Evidence with a composite quality score below 0.4 is flagged as low-confidence. Research conclusions must be accompanied by their evidence quality assessment.
 
 ## Invariants
 
-1. **RES-I-001 — Evidence-Bound Conclusions**: Every research conclusion must be traceable to at least one piece of evidence. Opinions without evidence are not permitted in research artifacts.
+1. **RES-I-001 â€” Evidence-Bound Conclusions**: Every research conclusion must be traceable to at least one piece of evidence. Opinions without evidence are not permitted in research artifacts.
 
-2. **RES-I-002 — Source Attribution**: Every source used in research must be attributed with full citation. Unattributed sources constitute a constitutional violation.
+2. **RES-I-002 â€” Source Attribution**: Every source used in research must be attributed with full citation. Unattributed sources constitute a constitutional violation.
 
-3. **RES-I-003 — Reproducibility**: Research analysis must be reproducible. Analysis code, parameters, and input data must be preserved as part of the research artifact.
+3. **RES-I-003 â€” Reproducibility**: Research analysis must be reproducible. Analysis code, parameters, and input data must be preserved as part of the research artifact.
 
-4. **RES-I-004 — Bias Disclosure**: Known biases in methodology, data sources, or analytical tools must be disclosed in the research artifact. Undisclosed biases invalidate the artifact.
+4. **RES-I-004 â€” Bias Disclosure**: Known biases in methodology, data sources, or analytical tools must be disclosed in the research artifact. Undisclosed biases invalidate the artifact.
 
-5. **RES-I-005 — Scope Fidelity**: Research findings must not claim conclusions beyond the stated scope and methodology. Scope overreach is a validation failure.
+5. **RES-I-005 â€” Scope Fidelity**: Research findings must not claim conclusions beyond the stated scope and methodology. Scope overreach is a validation failure.
 
 ## Edge Cases
 
@@ -123,7 +123,7 @@ Evidence with a composite quality score below 0.4 is flagged as low-confidence. 
 
 ### Security
 
-Research Workers have controlled internet access for web search and source retrieval. Retrieved content is sanitized for malicious content before processing. Research artifacts are access-controlled per Organization policy. Data analysis runs in sandboxed environments — no network access during analysis. (Physics/008-Security.md)
+Research Workers have controlled internet access for web search and source retrieval. Retrieved content is sanitized for malicious content before processing. Research artifacts are access-controlled per Organization policy. Data analysis runs in sandboxed environments â€” no network access during analysis. (Physics/008-Security.md)
 
 ### Evidence
 
@@ -131,7 +131,7 @@ Research is inherently evidence-driven. Every source, analysis step, and conclus
 
 ### Lifecycle
 
-Research Workers follow the canonical Worker lifecycle. Research projects follow a project lifecycle: Question → Review → Collect → Analyze → Conclude → Publish. Knowledge artifacts follow the Academy lifecycle: Proposed → Validated → Verified → Accepted → Published. (Physics/006-Lifecycles.md)
+Research Workers follow the canonical Worker lifecycle. Research projects follow a project lifecycle: Question â†’ Review â†’ Collect â†’ Analyze â†’ Conclude â†’ Publish. Knowledge artifacts follow the Academy lifecycle: Proposed â†’ Validated â†’ Verified â†’ Accepted â†’ Published. (Physics/006-Lifecycles.md)
 
 ### Capability Bounds
 
@@ -139,7 +139,7 @@ Research capabilities are bounded by web access policies, token budgets for read
 
 ### Communication
 
-All Research domain communication flows through ACF. Web search results and retrieved content arrive via ACF from internet-facing gateways. Research artifacts are submitted to Academy through ACF. Findings are distributed through ACF Knowledge Distribution channels. (Law 3 — Communication)
+All Research domain communication flows through ACF. Web search results and retrieved content arrive via ACF from internet-facing gateways. Research artifacts are submitted to Academy through ACF. Findings are distributed through ACF Knowledge Distribution channels. (Law 3 â€” Communication)
 
 ### Design DNA
 
@@ -149,7 +149,7 @@ All Research domain communication flows through ACF. Web search results and retr
 | R3 (DRY) | Research findings are stored once in Academy, referenced by all consumers |
 | R7 (Testability) | Every research methodology step has a verifiable output |
 | R9 (Deterministic) | Same source data and methodology produces identical analysis results |
-| R10 (Simpler Over Complex) | Research methodology is linear — no unbounded exploration loops |
+| R10 (Simpler Over Complex) | Research methodology is linear â€” no unbounded exploration loops |
 | R13 (Design for Failure) | Incomplete source retrieval produces partial results with gaps noted |
 
 ## Component Map
@@ -178,16 +178,16 @@ All Research domain communication flows through ACF. Web search results and retr
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/0005-Domain-Architecture.md | Domain Architecture — Research domain structure |
-| Physics/005-Events.md | Evidence — Research operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — Research capability bounds |
-| Physics/012-Experience.md | Experience — Research findings contribute to AIOS experience model |
-| Bible/02-Core/Sou/001-Reasoning.md | Reasoning — Sou consumes research findings for decision-making |
-| Bible/02-Core/Sou/002-Planner.md | Planner — Sou produces research plans |
-| Bible/02-Core/AGS/000-Overview.md | AGS — ResearchWorker and DataAnalyst Genome templates |
-| Bible/02-Core/Academy/000-Overview.md | Academy — Research artifact knowledge lifecycle |
-| Bible/02-Core/DTS/000-Overview.md | DTS — Evidence quality scoring for research confidence |
-| Bible/02-Core/ROS/000-Overview.md | ROS — Token and compute budget for research operations |
-| Bible/06-Services/ACF/000-Overview.md | ACF — Source retrieval transport |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Bible/0005-Domain-Architecture.md | Domain Architecture â€” Research domain structure |
+| Physics/005-Events.md | Evidence â€” Research operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” Research capability bounds |
+| Physics/012-Experience.md | Experience â€” Research findings contribute to AIOS experience model |
+| Bible/02-Core/Sou/001-Reasoning.md | Reasoning â€” Sou consumes research findings for decision-making |
+| Bible/02-Core/Sou/002-Planner.md | Planner â€” Sou produces research plans |
+| Bible/02-Core/AGS/000-Overview.md | AGS â€” ResearchWorker and DataAnalyst Genome templates |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” Research artifact knowledge lifecycle |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” Evidence quality scoring for research confidence |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” Token and compute budget for research operations |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” Source retrieval transport |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

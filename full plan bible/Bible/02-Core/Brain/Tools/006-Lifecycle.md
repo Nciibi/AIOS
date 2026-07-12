@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 006 — Tool Lifecycle
+﻿# AIOS Bible â€” Brain
+## 006 â€” Tool Lifecycle
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Tools |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Tools |
 | Document ID | AIOS-BBL-002-TOL-006 |
-| Source Laws | Law 6 — Law of Lifecycle |
+| Source Laws | Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/006-Lifecycles.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Tool Lifecycle Manager governs the full lifespan of every tool in the system — from registration through active use, deprecation, and eventual removal. It implements health monitoring via a heartbeat mechanism, tracks provider health transitions, automatically deregisters tools when their provider fails, and manages tool versioning. The Lifecycle Manager ensures that the Tool Registry always reflects the true operational state of every tool.
+The Tool Lifecycle Manager governs the full lifespan of every tool in the system â€” from registration through active use, deprecation, and eventual removal. It implements health monitoring via a heartbeat mechanism, tracks provider health transitions, automatically deregisters tools when their provider fails, and manages tool versioning. The Lifecycle Manager ensures that the Tool Registry always reflects the true operational state of every tool.
 
 Under Law 6 (Lifecycle), every tool has a defined lifecycle with explicit transitions. No tool skips from registered to removed without passing through the appropriate intermediate states.
 
@@ -122,18 +122,18 @@ VersionChange {
 
 ```
 Registered
-    │
-    │  (health check passed)
-    ▼
-Active ──────────────────────────────────────┐
-    │                                         │
-    │  (deprecation notice)                   │
-    ▼                                         │
-Deprecated ───────────────────────────────┐   │
-    │                                      │   │
-    │  (sunset date reached / manual)      │   │
-    ▼                                      ▼   ▼
-Removed                               (provider failure → auto-removed)
+    â”‚
+    â”‚  (health check passed)
+    â–¼
+Active â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚                                         â”‚
+    â”‚  (deprecation notice)                   â”‚
+    â–¼                                         â”‚
+Deprecated â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
+    â”‚                                      â”‚   â”‚
+    â”‚  (sunset date reached / manual)      â”‚   â”‚
+    â–¼                                      â–¼   â–¼
+Removed                               (provider failure â†’ auto-removed)
 ```
 
 | Stage | Meaning | Discovery | Invocation |
@@ -200,12 +200,12 @@ When a new version is registered:
 ### Provider Health Transitions
 
 ```
-Provider sends heartbeat ──► healthy
-    │
-    ├── Intermittent failures (3+ in 5 min) ──► degraded
-    ├── Heartbeat delayed (>1.5x interval) ──► degraded
-    ├── No heartbeat (> max_missed threshold) ──► unavailable
-    └── Grace period expired ──► auto-deregistration
+Provider sends heartbeat â”€â”€â–º healthy
+    â”‚
+    â”œâ”€â”€ Intermittent failures (3+ in 5 min) â”€â”€â–º degraded
+    â”œâ”€â”€ Heartbeat delayed (>1.5x interval) â”€â”€â–º degraded
+    â”œâ”€â”€ No heartbeat (> max_missed threshold) â”€â”€â–º unavailable
+    â””â”€â”€ Grace period expired â”€â”€â–º auto-deregistration
 ```
 
 ## Operations
@@ -374,13 +374,13 @@ interface ToolLifecycleManager {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LIF-001 | Every tool transitions through lifecycle stages in order (registered → active → deprecated → removed) | Algorithmic — state machine enforces ordering |
-| LIF-002 | No tool can be invoked before it reaches the active stage | Application-level — Invocation Manager checks lifecycle stage |
-| LIF-003 | A deprecated tool can still be invoked but Sou receives a deprecation notice | Algorithmic — deprecation_notice appended to result |
-| LIF-004 | Health status transitions are monotonic within a degradation period | Algorithmic — status can only worsen until heartbeat recovered |
-| LIF-005 | Every deregistered tool retains a tombstone for audit (minimum 30 days) | Database — tombstone retention enforced |
-| LIF-006 | A tool removed due to provider failure cannot be reinstated without a new provider heartbeat | Algorithmic — reinstateTool requires recent heartbeat |
-| LIF-007 | Version strings follow semantic versioning (MAJOR.MINOR.PATCH) | Schema — validated on registration |
+| LIF-001 | Every tool transitions through lifecycle stages in order (registered â†’ active â†’ deprecated â†’ removed) | Algorithmic â€” state machine enforces ordering |
+| LIF-002 | No tool can be invoked before it reaches the active stage | Application-level â€” Invocation Manager checks lifecycle stage |
+| LIF-003 | A deprecated tool can still be invoked but Sou receives a deprecation notice | Algorithmic â€” deprecation_notice appended to result |
+| LIF-004 | Health status transitions are monotonic within a degradation period | Algorithmic â€” status can only worsen until heartbeat recovered |
+| LIF-005 | Every deregistered tool retains a tombstone for audit (minimum 30 days) | Database â€” tombstone retention enforced |
+| LIF-006 | A tool removed due to provider failure cannot be reinstated without a new provider heartbeat | Algorithmic â€” reinstateTool requires recent heartbeat |
+| LIF-007 | Version strings follow semantic versioning (MAJOR.MINOR.PATCH) | Schema â€” validated on registration |
 
 ## Error Cases
 
@@ -398,17 +398,17 @@ interface ToolLifecycleManager {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Lifecycle Manager handles only tool lifespan and health |
-| R2 — Dependency Order | Depends on Tool Registry; no upward deps |
-| R3 — DRY | Lifecycle stages defined once in state machine |
-| R4 — Builder Pattern | Lifecycle built by Register → Health → Stage Transitions |
-| R5 — Liskov Substitution | Any ToolLifecycleManager implements the interface |
-| R6 — DI over Singletons | Health checkers, heartbeat handlers, auto-removal strategies injected |
-| R9 — Deterministic | Same heartbeats and transitions produce same lifecycle state |
-| R10 — Simpler Over Complex | Four clear stages with explicit transition rules |
-| R13 — Design for Failure | Auto-deregistration and grace period protect against provider failure |
-| R14 — Paved Path | All lifecycle flows through registerTool() → deprecateTool() → removeTool() |
-| R15 — Open/Closed | New lifecycle stages added via state machine config |
+| R1 â€” Modulsingularity | Lifecycle Manager handles only tool lifespan and health |
+| R2 â€” Dependency Order | Depends on Tool Registry; no upward deps |
+| R3 â€” DRY | Lifecycle stages defined once in state machine |
+| R4 â€” Builder Pattern | Lifecycle built by Register â†’ Health â†’ Stage Transitions |
+| R5 â€” Liskov Substitution | Any ToolLifecycleManager implements the interface |
+| R6 â€” DI over Singletons | Health checkers, heartbeat handlers, auto-removal strategies injected |
+| R9 â€” Deterministic | Same heartbeats and transitions produce same lifecycle state |
+| R10 â€” Simpler Over Complex | Four clear stages with explicit transition rules |
+| R13 â€” Design for Failure | Auto-deregistration and grace period protect against provider failure |
+| R14 â€” Paved Path | All lifecycle flows through registerTool() â†’ deprecateTool() â†’ removeTool() |
+| R15 â€” Open/Closed | New lifecycle stages added via state machine config |
 
 ## Related Documents
 

@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 004 — Session Management
+﻿# AIOS Bible â€” Brain
+## 004 â€” Session Management
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Conversation |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Conversation |
 | Document ID | AIOS-BBL-002-CON-004 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/004-Sessions.md, Physics/006-Lifecycles.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Session Management owns the lifecycle of conversation sessions — creation, state transitions, timeout enforcement, persistence, restoration, and cleanup. It ensures every user interaction occurs within a valid session and that sessions are properly cleaned up on end or timeout.
+Session Management owns the lifecycle of conversation sessions â€” creation, state transitions, timeout enforcement, persistence, restoration, and cleanup. It ensures every user interaction occurs within a valid session and that sessions are properly cleaned up on end or timeout.
 
 Under CONV-004, sessions live in Memory OS with active state cached in Conversation OS. Under CONV-006, sessions auto-end after 24 hours.
 
@@ -93,8 +93,8 @@ SessionSummary {
 
 ```typescript
 UserPreferences {
-  formality: number                // 0.0–1.0
-  verbosity: number                // 0.0–1.0
+  formality: number                // 0.0â€“1.0
+  verbosity: number                // 0.0â€“1.0
   preferred_modality: string
   timezone: string
   language: string
@@ -106,20 +106,20 @@ UserPreferences {
 
 ```
 Create
-   │
-   ▼
- Active ◄────────────────────────┐
-   │                             │
-   ├── idle timeout ──► Idle ────┤
-   │                  (input arrives)
-   │                             │
-   ├── user/Sou pause ──► Paused ──► Active
-   │                  (user/Sou resume)
-   │                             │
-   └── user ends ────────────────┼──► Ended
-       absolute timeout ─────────┘
-                                 │
-                                 ▼
+   â”‚
+   â–¼
+ Active â—„â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+   â”‚                             â”‚
+   â”œâ”€â”€ idle timeout â”€â”€â–º Idle â”€â”€â”€â”€â”¤
+   â”‚                  (input arrives)
+   â”‚                             â”‚
+   â”œâ”€â”€ user/Sou pause â”€â”€â–º Paused â”€â”€â–º Active
+   â”‚                  (user/Sou resume)
+   â”‚                             â”‚
+   â””â”€â”€ user ends â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â–º Ended
+       absolute timeout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                 â”‚
+                                 â–¼
                               Archived
 ```
 
@@ -134,17 +134,17 @@ Create
 | idle | ended | Absolute timeout exceeded |
 | paused | active | User calls `resumeSession()` or Sou calls `resumeSession()` |
 | paused | ended | Absolute timeout exceeded |
-| ended | (none) | Terminal state — no transitions out |
+| ended | (none) | Terminal state â€” no transitions out |
 
 ### Transition Rules
 
-- **active → idle**: Session Manager timer fires after `idle_timeout_ms` of no `last_activity` update. Transition emits `CONV.SessionIdle`.
-- **active → paused**: Request from user or Sou. Reason is recorded in event. Turn count is frozen.
-- **active → ended**: User sends end signal, Sou triggers end, or `absolute_timeout_ms` fires. SessionSummary is generated before archival.
-- **idle → active**: Any user input re-activates the session. No loss of context. Turn count resumes.
-- **idle → ended**: Absolute timeout check on heartbeat or resume attempt. Cannot be resumed.
-- **paused → active**: Resume request from user or Sou. Session Manager validates session hasn't exceeded absolute timeout.
-- **paused → ended**: Absolute timeout check on heartbeat or resume attempt. Same as idle end.
+- **active â†’ idle**: Session Manager timer fires after `idle_timeout_ms` of no `last_activity` update. Transition emits `CONV.SessionIdle`.
+- **active â†’ paused**: Request from user or Sou. Reason is recorded in event. Turn count is frozen.
+- **active â†’ ended**: User sends end signal, Sou triggers end, or `absolute_timeout_ms` fires. SessionSummary is generated before archival.
+- **idle â†’ active**: Any user input re-activates the session. No loss of context. Turn count resumes.
+- **idle â†’ ended**: Absolute timeout check on heartbeat or resume attempt. Cannot be resumed.
+- **paused â†’ active**: Resume request from user or Sou. Session Manager validates session hasn't exceeded absolute timeout.
+- **paused â†’ ended**: Absolute timeout check on heartbeat or resume attempt. Same as idle end.
 
 ## Timeout Management
 
@@ -155,8 +155,8 @@ Create
 | Default duration | 300000 ms (5 minutes) |
 | Configurable | Per-session via `timeout_config.idle_timeout_ms` |
 | Effect | Session transitions to `idle` |
-| Recovery | Input received → back to `active` |
-| Warning | Optional — emit `CONV.SessionTimeoutWarning` at 80% of timeout (240s) |
+| Recovery | Input received â†’ back to `active` |
+| Warning | Optional â€” emit `CONV.SessionTimeoutWarning` at 80% of timeout (240s) |
 
 ### Absolute Timeout
 
@@ -165,25 +165,25 @@ Create
 | Default duration | 86400000 ms (24 hours) |
 | Configurable | Per-session via `timeout_config.absolute_timeout_ms` |
 | Effect | Session transitions to `ended` |
-| Recovery | Impossible — terminal state |
+| Recovery | Impossible â€” terminal state |
 | Enforcement | Checked on resume and on periodic heartbeat |
 
 ### Timeout Warning Window
 
 ```
 Timeout setup: idle_timeout_ms = 300000
-  ┌────────────────────────────────────────────────────┐
-  │                                                    │
-  │  0ms          240000ms        300000ms              │
-  │  ▲             ▲               ▲                    │
-  │  │             │               │                    │
-  │  last_activity warning(80%)   idle transition       │
-  │                                                    │
-  │  Within warning window:                            │
-  │  - Timer: CONV.SessionTimeoutWarning               │
-  │  - Session Manager may notify user                 │
-  │  - Warning is optional, enabled per-session         │
-  └────────────────────────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚                                                    â”‚
+  â”‚  0ms          240000ms        300000ms              â”‚
+  â”‚  â–²             â–²               â–²                    â”‚
+  â”‚  â”‚             â”‚               â”‚                    â”‚
+  â”‚  last_activity warning(80%)   idle transition       â”‚
+  â”‚                                                    â”‚
+  â”‚  Within warning window:                            â”‚
+  â”‚  - Timer: CONV.SessionTimeoutWarning               â”‚
+  â”‚  - Session Manager may notify user                 â”‚
+  â”‚  - Warning is optional, enabled per-session         â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Timeout Decision Matrix
@@ -198,11 +198,11 @@ Input:
 
 Idle check (every heartbeat tick):
   if status == "active" and (t_now - t_last) >= T_idle:
-    transition("active" → "idle")
+    transition("active" â†’ "idle")
 
 Absolute check (on resume or tick):
   if (t_now - t0) >= T_abs and status != "ended":
-    transition(* → "ended")
+    transition(* â†’ "ended")
     archive()
 
 Warning check:
@@ -217,30 +217,30 @@ Warning check:
 | Tier | Location | Purpose | Volatility |
 |------|----------|---------|------------|
 | Cache | Conversation OS (in-memory) | Fast access for active sessions | Lost on restart |
-| Persistent | Memory OS — Episodic Memory | Long-term session storage | Durable |
-| Archival | Memory OS — Episodic Memory | Summaries on session end | Durable |
+| Persistent | Memory OS â€” Episodic Memory | Long-term session storage | Durable |
+| Archival | Memory OS â€” Episodic Memory | Summaries on session end | Durable |
 
 ### Persistence Flow
 
 ```
 createSession()
-  → Store in Memory OS (Episodic Memory)
-  → Cache in Conversation OS (in-memory map)
+  â†’ Store in Memory OS (Episodic Memory)
+  â†’ Cache in Conversation OS (in-memory map)
 
 updateSession()
-  → Update cache synchronously
-  → Persist to Memory OS asynchronously
+  â†’ Update cache synchronously
+  â†’ Persist to Memory OS asynchronously
 
 getSession()
-  → Check cache → hit → return cache
-  → Cache miss → restoreSession() from Memory OS
-  → Return restored session
+  â†’ Check cache â†’ hit â†’ return cache
+  â†’ Cache miss â†’ restoreSession() from Memory OS
+  â†’ Return restored session
 
 endSession()
-  → Generate SessionSummary
-  → Archive summary in Memory OS
-  → Remove from cache
-  → Clear Working Memory for session
+  â†’ Generate SessionSummary
+  â†’ Archive summary in Memory OS
+  â†’ Remove from cache
+  â†’ Clear Working Memory for session
 ```
 
 ### Cache Strategy
@@ -288,22 +288,22 @@ enforceLimits(user_id):
 
 ```
 session.createSession(user_id, modality)
-  → User Profile Service loads preferences from Memory OS
-  → Preferences merged into session.metadata.user_preferences
-  → Defaults applied for missing fields
+  â†’ User Profile Service loads preferences from Memory OS
+  â†’ Preferences merged into session.metadata.user_preferences
+  â†’ Defaults applied for missing fields
 
 session.updatePreferences(session_id, updates)
-  → Merge updates into session metadata
-  → Persist to Memory OS (User Profile)
-  → Available to next session for same user
+  â†’ Merge updates into session metadata
+  â†’ Persist to Memory OS (User Profile)
+  â†’ Available to next session for same user
 ```
 
 ### Preference Fields
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| formality | number (0.0–1.0) | 0.5 | Formality level of Sou's language |
-| verbosity | number (0.0–1.0) | 0.5 | How detailed responses should be |
+| formality | number (0.0â€“1.0) | 0.5 | Formality level of Sou's language |
+| verbosity | number (0.0â€“1.0) | 0.5 | How detailed responses should be |
 | preferred_modality | string | "text" | User's preferred communication channel |
 | timezone | string | "UTC" | User's timezone for time-aware responses |
 | language | string | "en" | ISO language code |
@@ -329,26 +329,26 @@ Under CONV-005, user preferences are persistent across sessions. Preferences upd
 
 ```
 User sends message with session_id
-         │
-         ▼
+         â”‚
+         â–¼
 Session Manager.getSession(session_id)
-         │
-         ├── Cache hit ──► Return cached session
-         │
-         └── Cache miss
-                 │
-                 ▼
+         â”‚
+         â”œâ”€â”€ Cache hit â”€â”€â–º Return cached session
+         â”‚
+         â””â”€â”€ Cache miss
+                 â”‚
+                 â–¼
          Query Memory OS (Episodic Memory)
-                 │
-         ┌───────┴───────┐
-         ▼               ▼
+                 â”‚
+         â”Œâ”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”
+         â–¼               â–¼
       Memory hit      Memory miss
-         │               │
-         ▼               ▼
+         â”‚               â”‚
+         â–¼               â–¼
   Rebuild session    Create new session
   in-memory cache    with new session_id
-         │               │
-         ▼               ▼
+         â”‚               â”‚
+         â–¼               â–¼
   Return session     Return new session
   to caller          to caller
 ```
@@ -364,14 +364,14 @@ restoreSession(session_id: string): ConversationSession {
   });
 
   if (!memoryData) {
-    // Memory miss — session not found
+    // Memory miss â€” session not found
     return null;
   }
 
   // 2. Validate session hasn't exceeded absolute timeout
   const elapsed = Date.now() - memoryData.started_at;
   if (elapsed >= memoryData.timeout_config.absolute_timeout_ms) {
-    // Absolute timeout exceeded — end session
+    // Absolute timeout exceeded â€” end session
     this.endSession(session_id, "absolute_timeout");
     return null;
   }
@@ -473,13 +473,13 @@ TimedOutSession {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| CONV-004 | Conversation OS is stateless — sessions live in Memory OS | Architectural — cache is transient; Memory OS is source of truth |
-| CONV-005 | User preferences are persistent across sessions | API-level — preferences stored in Memory OS User Profile |
-| CONV-006 | Sessions auto-end after 24 hours | Algorithmic — Session Manager enforces absolute timeout |
-| CONV-007 | A session in "ended" state cannot transition to any other state | Algorithmic — state machine rejects transitions out of "ended" |
-| CONV-008 | Every session has exactly one owner (user_id) | Schema — `user_id` is required and immutable after creation |
-| CONV-009 | Turn count is monotonic and never decreases within a session | Algorithmic — Turn Manager increments; Session Manager enforces no decrement |
-| CONV-010 | A user cannot exceed `max_sessions_per_user` concurrent sessions | Algorithmic — `enforceLimits()` ends oldest idle session on overflow |
+| CONV-004 | Conversation OS is stateless â€” sessions live in Memory OS | Architectural â€” cache is transient; Memory OS is source of truth |
+| CONV-005 | User preferences are persistent across sessions | API-level â€” preferences stored in Memory OS User Profile |
+| CONV-006 | Sessions auto-end after 24 hours | Algorithmic â€” Session Manager enforces absolute timeout |
+| CONV-007 | A session in "ended" state cannot transition to any other state | Algorithmic â€” state machine rejects transitions out of "ended" |
+| CONV-008 | Every session has exactly one owner (user_id) | Schema â€” `user_id` is required and immutable after creation |
+| CONV-009 | Turn count is monotonic and never decreases within a session | Algorithmic â€” Turn Manager increments; Session Manager enforces no decrement |
+| CONV-010 | A user cannot exceed `max_sessions_per_user` concurrent sessions | Algorithmic â€” `enforceLimits()` ends oldest idle session on overflow |
 
 ## Error Cases
 
@@ -499,18 +499,18 @@ TimedOutSession {
 ### Pattern 1: Normal Session Flow
 
 ```
-1. User authenticates → Conversation OS receives auth token
+1. User authenticates â†’ Conversation OS receives auth token
 2. Conversation OS calls createSession(user_id, "text")
-   → Session created with status "active"
-   → Cache populated, Memory OS persisted
-   → CONV.SessionCreated emitted
-3. User sends message → Turn Manager processes within active session
+   â†’ Session created with status "active"
+   â†’ Cache populated, Memory OS persisted
+   â†’ CONV.SessionCreated emitted
+3. User sends message â†’ Turn Manager processes within active session
 4. Session Manager updates last_activity on each turn
-5. User sends end signal → endSession(session_id, "user_ended")
-   → SessionSummary generated
-   → Summary archived to Memory OS
-   → Cache cleared
-   → CONV.SessionEnded + CONV.SessionArchived emitted
+5. User sends end signal â†’ endSession(session_id, "user_ended")
+   â†’ SessionSummary generated
+   â†’ Summary archived to Memory OS
+   â†’ Cache cleared
+   â†’ CONV.SessionEnded + CONV.SessionArchived emitted
 ```
 
 ### Pattern 2: Session Timeout and Recovery
@@ -518,58 +518,58 @@ TimedOutSession {
 ```
 1. User is in active session, walks away from device
 2. After 5 minutes (idle_timeout_ms):
-   → Session Manager heartbeat tick fires
-   → checkTimeouts() detects idle
-   → CONV.SessionTimeoutWarning emitted at 80% (240s)
-   → At 300s: transition("active" → "idle")
-   → CONV.SessionIdle emitted
+   â†’ Session Manager heartbeat tick fires
+   â†’ checkTimeouts() detects idle
+   â†’ CONV.SessionTimeoutWarning emitted at 80% (240s)
+   â†’ At 300s: transition("active" â†’ "idle")
+   â†’ CONV.SessionIdle emitted
 3. User returns and sends message:
-   → getSession(session_id) → cache hit → status is "idle"
-   → Input received → transition("idle" → "active")
-   → Session restored to active, context preserved
+   â†’ getSession(session_id) â†’ cache hit â†’ status is "idle"
+   â†’ Input received â†’ transition("idle" â†’ "active")
+   â†’ Session restored to active, context preserved
 4. User walks away for 25 hours:
-   → After 24 hours (absolute_timeout_ms):
-   → checkTimeouts() detects absolute timeout
-   → transition("idle" → "ended")
-   → CONV.SessionAbsoluteTimeout + CONV.SessionEnded emitted
-   → Session archived
+   â†’ After 24 hours (absolute_timeout_ms):
+   â†’ checkTimeouts() detects absolute timeout
+   â†’ transition("idle" â†’ "ended")
+   â†’ CONV.SessionAbsoluteTimeout + CONV.SessionEnded emitted
+   â†’ Session archived
 5. User attempts to resume:
-   → restoreSession(session_id)
-   → Memory hit, but elapsed > absolute_timeout_ms
-   → CONV_SESSION_EXPIRED error returned
-   → User must create new session
+   â†’ restoreSession(session_id)
+   â†’ Memory hit, but elapsed > absolute_timeout_ms
+   â†’ CONV_SESSION_EXPIRED error returned
+   â†’ User must create new session
 ```
 
 ### Pattern 3: Limit Enforcement
 
 ```
 1. User has 10 active sessions (max = 10)
-2. User starts new conversation → createSession()
+2. User starts new conversation â†’ createSession()
 3. Session Manager calls enforceLimits(user_id)
 4. Finds active_count (11) > max_sessions_per_user (10)
 5. Sorts idle sessions by last_activity (ascending)
 6. Finds oldest idle session: session_id = "abc-123", idle for 30 min
 7. Calls endSession("abc-123", "limit_enforcement")
-   → CONV.SessionLimitEnforced emitted
-   → Oldest idle session ended, summary archived
+   â†’ CONV.SessionLimitEnforced emitted
+   â†’ Oldest idle session ended, summary archived
 8. New session creation proceeds
-   → active_count now 10 (within limit)
-   → CONV.SessionCreated emitted
+   â†’ active_count now 10 (within limit)
+   â†’ CONV.SessionCreated emitted
 ```
 
 ### Pattern 4: Multi-Device Session Continuation
 
 ```
-1. User starts session on mobile app → session_id = "sess-001"
+1. User starts session on mobile app â†’ session_id = "sess-001"
 2. Session persisted to Memory OS
 3. User switches to desktop web browser
 4. Desktop client sends message with session_id "sess-001"
 5. Session Manager.getSession("sess-001"):
-   → Cache miss (different device, no cache replication)
-   → restoreSession("sess-001")
-   → Memory OS hit → rebuild in-memory state
-   → Session restored with active status
-   → CONV.SessionRestored emitted
+   â†’ Cache miss (different device, no cache replication)
+   â†’ restoreSession("sess-001")
+   â†’ Memory OS hit â†’ rebuild in-memory state
+   â†’ Session restored with active status
+   â†’ CONV.SessionRestored emitted
 6. User continues conversation seamlessly across devices
 ```
 
@@ -577,17 +577,17 @@ TimedOutSession {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Session Management handles only session lifecycle — creation, state, timeout, persistence |
-| R2 — Dependency Order | Depends on Memory OS (Episodic Memory, User Profile), Turn Manager; no upward deps |
-| R3 — DRY | Session model defined once in Conversation OS data model |
-| R4 — Builder Pattern | Session built by createSession → preferences → state initialization |
-| R5 — Liskov Substitution | Any SessionManager implementation conforms to the interface |
-| R6 — DI over Singletons | Timeout configs, limit policies, and persistence backends injected |
-| R9 — Deterministic | Same session_id + same input produces same session state |
-| R10 — Simpler Over Complex | Four-state model (active/idle/paused/ended) with clear transitions |
-| R13 — Design for Failure | Absolute timeout ensures no session leaks; cache miss triggers restoration |
-| R14 — Paved Path | All session operations flow through SessionManager interface |
-| R15 — Open/Closed | New session states or transition rules added via config, not by modifying core |
+| R1 â€” Modulsingularity | Session Management handles only session lifecycle â€” creation, state, timeout, persistence |
+| R2 â€” Dependency Order | Depends on Memory OS (Episodic Memory, User Profile), Turn Manager; no upward deps |
+| R3 â€” DRY | Session model defined once in Conversation OS data model |
+| R4 â€” Builder Pattern | Session built by createSession â†’ preferences â†’ state initialization |
+| R5 â€” Liskov Substitution | Any SessionManager implementation conforms to the interface |
+| R6 â€” DI over Singletons | Timeout configs, limit policies, and persistence backends injected |
+| R9 â€” Deterministic | Same session_id + same input produces same session state |
+| R10 â€” Simpler Over Complex | Four-state model (active/idle/paused/ended) with clear transitions |
+| R13 â€” Design for Failure | Absolute timeout ensures no session leaks; cache miss triggers restoration |
+| R14 â€” Paved Path | All session operations flow through SessionManager interface |
+| R15 â€” Open/Closed | New session states or transition rules added via config, not by modifying core |
 
 ## Related Documents
 

@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Trading — 002: Risk Analysis
+﻿# AIOS Bible â€” Domains
+## Trading â€” 002: Risk Analysis
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-TRD-002 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -168,17 +168,17 @@ interface CorrelationMatrix {
 
 ## Design DNA (R1-R6,R9,R10,R13-R15)
 
-- **R1 — Single Source of Truth**: Position limits and exposure data are sourced from the canonical Portfolio state.
-- **R2 — Immutable Event Log**: Every limit breach and risk computation is recorded as an immutable event.
-- **R3 — Capability-Based Authorization**: Hard limit override requires RiskAdmin capability; all overrides are logged.
-- **R4 — Law of Diminishing Returns**: Computational budget for stress testing is proportional to portfolio complexity.
-- **R5 — Deterministic Computation**: VaR and correlation computations are reproducible from identical input snapshots.
-- **R6 — Bounded Context**: Risk Analysis owns limits and risk models; portfolio construction belongs to Portfolio Management.
-- **R9 — Fail-Fast**: Pre-trade risk checks reject orders immediately; never queue for deferred validation.
-- **R10 — Audit Trail**: Every risk decision, limit change, and override is recorded with full identity context.
-- **R13 — Defensive Design**: Correlated model failures cause fallback to conservative parametric VaR.
-- **R14 — Self-Healing**: On transient correlation matrix failure, the previous valid matrix is reused with a staleness flag.
-- **R15 — Backward Compatibility**: Risk metric schemas and scenario definitions maintain versioned migration paths.
+- **R1 â€” Single Source of Truth**: Position limits and exposure data are sourced from the canonical Portfolio state.
+- **R2 â€” Immutable Event Log**: Every limit breach and risk computation is recorded as an immutable event.
+- **R3 â€” Capability-Based Authorization**: Hard limit override requires RiskAdmin capability; all overrides are logged.
+- **R4 â€” Law of Diminishing Returns**: Computational budget for stress testing is proportional to portfolio complexity.
+- **R5 â€” Deterministic Computation**: VaR and correlation computations are reproducible from identical input snapshots.
+- **R6 â€” Bounded Context**: Risk Analysis owns limits and risk models; portfolio construction belongs to Portfolio Management.
+- **R9 â€” Fail-Fast**: Pre-trade risk checks reject orders immediately; never queue for deferred validation.
+- **R10 â€” Audit Trail**: Every risk decision, limit change, and override is recorded with full identity context.
+- **R13 â€” Defensive Design**: Correlated model failures cause fallback to conservative parametric VaR.
+- **R14 â€” Self-Healing**: On transient correlation matrix failure, the previous valid matrix is reused with a staleness flag.
+- **R15 â€” Backward Compatibility**: Risk metric schemas and scenario definitions maintain versioned migration paths.
 
 ## Related Documents
 
@@ -187,6 +187,6 @@ interface CorrelationMatrix {
 | Bible/07-Domains/Trading/000-Overview.md | Base Trading domain overview |
 | Bible/07-Domains/Trading/001-Algorithms.md | Algorithms produce the positions that risk analysis monitors |
 | Bible/07-Domains/Trading/003-Market-Data.md | Market data feeds risk model computation |
-| Physics/005-Events.md | Evidence — risk operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — risk capability bounds |
-| Physics/012-Experience.md | Experience — risk outcomes drive strategy improvement |
+| Physics/005-Events.md | Evidence â€” risk operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” risk capability bounds |
+| Physics/012-Experience.md | Experience â€” risk outcomes drive strategy improvement |

@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Economic — 002: Cost Analysis
+﻿# AIOS Bible â€” Domains
+## Economic â€” 002: Cost Analysis
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-ECN-002 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle Compliance, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle Compliance, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/010-Execution.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,26 +15,26 @@
 
 ## Purpose
 
-The Cost Analysis sub-domain provides the cost allocation and analysis infrastructure for AIOS — cost allocation rule management, chargeback computation, variance analysis, trend detection, optimization recommendations, and cost attribution. Analysis consumes CostRecords and CostReports (defined in Economic/000-Overview.md) and produces actionable insights that inform budget planning, resource optimization, and organizational chargeback. Every allocation and analysis must be traceable to evidence records (Law 4). The analysis engine supports periodic reconciliation cycles and variance alerts (Law 6).
+The Cost Analysis sub-domain provides the cost allocation and analysis infrastructure for AIOS â€” cost allocation rule management, chargeback computation, variance analysis, trend detection, optimization recommendations, and cost attribution. Analysis consumes CostRecords and CostReports (defined in Economic/000-Overview.md) and produces actionable insights that inform budget planning, resource optimization, and organizational chargeback. Every allocation and analysis must be traceable to evidence records (Law 4). The analysis engine supports periodic reconciliation cycles and variance alerts (Law 6).
 
 ## Architecture
 
 ```
 Cost Data Ingestion (CostRecords, CostReports from EVS)
-        │
-        ▼
-Allocation Rule Application ──► Chargeback Computation ──► Variance Detection
-        │                                                    │
-        ▼                                                    ▼
+        â”‚
+        â–¼
+Allocation Rule Application â”€â”€â–º Chargeback Computation â”€â”€â–º Variance Detection
+        â”‚                                                    â”‚
+        â–¼                                                    â–¼
 Cost Attribution                                          Trend Analysis
-        │                                                    │
-        ▼                                                    ▼
-Optimization Recommendations ◄────── Report Generation
+        â”‚                                                    â”‚
+        â–¼                                                    â–¼
+Optimization Recommendations â—„â”€â”€â”€â”€â”€â”€ Report Generation
 ```
 
 The pipeline ingests cost records from EVS, applies configured allocation rules to categorize costs, computes chargeback amounts per consuming entity, detects variance against budget baselines, analyzes trends over time windows, attributes costs to sources, and generates optimization recommendations. Each stage can emit events and failures independently.
 
-## Data Model (TypeScript — extend the base doc types from Economic/000-Overview.md)
+## Data Model (TypeScript â€” extend the base doc types from Economic/000-Overview.md)
 
 ```typescript
 interface CostAllocationRule {
@@ -232,34 +232,34 @@ interface OptimizationEngine {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| ECN-ANA-001 | Every cost record is allocated to exactly one entity | Algorithmic — allocation engine ensures complete coverage |
-| ECN-ANA-002 | Sum of all chargeback amounts equals total spend for the period | Algorithmic — reconciliation validates chargeback sums |
-| ECN-ANA-003 | Allocation rules cannot have overlapping effective dates for same resource type | Algorithmic — validation rejects rule date conflicts |
-| ECN-ANA-004 | Every chargeback record references its source cost records | Architectural — sourceRecords array is required |
-| ECN-ANA-005 | Variance reports are regenerated on every budget state change | Algorithmic — budget transitions trigger variance recomputation |
-| ECN-ANA-006 | Optimization recommendations include risk assessment | Architectural — OptimizationRecommendation.riskLevel is required |
+| ECN-ANA-001 | Every cost record is allocated to exactly one entity | Algorithmic â€” allocation engine ensures complete coverage |
+| ECN-ANA-002 | Sum of all chargeback amounts equals total spend for the period | Algorithmic â€” reconciliation validates chargeback sums |
+| ECN-ANA-003 | Allocation rules cannot have overlapping effective dates for same resource type | Algorithmic â€” validation rejects rule date conflicts |
+| ECN-ANA-004 | Every chargeback record references its source cost records | Architectural â€” sourceRecords array is required |
+| ECN-ANA-005 | Variance reports are regenerated on every budget state change | Algorithmic â€” budget transitions trigger variance recomputation |
+| ECN-ANA-006 | Optimization recommendations include risk assessment | Architectural â€” OptimizationRecommendation.riskLevel is required |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Cost Analysis owns allocation, chargeback, variance, and trends; Budget Management owns budget state; Models owns forecasting |
-| R2 — Dependency Order | Depends on Economic (CostRecords, CostReports, Budget), EVS (evidence), ACF (dispatch); no circular dependencies |
-| R3 — DRY | Allocation rules defined once and reused across periods; cost records are singular sources of truth |
-| R4 — Builder Pattern | CostAllocationRule uses builder for complex allocation basis and weight expressions |
-| R5 — Stateless | Allocation computation is stateless given the same inputs; rule state is in the rule definition |
-| R6 — Evident Complete | Every allocation, chargeback, and variance analysis produces an evidence record |
-| R9 — Deterministic | Same cost records and allocation rules produce identical chargeback results |
-| R10 — Simpler Over Complex | Direct allocation is default; proportional and weighted allocation are opt-in |
-| R13 — Design for Failure | Unallocated costs are flagged not lost; variance escalation ensures visibility |
-| R14 — Paved Path | Monthly chargeback by organization with direct allocation covers 80% of use cases |
-| R15 — Open/Closed | New allocation strategies are pluggable; new resource types use existing rules |
+| R1 â€” Modulsingularity | Cost Analysis owns allocation, chargeback, variance, and trends; Budget Management owns budget state; Models owns forecasting |
+| R2 â€” Dependency Order | Depends on Economic (CostRecords, CostReports, Budget), EVS (evidence), ACF (dispatch); no circular dependencies |
+| R3 â€” DRY | Allocation rules defined once and reused across periods; cost records are singular sources of truth |
+| R4 â€” Builder Pattern | CostAllocationRule uses builder for complex allocation basis and weight expressions |
+| R5 â€” Stateless | Allocation computation is stateless given the same inputs; rule state is in the rule definition |
+| R6 â€” Evident Complete | Every allocation, chargeback, and variance analysis produces an evidence record |
+| R9 â€” Deterministic | Same cost records and allocation rules produce identical chargeback results |
+| R10 â€” Simpler Over Complex | Direct allocation is default; proportional and weighted allocation are opt-in |
+| R13 â€” Design for Failure | Unallocated costs are flagged not lost; variance escalation ensures visibility |
+| R14 â€” Paved Path | Monthly chargeback by organization with direct allocation covers 80% of use cases |
+| R15 â€” Open/Closed | New allocation strategies are pluggable; new resource types use existing rules |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/07-Domains/Economic/000-Overview.md | Base Economic System — defines Budget, CostRecord, CostReport base types |
+| Bible/07-Domains/Economic/000-Overview.md | Base Economic System â€” defines Budget, CostRecord, CostReport base types |
 | Bible/07-Domains/Economic/001-Models.md | Economic Models provides trend forecasts that feed optimization |
 | Bible/07-Domains/Economic/003-Simulation.md | Simulation uses cost analysis data for scenario modeling |
 | Bible/02-Core/ROS/000-Overview.md | ROS provides resource consumption records that fuel cost analysis |

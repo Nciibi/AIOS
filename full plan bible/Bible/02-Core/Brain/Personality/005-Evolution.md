@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 005 — Evolution
+﻿# AIOS Bible â€” Brain
+## 005 â€” Evolution
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Personality |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Personality |
 | Document ID | AIOS-BBL-002-PER-005 |
-| Source Laws | Law 6 — Law of Lifecycle, Law 1 — Law of Strategic Autonomy, Law 4 — Law of Evidence |
+| Source Laws | Law 6 â€” Law of Lifecycle, Law 1 â€” Law of Strategic Autonomy, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/006-Lifecycles.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,9 +15,9 @@
 
 ## Purpose
 
-Personality Evolution tracks and governs how Sou's personality changes over time. While Sou's core identity is immutable (PER-001), its traits, values, and style can evolve through experience, learning, and mood modulation. The Evolution system ensures that personality changes are gradual, bounded, recorded, and auditable — preventing drift while allowing growth.
+Personality Evolution tracks and governs how Sou's personality changes over time. While Sou's core identity is immutable (PER-001), its traits, values, and style can evolve through experience, learning, and mood modulation. The Evolution system ensures that personality changes are gradual, bounded, recorded, and auditable â€” preventing drift while allowing growth.
 
-Under Law 6 — Law of Lifecycle, all personality changes follow a defined lifecycle: trigger → evaluate → apply → record → review.
+Under Law 6 â€” Law of Lifecycle, all personality changes follow a defined lifecycle: trigger â†’ evaluate â†’ apply â†’ record â†’ review.
 
 ## Data Model
 
@@ -63,8 +63,8 @@ EvolutionSummary {
   versions: number
   first_version_created: timestamp
   latest_version_created: timestamp
-  drift_score: number            // 0.0–1.0, how much personality has drifted from baseline
-  components_changed: Record<string, number>  // Component → change count
+  drift_score: number            // 0.0â€“1.0, how much personality has drifted from baseline
+  components_changed: Record<string, number>  // Component â†’ change count
   last_evolution_cycle: timestamp
   pending_changes: number        // Changes queued but not yet applied
 }
@@ -74,7 +74,7 @@ EvolutionSummary {
 
 ```typescript
 PersonalityDriftReport {
-  drift_score: number            // 0.0–1.0, measured against constitutional baseline
+  drift_score: number            // 0.0â€“1.0, measured against constitutional baseline
   components: {
     traits: number               // Average deviation from default trait scores
     values: number               // Average deviation from constitutional value importances
@@ -91,39 +91,39 @@ Personality evolution follows a defined lifecycle managed by the Evolution syste
 
 ```
 Constitutional Baseline (Personality version 1.0)
-    │
-    ▼
+    â”‚
+    â–¼
 Experience Occurs
-    │
-    ├── Academy evaluates experience
-    ├── Mood responds to experience
-    ├── Context may trigger style adaptation
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Academy evaluates experience
+    â”œâ”€â”€ Mood responds to experience
+    â”œâ”€â”€ Context may trigger style adaptation
+    â”‚
+    â–¼
 Change Triggered
-    │
-    ├── Trait adjustment (via Academy)
-    ├── Value importance shift (via Academy, restricted)
-    ├── Style adaptation (via context or learning)
-    ├── Mood modulation (temporary)
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Trait adjustment (via Academy)
+    â”œâ”€â”€ Value importance shift (via Academy, restricted)
+    â”œâ”€â”€ Style adaptation (via context or learning)
+    â”œâ”€â”€ Mood modulation (temporary)
+    â”‚
+    â–¼
 Evolution Cycle
-    │
-    ├── Check plasticity bounds (PER-002)
-    ├── Check importance evolution bounds (VAL-004)
-    ├── Apply change to personality component
-    ├── Record EvolutionRecord
-    ├── Increment version
-    ├── Take personality snapshot
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Check plasticity bounds (PER-002)
+    â”œâ”€â”€ Check importance evolution bounds (VAL-004)
+    â”œâ”€â”€ Apply change to personality component
+    â”œâ”€â”€ Record EvolutionRecord
+    â”œâ”€â”€ Increment version
+    â”œâ”€â”€ Take personality snapshot
+    â”‚
+    â–¼
 Post-Evolution
-    │
-    ├── Check drift against constitutional baseline
-    ├── Emit PER.EvolutionCycleCompleted
-    ├── If drift exceeds threshold → alert Security Council
-    └── Clear pending changes
+    â”‚
+    â”œâ”€â”€ Check drift against constitutional baseline
+    â”œâ”€â”€ Emit PER.EvolutionCycleCompleted
+    â”œâ”€â”€ If drift exceeds threshold â†’ alert Security Council
+    â””â”€â”€ Clear pending changes
 ```
 
 ## Trait Plasticity and Learning
@@ -132,10 +132,10 @@ Trait plasticity is the primary mechanism for long-term personality evolution:
 
 | Plasticity Range | Evolution Speed | Example Traits | Change Frequency |
 |-----------------|----------------|----------------|------------------|
-| 0.0–0.2 | None (fixed) | Core constitutional traits | Never |
-| 0.3–0.5 | Slow | thoroughness (0.3), transparency (0.3) | Every 10+ experiences |
-| 0.6–0.8 | Moderate | curiosity (0.5), adaptability (0.5) | Every 5–10 experiences |
-| 0.9–1.0 | Fast | Experimental traits | Every 2–5 experiences |
+| 0.0â€“0.2 | None (fixed) | Core constitutional traits | Never |
+| 0.3â€“0.5 | Slow | thoroughness (0.3), transparency (0.3) | Every 10+ experiences |
+| 0.6â€“0.8 | Moderate | curiosity (0.5), adaptability (0.5) | Every 5â€“10 experiences |
+| 0.9â€“1.0 | Fast | Experimental traits | Every 2â€“5 experiences |
 
 ### Academy-Mediated Learning
 
@@ -156,9 +156,9 @@ evolve(lesson: AcademyLesson): EvolutionRecord[]
 ```
 
 Learning deltas are computed based on:
-- Lesson strength (0.0–1.0): How impactful the experience was
-- Lesson valence (+/–): Whether it reinforces or discourages the trait
-- Trait relevance (0.0–1.0): How relevant the lesson is to this trait
+- Lesson strength (0.0â€“1.0): How impactful the experience was
+- Lesson valence (+/â€“): Whether it reinforces or discourages the trait
+- Trait relevance (0.0â€“1.0): How relevant the lesson is to this trait
 - Current trait score: Traits further from extremes learn faster
 
 ## Mood-Driven Temporary Modulations
@@ -192,7 +192,7 @@ applyMoodModulation(trait: Trait, mood: MoodState): number
   return modulated
 ```
 
-Mood-based modulations are NOT recorded as EvolutionRecords — they are transient and tracked separately by the Mood Tracker.
+Mood-based modulations are NOT recorded as EvolutionRecords â€” they are transient and tracked separately by the Mood Tracker.
 
 ## Experience-Based Trait Adjustment
 
@@ -224,7 +224,7 @@ When the Academy processes experiences into lessons and applies them to personal
 
 ```typescript
 processAcademyLesson(lesson: AcademyLesson): EvolutionRecord[]
-  // Academy mediates — ensures learning is coherent
+  // Academy mediates â€” ensures learning is coherent
   if not validated by Academy:
     return []
   
@@ -262,11 +262,11 @@ Version Scheme: MAJOR.CHANGE (e.g., 1.0, 1.1, 2.0)
   CHANGE: Incremented on every evolution cycle with changes
 
 Version Lifecycle:
-  Version 1.0 → Constitutional personality at instantiation
-  Version 1.1 → First evolution cycle with changes
-  Version 1.2 → Second evolution cycle
+  Version 1.0 â†’ Constitutional personality at instantiation
+  Version 1.1 â†’ First evolution cycle with changes
+  Version 1.2 â†’ Second evolution cycle
   ...
-  Version 2.0 → Constitutional amendment reset
+  Version 2.0 â†’ Constitutional amendment reset
 ```
 
 Each version stores a full personality snapshot for rollback capability.
@@ -304,8 +304,8 @@ computeDrift(): PersonalityDriftReport
 | Level | Threshold | Action |
 |-------|-----------|--------|
 | Normal | < 0.1 | No action |
-| Elevated | 0.1–0.2 | Log warning; monitor |
-| High | 0.2–0.3 | Alert Academy; suggest corrective learning |
+| Elevated | 0.1â€“0.2 | Log warning; monitor |
+| High | 0.2â€“0.3 | Alert Academy; suggest corrective learning |
 | Critical | > 0.3 | Alert Security Council; consider personality reset |
 
 ## Internal Interface
@@ -373,14 +373,14 @@ interface PersonalityEvolutionConfig {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| EVO-001 | Every personality change is recorded as an EvolutionRecord | Architectural — all mutations go through `recordChange` |
-| EVO-002 | Trait evolution is bounded by plasticity (PER-002) | Algorithmic — clamped on every change |
-| EVO-003 | Mood modulations are temporary and decay to baseline | Algorithmic — Mood Tracker enforces decay |
-| EVO-004 | Evolution version is monotonic — always increases | Algorithmic — version increments only |
-| EVO-005 | Personality drift is monitored every evolution cycle | Algorithmic — `computeDrift` called on cycle end |
-| EVO-006 | Constitutional baseline is always recoverable | Architectural — stored at version 1.0 |
-| EVO-007 | Evolution history cannot be tampered with (append-only) | Architectural — EVO-001 enforced |
-| EVO-008 | Revert to baseline requires Security Council authority | Architectural — ACF-enforced permission |
+| EVO-001 | Every personality change is recorded as an EvolutionRecord | Architectural â€” all mutations go through `recordChange` |
+| EVO-002 | Trait evolution is bounded by plasticity (PER-002) | Algorithmic â€” clamped on every change |
+| EVO-003 | Mood modulations are temporary and decay to baseline | Algorithmic â€” Mood Tracker enforces decay |
+| EVO-004 | Evolution version is monotonic â€” always increases | Algorithmic â€” version increments only |
+| EVO-005 | Personality drift is monitored every evolution cycle | Algorithmic â€” `computeDrift` called on cycle end |
+| EVO-006 | Constitutional baseline is always recoverable | Architectural â€” stored at version 1.0 |
+| EVO-007 | Evolution history cannot be tampered with (append-only) | Architectural â€” EVO-001 enforced |
+| EVO-008 | Revert to baseline requires Security Council authority | Architectural â€” ACF-enforced permission |
 
 ## Error Cases
 
@@ -401,17 +401,17 @@ interface PersonalityEvolutionConfig {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Evolution handles only personality change — recording, versioning, drift, rollback |
-| R2 — Dependency Order | Depends on all Personality components, Memory OS, Academy; no upward deps |
-| R3 — DRY | Evolution records stored once in history, referenced by audit and drift |
-| R4 — Builder Pattern | Evolution built by Trigger → Evaluate → Apply → Record → Review |
-| R5 — Liskov Substitution | Any PersonalityEvolution implements the interface |
-| R6 — DI over Singletons | Drift strategies and evolution constraints injected |
-| R9 — Deterministic | Same changes produce same version sequence |
-| R10 — Simpler Over Complex | Evolution uses monotonic version with full snapshots |
-| R13 — Design for Failure | Drift monitoring catches and alerts on personality erosion |
-| R14 — Paved Path | All evolution flows through `evolve()` and `recordChange()` |
-| R15 — Open/Closed | New evolution triggers added via Registry, not by modifying core |
+| R1 â€” Modulsingularity | Evolution handles only personality change â€” recording, versioning, drift, rollback |
+| R2 â€” Dependency Order | Depends on all Personality components, Memory OS, Academy; no upward deps |
+| R3 â€” DRY | Evolution records stored once in history, referenced by audit and drift |
+| R4 â€” Builder Pattern | Evolution built by Trigger â†’ Evaluate â†’ Apply â†’ Record â†’ Review |
+| R5 â€” Liskov Substitution | Any PersonalityEvolution implements the interface |
+| R6 â€” DI over Singletons | Drift strategies and evolution constraints injected |
+| R9 â€” Deterministic | Same changes produce same version sequence |
+| R10 â€” Simpler Over Complex | Evolution uses monotonic version with full snapshots |
+| R13 â€” Design for Failure | Drift monitoring catches and alerts on personality erosion |
+| R14 â€” Paved Path | All evolution flows through `evolve()` and `recordChange()` |
+| R15 â€” Open/Closed | New evolution triggers added via Registry, not by modifying core |
 
 ## Related Documents
 

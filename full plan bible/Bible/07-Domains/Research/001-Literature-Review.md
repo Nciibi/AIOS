@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Research — 001: Literature Review
+﻿# AIOS Bible â€” Domains
+## Research â€” 001: Literature Review
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-RES-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,13 +15,13 @@
 
 ## Purpose
 
-The Literature Review engine enables AIOS to conduct systematic investigation of published research — searching academic databases, retrieving papers, extracting citations, comparing findings across sources, assessing quality, and identifying knowledge gaps. It ensures that AIOS builds on existing knowledge rather than duplicating effort or reaching uninformed conclusions.
+The Literature Review engine enables AIOS to conduct systematic investigation of published research â€” searching academic databases, retrieving papers, extracting citations, comparing findings across sources, assessing quality, and identifying knowledge gaps. It ensures that AIOS builds on existing knowledge rather than duplicating effort or reaching uninformed conclusions.
 
 ## Architecture
 
 ```
-search_papers ──> retrieve_papers ──> extract_citations ──> compare_findings ──> synthesize ──> identify_gaps
-       │               │                   │                      │                  │               │
+search_papers â”€â”€> retrieve_papers â”€â”€> extract_citations â”€â”€> compare_findings â”€â”€> synthesize â”€â”€> identify_gaps
+       â”‚               â”‚                   â”‚                      â”‚                  â”‚               â”‚
        v               v                   v                      v                  v               v
   QueryResult     PaperRecord        CitationList         ComparisonMatrix     SynthesisDoc     GapAnalysis
 ```
@@ -231,13 +231,13 @@ interface ConfidenceInterval {
 
 | Document | Relationship |
 |---------|-------------|
-| Research/000-Overview.md | Research domain overview — entities, capabilities, methodology |
-| Physics/005-Events.md | Evidence — all literature review operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — search scope and rate limits |
-| Physics/012-Experience.md | Experience — literature findings contribute to AIOS knowledge |
-| Bible/02-Core/Academy/000-Overview.md | Academy — paper metadata and findings stored as knowledge artifacts |
-| Bible/02-Core/DTS/000-Overview.md | DTS — quality scoring and confidence assessment methodology |
-| Bible/02-Core/ROS/000-Overview.md | ROS — token and compute budget for literature retrieval |
-| Bible/06-Services/ACF/000-Overview.md | ACF — transport for academic database queries and responses |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding for evidence-based research |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles applied to literature review |
+| Research/000-Overview.md | Research domain overview â€” entities, capabilities, methodology |
+| Physics/005-Events.md | Evidence â€” all literature review operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” search scope and rate limits |
+| Physics/012-Experience.md | Experience â€” literature findings contribute to AIOS knowledge |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” paper metadata and findings stored as knowledge artifacts |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” quality scoring and confidence assessment methodology |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” token and compute budget for literature retrieval |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” transport for academic database queries and responses |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding for evidence-based research |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles applied to literature review |

@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 001 — Goal Decomposition
+﻿# AIOS Bible â€” Brain
+## 001 â€” Goal Decomposition
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Planning |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Planning |
 | Document ID | AIOS-BBL-002-PLN-001 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 2 — Law of Non-Execution |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 2 â€” Law of Non-Execution |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Goal Decomposition is the entry point of the Planning System — it transforms a high-level strategic goal into a hierarchical tree of concrete, actionable milestones. This module applies one or more decomposition strategies (top-down, bottom-up, template-based, or mixed) to analyze the goal's structure, generate a milestone tree, and validate that the resulting decomposition is well-formed. Decomposition is recursive by nature: each milestone can itself be decomposed into sub-milestones until a configurable depth limit is reached or all nodes are primitive (directly executable). The output feeds directly into Milestone Planning and Dependency Resolution.
+Goal Decomposition is the entry point of the Planning System â€” it transforms a high-level strategic goal into a hierarchical tree of concrete, actionable milestones. This module applies one or more decomposition strategies (top-down, bottom-up, template-based, or mixed) to analyze the goal's structure, generate a milestone tree, and validate that the resulting decomposition is well-formed. Decomposition is recursive by nature: each milestone can itself be decomposed into sub-milestones until a configurable depth limit is reached or all nodes are primitive (directly executable). The output feeds directly into Milestone Planning and Dependency Resolution.
 
 ## Data Model
 
@@ -24,11 +24,11 @@ Goal Decomposition is the entry point of the Planning System — it transforms a
 ```typescript
 GoalAnalysis {
   goal: string
-  complexity: number              // 0.0–1.0, estimated complexity score
+  complexity: number              // 0.0â€“1.0, estimated complexity score
   domain_tags: string[]           // Detected domain labels (e.g., "auth", "frontend")
   suggested_strategy: "top-down" | "bottom-up" | "template" | "mixed"
   known_patterns: string[]        // Similar goals from episodic memory
-  ambiguity_score: number         // 0.0–1.0, how vague the goal statement is
+  ambiguity_score: number         // 0.0â€“1.0, how vague the goal statement is
   missing_context: string[]       // Aspects Sou should clarify before proceeding
 }
 ```
@@ -45,7 +45,7 @@ DecompositionNode {
   depth: number                    // 0 = root goal
   is_primitive: boolean            // True if no further decomposition needed
   strategy_used: DecompositionStrategyType
-  quality_score: number            // 0.0–1.0, assessed against quality criteria
+  quality_score: number            // 0.0â€“1.0, assessed against quality criteria
   metadata: {
     estimated_complexity: number
     required_capabilities: string[]
@@ -96,18 +96,18 @@ Start with the root goal and iteratively break it into smaller sub-goals:
 
 ```
 Goal: "Build e-commerce platform"
-├── Milestone: Payment Processing
-│   ├── Integrate Stripe API
-│   ├── Build checkout flow
-│   └── Handle refunds
-├── Milestone: Product Catalog
-│   ├── Design product schema
-│   ├── Build search/filter
-│   └── Admin CRUD interface
-└── Milestone: User Management
-    ├── Registration & login
-    ├── Profile management
-    └── Permission system
+â”œâ”€â”€ Milestone: Payment Processing
+â”‚   â”œâ”€â”€ Integrate Stripe API
+â”‚   â”œâ”€â”€ Build checkout flow
+â”‚   â””â”€â”€ Handle refunds
+â”œâ”€â”€ Milestone: Product Catalog
+â”‚   â”œâ”€â”€ Design product schema
+â”‚   â”œâ”€â”€ Build search/filter
+â”‚   â””â”€â”€ Admin CRUD interface
+â””â”€â”€ Milestone: User Management
+    â”œâ”€â”€ Registration & login
+    â”œâ”€â”€ Profile management
+    â””â”€â”€ Permission system
 ```
 
 Best for well-understood domains where the overall structure is known in advance.
@@ -126,15 +126,15 @@ Atomic tasks identified:
 - Build registration form component
 
 Grouped into Milestones:
-├── Milestone: Database Schema Design
-│   ├── Write SQL schema for users table
-│   └── Write SQL schema for products table
-├── Milestone: Auth API
-│   ├── Implement login endpoint
-│   └── Implement registration endpoint
-└── Milestone: Auth Frontend
-    ├── Build login form component
-    └── Build registration form component
+â”œâ”€â”€ Milestone: Database Schema Design
+â”‚   â”œâ”€â”€ Write SQL schema for users table
+â”‚   â””â”€â”€ Write SQL schema for products table
+â”œâ”€â”€ Milestone: Auth API
+â”‚   â”œâ”€â”€ Implement login endpoint
+â”‚   â””â”€â”€ Implement registration endpoint
+â””â”€â”€ Milestone: Auth Frontend
+    â”œâ”€â”€ Build login form component
+    â””â”€â”€ Build registration form component
 ```
 
 Best for novel or exploratory tasks where concrete steps are easier to identify than the overall architecture.
@@ -145,33 +145,33 @@ Match the goal against a library of predefined plan templates:
 
 ```
 Goal: "Implement REST API"
-→ Matches template: "REST API Blueprint"
-├── Milestone 1: API Design (OpenAPI spec)
-├── Milestone 2: Data Layer (models, migrations)
-├── Milestone 3: Business Logic (services)
-├── Milestone 4: Controllers (routing)
-├── Milestone 5: Tests (unit + integration)
-└── Milestone 6: Documentation
+â†’ Matches template: "REST API Blueprint"
+â”œâ”€â”€ Milestone 1: API Design (OpenAPI spec)
+â”œâ”€â”€ Milestone 2: Data Layer (models, migrations)
+â”œâ”€â”€ Milestone 3: Business Logic (services)
+â”œâ”€â”€ Milestone 4: Controllers (routing)
+â”œâ”€â”€ Milestone 5: Tests (unit + integration)
+â””â”€â”€ Milestone 6: Documentation
 ```
 
 Best for repetitive goals with known, stable structure.
 
 ### Mixed Decomposition
 
-Combine strategies — use templates for known portions, top-down for the core structure, bottom-up for exploratory sub-components:
+Combine strategies â€” use templates for known portions, top-down for the core structure, bottom-up for exploratory sub-components:
 
 ```
 Goal: "Modernize legacy payment system"
-├── [Template] Core: "Payment System Blueprint" (known structure)
-│   ├── Transaction processing
-│   ├── Reconciliation
-│   └── Reporting
-├── [Top-Down] Migration Layer
-│   ├── Data migration plan
-│   └── Rollback strategy
-└── [Bottom-Up] New Integration
-    ├── Research modern payment APIs
-    └── Prototype PoC integration
+â”œâ”€â”€ [Template] Core: "Payment System Blueprint" (known structure)
+â”‚   â”œâ”€â”€ Transaction processing
+â”‚   â”œâ”€â”€ Reconciliation
+â”‚   â””â”€â”€ Reporting
+â”œâ”€â”€ [Top-Down] Migration Layer
+â”‚   â”œâ”€â”€ Data migration plan
+â”‚   â””â”€â”€ Rollback strategy
+â””â”€â”€ [Bottom-Up] New Integration
+    â”œâ”€â”€ Research modern payment APIs
+    â””â”€â”€ Prototype PoC integration
 ```
 
 Best for complex, partially-known goals that don't fit a single strategy.
@@ -191,7 +191,7 @@ Algorithm: RecursiveDecompose(node, config, depth)
     quality = assessQuality(child)
     if quality < config.min_quality_threshold:
       apply refinement to child
-      re-decompose if refinement fails → mark as primitive with warning
+      re-decompose if refinement fails â†’ mark as primitive with warning
 
   validate tree structure
   emit PLN.GoalDecomposed event
@@ -205,8 +205,8 @@ Depth limits prevent infinite recursion. The branching factor cap prevents explo
 |-----------|-------------|-----------|
 | Atomic | Node represents a single, indivisible unit of work | No AND/OR ambiguity |
 | Measurable | Completion can be objectively verified | Clear pass/fail criteria |
-| Bounded | Scope is limited; no hidden expansion | Est. tokens ±20% |
-| Independent | Minimal coupling to sibling nodes | Dependency count ≤ 3 |
+| Bounded | Scope is limited; no hidden expansion | Est. tokens Â±20% |
+| Independent | Minimal coupling to sibling nodes | Dependency count â‰¤ 3 |
 | Valuable | Each node contributes directly to parent goal | Traceable upward |
 | Actionable | A capable worker can execute it | Capabilities specified |
 | Consistent | No contradictory requirements | Self-consistent |
@@ -228,7 +228,7 @@ interface GoalDecomposer {
 interface DecompositionStrategy {
   type: DecompositionStrategyType
   decompose(goal: string, context: DecisionContext): DecompositionNode[]
-  canHandle(goal: string, analysis: GoalAnalysis): number   // 0.0–1.0 confidence
+  canHandle(goal: string, analysis: GoalAnalysis): number   // 0.0â€“1.0 confidence
 }
 
 interface TemplateMatch {
@@ -261,40 +261,40 @@ interface DecisionContext {
 
 ```
 Raw Goal Input
-    │
-    ▼
+    â”‚
+    â–¼
 Goal Analysis (analyzeGoal)
-    │
-    ├── Assess complexity, ambiguity, domain
-    ├── Query episodic memory for similar patterns
-    └── Determine missing context
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Assess complexity, ambiguity, domain
+    â”œâ”€â”€ Query episodic memory for similar patterns
+    â””â”€â”€ Determine missing context
+    â”‚
+    â–¼
 Strategy Selection (selectStrategy)
-    │
-    ├── If high-confidence template match → template strategy
-    ├── If well-understood domain → top-down
-    ├── If exploratory → bottom-up
-    └── If complex/mixed → mixed strategy
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ If high-confidence template match â†’ template strategy
+    â”œâ”€â”€ If well-understood domain â†’ top-down
+    â”œâ”€â”€ If exploratory â†’ bottom-up
+    â””â”€â”€ If complex/mixed â†’ mixed strategy
+    â”‚
+    â–¼
 Decomposition (decompose)
-    │
-    ├── Apply strategy recursively
-    ├── Respect depth limit & branching factor
-    ├── Assess quality at each node
-    ├── Flag low-quality nodes for refinement
-    └── Emit PLN.GoalDecomposed
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Apply strategy recursively
+    â”œâ”€â”€ Respect depth limit & branching factor
+    â”œâ”€â”€ Assess quality at each node
+    â”œâ”€â”€ Flag low-quality nodes for refinement
+    â””â”€â”€ Emit PLN.GoalDecomposed
+    â”‚
+    â–¼
 Tree Validation (validateTree)
-    │
-    ├── Check all quality criteria
-    ├── Verify no duplicate or overlapping nodes
-    ├── Confirm root-to-leaf traceability
-    └── Return validated MilestoneTree
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ Check all quality criteria
+    â”œâ”€â”€ Verify no duplicate or overlapping nodes
+    â”œâ”€â”€ Confirm root-to-leaf traceability
+    â””â”€â”€ Return validated MilestoneTree
+    â”‚
+    â–¼
 Output to Milestone Planner
 ```
 
@@ -317,14 +317,14 @@ Output to Milestone Planner
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| GD-001 | Every decomposition node has exactly one parent (except root) | Structural — tree model enforced |
-| GD-002 | Total depth never exceeds `max_depth` | Algorithmic — checked at each recursion |
-| GD-003 | Branching factor never exceeds `max_branching_factor` | Algorithmic — checked at node creation |
-| GD-004 | Every node's description is traceable to the root goal | Algorithmic — validated in `validateTree` |
-| GD-005 | Quality score is monotonic (initial assessment ≥ refinement score) | Algorithmic — refinement can only improve |
-| GD-006 | Template matches with confidence < 0.5 are not applied | Algorithmic — threshold gating |
-| GD-007 | Recursive decomposition terminates (depth limit + primitive detection) | Algorithmic — guaranteed termination |
-| GD-008 | A decomposed plan is never empty — at least one milestone produced | Validation — enforced on output |
+| GD-001 | Every decomposition node has exactly one parent (except root) | Structural â€” tree model enforced |
+| GD-002 | Total depth never exceeds `max_depth` | Algorithmic â€” checked at each recursion |
+| GD-003 | Branching factor never exceeds `max_branching_factor` | Algorithmic â€” checked at node creation |
+| GD-004 | Every node's description is traceable to the root goal | Algorithmic â€” validated in `validateTree` |
+| GD-005 | Quality score is monotonic (initial assessment â‰¥ refinement score) | Algorithmic â€” refinement can only improve |
+| GD-006 | Template matches with confidence < 0.5 are not applied | Algorithmic â€” threshold gating |
+| GD-007 | Recursive decomposition terminates (depth limit + primitive detection) | Algorithmic â€” guaranteed termination |
+| GD-008 | A decomposed plan is never empty â€” at least one milestone produced | Validation â€” enforced on output |
 
 ## Error Cases
 
@@ -343,17 +343,17 @@ Output to Milestone Planner
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Goal Decomposition handles only decomposition; no execution |
-| R2 — Dependency Order | Depends on Episodic Memory for pattern matching; no upward deps |
-| R3 — DRY | Strategy logic encapsulated per strategy; shared validation reused |
-| R4 — Builder Pattern | Tree built stepwise: Analyze → Select → Decompose → Validate |
-| R5 — Liskov Substitution | Any DecompositionStrategy implements the interface |
-| R6 — DI over Singletons | Strategies injected via DecompositionConfig |
-| R9 — Deterministic | Same goal + context + strategy produces same tree |
-| R10 — Simpler Over Complex | Uses tree model, not generalized goal-net or HTN |
-| R13 — Design for Failure | Low-quality nodes flagged; depth limit prevents runaway recursion |
-| R14 — Paved Path | All decomposition flows through decompose() entry point |
-| R15 — Open/Closed | New strategies added via registry, not by modifying decomposer |
+| R1 â€” Modulsingularity | Goal Decomposition handles only decomposition; no execution |
+| R2 â€” Dependency Order | Depends on Episodic Memory for pattern matching; no upward deps |
+| R3 â€” DRY | Strategy logic encapsulated per strategy; shared validation reused |
+| R4 â€” Builder Pattern | Tree built stepwise: Analyze â†’ Select â†’ Decompose â†’ Validate |
+| R5 â€” Liskov Substitution | Any DecompositionStrategy implements the interface |
+| R6 â€” DI over Singletons | Strategies injected via DecompositionConfig |
+| R9 â€” Deterministic | Same goal + context + strategy produces same tree |
+| R10 â€” Simpler Over Complex | Uses tree model, not generalized goal-net or HTN |
+| R13 â€” Design for Failure | Low-quality nodes flagged; depth limit prevents runaway recursion |
+| R14 â€” Paved Path | All decomposition flows through decompose() entry point |
+| R15 â€” Open/Closed | New strategies added via registry, not by modifying decomposer |
 
 ## Related Documents
 

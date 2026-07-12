@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Coding — 004: Refactoring
+﻿# AIOS Bible â€” Domains
+## Coding â€” 004: Refactoring
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-COD-004 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -22,24 +22,24 @@ This component is the most architecturally complex in the Coding domain because 
 ## Architecture
 
 ```
-Refactoring Plan (from Sou)  ──▶  Symbol Resolution
-                                      │
-                                      ▼
+Refactoring Plan (from Sou)  â”€â”€â–¶  Symbol Resolution
+                                      â”‚
+                                      â–¼
                               Dependency Graph Builder
-                                      │
-                                      ▼
+                                      â”‚
+                                      â–¼
                               Impact Analysis
-                                      │
-                                      ▼
+                                      â”‚
+                                      â–¼
                               Transformation Engine
-                                      │
-                                      ▼
+                                      â”‚
+                                      â–¼
                               Change Set Generation
-                                      │
-                                      ▼
+                                      â”‚
+                                      â–¼
                               Verification (build + test)
-                                      │
-                                      ▼
+                                      â”‚
+                                      â–¼
                               Applied Changes
 ```
 
@@ -294,30 +294,30 @@ enum VerificationStatus {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Each refactoring type (rename, extract, inline, move) is a separate module |
-| R2 — Dependency Order | Refactoring depends on Language Registry and CodebaseIndex |
-| R3 — DRY | Symbol resolution logic is shared across all refactoring types |
-| R4 — Builder Pattern | ChangeSet is built incrementally through analysis + transformation phases |
-| R5 — Liskov Substitution | All refactoring operations implement IRefactoringOperation interface |
-| R6 — DI over Singletons | Analysis and transformation services are injected; no global state |
-| R9 — Deterministic | Same plan + codebase state produces identical ChangeSet |
-| R10 — Simpler Over Complex | Refactoring uses sequential transformation with dependency ordering |
-| R13 — Design for Failure | Verification failure triggers automatic rollback; no partial state persists |
-| R14 — Paved Path | Single paved path: analyze -> plan -> transform -> verify -> commit |
-| R15 — Open/Closed | New refactoring types added by implementing IRefactoringOperation interface |
+| R1 â€” Modulsingularity | Each refactoring type (rename, extract, inline, move) is a separate module |
+| R2 â€” Dependency Order | Refactoring depends on Language Registry and CodebaseIndex |
+| R3 â€” DRY | Symbol resolution logic is shared across all refactoring types |
+| R4 â€” Builder Pattern | ChangeSet is built incrementally through analysis + transformation phases |
+| R5 â€” Liskov Substitution | All refactoring operations implement IRefactoringOperation interface |
+| R6 â€” DI over Singletons | Analysis and transformation services are injected; no global state |
+| R9 â€” Deterministic | Same plan + codebase state produces identical ChangeSet |
+| R10 â€” Simpler Over Complex | Refactoring uses sequential transformation with dependency ordering |
+| R13 â€” Design for Failure | Verification failure triggers automatic rollback; no partial state persists |
+| R14 â€” Paved Path | Single paved path: analyze -> plan -> transform -> verify -> commit |
+| R15 â€” Open/Closed | New refactoring types added by implementing IRefactoringOperation interface |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Coding/000-Overview.md | Coding domain overview — refactoring is a core code modification capability |
-| Bible/07-Domains/Coding/001-Languages.md | Language Support Registry — provides language-specific parsing and symbol rules |
-| Bible/07-Domains/Coding/002-Code-Generation.md | Code Generation — refactoring may trigger regeneration of dependent code |
-| Bible/07-Domains/Coding/003-Review.md | Code Review — refactored code must pass review before merge |
-| Physics/005-Events.md | Evidence — every refactoring stage produces auditable Events |
-| Physics/007-Capabilities.md | Capabilities — refactoring scope bounded by Worker capability profile |
-| Physics/010-Execution.md | Execution — verification is part of the execution pipeline |
-| Bible/02-Core/Sou/002-Planner.md | Planner — Sou produces refactoring plans as structured code modifications |
-| Bible/02-Core/Academy/000-Overview.md | Academy — CodebaseIndex provides symbol graph for resolution |
-| Bible/02-Core/DTS/000-Overview.md | DTS — confidence scoring validates refactoring quality |
-| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK — BuildSandbox used for verification |
+| Bible/07-Domains/Coding/000-Overview.md | Coding domain overview â€” refactoring is a core code modification capability |
+| Bible/07-Domains/Coding/001-Languages.md | Language Support Registry â€” provides language-specific parsing and symbol rules |
+| Bible/07-Domains/Coding/002-Code-Generation.md | Code Generation â€” refactoring may trigger regeneration of dependent code |
+| Bible/07-Domains/Coding/003-Review.md | Code Review â€” refactored code must pass review before merge |
+| Physics/005-Events.md | Evidence â€” every refactoring stage produces auditable Events |
+| Physics/007-Capabilities.md | Capabilities â€” refactoring scope bounded by Worker capability profile |
+| Physics/010-Execution.md | Execution â€” verification is part of the execution pipeline |
+| Bible/02-Core/Sou/002-Planner.md | Planner â€” Sou produces refactoring plans as structured code modifications |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” CodebaseIndex provides symbol graph for resolution |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” confidence scoring validates refactoring quality |
+| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK â€” BuildSandbox used for verification |

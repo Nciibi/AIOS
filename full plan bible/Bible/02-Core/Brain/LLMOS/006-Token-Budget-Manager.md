@@ -1,18 +1,18 @@
-# AIOS Bible — Brain/LLMOS
-## 006 — Token Budget Manager
+﻿# AIOS Bible â€” Brain/LLMOS
+## 006 â€” Token Budget Manager
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-006 |
-| Source Laws | Law 7 — Law of Capability Bounds |
+| Source Laws | Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/010-Execution.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 3 — Budget Check (gateway) + continuous tracking |
+| Pipeline Stage | 3 â€” Budget Check (gateway) + continuous tracking |
 
 ## Purpose
 
@@ -77,7 +77,7 @@ interface BudgetCheckResult {
 4. Check each window:
    - If `current_usage + estimated_tokens > limit`: deny with `budget_exceeded` for this window
 5. If all windows pass: approve and reserve estimated tokens (optimistic reservation)
-6. Reserve estimated tokens in an in-memory pending ledger (not persisted to ROS) — this prevents concurrent requests from the same entity from over-subscribing within the same process. The persistent ROS record is only updated at reconciliation (Stage 17).
+6. Reserve estimated tokens in an in-memory pending ledger (not persisted to ROS) â€” this prevents concurrent requests from the same entity from over-subscribing within the same process. The persistent ROS record is only updated at reconciliation (Stage 17).
 
 ## Post-Request Reconciliation (Stage 17)
 
@@ -99,7 +99,7 @@ async function reconcileBudget(entity_id: UUIDv7, usage: TokenUsage): Promise<vo
 | Daily window exhausted | LLM-0102 | Deny request; return budget_exceeded with reset_at timestamp |
 | Hourly window exhausted | LLM-0102 | Deny request; return budget_exceeded with reset_at timestamp |
 | Per-request limit exceeded | LLM-0102 | Deny request; suggest reducing input size |
-| Entity has no budget configured | — | Apply default budget (1M tokens/day, unlimited hourly) |
+| Entity has no budget configured | â€” | Apply default budget (1M tokens/day, unlimited hourly) |
 
 ## Token Estimation
 
@@ -136,12 +136,12 @@ interface CreditBudget {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-BGT-001 | Every request passes budget check before entering the pipeline (Stage 3). | Architectural — gateway stage enforcement |
-| LLM-BGT-002 | Budget check is performed against at least one window (daily or hourly). | Algorithmic — multi-window check |
-| LLM-BGT-003 | Token estimation never returns 0 — minimum estimate is 1 token. | Algorithmic — floor applied |
-| LLM-BGT-004 | Reconciliation always runs after request completion (Stage 17). | Architectural — post-request stage enforcement |
-| LLM-BGT-005 | Budget overrides are multiplicative — applied to token counts before comparison with limits. | Algorithmic — override calculation |
-| LLM-BGT-006 | Credit budgets and token budgets are mutually exclusive — an entity uses one or the other. | Schema — budget type exclusivity |
+| LLM-BGT-001 | Every request passes budget check before entering the pipeline (Stage 3). | Architectural â€” gateway stage enforcement |
+| LLM-BGT-002 | Budget check is performed against at least one window (daily or hourly). | Algorithmic â€” multi-window check |
+| LLM-BGT-003 | Token estimation never returns 0 â€” minimum estimate is 1 token. | Algorithmic â€” floor applied |
+| LLM-BGT-004 | Reconciliation always runs after request completion (Stage 17). | Architectural â€” post-request stage enforcement |
+| LLM-BGT-005 | Budget overrides are multiplicative â€” applied to token counts before comparison with limits. | Algorithmic â€” override calculation |
+| LLM-BGT-006 | Credit budgets and token budgets are mutually exclusive â€” an entity uses one or the other. | Schema â€” budget type exclusivity |
 
 ## Events
 
@@ -154,17 +154,17 @@ interface CreditBudget {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Token Budget Manager is the sole budget authority |
-| R2 — Dependency Order | Budget check precedes all pipeline processing (Stage 3) |
-| R3 — DRY | Single budgeting model applied across all entities |
-| R4 — Builder Pattern | Token budgets configured through builder patterns |
-| R5 — Liskov Substitution | All entity budgets handled uniformly |
-| R6 — DI over Singletons | BudgetManager injected into pipeline stages |
-| R9 — Deterministic | Same request gets same budget decision |
-| R10 — Simpler Over Complex | Window-based budgets over complex rate-limiting |
-| R13 — Design for Failure | Default budget applied when entity config missing |
-| R14 — Paved Path | Standard budget windows defined for all entities |
-| R15 — Open/Closed | New budget windows added without pipeline changes |
+| R1 â€” Modulsingularity | Token Budget Manager is the sole budget authority |
+| R2 â€” Dependency Order | Budget check precedes all pipeline processing (Stage 3) |
+| R3 â€” DRY | Single budgeting model applied across all entities |
+| R4 â€” Builder Pattern | Token budgets configured through builder patterns |
+| R5 â€” Liskov Substitution | All entity budgets handled uniformly |
+| R6 â€” DI over Singletons | BudgetManager injected into pipeline stages |
+| R9 â€” Deterministic | Same request gets same budget decision |
+| R10 â€” Simpler Over Complex | Window-based budgets over complex rate-limiting |
+| R13 â€” Design for Failure | Default budget applied when entity config missing |
+| R14 â€” Paved Path | Standard budget windows defined for all entities |
+| R15 â€” Open/Closed | New budget windows added without pipeline changes |
 
 ## Related Documents
 
@@ -179,7 +179,7 @@ interface CreditBudget {
 
 | Condition | Error Code | Behavior |
 |-----------|------------|----------|
-| ROS unreachable for budget load | — | Allow request with warning; log for operator |
-| Entity budget not found | — | Apply default budget; log for operator |
-| Tokenizer cache miss + slow tokenization | — | Use fallback estimation; continue |
-| Reconciliation fails | — | Queue reconciliation job for retry; do not block pipeline |
+| ROS unreachable for budget load | â€” | Allow request with warning; log for operator |
+| Entity budget not found | â€” | Apply default budget; log for operator |
+| Tokenizer cache miss + slow tokenization | â€” | Use fallback estimation; continue |
+| Reconciliation fails | â€” | Queue reconciliation job for retry; do not block pipeline |

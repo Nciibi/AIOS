@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## SDK — 003: Provider SDK
+﻿# AIOS Bible â€” Interfaces
+## SDK â€” 003: Provider SDK
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-SDK-003 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Provider SDK provides the standard interface for building resource providers that register with ROS (Resource Orchestration Service) and offer capabilities to AIOS. A resource provider is any external system or service that AIOS can consume — compute clusters, LLM APIs, storage backends, network services, hardware devices, or any other resource type.
+The Provider SDK provides the standard interface for building resource providers that register with ROS (Resource Orchestration Service) and offer capabilities to AIOS. A resource provider is any external system or service that AIOS can consume â€” compute clusters, LLM APIs, storage backends, network services, hardware devices, or any other resource type.
 
 The Provider SDK is the extension mechanism of AIOS. While the Runtime SDK defines how Workers execute, and the Knowledge SDK defines how knowledge is managed, the Provider SDK defines how *anything else* connects to AIOS. It enables Organizations, partners, and the open-source community to add new resource types without modifying AIOS core.
 
@@ -117,7 +117,7 @@ Registration is validated by ROS. Providers with invalid capability schemas or m
 Providers follow this lifecycle within ROS:
 
 ```
-Discovered → Registered → Initialized → Active ↔ Degraded → Offline → Deregistered
+Discovered â†’ Registered â†’ Initialized â†’ Active â†” Degraded â†’ Offline â†’ Deregistered
 ```
 
 | State | Description | Resource Availability |
@@ -137,7 +137,7 @@ Health checks drive state transitions. A provider that fails consecutive health 
 Provider capabilities follow a defined lifecycle:
 
 ```
-Registered → Active → Deprecated → Removed
+Registered â†’ Active â†’ Deprecated â†’ Removed
 ```
 
 | State | Description | Allocation Possible? |
@@ -191,15 +191,15 @@ The Provider SDK supports these built-in resource types, with extension points f
 
 ### Security
 
-Resource providers authenticate with ROS via mTLS. Provider credentials are managed by KMS — never stored in provider configuration files. All provider communication is encrypted. Providers are isolated — one provider cannot access another provider's allocations. Capability execution is authorized by ROS based on the requesting entity's permissions. (Physics/008-Security.md)
+Resource providers authenticate with ROS via mTLS. Provider credentials are managed by KMS â€” never stored in provider configuration files. All provider communication is encrypted. Providers are isolated â€” one provider cannot access another provider's allocations. Capability execution is authorized by ROS based on the requesting entity's permissions. (Physics/008-Security.md)
 
 ### Evidence
 
-Every provider operation produces an Event — registration, health changes, resource allocation, capability execution, and deregistration. Provider Events feed into ROS accounting, DTS trust scoring, and Academy learning. Providers that fail to produce Events are marked as Degraded. (PHI-008)
+Every provider operation produces an Event â€” registration, health changes, resource allocation, capability execution, and deregistration. Provider Events feed into ROS accounting, DTS trust scoring, and Academy learning. Providers that fail to produce Events are marked as Degraded. (PHI-008)
 
 ### Lifecycle
 
-Providers follow the lifecycle defined in the Provider SDK. Resource allocations within a provider follow the resource lifecycle (Reserved → Allocated → Consumed → Released). Provider versions follow semantic versioning. Deprecated provider capabilities have a minimum support window. (Physics/006-Lifecycles.md)
+Providers follow the lifecycle defined in the Provider SDK. Resource allocations within a provider follow the resource lifecycle (Reserved â†’ Allocated â†’ Consumed â†’ Released). Provider versions follow semantic versioning. Deprecated provider capabilities have a minimum support window. (Physics/006-Lifecycles.md)
 
 ### Capability Bounds
 
@@ -207,33 +207,33 @@ Providers can only offer capabilities they registered. The resources a provider 
 
 ### Communication
 
-All Provider SDK communication flows through ACF. Provider endpoints use ACF topics for capability requests, metrics streaming, and event production. Cross-provider communication is not supported — all inter-provider data must flow through AIOS core. (Law 3 — Communication)
+All Provider SDK communication flows through ACF. Provider endpoints use ACF topics for capability requests, metrics streaming, and event production. Cross-provider communication is not supported â€” all inter-provider data must flow through AIOS core. (Law 3 â€” Communication)
 
 ### Design DNA
 
 | Rule | Compliance |
 |------|-----------|
-| R1 (Modulsingularity) | Provider SDK covers only resource provision — no runtime or knowledge concerns |
-| R5 (Liskov) | All providers implement the same ResourceProvider interface — interchangeable |
-| R6 (DI) | Providers are injected into ROS — no hard coupling between provider types |
+| R1 (Modulsingularity) | Provider SDK covers only resource provision â€” no runtime or knowledge concerns |
+| R5 (Liskov) | All providers implement the same ResourceProvider interface â€” interchangeable |
+| R6 (DI) | Providers are injected into ROS â€” no hard coupling between provider types |
 | R9 (Deterministic) | Same allocation request to the same provider produces identical allocation |
-| R10 (Simpler Over Complex) | Provider capabilities are flat-listed — no capability hierarchies |
+| R10 (Simpler Over Complex) | Provider capabilities are flat-listed â€” no capability hierarchies |
 | R13 (Design for Failure) | Providers report Degraded health before failing; ROS fails allocation to Degraded providers |
-| R14 (Paved Path) | Paved path: register → initialize → allocate → execute → release → deregister |
+| R14 (Paved Path) | Paved path: register â†’ initialize â†’ allocate â†’ execute â†’ release â†’ deregister |
 | R15 (Open/Closed) | New provider types implement the ResourceProvider interface without modifying ROS core |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/005-Events.md | Evidence — Provider SDK operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — Provider capabilities define resource bounds |
-| Bible/08-Interfaces/API/000-Specifications.md | API — Provider SDK uses ACF API contracts |
-| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK — Runtime providers implement Provider SDK |
-| Bible/02-Core/ROS/000-Overview.md | ROS — Provider SDK integrates with ROS for resource management |
-| Bible/02-Core/ROS/002-Registry.md | ROS Registry — Provider registration and health tracking |
-| Bible/02-Core/ROS/008-Provider-SDK.md | ROS Provider SDK — Detailed provider SDK specification |
-| Bible/06-Services/Cryptography/KMS/000-KMS.md | KMS — Provider credential management |
-| Bible/06-Services/ACF/000-Overview.md | ACF — Provider communication transport |
-| Bible/00-Foundations/002-Design-DNA.md | Design DNA — R1–R15 compliance for providers |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Physics/005-Events.md | Evidence â€” Provider SDK operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” Provider capabilities define resource bounds |
+| Bible/08-Interfaces/API/000-Specifications.md | API â€” Provider SDK uses ACF API contracts |
+| Bible/08-Interfaces/SDK/000-Runtime-SDK.md | Runtime SDK â€” Runtime providers implement Provider SDK |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” Provider SDK integrates with ROS for resource management |
+| Bible/02-Core/ROS/002-Registry.md | ROS Registry â€” Provider registration and health tracking |
+| Bible/02-Core/ROS/008-Provider-SDK.md | ROS Provider SDK â€” Detailed provider SDK specification |
+| Bible/06-Services/Cryptography/KMS/000-KMS.md | KMS â€” Provider credential management |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” Provider communication transport |
+| Bible/00-Foundations/002-Design-DNA.md | Design DNA â€” R1â€“R15 compliance for providers |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

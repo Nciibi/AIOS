@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## Console — 001: CLI Commands
+﻿# AIOS Bible â€” Interfaces
+## Console â€” 001: CLI Commands
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-GC-001 |
-| Source Laws | Law 1 — Law of Origin, Law 4 — Law of Evidence, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 1 â€” Law of Origin, Law 4 â€” Law of Evidence, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/006-Lifecycles.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -21,27 +21,27 @@ The CLI command system provides a structured, scriptable interface for governanc
 
 ```
 input string
-    │
-    ▼
-┌──────────────┐
-│  parse_command│  tokenize and identify command name
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│ validate_args │  check required args, types, bounds
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│ command route │  dispatch to registered handler
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│   execute    │  run governance action, record evidence
-└──────┬───────┘
-       ▼
-┌──────────────┐
-│ format_output│  render structured result to terminal
-└──────────────┘
+    â”‚
+    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  parse_commandâ”‚  tokenize and identify command name
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ validate_args â”‚  check required args, types, bounds
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ command route â”‚  dispatch to registered handler
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚   execute    â”‚  run governance action, record evidence
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ format_outputâ”‚  render structured result to terminal
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Data Model (TypeScript)
@@ -185,41 +185,41 @@ interface HistoryManager {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| GC-001-01 | Every CLI command execution produces an evidence record | Architectural — executor records to EVS before returning |
-| GC-001-02 | Arguments are validated before execution, never during | Algorithmic — validate_args runs before execute_command |
-| GC-001-03 | Command execution is idempotent — same input produces same evidence outcome | Algorithmic — command handlers are deterministic |
-| GC-001-04 | CLI sessions expire after configurable idle timeout | Algorithmic — session manager enforces timeout |
-| GC-001-05 | Alias resolution never creates cycles | Architectural — alias target must resolve to a registered command |
-| GC-001-06 | History is bounded to a maximum configurable size | Algorithmic — oldest entries pruned on overflow |
+| GC-001-01 | Every CLI command execution produces an evidence record | Architectural â€” executor records to EVS before returning |
+| GC-001-02 | Arguments are validated before execution, never during | Algorithmic â€” validate_args runs before execute_command |
+| GC-001-03 | Command execution is idempotent â€” same input produces same evidence outcome | Algorithmic â€” command handlers are deterministic |
+| GC-001-04 | CLI sessions expire after configurable idle timeout | Algorithmic â€” session manager enforces timeout |
+| GC-001-05 | Alias resolution never creates cycles | Architectural â€” alias target must resolve to a registered command |
+| GC-001-06 | History is bounded to a maximum configurable size | Algorithmic â€” oldest entries pruned on overflow |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | CLI owns parsing, validation, formatting; governance actions delegated to handlers |
-| R2 — Dependency Order | Depends on CommandRegistry, ArgumentValidator, EVS; no circular deps |
-| R3 — DRY | Argument specs defined once in CLICommand; reused by validation and help generation |
-| R4 — Builder Pattern | CommandResult built incrementally during execution |
-| R5 — Deterministic | Same input string always yields same parsed command and validation outcome |
-| R6 — Single Source | Commands defined in registry; no scattered references |
-| R9 — Deterministic | Replaying command history produces same evidence trail |
-| R10 — Simpler Over Complex | Default output format is table; JSON and YAML are opt-in |
-| R13 — Design for Failure | Session expiry traps preserve partial state; timeout aborts gracefully |
-| R14 — Paved Path | Standard governance commands (override, rfc, certify) have first-class support |
-| R15 — Open/Closed | New commands register via CommandRegistry without modifying the CLI engine |
+| R1 â€” Modulsingularity | CLI owns parsing, validation, formatting; governance actions delegated to handlers |
+| R2 â€” Dependency Order | Depends on CommandRegistry, ArgumentValidator, EVS; no circular deps |
+| R3 â€” DRY | Argument specs defined once in CLICommand; reused by validation and help generation |
+| R4 â€” Builder Pattern | CommandResult built incrementally during execution |
+| R5 â€” Deterministic | Same input string always yields same parsed command and validation outcome |
+| R6 â€” Single Source | Commands defined in registry; no scattered references |
+| R9 â€” Deterministic | Replaying command history produces same evidence trail |
+| R10 â€” Simpler Over Complex | Default output format is table; JSON and YAML are opt-in |
+| R13 â€” Design for Failure | Session expiry traps preserve partial state; timeout aborts gracefully |
+| R14 â€” Paved Path | Standard governance commands (override, rfc, certify) have first-class support |
+| R15 â€” Open/Closed | New commands register via CommandRegistry without modifying the CLI engine |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/08-Interfaces/Console/000-Overview.md | Governance Console overview — CLI is the primary interaction mode |
+| Bible/08-Interfaces/Console/000-Overview.md | Governance Console overview â€” CLI is the primary interaction mode |
 | Bible/08-Interfaces/Console/002-REPL.md | REPL builds on CLI command definitions |
 | Bible/08-Interfaces/Console/003-Scripting.md | Scripting engine executes sequences of CLI commands |
 | Bible/08-Interfaces/Console/004-AutoComplete.md | Auto-complete uses command definitions and argument specs |
 | Bible/08-Interfaces/Dashboard/000-Overview.md | Dashboard surfaces governance alerts for CLI action |
-| Bible/08-Interfaces/UI/000-Overview.md | General human interface — console is governance-specific |
-| Bible/01-Governance/001-CLS.md | Constitutional Lifecycle Service — constitution versioning commands |
-| Bible/01-Governance/003-CRP.md | Change Request Pipeline — RFC decision commands |
-| Bible/05-Platform/005-AUS.md | Audit System — audit query commands |
-| Bible/05-Platform/004-EVS.md | Evidence System — evidence recording for every command |
+| Bible/08-Interfaces/UI/000-Overview.md | General human interface â€” console is governance-specific |
+| Bible/01-Governance/001-CLS.md | Constitutional Lifecycle Service â€” constitution versioning commands |
+| Bible/01-Governance/003-CRP.md | Change Request Pipeline â€” RFC decision commands |
+| Bible/05-Platform/005-AUS.md | Audit System â€” audit query commands |
+| Bible/05-Platform/004-EVS.md | Evidence System â€” evidence recording for every command |
 | Bible/06-Services/ACF/000-Overview.md | ACF transports all CLI command invocations |

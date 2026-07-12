@@ -1,18 +1,18 @@
-# AIOS Bible — Brain/LLMOS
-## 008 — Streaming Manager
+﻿# AIOS Bible â€” Brain/LLMOS
+## 008 â€” Streaming Manager
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-008 |
-| Source Laws | Law 3 — Law of Communication |
+| Source Laws | Law 3 â€” Law of Communication |
 | Source Physics | Physics/004-Sessions.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 13 — Streaming |
+| Pipeline Stage | 13 â€” Streaming |
 
 ## Purpose
 
@@ -31,9 +31,9 @@ type StreamMode = "direct" | "buffered" | "hybrid";
 | `hybrid` | Forward chunks AND assemble full response for validation | Medium | Interactive + validation required |
 
 The mode is determined by:
-- `stream=true` + no schema → `direct`
-- `stream=true` + schema → `hybrid`
-- `stream=false` → `buffered`
+- `stream=true` + no schema â†’ `direct`
+- `stream=true` + schema â†’ `hybrid`
+- `stream=false` â†’ `buffered`
 
 ## Chunk Schema
 
@@ -126,12 +126,12 @@ Final chunk contains:
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-STR-001 | Every chunk has a monotonically increasing sequence number starting at 1. | Algorithmic — sequence tracking |
-| LLM-STR-002 | In `direct` mode, chunks are delivered to caller in order with no reordering. | Algorithmic — ordered delivery |
-| LLM-STR-003 | In `buffered` mode, assembled response is equivalent to non-streamed response. | Algorithmic — deterministic assembly |
-| LLM-STR-004 | Tool call arguments are accumulated correctly across chunks. | Algorithmic — partial tool call accumulation |
-| LLM-STR-005 | Backpressure never causes data loss — only delays. | Algorithmic — buffer management |
-| LLM-STR-006 | Every chunk delivered to caller passes through output guardrails (Stage 14) before delivery. | Architectural — pipeline stage ordering |
+| LLM-STR-001 | Every chunk has a monotonically increasing sequence number starting at 1. | Algorithmic â€” sequence tracking |
+| LLM-STR-002 | In `direct` mode, chunks are delivered to caller in order with no reordering. | Algorithmic â€” ordered delivery |
+| LLM-STR-003 | In `buffered` mode, assembled response is equivalent to non-streamed response. | Algorithmic â€” deterministic assembly |
+| LLM-STR-004 | Tool call arguments are accumulated correctly across chunks. | Algorithmic â€” partial tool call accumulation |
+| LLM-STR-005 | Backpressure never causes data loss â€” only delays. | Algorithmic â€” buffer management |
+| LLM-STR-006 | Every chunk delivered to caller passes through output guardrails (Stage 14) before delivery. | Architectural â€” pipeline stage ordering |
 
 ## Events
 
@@ -145,17 +145,17 @@ Final chunk contains:
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Streaming Manager is the sole stream handler |
-| R2 — Dependency Order | Streaming depends on Provider SDK for chunk delivery |
-| R3 — DRY | Stream modes defined once (direct/buffered/hybrid) |
-| R4 — Builder Pattern | AssembledResponse built through stream assembly |
-| R5 — Liskov Substitution | All provider streams handled uniformly |
-| R6 — DI over Singletons | StreamingManager injected into pipeline |
-| R9 — Deterministic | Same chunks produce same assembled response |
-| R10 — Simpler Over Complex | Simple delta concatenation over complex state machines |
-| R13 — Design for Failure | Backpressure buffer prevents data loss |
-| R14 — Paved Path | Direct mode provides default streaming behavior |
-| R15 — Open/Closed | New provider stream formats added without manager changes |
+| R1 â€” Modulsingularity | Streaming Manager is the sole stream handler |
+| R2 â€” Dependency Order | Streaming depends on Provider SDK for chunk delivery |
+| R3 â€” DRY | Stream modes defined once (direct/buffered/hybrid) |
+| R4 â€” Builder Pattern | AssembledResponse built through stream assembly |
+| R5 â€” Liskov Substitution | All provider streams handled uniformly |
+| R6 â€” DI over Singletons | StreamingManager injected into pipeline |
+| R9 â€” Deterministic | Same chunks produce same assembled response |
+| R10 â€” Simpler Over Complex | Simple delta concatenation over complex state machines |
+| R13 â€” Design for Failure | Backpressure buffer prevents data loss |
+| R14 â€” Paved Path | Direct mode provides default streaming behavior |
+| R15 â€” Open/Closed | New provider stream formats added without manager changes |
 
 ## Related Documents
 
@@ -169,6 +169,6 @@ Final chunk contains:
 
 | Condition | Error Code | Behavior |
 |-----------|------------|----------|
-| Provider does not support streaming | — | Fall back to buffered mode |
-| Backpressure buffer overflow | — | Drop oldest non-tool chunks |
-| Mid-stream content filter trigger | — | Continue with finish_reason="content_filter" |
+| Provider does not support streaming | â€” | Fall back to buffered mode |
+| Backpressure buffer overflow | â€” | Drop oldest non-tool chunks |
+| Mid-stream content filter trigger | â€” | Continue with finish_reason="content_filter" |

@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 003 — Constraint Checker
+﻿# AIOS Bible â€” Brain
+## 003 â€” Constraint Checker
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Decision |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Decision |
 | Document ID | AIOS-BBL-002-DEC-003 |
-| Source Laws | Law 1 — Law of Strategic Autonomy, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 1 â€” Law of Strategic Autonomy, Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Constraint Checker evaluates decision options against hard and soft constraints. Hard constraints are gates — violated options are removed from consideration. Soft constraints apply score penalties. The Constraint Checker runs before the Scoring Engine so that disqualified options don't waste computation.
+The Constraint Checker evaluates decision options against hard and soft constraints. Hard constraints are gates â€” violated options are removed from consideration. Soft constraints apply score penalties. The Constraint Checker runs before the Scoring Engine so that disqualified options don't waste computation.
 
 Under DEC-003, hard constraints always remove non-compliant options before scoring begins.
 
@@ -30,8 +30,8 @@ DecisionConstraint {
   expression: string           // Constraint expression language
   description: string
   penalty?: {
-    weight: number             // 0.0–1.0, significance of this constraint
-    severity: number           // 0.0–1.0, how severely violated
+    weight: number             // 0.0â€“1.0, significance of this constraint
+    severity: number           // 0.0â€“1.0, how severely violated
   }
   category?: "resource" | "safety" | "capability" | "preference" | "policy"
   enabled: boolean
@@ -120,8 +120,8 @@ Boolean pass/fail. Failed = option eliminated from consideration.
 ```
 Hard Constraint Example:
   expression: "cost < 4096"
-  If cost = 5000 → FAIL → option removed
-  If cost = 3000 → PASS → option proceeds to scoring
+  If cost = 5000 â†’ FAIL â†’ option removed
+  If cost = 3000 â†’ PASS â†’ option proceeds to scoring
 ```
 
 Hard constraints are evaluated with short-circuit AND logic. If any hard constraint fails, remaining hard constraints for that option are skipped.
@@ -131,9 +131,9 @@ Hard constraints are evaluated with short-circuit AND logic. If any hard constra
 Score penalty applied to the weighted total. Penalty formula:
 
 ```
-penalty = weight × severity
+penalty = weight Ã— severity
 
-adjusted_score = weighted_score - (weighted_score × total_penalty)
+adjusted_score = weighted_score - (weighted_score Ã— total_penalty)
 ```
 
 | severity | Impact | Use Case |
@@ -192,13 +192,13 @@ attribute operator value
 ### Compound Expressions
 
 ```typescript
-// AND — all sub-expressions must pass
+// AND â€” all sub-expressions must pass
 "(cost < 4096) AND (safety == true) AND (modality in ['text', 'voice'])"
 
-// OR — at least one sub-expression passes
+// OR â€” at least one sub-expression passes
 "(language == 'python') OR (language == 'typescript') OR (language == 'go')"
 
-// NOT — negates a sub-expression
+// NOT â€” negates a sub-expression
 "NOT (cost > 10000)"
 
 // Nested compounds
@@ -219,41 +219,41 @@ attribute operator value
 ## Constraint Evaluation Pipeline
 
 ```
-                     ┌──────────────┐
-                     │  Expression  │
-                     │    String    │
-                     └──────┬───────┘
-                            │
-                            ▼
-                     ┌──────────────┐
-                     │    Parse     │
-                     │  Expression  │
-                     └──────┬───────┘
-                            │
-                            ▼
-                     ┌──────────────┐
-                     │   Resolve    │
-                     │  Attributes  │
-                     └──────┬───────┘
-                            │
-                            ▼
-                     ┌──────────────┐
-                     │   Coerce     │
-                     │    Types     │
-                     └──────┬───────┘
-                            │
-                            ▼
-                     ┌──────────────┐
-                     │   Evaluate   │
-                     │  Expression  │
-                     └──────┬───────┘
-                            │
-                            ▼
-                     ┌──────────────┐
-                     │    Return    │
-                     │  Constraint- │
-                     │   Result     │
-                     └──────────────┘
+                     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                     â”‚  Expression  â”‚
+                     â”‚    String    â”‚
+                     â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                            â”‚
+                            â–¼
+                     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                     â”‚    Parse     â”‚
+                     â”‚  Expression  â”‚
+                     â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                            â”‚
+                            â–¼
+                     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                     â”‚   Resolve    â”‚
+                     â”‚  Attributes  â”‚
+                     â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                            â”‚
+                            â–¼
+                     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                     â”‚   Coerce     â”‚
+                     â”‚    Types     â”‚
+                     â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                            â”‚
+                            â–¼
+                     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                     â”‚   Evaluate   â”‚
+                     â”‚  Expression  â”‚
+                     â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                            â”‚
+                            â–¼
+                     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                     â”‚    Return    â”‚
+                     â”‚  Constraint- â”‚
+                     â”‚   Result     â”‚
+                     â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Step 1: Parse Expression
@@ -281,7 +281,7 @@ The attribute name is looked up in `option.attributes`:
 
 ```
 Expression: "cost < 4096"
-Resolution: option.attributes["cost"] → 5000
+Resolution: option.attributes["cost"] â†’ 5000
 ```
 
 If an attribute is missing:
@@ -294,9 +294,9 @@ When types between the resolved attribute and expression value don't match:
 
 | Attribute Type | Expression Value | Coerced To | Example |
 |---------------|-----------------|------------|---------|
-| `string("5")` | `number(5)` | `number(5)` | `cost < 4096` with `cost: "3000"` → `3000 < 4096` |
-| `number(1)` | `boolean(true)` | `boolean(true)` | `active == true` with `active: 1` → `1 == 1` |
-| `string("true")` | `boolean(true)` | `boolean(true)` | `safety == true` with `safety: "true"` → `true == true` |
+| `string("5")` | `number(5)` | `number(5)` | `cost < 4096` with `cost: "3000"` â†’ `3000 < 4096` |
+| `number(1)` | `boolean(true)` | `boolean(true)` | `active == true` with `active: 1` â†’ `1 == 1` |
+| `string("true")` | `boolean(true)` | `boolean(true)` | `safety == true` with `safety: "true"` â†’ `true == true` |
 | `null` | any | `undefined` | Missing attribute treated as null |
 
 Coercion is configurable via `ConstraintConfig.enable_type_coercion`. When disabled, type mismatches produce a FAIL result.
@@ -347,20 +347,20 @@ Hard constraints are evaluated before scoring. The pipeline is:
 
 ```
 Option Set
-    │
-    ▼
+    â”‚
+    â–¼
 Evaluate All Hard Constraints (AND logic)
-    │
-    ├── All passed → proceed to scoring
-    │
-    └── Any failed → remove option, emit event
-                       │
-                       ▼
+    â”‚
+    â”œâ”€â”€ All passed â†’ proceed to scoring
+    â”‚
+    â””â”€â”€ Any failed â†’ remove option, emit event
+                       â”‚
+                       â–¼
                  Check if any options remain
-                       │
-                       ├── Yes → score remaining options
-                       │
-                       └── No → return DEC_ALL_ELIMINATED
+                       â”‚
+                       â”œâ”€â”€ Yes â†’ score remaining options
+                       â”‚
+                       â””â”€â”€ No â†’ return DEC_ALL_ELIMINATED
 ```
 
 ### Violation Handling
@@ -385,8 +385,8 @@ All hard constraints in a set must pass. The evaluation short-circuits on first 
 
 ```
 Hard Constraints: [c1, c2, c3]
-Option X: c1 → PASS, c2 → FAIL → skip c3, remove option X
-Option Y: c1 → PASS, c2 → PASS, c3 → PASS → option Y proceeds
+Option X: c1 â†’ PASS, c2 â†’ FAIL â†’ skip c3, remove option X
+Option Y: c1 â†’ PASS, c2 â†’ PASS, c3 â†’ PASS â†’ option Y proceeds
 ```
 
 ### Option Rejection Detail
@@ -407,16 +407,16 @@ OptionRejection {
 ### Penalty Formula
 
 ```
-penalty_per_constraint = weight × severity
+penalty_per_constraint = weight Ã— severity
 total_penalty = SUM(penalty_per_constraint) / number_of_soft_constraints
-adjusted_score = weighted_score × (1 - total_penalty)
+adjusted_score = weighted_score Ã— (1 - total_penalty)
 ```
 
 Where:
-- `weight` = significance of the constraint (0.0–1.0, defined on the constraint)
-- `severity` = how badly the constraint is violated (0.0–1.0)
-- `severity = 0.0` → no impact on score
-- `severity = 1.0` → maximum penalty (score multiplied by 1 - weight)
+- `weight` = significance of the constraint (0.0â€“1.0, defined on the constraint)
+- `severity` = how badly the constraint is violated (0.0â€“1.0)
+- `severity = 0.0` â†’ no impact on score
+- `severity = 1.0` â†’ maximum penalty (score multiplied by 1 - weight)
 
 ### Example
 
@@ -427,16 +427,16 @@ Attributes: { cost: 0.50, latency: 2000, modality: "text" }
 Soft constraint: "cost < 0.10"
   weight: 0.6
   severity: 1.0  (cost 0.50 is far above 0.10)
-  penalty: 0.6 × 1.0 = 0.6
+  penalty: 0.6 Ã— 1.0 = 0.6
 
 Soft constraint: "latency < 500"
   weight: 0.4
   severity: 0.8  (latency 2000 is well above 500)
-  penalty: 0.4 × 0.8 = 0.32
+  penalty: 0.4 Ã— 0.8 = 0.32
 
 total_penalty = (0.6 + 0.32) / 2 = 0.46
 weighted_score = 0.75
-adjusted_score = 0.75 × (1 - 0.46) = 0.405
+adjusted_score = 0.75 Ã— (1 - 0.46) = 0.405
 ```
 
 ### Severity Determination
@@ -447,8 +447,8 @@ Severity is calculated based on how far the attribute deviates from the constrai
 |-----------|----------|-------------|
 | Within bounds (passes) | 0.0 | No penalty |
 | Slight deviation (<10% over) | 0.25 | Close enough, minor penalty |
-| Moderate deviation (10–50% over) | 0.50 | Notable gap |
-| Large deviation (50–100% over) | 0.75 | Significant gap |
+| Moderate deviation (10â€“50% over) | 0.50 | Notable gap |
+| Large deviation (50â€“100% over) | 0.75 | Significant gap |
 | Extreme deviation (>100% over) | 1.0 | Maximum penalty |
 
 ### Reporting
@@ -624,38 +624,38 @@ SetEvaluationResult {
 
 ```
 DecisionRequest
-    │
-    ▼
-┌──────────────────┐
-│  Resolve         │ ← Expand named constraints from registry
-│  Constraints     │
-└──────┬───────────┘
-       │
-       ▼
-┌──────────────────┐
-│  Check Hard      │ ← Eliminate non-compliant options
-│  Constraints     │
-└──────┬───────────┘
-       │
-       ▼
-┌──────────────────┐
-│  [Scoring        │ ← Only remaining options scored
-│   Engine]        │
-└──────┬───────────┘
-       │
-       ▼
-┌──────────────────┐
-│  Apply Soft      │ ← Penalty subtracted from scores
-│  Penalties       │
-└──────┬───────────┘
-       │
-       ▼
-┌──────────────────┐
-│  [Trade-off      │
-│   Analyzer]      │
-└──────┬───────────┘
-       │
-       ▼
+    â”‚
+    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Resolve         â”‚ â† Expand named constraints from registry
+â”‚  Constraints     â”‚
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+       â”‚
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Check Hard      â”‚ â† Eliminate non-compliant options
+â”‚  Constraints     â”‚
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+       â”‚
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  [Scoring        â”‚ â† Only remaining options scored
+â”‚   Engine]        â”‚
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+       â”‚
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Apply Soft      â”‚ â† Penalty subtracted from scores
+â”‚  Penalties       â”‚
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+       â”‚
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  [Trade-off      â”‚
+â”‚   Analyzer]      â”‚
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+       â”‚
+       â–¼
   Recommendation
   (with constraint
    results attached)
@@ -664,26 +664,26 @@ DecisionRequest
 ### Data Flow
 
 ```
-DecisionRequest.options  ──►  checkConstraints()
-                                    │
-                                    ├── For each option:
-                                    │     ├── For each hard constraint:
-                                    │     │     └── evaluateConstraint() → ConstraintResult
-                                    │     │           ├── passed → next constraint
-                                    │     │           └── failed → emit DEC.ConstraintViolated
-                                    │     │                     → add to violated_constraints
-                                    │     │                     → mark option eliminated
-                                    │     │
-                                    │     └── For each soft constraint:
-                                    │           └── evaluateConstraint() → ConstraintResult
-                                    │                 ├── passed → no penalty
-                                    │                 └── failed → calculate penalty
-                                    │
-                                    └── Return ConstraintCheckResult
-                                          ├── violation_reports[]
-                                          ├── eliminated_options[]
-                                          ├── remaining_options[]
-                                          └── summary
+DecisionRequest.options  â”€â”€â–º  checkConstraints()
+                                    â”‚
+                                    â”œâ”€â”€ For each option:
+                                    â”‚     â”œâ”€â”€ For each hard constraint:
+                                    â”‚     â”‚     â””â”€â”€ evaluateConstraint() â†’ ConstraintResult
+                                    â”‚     â”‚           â”œâ”€â”€ passed â†’ next constraint
+                                    â”‚     â”‚           â””â”€â”€ failed â†’ emit DEC.ConstraintViolated
+                                    â”‚     â”‚                     â†’ add to violated_constraints
+                                    â”‚     â”‚                     â†’ mark option eliminated
+                                    â”‚     â”‚
+                                    â”‚     â””â”€â”€ For each soft constraint:
+                                    â”‚           â””â”€â”€ evaluateConstraint() â†’ ConstraintResult
+                                    â”‚                 â”œâ”€â”€ passed â†’ no penalty
+                                    â”‚                 â””â”€â”€ failed â†’ calculate penalty
+                                    â”‚
+                                    â””â”€â”€ Return ConstraintCheckResult
+                                          â”œâ”€â”€ violation_reports[]
+                                          â”œâ”€â”€ eliminated_options[]
+                                          â”œâ”€â”€ remaining_options[]
+                                          â””â”€â”€ summary
 ```
 
 ## Events
@@ -705,13 +705,13 @@ DecisionRequest.options  ──►  checkConstraints()
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| DEC-003 | Hard constraints always remove non-compliant options before scoring | Algorithmic — checked before scoring |
-| DEC-003a | Soft constraints never eliminate options | Algorithmic — soft violations only affect score |
-| DEC-003b | Constraint evaluation is deterministic — same inputs always produce same results | Algorithmic — no random or time-based factors |
-| DEC-003c | A missing attribute in a hard constraint defaults to FAIL | Algorithmic — cannot validate what isn't present |
-| DEC-003d | All hard constraints within a set use AND logic unless explicitly configured as OR | Config — constraint_set.logic defaults to "and" |
-| DEC-003e | Named constraints are immutable after registration (register once, read-only afterward) | Architectural — registry returns copies, not references |
-| DEC-003f | A constraint expression that fails to parse is treated as a hard FAIL | Error handling — parse failure = cannot validate |
+| DEC-003 | Hard constraints always remove non-compliant options before scoring | Algorithmic â€” checked before scoring |
+| DEC-003a | Soft constraints never eliminate options | Algorithmic â€” soft violations only affect score |
+| DEC-003b | Constraint evaluation is deterministic â€” same inputs always produce same results | Algorithmic â€” no random or time-based factors |
+| DEC-003c | A missing attribute in a hard constraint defaults to FAIL | Algorithmic â€” cannot validate what isn't present |
+| DEC-003d | All hard constraints within a set use AND logic unless explicitly configured as OR | Config â€” constraint_set.logic defaults to "and" |
+| DEC-003e | Named constraints are immutable after registration (register once, read-only afterward) | Architectural â€” registry returns copies, not references |
+| DEC-003f | A constraint expression that fails to parse is treated as a hard FAIL | Error handling â€” parse failure = cannot validate |
 
 ## Error Cases
 
@@ -742,7 +742,7 @@ Constraints:
 Result:
   - Llama eliminated (cost = 5000, exceeds budget)
   - Mistral eliminated (safety == false)
-  - GPT-4 and Claude pass → proceed to scoring
+  - GPT-4 and Claude pass â†’ proceed to scoring
 ```
 
 ### Pattern 2: Soft Preference Tuning
@@ -752,13 +752,13 @@ Goal: Choose a search strategy
 Options: [broad_search, deep_search, targeted_search]
 
 Constraints:
-  - Soft: "latency < 500"       (weight: 0.7) — prefer fast
-  - Soft: "depth > 0.8"         (weight: 0.3) — prefer thorough
+  - Soft: "latency < 500"       (weight: 0.7) â€” prefer fast
+  - Soft: "depth > 0.8"         (weight: 0.3) â€” prefer thorough
 
 Result:
-  - broad_search: low latency (pass soft), low depth (penalty 0.3 × 0.6 = 0.18)
-  - deep_search: high latency (penalty 0.7 × 0.8 = 0.56), high depth (pass)
-  - targeted_search: moderate latency (penalty 0.7 × 0.3 = 0.21), moderate depth (penalty 0.3 × 0.2 = 0.06)
+  - broad_search: low latency (pass soft), low depth (penalty 0.3 Ã— 0.6 = 0.18)
+  - deep_search: high latency (penalty 0.7 Ã— 0.8 = 0.56), high depth (pass)
+  - targeted_search: moderate latency (penalty 0.7 Ã— 0.3 = 0.21), moderate depth (penalty 0.3 Ã— 0.2 = 0.06)
 
 All options survive to scoring, but soft penalties adjust their final ranks.
 ```
@@ -824,17 +824,17 @@ Named constraints are resolved from registry, evaluated against option attribute
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Constraint Checker evaluates constraints; it does not score or trade off |
-| R2 — Dependency Order | Depends on Expression Parser and Constraint Registry; no upward deps |
-| R3 — DRY | Constraint expressions defined once, reusable via named constraints |
-| R4 — Builder Pattern | Result built by pipeline: Parse → Resolve → Coerce → Evaluate → Report |
-| R5 — Liskov Substitution | Any ConstraintExpression implements evaluate() returning ConstraintResult |
-| R6 — DI over Singletons | ConstraintChecker receives registry and config via injection |
-| R9 — Deterministic | Same expression + same attributes = same result every time |
-| R10 — Simpler Over Complex | Expression language is predicate-based; no AST manipulation exposed |
-| R13 — Design for Failure | Parse failures → FAIL; missing attributes → FAIL; timeout → FAIL |
-| R14 — Paved Path | All evaluation flows through checkConstraints() |
-| R15 — Open/Closed | New operators and constraint types added via registry, not by modifying evaluator |
+| R1 â€” Modulsingularity | Constraint Checker evaluates constraints; it does not score or trade off |
+| R2 â€” Dependency Order | Depends on Expression Parser and Constraint Registry; no upward deps |
+| R3 â€” DRY | Constraint expressions defined once, reusable via named constraints |
+| R4 â€” Builder Pattern | Result built by pipeline: Parse â†’ Resolve â†’ Coerce â†’ Evaluate â†’ Report |
+| R5 â€” Liskov Substitution | Any ConstraintExpression implements evaluate() returning ConstraintResult |
+| R6 â€” DI over Singletons | ConstraintChecker receives registry and config via injection |
+| R9 â€” Deterministic | Same expression + same attributes = same result every time |
+| R10 â€” Simpler Over Complex | Expression language is predicate-based; no AST manipulation exposed |
+| R13 â€” Design for Failure | Parse failures â†’ FAIL; missing attributes â†’ FAIL; timeout â†’ FAIL |
+| R14 â€” Paved Path | All evaluation flows through checkConstraints() |
+| R15 â€” Open/Closed | New operators and constraint types added via registry, not by modifying evaluator |
 
 ## Related Documents
 

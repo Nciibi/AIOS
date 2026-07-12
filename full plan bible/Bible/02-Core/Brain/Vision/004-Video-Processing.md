@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 004 — Video Processor
+﻿# AIOS Bible â€” Brain
+## 004 â€” Video Processor
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Vision |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Vision |
 | Document ID | AIOS-BBL-002-VIS-004 |
-| Source Laws | Law 4 — Law of Evidence, Law 3 — Law of Communication |
+| Source Laws | Law 4 â€” Law of Evidence, Law 3 â€” Law of Communication |
 | Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Video Processor analyzes video content by selecting representative frames, detecting key events, and producing summaries. It supports three analysis modes (summarize, detect, stream) and four frame selection strategies (uniform, scene-change, motion-based, custom). Video processing enables Sou to understand temporal visual content — meetings, surveillance footage, recordings, and live streams — without processing every frame.
+The Video Processor analyzes video content by selecting representative frames, detecting key events, and producing summaries. It supports three analysis modes (summarize, detect, stream) and four frame selection strategies (uniform, scene-change, motion-based, custom). Video processing enables Sou to understand temporal visual content â€” meetings, surveillance footage, recordings, and live streams â€” without processing every frame.
 
 Under VIS-007, video analysis always respects a configurable frame limit (`max_frames`) to prevent unbounded processing. Under VIS-003, video frames are ephemeral unless explicitly stored.
 
@@ -82,7 +82,7 @@ VideoEvent {
   timestamp_ms: number
   event_type: string               // e.g. "person_enters", "object_appears", "scene_change"
   description: string
-  confidence: number               // 0.0–1.0
+  confidence: number               // 0.0â€“1.0
   frame: ImageInput                // Representative frame of the event
   duration_ms?: number             // How long the event lasted
   bounding_boxes?: BoundingBox[]   // Relevant objects in the event frame
@@ -131,8 +131,8 @@ VideoConfig {
   frame_selection: {
     strategy: "uniform" | "scene-change" | "motion-based" | "custom"
     interval_ms?: number           // For uniform sampling
-    scene_change_threshold?: number // For scene-change detection (0.0–1.0)
-    motion_threshold?: number      // For motion-based detection (0.0–1.0)
+    scene_change_threshold?: number // For scene-change detection (0.0â€“1.0)
+    motion_threshold?: number      // For motion-based detection (0.0â€“1.0)
     custom_timestamps_ms?: number[] // For custom strategy
   }
   event_detection: {
@@ -162,23 +162,23 @@ The Video Processor supports three analysis modes:
 
 | Mode | Behavior | Frame Selection | Output | Use Case |
 |------|----------|----------------|--------|----------|
-| Summarize | Sample frames → describe key events | Automatic | Summary + key events + frame summaries | Meeting recording review |
+| Summarize | Sample frames â†’ describe key events | Automatic | Summary + key events + frame summaries | Meeting recording review |
 | Detect | Monitor for specific events/objects | Event-driven | Key events with timestamps | Security camera monitoring |
 | Stream | Real-time frame-by-frame analysis | Continuous | AsyncIterable of frame events | Live video processing |
 
 ```
 Summarize:
-  Video → [Frame Selector] → selected frames → [Scene Describer per frame]
-       → [Event Detector] → key_events[] + summary
+  Video â†’ [Frame Selector] â†’ selected frames â†’ [Scene Describer per frame]
+       â†’ [Event Detector] â†’ key_events[] + summary
 
 Detect:
-  Video → [Frame Selector (event-driven)] → candidate frames
-       → [Event Matcher] → matching key_events[]
+  Video â†’ [Frame Selector (event-driven)] â†’ candidate frames
+       â†’ [Event Matcher] â†’ matching key_events[]
 
 Stream:
-  Video stream → [Frame Selector (continuous)]
-       → AsyncIterable → each frame analyzed in real-time
-       → events emitted as they occur
+  Video stream â†’ [Frame Selector (continuous)]
+       â†’ AsyncIterable â†’ each frame analyzed in real-time
+       â†’ events emitted as they occur
 ```
 
 ### Frame Selection Strategies
@@ -188,8 +188,8 @@ The frame selection strategy determines which frames from the video are analyzed
 | Strategy | Algorithm | Best For | Caveats |
 |----------|-----------|----------|---------|
 | Uniform | Pick every Nth frame based on `interval_ms` | General summarization | Can miss brief events |
-| Scene-change | Detect cuts/transitions → sample frames after each change | Lectures, presentations | May miss gradual changes |
-| Motion-based | Analyze motion vectors → sample on significant motion | Surveillance footage | Higher computational cost |
+| Scene-change | Detect cuts/transitions â†’ sample frames after each change | Lectures, presentations | May miss gradual changes |
+| Motion-based | Analyze motion vectors â†’ sample on significant motion | Surveillance footage | Higher computational cost |
 | Custom | Use user-provided timestamp array | Specific frame timing | Requires prior knowledge |
 
 ```
@@ -217,14 +217,14 @@ Algorithm:
   1. Analyze each selected frame via Image Analysis
   2. Compare consecutive frame descriptions
   3. Detect significant changes:
-     ┌────────────────────────────────┐
-     │ New object/person appears      │ → "person_enters"
-     │ Object/person disappears       │ → "person_exits"
-     │ Scene context changes          │ → "scene_change"
-     │ Action state changes           │ → "action_transition"
-     │ Text on screen changes         │ → "text_change"
-     │ User-defined pattern matched   │ → "custom_event"
-     └────────────────────────────────┘
+     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+     â”‚ New object/person appears      â”‚ â†’ "person_enters"
+     â”‚ Object/person disappears       â”‚ â†’ "person_exits"
+     â”‚ Scene context changes          â”‚ â†’ "scene_change"
+     â”‚ Action state changes           â”‚ â†’ "action_transition"
+     â”‚ Text on screen changes         â”‚ â†’ "text_change"
+     â”‚ User-defined pattern matched   â”‚ â†’ "custom_event"
+     â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
   4. Group related detections into events
   5. Filter by min_confidence
   6. Assign event_type from detected pattern
@@ -235,17 +235,17 @@ Algorithm:
 Summarization produces a condensed textual overview:
 
 ```
-Raw frames → individual descriptions
-     │
-     ▼
+Raw frames â†’ individual descriptions
+     â”‚
+     â–¼
 Concatenate into transcript
-     │
-     ▼
+     â”‚
+     â–¼
 LLMOS summarization call:
   "Summarize the following video frame descriptions into
    a coherent narrative of key moments..."
-     │
-     ▼
+     â”‚
+     â–¼
 Summary output + key event timeline + frame summaries
 ```
 
@@ -258,18 +258,18 @@ Selection before enforcement:
   Strategy estimates N candidate frames
 
 If N > max_frames:
-  ┌─────────────────────────────────────┐
-  │ Uniform:   Increase interval_ms      │
-  │ Scene-change: Raise threshold        │
-  │ Motion-based: Raise motion_threshold │
-  │ Custom:    Take first max_frames     │
-  └─────────────────────────────────────┘
+  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+  â”‚ Uniform:   Increase interval_ms      â”‚
+  â”‚ Scene-change: Raise threshold        â”‚
+  â”‚ Motion-based: Raise motion_threshold â”‚
+  â”‚ Custom:    Take first max_frames     â”‚
+  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
   If strategy adjustment still exceeds max_frames:
-    → Subsample uniformly to max_frames
-    → Log frame_limit_reached warning
+    â†’ Subsample uniformly to max_frames
+    â†’ Log frame_limit_reached warning
 
-Result: frames_selected ≤ max_frames always
+Result: frames_selected â‰¤ max_frames always
 ```
 
 ### Streaming Video Analysis
@@ -278,26 +278,26 @@ Streaming mode processes frames in real-time:
 
 ```
 Stream Start
-    │
-    ▼
+    â”‚
+    â–¼
 Establish connection to stream endpoint
-    │
-    ▼
+    â”‚
+    â–¼
 Frame buffer (ring buffer, capacity = max_frames)
-    │
-    ▼
+    â”‚
+    â–¼
 For each frame:
-    ├── Apply frame selection strategy
-    ├── Analyze frame (Image Analysis)
-    ├── Detect events
-    ├── Emit VIS.VideoFrameAnalyzed
-    └── If event detected:
-          └── Emit event via AsyncIterable
-    │
-    ▼
+    â”œâ”€â”€ Apply frame selection strategy
+    â”œâ”€â”€ Analyze frame (Image Analysis)
+    â”œâ”€â”€ Detect events
+    â”œâ”€â”€ Emit VIS.VideoFrameAnalyzed
+    â””â”€â”€ If event detected:
+          â””â”€â”€ Emit event via AsyncIterable
+    â”‚
+    â–¼
 Stream End
-    │
-    └── Emit VIS.VideoProcessingCompleted
+    â”‚
+    â””â”€â”€ Emit VIS.VideoProcessingCompleted
 ```
 
 ### Timestamp-Based Event Tracking
@@ -306,16 +306,16 @@ Every event is anchored to its video timestamp:
 
 ```
 Event Timeline:
-0:00 ────────────────────────────────────── duration_ms
-      │     │              │         │
-      ▼     ▼              ▼         ▼
+0:00 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ duration_ms
+      â”‚     â”‚              â”‚         â”‚
+      â–¼     â–¼              â–¼         â–¼
      Person enters    Scene change   Person exits
      (0:03)           (1:15)        (2:30)
 
 Query patterns:
-  getEventsBetween(0:00, 1:00) → events in first minute
-  getEventsByType("person_enters") → all entry events
-  getEventsAfter(timestamp) → events after a point
+  getEventsBetween(0:00, 1:00) â†’ events in first minute
+  getEventsByType("person_enters") â†’ all entry events
+  getEventsAfter(timestamp) â†’ events after a point
 ```
 
 ## Internal Interface
@@ -440,14 +440,14 @@ interface StreamEvent {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| VID-001 | Frames analyzed never exceeds max_frames | Algorithmic — VIS-007 hard cap enforced during selection |
-| VID-002 | Every key event has a timestamp and representative frame | Schema — timestamp_ms and frame are required |
-| VID-003 | Frame summaries are generated in chronological order | Algorithmic — frame pipeline preserves order |
-| VID-004 | Event detection uses a cooldown period to prevent duplicate events | Algorithmic — cooldown_ms enforced between same-type events |
-| VID-005 | Streaming analysis is always cancellable | Architectural — StreamHandler supports disconnect |
-| VID-006 | Frame buffer is a ring buffer with bounded capacity | Algorithmic — buffer never exceeds max_frames |
-| VID-007 | Summarization only runs on frames that were actually analyzed | Algorithmic — summarization input is frame analysis output |
-| VID-008 | Video data is ephemeral unless explicitly stored to Memory OS | Architectural — stateless per VIS-003 |
+| VID-001 | Frames analyzed never exceeds max_frames | Algorithmic â€” VIS-007 hard cap enforced during selection |
+| VID-002 | Every key event has a timestamp and representative frame | Schema â€” timestamp_ms and frame are required |
+| VID-003 | Frame summaries are generated in chronological order | Algorithmic â€” frame pipeline preserves order |
+| VID-004 | Event detection uses a cooldown period to prevent duplicate events | Algorithmic â€” cooldown_ms enforced between same-type events |
+| VID-005 | Streaming analysis is always cancellable | Architectural â€” StreamHandler supports disconnect |
+| VID-006 | Frame buffer is a ring buffer with bounded capacity | Algorithmic â€” buffer never exceeds max_frames |
+| VID-007 | Summarization only runs on frames that were actually analyzed | Algorithmic â€” summarization input is frame analysis output |
+| VID-008 | Video data is ephemeral unless explicitly stored to Memory OS | Architectural â€” stateless per VIS-003 |
 
 ## Error Cases
 
@@ -469,17 +469,17 @@ interface StreamEvent {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Video Processor handles only video content analysis |
-| R2 — Dependency Order | Depends on Image Analysis, LLMOS; no upward deps |
-| R3 — DRY | Frame models and config defined once in Vision Model |
-| R4 — Builder Pattern | Analysis built by Frame Selector → Analyzer → Event Detector |
-| R5 — Liskov Substitution | Any FrameSelector, EventDetector implements its interface |
-| R6 — DI over Singletons | Frame selectors, event detectors, stream handlers injected |
-| R9 — Deterministic | Same video + config produces same events (model-dependent) |
-| R10 — Simpler Over Complex | Three modes; frame selection decoupled from analysis |
-| R13 — Design for Failure | Frame skip on timeout; partial results; stream reconnect |
-| R14 — Paved Path | All video analysis flows through `analyze()` |
-| R15 — Open/Closed | New frame selection strategies added via FrameSelector |
+| R1 â€” Modulsingularity | Video Processor handles only video content analysis |
+| R2 â€” Dependency Order | Depends on Image Analysis, LLMOS; no upward deps |
+| R3 â€” DRY | Frame models and config defined once in Vision Model |
+| R4 â€” Builder Pattern | Analysis built by Frame Selector â†’ Analyzer â†’ Event Detector |
+| R5 â€” Liskov Substitution | Any FrameSelector, EventDetector implements its interface |
+| R6 â€” DI over Singletons | Frame selectors, event detectors, stream handlers injected |
+| R9 â€” Deterministic | Same video + config produces same events (model-dependent) |
+| R10 â€” Simpler Over Complex | Three modes; frame selection decoupled from analysis |
+| R13 â€” Design for Failure | Frame skip on timeout; partial results; stream reconnect |
+| R14 â€” Paved Path | All video analysis flows through `analyze()` |
+| R15 â€” Open/Closed | New frame selection strategies added via FrameSelector |
 
 ## Related Documents
 

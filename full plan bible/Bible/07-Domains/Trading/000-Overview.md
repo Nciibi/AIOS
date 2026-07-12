@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Trading — 000: Overview
+﻿# AIOS Bible â€” Domains
+## Trading â€” 000: Overview
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-TRD-000 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Trading domain enables AIOS to develop, backtest, deploy, and monitor automated financial trading strategies — across equities, futures, options, forex, and cryptocurrency markets. It provides the capability set for strategy research, quantitative model development, risk management, order execution, and portfolio management.
+The Trading domain enables AIOS to develop, backtest, deploy, and monitor automated financial trading strategies â€” across equities, futures, options, forex, and cryptocurrency markets. It provides the capability set for strategy research, quantitative model development, risk management, order execution, and portfolio management.
 
 Trading is a domain where speed, accuracy, and risk management are paramount. Financial markets operate under strict regulatory regimes, and trading errors can have significant financial consequences. The Trading domain therefore emphasizes simulation-first validation, strict capability bounds on order sizes and instruments, comprehensive audit trails, and compliance with jurisdictional regulations.
 
@@ -51,16 +51,16 @@ The Trading domain provides the following capability groups:
 Trading strategies follow a rigorous validation lifecycle:
 
 ```
-Idea → Research → Backtest → Paper Trade → Deploy → Monitor → Retire
+Idea â†’ Research â†’ Backtest â†’ Paper Trade â†’ Deploy â†’ Monitor â†’ Retire
 ```
 
 | Phase | Description | Verification Required |
 |-------|-------------|----------------------|
 | Idea | Strategy concept defined | Peer review (ResearchWorker) |
 | Research | Hypothesis tested on historical data | Statistical significance verified |
-| Backtest | Full historical simulation with realistic costs | DTS confidence ≥ 0.7 |
-| Paper Trade | Live market simulation without real capital | DTS confidence ≥ 0.8 |
-| Deploy | Live trading with real capital, bounded position | DTS confidence ≥ 0.9 + RiskWorker approval |
+| Backtest | Full historical simulation with realistic costs | DTS confidence â‰¥ 0.7 |
+| Paper Trade | Live market simulation without real capital | DTS confidence â‰¥ 0.8 |
+| Deploy | Live trading with real capital, bounded position | DTS confidence â‰¥ 0.9 + RiskWorker approval |
 | Monitor | Ongoing performance tracking | Daily risk checks |
 | Retire | Strategy decommissioned | Performance degradation or regime change |
 
@@ -85,15 +85,15 @@ All risk limits are enforced by ROS budget allocation. A trade that would violat
 
 ## Invariants
 
-1. **TRD-I-001 — Simulation Before Capital**: No strategy may trade with real capital without passing backtest AND paper trading phases. Backtest-only strategies are research artifacts, not deployable strategies.
+1. **TRD-I-001 â€” Simulation Before Capital**: No strategy may trade with real capital without passing backtest AND paper trading phases. Backtest-only strategies are research artifacts, not deployable strategies.
 
-2. **TRD-I-002 — Hard Risk Limits**: Risk limits are enforced at the ROS allocation level. A trade that would violate a position, drawdown, or concentration limit is rejected before reaching the exchange. Software overrides are prohibited.
+2. **TRD-I-002 â€” Hard Risk Limits**: Risk limits are enforced at the ROS allocation level. A trade that would violate a position, drawdown, or concentration limit is rejected before reaching the exchange. Software overrides are prohibited.
 
-3. **TRD-I-003 — Complete Audit Trail**: Every order, fill, rejection, and risk event is recorded in the Event Store. The complete trade lifecycle for every order must be reconstructable from Events.
+3. **TRD-I-003 â€” Complete Audit Trail**: Every order, fill, rejection, and risk event is recorded in the Event Store. The complete trade lifecycle for every order must be reconstructable from Events.
 
-4. **TRD-I-004 — Market Data Integrity**: All market data used for decision-making must be validated before use. Stale, missing, or obviously erroneous data must be handled through defined degraded modes.
+4. **TRD-I-004 â€” Market Data Integrity**: All market data used for decision-making must be validated before use. Stale, missing, or obviously erroneous data must be handled through defined degraded modes.
 
-5. **TRD-I-005 — Best Execution**: Orders must be routed to achieve best execution considering price, speed, and likelihood of execution. Order routing decisions are recorded and auditable.
+5. **TRD-I-005 â€” Best Execution**: Orders must be routed to achieve best execution considering price, speed, and likelihood of execution. Order routing decisions are recorded and auditable.
 
 ## Edge Cases
 
@@ -123,15 +123,15 @@ All risk limits are enforced by ROS budget allocation. A trade that would violat
 
 ### Security
 
-Trading Workers operate in sandboxed environments with no direct exchange access — all orders pass through the ExecutionWorker which enforces risk limits. API keys and exchange credentials are managed by KMS and never exposed to strategy Workers. Order placement is authenticated and authorized per trade. (Physics/008-Security.md)
+Trading Workers operate in sandboxed environments with no direct exchange access â€” all orders pass through the ExecutionWorker which enforces risk limits. API keys and exchange credentials are managed by KMS and never exposed to strategy Workers. Order placement is authenticated and authorized per trade. (Physics/008-Security.md)
 
 ### Evidence
 
-Every trading operation produces an Event — research, backtest, paper trade, order placement, fill, and risk check. The complete trade lifecycle is recorded in the Event Store for audit, compliance, and post-trade analysis. Strategy performance evidence feeds into Academy knowledge. (PHI-008)
+Every trading operation produces an Event â€” research, backtest, paper trade, order placement, fill, and risk check. The complete trade lifecycle is recorded in the Event Store for audit, compliance, and post-trade analysis. Strategy performance evidence feeds into Academy knowledge. (PHI-008)
 
 ### Lifecycle
 
-Trading Workers follow the canonical Worker lifecycle. Strategies follow the trading strategy lifecycle. Backtests and paper trades are batch jobs. Live trading sessions follow an operational lifecycle (Market Open → Active → Market Close → Settlement). (Physics/006-Lifecycles.md)
+Trading Workers follow the canonical Worker lifecycle. Strategies follow the trading strategy lifecycle. Backtests and paper trades are batch jobs. Live trading sessions follow an operational lifecycle (Market Open â†’ Active â†’ Market Close â†’ Settlement). (Physics/006-Lifecycles.md)
 
 ### Capability Bounds
 
@@ -139,7 +139,7 @@ Trading capabilities are bounded by instrument authorization, position limits, a
 
 ### Communication
 
-All Trading domain communication flows through ACF. Market data arrives through ACF from exchange feed providers. Orders are submitted through ACF to execution gateways. Risk alerts are high-priority ACF messages delivered to the RiskWorker and Security Council. (Law 3 — Communication)
+All Trading domain communication flows through ACF. Market data arrives through ACF from exchange feed providers. Orders are submitted through ACF to execution gateways. Risk alerts are high-priority ACF messages delivered to the RiskWorker and Security Council. (Law 3 â€” Communication)
 
 ### Design DNA
 
@@ -148,9 +148,9 @@ All Trading domain communication flows through ACF. Market data arrives through 
 | R1 (Modulsingularity) | Each trading capability (research, model, backtest, risk, execute, portfolio) is separate |
 | R5 (Liskov) | All exchange adapters implement the ExchangeInterface |
 | R9 (Deterministic) | Same strategy and market data produces identical backtest results |
-| R10 (Simpler Over Complex) | Strategy deployment follows linear lifecycle — no shortcuts |
+| R10 (Simpler Over Complex) | Strategy deployment follows linear lifecycle â€” no shortcuts |
 | R13 (Design for Failure) | Order failures trigger automatic position reconciliation; exchange disconnects trigger circuit breaker |
-| R14 (Paved Path) | Paved path: research → backtest → paper → deploy → monitor → retire |
+| R14 (Paved Path) | Paved path: research â†’ backtest â†’ paper â†’ deploy â†’ monitor â†’ retire |
 
 ## Performance Characteristics
 
@@ -159,7 +159,7 @@ All Trading domain communication flows through ACF. Market data arrives through 
 | Strategy research | < 60 minutes | 4 hours |
 | Backtest (1 year, 1 instrument) | < 5 minutes | 15 minutes |
 | Backtest (5 years, 50 instruments) | < 30 minutes | 2 hours |
-| Paper trade (per session) | 1–30 days | N/A (calendar-based) |
+| Paper trade (per session) | 1â€“30 days | N/A (calendar-based) |
 | Order placement latency | < 50ms | 500ms |
 | Order fill confirmation | < 100ms | 1 second |
 | Risk check (pre-trade) | < 10ms | 50ms |
@@ -170,18 +170,18 @@ All Trading domain communication flows through ACF. Market data arrives through 
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/0005-Domain-Architecture.md | Domain Architecture — Trading domain structure |
-| Physics/005-Events.md | Evidence — Trading operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — Trading capability bounds and risk limits |
-| Physics/012-Experience.md | Experience — Trading outcomes drive strategy improvement |
-| Bible/02-Core/Sou/002-Planner.md | Planner — Sou produces trading strategy research plans |
-| Bible/02-Core/AGS/000-Overview.md | AGS — TradingWorker and ExecutionWorker Genome templates |
-| Bible/02-Core/Academy/000-Overview.md | Academy — Strategy and market model knowledge management |
-| Bible/02-Core/DTS/000-Overview.md | DTS — Strategy confidence scoring and backtest validation |
-| Bible/02-Core/ROS/000-Overview.md | ROS — Capital allocation and position sizing |
-| Bible/06-Services/ACF/000-Overview.md | ACF — Market data and order transport |
-| Bible/06-Services/Cryptography/KMS/000-KMS.md | KMS — Exchange credential management |
-| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — Exchange connectivity provider |
-| Bible/08-Interfaces/API/000-Specifications.md | API — Market data API contract specifications |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Bible/0005-Domain-Architecture.md | Domain Architecture â€” Trading domain structure |
+| Physics/005-Events.md | Evidence â€” Trading operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” Trading capability bounds and risk limits |
+| Physics/012-Experience.md | Experience â€” Trading outcomes drive strategy improvement |
+| Bible/02-Core/Sou/002-Planner.md | Planner â€” Sou produces trading strategy research plans |
+| Bible/02-Core/AGS/000-Overview.md | AGS â€” TradingWorker and ExecutionWorker Genome templates |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” Strategy and market model knowledge management |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” Strategy confidence scoring and backtest validation |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” Capital allocation and position sizing |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” Market data and order transport |
+| Bible/06-Services/Cryptography/KMS/000-KMS.md | KMS â€” Exchange credential management |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK â€” Exchange connectivity provider |
+| Bible/08-Interfaces/API/000-Specifications.md | API â€” Market data API contract specifications |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

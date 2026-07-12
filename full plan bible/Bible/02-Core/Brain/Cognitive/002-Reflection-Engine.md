@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 002 — Reflection Engine
+﻿# AIOS Bible â€” Brain
+## 002 â€” Reflection Engine
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Cognitive |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Cognitive |
 | Document ID | AIOS-BBL-002-COG-002 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/005-Events.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Reflection Engine enables Sou to reason about past experiences and outcomes. It implements 5 reflection types — outcome analysis, mistake analysis, success analysis, bias detection, and learning extraction — that consume episodic memory and produce structured lessons, bias reports, and pattern insights. Reflection results are stored in the Evidence Store and inform future reasoning, metacognition, and Academy learning.
+The Reflection Engine enables Sou to reason about past experiences and outcomes. It implements 5 reflection types â€” outcome analysis, mistake analysis, success analysis, bias detection, and learning extraction â€” that consume episodic memory and produce structured lessons, bias reports, and pattern insights. Reflection results are stored in the Evidence Store and inform future reasoning, metacognition, and Academy learning.
 
 ## Data Model
 
@@ -52,7 +52,7 @@ ReflectionOutput {
   lessons: Lesson[]
   patterns: Pattern[]
   biases_detected: DetectedBias[]
-  confidence: number                   // 0.0–1.0
+  confidence: number                   // 0.0â€“1.0
   alternative_interpretations: string[]
   metadata: {
     reflection_depth: "quick" | "deep"
@@ -79,7 +79,7 @@ Lesson {
   content: string                      // Actionable lesson statement
   severity: "info" | "warning" | "critical"
   applicability: string[]              // Tags for when this lesson applies
-  generalizability: number             // 0.0 (specific) – 1.0 (universal)
+  generalizability: number             // 0.0 (specific) â€“ 1.0 (universal)
   source_experience_id: string
   created_at: timestamp
   evidence_strength: number            // How well supported this lesson is
@@ -96,7 +96,7 @@ Pattern {
   type: "behavioral" | "cognitive" | "outcome" | "error"
   description: string
   occurrences: number                  // How many times this pattern observed
-  frequency: number                    // 0.0–1.0 (how often it manifests)
+  frequency: number                    // 0.0â€“1.0 (how often it manifests)
   evidence_ids: string[]               // Supporting experiences
   confidence: number                   // Pattern detection confidence
   hypothesis: string                   // Tentative explanation
@@ -134,23 +134,23 @@ DetectedBias {
 ### 2. Input from Episodic Memory
 
 ```
-Episodic Memory ──► Experience Record
-                        │
-                        ├── experience_id
-                        ├── session_id
-                        ├── goal
-                        ├── decisions_made
-                        ├── actions_taken
-                        ├── outcome
-                        ├── reasoning_chain_id
-                        ├── evidence_used
-                        └── metadata (importance, recency)
-                              │
-                              ▼
+Episodic Memory â”€â”€â–º Experience Record
+                        â”‚
+                        â”œâ”€â”€ experience_id
+                        â”œâ”€â”€ session_id
+                        â”œâ”€â”€ goal
+                        â”œâ”€â”€ decisions_made
+                        â”œâ”€â”€ actions_taken
+                        â”œâ”€â”€ outcome
+                        â”œâ”€â”€ reasoning_chain_id
+                        â”œâ”€â”€ evidence_used
+                        â””â”€â”€ metadata (importance, recency)
+                              â”‚
+                              â–¼
                     Reflection Engine
-                              │
-                    ┌─────────┴─────────┐
-                    │                   │
+                              â”‚
+                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                    â”‚                   â”‚
               Single experience      Batch (N experiences)
               (detailed)             (pattern detection)
 ```
@@ -180,37 +180,37 @@ ReflectionOutput {
 ### 4. Lesson Extraction Pipeline
 
 ```
-Experience → Analyze → Identify cause/effect → Formulate lesson
-                                                    │
-                                          ┌─────────┴──────────┐
-                                          │                    │
+Experience â†’ Analyze â†’ Identify cause/effect â†’ Formulate lesson
+                                                    â”‚
+                                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                                          â”‚                    â”‚
                                     Generalizable        Specific
-                                    │                    │
-                                    ▼                    ▼
+                                    â”‚                    â”‚
+                                    â–¼                    â–¼
                               Tag applicability    Store as is
-                              Store in Evidence    │
-                              │                    ▼
-                              ▼              Future reference
+                              Store in Evidence    â”‚
+                              â”‚                    â–¼
+                              â–¼              Future reference
                         Academy consumption
 ```
 
-Lessons progress through a lifecycle: extracted → stored → validated → refined (or archived if disproven).
+Lessons progress through a lifecycle: extracted â†’ stored â†’ validated â†’ refined (or archived if disproven).
 
 ### 5. Pattern Detection
 
 ```
-Batch of N experiences → Feature extraction → Similarity clustering
-                                                      │
-                                                      ▼
+Batch of N experiences â†’ Feature extraction â†’ Similarity clustering
+                                                      â”‚
+                                                      â–¼
                                               Pattern hypothesis
-                                                      │
-                                                      ▼
+                                                      â”‚
+                                                      â–¼
                                             Statistical validation
-                                                      │
-                                                      ▼
+                                                      â”‚
+                                                      â–¼
                                             Pattern accepted/rejected
-                                                      │
-                                                      ▼
+                                                      â”‚
+                                                      â–¼
                                             Stored in Evidence Store
 ```
 
@@ -287,14 +287,14 @@ interface LessonContext {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| COG-REFL-001 | Every reflection requires at least one linked experience_id | Schema — required field |
-| COG-REFL-002 | Reflection is read-only on Episodic Memory — never modifies experiences | Architectural — query-only access |
-| COG-REFL-003 | Lessons are uniquely identified and deduplicated across reflections | Algorithmic — lesson_id dedup check |
-| COG-REFL-004 | A lesson's evidence_strength cannot exceed the number of supporting experiences | Algorithmic — bounded by count |
-| COG-REFL-005 | Patterns require a minimum of 3 occurrences before acceptance | Threshold — configurable via PatternFilter |
-| COG-REFL-006 | Bias detection compares against a baseline of unbiased reasoning | Algorithmic — baseline embedded in detector |
-| COG-REFL-007 | Deep reflection always includes at least 2 passes (analysis + verification) | Algorithmic — multi-pass enforced |
-| COG-REFL-008 | Lessons cannot be deleted, only archived with an explanation | Architectural — immutable audit trail |
+| COG-REFL-001 | Every reflection requires at least one linked experience_id | Schema â€” required field |
+| COG-REFL-002 | Reflection is read-only on Episodic Memory â€” never modifies experiences | Architectural â€” query-only access |
+| COG-REFL-003 | Lessons are uniquely identified and deduplicated across reflections | Algorithmic â€” lesson_id dedup check |
+| COG-REFL-004 | A lesson's evidence_strength cannot exceed the number of supporting experiences | Algorithmic â€” bounded by count |
+| COG-REFL-005 | Patterns require a minimum of 3 occurrences before acceptance | Threshold â€” configurable via PatternFilter |
+| COG-REFL-006 | Bias detection compares against a baseline of unbiased reasoning | Algorithmic â€” baseline embedded in detector |
+| COG-REFL-007 | Deep reflection always includes at least 2 passes (analysis + verification) | Algorithmic â€” multi-pass enforced |
+| COG-REFL-008 | Lessons cannot be deleted, only archived with an explanation | Architectural â€” immutable audit trail |
 
 ## Error Cases
 
@@ -313,17 +313,17 @@ interface LessonContext {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Reflection Engine only analyzes past experiences |
-| R2 — Dependency Order | Depends on Episodic Memory, LLMOS, Evidence Store |
-| R3 — DRY | Reflection type templates defined once per type |
-| R4 — Builder Pattern | Reflection output built progressively across passes |
-| R5 — Liskov Substitution | Any reflection type implementation is interchangeable |
-| R6 — DI over Singletons | Pattern detectors and lesson extractors injected |
-| R9 — Deterministic | Same experience produces same reflection at temperature=0 |
-| R10 — Simpler Over Complex | Uses 5 explicit types, not free-form analysis |
-| R13 — Design for Failure | Deep reflection can return partial results on timeout |
-| R14 — Paved Path | All reflections flow through `reflect` method |
-| R15 — Open/Closed | New reflection types added by registering with engine |
+| R1 â€” Modulsingularity | Reflection Engine only analyzes past experiences |
+| R2 â€” Dependency Order | Depends on Episodic Memory, LLMOS, Evidence Store |
+| R3 â€” DRY | Reflection type templates defined once per type |
+| R4 â€” Builder Pattern | Reflection output built progressively across passes |
+| R5 â€” Liskov Substitution | Any reflection type implementation is interchangeable |
+| R6 â€” DI over Singletons | Pattern detectors and lesson extractors injected |
+| R9 â€” Deterministic | Same experience produces same reflection at temperature=0 |
+| R10 â€” Simpler Over Complex | Uses 5 explicit types, not free-form analysis |
+| R13 â€” Design for Failure | Deep reflection can return partial results on timeout |
+| R14 â€” Paved Path | All reflections flow through `reflect` method |
+| R15 â€” Open/Closed | New reflection types added by registering with engine |
 
 ## Related Documents
 
@@ -333,7 +333,7 @@ interface LessonContext {
 | Brain/Cognitive/001-Reasoning-Pipeline.md | Reflection consumes reasoning chain outputs |
 | Brain/Cognitive/003-Metacognition.md | Metacognition uses reflection results for calibration |
 | Brain/Cognitive/004-Cognitive-Biases.md | Bias detection feeds into Cognitive Biases system |
-| Brain/Memory/002-Episodic-Memory.md | Primary input source — experiences to reflect on |
+| Brain/Memory/002-Episodic-Memory.md | Primary input source â€” experiences to reflect on |
 | Bible/05-Platform/004-EVS.md | Reflection outputs stored as evidence in Event Store |
 | Bible/02-Core/Academy/000-Overview.md | Academy consumes lessons for formal learning |
 | Brain/Sou/001-Reasoning.md | Sou initiates reflection via delegate |

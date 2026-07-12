@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## Console — 000: Governance Console
+﻿# AIOS Bible â€” Interfaces
+## Console â€” 000: Governance Console
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-GC-000 |
-| Source Laws | Law 1 — Law of Origin, Law 4 — Law of Evidence, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 1 â€” Law of Origin, Law 4 â€” Law of Evidence, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/006-Lifecycles.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,46 +15,46 @@
 
 ## Purpose
 
-The Governance Console is the human-facing interface to AIOS's governance machinery. It is the bridge between human authority (Law 1 — Origin) and AIOS's constitutional governance services. Through the Console, humans review the Constitution, approve or reject RFCs, exercise Human Override (Article I, Section 004), certify agents, and inspect the audit trail that proves constitutional compliance.
+The Governance Console is the human-facing interface to AIOS's governance machinery. It is the bridge between human authority (Law 1 â€” Origin) and AIOS's constitutional governance services. Through the Console, humans review the Constitution, approve or reject RFCs, exercise Human Override (Article I, Section 004), certify agents, and inspect the audit trail that proves constitutional compliance.
 
-The Governance Console is not a general-purpose UI — it is specifically the human-in-the-loop control surface for governance decisions that only a human may make. Routine operations happen through the Human Interface and Dashboard; governance-critical actions happen here.
+The Governance Console is not a general-purpose UI â€” it is specifically the human-in-the-loop control surface for governance decisions that only a human may make. Routine operations happen through the Human Interface and Dashboard; governance-critical actions happen here.
 
 ## Architecture
 
 ```
-┌────────────────────────────────────────────────────────┐
-│                  Governance Console                      │
-│                                                         │
-│  ┌────────────┐  ┌────────────┐  ┌──────────────────┐  │
-│  │ Constitution│  │   RFC      │  │   Human Override  │  │
-│  │  Viewer    │  │  Review    │  │   Console        │  │
-│  └─────┬──────┘  └─────┬──────┘  └────────┬─────────┘  │
-│        │                │                 │            │
-│  ┌─────▼──────┐  ┌─────▼──────┐  ┌────────▼─────────┐  │
-│  │   Audit     │  │  Agent     │  │   Decision        │  │
-│  │   Explorer  │  │  Certification│ │   Log Viewer     │  │
-│  └─────┬──────┘  └─────┬──────┘  └────────┬─────────┘  │
-│        │                │                 │            │
-│        └────────────────┼─────────────────┘            │
-│                         │                              │
-│                ┌────────▼────────┐                     │
-│                │  Governance API  │                     │
-│                │  (ACF-backed)    │                     │
-│                └────────┬────────┘                     │
-└─────────────────────────┼──────────────────────────────┘
-                          │
-                          ▼
-        ┌─────────────────────────────────────────┐
-        │ 01-Governance Services (CLS, DGP, CRP,   │
-        │  CKR, ADG, AKM) + 02-Core, 04-Execution  │
-        └─────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                  Governance Console                      â”‚
+â”‚                                                         â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+â”‚  â”‚ Constitutionâ”‚  â”‚   RFC      â”‚  â”‚   Human Override  â”‚  â”‚
+â”‚  â”‚  Viewer    â”‚  â”‚  Review    â”‚  â”‚   Console        â”‚  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+â”‚        â”‚                â”‚                 â”‚            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+â”‚  â”‚   Audit     â”‚  â”‚  Agent     â”‚  â”‚   Decision        â”‚  â”‚
+â”‚  â”‚   Explorer  â”‚  â”‚  Certificationâ”‚ â”‚   Log Viewer     â”‚  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+â”‚        â”‚                â”‚                 â”‚            â”‚
+â”‚        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜            â”‚
+â”‚                         â”‚                              â”‚
+â”‚                â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”                     â”‚
+â”‚                â”‚  Governance API  â”‚                     â”‚
+â”‚                â”‚  (ACF-backed)    â”‚                     â”‚
+â”‚                â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”˜                     â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                          â”‚
+                          â–¼
+        â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+        â”‚ 01-Governance Services (CLS, DGP, CRP,   â”‚
+        â”‚  CKR, ADG, AKM) + 02-Core, 04-Execution  â”‚
+        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Core Concepts
 
 ### 1. Constitution Viewer
 
-Reads the active Constitution from the Constitutional Knowledge Repository (CKR). Shows the current text, version history, and amendment status. Humans can compare versions and see the rationale for each change. The viewer is read-only for humans — amendments go through the RFC pipeline.
+Reads the active Constitution from the Constitutional Knowledge Repository (CKR). Shows the current text, version history, and amendment status. Humans can compare versions and see the rationale for each change. The viewer is read-only for humans â€” amendments go through the RFC pipeline.
 
 ### 2. RFC Review
 
@@ -62,7 +62,7 @@ Presents pending Change Requests (CRPs) for human review. Shows the proposed cha
 
 ### 3. Human Override
 
-The most consequential console capability. Human Override (Article I, Section 004) temporarily suspends a specific Physics law or constitutional constraint for a specific, bounded operation. The override requires explicit human identity, justification, scope, and duration. Every override is recorded as evidence and subject to post-hoc audit. The console enforces that overrides are time-bound and scope-bound — they cannot be open-ended.
+The most consequential console capability. Human Override (Article I, Section 004) temporarily suspends a specific Physics law or constitutional constraint for a specific, bounded operation. The override requires explicit human identity, justification, scope, and duration. Every override is recorded as evidence and subject to post-hoc audit. The console enforces that overrides are time-bound and scope-bound â€” they cannot be open-ended.
 
 ### 4. Agent Certification
 
@@ -178,19 +178,19 @@ interface AuditExplorer {
 
 ```
 Human opens Console (MFA-verified session)
-        │
-        ▼
+        â”‚
+        â–¼
 Console loads pending governance actions
-        │
-        ├── RFC pending ──► Human reviews ──► decideRFC() ──► CRP pipeline
-        │
-        ├── Agent pending cert ──► Human reviews ──► decideCertification() ──► AGX promotion
-        │
-        ├── Override needed ──► Human requests ──► requestOverride() ──► Law suspended (time-bound)
-        │
-        └── Audit query ──► Human explores ──► exploreAudit() ──► Evidence shown
-        │
-        ▼
+        â”‚
+        â”œâ”€â”€ RFC pending â”€â”€â–º Human reviews â”€â”€â–º decideRFC() â”€â”€â–º CRP pipeline
+        â”‚
+        â”œâ”€â”€ Agent pending cert â”€â”€â–º Human reviews â”€â”€â–º decideCertification() â”€â”€â–º AGX promotion
+        â”‚
+        â”œâ”€â”€ Override needed â”€â”€â–º Human requests â”€â”€â–º requestOverride() â”€â”€â–º Law suspended (time-bound)
+        â”‚
+        â””â”€â”€ Audit query â”€â”€â–º Human explores â”€â”€â–º exploreAudit() â”€â”€â–º Evidence shown
+        â”‚
+        â–¼
 All actions recorded as evidence (Law 4)
 ```
 
@@ -225,41 +225,41 @@ All actions recorded as evidence (Law 4)
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| GC-001 | Every governance action requires a verified human identity | Constitutional — Human Override and RFC approval require human identity |
-| GC-002 | Every console action produces an evidence record (Law 4) | Architectural — all actions logged to EVS |
-| GC-003 | Human overrides are always time-bound and scope-bound | Algorithmic — override cannot be open-ended |
-| GC-004 | MFA is required for all override and certification decisions | Architectural — session manager enforces MFA gate |
-| GC-005 | Override can only suspend one law per request | Algorithmic — single law per override request |
-| GC-006 | A decision on an RFC is idempotent — cannot be reversed by re-deciding | Architectural — decision state is terminal |
-| GC-007 | Console sessions expire after configurable idle timeout | Algorithmic — session manager enforces timeout |
+| GC-001 | Every governance action requires a verified human identity | Constitutional â€” Human Override and RFC approval require human identity |
+| GC-002 | Every console action produces an evidence record (Law 4) | Architectural â€” all actions logged to EVS |
+| GC-003 | Human overrides are always time-bound and scope-bound | Algorithmic â€” override cannot be open-ended |
+| GC-004 | MFA is required for all override and certification decisions | Architectural â€” session manager enforces MFA gate |
+| GC-005 | Override can only suspend one law per request | Algorithmic â€” single law per override request |
+| GC-006 | A decision on an RFC is idempotent â€” cannot be reversed by re-deciding | Architectural â€” decision state is terminal |
+| GC-007 | Console sessions expire after configurable idle timeout | Algorithmic â€” session manager enforces timeout |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Console owns human governance interaction exclusively; governance services own the logic |
-| R2 — Dependency Order | Depends on 01-Governance services, AUS, EVS, ACF; no circular deps |
-| R3 — DRY | Constitution text sourced from CKR; console renders, does not duplicate |
-| R4 — Builder Pattern | Override requests use builder for scope and duration validation |
-| R9 — Deterministic | Same query returns same evidence; actions are replayable from evidence |
-| R10 — Simpler Over Complex | Default console shows pending actions; advanced views are opt-in |
-| R13 — Design for Failure | Session expiry and MFA failure preserve partial state; no silent overrides |
-| R14 — Paved Path | RFC review and override request are the standard flows |
-| R15 — Open/Closed | New governance action types register via Console API extension |
+| R1 â€” Modulsingularity | Console owns human governance interaction exclusively; governance services own the logic |
+| R2 â€” Dependency Order | Depends on 01-Governance services, AUS, EVS, ACF; no circular deps |
+| R3 â€” DRY | Constitution text sourced from CKR; console renders, does not duplicate |
+| R4 â€” Builder Pattern | Override requests use builder for scope and duration validation |
+| R9 â€” Deterministic | Same query returns same evidence; actions are replayable from evidence |
+| R10 â€” Simpler Over Complex | Default console shows pending actions; advanced views are opt-in |
+| R13 â€” Design for Failure | Session expiry and MFA failure preserve partial state; no silent overrides |
+| R14 â€” Paved Path | RFC review and override request are the standard flows |
+| R15 â€” Open/Closed | New governance action types register via Console API extension |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
 | Bible/01-Governance/000-Overview.md | Governance services that the Console surfaces to humans |
-| Bible/01-Governance/001-CLS.md | Constitutional Lifecycle Service — constitution versioning |
-| Bible/01-Governance/003-CRP.md | Change Request Pipeline — RFC lifecycle |
+| Bible/01-Governance/001-CLS.md | Constitutional Lifecycle Service â€” constitution versioning |
+| Bible/01-Governance/003-CRP.md | Change Request Pipeline â€” RFC lifecycle |
 | Bible/02-Core/Brain/Autonomy/000-Overview.md | Autonomy escalation may trigger human override via Console |
 | Bible/02-Core/Agents/000-Overview.md | Agent certification decisions surface here |
-| Bible/05-Platform/005-AUS.md | Audit System — evidence explored by Console |
-| Bible/05-Platform/004-EVS.md | Evidence System — source of audit data |
+| Bible/05-Platform/005-AUS.md | Audit System â€” evidence explored by Console |
+| Bible/05-Platform/004-EVS.md | Evidence System â€” source of audit data |
 | Bible/06-Services/ACF/000-Overview.md | ACF transports all console actions |
-| Bible/08-Interfaces/UI/000-Overview.md | General human interface — console is governance-specific |
+| Bible/08-Interfaces/UI/000-Overview.md | General human interface â€” console is governance-specific |
 | Bible/08-Interfaces/Dashboard/000-Overview.md | Dashboard surfaces governance alerts for human action |
 | Physics/006-Lifecycles.md | Lifecycle state machine invariants |
-| Physics/005-Events.md | Evidence invariants — every console action is logged |
+| Physics/005-Events.md | Evidence invariants â€” every console action is logged |

@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 002 — Planning (Delegated to Planning System)
+﻿# AIOS Bible â€” Brain
+## 002 â€” Planning (Delegated to Planning System)
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 2.0 |
-| Category | Bible — Brain |
+| Version | 2.0.0 |
+| Category | Bible â€” Brain |
 | Document ID | AIOS-BBL-002-SOU-002 |
-| Source Laws | Law 2 — Law of Non-Execution, Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds, Law 6 — Law of Lifecycle Compliance |
+| Source Laws | Law 2 â€” Law of Non-Execution, Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds, Law 6 â€” Law of Lifecycle Compliance |
 | Source Physics | Physics/005-Events.md, Physics/006-Lifecycles.md, Physics/007-Capabilities.md, Physics/004-Sessions.md |
 | Supersedes | Bible/02-Core/Sou/002-Planner.md v1.0 |
 | Superseded By | Nothing |
@@ -15,30 +15,30 @@
 
 ## Purpose
 
-Sou plans by framing goals and delegating decomposition to the **Planning System** — a Brain service that handles strategic and tactical planning, goal decomposition, and milestone tracking. Sou defines what success looks like; the Planning System produces the how.
+Sou plans by framing goals and delegating decomposition to the **Planning System** â€” a Brain service that handles strategic and tactical planning, goal decomposition, and milestone tracking. Sou defines what success looks like; the Planning System produces the how.
 
 Planning is resource-aware, constitutionally-compliant, and evidence-driven. Sou retains approval authority over all plans. Execution is delegated through OSYS to Workers.
 
 ## Planning Inputs and Outputs
 
 ```
-┌──────────────┐  goal                    ┌──────────────┐
-│  Reasoning   │───────resources─────────▶│   Planner    │
-│  (001)       │───constitutional_constraints  (002)    │
-│              │───current_state─────────▶│              │
-└──────────────┘                          └──────┬───────┘
-                                                  │
-                                                  ▼
-                                          ┌──────────────┐
-                                          │ Mission Plan │
-                                          └──────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  goal                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Reasoning   â”‚â”€â”€â”€â”€â”€â”€â”€resourcesâ”€â”€â”€â”€â”€â”€â”€â”€â”€â–¶â”‚   Planner    â”‚
+â”‚  (001)       â”‚â”€â”€â”€constitutional_constraints  (002)    â”‚
+â”‚              â”‚â”€â”€â”€current_stateâ”€â”€â”€â”€â”€â”€â”€â”€â”€â–¶â”‚              â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜                          â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                                                  â”‚
+                                                  â–¼
+                                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                                          â”‚ Mission Plan â”‚
+                                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 | Input | Source | Description |
 |-------|--------|-------------|
 | Goal | Reasoning | The desired outcome with success criteria |
 | Available Resources | ROS (Resource Orchestration System) | Capabilities, compute, storage, network |
-| Constitutional Constraints | Constitution, CPR-001–010 | Legal bounds on what may be planned |
+| Constitutional Constraints | Constitution, CPR-001â€“010 | Legal bounds on what may be planned |
 | Current State | LMS (Lifecycle Management) | State of entities that will execute the plan |
 | Evidence | Experience (Physics/012-Experience.md) | Historical data on similar plans |
 
@@ -81,7 +81,7 @@ Every mission plan produced by the Planner has the following structure:
 ```
 Input:  goal, resources, constraints, current_state, evidence
 Process: 
-  1. Analyze goal structure → decompose into milestones
+  1. Analyze goal structure â†’ decompose into milestones
   2. Map milestones to resource requirements
   3. Check resource availability via ROS
   4. Validate constitutional compliance (CPR-009)
@@ -146,12 +146,12 @@ Planner Output:
     M4: Monitoring and adjustment (Days 21-30)
   Resources: 8 Workers (M1-M2), 10 Workers (M3-M4), 300 compute hours
   Risks:
-    - Worker burnout if optimization is too aggressive → Mitigation: phased rollout
-    - Underestimated training time → Mitigation: buffer 2 days
+    - Worker burnout if optimization is too aggressive â†’ Mitigation: phased rollout
+    - Underestimated training time â†’ Mitigation: buffer 2 days
   Validation:
-    - Constitutional: ✓ (Law 5 compliance)
-    - Resource feasibility: ✓ (resource plan within limits)
-    - Timeline realism: ✓ (similar to Q2 improvement)
+    - Constitutional: âœ“ (Law 5 compliance)
+    - Resource feasibility: âœ“ (resource plan within limits)
+    - Timeline realism: âœ“ (similar to Q2 improvement)
 ```
 
 ## Plan Validation
@@ -165,7 +165,7 @@ Every plan must pass four validation gates before it can be proposed:
 | Capability Availability (CCA) | Required capabilities are granted to executing entities | Capability Registry (Physics/007-Capabilities.md) |
 | Timeline Realism | Estimated duration is consistent with historical evidence | Experience store (Physics/012-Experience.md) |
 
-## Edge Cases — Planner
+## Edge Cases â€” Planner
 
 | Scenario | Handling |
 |----------|----------|
@@ -192,21 +192,21 @@ Every plan must pass four validation gates before it can be proposed:
 
 | Condition | Error Code | Severity | Recovery |
 |-----------|------------|----------|----------|
-| Goal is underspecified — missing success criteria | SOU_PLN_001 | Medium | Request clarification from goal source; use conservative assumptions |
+| Goal is underspecified â€” missing success criteria | SOU_PLN_001 | Medium | Request clarification from goal source; use conservative assumptions |
 | Resource requirements exceed available capacity | SOU_PLN_002 | High | Reduce scope, wait for resource release, or request emergency allocation |
 | Constitutional constraint violation in plan | SOU_PLN_003 | Critical | Block plan; document violation for Security Council review |
 | Circular milestone dependency detected | SOU_PLN_004 | High | Break cycle by reordering or parallelizing milestones |
 | Timeline estimate outside historical bounds | SOU_PLN_005 | Low | Flag as high-risk; proceed with monitoring tag |
-| Plan validation failed — multiple violations | SOU_PLN_006 | Critical | Return full violation report; require re-plan from corrected inputs |
+| Plan validation failed â€” multiple violations | SOU_PLN_006 | Critical | Return full violation report; require re-plan from corrected inputs |
 
 ## Invariants
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| SOU-PLN-001 | Planner never allocates resources or assigns entities | Architectural — resource checks are queries only |
-| SOU-PLN-002 | Every plan must pass all four validation gates before proposal | Algorithmic — gated plan submission pipeline |
-| SOU-PLN-003 | Plans always trace to a specific goal from Reasoning | Schema — goal_id required in MissionPlan |
-| SOU-PLN-004 | Plan modifications produce a new version, never mutate in place | API-level — refinePlan produces new version |
+| SOU-PLN-001 | Planner never allocates resources or assigns entities | Architectural â€” resource checks are queries only |
+| SOU-PLN-002 | Every plan must pass all four validation gates before proposal | Algorithmic â€” gated plan submission pipeline |
+| SOU-PLN-003 | Plans always trace to a specific goal from Reasoning | Schema â€” goal_id required in MissionPlan |
+| SOU-PLN-004 | Plan modifications produce a new version, never mutate in place | API-level â€” refinePlan produces new version |
 
 ## Cross-Cutting Concerns
 
@@ -220,7 +220,7 @@ Every planning operation produces Events. Plans are derived from evidence (histo
 
 ### Lifecycle
 
-Plans follow the mission lifecycle: Created (Planner) → Proposed (DGP) → Approved (Security Council) → Executed (OSYS). (Physics/006-Lifecycles.md)
+Plans follow the mission lifecycle: Created (Planner) â†’ Proposed (DGP) â†’ Approved (Security Council) â†’ Executed (OSYS). (Physics/006-Lifecycles.md)
 
 ### Capability Bounds
 
@@ -228,40 +228,40 @@ Planner is bounded by Sou's capabilities. It may plan any mission but may NOT al
 
 ### Communication
 
-Plans are communicated via ACF. ROS is queried for resource availability. DGP receives plan proposals. LMS receives lifecycle queries. (Law 3 — Communication)
+Plans are communicated via ACF. ROS is queried for resource availability. DGP receives plan proposals. LMS receives lifecycle queries. (Law 3 â€” Communication)
 
 ## Design DNA
 
 | Rule | Compliance |
 |------|-----------|
-| R1 — Modulsingularity | Planner focuses solely on mission planning |
-| R2 — Dependency Order | Planner depends on Reasoning, ROS, LMS; no upward dependencies |
-| R3 — DRY | Plan structure is defined once in the Data Model |
-| R4 — Builder Pattern | Plan construction (createPlan) is separate from execution |
-| R5 — Liskov Substitution | All planning algorithms implement the Planner interface |
-| R6 — DI over Singletons | ROS and LMS clients are injected dependencies |
-| R9 — Deterministic | Same goal and constraints produce the same plan structure |
-| R10 — Simpler Over Complex | Plans use the simplest sufficient milestone decomposition |
-| R13 — Design for Failure | Planner degrades gracefully when ROS is unavailable |
-| R14 — Paved Path | All plans flow through createPlan → validatePlan → DGP |
-| R15 — Open/Closed | New planning heuristics added by extending, not modifying, the Planner interface |
+| R1 â€” Modulsingularity | Planner focuses solely on mission planning |
+| R2 â€” Dependency Order | Planner depends on Reasoning, ROS, LMS; no upward dependencies |
+| R3 â€” DRY | Plan structure is defined once in the Data Model |
+| R4 â€” Builder Pattern | Plan construction (createPlan) is separate from execution |
+| R5 â€” Liskov Substitution | All planning algorithms implement the Planner interface |
+| R6 â€” DI over Singletons | ROS and LMS clients are injected dependencies |
+| R9 â€” Deterministic | Same goal and constraints produce the same plan structure |
+| R10 â€” Simpler Over Complex | Plans use the simplest sufficient milestone decomposition |
+| R13 â€” Design for Failure | Planner degrades gracefully when ROS is unavailable |
+| R14 â€” Paved Path | All plans flow through createPlan â†’ validatePlan â†’ DGP |
+| R15 â€” Open/Closed | New planning heuristics added by extending, not modifying, the Planner interface |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/004-Sessions.md | Sessions — plans may target specific session types |
-| Physics/005-Events.md | Evidence — planning produces and consumes Events |
-| Physics/006-Lifecycles.md | Lifecycles — plans are lifecycle-aware |
-| Physics/007-Capabilities.md | Capabilities — plans require capability checks |
-| Bible/01-Governance/002-DGP.md | DGP — plans are submitted as proposals through DGP |
-| Bible/02-Core/Brain/Sou/000-Overview.md | Sou overview — planning is a capability of the executive intelligence |
-| Bible/02-Core/Brain/Sou/001-Reasoning.md | Reasoning — Planning consumes Reasoning outputs |
-| Bible/02-Core/Brain/Sou/003-Missions.md | Missions — Planning produces mission proposals |
-| Bible/02-Core/Brain/Sou/004-Learning.md | Learning — Planning improves from learning |
-| Bible/02-Core/Brain/Planning/000-Overview.md | Planning System — handles goal decomposition and milestone tracking |
-| Bible/02-Core/OSYS | OSYS — plans are executed by Organizations |
-| Bible/02-Core/DTS/002-Sim-Pipeline.md | Simulation — plans can be simulated before execution |
-| Bible/02-Core/ROS | ROS — resource queries for feasibility checks |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Physics/004-Sessions.md | Sessions â€” plans may target specific session types |
+| Physics/005-Events.md | Evidence â€” planning produces and consumes Events |
+| Physics/006-Lifecycles.md | Lifecycles â€” plans are lifecycle-aware |
+| Physics/007-Capabilities.md | Capabilities â€” plans require capability checks |
+| Bible/01-Governance/002-DGP.md | DGP â€” plans are submitted as proposals through DGP |
+| Bible/02-Core/Brain/Sou/000-Overview.md | Sou overview â€” planning is a capability of the executive intelligence |
+| Bible/02-Core/Brain/Sou/001-Reasoning.md | Reasoning â€” Planning consumes Reasoning outputs |
+| Bible/02-Core/Brain/Sou/003-Missions.md | Missions â€” Planning produces mission proposals |
+| Bible/02-Core/Brain/Sou/004-Learning.md | Learning â€” Planning improves from learning |
+| Bible/02-Core/Brain/Planning/000-Overview.md | Planning System â€” handles goal decomposition and milestone tracking |
+| Bible/02-Core/OSYS | OSYS â€” plans are executed by Organizations |
+| Bible/02-Core/DTS/002-Sim-Pipeline.md | Simulation â€” plans can be simulated before execution |
+| Bible/02-Core/ROS | ROS â€” resource queries for feasibility checks |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

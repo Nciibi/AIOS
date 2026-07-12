@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 005 — Tool Sandboxing
+﻿# AIOS Bible â€” Brain
+## 005 â€” Tool Sandboxing
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Tools |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Tools |
 | Document ID | AIOS-BBL-002-TOL-005 |
-| Source Laws | Law 7 — Law of Capability Bounds, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 7 â€” Law of Capability Bounds, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -161,13 +161,13 @@ Each tool's sandbox profile is derived from its ToolDefinition and capability de
 
 ```
 ToolDefinition
-    │
-    ├── execution_type → max_duration_ms (sync=30s, async=5min, stream=10min)
-    ├── category → default resource profile (read=low, compute=high, etc.)
-    ├── capability_bounds → network/filesystem policies
-    └── rate_limits → concurrency constraint
-    │
-    ▼
+    â”‚
+    â”œâ”€â”€ execution_type â†’ max_duration_ms (sync=30s, async=5min, stream=10min)
+    â”œâ”€â”€ category â†’ default resource profile (read=low, compute=high, etc.)
+    â”œâ”€â”€ capability_bounds â†’ network/filesystem policies
+    â””â”€â”€ rate_limits â†’ concurrency constraint
+    â”‚
+    â–¼
 SandboxProfile (merged from defaults + tool-specific overrides)
 ```
 
@@ -319,14 +319,14 @@ interface SandboxManager {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| SAN-001 | No tool execution exceeds its resource limits | Algorithmic — limits enforced at runtime |
-| SAN-002 | Tool output never exceeds output size limits | Algorithmic — truncation applied post-execution |
-| SAN-003 | Network-denied tools never make network requests | Algorithmic — network policy checked per request |
-| SAN-004 | Filesystem-read-only tools never write to disk | Algorithmic — filesystem policy enforced on every I/O |
-| SAN-005 | Sandbox profiles are derived deterministically from tool definitions | Algorithmic — deriveProfile is a pure function |
-| SAN-006 | Every sandbox execution has a timeout | API-level — max_duration_ms is required |
-| SAN-007 | Resource usage tracking is monotonic (counters only increase) | Algorithmic — cumulative counters |
-| SAN-008 | Violation events always include the limit and actual values | Schema — SandboxViolation requires limit and actual |
+| SAN-001 | No tool execution exceeds its resource limits | Algorithmic â€” limits enforced at runtime |
+| SAN-002 | Tool output never exceeds output size limits | Algorithmic â€” truncation applied post-execution |
+| SAN-003 | Network-denied tools never make network requests | Algorithmic â€” network policy checked per request |
+| SAN-004 | Filesystem-read-only tools never write to disk | Algorithmic â€” filesystem policy enforced on every I/O |
+| SAN-005 | Sandbox profiles are derived deterministically from tool definitions | Algorithmic â€” deriveProfile is a pure function |
+| SAN-006 | Every sandbox execution has a timeout | API-level â€” max_duration_ms is required |
+| SAN-007 | Resource usage tracking is monotonic (counters only increase) | Algorithmic â€” cumulative counters |
+| SAN-008 | Violation events always include the limit and actual values | Schema â€” SandboxViolation requires limit and actual |
 
 ## Error Cases
 
@@ -345,17 +345,17 @@ interface SandboxManager {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Sandbox Manager handles only execution constraints |
-| R2 — Dependency Order | Depends on Tool Registry for tool definitions; no upward deps |
-| R3 — DRY | Sandbox profiles derived from tool definitions, not duplicated |
-| R4 — Builder Pattern | Profile built by Derivation → Limit Setup → Execution → Monitoring |
-| R5 — Liskov Substitution | Any SandboxManager implements the interface |
-| R6 — DI over Singletons | Resource monitors and isolation strategies injected |
-| R9 — Deterministic | Same profile and execution produce same constraint behavior |
-| R10 — Simpler Over Complex | Clear limit/resource/violation model with three enforcement modes |
-| R13 — Design for Failure | Violations caught gracefully; execution killed cleanly |
-| R14 — Paved Path | All sandboxed execution flows through executeInSandbox() |
-| R15 — Open/Closed | New resource types added via monitor plugins |
+| R1 â€” Modulsingularity | Sandbox Manager handles only execution constraints |
+| R2 â€” Dependency Order | Depends on Tool Registry for tool definitions; no upward deps |
+| R3 â€” DRY | Sandbox profiles derived from tool definitions, not duplicated |
+| R4 â€” Builder Pattern | Profile built by Derivation â†’ Limit Setup â†’ Execution â†’ Monitoring |
+| R5 â€” Liskov Substitution | Any SandboxManager implements the interface |
+| R6 â€” DI over Singletons | Resource monitors and isolation strategies injected |
+| R9 â€” Deterministic | Same profile and execution produce same constraint behavior |
+| R10 â€” Simpler Over Complex | Clear limit/resource/violation model with three enforcement modes |
+| R13 â€” Design for Failure | Violations caught gracefully; execution killed cleanly |
+| R14 â€” Paved Path | All sandboxed execution flows through executeInSandbox() |
+| R15 â€” Open/Closed | New resource types added via monitor plugins |
 
 ## Related Documents
 

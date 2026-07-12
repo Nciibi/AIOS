@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## FPGA — 001: Architecture
+﻿# AIOS Bible â€” Domains
+## FPGA â€” 001: Architecture
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-FPGA-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The FPGA Architecture sub-doc defines the device architecture layer — device family registry, logic fabric model, IP core catalog, constraint definition, resource estimation, and device selection. It provides the structural foundation upon which RTL design, synthesis, and verification are built.
+The FPGA Architecture sub-doc defines the device architecture layer â€” device family registry, logic fabric model, IP core catalog, constraint definition, resource estimation, and device selection. It provides the structural foundation upon which RTL design, synthesis, and verification are built.
 
 ## Architecture
 
@@ -159,12 +159,12 @@ interface DeviceSelector {
 
 | Code | Condition | Severity | Recovery |
 |------|-----------|----------|----------|
-| FPGA-ARC-001 | Device family mismatch — selected device does not match family in requirements | HIGH | Reject selection, present compatible alternatives from registry |
-| FPGA-ARC-002 | Resource overestimation — estimated utilization exceeds 100% of device capacity | HIGH | Return overflow report, suggest larger device, trigger replan |
-| FPGA-ARC-003 | IP core license unavailable — required IP core license is expired or missing | MEDIUM | Queue license acquisition, fall back to open-source alternative if available |
-| FPGA-ARC-004 | Constraint conflict — two constraints target same path with incompatible values | MEDIUM | Report conflict with priority resolution, require manual override |
-| FPGA-ARC-005 | Device not in registry — specified device part number is unknown | HIGH | Query vendor database, escalate to registry update if verified |
-| FPGA-ARC-006 | IP core incompatible — IP core does not support selected device family | MEDIUM | Search compatible variants, suggest alternative IP core |
+| FPGA-ARC-001 | Device family mismatch â€” selected device does not match family in requirements | HIGH | Reject selection, present compatible alternatives from registry |
+| FPGA-ARC-002 | Resource overestimation â€” estimated utilization exceeds 100% of device capacity | HIGH | Return overflow report, suggest larger device, trigger replan |
+| FPGA-ARC-003 | IP core license unavailable â€” required IP core license is expired or missing | MEDIUM | Queue license acquisition, fall back to open-source alternative if available |
+| FPGA-ARC-004 | Constraint conflict â€” two constraints target same path with incompatible values | MEDIUM | Report conflict with priority resolution, require manual override |
+| FPGA-ARC-005 | Device not in registry â€” specified device part number is unknown | HIGH | Query vendor database, escalate to registry update if verified |
+| FPGA-ARC-006 | IP core incompatible â€” IP core does not support selected device family | MEDIUM | Search compatible variants, suggest alternative IP core |
 
 ## Invariants
 
@@ -178,17 +178,17 @@ interface DeviceSelector {
 
 ## Design DNA (R1-R6,R9,R10,R13-R15)
 
-- **R1 — Single Source of Truth**: Device family registry is the sole source for device capabilities; fabric models derive from it.
-- **R2 — Immutable Event Log**: Every device selection, resource estimate, and IP instantiation produces an immutable event.
-- **R3 — Capability-Based Authorization**: Only HDLWorker and SynthesisWorker capabilities may access the DeviceRegistry.
-- **R4 — Law of Diminishing Returns**: Resource estimation beyond 80% utilization triggers diminishing returns warnings.
-- **R5 — Deterministic Computation**: All resource estimates are deterministic functions of design metadata and device spec.
-- **R6 — Bounded Context**: Device architecture owns device families and fabric models; cross-domain device handoff goes through Sou.
-- **R9 — Fail-Fast**: Device mismatch and license issues are detected at selection time, never during synthesis.
-- **R10 — Audit Trail**: Every constraint definition and IP instantiation is logged with device ID, timestamp, and worker identity.
-- **R13 — Defensive Design**: Resource estimates include safety margin (10%) above calculated utilization.
-- **R14 — Self-Healing**: On license expiry, IPCatalog queries Academy for substitute cores automatically.
-- **R15 — Backward Compatibility**: Device family registry maintains versioned migration paths for deprecated families.
+- **R1 â€” Single Source of Truth**: Device family registry is the sole source for device capabilities; fabric models derive from it.
+- **R2 â€” Immutable Event Log**: Every device selection, resource estimate, and IP instantiation produces an immutable event.
+- **R3 â€” Capability-Based Authorization**: Only HDLWorker and SynthesisWorker capabilities may access the DeviceRegistry.
+- **R4 â€” Law of Diminishing Returns**: Resource estimation beyond 80% utilization triggers diminishing returns warnings.
+- **R5 â€” Deterministic Computation**: All resource estimates are deterministic functions of design metadata and device spec.
+- **R6 â€” Bounded Context**: Device architecture owns device families and fabric models; cross-domain device handoff goes through Sou.
+- **R9 â€” Fail-Fast**: Device mismatch and license issues are detected at selection time, never during synthesis.
+- **R10 â€” Audit Trail**: Every constraint definition and IP instantiation is logged with device ID, timestamp, and worker identity.
+- **R13 â€” Defensive Design**: Resource estimates include safety margin (10%) above calculated utilization.
+- **R14 â€” Self-Healing**: On license expiry, IPCatalog queries Academy for substitute cores automatically.
+- **R15 â€” Backward Compatibility**: Device family registry maintains versioned migration paths for deprecated families.
 
 ## Related Documents
 
@@ -197,7 +197,7 @@ interface DeviceSelector {
 | Bible/07-Domains/FPGA/000-Overview.md | Base FPGA domain overview |
 | Bible/07-Domains/FPGA/002-Synthesis.md | Synthesis consumes architecture constraints for P&R |
 | Bible/07-Domains/FPGA/003-Verification.md | Verification validates architecture compliance |
-| Bible/06-Services/ACF/000-Overview.md | ACF — device selection event transport |
-| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK — EDA provider adapter interface |
-| Bible/02-Core/DTS/000-Overview.md | DTS — design confidence scoring |
-| Bible/02-Core/ROS/000-Overview.md | ROS — compute budgets for device estimation |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” device selection event transport |
+| Bible/08-Interfaces/SDK/003-Provider-SDK.md | Provider SDK â€” EDA provider adapter interface |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” design confidence scoring |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” compute budgets for device estimation |

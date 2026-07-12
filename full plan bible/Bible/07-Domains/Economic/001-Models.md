@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Economic — 001: Economic Models
+﻿# AIOS Bible â€” Domains
+## Economic â€” 001: Economic Models
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-ECN-001 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle Compliance, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle Compliance, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/010-Execution.md, Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,24 +15,24 @@
 
 ## Purpose
 
-The Economic Models sub-domain provides the forecasting and modeling infrastructure for AIOS — demand forecasting, cost projection, resource pricing models, supply/demand modeling, scenario simulation, and ROI computation. Models consume historical cost data from CostReports and PriceSheets (defined in Economic/000-Overview.md) and produce forward-looking projections that inform budget planning, pricing decisions, and resource strategy. Models are advisory — they inform decisions but never enforce them (Law 6). All model outputs must be traceable to their input evidence (Law 4).
+The Economic Models sub-domain provides the forecasting and modeling infrastructure for AIOS â€” demand forecasting, cost projection, resource pricing models, supply/demand modeling, scenario simulation, and ROI computation. Models consume historical cost data from CostReports and PriceSheets (defined in Economic/000-Overview.md) and produce forward-looking projections that inform budget planning, pricing decisions, and resource strategy. Models are advisory â€” they inform decisions but never enforce them (Law 6). All model outputs must be traceable to their input evidence (Law 4).
 
 ## Architecture
 
 ```
 Historical Data (CostReports, PriceSheets)
-        │
-        ▼
-Model Selection ──► Parameter Fitting ──► Validation ──► Forecast Generation ──► Sensitivity Analysis
-        │                                    │
-        ▼                                    ▼
+        â”‚
+        â–¼
+Model Selection â”€â”€â–º Parameter Fitting â”€â”€â–º Validation â”€â”€â–º Forecast Generation â”€â”€â–º Sensitivity Analysis
+        â”‚                                    â”‚
+        â–¼                                    â–¼
 Rejected Model                          Validated Output
    feedback loop                         to Consumer
 ```
 
 The pipeline proceeds sequentially: historical data is retrieved, a model type is selected based on data characteristics, parameters are fitted using optimization, the fitted model is validated against holdout data, forecasts are generated, and sensitivity analysis quantifies uncertainty. Each stage has quality gates that can abort with specific error codes.
 
-## Data Model (TypeScript — extend the base doc types from Economic/000-Overview.md)
+## Data Model (TypeScript â€” extend the base doc types from Economic/000-Overview.md)
 
 ```typescript
 interface EconomicModel {
@@ -157,7 +157,7 @@ SensitivityAnalysis quantifies how changes in input parameters affect model outp
 
 ### 7. Model Lifecycle
 
-Models progress through states: building (fitting parameters) → validated (quality gates passed) → deployed (available for forecasts) → failed (quality gates not met). Failed models produce error codes guiding parameter adjustment.
+Models progress through states: building (fitting parameters) â†’ validated (quality gates passed) â†’ deployed (available for forecasts) â†’ failed (quality gates not met). Failed models produce error codes guiding parameter adjustment.
 
 ## Internal Interfaces
 
@@ -217,34 +217,34 @@ interface SensitivityEngine {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| ECN-MDL-001 | Every forecast must cite the model that produced it | Architectural — DemandForecast.modelId is required |
-| ECN-MDL-002 | A model cannot be deployed without passing validation thresholds | Algorithmic — ModelBuilder.validate must pass before status becomes deployed |
-| ECN-MDL-003 | Given identical input data and parameters, forecasts are deterministic | Algorithmic — seeded RNG ensures reproducibility |
-| ECN-MDL-004 | Forecast horizon must not exceed training window length | Algorithmic — validation rejects horizon > training window |
-| ECN-MDL-005 | All model inputs must reference evidence records (Law 4) | Architectural — inputRefs must resolve to valid evidence |
-| ECN-MDL-006 | Model retraining produces a new version; prior versions remain available | Architectural — model versioning is append-only |
+| ECN-MDL-001 | Every forecast must cite the model that produced it | Architectural â€” DemandForecast.modelId is required |
+| ECN-MDL-002 | A model cannot be deployed without passing validation thresholds | Algorithmic â€” ModelBuilder.validate must pass before status becomes deployed |
+| ECN-MDL-003 | Given identical input data and parameters, forecasts are deterministic | Algorithmic â€” seeded RNG ensures reproducibility |
+| ECN-MDL-004 | Forecast horizon must not exceed training window length | Algorithmic â€” validation rejects horizon > training window |
+| ECN-MDL-005 | All model inputs must reference evidence records (Law 4) | Architectural â€” inputRefs must resolve to valid evidence |
+| ECN-MDL-006 | Model retraining produces a new version; prior versions remain available | Architectural â€” model versioning is append-only |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Economic Models owns forecasting and modeling; Budget Management owns budget state; Cost Accounting owns cost records |
-| R2 — Dependency Order | Depends on Economic (CostReports, PriceSheets), EVS (evidence), ACF (dispatch); no circular dependencies |
-| R3 — DRY | Model algorithms defined once in ModelParams; all forecast types reference the same interfaces |
-| R4 — Builder Pattern | EconomicModel uses builder pattern for complex parameter configuration |
-| R5 — Stateless | Model computation is stateless given the same inputs; state tracking is in the model metadata only |
-| R6 — Evident Complete | Every model build, forecast, and analysis produces an evidence record |
-| R9 — Deterministic | Same training data and parameters produce identical model outputs |
-| R10 — Simpler Over Complex | Linear regression and exponential smoothing defaults; neural networks opt-in for high-volume resources |
-| R13 — Design for Failure | Model validation gates prevent deployment of poor models; forecasts include confidence intervals |
-| R14 — Paved Path | Monthly demand forecast with 90-day horizon covers 80% of use cases |
-| R15 — Open/Closed | New model algorithms can be registered without changing the pipeline; new resource types use existing models |
+| R1 â€” Modulsingularity | Economic Models owns forecasting and modeling; Budget Management owns budget state; Cost Accounting owns cost records |
+| R2 â€” Dependency Order | Depends on Economic (CostReports, PriceSheets), EVS (evidence), ACF (dispatch); no circular dependencies |
+| R3 â€” DRY | Model algorithms defined once in ModelParams; all forecast types reference the same interfaces |
+| R4 â€” Builder Pattern | EconomicModel uses builder pattern for complex parameter configuration |
+| R5 â€” Stateless | Model computation is stateless given the same inputs; state tracking is in the model metadata only |
+| R6 â€” Evident Complete | Every model build, forecast, and analysis produces an evidence record |
+| R9 â€” Deterministic | Same training data and parameters produce identical model outputs |
+| R10 â€” Simpler Over Complex | Linear regression and exponential smoothing defaults; neural networks opt-in for high-volume resources |
+| R13 â€” Design for Failure | Model validation gates prevent deployment of poor models; forecasts include confidence intervals |
+| R14 â€” Paved Path | Monthly demand forecast with 90-day horizon covers 80% of use cases |
+| R15 â€” Open/Closed | New model algorithms can be registered without changing the pipeline; new resource types use existing models |
 
 ## Related Documents
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/07-Domains/Economic/000-Overview.md | Base Economic System — defines Budget, CostReport, PriceSheet base types |
+| Bible/07-Domains/Economic/000-Overview.md | Base Economic System â€” defines Budget, CostReport, PriceSheet base types |
 | Bible/07-Domains/Economic/002-Analysis.md | Cost Analysis consumes models for trend detection and optimization |
 | Bible/07-Domains/Economic/003-Simulation.md | Simulation uses models as underlying engines for what-if scenarios |
 | Bible/02-Core/ROS/000-Overview.md | ROS provides resource consumption data that trains models |

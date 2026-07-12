@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Research — 003: Data Analysis
+﻿# AIOS Bible â€” Domains
+## Research â€” 003: Data Analysis
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-RES-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,13 +15,13 @@
 
 ## Purpose
 
-The Data Analysis engine enables AIOS to process, transform, and extract meaning from datasets — from ingestion and cleaning through statistical analysis, visualization, pattern detection, and confidence assessment. It provides the analytical backbone for evidence-backed conclusions across all domains.
+The Data Analysis engine enables AIOS to process, transform, and extract meaning from datasets â€” from ingestion and cleaning through statistical analysis, visualization, pattern detection, and confidence assessment. It provides the analytical backbone for evidence-backed conclusions across all domains.
 
 ## Architecture
 
 ```
-ingest ──> clean ──> transform ──> analyze ──> visualize ──> report
-  │        │          │             │           │            │
+ingest â”€â”€> clean â”€â”€> transform â”€â”€> analyze â”€â”€> visualize â”€â”€> report
+  â”‚        â”‚          â”‚             â”‚           â”‚            â”‚
   v        v          v             v           v            v
 Dataset  Cleaned    Transformed  Statistical  Visualiz-  Analysis
          Dataset    Dataset      Result       ation      Report
@@ -301,15 +301,15 @@ interface ConfidenceInterval {
 
 | Document | Relationship |
 |---------|-------------|
-| Research/000-Overview.md | Research domain overview — entities, capabilities, methodology |
-| Research/001-Literature-Review.md | Literature Review — provides context and comparison for analysis findings |
-| Research/002-Experiment-Design.md | Experiment Design — produces data that Data Analysis consumes |
-| Physics/005-Events.md | Evidence — all data analysis operations produce Events |
-| Physics/007-Capabilities.md | Capabilities — compute and memory bounds for analysis operations |
-| Physics/012-Experience.md | Experience — analysis outcomes drive AIOS model improvement |
-| Bible/02-Core/Academy/000-Overview.md | Academy — datasets and analysis results stored as knowledge artifacts |
-| Bible/02-Core/DTS/000-Overview.md | DTS — confidence scoring and statistical validity methodology |
-| Bible/02-Core/ROS/000-Overview.md | ROS — compute and memory budget for analysis pipelines |
-| Bible/06-Services/ACF/000-Overview.md | ACF — data source connectivity for remote datasets |
-| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001–010 — philosophical grounding for quantitative analysis |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles applied to data analysis |
+| Research/000-Overview.md | Research domain overview â€” entities, capabilities, methodology |
+| Research/001-Literature-Review.md | Literature Review â€” provides context and comparison for analysis findings |
+| Research/002-Experiment-Design.md | Experiment Design â€” produces data that Data Analysis consumes |
+| Physics/005-Events.md | Evidence â€” all data analysis operations produce Events |
+| Physics/007-Capabilities.md | Capabilities â€” compute and memory bounds for analysis operations |
+| Physics/012-Experience.md | Experience â€” analysis outcomes drive AIOS model improvement |
+| Bible/02-Core/Academy/000-Overview.md | Academy â€” datasets and analysis results stored as knowledge artifacts |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” confidence scoring and statistical validity methodology |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” compute and memory budget for analysis pipelines |
+| Bible/06-Services/ACF/000-Overview.md | ACF â€” data source connectivity for remote datasets |
+| Bible/00-Foundations/001-AIOS-Philosophy.md | PHI-001â€“010 â€” philosophical grounding for quantitative analysis |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles applied to data analysis |

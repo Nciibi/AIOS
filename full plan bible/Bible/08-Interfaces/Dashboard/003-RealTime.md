@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## Dashboard — 003: Real-Time
+﻿# AIOS Bible â€” Interfaces
+## Dashboard â€” 003: Real-Time
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-DB-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 8 — Law of Verification-First, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 4 â€” Law of Evidence, Law 8 â€” Law of Verification-First, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/005-Events.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -110,7 +110,7 @@ The Connection Manager opens and maintains persistent connections (WebSocket or 
 
 ### 3. Update Batching
 
-Incoming data points are accumulated into UpdateBatch objects. Batches are processed atomically — all points in a batch are delivered together to the widget renderer to maintain consistency.
+Incoming data points are accumulated into UpdateBatch objects. Batches are processed atomically â€” all points in a batch are delivered together to the widget renderer to maintain consistency.
 
 ### 4. Rate Limiting
 
@@ -194,28 +194,28 @@ interface ThrottleController {
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| DB-018 | Stale data from disconnected streams is marked stale, never shown as current | Algorithmic — freshnessCheck gates all widget updates |
-| DB-019 | Refresh rate never exceeds configured minimum interval | Algorithmic — ThrottleController enforces limits per widget |
-| DB-020 | Reconnection uses exponential backoff with max cap | Architectural — ConnectionManager implements capped backoff |
-| DB-021 | Update batches are delivered atomically to widgets | Algorithmic — UpdateDistributor processes batches as units |
-| DB-022 | No persistent connection is left dangling on view close | Architectural — SubscriptionManager cleans up on view unload |
-| DB-023 | Rate limiting never drops evidence-critical data | Algorithmic — evidenceRef-bearing updates are queued, not dropped |
+| DB-018 | Stale data from disconnected streams is marked stale, never shown as current | Algorithmic â€” freshnessCheck gates all widget updates |
+| DB-019 | Refresh rate never exceeds configured minimum interval | Algorithmic â€” ThrottleController enforces limits per widget |
+| DB-020 | Reconnection uses exponential backoff with max cap | Architectural â€” ConnectionManager implements capped backoff |
+| DB-021 | Update batches are delivered atomically to widgets | Algorithmic â€” UpdateDistributor processes batches as units |
+| DB-022 | No persistent connection is left dangling on view close | Architectural â€” SubscriptionManager cleans up on view unload |
+| DB-023 | Rate limiting never drops evidence-critical data | Algorithmic â€” evidenceRef-bearing updates are queued, not dropped |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Real-Time subsystem owns streaming; Metrics own computation |
-| R2 — Dependency Order | Subscribes to AOP, EVS, AUS streams; no circular deps |
-| R3 — DRY | Stream connections shared across widgets subscribing to same source |
-| R4 — Builder Pattern | RefreshSchedule uses builder for hybrid policy configuration |
-| R5 — Liskov Substitution | Compliant | Stream connections are interchangeable through StreamProvider interface |
-| R6 — DI over Singletons | Compliant | Connection factories are injected via stream registry |
-| R9 — Deterministic | Same subscription + same source data = same widget update |
-| R10 — Simpler Over Complex | Polling is the default; streaming is opt-in per widget |
-| R13 — Design for Failure | Disconnect marks stale + fall back to polling; never blank |
-| R14 — Paved Path | Default refresh interval (30s polling) covers most use cases |
-| R15 — Open/Closed | New stream types register via StreamConnection extension |
+| R1 â€” Modulsingularity | Real-Time subsystem owns streaming; Metrics own computation |
+| R2 â€” Dependency Order | Subscribes to AOP, EVS, AUS streams; no circular deps |
+| R3 â€” DRY | Stream connections shared across widgets subscribing to same source |
+| R4 â€” Builder Pattern | RefreshSchedule uses builder for hybrid policy configuration |
+| R5 â€” Liskov Substitution | Compliant | Stream connections are interchangeable through StreamProvider interface |
+| R6 â€” DI over Singletons | Compliant | Connection factories are injected via stream registry |
+| R9 â€” Deterministic | Same subscription + same source data = same widget update |
+| R10 â€” Simpler Over Complex | Polling is the default; streaming is opt-in per widget |
+| R13 â€” Design for Failure | Disconnect marks stale + fall back to polling; never blank |
+| R14 â€” Paved Path | Default refresh interval (30s polling) covers most use cases |
+| R15 â€” Open/Closed | New stream types register via StreamConnection extension |
 
 ## Related Documents
 
@@ -229,5 +229,5 @@ interface ThrottleController {
 | Bible/05-Platform/Observability/000-AOP.md | AOP provides real-time observability stream |
 | Bible/08-Interfaces/UI/000-Overview.md | UI renders real-time widget updates |
 | Bible/08-Interfaces/Console/000-Overview.md | Console may subscribe to real-time alert streams |
-| Physics/005-Events.md | Evidence invariants — streamed data is evidence-derived |
+| Physics/005-Events.md | Evidence invariants â€” streamed data is evidence-derived |
 | Physics/011-Design-DNA.md | Design DNA rules govern real-time construction |

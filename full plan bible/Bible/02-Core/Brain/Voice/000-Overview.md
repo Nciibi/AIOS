@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 000 — Voice System
+﻿# AIOS Bible â€” Brain
+## 000 â€” Voice System
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Voice |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Voice |
 | Document ID | AIOS-BBL-002-VCE-000 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -23,37 +23,37 @@ Voice I/O is one modality managed by Conversation OS. When a user speaks, Conver
 
 ```
 Conversation OS (modality adapter)
-    ▲                         │
-    │                         ▼
-    │              ┌──────────────────────┐
-    │              │    Voice System       │
-    │              │                      │
-    │              │  ┌──────────┐        │
-    │              │  │  STT      │        │
-    │              │  │ Engine   │         │
-    │              │  └────┬─────┘        │
-    │              │       │              │
-    │              │  ┌────▼─────┐        │
-    ├──────────────┼──│  TTS      │        │
-    │              │  │ Engine   │         │
-    │              │  └──────────┘        │
-    │              │                      │
-    │              │  ┌──────────┐        │
-    │              │  │  Voice    │        │
-    │              │  │  Router   │        │
-    │              │  └──────────┘        │
-    │              │                      │
-    │              │  ┌──────────┐        │
-    │              │  │  Voice    │        │
-    │              │  │  Profile  │        │
-    │              │  └──────────┘        │
-    └──────────────┴──────────────────────┘
-                         │
-                         ▼
-                  ┌──────────────┐
-                  │  Provider    │
-                  │  SDK         │
-                  └──────────────┘
+    â–²                         â”‚
+    â”‚                         â–¼
+    â”‚              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â”‚              â”‚    Voice System       â”‚
+    â”‚              â”‚                      â”‚
+    â”‚              â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”‚
+    â”‚              â”‚  â”‚  STT      â”‚        â”‚
+    â”‚              â”‚  â”‚ Engine   â”‚         â”‚
+    â”‚              â”‚  â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜        â”‚
+    â”‚              â”‚       â”‚              â”‚
+    â”‚              â”‚  â”Œâ”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”        â”‚
+    â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”‚  TTS      â”‚        â”‚
+    â”‚              â”‚  â”‚ Engine   â”‚         â”‚
+    â”‚              â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜        â”‚
+    â”‚              â”‚                      â”‚
+    â”‚              â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”‚
+    â”‚              â”‚  â”‚  Voice    â”‚        â”‚
+    â”‚              â”‚  â”‚  Router   â”‚        â”‚
+    â”‚              â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜        â”‚
+    â”‚              â”‚                      â”‚
+    â”‚              â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”        â”‚
+    â”‚              â”‚  â”‚  Voice    â”‚        â”‚
+    â”‚              â”‚  â”‚  Profile  â”‚        â”‚
+    â”‚              â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜        â”‚
+    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                         â”‚
+                         â–¼
+                  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                  â”‚  Provider    â”‚
+                  â”‚  SDK         â”‚
+                  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 Voice System is stateless per BRAIN-007. Audio files and processing history are persisted through Memory OS.
@@ -74,7 +74,7 @@ STTRequest {
 STTResult {
   request_id: string
   transcript: string
-  confidence: number           // 0.0–1.0
+  confidence: number           // 0.0â€“1.0
   language: string
   words: WordTiming[]
   duration_ms: number
@@ -130,9 +130,9 @@ STTConfig {
 
 TTSConfig {
   model: string                // Which TTS model to use
-  speed: number                // 0.5–2.0 speech rate multiplier
-  pitch: number                // -0.5–0.5 semitone adjustment
-  volume: number               // 0.0–1.0
+  speed: number                // 0.5â€“2.0 speech rate multiplier
+  pitch: number                // -0.5â€“0.5 semitone adjustment
+  volume: number               // 0.0â€“1.0
   emphasis?: string            // "strong" | "moderate" | "reduced"
   style?: string               // "neutral" | "conversational" | "announcement"
 }
@@ -160,7 +160,7 @@ VoiceProfile {
 }
 ```
 
-### 1. STT Engine — Speech-to-Text
+### 1. STT Engine â€” Speech-to-Text
 
 Converts audio input into text. Supports multiple providers and languages:
 
@@ -184,7 +184,7 @@ STT accuracy targets:
 | Multiple speakers | < 15% | Diarization ON |
 | Streaming, real-time | < 10% | Incremental, partial utterances |
 
-### 2. TTS Engine — Text-to-Speech
+### 2. TTS Engine â€” Text-to-Speech
 
 Converts text into spoken audio. Supports multiple voices and styles:
 
@@ -288,12 +288,12 @@ interface VoiceRouterStrategy {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| VOI-001 | Voice System never interprets meaning — it transcribes and synthesizes only | Architectural — no NLP in Voice System |
-| VOI-002 | All audio data is ephemeral unless explicitly stored to Memory OS | Architectural — stateless per BRAIN-007 |
-| VOI-003 | STT results always include a confidence score | Schema — required field on STTResult |
-| VOI-004 | TTS never modifies Sou's text content | Architectural — text passes through verbatim |
-| VOI-005 | Voice profiles are scoped to the user who created them | API-level — authorization enforced |
-| VOI-006 | Streaming is always cancellable mid-stream | API-level — cancel signal on stream handle |
+| VOI-001 | Voice System never interprets meaning â€” it transcribes and synthesizes only | Architectural â€” no NLP in Voice System |
+| VOI-002 | All audio data is ephemeral unless explicitly stored to Memory OS | Architectural â€” stateless per BRAIN-007 |
+| VOI-003 | STT results always include a confidence score | Schema â€” required field on STTResult |
+| VOI-004 | TTS never modifies Sou's text content | Architectural â€” text passes through verbatim |
+| VOI-005 | Voice profiles are scoped to the user who created them | API-level â€” authorization enforced |
+| VOI-006 | Streaming is always cancellable mid-stream | API-level â€” cancel signal on stream handle |
 
 ## Related Documents
 
@@ -322,14 +322,14 @@ interface VoiceRouterStrategy {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Voice System does one thing: speech I/O |
-| R2 — Dependency Order | Depends on Memory OS, Conversation OS; no upward deps |
-| R3 — DRY | Voice profiles defined once in Profile Manager |
-| R4 — Builder Pattern | Audio pipeline built by Router → Provider → Stream |
-| R5 — Liskov Substitution | Any STTProvider/TTSProvider implements the interface |
-| R6 — DI over Singletons | Providers and routing strategies injected |
-| R9 — Deterministic | Same audio+config produces same transcript (model-dependent) |
-| R10 — Simpler Over Complex | Uses clear STT/TTS split with shared profile management |
-| R13 — Design for Failure | Provider failover and streaming timeouts always handled |
-| R14 — Paved Path | All voice I/O flows through `stt` and `tts` |
-| R15 — Open/Closed | New providers added via Provider SDK, not by modifying core |
+| R1 â€” Modulsingularity | Voice System does one thing: speech I/O |
+| R2 â€” Dependency Order | Depends on Memory OS, Conversation OS; no upward deps |
+| R3 â€” DRY | Voice profiles defined once in Profile Manager |
+| R4 â€” Builder Pattern | Audio pipeline built by Router â†’ Provider â†’ Stream |
+| R5 â€” Liskov Substitution | Any STTProvider/TTSProvider implements the interface |
+| R6 â€” DI over Singletons | Providers and routing strategies injected |
+| R9 â€” Deterministic | Same audio+config produces same transcript (model-dependent) |
+| R10 â€” Simpler Over Complex | Uses clear STT/TTS split with shared profile management |
+| R13 â€” Design for Failure | Provider failover and streaming timeouts always handled |
+| R14 â€” Paved Path | All voice I/O flows through `stt` and `tts` |
+| R15 â€” Open/Closed | New providers added via Provider SDK, not by modifying core |

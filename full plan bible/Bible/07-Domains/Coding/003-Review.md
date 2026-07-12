@@ -1,13 +1,13 @@
-# AIOS Bible — Domains
-## Coding — 003: Code Review
+﻿# AIOS Bible â€” Domains
+## Coding â€” 003: Code Review
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Domains |
+| Version | 1.0.0 |
+| Category | Bible â€” Domains |
 | Document ID | AIOS-BBL-007-COD-003 |
-| Source Laws | Law 4 — Law of Evidence, Law 7 — Law of Capability Bounds |
+| Source Laws | Law 4 â€” Law of Evidence, Law 7 â€” Law of Capability Bounds |
 | Source Physics | Physics/005-Events.md, Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -22,23 +22,23 @@ This component acts as a quality gate in the Coding workflow. Every code change 
 ## Architecture
 
 ```
-Code Diff / File ──▶  Diff Analyzer
-                         │
-                    ┌────┴────┐
-                    ▼         ▼
+Code Diff / File â”€â”€â–¶  Diff Analyzer
+                         â”‚
+                    â”Œâ”€â”€â”€â”€â”´â”€â”€â”€â”€â”
+                    â–¼         â–¼
             Style Checker   Complexity Analyzer
-                    │              │
-                    ▼              ▼
+                    â”‚              â”‚
+                    â–¼              â–¼
             Security Scanner   Smell Detector
-                    │              │
-                    └────┬─────────┘
-                         ▼
+                    â”‚              â”‚
+                    â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                         â–¼
                    Scoring Engine
-                         │
-                         ▼
+                         â”‚
+                         â–¼
                   Review Report
-                    │       │
-                    ▼       ▼
+                    â”‚       â”‚
+                    â–¼       â–¼
                Approved   Escalated (human review)
 ```
 
@@ -228,29 +228,29 @@ enum ChangeType {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Each review dimension (style, complexity, security, smells) is a separate module |
-| R2 — Dependency Order | Review depends on Language Registry; CodeWorker depends on Review |
-| R3 — DRY | Style rules and smell patterns are defined once per language; reused across reviews |
-| R4 — Builder Pattern | Review result is built incrementally through parallel analysis stages |
-| R5 — Liskov Substitution | All analysis stages implement IAnalysisStage interface |
-| R6 — DI over Singletons | Analysis stages are injected into pipeline; no shared state |
-| R9 — Deterministic | Same diff + thresholds + rules produces identical review score |
-| R10 — Simpler Over Complex | Review pipeline uses parallel fan-out with linear aggregation |
-| R13 — Design for Failure | Failed analysis stage degrades gracefully; partial results with warning |
-| R14 — Paved Path | Single paved path: diff -> analyze -> score -> approve/escalate |
-| R15 — Open/Closed | New analysis stages added by implementing IAnalysisStage; pipeline unchanged |
+| R1 â€” Modulsingularity | Each review dimension (style, complexity, security, smells) is a separate module |
+| R2 â€” Dependency Order | Review depends on Language Registry; CodeWorker depends on Review |
+| R3 â€” DRY | Style rules and smell patterns are defined once per language; reused across reviews |
+| R4 â€” Builder Pattern | Review result is built incrementally through parallel analysis stages |
+| R5 â€” Liskov Substitution | All analysis stages implement IAnalysisStage interface |
+| R6 â€” DI over Singletons | Analysis stages are injected into pipeline; no shared state |
+| R9 â€” Deterministic | Same diff + thresholds + rules produces identical review score |
+| R10 â€” Simpler Over Complex | Review pipeline uses parallel fan-out with linear aggregation |
+| R13 â€” Design for Failure | Failed analysis stage degrades gracefully; partial results with warning |
+| R14 â€” Paved Path | Single paved path: diff -> analyze -> score -> approve/escalate |
+| R15 â€” Open/Closed | New analysis stages added by implementing IAnalysisStage; pipeline unchanged |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Bible/07-Domains/Coding/000-Overview.md | Coding domain overview — code review is a mandatory quality gate |
-| Bible/07-Domains/Coding/001-Languages.md | Language Support Registry — provides style guides and rules per language |
-| Bible/07-Domains/Coding/002-Code-Generation.md | Code Generation — reviewed code originates from generation pipeline |
-| Bible/07-Domains/Coding/004-Refactoring.md | Refactoring — review validates refactoring transformations |
-| Physics/005-Events.md | Evidence — every review finding is an auditable Event |
-| Physics/007-Capabilities.md | Capabilities — review scope bounded by Worker capability profile |
-| Physics/010-Execution.md | Execution — review is part of the verification pipeline stage |
-| Bible/02-Core/DTS/000-Overview.md | DTS — review scores feed confidence scoring for generated code |
-| Bible/03-Institutions/Workers/005-Playbook-Manager.md | Playbook Manager — review playbooks define custom review rules |
-| Bible/00-Foundations/003-Core-Principles.md | CPR — review enforces constitutional compliance of generated code |
+| Bible/07-Domains/Coding/000-Overview.md | Coding domain overview â€” code review is a mandatory quality gate |
+| Bible/07-Domains/Coding/001-Languages.md | Language Support Registry â€” provides style guides and rules per language |
+| Bible/07-Domains/Coding/002-Code-Generation.md | Code Generation â€” reviewed code originates from generation pipeline |
+| Bible/07-Domains/Coding/004-Refactoring.md | Refactoring â€” review validates refactoring transformations |
+| Physics/005-Events.md | Evidence â€” every review finding is an auditable Event |
+| Physics/007-Capabilities.md | Capabilities â€” review scope bounded by Worker capability profile |
+| Physics/010-Execution.md | Execution â€” review is part of the verification pipeline stage |
+| Bible/02-Core/DTS/000-Overview.md | DTS â€” review scores feed confidence scoring for generated code |
+| Bible/03-Institutions/Workers/005-Playbook-Manager.md | Playbook Manager â€” review playbooks define custom review rules |
+| Bible/00-Foundations/003-Core-Principles.md | CPR â€” review enforces constitutional compliance of generated code |

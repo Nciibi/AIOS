@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## SDK — 000: Runtime SDK
+﻿# AIOS Bible â€” Interfaces
+## SDK â€” 000: Runtime SDK
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-SDK-000 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence, Law 9 — Law of Design DNA |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence, Law 9 â€” Law of Design DNA |
 | Source Physics | Physics/005-Events.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Runtime SDK provides the standard interface for runtime execution providers to integrate with AIOS. A runtime execution provider is any backend that can instantiate and run AIOS Workers — examples include LLM inference engines (Claude Code, Codex, Ollama), code execution sandboxes (container runtimes, WASM), and general compute environments (VM, bare metal).
+The Runtime SDK provides the standard interface for runtime execution providers to integrate with AIOS. A runtime execution provider is any backend that can instantiate and run AIOS Workers â€” examples include LLM inference engines (Claude Code, Codex, Ollama), code execution sandboxes (container runtimes, WASM), and general compute environments (VM, bare metal).
 
 The Runtime SDK defines the contract that every runtime provider must implement to be compatible with AIOS. It covers session lifecycle, capability invocation, resource accounting, evidence capture, and communication with the AIOS core.
 
@@ -65,8 +65,8 @@ interface RuntimeProvider {
 From the Runtime SDK perspective, a session follows this lifecycle:
 
 ```
-Created → Starting → Running ↔ Paused → Terminating → Terminated
-     └────→ Failed
+Created â†’ Starting â†’ Running â†” Paused â†’ Terminating â†’ Terminated
+     â””â”€â”€â”€â”€â†’ Failed
 ```
 
 | State | Description | Expected By |
@@ -75,9 +75,9 @@ Created → Starting → Running ↔ Paused → Terminating → Terminated
 | Starting | Genome loaded, dependencies initialized, sandbox prepared | Runtime Provider |
 | Running | Session is executing capabilities | LMS, Invokers |
 | Paused | Execution suspended, state preserved | LMS, Supervisor |
-| Terminating | Cleanup in progress — final events, resource release | Runtime Provider |
+| Terminating | Cleanup in progress â€” final events, resource release | Runtime Provider |
 | Terminated | Session fully stopped, resources released | LMS |
-| Failed | Unexpected termination — error state | Security Council, LMS |
+| Failed | Unexpected termination â€” error state | Security Council, LMS |
 
 The Runtime SDK must emit lifecycle Events for every transition.
 
@@ -88,9 +88,9 @@ Capability invocation follows a defined protocol:
 ```
 1. Invoker sends invokeCapability request via ACF
 2. Runtime SDK validates:
-   └─ Session is in Running state
-   └─ Capability is authorized in session Genome
-   └─ Resource budget is sufficient
+   â””â”€ Session is in Running state
+   â””â”€ Capability is authorized in session Genome
+   â””â”€ Resource budget is sufficient
 3. Runtime SDK allocates resources for this invocation
 4. Runtime SDK executes the capability in the session context
 5. Runtime SDK streams intermediate events (if streaming capability)
@@ -135,10 +135,10 @@ Runtime providers must implement session isolation at these levels:
 
 | Isolation Level | Guarantee | Provider Types |
 |----------------|-----------|----------------|
-| L1 — Logical | Separate process space, shared kernel | WASM, LLM (stateless) |
-| L2 — Container | Separate container per session | Container runtimes |
-| L3 — VM | Separate virtual machine per session | VM providers |
-| L4 — Hardware | Separate physical hardware | Bare metal, HSM |
+| L1 â€” Logical | Separate process space, shared kernel | WASM, LLM (stateless) |
+| L2 â€” Container | Separate container per session | Container runtimes |
+| L3 â€” VM | Separate virtual machine per session | VM providers |
+| L4 â€” Hardware | Separate physical hardware | Bare metal, HSM |
 
 The minimum isolation level for a session is determined by the session's Genome security requirements. L1 is the default. L3 or L4 is required for sessions handling sensitive data or operating at high autonomy levels.
 
@@ -186,46 +186,46 @@ Health checks occur every 30 seconds. A provider that reports Unhealthy for 3 co
 
 ### Security
 
-Runtime sessions are sandboxed — no session may access another session's resources. Runtime providers authenticate with AIOS via mTLS. All capability invocations are authorized by the session's Genome. Resource reporting is cryptographically signed to prevent tampering. (Physics/008-Security.md)
+Runtime sessions are sandboxed â€” no session may access another session's resources. Runtime providers authenticate with AIOS via mTLS. All capability invocations are authorized by the session's Genome. Resource reporting is cryptographically signed to prevent tampering. (Physics/008-Security.md)
 
 ### Evidence
 
-Every Runtime SDK operation produces an Event — session lifecycle transitions, capability invocations, resource usage reports. The complete execution history of every session is recorded in the Event Store for audit and analysis. (PHI-008)
+Every Runtime SDK operation produces an Event â€” session lifecycle transitions, capability invocations, resource usage reports. The complete execution history of every session is recorded in the Event Store for audit and analysis. (PHI-008)
 
 ### Lifecycle
 
-Sessions follow the lifecycle defined in the SDK interface. The Runtime SDK implements the session management portion of the broader entity lifecycle (Physics/006-Lifecycles.md). Runtime providers have their own operational lifecycle (Registered → Active → Degraded → Offline). (Physics/006-Lifecycles.md)
+Sessions follow the lifecycle defined in the SDK interface. The Runtime SDK implements the session management portion of the broader entity lifecycle (Physics/006-Lifecycles.md). Runtime providers have their own operational lifecycle (Registered â†’ Active â†’ Degraded â†’ Offline). (Physics/006-Lifecycles.md)
 
 ### Capability Bounds
 
-Runtime providers can only execute capabilities defined in the session's Genome. Resource consumption is bounded by the allocation provided at session creation. Providers enforce resource limits at the OS/container level — a session exceeding its allocation is terminated. (Physics/007-Capabilities.md)
+Runtime providers can only execute capabilities defined in the session's Genome. Resource consumption is bounded by the allocation provided at session creation. Providers enforce resource limits at the OS/container level â€” a session exceeding its allocation is terminated. (Physics/007-Capabilities.md)
 
 ### Communication
 
-All Runtime SDK communication with AIOS core flows through ACF. Runtime providers communicate with their sessions through provider-specific channels (not through ACF). Cross-provider communication is not supported — all inter-session communication must go through ACF. (Law 3 — Communication)
+All Runtime SDK communication with AIOS core flows through ACF. Runtime providers communicate with their sessions through provider-specific channels (not through ACF). Cross-provider communication is not supported â€” all inter-session communication must go through ACF. (Law 3 â€” Communication)
 
 ### Design DNA
 
 | Rule | Compliance |
 |------|-----------|
-| R1 (Modulsingularity) | Runtime SDK covers only runtime execution — no knowledge or audit concerns |
-| R5 (Liskov) | All runtime providers implement the same RuntimeProvider interface — interchangeable |
-| R6 (DI) | Runtime providers are injected into sessions — no hard coupling |
+| R1 (Modulsingularity) | Runtime SDK covers only runtime execution â€” no knowledge or audit concerns |
+| R5 (Liskov) | All runtime providers implement the same RuntimeProvider interface â€” interchangeable |
+| R6 (DI) | Runtime providers are injected into sessions â€” no hard coupling |
 | R9 (Deterministic) | Same Genome and allocation produces identical session initialization |
-| R10 (Simpler Over Complex) | Session lifecycle is linear — no branching state machines |
-| R13 (Design for Failure) | Sessions fail closed — terminate on unhandled error, preserve evidence |
-| R14 (Paved Path) | Paved path: create session → start → invoke → monitor → terminate |
+| R10 (Simpler Over Complex) | Session lifecycle is linear â€” no branching state machines |
+| R13 (Design for Failure) | Sessions fail closed â€” terminate on unhandled error, preserve evidence |
+| R14 (Paved Path) | Paved path: create session â†’ start â†’ invoke â†’ monitor â†’ terminate |
 
 ## Related Documents
 
 | Document | Relationship |
 |---------|-------------|
-| Physics/005-Events.md | Evidence — Runtime SDK operations produce Events |
-| Physics/010-Execution.md | Execution — Runtime SDK implements the execution model |
-| Bible/08-Interfaces/API/000-Specifications.md | API — Runtime SDK consumes ACF API contracts |
-| Bible/02-Core/AGS/000-Overview.md | AGS — Session genomes define runtime requirements |
-| Bible/02-Core/ROS/000-Overview.md | ROS — Resource allocation and accounting for sessions |
-| Bible/04-Execution/Runtime/000-Overview.md | Runtime — Execution runtime architecture |
-| Bible/03-Institutions/Workers/000-Overview.md | Workers — Sessions are Worker instances |
-| Bible/00-Foundations/002-Design-DNA.md | Design DNA — R1–R15 compliance |
-| Bible/00-Foundations/003-Core-Principles.md | CPR-001–010 — core principles |
+| Physics/005-Events.md | Evidence â€” Runtime SDK operations produce Events |
+| Physics/010-Execution.md | Execution â€” Runtime SDK implements the execution model |
+| Bible/08-Interfaces/API/000-Specifications.md | API â€” Runtime SDK consumes ACF API contracts |
+| Bible/02-Core/AGS/000-Overview.md | AGS â€” Session genomes define runtime requirements |
+| Bible/02-Core/ROS/000-Overview.md | ROS â€” Resource allocation and accounting for sessions |
+| Bible/04-Execution/Runtime/000-Overview.md | Runtime â€” Execution runtime architecture |
+| Bible/03-Institutions/Workers/000-Overview.md | Workers â€” Sessions are Worker instances |
+| Bible/00-Foundations/002-Design-DNA.md | Design DNA â€” R1â€“R15 compliance |
+| Bible/00-Foundations/003-Core-Principles.md | CPR-001â€“010 â€” core principles |

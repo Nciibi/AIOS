@@ -1,50 +1,50 @@
-# AIOS Bible — Brain/LLMOS
-## 009 — Retry Engine
+﻿# AIOS Bible â€” Brain/LLMOS
+## 009 â€” Retry Engine
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/LLMOS |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-009 |
-| Source Laws | Law 8 — Law of Verification-First (reliability), Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 8 â€” Law of Verification-First (reliability), Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/006-Lifecycles.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
 | Amended By | RFC |
-| Pipeline Stage | 12 — Provider Call with Retry |
+| Pipeline Stage | 12 â€” Provider Call with Retry |
 
 ## Purpose
 
-The Retry Engine manages the safe, observable execution of provider API calls with configurable retry logic and fallback chains. It is the bridge between the LLMOS pipeline and the Provider SDK. Every provider call passes through the Retry Engine, which handles transient failures, rate limiting, timeouts, and model unavailability — ensuring the pipeline produces a response or a clear failure reason.
+The Retry Engine manages the safe, observable execution of provider API calls with configurable retry logic and fallback chains. It is the bridge between the LLMOS pipeline and the Provider SDK. Every provider call passes through the Retry Engine, which handles transient failures, rate limiting, timeouts, and model unavailability â€” ensuring the pipeline produces a response or a clear failure reason.
 
 ## Architecture
 
 ```
 ProviderRequest (from Prompt Compiler)
-         │
-         ▼
-┌─────────────────────────────────────────────┐
-│          RETRY ENGINE                       │
-│                                             │
-│  ┌─────────────┐    ┌──────────────────┐   │
-│  │ Attempt Manager│──►│ Backoff Calculator│  │
-│  └─────────────┘    └──────────────────┘   │
-│         │                                    │
-│         ▼                                    │
-│  ┌──────────────────────────────────────┐   │
-│  │         Fallback Chain               │   │
-│  │  Model A (primary) → attempt 1..N    │   │
-│  │  Model B (fallback 1) → attempt 1..N │   │
-│  │  Model C (fallback 2) → attempt 1..N │   │
-│  └──────────────────────────────────────┘   │
-│         │                                    │
-│         ▼                                    │
-│  Provider SDK → Provider API ←──────────┘   │
-│         │                                    │
-│         ▼                                    │
-│  Success or FinalFailure                     │
-└─────────────────────────────────────────────┘
+         â”‚
+         â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚          RETRY ENGINE                       â”‚
+â”‚                                             â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
+â”‚  â”‚ Attempt Managerâ”‚â”€â”€â–ºâ”‚ Backoff Calculatorâ”‚  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
+â”‚         â”‚                                    â”‚
+â”‚         â–¼                                    â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”   â”‚
+â”‚  â”‚         Fallback Chain               â”‚   â”‚
+â”‚  â”‚  Model A (primary) â†’ attempt 1..N    â”‚   â”‚
+â”‚  â”‚  Model B (fallback 1) â†’ attempt 1..N â”‚   â”‚
+â”‚  â”‚  Model C (fallback 2) â†’ attempt 1..N â”‚   â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
+â”‚         â”‚                                    â”‚
+â”‚         â–¼                                    â”‚
+â”‚  Provider SDK â†’ Provider API â†â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜   â”‚
+â”‚         â”‚                                    â”‚
+â”‚         â–¼                                    â”‚
+â”‚  Success or FinalFailure                     â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ## Retry Configuration
@@ -91,10 +91,10 @@ interface CircuitBreakerConfig {
 | `provider_overloaded` | Yes | Exponential | 429 without Retry-After |
 | `provider_internal_error` | Yes | Exponential | 500 from provider |
 | `network_error` | Yes | Exponential | DNS, TLS, connection errors |
-| `auth_error` | No | — | 401, 403 — fail immediately |
-| `invalid_request` | No | — | 400, 422 — fail immediately |
-| `content_filter` | No | — | Provider blocked content — fail immediately |
-| `model_not_found` | No | — | Trigger fallback to next model instead |
+| `auth_error` | No | â€” | 401, 403 â€” fail immediately |
+| `invalid_request` | No | â€” | 400, 422 â€” fail immediately |
+| `content_filter` | No | â€” | Provider blocked content â€” fail immediately |
+| `model_not_found` | No | â€” | Trigger fallback to next model instead |
 
 ## Fallback Chain
 
@@ -185,13 +185,13 @@ interface CircuitBreakerState {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| LLM-RTY-001 | Every provider call is wrapped by the Retry Engine — no direct provider calls from any pipeline component. | Architectural — sole provider call gateway |
-| LLM-RTY-002 | Max total attempts across all fallbacks is never exceeded. | Algorithmic — attempt counter enforcement |
-| LLM-RTY-003 | Backoff with jitter ensures no thundering herd on provider recovery. | Algorithmic — jittered backoff calculation |
-| LLM-RTY-004 | Non-retryable errors (auth, invalid request, content filter) never trigger retry. | Algorithmic — error classification |
-| LLM-RTY-005 | Circuit breaker state is shared across all pipeline instances for the same model. | Architectural — distributed state |
-| LLM-RTY-006 | The attempt record is always produced regardless of success or failure. | Architectural — observability invariant |
-| LLM-RTY-007 | Fallback never upgrades to a more expensive model without router approval. | Algorithmic — fallback strategy enforcement |
+| LLM-RTY-001 | Every provider call is wrapped by the Retry Engine â€” no direct provider calls from any pipeline component. | Architectural â€” sole provider call gateway |
+| LLM-RTY-002 | Max total attempts across all fallbacks is never exceeded. | Algorithmic â€” attempt counter enforcement |
+| LLM-RTY-003 | Backoff with jitter ensures no thundering herd on provider recovery. | Algorithmic â€” jittered backoff calculation |
+| LLM-RTY-004 | Non-retryable errors (auth, invalid request, content filter) never trigger retry. | Algorithmic â€” error classification |
+| LLM-RTY-005 | Circuit breaker state is shared across all pipeline instances for the same model. | Architectural â€” distributed state |
+| LLM-RTY-006 | The attempt record is always produced regardless of success or failure. | Architectural â€” observability invariant |
+| LLM-RTY-007 | Fallback never upgrades to a more expensive model without router approval. | Algorithmic â€” fallback strategy enforcement |
 
 ## Events
 
@@ -206,17 +206,17 @@ interface CircuitBreakerState {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Retry Engine is the sole provider call executor |
-| R2 — Dependency Order | Retry Engine depends on Provider SDK for execution |
-| R3 — DRY | Single retry logic applied to all providers |
-| R4 — Builder Pattern | RetryConfig built via builder pattern |
-| R5 — Liskov Substitution | All providers interchangeable through ModelProvider interface |
-| R6 — DI over Singletons | RetryEngine injected into pipeline |
-| R9 — Deterministic | Same request produces same retry sequence |
-| R10 — Simpler Over Complex | Configurable backoff over opaque retry logic |
-| R13 — Design for Failure | Core purpose — design for failure with circuit breakers |
-| R14 — Paved Path | Default retry config for all provider calls |
-| R15 — Open/Closed | New error types retried without engine changes |
+| R1 â€” Modulsingularity | Retry Engine is the sole provider call executor |
+| R2 â€” Dependency Order | Retry Engine depends on Provider SDK for execution |
+| R3 â€” DRY | Single retry logic applied to all providers |
+| R4 â€” Builder Pattern | RetryConfig built via builder pattern |
+| R5 â€” Liskov Substitution | All providers interchangeable through ModelProvider interface |
+| R6 â€” DI over Singletons | RetryEngine injected into pipeline |
+| R9 â€” Deterministic | Same request produces same retry sequence |
+| R10 â€” Simpler Over Complex | Configurable backoff over opaque retry logic |
+| R13 â€” Design for Failure | Core purpose â€” design for failure with circuit breakers |
+| R14 â€” Paved Path | Default retry config for all provider calls |
+| R15 â€” Open/Closed | New error types retried without engine changes |
 
 ## Related Documents
 
@@ -232,5 +232,5 @@ interface CircuitBreakerState {
 |-----------|------------|----------|
 | All retries exhausted | LLM-0501 | Return provider unavailable with combined attempt records |
 | All fallbacks exhausted | LLM-0502 | Return all providers unavailable; include last error from each |
-| Circuit breaker open | — | Skip to fallback; record as circuit_open in attempts |
-| Total timeout exceeded | — | Cancel current attempt; return timeout error |
+| Circuit breaker open | â€” | Skip to fallback; record as circuit_open in attempts |
+| Total timeout exceeded | â€” | Cancel current attempt; return timeout error |

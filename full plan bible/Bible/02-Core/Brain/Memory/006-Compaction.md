@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 006 — Memory Compaction
+﻿# AIOS Bible â€” Brain
+## 006 â€” Memory Compaction
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Memory |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Memory |
 | Document ID | AIOS-BBL-002-MEM-006 |
-| Source Laws | Law 4 — Law of Evidence, Law 6 — Law of Lifecycle |
+| Source Laws | Law 4 â€” Law of Evidence, Law 6 â€” Law of Lifecycle |
 | Source Physics | Physics/005-Events.md, Physics/006-Lifecycles.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -34,7 +34,7 @@ ReclamationConfig {
 
 | Phase | Action | Duration After Delete | Recoverable? |
 |-------|--------|----------------------|--------------|
-| 1. Soft delete | Item marked deleted, still in indexes | 0–24 hours | Yes |
+| 1. Soft delete | Item marked deleted, still in indexes | 0â€“24 hours | Yes |
 | 2. Archival check | Check if item needs summarized first | 24 hours | Yes (from archive) |
 | 3. Hard delete | Item removed from store + indexes | > 24 hours | No |
 
@@ -73,18 +73,18 @@ Items may be promoted between memory types as they demonstrate value.
 
 ```typescript
 CrossMemoryPromotionConfig {
-  // Working → Episodic
+  // Working â†’ Episodic
   working_to_episodic_threshold: 0.7     // Importance threshold
   working_to_episodic_on_session_end: true
 
-  // Episodic → Semantic
+  // Episodic â†’ Semantic
   episodic_to_semantic_min_confidence: 0.8
   episodic_to_semantic_min_occurrences: 3   // Same pattern observed 3+ times
   episodic_to_semantic_types: [
     "user_preference", "domain_knowledge", "relationship", "rule"
   ]
 
-  // Episodic → Procedural
+  // Episodic â†’ Procedural
   episodic_to_procedural_min_successes: 3
   episodic_to_procedural_min_steps: 2         // Minimum action sequence length
   episodic_to_procedural_types: [
@@ -229,41 +229,41 @@ Each compaction cycle proceeds through configurable phases:
 
 ```
 Phase 1: Reclamation
-    ├── Scan for soft-deleted items past recovery window
-    ├── Hard-delete in batches of 1000
-    └── Update all indexes
-    │
+    â”œâ”€â”€ Scan for soft-deleted items past recovery window
+    â”œâ”€â”€ Hard-delete in batches of 1000
+    â””â”€â”€ Update all indexes
+    â”‚
 Phase 2: Reorganization (every N cycles)
-    ├── Identify segments with high stale ratio
-    ├── Read live items from stale segments
-    ├── Write new compacted segments
-    └── Schedule old segments for deletion
-    │
+    â”œâ”€â”€ Identify segments with high stale ratio
+    â”œâ”€â”€ Read live items from stale segments
+    â”œâ”€â”€ Write new compacted segments
+    â””â”€â”€ Schedule old segments for deletion
+    â”‚
 Phase 3: Importance Adjustment
-    ├── Query items with activity in promotion window
-    ├── Apply access_promotion per access count
-    ├── Apply decay for items without access
-    └── Emit promotion events for significant changes
-    │
+    â”œâ”€â”€ Query items with activity in promotion window
+    â”œâ”€â”€ Apply access_promotion per access count
+    â”œâ”€â”€ Apply decay for items without access
+    â””â”€â”€ Emit promotion events for significant changes
+    â”‚
 Phase 4: Cross-Memory Promotion
-    ├── Scan episodic for promotable patterns
-    ├── For each candidate:
-    │   ├── Check minimum occurrences/confidence
-    │   ├── Generate Semantic Fact or Procedure
-    │   ├── Store in target memory type
-    │   └── Record provenance link
-    └── Emit promotion events
-    │
+    â”œâ”€â”€ Scan episodic for promotable patterns
+    â”œâ”€â”€ For each candidate:
+    â”‚   â”œâ”€â”€ Check minimum occurrences/confidence
+    â”‚   â”œâ”€â”€ Generate Semantic Fact or Procedure
+    â”‚   â”œâ”€â”€ Store in target memory type
+    â”‚   â””â”€â”€ Record provenance link
+    â””â”€â”€ Emit promotion events
+    â”‚
 Phase 5: Eviction (if triggered)
-    ├── Sort eviction candidates by priority_order
-    ├── Evict up to max_eviction_per_cycle
-    └── Update all indexes
-    │
+    â”œâ”€â”€ Sort eviction candidates by priority_order
+    â”œâ”€â”€ Evict up to max_eviction_per_cycle
+    â””â”€â”€ Update all indexes
+    â”‚
 Phase 6: Integrity Check (every N cycles)
-    ├── Sample items from each memory type
-    ├── Verify checksum against stored hash
-    ├── Verify index consistency (every item in index exists in store)
-    └── Repair or report inconsistencies
+    â”œâ”€â”€ Sample items from each memory type
+    â”œâ”€â”€ Verify checksum against stored hash
+    â”œâ”€â”€ Verify index consistency (every item in index exists in store)
+    â””â”€â”€ Repair or report inconsistencies
 ```
 
 ## Performance Impact
@@ -345,7 +345,7 @@ interface ReorganizationReport {
 }
 
 interface PromotionReport {
-  items_promoted: Record<string, number>  // Memory type → count
+  items_promoted: Record<string, number>  // Memory type â†’ count
   items_decayed: Record<string, number>
   importance_changes: number
 }
@@ -407,13 +407,13 @@ interface CompactionStatus {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| CMP-001 | Compaction never blocks active memory reads or writes | Architectural — concurrent access design |
-| CMP-002 | Soft-deleted items are recoverable for 24 hours | Algorithmic — recovery window enforced |
-| CMP-003 | Hard-deleted items are removed from all indexes | Algorithmic — index cleanup runs before delete |
-| CMP-004 | Importance scores are bounded [0.0, 1.0] | Schema — clamped on every adjustment |
-| CMP-005 | Cross-memory promotions preserve provenance | Schema — source_episode field required |
-| CMP-006 | Emergency eviction always preserves Working and pinned items | Algorithmic — eviction order enforced |
-| CMP-007 | Integrity checks never modify active data | Architectural — read-only verification |
+| CMP-001 | Compaction never blocks active memory reads or writes | Architectural â€” concurrent access design |
+| CMP-002 | Soft-deleted items are recoverable for 24 hours | Algorithmic â€” recovery window enforced |
+| CMP-003 | Hard-deleted items are removed from all indexes | Algorithmic â€” index cleanup runs before delete |
+| CMP-004 | Importance scores are bounded [0.0, 1.0] | Schema â€” clamped on every adjustment |
+| CMP-005 | Cross-memory promotions preserve provenance | Schema â€” source_episode field required |
+| CMP-006 | Emergency eviction always preserves Working and pinned items | Algorithmic â€” eviction order enforced |
+| CMP-007 | Integrity checks never modify active data | Architectural â€” read-only verification |
 
 ## Error Cases
 
@@ -430,17 +430,17 @@ interface CompactionStatus {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Compaction does one thing: memory maintenance |
-| R2 — Dependency Order | Depends on Memory OS core, Index Store; no upward deps |
-| R3 — DRY | Compaction config defined once; phases share common patterns |
-| R4 — Builder Pattern | Report built by Phase Execution → Aggregation |
-| R5 — Liskov Substitution | Any CompactionStrategy implements the interface |
-| R6 — DI over Singletons | Phase strategies injected via config |
-| R9 — Deterministic | Same state produces same compaction outcome |
-| R10 — Simpler Over Complex | Clear phase separation with graduated priority |
-| R13 — Design for Failure | Emergency eviction as last resort |
-| R14 — Paved Path | All maintenance flows through compaction cycles |
-| R15 — Open/Closed | New phases added via CompactionPhase enum |
+| R1 â€” Modulsingularity | Compaction does one thing: memory maintenance |
+| R2 â€” Dependency Order | Depends on Memory OS core, Index Store; no upward deps |
+| R3 â€” DRY | Compaction config defined once; phases share common patterns |
+| R4 â€” Builder Pattern | Report built by Phase Execution â†’ Aggregation |
+| R5 â€” Liskov Substitution | Any CompactionStrategy implements the interface |
+| R6 â€” DI over Singletons | Phase strategies injected via config |
+| R9 â€” Deterministic | Same state produces same compaction outcome |
+| R10 â€” Simpler Over Complex | Clear phase separation with graduated priority |
+| R13 â€” Design for Failure | Emergency eviction as last resort |
+| R14 â€” Paved Path | All maintenance flows through compaction cycles |
+| R15 â€” Open/Closed | New phases added via CompactionPhase enum |
 
 ## Related Documents
 

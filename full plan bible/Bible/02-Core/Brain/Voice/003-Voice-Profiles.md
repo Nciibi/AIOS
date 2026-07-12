@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 003 — Voice Profile Manager
+﻿# AIOS Bible â€” Brain
+## 003 â€” Voice Profile Manager
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Voice |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Voice |
 | Document ID | AIOS-BBL-002-VCE-003 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -62,7 +62,7 @@ VoiceProfile {
 
 | Type | Scope | Persistence | Example |
 |------|-------|-------------|---------|
-| `default_system` | System-wide | Always present | "Sou Default" — English, female, neural |
+| `default_system` | System-wide | Always present | "Sou Default" â€” English, female, neural |
 | `user_preference` | Per-user | Persisted in Memory OS | "Alice prefers deep male voice" |
 | `context_override` | Per-session | Ephemeral, cleared with session | "Announcement style for briefing mode" |
 | `custom` | Per-user, user-created | Persisted in Memory OS | "Bob's cloned voice from sample" |
@@ -77,7 +77,7 @@ ProfileProviderMapping {
   profile_id: string
   provider: string
   provider_voice_id: string
-  priority: number                   // 0–100, higher = preferred
+  priority: number                   // 0â€“100, higher = preferred
   is_active: boolean
   capabilities?: {
     qualities: ("high" | "standard" | "low")[]
@@ -301,12 +301,12 @@ type ProfileErrorCode =
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| VPM-001 | The system always has at least one active default profile | Seed — initialized on first install |
-| VPM-002 | Default system profiles are read-only and cannot be deleted | API — delete fails with `VOI_PROFILE_READ_ONLY` |
-| VPM-003 | Context override profiles expire when their session ends | Lifecycle — `cleanExpiredSessions()` called by Session Manager |
-| VPM-004 | A user can have at most one active default preference | Algorithmic — `setDefaultProfile` replaces previous default |
-| VPM-005 | Profiles are scoped to exactly one user unless system-wide | Schema — `scope.user_id` is required for non-system types |
-| VPM-006 | Provider voice IDs are unique per provider within a mapping | Schema — unique constraint on (provider, provider_voice_id) |
+| VPM-001 | The system always has at least one active default profile | Seed â€” initialized on first install |
+| VPM-002 | Default system profiles are read-only and cannot be deleted | API â€” delete fails with `VOI_PROFILE_READ_ONLY` |
+| VPM-003 | Context override profiles expire when their session ends | Lifecycle â€” `cleanExpiredSessions()` called by Session Manager |
+| VPM-004 | A user can have at most one active default preference | Algorithmic â€” `setDefaultProfile` replaces previous default |
+| VPM-005 | Profiles are scoped to exactly one user unless system-wide | Schema â€” `scope.user_id` is required for non-system types |
+| VPM-006 | Provider voice IDs are unique per provider within a mapping | Schema â€” unique constraint on (provider, provider_voice_id) |
 
 ## Error Cases
 
@@ -325,17 +325,17 @@ type ProfileErrorCode =
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Voice Profile Manager handles only profile definitions and resolution |
-| R2 — Dependency Order | Depends on Memory OS for persistence; no upward deps |
-| R3 — DRY | Profile type behavior defined once in schemas |
-| R4 — Builder Pattern | Profile built by Create → Validate → Store → Index |
-| R5 — Liskov Substitution | Any profile can be substituted for another of compatible type |
-| R6 — DI over Singletons | Profile store and providers injected |
-| R9 — Deterministic | Same profile query returns same resolution (non-system depends on persistence) |
-| R10 — Simpler Over Complex | Four clear profile types with cascade resolution |
-| R13 — Design for Failure | Default fallback chain always produces a voice |
-| R14 — Paved Path | Profile resolution flows through `getDefaultProfile()` or `getProfile()` |
-| R15 — Open/Closed | New profile types added by extending type enum, not modifying resolution core |
+| R1 â€” Modulsingularity | Voice Profile Manager handles only profile definitions and resolution |
+| R2 â€” Dependency Order | Depends on Memory OS for persistence; no upward deps |
+| R3 â€” DRY | Profile type behavior defined once in schemas |
+| R4 â€” Builder Pattern | Profile built by Create â†’ Validate â†’ Store â†’ Index |
+| R5 â€” Liskov Substitution | Any profile can be substituted for another of compatible type |
+| R6 â€” DI over Singletons | Profile store and providers injected |
+| R9 â€” Deterministic | Same profile query returns same resolution (non-system depends on persistence) |
+| R10 â€” Simpler Over Complex | Four clear profile types with cascade resolution |
+| R13 â€” Design for Failure | Default fallback chain always produces a voice |
+| R14 â€” Paved Path | Profile resolution flows through `getDefaultProfile()` or `getProfile()` |
+| R15 â€” Open/Closed | New profile types added by extending type enum, not modifying resolution core |
 
 ## Related Documents
 

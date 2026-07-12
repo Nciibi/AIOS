@@ -1,13 +1,13 @@
-# AIOS Bible — Interfaces
-## Dashboard — 005: Alerts
+﻿# AIOS Bible â€” Interfaces
+## Dashboard â€” 005: Alerts
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Interfaces |
+| Version | 1.0.0 |
+| Category | Bible â€” Interfaces |
 | Document ID | AIOS-BBL-008-DB-005 |
-| Source Laws | Law 4 — Law of Evidence, Law 8 — Law of Verification-First, Law 9 — Law of Constitutional Supremacy |
+| Source Laws | Law 4 â€” Law of Evidence, Law 8 â€” Law of Verification-First, Law 9 â€” Law of Constitutional Supremacy |
 | Source Physics | Physics/005-Events.md, Physics/011-Design-DNA.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Alert subsystem surfaces actionable notifications from AOP, AUS, and the Simulation system onto the Dashboard. Alerts are classified by severity, linked to supporting evidence, routed to the appropriate human interface (Console for governance, UI for awareness), and tracked through their lifecycle. Alerts inform — they never auto-resolve sensitive actions.
+The Alert subsystem surfaces actionable notifications from AOP, AUS, and the Simulation system onto the Dashboard. Alerts are classified by severity, linked to supporting evidence, routed to the appropriate human interface (Console for governance, UI for awareness), and tracked through their lifecycle. Alerts inform â€” they never auto-resolve sensitive actions.
 
 ## Architecture
 
@@ -100,7 +100,7 @@ Alerts originate from AOP (threshold breaches, anomalies), AUS (audit findings, 
 
 ### 2. Severity Classification
 
-Each alert is classified as critical, warning, or info. Classification is derived from the source system's own severity assessment, enriched by AUS audit context. Classification follows evidence — severity is never manually asserted.
+Each alert is classified as critical, warning, or info. Classification is derived from the source system's own severity assessment, enriched by AUS audit context. Classification follows evidence â€” severity is never manually asserted.
 
 ### 3. Surfacing
 
@@ -112,7 +112,7 @@ Every alert carries an evidenceRef linking to the EVS event or AUS finding that 
 
 ### 5. Action Routing
 
-Alerts define AlertAction entries that link to the Governance Console (for overrides, approvals) or the Human Interface (for awareness views). Actions never execute directly on the Dashboard — they route to the appropriate system for human decision.
+Alerts define AlertAction entries that link to the Governance Console (for overrides, approvals) or the Human Interface (for awareness views). Actions never execute directly on the Dashboard â€” they route to the appropriate system for human decision.
 
 ## Operations
 
@@ -180,28 +180,28 @@ interface ActionRouter {
 
 | ID | Rule | Enforcement |
 |----|------|-------------|
-| DB-030 | Alerts inform only — never auto-resolve sensitive actions | Constitutional — action routing always requires human navigation |
-| DB-031 | Every alert links to verifiable evidence | Algorithmic — link_to_evidence validates evidenceRef existence |
-| DB-032 | Severity is derived from evidence, never manually asserted | Algorithmic — AlertClassifier requires source context |
-| DB-033 | Archived alerts are immutable; no edits after archive | Architectural — archive transitions state to read-only |
-| DB-034 | Action links target Console or UI, never direct execution | Architectural — ActionRouter resolves to view URLs only |
-| DB-035 | Duplicate alerts from same source are suppressed | Algorithmic — AlertIngestor deduplicates by sourceAlertId |
+| DB-030 | Alerts inform only â€” never auto-resolve sensitive actions | Constitutional â€” action routing always requires human navigation |
+| DB-031 | Every alert links to verifiable evidence | Algorithmic â€” link_to_evidence validates evidenceRef existence |
+| DB-032 | Severity is derived from evidence, never manually asserted | Algorithmic â€” AlertClassifier requires source context |
+| DB-033 | Archived alerts are immutable; no edits after archive | Architectural â€” archive transitions state to read-only |
+| DB-034 | Action links target Console or UI, never direct execution | Architectural â€” ActionRouter resolves to view URLs only |
+| DB-035 | Duplicate alerts from same source are suppressed | Algorithmic â€” AlertIngestor deduplicates by sourceAlertId |
 
 ## Design DNA
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Alert subsystem owns surfacing; AOP/AUS own detection |
-| R2 — Dependency Order | Depends on AOP, AUS, EVS, Simulation; no circular deps |
-| R3 — DRY | Alerts ingested once; surfaced on all relevant alert-list widgets |
-| R4 — Builder Pattern | AlertAction uses builder for target URL construction |
-| R5 — Law of Demeter | Alert subsystem communicates with sources via AlertSurface interface only |
-| R6 — DI over Singletons | Compliant | Alert routing implementations are injected via the AlertDispatcher interface |
-| R9 — Deterministic | Same source alert + same classification = same surfaced presentation |
-| R10 — Simpler Over Complex | Active alert list is default; history and analytics are opt-in |
-| R13 — Design for Failure | Source unavailable queues alerts; evidence missing marks degraded |
-| R14 — Paved Path | Critical alerts appear on Health view by default |
-| R15 — Open/Closed | New alert sources register via AlertIngestor extension |
+| R1 â€” Modulsingularity | Alert subsystem owns surfacing; AOP/AUS own detection |
+| R2 â€” Dependency Order | Depends on AOP, AUS, EVS, Simulation; no circular deps |
+| R3 â€” DRY | Alerts ingested once; surfaced on all relevant alert-list widgets |
+| R4 â€” Builder Pattern | AlertAction uses builder for target URL construction |
+| R5 â€” Law of Demeter | Alert subsystem communicates with sources via AlertSurface interface only |
+| R6 â€” DI over Singletons | Compliant | Alert routing implementations are injected via the AlertDispatcher interface |
+| R9 â€” Deterministic | Same source alert + same classification = same surfaced presentation |
+| R10 â€” Simpler Over Complex | Active alert list is default; history and analytics are opt-in |
+| R13 â€” Design for Failure | Source unavailable queues alerts; evidence missing marks degraded |
+| R14 â€” Paved Path | Critical alerts appear on Health view by default |
+| R15 â€” Open/Closed | New alert sources register via AlertIngestor extension |
 
 ## Related Documents
 
@@ -218,5 +218,5 @@ interface ActionRouter {
 | Bible/05-Platform/005-AUS.md | AUS provides audit finding alerts |
 | Bible/04-Execution/Simulation/000-Overview.md | Simulation provides scenario outcome alerts |
 | Bible/01-Governance/001-CLS.md | Constitutional limits on auto-resolution govern alert actions |
-| Physics/005-Events.md | Evidence invariants — alert values are evidence-derived |
+| Physics/005-Events.md | Evidence invariants â€” alert values are evidence-derived |
 | Physics/011-Design-DNA.md | Design DNA rules govern alert construction |

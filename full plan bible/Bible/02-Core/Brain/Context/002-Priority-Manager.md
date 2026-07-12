@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 002 — Priority Manager
+﻿# AIOS Bible â€” Brain
+## 002 â€” Priority Manager
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Context |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Context |
 | Document ID | AIOS-BBL-002-CTX-002 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/005-Events.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Priority Manager assigns, decays, and overrides priority scores for every item in the context window. It implements the 5-tier priority model defined in CTX-000, ensuring that the most important information is retained while lower-value context is eligible for compression or eviction. Priority scores drive all downstream decisions — section ordering, compression target selection, TTL extension eligibility, and emergency eviction order.
+The Priority Manager assigns, decays, and overrides priority scores for every item in the context window. It implements the 5-tier priority model defined in CTX-000, ensuring that the most important information is retained while lower-value context is eligible for compression or eviction. Priority scores drive all downstream decisions â€” section ordering, compression target selection, TTL extension eligibility, and emergency eviction order.
 
 ## Data Model
 
@@ -24,11 +24,11 @@ The Priority Manager assigns, decays, and overrides priority scores for every it
 ```typescript
 PriorityScore {
   item_id: string
-  score: number              // 0.0–1.0
+  score: number              // 0.0â€“1.0
   tier: PriorityTier
   base_score: number         // Original score at insert time
   decay_rate: number         // Per-turn decay amount
-  min_score: number          // Floor — score will not decay below this
+  min_score: number          // Floor â€” score will not decay below this
   last_decayed_at: timestamp
   decay_count: number
   source_boost: number       // Bonus from source service priority
@@ -59,7 +59,7 @@ PriorityConfig {
     can_expire: boolean
     can_pin: boolean
   }>
-  source_weights: Record<string, number>    // Source service → priority boost
+  source_weights: Record<string, number>    // Source service â†’ priority boost
   access_boost: number                      // +0.1 per access
   reference_boost: number                   // +0.15 when referenced by Sou
   reflection_boost: number                  // +0.2 when referenced by Reflection
@@ -72,11 +72,11 @@ PriorityConfig {
 
 | Tier | Score Range | Default Decay/Turn | Min Floor | Always in Context | Examples |
 |------|-------------|-------------------|-----------|-------------------|----------|
-| Critical | 0.9–1.0 | 0.0 | 0.9 | Yes | User input, active mission state, security alerts |
-| High | 0.7–0.9 | 0.02 | 0.5 | Yes until resolved | Pinned goals, active tool calls, recent user messages (≤5 turns) |
-| Medium | 0.4–0.7 | 0.04 | 0.3 | If space permits | Conversation history (6–20 turns), system notifications |
-| Low | 0.2–0.4 | 0.06 | 0.15 | Subject to compression | Historical context (21–50 turns), verbose tool output |
-| Background | 0.0–0.2 | 0.10 | 0.0 | Excluded unless requested | Log entries, debug info, stale context |
+| Critical | 0.9â€“1.0 | 0.0 | 0.9 | Yes | User input, active mission state, security alerts |
+| High | 0.7â€“0.9 | 0.02 | 0.5 | Yes until resolved | Pinned goals, active tool calls, recent user messages (â‰¤5 turns) |
+| Medium | 0.4â€“0.7 | 0.04 | 0.3 | If space permits | Conversation history (6â€“20 turns), system notifications |
+| Low | 0.2â€“0.4 | 0.06 | 0.15 | Subject to compression | Historical context (21â€“50 turns), verbose tool output |
+| Background | 0.0â€“0.2 | 0.10 | 0.0 | Excluded unless requested | Log entries, debug info, stale context |
 
 ### Default Tier Assignment by Item Type
 
@@ -288,7 +288,7 @@ interface PriorityManager {
 interface DecayReport {
   session_id: string
   items_decayed: number
-  tier_shifts: Record<string, number>   // tier → count of items that shifted
+  tier_shifts: Record<string, number>   // tier â†’ count of items that shifted
   total_score_delta: number
   turns_elapsed: number
   timestamp: timestamp
@@ -300,13 +300,13 @@ interface DecayReport {
 ### Pattern 1: Priority Lifecycle of a Tool Result
 
 ```
-1. Tool executes → result pushed with priority: 0.75 (High)
+1. Tool executes â†’ result pushed with priority: 0.75 (High)
 2. Next turn: priority = 0.75 - 0.02 = 0.73 (still High)
-3. Sou references the result → +0.15 → priority = 0.88 (High)
+3. Sou references the result â†’ +0.15 â†’ priority = 0.88 (High)
 4. After 3 turns without access: priority = 0.88 - 0.06 = 0.82 (High)
 5. After 10 turns: priority = 0.82 - 0.14 = 0.68 (Medium)
 6. After 20 turns: priority = 0.68 - 0.20 = 0.48 (Medium)
-7. Sou never accesses again → priority hits min 0.5 (if started High)
+7. Sou never accesses again â†’ priority hits min 0.5 (if started High)
    OR continues to decay if it was never boosted above min
 ```
 
@@ -326,8 +326,8 @@ interface DecayReport {
 ```
 1. Sou pins an item at priority 0.95 (Critical)
 2. Item survives all compression and eviction cycles
-3. Session ends → item is still Critical — promoted to Episodic Memory
-4. New session starts → Sou queries for previous session
+3. Session ends â†’ item is still Critical â€” promoted to Episodic Memory
+4. New session starts â†’ Sou queries for previous session
 5. Episodic returns the pinned item with its historical priority
 6. Sou can re-pin it in the new session
 ```
@@ -349,12 +349,12 @@ interface DecayReport {
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| PR-001 | Priority scores are bounded [0.0, 1.0] | Schema — clamped on every update |
-| PR-002 | Non-pinned items decay monotonically (score never increases except by boost) | Algorithmic — boost is separate from decay |
-| PR-003 | Priority tiers map to non-overlapping score ranges | Algorithmic — classifyTier uses strict bounds |
-| PR-004 | Pinned items are immune to decay | Algorithmic — decay skips pinned items |
-| PR-005 | Each item has exactly one priority score at any time | Schema — one-to-one with ContextItem |
-| PR-006 | Priority overrides are logged immutably | Architectural — override_history is append-only |
+| PR-001 | Priority scores are bounded [0.0, 1.0] | Schema â€” clamped on every update |
+| PR-002 | Non-pinned items decay monotonically (score never increases except by boost) | Algorithmic â€” boost is separate from decay |
+| PR-003 | Priority tiers map to non-overlapping score ranges | Algorithmic â€” classifyTier uses strict bounds |
+| PR-004 | Pinned items are immune to decay | Algorithmic â€” decay skips pinned items |
+| PR-005 | Each item has exactly one priority score at any time | Schema â€” one-to-one with ContextItem |
+| PR-006 | Priority overrides are logged immutably | Architectural â€” override_history is append-only |
 
 ## Error Cases
 
@@ -371,17 +371,17 @@ interface DecayReport {
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Priority Manager handles only scoring, decay, and pinning |
-| R2 — Dependency Order | Depends on Context Registry; no upward deps |
-| R3 — DRY | Tier definitions stored once in PriorityConfig |
-| R4 — Builder Pattern | Score built by base → source boost → access boost → decay |
-| R5 — Liskov Substitution | Any PriorityConfig implements the interface |
-| R6 — DI over Singletons | Tier config, source weights, decay rates injected |
-| R9 — Deterministic | Same item + same context produces same score |
-| R10 — Simpler Over Complex | 5-tier model with clear boundaries and behaviors |
-| R13 — Design for Failure | Emergency threshold guarantees eviction always succeeds |
-| R14 — Paved Path | All scoring flows through scoreItem → applyDecay → pin/unpin |
-| R15 — Open/Closed | New tiers added via PriorityConfig, not by modifying scorer |
+| R1 â€” Modulsingularity | Priority Manager handles only scoring, decay, and pinning |
+| R2 â€” Dependency Order | Depends on Context Registry; no upward deps |
+| R3 â€” DRY | Tier definitions stored once in PriorityConfig |
+| R4 â€” Builder Pattern | Score built by base â†’ source boost â†’ access boost â†’ decay |
+| R5 â€” Liskov Substitution | Any PriorityConfig implements the interface |
+| R6 â€” DI over Singletons | Tier config, source weights, decay rates injected |
+| R9 â€” Deterministic | Same item + same context produces same score |
+| R10 â€” Simpler Over Complex | 5-tier model with clear boundaries and behaviors |
+| R13 â€” Design for Failure | Emergency threshold guarantees eviction always succeeds |
+| R14 â€” Paved Path | All scoring flows through scoreItem â†’ applyDecay â†’ pin/unpin |
+| R15 â€” Open/Closed | New tiers added via PriorityConfig, not by modifying scorer |
 
 ## Related Documents
 

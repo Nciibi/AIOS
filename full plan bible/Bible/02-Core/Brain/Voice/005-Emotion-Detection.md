@@ -1,13 +1,13 @@
-# AIOS Bible — Brain
-## 005 — Emotion Detection
+﻿# AIOS Bible â€” Brain
+## 005 â€” Emotion Detection
 
 | Property | Value |
 |----------|-------|
 | Status | Active |
-| Version | 1.0 |
-| Category | Bible — Brain/Voice |
+| Version | 1.0.0 |
+| Category | Bible â€” Brain/Voice |
 | Document ID | AIOS-BBL-002-VCE-005 |
-| Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
+| Source Laws | Law 3 â€” Law of Communication, Law 4 â€” Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Emotion Detection analyzes paralinguistic features of the user's voice (tone, pitch, pace, volume) to infer emotional state during STT processing. Detected emotions are passed as metadata alongside transcribed text, enabling Sou to adjust tone, empathy, or response strategy based on the user's emotional context. Emotion detection runs in real-time alongside streaming transcription and is purely ephemeral — emotion data is never persisted to Memory OS unless explicitly requested by Sou for diagnostics.
+Emotion Detection analyzes paralinguistic features of the user's voice (tone, pitch, pace, volume) to infer emotional state during STT processing. Detected emotions are passed as metadata alongside transcribed text, enabling Sou to adjust tone, empathy, or response strategy based on the user's emotional context. Emotion detection runs in real-time alongside streaming transcription and is purely ephemeral â€” emotion data is never persisted to Memory OS unless explicitly requested by Sou for diagnostics.
 
 Under VOI-001, Emotion Detection infers emotional state from acoustic features, not from semantic content analysis.
 
@@ -28,7 +28,7 @@ EmotionResult {
   request_id: string
   session_id: string
   primary_emotion: EmotionCategory
-  primary_confidence: number          // 0.0–1.0 confidence in primary
+  primary_confidence: number          // 0.0â€“1.0 confidence in primary
   secondary_emotion?: EmotionCategory
   secondary_confidence?: number
   emotions: EmotionScores             // Scores for all categories
@@ -68,7 +68,7 @@ EmotionAcousticProfile {
 
 ```typescript
 EmotionScores {
-  happy: number                       // 0.0–1.0
+  happy: number                       // 0.0â€“1.0
   sad: number
   angry: number
   fearful: number
@@ -85,7 +85,7 @@ AcousticFeatures {
   pitch_variance: number
   pitch_contour: "rising" | "falling" | "flat" | "variable"
   speaking_rate: number               // Words per minute
-  volume_mean: number                 // RMS energy 0.0–1.0
+  volume_mean: number                 // RMS energy 0.0â€“1.0
   volume_variance: number
   voice_quality: "clear" | "breathy" | "creaky" | "strained"
   pauses: {
@@ -127,10 +127,10 @@ Emotion detection analyzes four primary acoustic dimensions:
 
 | Dimension | Feature Extraction | Emotion Correlation |
 |-----------|-------------------|---------------------|
-| Pitch (F0) | Fundamental frequency mean, variance, contour | High pitch → happy/surprised/fearful; Low pitch → sad/neutral |
-| Pace | Speaking rate in words per minute, pause patterns | Fast pace → happy/angry/anxious; Slow pace → sad/thoughtful |
-| Volume | RMS energy, dynamic range | Loud → angry/happy/surprised; Quiet → sad/fearful |
-| Tone | Spectral tilt, harmonics-to-noise ratio | Harsh → angry; Breathy → fearful/sad; Clear → happy/neutral |
+| Pitch (F0) | Fundamental frequency mean, variance, contour | High pitch â†’ happy/surprised/fearful; Low pitch â†’ sad/neutral |
+| Pace | Speaking rate in words per minute, pause patterns | Fast pace â†’ happy/angry/anxious; Slow pace â†’ sad/thoughtful |
+| Volume | RMS energy, dynamic range | Loud â†’ angry/happy/surprised; Quiet â†’ sad/fearful |
+| Tone | Spectral tilt, harmonics-to-noise ratio | Harsh â†’ angry; Breathy â†’ fearful/sad; Clear â†’ happy/neutral |
 
 ### Real-Time Detection During STT
 
@@ -138,15 +138,15 @@ Emotion detection runs in parallel with STT streaming:
 
 ```
 STT Transcription Stream
-    │
-    ├── Audio Chunk → STT Engine → Partial Transcript
-    │
-    └── Audio Chunk → EmotionDetector → EmotionResult
-                                          │
-                                          ▼
+    â”‚
+    â”œâ”€â”€ Audio Chunk â†’ STT Engine â†’ Partial Transcript
+    â”‚
+    â””â”€â”€ Audio Chunk â†’ EmotionDetector â†’ EmotionResult
+                                          â”‚
+                                          â–¼
                               Context Metadata (ephemeral)
-                                          │
-                                          ▼
+                                          â”‚
+                                          â–¼
                                   Sou's Response Strategy
 ```
 
@@ -173,12 +173,12 @@ Emotion data is ephemeral by default under these rules:
 
 | Rule | Enforcement |
 |------|-------------|
-| Emotion data is not persisted to Memory OS | Architectural — EmotionResult is never written to storage layer |
-| Emotion data is not logged (except anonymous metrics) | Algorithmic — log filter strips emotion fields |
-| Emotion data expires with the session context | Lifecycle — cleared when session ends |
-| Emotion detection is opt-in per session | Config — `detect_emotion: boolean` on session init |
-| Raw acoustic features are never stored | Architectural — only emotion category + confidence passed through |
-| Users are informed that emotion detection is active | Policy — Conversation OS registers disclosure via privacy notice |
+| Emotion data is not persisted to Memory OS | Architectural â€” EmotionResult is never written to storage layer |
+| Emotion data is not logged (except anonymous metrics) | Algorithmic â€” log filter strips emotion fields |
+| Emotion data expires with the session context | Lifecycle â€” cleared when session ends |
+| Emotion detection is opt-in per session | Config â€” `detect_emotion: boolean` on session init |
+| Raw acoustic features are never stored | Architectural â€” only emotion category + confidence passed through |
+| Users are informed that emotion detection is active | Policy â€” Conversation OS registers disclosure via privacy notice |
 
 ## Operations
 
@@ -279,7 +279,7 @@ interface EmotionStreamHandle {
 interface EmotionDetectionConfig {
   enabled: boolean
   model: string
-  confidence_threshold: number           // 0.0–1.0, default 0.6
+  confidence_threshold: number           // 0.0â€“1.0, default 0.6
   emit_interim_results: boolean          // Emit during streaming vs only on final
   include_acoustic_features: boolean     // Include raw acoustic data (privacy-sensitive)
   max_timeline_segments: number          // Max segments per utterance
@@ -313,12 +313,12 @@ type EmotionErrorCode =
 
 | ID | Invariant | Enforcement |
 |----|-----------|-------------|
-| EMD-001 | Emotion detection is based on acoustic features only, never on transcript content | Architectural — no NLP pipeline in EmotionDetector |
-| EMD-002 | Emotion data is ephemeral and never persisted to Memory OS by default | Algorithmic — storage layer rejects emotion fields |
-| EMD-003 | The sum of all emotion category scores always equals 1.0 | Algorithmic — scores are softmax-normalized |
-| EMD-004 | Neutral is always reported; at least neutral has a non-zero score | Algorithmic — baseline neutral always included |
-| EMD-005 | Emotion detection runs only when `detect_emotion: true` in session config | Config — entire pipeline skipped when disabled |
-| EMD-006 | Emotion timeline segments are non-overlapping and cover the full utterance | Algorithmic — segments partition the timeline without gaps |
+| EMD-001 | Emotion detection is based on acoustic features only, never on transcript content | Architectural â€” no NLP pipeline in EmotionDetector |
+| EMD-002 | Emotion data is ephemeral and never persisted to Memory OS by default | Algorithmic â€” storage layer rejects emotion fields |
+| EMD-003 | The sum of all emotion category scores always equals 1.0 | Algorithmic â€” scores are softmax-normalized |
+| EMD-004 | Neutral is always reported; at least neutral has a non-zero score | Algorithmic â€” baseline neutral always included |
+| EMD-005 | Emotion detection runs only when `detect_emotion: true` in session config | Config â€” entire pipeline skipped when disabled |
+| EMD-006 | Emotion timeline segments are non-overlapping and cover the full utterance | Algorithmic â€” segments partition the timeline without gaps |
 
 ## Error Cases
 
@@ -336,17 +336,17 @@ type EmotionErrorCode =
 
 | Rule | Assessment |
 |------|-----------|
-| R1 — Modulsingularity | Emotion Detection handles only paralinguistic emotion inference |
-| R2 — Dependency Order | Depends on STT Engine for audio pipeline; no upward deps on Sou or Conversation OS |
-| R3 — DRY | Emotion category definitions and acoustic profiles defined once |
-| R4 — Builder Pattern | Emotion result built by AcousticAnalysis → Classification → Scoring |
-| R5 — Liskov Substitution | Any EmotionDetector implementation produces EmotionResult-compatible output |
-| R6 — DI over Singletons | Detection models and config injected |
-| R9 — Deterministic | Same audio produces same emotion scores (model-dependent) |
-| R10 — Simpler Over Complex | Six emotion categories with clear acoustic markers |
-| R13 — Design for Failure | Low confidence and model fallback always return at least neutral |
-| R14 — Paved Path | Detection flows through `detectEmotion()` or `detectEmotionStream()` |
-| R15 — Open/Closed | New emotion categories added by extending type union and acoustic profiles |
+| R1 â€” Modulsingularity | Emotion Detection handles only paralinguistic emotion inference |
+| R2 â€” Dependency Order | Depends on STT Engine for audio pipeline; no upward deps on Sou or Conversation OS |
+| R3 â€” DRY | Emotion category definitions and acoustic profiles defined once |
+| R4 â€” Builder Pattern | Emotion result built by AcousticAnalysis â†’ Classification â†’ Scoring |
+| R5 â€” Liskov Substitution | Any EmotionDetector implementation produces EmotionResult-compatible output |
+| R6 â€” DI over Singletons | Detection models and config injected |
+| R9 â€” Deterministic | Same audio produces same emotion scores (model-dependent) |
+| R10 â€” Simpler Over Complex | Six emotion categories with clear acoustic markers |
+| R13 â€” Design for Failure | Low confidence and model fallback always return at least neutral |
+| R14 â€” Paved Path | Detection flows through `detectEmotion()` or `detectEmotionStream()` |
+| R15 â€” Open/Closed | New emotion categories added by extending type union and acoustic profiles |
 
 ## Related Documents
 
