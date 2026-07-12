@@ -1,5 +1,5 @@
 # AIOS Bible — Brain
-## Sou 002 — Planning (Delegated to Planning System)
+## 002 — Planning (Delegated to Planning System)
 
 | Property | Value |
 |----------|-------|

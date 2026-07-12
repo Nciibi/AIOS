@@ -1,5 +1,5 @@
 # AIOS Bible — Brain
-## Sou 005 — Memory and Knowledge (Delegated to Memory OS)
+## 005 — Memory and Knowledge (Delegated to Memory OS)
 
 | Property | Value |
 |----------|-------|

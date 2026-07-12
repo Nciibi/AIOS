@@ -1,5 +1,5 @@
 # AIOS Bible — Brain
-## Sou 003 — Missions (Creation and Oversight)
+## 003 — Missions (Creation and Oversight)
 
 | Property | Value |
 |----------|-------|

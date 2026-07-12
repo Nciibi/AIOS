@@ -1,5 +1,5 @@
 # AIOS Bible — Brain
-## Sou 004 — Learning (Integration and Adaptation)
+## 004 — Learning (Integration and Adaptation)
 
 | Property | Value |
 |----------|-------|

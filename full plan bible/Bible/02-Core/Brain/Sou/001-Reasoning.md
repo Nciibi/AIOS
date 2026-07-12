@@ -1,5 +1,5 @@
 # AIOS Bible — Brain
-## Sou 001 — Reasoning (Delegated to Cognitive OS)
+## 001 — Reasoning (Delegated to Cognitive OS)
 
 | Property | Value |
 |----------|-------|
