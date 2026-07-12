@@ -422,6 +422,6 @@ interface BiasAdjustment {
 | Brain/Cognitive/003-Metacognition.md | Metacognition consumes confidence for calibration and gap detection |
 | Brain/Cognitive/004-Cognitive-Biases.md | Overconfidence detection feeds into bias adjustment |
 | Brain/LLMOS/000-Overview.md | LLMOS logprobs inform step-level confidence |
-| Brain/Evidence/000-Overview.md | Evidence quality assessment adjusts confidence |
+| Bible/05-Platform/004-EVS.md | Evidence quality assessment uses Event Store data |
 | Brain/Sou/001-Reasoning.md | Sou acts on low confidence recommendations |
 | Brain/Decision/000-Overview.md | Confidence thresholds gate whether decisions proceed |

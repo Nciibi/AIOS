@@ -422,7 +422,7 @@ interface PersonalityEvolutionConfig {
 | Personality/002-Values.md | Value importance evolution governed by evolution rules |
 | Personality/003-Behavior-Patterns.md | Trait plasticity drives most evolution changes |
 | Personality/004-Style-Config.md | Style adaptations recorded as evolution events |
-| Brain/Academy/000-Overview.md | Academy mediates experience-based personality evolution |
+| Bible/02-Core/Academy/000-Overview.md | Academy mediates experience-based personality evolution |
 | Brain/Memory/002-Episodic-Memory.md | Experiences stored in Episodic Memory drive evolution |
 | Bible/05-Platform/004-EVS.md | Evolution events recorded throughout lifecycle |
 | Bible/06-Governance/001-Security-Council.md | Drift alerts and personality resets handled by Security Council |

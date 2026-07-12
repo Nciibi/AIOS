@@ -313,5 +313,5 @@ interface TraitEngineConfig {
 | Personality/004-Style-Config.md | Traits modulate communication style dimensions |
 | Personality/005-Evolution.md | Trait adjustments are recorded in personality evolution |
 | Brain/Memory/002-Episodic-Memory.md | Episodic experiences drive Academy trait learning |
-| Brain/Academy/000-Overview.md | Academy mediates experience-based trait evolution |
+| Bible/02-Core/Academy/000-Overview.md | Academy mediates experience-based trait evolution |
 | Brain/Decision/000-Overview.md | Trait influence feeds into decision scoring |

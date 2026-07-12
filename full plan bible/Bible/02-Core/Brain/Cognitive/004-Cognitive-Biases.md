@@ -380,4 +380,4 @@ interface DecisionContext {
 | Brain/Cognitive/003-Metacognition.md | Bias adjustments inform confidence calibration |
 | Brain/Cognitive/005-Confidence.md | Overconfidence detection directly relates to confidence scoring |
 | Brain/LLMOS/000-Overview.md | Debiasing prompts injected into LLMOS calls |
-| Brain/Evidence/000-Overview.md | Evidence re-evaluation corrects biased evidence weighting |
+| Bible/05-Platform/004-EVS.md | Evidence re-evaluation uses Event Store evidence records |

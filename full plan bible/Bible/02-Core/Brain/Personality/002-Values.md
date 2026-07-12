@@ -283,5 +283,5 @@ interface ValueMatrixConfig {
 | Personality/003-Behavior-Patterns.md | Values influence trait expression in behavior |
 | Personality/005-Evolution.md | Value importance evolution tracked through personality evolution |
 | Brain/Decision/000-Overview.md | Decision System consumes weighted value scores |
-| Brain/Evidence/000-Overview.md | Value conflicts logged as evidence (PER-006) |
+| Bible/05-Platform/004-EVS.md | Value conflicts logged as evidence (PER-006) |
 | Bible/05-Platform/004-EVS.md | Events recorded throughout value lifecycle |

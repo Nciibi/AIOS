@@ -334,6 +334,6 @@ interface LessonContext {
 | Brain/Cognitive/003-Metacognition.md | Metacognition uses reflection results for calibration |
 | Brain/Cognitive/004-Cognitive-Biases.md | Bias detection feeds into Cognitive Biases system |
 | Brain/Memory/002-Episodic-Memory.md | Primary input source — experiences to reflect on |
-| Brain/Memory/004-Evidence-Store.md | Reflection outputs stored as evidence |
-| Brain/Academy/000-Overview.md | Academy consumes lessons for formal learning |
+| Bible/05-Platform/004-EVS.md | Reflection outputs stored as evidence in Event Store |
+| Bible/02-Core/Academy/000-Overview.md | Academy consumes lessons for formal learning |
 | Brain/Sou/001-Reasoning.md | Sou initiates reflection via delegate |
