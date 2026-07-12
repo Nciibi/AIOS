@@ -1,6 +1,6 @@
 # Ideas & Suggestions for Unpopulated Bible Stubs
 
-This document captures proposals for the ~196 empty stub files in the Bible tree. Each suggestion identifies what content is needed and how it fits the existing architecture.
+This document captures proposals for the ~196 empty stub files originally identified in the Bible tree. All Bible stubs have since been populated. The suggestions below now serve as a design rationale reference. For current remaining stubs outside the Bible tree, see `Tests/000-Integration-Tests.md` (Stub Inventory section).
 
 ---
 
