@@ -76,7 +76,7 @@ UserProximity {
 
 ### SignalEvaluation
 
-`	ypescript
+```typescript
 SignalEvaluation {
   evaluation_id: string
   signal_id: string
@@ -86,18 +86,18 @@ SignalEvaluation {
   computed_at: timestamp
   computation_time_ms: number
 }
-`
+```
 
 ### SalienceThresholds
 
-`	ypescript
+```typescript
 SalienceThresholds {
   focus_threshold: number          // Default: 0.80
   snooze_threshold: number         // Default: 0.30
   immediate_drop_threshold: number // Default: 0.15
   deep_work_protection_boost: number  // Default: +0.10 to focus threshold
 }
-`
+```
 
 ## Core Concepts
 
@@ -148,12 +148,12 @@ Each stage computes a 0.0–1.0 score. The pipeline is sequential: early stages 
 
 Goal alignment measures how relevant a signal is to Sou's current active goal:
 
-`	ypescript
+```typescript
 computeGoalAlignment(
   signal: AttentionSignal,
   active_goal: { goal_id: string; description: string; keywords: string[] }
 ): GoalAlignment
-`
+```
 
 Computation steps:
 1. Extract keywords from signal content and metadata
@@ -209,13 +209,13 @@ Past reliability tracks the source's historical accuracy. If a source has sent 1
 
 Novelty detects how different a signal is from recent signals to prevent Sou from seeing duplicates or near-duplicates:
 
-`	ypescript
+```typescript
 detectNovelty(
   signal: AttentionSignal,
   recent_signals: AttentionSignal[],
   window_size: number  // Default: last 10 signals
 ): NoveltyScore
-`
+```
 
 Detection algorithm:
 1. For each recent signal, compute a similarity score (0.0–1.0)
@@ -276,7 +276,7 @@ After a signal's composite score drops below immediate_drop_threshold for two co
 
 ## Internal Interface
 
-`	ypescript
+```typescript
 interface SalienceScorer {
   evaluate(
     signal: AttentionSignal,
@@ -322,7 +322,7 @@ interface SalienceScorer {
 
   getEvaluationHistory(window_ms: number): Promise<SignalEvaluation[]>
 }
-`
+```
 
 ## Events
 
