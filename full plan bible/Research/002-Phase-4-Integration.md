@@ -250,4 +250,4 @@ How Phase 4 connects AIOS to external services and platforms.
 | Bible/0008-Future-Research.md | Research agenda and open questions |
 | Bible/02-Core/Brain/Autonomy/000-Overview.md | Autonomy System — L3+ agents can apply system changes |
 | Bible/07-Domains/Linux/000-Overview.md | Linux Domain — AIOS Linux integration domain |
-| ChatGPT-souuSouu Agent System Design.md | Original design vision — Visual Army, OS-level orchestration |
+| ChatGPT-souuSouu Agent System Design.md (project root) | Original design vision — Visual Army, OS-level orchestration |
