@@ -174,8 +174,8 @@ interface IdentityResolver {
 | Bible/02-Core/Agents/003-Configuration.md | Agent configuration is applied after factory assembly |
 | Bible/02-Core/Agents/004-Lifecycle.md | Factory assigns initial lifecycle stage; Lifecycle manages transitions |
 | Bible/02-Core/AGS/000-Overview.md | AGS produces the genome templates consumed by Factory |
-| Bible/02-Core/IDS/000-Overview.md | IDS provides identity assignment for new agents |
-| Bible/02-Core/SSM/000-Overview.md | SSM provides secrets for capability parameter injection |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS provides identity assignment for new agents |
+| Bible/04-Execution/Security/SSM/000-SSM.md | SSM provides secrets for capability parameter injection |
 | Bible/00-Foundations/008-Object-Lifecycle.md | Object Lifecycle governs stage assignment rules |
 | Physics/007-Capabilities.md | Capability bound invariants enforced at creation |
 | Physics/006-Lifecycles.md | Lifecycle state machine invariants for initial stage |

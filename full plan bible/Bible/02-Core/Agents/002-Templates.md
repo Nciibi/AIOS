@@ -198,6 +198,6 @@ interface TemplateValidator {
 | Bible/02-Core/Agents/003-Configuration.md | Template parameters may bind to agent configuration |
 | Bible/02-Core/Agents/004-Lifecycle.md | Template lifecycle (active/deprecated/retired) mirrors agent lifecycle concepts |
 | Bible/02-Core/AGS/000-Overview.md | AGS produces and maintains the genome templates |
-| Bible/02-Core/SSM/000-Overview.md | SSM provides secret binding for sensitive template parameters |
+| Bible/04-Execution/Security/SSM/000-SSM.md | SSM provides secret binding for sensitive template parameters |
 | Physics/007-Capabilities.md | Capability bound invariants enforced on template capabilities |
 | Physics/006-Lifecycles.md | Template lifecycle states align with object lifecycle principles |

@@ -196,8 +196,8 @@ interface ConfigValidator {
 | Bible/02-Core/Agents/001-Factory.md | Factory assigns initial agent configuration at creation |
 | Bible/02-Core/Agents/002-Templates.md | Templates define default parameter values and config schema |
 | Bible/02-Core/Agents/004-Lifecycle.md | Restart-required config changes may trigger lifecycle transitions |
-| Bible/02-Core/SSM/000-Overview.md | SSM provides secret storage and rotation for secret bindings |
-| Bible/02-Core/IDS/000-Overview.md | IDS identities authorize configuration changes |
+| Bible/04-Execution/Security/SSM/000-SSM.md | SSM provides secret storage and rotation for secret bindings |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS identities authorize configuration changes |
 | Bible/04-Execution/Security/CCA/000-CCA.md | CCA validates capability configuration changes |
 | Bible/05-Platform/004-EVS.md | EVS records config change events as evidence |
 | Bible/03-Institutions/Workers/000-Overview.md | Workers consume configuration at runtime |

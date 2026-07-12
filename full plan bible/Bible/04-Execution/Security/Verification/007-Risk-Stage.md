@@ -202,5 +202,5 @@ interface RiskLevelMapper {
 | Bible/04-Execution/Security/Verification/001-Pipeline-Stages.md | Pipeline Architecture — Risk is stage 6 |
 | Bible/04-Execution/Security/Verification/006-Capability-Stage.md | Capability Stage — provides capability context for risk evaluation |
 | Bible/04-Execution/Security/Verification/008-Authorization-Stage.md | Final Authorization Stage — next stage in pipeline |
-| Bible/04-Execution/Security/Security-Council/000-Overview.md | Security Council — escalation target for critical risks |
+| Bible/04-Execution/Security/000-Overview.md | Security Council — escalation target for critical risks |
 | Bible/05-Platform/004-EVS.md | EVS — evidence logging for risk assessments |

@@ -219,11 +219,11 @@ interface EvidenceSealer {
 | Bible/02-Core/Agents/001-Factory.md | Factory assigns the initial CREATED state; Lifecycle manages all subsequent transitions |
 | Bible/02-Core/Agents/002-Templates.md | Templates may define default tenure policies |
 | Bible/02-Core/Agents/003-Configuration.md | Configuration changes may trigger lifecycle transitions (restart-required) |
-| Bible/02-Core/IDS/000-Overview.md | IDS provides authorization identity for transition requests |
-| Bible/02-Core/SSM/000-Overview.md | SSM provides secrets for evidence sealing keys |
+| Bible/04-Execution/Security/IDS/000-Overview.md | IDS provides authorization identity for transition requests |
+| Bible/04-Execution/Security/SSM/000-SSM.md | SSM provides secrets for evidence sealing keys |
 | Bible/05-Platform/004-EVS.md | EVS stores and seals evidence on termination |
-| Bible/03-Institutions/ROS/000-Overview.md | ROS may trigger lifecycle transitions based on runtime health |
-| Bible/03-Institutions/Works/000-Overview.md | Works manages agent work assignments during ACTIVE state |
+| Bible/02-Core/ROS/000-Overview.md | ROS may trigger lifecycle transitions based on runtime health |
+| Bible/03-Institutions/Workers/000-Overview.md | Workers manage agent work assignments during ACTIVE state |
 | Bible/00-Foundations/008-Object-Lifecycle.md | Object Lifecycle is the foundational pattern for agent lifecycle states |
 | Bible/04-Execution/Security/000-Overview.md | Security Council authorizes freeze/unfreeze transitions |
 | Physics/007-Capabilities.md | Capability bounds limit transitions that require capability validation |

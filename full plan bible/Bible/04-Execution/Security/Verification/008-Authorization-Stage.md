@@ -219,6 +219,6 @@ interface TokenIssuer {
 | Bible/04-Execution/Security/Verification/006-Capability-Stage.md | Capability Stage — stage 5 source |
 | Bible/04-Execution/Security/Verification/007-Risk-Stage.md | Risk Stage — stage 6 source |
 | Bible/04-Execution/Security/Execution-Auth/000-EAS.md | EAS — token consumer and execution-time validator |
-| Bible/04-Execution/Security/Security-Council/000-Overview.md | Security Council — override authority for decisions |
+| Bible/04-Execution/Security/000-Overview.md | Security Council — override authority for decisions |
 | Bible/06-Services/Cryptography/000-CSP.md | CSP — token signing and signature verification |
 | Bible/05-Platform/004-EVS.md | EVS — evidence logging for final decisions |

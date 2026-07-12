@@ -15,7 +15,7 @@
 
 ## Purpose
 
-The Ollama Provider implements both the `ExecutionProvider` interface (Runtime SDK) and the `ModelProvider` interface (LLMOS Provider SDK). Under the canonical LLMOS architecture, all AI inference requests route through the LLMOS pipeline (`Bible/04-Execution/LLMOS/`) which handles routing, prompt compilation, context management, memory injection, guardrails, retry, and caching before calling this provider through the `ModelProvider` interface. The `ExecutionProvider` path is deprecated for AI inference and maintained only for backward compatibility during migration.
+The Ollama Provider implements both the `ExecutionProvider` interface (Runtime SDK) and the `ModelProvider` interface (LLMOS Provider SDK). Under the canonical LLMOS architecture, all AI inference requests route through the LLMOS pipeline (`Bible/02-Core/Brain/LLMOS/`) which handles routing, prompt compilation, context management, memory injection, guardrails, retry, and caching before calling this provider through the `ModelProvider` interface. The `ExecutionProvider` path is deprecated for AI inference and maintained only for backward compatibility during migration.
 
 The provider executes model inference actions against locally hosted models through the Ollama API. It provides access to open-weight models (Llama 3, Mistral, Qwen, DeepSeek, Gemma, Phi) running on local or private infrastructure, enabling air-gapped and low-latency inference within AIOS capability bounds.
 
@@ -179,7 +179,7 @@ All LLMOS pipeline stages (routing, guardrails, caching) run before this provide
 |----------|-------------|
 | Bible/04-Execution/Runtime/000-Overview.md | Runtime Engine architecture |
 | Bible/04-Execution/Runtime/001-SDK.md | Provider SDK used to build this provider |
-| Bible/04-Execution/LLMOS/013-Provider-SDK.md | LLMOS ModelProvider interface (canonical path) |
-| Bible/04-Execution/LLMOS/000-Overview.md | LLMOS pipeline overview |
+| Bible/02-Core/Brain/LLMOS/013-Provider-SDK.md | LLMOS ModelProvider interface (canonical path) |
+| Bible/02-Core/Brain/LLMOS/000-Overview.md | LLMOS pipeline overview |
 | Physics/010-Execution.md | Execution invariants for local model inference |
 | Physics/007-Capabilities.md | Capability bounds for GPU memory and model selection |
