@@ -159,13 +159,13 @@ User Response (via Sou → Conversation OS → User)
 
 ## Brain Events
 
-| Event | Description |
-|-------|-------------|
-| `Brain.ServiceInitialized` | A Brain service completed startup |
-| `Brain.ServiceFailed` | A Brain service failed to initialize |
-| `Brain.ExternalRequest` | External request entered Brain via ACF |
-| `Brain.ResponseReady` | Brain produced a response for the user |
-| `Brain.AuthorizationRequired` | Brain action requires Security Council verification |
+| Event | Produced When | Description |
+|-------|--------------|-------------|
+| `Brain.ServiceInitialized` | After Brain service startup completes | A Brain service completed startup |
+| `Brain.ServiceFailed` | Brain service initialization error | A Brain service failed to initialize |
+| `Brain.ExternalRequest` | External request received via ACF | External request entered Brain via ACF |
+| `Brain.ResponseReady` | Response composed and ready for delivery | Brain produced a response for the user |
+| `Brain.AuthorizationRequired` | Action requires Security Council verification before execution | Brain action requires Security Council verification |
 
 ## Forward References
 

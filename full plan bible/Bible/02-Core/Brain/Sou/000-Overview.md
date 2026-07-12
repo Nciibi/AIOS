@@ -125,15 +125,15 @@ Sou does NOT directly implement reasoning, planning, or memory. These are delega
 
 ## Sou Events
 
-| Event | Description |
-|-------|-------------|
-| `Sou.InputReceived` | Input entered Sou's processing |
-| `Sou.DecisionMade` | Sou made a strategic decision |
-| `Sou.MissionCreated` | Sou created a mission |
-| `Sou.WorkerDispatched` | Sou dispatched a worker |
-| `Sou.ResponseSent` | Sou sent a user-facing response |
-| `Sou.LearningIntegrated` | Sou integrated learning from an outcome |
-| `Sou.GoalUpdated` | Sou updated its strategic goals |
+| Event | Produced When | Description |
+|-------|--------------|-------------|
+| `Sou.InputReceived` | Input arrives via ACF | Input entered Sou's processing |
+| `Sou.DecisionMade` | Sou completes a strategic decision | Sou made a strategic decision |
+| `Sou.MissionCreated` | Mission proposal submitted to DGP | Sou created a mission |
+| `Sou.WorkerDispatched` | Worker assigned to a task | Sou dispatched a worker |
+| `Sou.ResponseSent` | Response delivered to Conversation OS | Sou sent a user-facing response |
+| `Sou.LearningIntegrated` | Learning ingested from outcome evidence | Sou integrated learning from an outcome |
+| `Sou.GoalUpdated` | Strategic goal modified via Learning | Sou updated its strategic goals |
 
 ## Edge Cases
 
