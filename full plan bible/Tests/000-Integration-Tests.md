@@ -102,7 +102,7 @@ Every document's `Related Documents` table must reference only existing files. T
 | `Research/002-Phase-4-Integration.md` | ✅ Active | — | — |
 | `Research/003-Phase-5-Ecosystem.md` | ✅ Active | — | — |
 | `Tests/000-Integration-Tests.md` | ✅ Active | — | — |
-| `DNA/` | ❌ Empty directory | — | — |
+| `DNA/` | ✅ Active (3 files) | — | — |
 
 ## Test Automation
 
