@@ -225,6 +225,6 @@ interface EvidenceSealer {
 | Bible/03-Institutions/ROS/000-Overview.md | ROS may trigger lifecycle transitions based on runtime health |
 | Bible/03-Institutions/Works/000-Overview.md | Works manages agent work assignments during ACTIVE state |
 | Bible/00-Foundations/008-Object-Lifecycle.md | Object Lifecycle is the foundational pattern for agent lifecycle states |
-| Bible/04-Execution/Security/Security-Council.md | Security Council authorizes freeze/unfreeze transitions |
+| Bible/04-Execution/Security/000-Overview.md | Security Council authorizes freeze/unfreeze transitions |
 | Physics/007-Capabilities.md | Capability bounds limit transitions that require capability validation |
 | Physics/006-Lifecycles.md | Lifecycle state machine invariants and transition rules |

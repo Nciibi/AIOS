@@ -158,23 +158,23 @@ Delegation can occur in any state from Planned through Running. Sub-Missions fol
 
 ## Invariants
 
-| ID | Invariant |
-|----|-----------|
-| MSN-DEL-001 | Every delegation must have a signed contract before execution begins |
-| MSN-DEL-002 | A Mission cannot delegate its entire scope — must retain at least one milestone |
-| MSN-DEL-003 | Delegated budget must not exceed parent Mission's allocated budget |
-| MSN-DEL-004 | Accountability chain must be recorded before any work is transferred |
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| MSN-DEL-001 | Every delegation must have a signed contract before execution begins | Architectural — Contract status must be 'accepted' before work starts |
+| MSN-DEL-002 | A Mission cannot delegate its entire scope — must retain at least one milestone | Algorithmic — Validation rejects delegation of all milestones |
+| MSN-DEL-003 | Delegated budget must not exceed parent Mission's allocated budget | Algorithmic — Budget cross-check against parent allocation |
+| MSN-DEL-004 | Accountability chain must be recorded before any work is transferred | Architectural — Event store write precedes worker dispatch |
 
 ## Design DNA
 
-| Rule | Compliance |
+| Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Delegation is a single focused concern within the Mission system |
-| R3 (DRY) | Delegation contracts follow the same pattern as Mission plans |
-| R9 (Deterministic) | Same delegation contract with same target produces same outcome |
-| R10 (Simpler Over Complex) | Clear contract format with well-defined acceptance/rejection flow |
-| R12 (Embrace Errors) | All delegation errors have unique codes (MSN_DEL_001–005) |
-| R13 (Design for Failure) | Escalation paths defined for all delegation failure modes |
+| R1 — Modulsingularity | Delegation is a single focused concern within the Mission system |
+| R3 — DRY | Delegation contracts follow the same pattern as Mission plans |
+| R9 — Deterministic | Same delegation contract with same target produces same outcome |
+| R10 — Simpler Over Complex | Clear contract format with well-defined acceptance/rejection flow |
+| R12 — Embrace Errors | All delegation errors have unique codes (MSN_DEL_001–005) |
+| R13 — Design for Failure | Escalation paths defined for all delegation failure modes |
 
 ## Related Documents
 

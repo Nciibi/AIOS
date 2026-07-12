@@ -166,24 +166,24 @@ Planning occurs in the **Planned** state (000-Lifecycle.md). The plan is produce
 
 ## Invariants
 
-| ID | Invariant |
-|----|-----------|
-| MSN-PLN-001 | Every plan must contain at least one Goal |
-| MSN-PLN-002 | Milestone dependency graph must be a DAG |
-| MSN-PLN-003 | Resource requirements must not exceed Organization allocation |
-| MSN-PLN-004 | Timeline must be internally consistent (start ≤ end for all segments) |
-| MSN-PLN-005 | All milestones must be associated with a Goal |
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| MSN-PLN-001 | Every plan must contain at least one Goal | Architectural — Schema validation rejects empty goal sets |
+| MSN-PLN-002 | Milestone dependency graph must be a DAG | Algorithmic — Cycle detection on dependency graph |
+| MSN-PLN-003 | Resource requirements must not exceed Organization allocation | Algorithmic — Budget validation against ROS allocation |
+| MSN-PLN-004 | Timeline must be internally consistent (start ≤ end for all segments) | Algorithmic — Timeline cross-validation on creation |
+| MSN-PLN-005 | All milestones must be associated with a Goal | Architectural — Milestone.goal_id references must resolve |
 
 ## Design DNA
 
-| Rule | Compliance |
+| Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Planning is a single focused concern within the Mission lifecycle |
-| R3 (DRY) | Plans reference canonical types from Physics/002-Missions.md |
-| R9 (Deterministic) | Same Intent and context produces same plan structure |
-| R10 (Simpler Over Complex) | Linear planning flow with clear validation gates |
-| R12 (Embrace Errors) | All planning errors have unique codes (MSN_PLN_001–006) |
-| R14 (Paved Path) | Intent → Goals → Milestones → Resources → Dependencies → Timeline → Risk |
+| R1 — Modulsingularity | Planning is a single focused concern within the Mission lifecycle |
+| R3 — DRY | Plans reference canonical types from Physics/002-Missions.md |
+| R9 — Deterministic | Same Intent and context produces same plan structure |
+| R10 — Simpler Over Complex | Linear planning flow with clear validation gates |
+| R12 — Embrace Errors | All planning errors have unique codes (MSN_PLN_001–006) |
+| R14 — Paved Path | Intent → Goals → Milestones → Resources → Dependencies → Timeline → Risk |
 
 ## Related Documents
 

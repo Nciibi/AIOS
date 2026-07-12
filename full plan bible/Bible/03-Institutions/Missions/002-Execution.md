@@ -169,24 +169,24 @@ Execution occurs in the **Running** state (000-Lifecycle.md). Transitions from R
 
 ## Invariants
 
-| ID | Invariant |
-|----|-----------|
-| MSN-EXEC-001 | Every dispatched worker must be assigned to at least one milestone |
-| MSN-EXEC-002 | Evidence chain must be append-only and immutable |
-| MSN-EXEC-003 | Total resource consumption must not exceed allocated budget |
-| MSN-EXEC-004 | Timeline adjustments must preserve milestone DAG ordering |
-| MSN-EXEC-005 | Missed check-in must trigger escalation within SLA timeout |
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| MSN-EXEC-001 | Every dispatched worker must be assigned to at least one milestone | Architectural — WorkerAssignment schema requires milestone_ids |
+| MSN-EXEC-002 | Evidence chain must be append-only and immutable | Architectural — EvidencePackage chain is write-once |
+| MSN-EXEC-003 | Total resource consumption must not exceed allocated budget | Algorithmic — ROS budget enforcement at allocation |
+| MSN-EXEC-004 | Timeline adjustments must preserve milestone DAG ordering | Algorithmic — DAG order validated on every adjustment |
+| MSN-EXEC-005 | Missed check-in must trigger escalation within SLA timeout | Algorithmic — Timer triggers escalation if check-in not received |
 
 ## Design DNA
 
-| Rule | Compliance |
+| Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Execution is a single focused subsystem of the Mission lifecycle |
-| R3 (DRY) | Execution reuses types from Physics/002-Missions.md |
-| R9 (Deterministic) | Same worker dispatch with same input produces same execution |
-| R10 (Simpler Over Complex) | Linear progress model with clear check-in gates |
-| R12 (Embrace Errors) | All execution errors have unique codes (MSN_EXEC_001–006) |
-| R13 (Design for Failure) | Checkpoints enable recovery; heartbeat detects failure |
+| R1 — Modulsingularity | Execution is a single focused subsystem of the Mission lifecycle |
+| R3 — DRY | Execution reuses types from Physics/002-Missions.md |
+| R9 — Deterministic | Same worker dispatch with same input produces same execution |
+| R10 — Simpler Over Complex | Linear progress model with clear check-in gates |
+| R12 — Embrace Errors | All execution errors have unique codes (MSN_EXEC_001–006) |
+| R13 — Design for Failure | Checkpoints enable recovery; heartbeat detects failure |
 
 ## Related Documents
 

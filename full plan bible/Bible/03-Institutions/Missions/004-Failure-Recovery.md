@@ -202,24 +202,24 @@ Failure handling intersects the Mission lifecycle at Running, Waiting, Paused, a
 
 ## Invariants
 
-| ID | Invariant |
-|----|-----------|
-| MSN-FAIL-001 | Every failure must be classified before recovery can begin |
-| MSN-FAIL-002 | Auto-retry is only permitted for transient failures |
-| MSN-FAIL-003 | Recovery approval must come from level above current escalation |
-| MSN-FAIL-004 | Evidence integrity must be preserved through all recovery actions |
-| MSN-FAIL-005 | Cascading failure must isolate affected Missions before propagation |
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| MSN-FAIL-001 | Every failure must be classified before recovery can begin | Algorithmic — Recovery rejected without classification |
+| MSN-FAIL-002 | Auto-retry is only permitted for transient failures | Architectural — RetryHandler checks classification category |
+| MSN-FAIL-003 | Recovery approval must come from level above current escalation | Algorithmic — Approval authorization check |
+| MSN-FAIL-004 | Evidence integrity must be preserved through all recovery actions | Architectural — Evidence chain is append-only during recovery |
+| MSN-FAIL-005 | Cascading failure must isolate affected Missions before propagation | Algorithmic — Containment check before recovery execution |
 
 ## Design DNA
 
-| Rule | Compliance |
+| Rule | Assessment |
 |------|-----------|
-| R1 (Modulsingularity) | Failure and recovery is a single focused concern |
-| R3 (DRY) | Recovery state machine follows same pattern as Mission lifecycle |
-| R9 (Deterministic) | Same failure with same strategy produces same recovery outcome |
-| R10 (Simpler Over Complex) | Clear escalation ladder with defined gates |
-| R12 (Embrace Errors) | All recovery errors have unique codes (MSN_FAIL_001–007) |
-| R13 (Design for Failure) | Every failure mode has a defined detection and recovery path |
+| R1 — Modulsingularity | Failure and recovery is a single focused concern |
+| R3 — DRY | Recovery state machine follows same pattern as Mission lifecycle |
+| R9 — Deterministic | Same failure with same strategy produces same recovery outcome |
+| R10 — Simpler Over Complex | Clear escalation ladder with defined gates |
+| R12 — Embrace Errors | All recovery errors have unique codes (MSN_FAIL_001–007) |
+| R13 — Design for Failure | Every failure mode has a defined detection and recovery path |
 
 ## Related Documents
 
