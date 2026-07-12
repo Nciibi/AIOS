@@ -280,7 +280,7 @@ interface TTLScanner {
 | Brain/Cognitive/000-Overview.md | Reasoning context retrieved from here |
 | Brain/LLMOS/005-Memory-Injection.md | LLMOS retrieves memories for prompt injection |
 | Brain/Sou/005-Knowledge.md | Sou delegates memory access to Memory OS |
-| Bible/05-Platform/EVS/ | Event Store provides underlying persistence |
+| Bible/05-Platform/004-EVS.md | Event Store provides underlying persistence |
 
 ## Error Cases
 

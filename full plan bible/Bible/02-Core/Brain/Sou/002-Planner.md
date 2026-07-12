@@ -40,7 +40,7 @@ Planning is resource-aware, constitutionally-compliant, and evidence-driven. Sou
 | Available Resources | ROS (Resource Orchestration System) | Capabilities, compute, storage, network |
 | Constitutional Constraints | Constitution, CPR-001–010 | Legal bounds on what may be planned |
 | Current State | LMS (Lifecycle Management) | State of entities that will execute the plan |
-| Evidence | Experience (Physics/012) | Historical data on similar plans |
+| Evidence | Experience (Physics/012-Experience.md) | Historical data on similar plans |
 
 | Output | Destination | Description |
 |--------|-------------|-------------|
@@ -111,7 +111,7 @@ Input:  plan
 Process:
   1. Constitutional compliance check (CPR-009)
   2. Resource feasibility check (ROS integration)
-  3. Capability availability check (CCA / Physics/007)
+  3. Capability availability check (CCA / Physics/007-Capabilities.md)
   4. Timeline realism check (historical evidence)
   5. Dependency completeness check
 Output: ValidationReport { passed: bool, issues: ValidationIssue[] }
@@ -162,8 +162,8 @@ Every plan must pass four validation gates before it can be proposed:
 |------|-------|-------------|
 | Constitutional Compliance (CPR-009) | No plan element violates a Law or constitutional principle | Security Council verification |
 | Resource Feasibility (ROS) | Required resources exist and are allocatable | ROS registry query |
-| Capability Availability (CCA) | Required capabilities are granted to executing entities | Capability Registry (Physics/007) |
-| Timeline Realism | Estimated duration is consistent with historical evidence | Experience store (Physics/012) |
+| Capability Availability (CCA) | Required capabilities are granted to executing entities | Capability Registry (Physics/007-Capabilities.md) |
+| Timeline Realism | Estimated duration is consistent with historical evidence | Experience store (Physics/012-Experience.md) |
 
 ## Edge Cases — Planner
 
