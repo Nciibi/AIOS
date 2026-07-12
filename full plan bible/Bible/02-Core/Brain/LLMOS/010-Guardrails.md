@@ -8,6 +8,10 @@
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-010 |
 | Source Laws | Law 2 — Law of Non-Execution (safety), Law 8 — Law of Verification-First |
+| Source Physics | Physics/008-Security.md, Physics/007-Capabilities.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 | Pipeline Stage | 11 — Input Guardrail Check and 14 — Output Guardrail Check |
 
 ## Purpose

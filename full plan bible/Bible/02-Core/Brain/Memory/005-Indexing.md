@@ -461,6 +461,7 @@ interface RebuildReport {
 | R10 — Simpler Over Complex | 6 focused index types, each with one access pattern |
 | R13 — Design for Failure | Rebuildable from primary store on corruption |
 | R14 — Paved Path | All queries flow through executeQuery |
+| R15 — Open/Closed | New index types added by implementing the Index interface, not by modifying the query executor |
 
 ## Related Documents
 

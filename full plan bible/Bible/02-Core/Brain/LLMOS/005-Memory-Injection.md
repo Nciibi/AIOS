@@ -8,6 +8,10 @@
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-005 |
 | Source Laws | Law 3 — Law of Communication (conversation memory) |
+| Source Physics | Physics/005-Events.md, Physics/006-Lifecycles.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 | Pipeline Stage | 9 — Memory Injection |
 
 ## Purpose

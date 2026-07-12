@@ -8,6 +8,10 @@
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-004 |
 | Source Laws | Law 7 — Law of Capability Bounds (context window) |
+| Source Physics | Physics/004-Sessions.md, Physics/008-Security.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 | Pipeline Stage | 8 — Context Building |
 
 ## Purpose

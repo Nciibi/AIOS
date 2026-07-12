@@ -277,5 +277,6 @@ interface ResourceEstimator {
 | R6 — DI over Singletons | Strategies injected at plan creation |
 | R9 — Deterministic | Same goal + context produces same plan (unless strategy includes randomness) |
 | R10 — Simpler Over Complex | Uses milestone tree, not generalized PERT/CPM |
+| R13 — Design for Failure | Planning System degrades gracefully — resource estimates use cached data when ROS is unavailable |
 | R14 — Paved Path | All planning flows through `createPlan` → `approvePlan` |
 | R15 — Open/Closed | New decomposition strategies added via Registry |

@@ -272,5 +272,6 @@ interface StyleAdapter {
 | R6 — DI over Singletons | Style adaptation strategies injected |
 | R9 — Deterministic | Same personality produces same expression |
 | R10 — Simpler Over Complex | Traits use simple scalar scores (0.0–1.0) |
+| R13 — Design for Failure | Personality System degrades gracefully — missing traits fall back to defaults, profile loading errors use cached copy |
 | R14 — Paved Path | All personality access flows through `getProfile` |
 | R15 — Open/Closed | New traits added via Registry, not by modifying core |

@@ -8,6 +8,10 @@
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-008 |
 | Source Laws | Law 3 — Law of Communication |
+| Source Physics | Physics/004-Sessions.md, Physics/009-Interaction.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 | Pipeline Stage | 13 — Streaming |
 
 ## Purpose

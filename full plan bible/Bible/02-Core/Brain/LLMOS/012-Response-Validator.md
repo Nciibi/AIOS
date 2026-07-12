@@ -8,6 +8,10 @@
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-012 |
 | Source Laws | Law 8 — Law of Verification-First |
+| Source Physics | Physics/008-Security.md, Physics/009-Interaction.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 | Pipeline Stage | 15 — Response Validation |
 
 ## Purpose

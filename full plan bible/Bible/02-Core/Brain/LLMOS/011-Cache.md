@@ -8,6 +8,10 @@
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-011 |
 | Source Laws | Law 13 — Design for Failure, Law 14 — Paved Path |
+| Source Physics | Physics/005-Events.md, Physics/006-Lifecycles.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 | Pipeline Stage | 7 — Cache Lookup, Stage 16 — Cache Store |
 
 ## Purpose

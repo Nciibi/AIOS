@@ -835,7 +835,6 @@ Named constraints are resolved from registry, evaluated against option attribute
 | R13 — Design for Failure | Parse failures → FAIL; missing attributes → FAIL; timeout → FAIL |
 | R14 — Paved Path | All evaluation flows through checkConstraints() |
 | R15 — Open/Closed | New operators and constraint types added via registry, not by modifying evaluator |
-| R16 — Tell Don't Ask | Constraints declare themselves (type, expression); evaluator does not inspect internals |
 
 ## Related Documents
 

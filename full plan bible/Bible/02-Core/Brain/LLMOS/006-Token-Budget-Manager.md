@@ -8,6 +8,10 @@
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-006 |
 | Source Laws | Law 7 — Law of Capability Bounds |
+| Source Physics | Physics/010-Execution.md, Physics/007-Capabilities.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 | Pipeline Stage | 3 — Budget Check (gateway) + continuous tracking |
 
 ## Purpose

@@ -8,6 +8,10 @@
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-001 |
 | Source Laws | Law 7 — Law of Capability Bounds |
+| Source Physics | Physics/007-Capabilities.md, Physics/005-Events.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 | Pipeline Stage | 4 — Model Resolution |
 
 ## Purpose

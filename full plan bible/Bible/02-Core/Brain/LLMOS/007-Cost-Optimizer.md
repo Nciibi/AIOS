@@ -8,6 +8,10 @@
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-007 |
 | Source Laws | Law 7 — Law of Capability Bounds (cost constraints) |
+| Source Physics | Physics/010-Execution.md, Physics/005-Events.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 | Pipeline Stage | 5 — Cost Optimization |
 
 ## Purpose

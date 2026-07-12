@@ -8,6 +8,10 @@
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-009 |
 | Source Laws | Law 8 — Law of Verification-First (reliability), Law 13 — Design for Failure |
+| Source Physics | Physics/006-Lifecycles.md, Physics/005-Events.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 | Pipeline Stage | 12 — Provider Call with Retry |
 
 ## Purpose

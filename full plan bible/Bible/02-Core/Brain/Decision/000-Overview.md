@@ -287,5 +287,6 @@ interface ConstraintExpression {
 | R6 — DI over Singletons | Criteria, scoring functions injected |
 | R9 — Deterministic | Same inputs produce same recommendation (no randomness) |
 | R10 — Simpler Over Complex | Uses weighted sum model (no neural networks or ML) |
+| R13 — Design for Failure | Decision System degrades gracefully — missing criteria trigger fallback scoring, not hard failure |
 | R14 — Paved Path | All evaluation flows through `evaluateOptions` |
 | R15 — Open/Closed | New scoring functions added via Registry, not by modifying core |

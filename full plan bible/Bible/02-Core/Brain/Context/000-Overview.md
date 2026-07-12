@@ -298,5 +298,6 @@ ContextItem {
 | R6 — DI over Singletons | Scorer and compression strategies injected |
 | R9 — Deterministic | Same inputs produce same context window |
 | R10 — Simpler Over Complex | Priority model uses simple 5-tier scale |
+| R13 — Design for Failure | Context System degrades gracefully — stale context is served when a push source is unavailable |
 | R14 — Paved Path | All context flows through push/pull API |
 | R15 — Open/Closed | New item types added via Registry, not by modifying core
