@@ -20,7 +20,7 @@ Memory Injection retrieves relevant memories from the Memory OS and inserts them
 
 ## Memory Sources
 
-The Memory OS (Bible/02-Core/Brain/Memory/) manages four types of memory:
+The Memory OS (Bible/02-Core/Brain/Memory/000-Overview.md) manages four types of memory:
 
 | Source | Type | Description | Retrieval Method |
 |--------|------|-------------|------------------|
@@ -176,7 +176,7 @@ interface MemoryOperation {
 
 | Document | Relationship |
 |----------|-------------|
-| Bible/02-Core/Brain/Memory/ | Memory OS provides the storage and retrieval APIs consumed by this component |
+| Bible/02-Core/Brain/Memory/000-Overview.md | Memory OS provides the storage and retrieval APIs consumed by this component |
 | LLMOS/004-Context-Builder.md | Defines the token budget that constrains memory injection |
 | LLMOS/003-Prompt-Compiler.md | Consumes the injected memory blocks for prompt assembly |
 | Bible/02-Core/ROS/000-Overview.md | Memory retrieval is tracked as a ROS resource usage |
