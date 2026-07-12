@@ -183,7 +183,7 @@ function selectReasoningMethod(problem, evidence, constraints):
   return methods
 ```
 
-## Reasoning Events
+## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|

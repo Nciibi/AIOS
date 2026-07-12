@@ -6,7 +6,7 @@
 | Status | Active |
 | Version | 1.0 |
 | Category | Bible — Brain/Conversation |
-| Document ID | AIOS-BBL-002-CONV-005 |
+| Document ID | AIOS-BBL-002-CON-005 |
 | Source Laws | Law 3 — Law of Communication, Law 4 — Law of Evidence |
 | Source Physics | Physics/009-Interaction.md, Physics/005-Events.md |
 | Supersedes | Nothing |

@@ -6,7 +6,7 @@
 | Status | Active |
 | Version | 1.0 |
 | Category | Bible — Brain/Tools |
-| Document ID | AIOS-BBL-002-TLS-006 |
+| Document ID | AIOS-BBL-002-TOL-006 |
 | Source Laws | Law 6 — Law of Lifecycle |
 | Source Physics | Physics/006-Lifecycles.md |
 | Supersedes | Nothing |

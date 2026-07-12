@@ -186,7 +186,7 @@ Sou maintains several learning models:
 
 Each model is versioned independently. Models may be shared with the Academy for system-wide improvement.
 
-## Learning Events
+## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|

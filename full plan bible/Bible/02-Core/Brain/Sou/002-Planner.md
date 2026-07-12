@@ -177,7 +177,7 @@ Every plan must pass four validation gates before it can be proposed:
 | Constitutional constraint is ambiguous | Planner flags constraint as ambiguous. Proceeds with interpretation documented in the plan. |
 | Plan validation passes but timeline is unrealistic | Warning produced. Plan is created but tagged for monitoring. DTS simulates it at low confidence. |
 
-## Planner Events
+## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|

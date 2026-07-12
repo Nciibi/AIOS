@@ -174,7 +174,7 @@ Mission Execution → Events → Event Store → ACF Stream → Sou Learning
 | Timing data | LMS | Planner (timeline realism updates) |
 | Constitutional compliance | Security Council | Knowledge (constitutional precedent) |
 
-## Sou's Mission Events
+## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|

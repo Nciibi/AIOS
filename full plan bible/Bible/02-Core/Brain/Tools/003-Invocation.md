@@ -6,7 +6,7 @@
 | Status | Active |
 | Version | 1.0 |
 | Category | Bible — Brain/Tools |
-| Document ID | AIOS-BBL-002-TLS-003 |
+| Document ID | AIOS-BBL-002-TOL-003 |
 | Source Laws | Law 7 — Law of Capability Bounds, Law 3 — Law of Communication |
 | Source Physics | Physics/007-Capabilities.md, Physics/009-Interaction.md |
 | Supersedes | Nothing |

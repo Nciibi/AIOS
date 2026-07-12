@@ -172,7 +172,7 @@ Created → Active → Updated → Archived (retention expired)
 | type_filter | Filter by knowledge type | `typeFilter("Strategic Knowledge")` |
 | combined | Multiple criteria | `combined(type=Strategic, tags=[q3], min_confidence=0.8)` |
 
-## Knowledge Events
+## Events
 
 | Event Type | Produced When | Fields |
 |-----------|--------------|--------|
