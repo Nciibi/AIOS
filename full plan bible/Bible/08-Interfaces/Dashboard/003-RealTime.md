@@ -167,7 +167,7 @@ interface ThrottleController {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | DB.StreamConnected | connectionId, source, endpoint | Streaming connection established |
 | DB.StreamDisconnected | connectionId, reason | Streaming connection lost |

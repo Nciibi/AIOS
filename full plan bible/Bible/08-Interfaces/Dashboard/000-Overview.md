@@ -195,7 +195,7 @@ All displayed data is evidence-backed (Law 4)
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | `DB.ViewLoaded` | viewId, category, viewerId | Dashboard view rendered |
 | `DB.WidgetUpdated` | widgetId, value, evidenceRef | Widget value refreshed from source |

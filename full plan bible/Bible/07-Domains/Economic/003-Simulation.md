@@ -236,7 +236,7 @@ interface WhatIfEngine {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | `ECN.ScenarioDefined` | scenarioId, name, changeCount | New economic scenario created and validated |
 | `ECN.SimulationDefined` | scenarioId, params, bounds | Simulation parameters configured and bounds checked |

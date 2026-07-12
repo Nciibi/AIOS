@@ -270,7 +270,7 @@ interface BuildError {
 
 ## Events
 
-| Event | Payload | Description |
+| Event Type | Produced When | Fields |
 |-------|---------|-------------|
 | Embedded.FirmwareProjectCreated | { projectId: string, boardId: string } | New firmware project initialized from board profile |
 | Embedded.HALGenerated | { projectId: string, halVersion: string } | HAL abstraction layer code has been generated |

@@ -143,7 +143,7 @@ interface HistoryNavigator {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | `GC.REPLStarted` | sessionId, humanId, contextSnapshot | Interactive REPL session initialized |
 | `GC.REPLCommandEvaluated` | sessionId, input, durationMs, success | Command evaluated against REPL context |

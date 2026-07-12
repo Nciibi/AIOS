@@ -150,7 +150,7 @@ interface InheritanceResolver {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | UI.ThemeDefined | themeId, name, variant, baseThemeId | New theme variant registered |
 | UI.ThemeApplied | themeId, resolvedTokens, duration | Theme activated and tokens applied |

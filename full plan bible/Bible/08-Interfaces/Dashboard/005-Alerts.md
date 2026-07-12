@@ -154,7 +154,7 @@ interface ActionRouter {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | DB.AlertSurfaced | alertId, severity, source | Alert displayed on dashboard alert-list |
 | DB.AlertClassified | alertId, severity, classifier | Severity assigned or updated |

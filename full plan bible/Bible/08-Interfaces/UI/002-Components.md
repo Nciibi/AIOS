@@ -139,7 +139,7 @@ interface AccessibilityEngine {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | UI.ComponentRendered | componentId, type, timestamp | Component mounted and visible |
 | UI.ComponentInteracted | componentId, event, value | User interaction on component |

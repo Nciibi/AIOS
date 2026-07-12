@@ -209,7 +209,7 @@ Delivered to human; evidence recorded (Law 4)
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | `UI.SessionStarted` | sessionId, humanId, channel | Human interaction session opened |
 | `UI.MessageReceived` | messageId, sessionId, intent | Human message parsed |

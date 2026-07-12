@@ -245,7 +245,7 @@ Enforcement Gateway checks budget via checkBudget()
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | `ECN.BudgetCreated` | budgetId, ownerId, totalAmount | New budget registered |
 | `ECN.BudgetActivated` | budgetId, effectiveFrom | Budget entered Active phase |

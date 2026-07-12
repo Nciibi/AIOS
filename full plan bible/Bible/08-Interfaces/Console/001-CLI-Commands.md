@@ -157,7 +157,7 @@ interface HistoryManager {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | `GC.CLICommandParsed` | sessionId, raw, commandName | Raw input parsed into command structure |
 | `GC.CLIArgsValidated` | sessionId, commandName, args, valid | Argument validation completed |

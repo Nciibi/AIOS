@@ -150,7 +150,7 @@ interface LayoutManager {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | DB.WidgetCreated | widgetId, type, viewId | New widget registered in a view |
 | DB.WidgetConfigured | widgetId, settings | Widget settings updated |

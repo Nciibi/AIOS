@@ -148,7 +148,7 @@ interface StalenessMonitor {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | DB.MetricDefined | metricId, name, source | New metric registered in catalog |
 | DB.MetricQueried | metricId, source, durationMs | Source query executed for metric |

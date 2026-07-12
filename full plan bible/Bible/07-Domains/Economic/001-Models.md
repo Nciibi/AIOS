@@ -188,7 +188,7 @@ interface SensitivityEngine {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | `ECN.ModelBuildStarted` | modelId, modelType, algorithm | Economic model build initiated |
 | `ECN.ModelBuilt` | modelId, validationMetrics | Model fitted and validated successfully |

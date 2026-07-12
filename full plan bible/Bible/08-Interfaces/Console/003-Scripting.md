@@ -180,7 +180,7 @@ interface Scheduler {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | `GC.ScriptDefined` | scriptId, name, version | New script registered in the script registry |
 | `GC.ScriptStarted` | scriptId, executionId, variableCount | Script execution initiated |

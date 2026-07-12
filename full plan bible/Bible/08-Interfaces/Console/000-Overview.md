@@ -196,7 +196,7 @@ All actions recorded as evidence (Law 4)
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | `GC.SessionStarted` | sessionId, humanId, mfaVerified | Human opened governance console |
 | `GC.RfcDecided` | rfcId, decision, reviewerId | Human decision on RFC recorded |

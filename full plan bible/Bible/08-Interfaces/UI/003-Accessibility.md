@@ -143,7 +143,7 @@ interface ContrastValidator {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | UI.AccessibilityAuditRun | auditId, componentCount, passedCount, failedCount | Full accessibility scan completed |
 | UI.ViolationDetected | violationId, componentId, severity, wcagCriteria | New accessibility violation found |

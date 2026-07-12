@@ -137,7 +137,7 @@ interface PatternLibrary {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | UI.DesignTokenUpdated | tokenId, category, oldValue, newValue | A design token value changed |
 | UI.ComponentRegistered | componentId, name, type | New component added to the library |

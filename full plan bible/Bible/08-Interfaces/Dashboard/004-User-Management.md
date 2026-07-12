@@ -163,7 +163,7 @@ interface SavedViewManager {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | DB.UserPreferenceUpdated | userId, changedFields | User dashboard preferences changed |
 | DB.ViewCustomized | userId, viewId, widgetCount | Widget layout customized for user |

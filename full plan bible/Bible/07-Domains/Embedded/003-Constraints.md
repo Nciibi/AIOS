@@ -246,7 +246,7 @@ interface OptimizationEngine {
 
 ## Events
 
-| Event | Payload | Description |
+| Event Type | Produced When | Fields |
 |-------|---------|-------------|
 | Embedded.FlashAnalyzed | { binaryId: string, usedBytes: number, totalBytes: number } | Flash section analysis completed |
 | Embedded.RAMProfiled | { binaryId: string, peakUsage: number, fragmentationIndex: number } | RAM profiling completed |

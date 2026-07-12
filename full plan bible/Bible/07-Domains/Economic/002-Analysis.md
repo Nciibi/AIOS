@@ -202,7 +202,7 @@ interface OptimizationEngine {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | `ECN.AllocationRuleCreated` | ruleId, name, strategy, targets | New cost allocation rule registered |
 | `ECN.AllocationRuleApplied` | ruleId, recordsAffected, totalAllocated | Allocation rule executed against cost records |

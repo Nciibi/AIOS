@@ -164,7 +164,7 @@ interface ClockConfiguration {
 
 ## Events
 
-| Event | Payload | Description |
+| Event Type | Produced When | Fields |
 |-------|---------|-------------|
 | Embedded.DeviceRegistered | { deviceId: string, boardId: string } | A new device has been added to the registry |
 | Embedded.MCUDetected | { profileId: string, method: string } | An MCU was detected and profile-matched |

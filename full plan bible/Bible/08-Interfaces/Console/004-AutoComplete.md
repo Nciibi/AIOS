@@ -140,7 +140,7 @@ interface ParameterCompleter {
 
 ## Events
 
-| Event | Fields | Description |
+| Event Type | Produced When | Fields |
 |-------|--------|-------------|
 | `GC.AutocompleteTriggered` | sessionId, inputLength, cursorPosition | Auto-completion activated by human input |
 | `GC.CandidateGenerated` | sessionId, candidateCount, maxScore | Candidates generated from all providers |
