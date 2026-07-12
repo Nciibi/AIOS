@@ -256,8 +256,8 @@ interface IntentClassifier {
 | Brain/Personality/000-Overview.md | Personality style is applied to responses |
 | Brain/Attention/000-Overview.md | User input generates attention signals |
 | Brain/Context/000-Overview.md | Conversation turns are pushed to the context window |
-| Brain/Memory/ | Session state and preferences persisted here |
-| Brain/Voice/ | Voice modality uses Voice System for STT/TTS |
+| Brain/Memory/000-Overview.md | Session state and preferences persisted here |
+| Brain/Voice/000-Overview.md | Voice modality uses Voice System for STT/TTS |
 
 ## Error Cases
 

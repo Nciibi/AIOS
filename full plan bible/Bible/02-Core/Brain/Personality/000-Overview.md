@@ -249,7 +249,7 @@ interface StyleAdapter {
 | Brain/Decision/000-Overview.md | Value matrix feeds into decision scoring |
 | Brain/Attention/000-Overview.md | Personality influences salience scoring |
 | Brain/LLMOS/003-Prompt-Compiler.md | Personality is injected into system prompts |
-| Brain/Memory/ | Personality data persisted here |
+| Brain/Memory/000-Overview.md | Personality data persisted here |
 
 ## Error Cases
 

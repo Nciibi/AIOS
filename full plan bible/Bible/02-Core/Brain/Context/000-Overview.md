@@ -273,7 +273,7 @@ ContextItem {
 | Brain/Sou/000-Overview.md | Sou reads context; SOU-004 gives Sou global context ownership |
 | Brain/LLMOS/006-Token-Budget-Manager.md | Sets token budget consumed by context compression |
 | Brain/LLMOS/004-Context-Builder.md | Consumes context window for LLMOS prompt assembly |
-| Brain/Memory/ | Persists context data (stateless design) |
+| Brain/Memory/000-Overview.md | Persists context data (stateless design) |
 | Brain/Decision/000-Overview.md | Decision System consumes context for trade-off analysis |
 | Brain/Tools/000-Overview.md | Tool results are pushed into the context window |
 

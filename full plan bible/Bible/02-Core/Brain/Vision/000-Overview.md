@@ -371,7 +371,7 @@ interface ImagePreprocessor {
 | Brain/Sou/000-Overview.md | Sou consumes vision output for reasoning |
 | Brain/Cognitive/000-Overview.md | Cognitive OS reasons about vision results |
 | Brain/LLMOS/000-Overview.md | LLMOS provides the inference backend for vision |
-| Brain/Memory/ | Vision analysis results persisted here |
+| Brain/Memory/000-Overview.md | Vision analysis results persisted here |
 | Bible/04-Execution/Runtime/ | Vision providers registered as Execution Providers |
 
 ## Error Cases
