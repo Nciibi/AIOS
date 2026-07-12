@@ -147,15 +147,15 @@ interface CongestionReport {
 
 ## Events
 
-| FPGA.EventType |    Produced When | Fields |
+| FPGA.EventType |     Produced When | Fields |
 |-------|----------|---------|
-| FPGA.SynthesisStarted |    SynthesisEngine: synth_id, device, goal, frequency | Fired when synthesis job begins |
-| FPGA.SynthesisCompleted |    SynthesisEngine: synth_id, tech_map, utilization, duration | Fired after synthesis finishes |
-| FPGA.MappingDone |    Mapper: synth_id, lut_type, dsp, bram, util | Fired when technology mapping completes |
-| FPGA.PlacementDone |    Placer: placement_id, cell_util, congestion, iter | Fired when placement finishes |
-| FPGA.RoutingDone |    Router: routing_id, wires_routed, unrouted, slack | Fired when routing completes |
-| FPGA.TimingAnalyzed |    TimingAnalyzer: timing_id, fmax, violators, paths | Fired after timing analysis |
-| FPGA.TimingClosed |    Optimizer: closure_id, iterations, final_slack, status | Fired when timing closure is achieved or abandoned |
+| FPGA.SynthesisStarted |     SynthesisEngine: synth_id, device, goal, frequency | Fired when synthesis job begins |
+| FPGA.SynthesisCompleted |     SynthesisEngine: synth_id, tech_map, utilization, duration | Fired after synthesis finishes |
+| FPGA.MappingDone |     Mapper: synth_id, lut_type, dsp, bram, util | Fired when technology mapping completes |
+| FPGA.PlacementDone |     Placer: placement_id, cell_util, congestion, iter | Fired when placement finishes |
+| FPGA.RoutingDone |     Router: routing_id, wires_routed, unrouted, slack | Fired when routing completes |
+| FPGA.TimingAnalyzed |     TimingAnalyzer: timing_id, fmax, violators, paths | Fired after timing analysis |
+| FPGA.TimingClosed |     Optimizer: closure_id, iterations, final_slack, status | Fired when timing closure is achieved or abandoned |
 
 ## Error Cases
 
@@ -178,22 +178,6 @@ interface CongestionReport {
 | FPGA-SYN-INV-003 | P&R must achieve positive worst negative slack before bitstream generation | Postcondition check after RoutingDone; block bitstream on negative slack |
 | FPGA-SYN-INV-004 | Congestion score must be below 90% for a design to proceed to bitstream | Threshold check in PlaceRouteCompleted handler |
 | FPGA-SYN-INV-005 | Synthesis results must be bit-identical for identical RTL and toolchain | Determinism check via checksum on TechnologyMap; regression test enforcement |
-
-## Design DNA
-
-| Rule | Assessment |
-|------|-----------|
-| R1 - Modulsingularity | Compliant |
-| R2 - Dependency Order | Compliant |
-| R3 - DRY | Compliant |
-| R4 - Builder Pattern | Compliant |
-| R5 - Liskov Substitution | Compliant |
-| R6 - DI over Singletons | Compliant |
-| R9 - Deterministic | Compliant |
-| R10 - Simpler Over Complex | Compliant |
-| R13 - Design for Failure | Compliant |
-| R14 - Paved Path | Compliant |
-| R15 - Open/Closed | Compliant |
 
 ## Design DNA
 

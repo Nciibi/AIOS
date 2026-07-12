@@ -246,15 +246,15 @@ interface OptimizationEngine {
 
 ## Events
 
-| EMB.EventType |    Produced When | Fields |
+| EMB.EventType |     Produced When | Fields |
 |-----------|---------------|--------|
-| EMB.FlashAnalyzed |    Flash usage analysis completes | binaryId, usedFlash, totalFlash, utilizationPct |
-| EMB.RAMProfiled |    RAM profiling completes | binaryId, peakUsage, totalRam, heapFragmentation |
-| EMB.StackDepthChecked |    Stack depth analysis completes | binaryId, maxDepth, confidence, callChainDepth |
-| EMB.PowerEstimated |    Power consumption estimation completes | binaryId, averageMa, batteryHours, operatingMode |
-| EMB.TimingAnalyzed |    Timing analysis completes | binaryId, slack, deadlineMet, criticalPath |
-| EMB.ConstraintViolation |    One or more resource constraints are exceeded | binaryId, violations, category, severity |
-| EMB.OptimizationApplied |    An auto-fix optimization is applied to the project | binaryId, savingBytes, autoFixCount, recommendations |
+| EMB.FlashAnalyzed |     Flash usage analysis completes | binaryId, usedFlash, totalFlash, utilizationPct |
+| EMB.RAMProfiled |     RAM profiling completes | binaryId, peakUsage, totalRam, heapFragmentation |
+| EMB.StackDepthChecked |     Stack depth analysis completes | binaryId, maxDepth, confidence, callChainDepth |
+| EMB.PowerEstimated |     Power consumption estimation completes | binaryId, averageMa, batteryHours, operatingMode |
+| EMB.TimingAnalyzed |     Timing analysis completes | binaryId, slack, deadlineMet, criticalPath |
+| EMB.ConstraintViolation |     One or more resource constraints are exceeded | binaryId, violations, category, severity |
+| EMB.OptimizationApplied |     An auto-fix optimization is applied to the project | binaryId, savingBytes, autoFixCount, recommendations |
 
 ## Error Cases
 
@@ -294,22 +294,6 @@ interface OptimizationEngine {
 | R13 - Design for Failure | ConstraintViolation events trigger automatic rollback or alternative generation passes |
 | R14 - Paved Path | Constraint budgets are enforced programmatically; no manual overrides bypass analysis |
 | R15 - Open/Closed | MD5 of binary + budget matches MD5 of all reports across all runs |
-
-## Design DNA
-
-| Rule | Assessment |
-|------|-----------|
-| R1 - Modulsingularity | Compliant |
-| R2 - Dependency Order | Compliant |
-| R3 - DRY | Compliant |
-| R4 - Builder Pattern | Compliant |
-| R5 - Liskov Substitution | Compliant |
-| R6 - DI over Singletons | Compliant |
-| R9 - Deterministic | Compliant |
-| R10 - Simpler Over Complex | Compliant |
-| R13 - Design for Failure | Compliant |
-| R14 - Paved Path | Compliant |
-| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

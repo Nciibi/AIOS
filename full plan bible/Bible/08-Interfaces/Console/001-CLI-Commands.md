@@ -157,16 +157,16 @@ interface HistoryManager {
 
 ## Events
 
-| CON.EventType |    Produced When | Fields |
+| CON.EventType |     Produced When | Fields |
 |-------|--------|-------------|
-| CON.CLICommandParsed |    sessionId, raw, commandName | Raw input parsed into command structure |
-| CON.CLIArgsValidated |    sessionId, commandName, args, valid | Argument validation completed |
-| CON.CLICommandExecuted |    sessionId, commandName, durationMs, success | Command dispatched and executed |
-| CON.CLIOutputFormatted |    sessionId, format, outputSize | Result formatted for display |
-| CON.CLISessionStarted |    sessionId, humanId | New CLI command session initialized |
-| CON.CLISessionEnded |    sessionId, humanId, commandCount | CLI session closed |
-| CON.CLIHistoryRetrieved |    sessionId, query, resultCount | History query executed |
-| CON.CLIAliasResolved |    sessionId, alias, targetCommand | Alias mapped to canonical command |
+| CON.CLICommandParsed |     sessionId, raw, commandName | Raw input parsed into command structure |
+| CON.CLIArgsValidated |     sessionId, commandName, args, valid | Argument validation completed |
+| CON.CLICommandExecuted |     sessionId, commandName, durationMs, success | Command dispatched and executed |
+| CON.CLIOutputFormatted |     sessionId, format, outputSize | Result formatted for display |
+| CON.CLISessionStarted |     sessionId, humanId | New CLI command session initialized |
+| CON.CLISessionEnded |     sessionId, humanId, commandCount | CLI session closed |
+| CON.CLIHistoryRetrieved |     sessionId, query, resultCount | History query executed |
+| CON.CLIAliasResolved |     sessionId, alias, targetCommand | Alias mapped to canonical command |
 
 ## Error Cases
 

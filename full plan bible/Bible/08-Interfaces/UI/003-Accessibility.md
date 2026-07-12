@@ -143,15 +143,15 @@ interface ContrastValidator {
 
 ## Events
 
-| UI.EventType |    Produced When | Fields |
+| UI.EventType |     Produced When | Fields |
 |-------|--------|-------------|
-| UI.AccessibilityAuditRun |    auditId, componentCount, passedCount, failedCount | Full accessibility scan completed |
-| UI.ViolationDetected |    violationId, componentId, severity, wcagCriteria | New accessibility violation found |
-| UI.ViolationRemediated |    violationId, componentId, fixApplied | Violation resolved and re-audited |
-| UI.ComplianceReportGenerated |    reportId, aaPassRate, aaaPassRate | Compliance report published |
-| UI.FocusOrderChanged |    componentId, previousOrder, newOrder | Keyboard navigation order modified |
-| UI.ScreenReaderConfigured |    configId, reader, version | Screen reader settings updated |
-| UI.ContrastFailure |    tokenId, ratio, minimumRequired | Token pair fails contrast check |
+| UI.AccessibilityAuditRun |     auditId, componentCount, passedCount, failedCount | Full accessibility scan completed |
+| UI.ViolationDetected |     violationId, componentId, severity, wcagCriteria | New accessibility violation found |
+| UI.ViolationRemediated |     violationId, componentId, fixApplied | Violation resolved and re-audited |
+| UI.ComplianceReportGenerated |     reportId, aaPassRate, aaaPassRate | Compliance report published |
+| UI.FocusOrderChanged |     componentId, previousOrder, newOrder | Keyboard navigation order modified |
+| UI.ScreenReaderConfigured |     configId, reader, version | Screen reader settings updated |
+| UI.ContrastFailure |     tokenId, ratio, minimumRequired | Token pair fails contrast check |
 
 ## Error Cases
 

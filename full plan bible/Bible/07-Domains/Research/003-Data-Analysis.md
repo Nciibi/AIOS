@@ -248,15 +248,15 @@ interface ConfidenceInterval {
 
 ## Events
 
-| RES.EventType |    Produced When | Fields |
+| RES.EventType |     Produced When | Fields |
 |-----------|--------------|--------|
-| RES.DataIngested |    Dataset loading completes | dataset_id, record_count, field_count, source, checksum, size_bytes |
-| RES.DataCleaned |    Cleaning step completes | dataset_id, missing_values_handled, outliers_removed, duplicates_removed, audit_log_hash |
-| RES.AnalysisRun |    Statistical analysis completes | result_id, test_type, test_statistic, p_value, effect_size, assumption_violations |
-| RES.VisualizationGenerated |    Visualization is rendered | visualization_id, chart_type, dimensions, measures, file_format, size_bytes |
-| RES.PatternDetected |    Pattern detection finds a result | pattern_id, pattern_type, confidence, support, description |
-| RES.ConfidenceAssessed |    Confidence assessment completes | assessment_id, overall_confidence, data_quality, statistical_validity, reproducibility |
-| RES.PipelineCompleted |    Full analysis pipeline finishes | pipeline_id, step_count, total_duration_ms, status, artifact_count |
+| RES.DataIngested |     Dataset loading completes | dataset_id, record_count, field_count, source, checksum, size_bytes |
+| RES.DataCleaned |     Cleaning step completes | dataset_id, missing_values_handled, outliers_removed, duplicates_removed, audit_log_hash |
+| RES.AnalysisRun |     Statistical analysis completes | result_id, test_type, test_statistic, p_value, effect_size, assumption_violations |
+| RES.VisualizationGenerated |     Visualization is rendered | visualization_id, chart_type, dimensions, measures, file_format, size_bytes |
+| RES.PatternDetected |     Pattern detection finds a result | pattern_id, pattern_type, confidence, support, description |
+| RES.ConfidenceAssessed |     Confidence assessment completes | assessment_id, overall_confidence, data_quality, statistical_validity, reproducibility |
+| RES.PipelineCompleted |     Full analysis pipeline finishes | pipeline_id, step_count, total_duration_ms, status, artifact_count |
 
 ## Error Cases
 

@@ -308,17 +308,17 @@ interface DimensionAnalyzer {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| VIS.SceneDescriptionStarted |    request_id, detail_level, dimensions_requested | Scene description began |
-| VIS.SceneDescriptionCompleted |    request_id, description_length, structured_fields | Description successfully generated |
-| VIS.SceneDescriptionFailed |    request_id, error_code, reason | Description generation failed |
-| VIS.SceneDimensionAnalyzed |    request_id, dimension, confidence | Individual dimension analyzed |
-| VIS.SceneSubjectDetected |    request_id, subject_name, classification, confidence | Subject identified in scene |
-| VIS.SceneEnvironmentClassified |    request_id, setting, indoor, lighting | Environment classification completed |
-| VIS.SceneTextMentioned |    request_id, text_sample, context, confidence | Visible text included in description |
-| VIS.SceneLowConfidence |    request_id, overall_confidence, uncertainty_reason | Description confidence below threshold |
-| VIS.SceneDetailGenerated |    request_id, detail_level, token_count | Natural language description generated |
-| VIS.SceneMultiSubject |    request_id, subject_count, group_count | Multiple subjects detected and handled |
-| VIS.SceneOcclusionDetected |    request_id, subject, occlusion_estimate | Partial subject occlusion noted |
+| VIS.SceneDescriptionStarted |     request_id, detail_level, dimensions_requested | Scene description began |
+| VIS.SceneDescriptionCompleted |     request_id, description_length, structured_fields | Description successfully generated |
+| VIS.SceneDescriptionFailed |     request_id, error_code, reason | Description generation failed |
+| VIS.SceneDimensionAnalyzed |     request_id, dimension, confidence | Individual dimension analyzed |
+| VIS.SceneSubjectDetected |     request_id, subject_name, classification, confidence | Subject identified in scene |
+| VIS.SceneEnvironmentClassified |     request_id, setting, indoor, lighting | Environment classification completed |
+| VIS.SceneTextMentioned |     request_id, text_sample, context, confidence | Visible text included in description |
+| VIS.SceneLowConfidence |     request_id, overall_confidence, uncertainty_reason | Description confidence below threshold |
+| VIS.SceneDetailGenerated |     request_id, detail_level, token_count | Natural language description generated |
+| VIS.SceneMultiSubject |     request_id, subject_count, group_count | Multiple subjects detected and handled |
+| VIS.SceneOcclusionDetected |     request_id, subject, occlusion_estimate | Partial subject occlusion noted |
 
 ## Invariants
 

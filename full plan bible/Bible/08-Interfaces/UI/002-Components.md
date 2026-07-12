@@ -139,15 +139,15 @@ interface AccessibilityEngine {
 
 ## Events
 
-| UI.EventType |    Produced When | Fields |
+| UI.EventType |     Produced When | Fields |
 |-------|--------|-------------|
-| UI.ComponentRendered |    componentId, type, timestamp | Component mounted and visible |
-| UI.ComponentInteracted |    componentId, event, value | User interaction on component |
-| UI.StateChanged |    componentId, previousState, newState | Immutable state transition |
-| UI.AccessibilityApplied |    componentId, role, label | ARIA attributes attached |
-| UI.EventBubbled |    componentId, event, origin, target | Event propagated through handler chain |
-| UI.RenderPatched |    componentId, diffSize, duration | Virtual DOM patch applied |
-| UI.ComponentTested |    componentId, testType, result | Test suite execution completed |
+| UI.ComponentRendered |     componentId, type, timestamp | Component mounted and visible |
+| UI.ComponentInteracted |     componentId, event, value | User interaction on component |
+| UI.StateChanged |     componentId, previousState, newState | Immutable state transition |
+| UI.AccessibilityApplied |     componentId, role, label | ARIA attributes attached |
+| UI.EventBubbled |     componentId, event, origin, target | Event propagated through handler chain |
+| UI.RenderPatched |     componentId, diffSize, duration | Virtual DOM patch applied |
+| UI.ComponentTested |     componentId, testType, result | Test suite execution completed |
 
 ## Error Cases
 

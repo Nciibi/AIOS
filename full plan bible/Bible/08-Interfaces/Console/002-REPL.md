@@ -143,16 +143,16 @@ interface HistoryNavigator {
 
 ## Events
 
-| CON.EventType |    Produced When | Fields |
+| CON.EventType |     Produced When | Fields |
 |-------|--------|-------------|
-| CON.REPLStarted |    sessionId, humanId, contextSnapshot | Interactive REPL session initialized |
-| CON.REPLCommandEvaluated |    sessionId, input, durationMs, success | Command evaluated against REPL context |
-| CON.REPLResultPrinted |    sessionId, style, outputSize | Evaluation result rendered to terminal |
-| CON.REPLContextUpdated |    sessionId, updatedKeys | EvalContext modified after evaluation |
-| CON.REPLSuggestionTriggered |    sessionId, prefix, suggestionCount | Auto-suggestions generated for input |
-| CON.REPLHistoryNavigated |    sessionId, direction, entrySequence | Human navigated command history |
-| CON.REPLSessionEnded |    sessionId, humanId, evalCount, duration | Interactive REPL session closed |
-| CON.REPLMultiLineStarted |    sessionId, lineCount | Multi-line input mode entered |
+| CON.REPLStarted |     sessionId, humanId, contextSnapshot | Interactive REPL session initialized |
+| CON.REPLCommandEvaluated |     sessionId, input, durationMs, success | Command evaluated against REPL context |
+| CON.REPLResultPrinted |     sessionId, style, outputSize | Evaluation result rendered to terminal |
+| CON.REPLContextUpdated |     sessionId, updatedKeys | EvalContext modified after evaluation |
+| CON.REPLSuggestionTriggered |     sessionId, prefix, suggestionCount | Auto-suggestions generated for input |
+| CON.REPLHistoryNavigated |     sessionId, direction, entrySequence | Human navigated command history |
+| CON.REPLSessionEnded |     sessionId, humanId, evalCount, duration | Interactive REPL session closed |
+| CON.REPLMultiLineStarted |     sessionId, lineCount | Multi-line input mode entered |
 
 ## Error Cases
 

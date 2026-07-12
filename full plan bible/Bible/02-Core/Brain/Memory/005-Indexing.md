@@ -417,13 +417,13 @@ interface RebuildReport {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| MEM.MEMEvent |    item_id, indexes_updated | Item added to all indexes |
-| MEM.MEMEvent |    index_type, key, item_id | Single index entry updated |
-| MEM.MEMEvent |    index_type, key, item_id | Single index entry removed |
-| MEM.MEMEvent |    query_id, indexes_used, result_count, latency_ms | Composite query completed |
-| MEM.MEMEvent |    reason | Full index rebuild initiated |
-| MEM.MEMEvent |    items_processed, duration_ms, indexes_rebuilt | Rebuild finished |
-| MEM.MEMEvent |    current_bytes, budget_bytes, growth_rate | Index approaching memory budget |
+| MEM.MEMEvent |     item_id, indexes_updated | Item added to all indexes |
+| MEM.MEMEvent |     index_type, key, item_id | Single index entry updated |
+| MEM.MEMEvent |     index_type, key, item_id | Single index entry removed |
+| MEM.MEMEvent |     query_id, indexes_used, result_count, latency_ms | Composite query completed |
+| MEM.MEMEvent |     reason | Full index rebuild initiated |
+| MEM.MEMEvent |     items_processed, duration_ms, indexes_rebuilt | Rebuild finished |
+| MEM.MEMEvent |     current_bytes, budget_bytes, growth_rate | Index approaching memory budget |
 
 ## Invariants
 

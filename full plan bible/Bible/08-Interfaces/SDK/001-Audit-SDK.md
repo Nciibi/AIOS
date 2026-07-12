@@ -169,15 +169,15 @@ Audit providers must support configurable retention policies:
 
 ## Events
 
-| SDK.EventType |    Produced When | Fields |
+| SDK.EventType |     Produced When | Fields |
 |-----------|--------------|--------|
-| SDK.EvidenceQueried |    Audit query is executed | query_id, filter_hash, result_count, duration_ms, query_type |
-| SDK.ChainVerified |    Event chain verification completes | chain_id, start_event, end_event, is_valid, broken_links, verification_level |
-| SDK.AnomalyDetected |    Anomaly detection triggers | anomaly_id, pattern, severity, affected_events_count, confidence |
-| SDK.ComplianceReportGenerated |    Compliance report is produced | report_id, standard, scope, passed_checks, failed_checks, score_pct |
-| SDK.EvidencePackageSealed |    Evidence package is created and sealed | package_id, case_id, event_count, seal_hash, retention_days |
-| SDK.EvidencePackageAccessed |    Sealed evidence package is accessed | package_id, accessed_by, access_reason, timestamp |
-| SDK.RetentionPolicyChanged |    Retention policy is modified | policy_id, previous_policy, new_policy, changed_by, reason |
+| SDK.EvidenceQueried |     Audit query is executed | query_id, filter_hash, result_count, duration_ms, query_type |
+| SDK.ChainVerified |     Event chain verification completes | chain_id, start_event, end_event, is_valid, broken_links, verification_level |
+| SDK.AnomalyDetected |     Anomaly detection triggers | anomaly_id, pattern, severity, affected_events_count, confidence |
+| SDK.ComplianceReportGenerated |     Compliance report is produced | report_id, standard, scope, passed_checks, failed_checks, score_pct |
+| SDK.EvidencePackageSealed |     Evidence package is created and sealed | package_id, case_id, event_count, seal_hash, retention_days |
+| SDK.EvidencePackageAccessed |     Sealed evidence package is accessed | package_id, accessed_by, access_reason, timestamp |
+| SDK.RetentionPolicyChanged |     Retention policy is modified | policy_id, previous_policy, new_policy, changed_by, reason |
 
 
 ## Design DNA

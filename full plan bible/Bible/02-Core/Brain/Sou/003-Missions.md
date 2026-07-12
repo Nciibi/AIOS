@@ -176,14 +176,14 @@ Mission Execution â†’ Events â†’ Event Store â†’ ACF Stream â†
 
 ## Events
 
-| SOU.EventType |    Produced When | Fields |
+| SOU.EventType |     Produced When | Fields |
 |-----------|--------------|--------|
-| SOU.MissionProposed |    Sou creates a mission proposal | mission_id, goal, plan_id |
-| SOU.MissionPlanApproved |    Sou approves the detailed plan | mission_id, approved_by, conditions |
-| SOU.MissionAdjustmentProposed |    Sou proposes a mission change | mission_id, adjustment_type, rationale |
-| SOU.MissionOutcomeEvaluated |    Sou evaluates mission completion | mission_id, goal_achievement_score, lessons |
-| SOU.MissionMonitored |    Sou performs a routine monitor check | mission_id, state, health_score |
-| SOU.MissionInterventionRequested |    Sou requests governance intervention | mission_id, reason, severity |
+| SOU.MissionProposed |     Sou creates a mission proposal | mission_id, goal, plan_id |
+| SOU.MissionPlanApproved |     Sou approves the detailed plan | mission_id, approved_by, conditions |
+| SOU.MissionAdjustmentProposed |     Sou proposes a mission change | mission_id, adjustment_type, rationale |
+| SOU.MissionOutcomeEvaluated |     Sou evaluates mission completion | mission_id, goal_achievement_score, lessons |
+| SOU.MissionMonitored |     Sou performs a routine monitor check | mission_id, state, health_score |
+| SOU.MissionInterventionRequested |     Sou requests governance intervention | mission_id, reason, severity |
 
 ## Edge Cases â€” Missions
 

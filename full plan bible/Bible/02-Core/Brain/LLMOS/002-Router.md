@@ -122,7 +122,7 @@ interface RoutingDecision {
 
 | Event | Fields | Trigger |
 |-------|--------|---------|
-| LLM.ModelSelected |    request_id, model_selected, selection_reason, composite_score, mode, alternatives_considered | After selection (Stage 5) |
+| LLM.ModelSelected |     request_id, model_selected, selection_reason, composite_score, mode, alternatives_considered | After selection (Stage 5) |
 
 
 ## Cross-Cutting Concerns

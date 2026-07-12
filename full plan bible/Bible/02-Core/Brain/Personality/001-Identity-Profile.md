@@ -203,16 +203,16 @@ interface IdentityStoreConfig {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PER.IdentityLoaded |    instance_id, name, version, created_at | Identity loaded on startup |
-| PER.IdentityAccessed |    field, caller, access_type | Identity field accessed by a component |
-| PER.IdentityWriteDenied |    field, caller, attempted_value | Write to immutable field rejected |
-| PER.IdentityAmended |    field, old_value, new_value, authority | Identity amended by constitutional authority |
-| PER.IdentityHistoryAppended |    entry, history_length | New history entry added by Sou |
-| PER.IdentityVerificationSucceeded |    checksum, duration_ms | Identity integrity check passed |
-| PER.IdentityVerificationFailed |    checksum, discrepancies, reason | Identity integrity check failed |
-| PER.IdentityEmergencyFallback |    reason, original_err | Emergency identity loaded due to failure |
-| PER.IdentityInjected |    prompt_id, instance_id, version | Identity injected into LLMOS prompt |
-| PER.IdentityCacheUpdated |    version, instance_id | Cached identity refreshed |
+| PER.IdentityLoaded |     instance_id, name, version, created_at | Identity loaded on startup |
+| PER.IdentityAccessed |     field, caller, access_type | Identity field accessed by a component |
+| PER.IdentityWriteDenied |     field, caller, attempted_value | Write to immutable field rejected |
+| PER.IdentityAmended |     field, old_value, new_value, authority | Identity amended by constitutional authority |
+| PER.IdentityHistoryAppended |     entry, history_length | New history entry added by Sou |
+| PER.IdentityVerificationSucceeded |     checksum, duration_ms | Identity integrity check passed |
+| PER.IdentityVerificationFailed |     checksum, discrepancies, reason | Identity integrity check failed |
+| PER.IdentityEmergencyFallback |     reason, original_err | Emergency identity loaded due to failure |
+| PER.IdentityInjected |     prompt_id, instance_id, version | Identity injected into LLMOS prompt |
+| PER.IdentityCacheUpdated |     version, instance_id | Cached identity refreshed |
 
 ## Invariants
 

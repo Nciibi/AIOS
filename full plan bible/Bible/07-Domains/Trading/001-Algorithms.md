@@ -127,15 +127,15 @@ interface AlgorithmTemplate {
 
 ## Events
 
-| TRD.EventType |    Produced When | Fields |
+| TRD.EventType |     Produced When | Fields |
 |-------|----------|---------|
-| TRD.AlgorithmImplemented |    StrategyEngine: algorithmId, templateId, version | Fired when a new algorithm is registered |
-| TRD.AlgorithmConfigured |    StrategyEngine: algorithmId, params, hash | Fired after parameter update |
-| TRD.SignalGenerated |    SignalBus: algorithmId, signal, confidence, timestamp | Emitted on each signal computation |
-| TRD.OrderConstructed |    OrderFactory: algorithmId, orderPayload, checksum | Fired when an order is built |
-| TRD.AlgorithmOptimized |    Optimizer: algorithmId, metrics, optimalParams | Fired after optimization run |
-| TRD.AlgorithmDeployed |    StrategyEngine: algorithmId, targetEnv | Fired on promotion to paper/live |
-| TRD.AlgorithmPaused |    StrategyEngine: algorithmId, reason | Fired when algorithm is halted |
+| TRD.AlgorithmImplemented |     StrategyEngine: algorithmId, templateId, version | Fired when a new algorithm is registered |
+| TRD.AlgorithmConfigured |     StrategyEngine: algorithmId, params, hash | Fired after parameter update |
+| TRD.SignalGenerated |     SignalBus: algorithmId, signal, confidence, timestamp | Emitted on each signal computation |
+| TRD.OrderConstructed |     OrderFactory: algorithmId, orderPayload, checksum | Fired when an order is built |
+| TRD.AlgorithmOptimized |     Optimizer: algorithmId, metrics, optimalParams | Fired after optimization run |
+| TRD.AlgorithmDeployed |     StrategyEngine: algorithmId, targetEnv | Fired on promotion to paper/live |
+| TRD.AlgorithmPaused |     StrategyEngine: algorithmId, reason | Fired when algorithm is halted |
 
 ## Error Cases
 
@@ -157,22 +157,6 @@ interface AlgorithmTemplate {
 | TRD-ALG-INV-003 | Backtest and live execution must use identical signal logic (no branching) | Single code path enforced via compilation guard |
 | TRD-ALG-INV-004 | Every algorithm version must have a corresponding backtest result before live deployment | Gateway check in StrategyEngine deploy pipeline |
 | TRD-ALG-INV-005 | Cooldown period between consecutive signals of same direction must be enforced | Sliding window check in SignalGenerator |
-
-## Design DNA
-
-| Rule | Assessment |
-|------|-----------|
-| R1 - Modulsingularity | Compliant |
-| R2 - Dependency Order | Compliant |
-| R3 - DRY | Compliant |
-| R4 - Builder Pattern | Compliant |
-| R5 - Liskov Substitution | Compliant |
-| R6 - DI over Singletons | Compliant |
-| R9 - Deterministic | Compliant |
-| R10 - Simpler Over Complex | Compliant |
-| R13 - Design for Failure | Compliant |
-| R14 - Paved Path | Compliant |
-| R15 - Open/Closed | Compliant |
 
 ## Design DNA
 

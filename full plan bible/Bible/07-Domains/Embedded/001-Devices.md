@@ -164,15 +164,15 @@ interface ClockConfiguration {
 
 ## Events
 
-| EMB.EventType |    Produced When | Fields |
+| EMB.EventType |     Produced When | Fields |
 |-----------|---------------|--------|
-| EMB.DeviceRegistered |    A new device is added to the registry | deviceId, boardId, registeredAt, registeredBy |
-| EMB.MCUDetected |    An MCU is detected and profile-matched | profileId, method, confidence, detectedAt |
-| EMB.BSPGenerated |    A board support package is generated | boardId, artifactCount, generationDuration |
-| EMB.PinConflictDetected |    A pin assignment conflict is found | pin, conflictCount, peripheralList |
-| EMB.DeviceTreeCompiled |    Device tree compilation completes | boardId, nodeCount, validationStatus |
-| EMB.PeripheralMismatch |    A peripheral type mismatch is detected | peripheral, expected, actual, severity |
-| EMB.BSPCacheHit |    BSP is retrieved from cache instead of regenerated | boardId, cacheAge, cacheKey |
+| EMB.DeviceRegistered |     A new device is added to the registry | deviceId, boardId, registeredAt, registeredBy |
+| EMB.MCUDetected |     An MCU is detected and profile-matched | profileId, method, confidence, detectedAt |
+| EMB.BSPGenerated |     A board support package is generated | boardId, artifactCount, generationDuration |
+| EMB.PinConflictDetected |     A pin assignment conflict is found | pin, conflictCount, peripheralList |
+| EMB.DeviceTreeCompiled |     Device tree compilation completes | boardId, nodeCount, validationStatus |
+| EMB.PeripheralMismatch |     A peripheral type mismatch is detected | peripheral, expected, actual, severity |
+| EMB.BSPCacheHit |     BSP is retrieved from cache instead of regenerated | boardId, cacheAge, cacheKey |
 
 ## Error Cases
 
@@ -212,22 +212,6 @@ interface ClockConfiguration {
 | R13 - Design for Failure | PinConflictDetected events trigger automatic reassignment workflows |
 | R14 - Paved Path | Device tree compilation enforces binding rules programmatically |
 | R15 - Open/Closed | MD5 of inputs matches MD5 of BSP output across all runs |
-
-## Design DNA
-
-| Rule | Assessment |
-|------|-----------|
-| R1 - Modulsingularity | Compliant |
-| R2 - Dependency Order | Compliant |
-| R3 - DRY | Compliant |
-| R4 - Builder Pattern | Compliant |
-| R5 - Liskov Substitution | Compliant |
-| R6 - DI over Singletons | Compliant |
-| R9 - Deterministic | Compliant |
-| R10 - Simpler Over Complex | Compliant |
-| R13 - Design for Failure | Compliant |
-| R14 - Paved Path | Compliant |
-| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

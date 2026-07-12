@@ -191,16 +191,16 @@ interface ROSInterfaceField {
 
 ## Events
 
-| ROB.EventType |    Produced When | Fields |
+| ROB.EventType |     Produced When | Fields |
 |-----------|--------------|--------|
-| ROB.ROSPackageCreated |    ROS package scaffold is generated | package_id, package_name, version, build_type, node_count, interface_count |
-| ROB.ROSNodeGenerated |    ROS node source code is generated | node_id, node_name, language, package_name, publisher_count, subscriber_count, service_count, action_count |
-| ROB.ROSInterfaceDefined |    ROS msg/srv/action interface is created | interface_id, interface_name, interface_type, field_count, package_name |
-| ROB.ROSGraphUpdated |    ROS topic/service graph is modified | graph_id, node_name, added_topics, removed_topics, added_services, removed_services |
-| ROB.ROSLaunchDeployed |    Launch file is deployed and nodes start | launch_id, launch_file, node_count, target_platform, deployment_time_ms |
-| ROB.ROSSecurityConfigured |    DDS security configuration is applied | config_id, domain_id, transport, security_enabled, package_name |
-| ROB.ROSBuildCompleted |    ROS package build finishes | build_id, package_name, success, error_count, warning_count, build_time_ms |
-| ROB.ROSPackageValidated |    ROS package validation completes | validation_id, package_name, is_valid, errors, warnings |
+| ROB.ROSPackageCreated |     ROS package scaffold is generated | package_id, package_name, version, build_type, node_count, interface_count |
+| ROB.ROSNodeGenerated |     ROS node source code is generated | node_id, node_name, language, package_name, publisher_count, subscriber_count, service_count, action_count |
+| ROB.ROSInterfaceDefined |     ROS msg/srv/action interface is created | interface_id, interface_name, interface_type, field_count, package_name |
+| ROB.ROSGraphUpdated |     ROS topic/service graph is modified | graph_id, node_name, added_topics, removed_topics, added_services, removed_services |
+| ROB.ROSLaunchDeployed |     Launch file is deployed and nodes start | launch_id, launch_file, node_count, target_platform, deployment_time_ms |
+| ROB.ROSSecurityConfigured |     DDS security configuration is applied | config_id, domain_id, transport, security_enabled, package_name |
+| ROB.ROSBuildCompleted |     ROS package build finishes | build_id, package_name, success, error_count, warning_count, build_time_ms |
+| ROB.ROSPackageValidated |     ROS package validation completes | validation_id, package_name, is_valid, errors, warnings |
 
 ## Error Cases
 
@@ -241,22 +241,6 @@ interface ROSInterfaceField {
 | R13 - Design for Failure | Package build failures preserve full build logs and intermediate artifacts for debugging; validation catches errors before build |
 | R14 - Paved Path | Paved path: specify interfaces â†’ generate package â†’ build â†’ validate â†’ deploy. Alternative paths available for advanced use cases |
 | R15 - Open/Closed | Each generator module has independently testable output; generated nodes can be unit tested without ROS runtime |
-
-## Design DNA
-
-| Rule | Assessment |
-|------|-----------|
-| R1 - Modulsingularity | Compliant |
-| R2 - Dependency Order | Compliant |
-| R3 - DRY | Compliant |
-| R4 - Builder Pattern | Compliant |
-| R5 - Liskov Substitution | Compliant |
-| R6 - DI over Singletons | Compliant |
-| R9 - Deterministic | Compliant |
-| R10 - Simpler Over Complex | Compliant |
-| R13 - Design for Failure | Compliant |
-| R14 - Paved Path | Compliant |
-| R15 - Open/Closed | Compliant |
 
 ## Cross-Cutting Concerns
 

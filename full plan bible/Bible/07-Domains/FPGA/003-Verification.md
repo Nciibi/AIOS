@@ -146,15 +146,15 @@ interface ReadbackResult {
 
 ## Events
 
-| FPGA.EventType |    Produced When | Fields |
+| FPGA.EventType |     Produced When | Fields |
 |-------|----------|---------|
-| FPGA.SimulationPassed |    SimulationRunner: sim_id, test_cases, passed, coverage | Fired when simulation completes with all tests passing |
-| FPGA.FormalVerified |    FormalEngine: formal_id, properties, proven, inconclusive | Fired when formal verification completes |
-| FPGA.AssertionChecked |    AssertionChecker: module, assertions_fired, passed, failed | Fired after assertion evaluation |
-| FPGA.CoverageAnalyzed |    CoverageAnalyzer: sim_id, total_coverage, gaps, threshold | Fired when coverage analysis finishes |
-| FPGA.BitstreamVerified |    BitstreamVerifier: bitstream_id, checksum, signature_valid | Fired after bitstream integrity check |
-| FPGA.ReadbackVerified |    ReadbackController: readback_id, match, mismatches | Fired after readback comparison |
-| FPGA.SimulationFailed |    SimulationRunner: sim_id, failing_tests, logs, assertions | Fired when simulation fails |
+| FPGA.SimulationPassed |     SimulationRunner: sim_id, test_cases, passed, coverage | Fired when simulation completes with all tests passing |
+| FPGA.FormalVerified |     FormalEngine: formal_id, properties, proven, inconclusive | Fired when formal verification completes |
+| FPGA.AssertionChecked |     AssertionChecker: module, assertions_fired, passed, failed | Fired after assertion evaluation |
+| FPGA.CoverageAnalyzed |     CoverageAnalyzer: sim_id, total_coverage, gaps, threshold | Fired when coverage analysis finishes |
+| FPGA.BitstreamVerified |     BitstreamVerifier: bitstream_id, checksum, signature_valid | Fired after bitstream integrity check |
+| FPGA.ReadbackVerified |     ReadbackController: readback_id, match, mismatches | Fired after readback comparison |
+| FPGA.SimulationFailed |     SimulationRunner: sim_id, failing_tests, logs, assertions | Fired when simulation fails |
 
 ## Error Cases
 
@@ -177,22 +177,6 @@ interface ReadbackResult {
 | FPGA-VRF-INV-003 | Bitstream must pass integrity verification before device programming | Postcondition check in BitstreamVerifier; block program on integrity failure |
 | FPGA-VRF-INV-004 | Coverage must meet minimum threshold of 80% for functional verification signoff | Threshold gate in CoverageAnalyzer; block handoff on below-threshold coverage |
 | FPGA-VRF-INV-005 | All assertion violations must be resolved or explicitly waived before bitstream generation | Waiver registry check in BitstreamVerifier; enforce zero unresolved violations |
-
-## Design DNA
-
-| Rule | Assessment |
-|------|-----------|
-| R1 - Modulsingularity | Compliant |
-| R2 - Dependency Order | Compliant |
-| R3 - DRY | Compliant |
-| R4 - Builder Pattern | Compliant |
-| R5 - Liskov Substitution | Compliant |
-| R6 - DI over Singletons | Compliant |
-| R9 - Deterministic | Compliant |
-| R10 - Simpler Over Complex | Compliant |
-| R13 - Design for Failure | Compliant |
-| R14 - Paved Path | Compliant |
-| R15 - Open/Closed | Compliant |
 
 ## Design DNA
 

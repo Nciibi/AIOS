@@ -133,15 +133,15 @@ interface CorrelationMatrix {
 
 ## Events
 
-| TRD.EventType |    Produced When | Fields |
+| TRD.EventType |     Produced When | Fields |
 |-------|----------|---------|
-| TRD.RiskMetricsCalculated |    RiskEngine: portfolioId, metrics, method | Published after risk metric computation |
-| TRD.VaRComputed |    VaRCalculator: portfolioId, varResult | Fired when VaR is recalculated |
-| TRD.StressTestRun |    StressTestRunner: portfolioId, scenarios, summary | Emitted after stress test completion |
-| TRD.ExposureUpdated |    ExposureTracker: portfolioId, report | Published on exposure change |
-| TRD.LimitBreached |    LimitEnforcer: limitId, scope, currentValue, maxValue | Fired when any limit threshold is crossed |
-| TRD.LimitRestored |    LimitEnforcer: limitId, scope, currentValue | Fired when a breached limit recovers |
-| TRD.CorrelationUpdated |    RiskEngine: matrixId, pairs | Emitted when correlation matrix is refreshed |
+| TRD.RiskMetricsCalculated |     RiskEngine: portfolioId, metrics, method | Published after risk metric computation |
+| TRD.VaRComputed |     VaRCalculator: portfolioId, varResult | Fired when VaR is recalculated |
+| TRD.StressTestRun |     StressTestRunner: portfolioId, scenarios, summary | Emitted after stress test completion |
+| TRD.ExposureUpdated |     ExposureTracker: portfolioId, report | Published on exposure change |
+| TRD.LimitBreached |     LimitEnforcer: limitId, scope, currentValue, maxValue | Fired when any limit threshold is crossed |
+| TRD.LimitRestored |     LimitEnforcer: limitId, scope, currentValue | Fired when a breached limit recovers |
+| TRD.CorrelationUpdated |     RiskEngine: matrixId, pairs | Emitted when correlation matrix is refreshed |
 
 ## Error Cases
 
@@ -165,22 +165,6 @@ interface CorrelationMatrix {
 | TRD-RSK-INV-004 | VaR computation must use at least 250 trading days of history | Precondition validation in VaRCalculator |
 | TRD-RSK-INV-005 | Correlation matrix must be recomputed at least once per trading day | Scheduled job in RiskEngine |
 | TRD-RSK-INV-006 | Stress scenarios must cover at least 5 distinct shock types (equity, FX, rates, credit, commodity) | Validation check on scenario registration |
-
-## Design DNA
-
-| Rule | Assessment |
-|------|-----------|
-| R1 - Modulsingularity | Compliant |
-| R2 - Dependency Order | Compliant |
-| R3 - DRY | Compliant |
-| R4 - Builder Pattern | Compliant |
-| R5 - Liskov Substitution | Compliant |
-| R6 - DI over Singletons | Compliant |
-| R9 - Deterministic | Compliant |
-| R10 - Simpler Over Complex | Compliant |
-| R13 - Design for Failure | Compliant |
-| R14 - Paved Path | Compliant |
-| R15 - Open/Closed | Compliant |
 
 ## Design DNA
 

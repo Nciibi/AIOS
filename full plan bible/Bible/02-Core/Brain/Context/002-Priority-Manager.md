@@ -336,14 +336,14 @@ interface DecayReport {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| CTX.ItemScored |    item_id, score, tier, source | Priority assigned at insert |
-| CTX.ItemPinned |    item_id, priority, old_priority | Item pinned by Sou |
-| CTX.ItemUnpinned |    item_id, old_priority | Pin removed |
-| CTX.PriorityDecayed |    item_id, old_score, new_score, tier_shift | Turn-based decay applied |
-| CTX.PriorityAdjusted |    item_id, old_score, new_score, reason | Manual or system override |
-| CTX.PriorityBoosted |    item_id, boost_amount, reason, duration | Temporary boost applied |
-| CTX.TierShifted |    item_id, old_tier, new_tier, score | Item crossed tier boundary |
-| CTX.DecayApplied |    session_id, items_decayed, total_delta | Batch decay complete |
+| CTX.ItemScored |     item_id, score, tier, source | Priority assigned at insert |
+| CTX.ItemPinned |     item_id, priority, old_priority | Item pinned by Sou |
+| CTX.ItemUnpinned |     item_id, old_priority | Pin removed |
+| CTX.PriorityDecayed |     item_id, old_score, new_score, tier_shift | Turn-based decay applied |
+| CTX.PriorityAdjusted |     item_id, old_score, new_score, reason | Manual or system override |
+| CTX.PriorityBoosted |     item_id, boost_amount, reason, duration | Temporary boost applied |
+| CTX.TierShifted |     item_id, old_tier, new_tier, score | Item crossed tier boundary |
+| CTX.DecayApplied |     session_id, items_decayed, total_delta | Batch decay complete |
 
 ## Invariants
 

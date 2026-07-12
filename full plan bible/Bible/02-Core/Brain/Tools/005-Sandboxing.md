@@ -304,16 +304,16 @@ interface SandboxManager {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| TOL.SandboxCreated |    execution_id, invocation_id, tool_id, isolation_level | Sandbox execution context created |
-| TOL.SandboxCompleted |    execution_id, resource_usage, duration_ms | Sandbox execution completed successfully |
-| TOL.SandboxViolation |    execution_id, type, limit, actual, details | Resource limit violated |
-| TOL.SandboxTimeout |    execution_id, deadline, actual_duration | Execution exceeded time limit |
-| TOL.SandboxKilled |    execution_id, reason, resource_usage | Execution forcibly terminated |
-| TOL.SandboxOutputTruncated |    execution_id, original_bytes, max_bytes | Output truncated to size limit |
-| TOL.SandboxProfileDerived |    tool_id, isolation_level, resource_limits_summary | Sandbox profile derived from tool definition |
-| TOL.SandboxProfileUpdated |    tool_id, updated_limits, reason | Sandbox profile changed |
-| TOL.SandboxIsolationBreach |    execution_id, breach_type, details | Isolation boundary crossed |
-| TOL.SandboxMetrics |    total_executions, violations_count, avg_resource_usage | Aggregated sandbox metrics |
+| TOL.SandboxCreated |     execution_id, invocation_id, tool_id, isolation_level | Sandbox execution context created |
+| TOL.SandboxCompleted |     execution_id, resource_usage, duration_ms | Sandbox execution completed successfully |
+| TOL.SandboxViolation |     execution_id, type, limit, actual, details | Resource limit violated |
+| TOL.SandboxTimeout |     execution_id, deadline, actual_duration | Execution exceeded time limit |
+| TOL.SandboxKilled |     execution_id, reason, resource_usage | Execution forcibly terminated |
+| TOL.SandboxOutputTruncated |     execution_id, original_bytes, max_bytes | Output truncated to size limit |
+| TOL.SandboxProfileDerived |     tool_id, isolation_level, resource_limits_summary | Sandbox profile derived from tool definition |
+| TOL.SandboxProfileUpdated |     tool_id, updated_limits, reason | Sandbox profile changed |
+| TOL.SandboxIsolationBreach |     execution_id, breach_type, details | Isolation boundary crossed |
+| TOL.SandboxMetrics |     total_executions, violations_count, avg_resource_usage | Aggregated sandbox metrics |
 
 ## Invariants
 

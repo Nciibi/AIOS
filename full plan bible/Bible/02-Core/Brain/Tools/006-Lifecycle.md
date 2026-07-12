@@ -357,18 +357,18 @@ interface ToolLifecycleManager {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| TOL.ToolRegistered |    tool_id, name, provider, initial_stage, version | Tool registered in the system |
-| TOL.ToolActivated |    tool_id, previous_stage, health_status | Tool transitioned to active |
-| TOL.ToolDeprecated |    tool_id, reason, sunset_date, replacement_tool_id | Tool marked as deprecated |
-| TOL.ToolRemoved |    tool_id, reason, stage_duration_days | Tool removed from system |
-| TOL.ToolReinstated |    tool_id, reason, previous_stage | Tool restored after removal |
-| TOL.ToolHealthChanged |    tool_id, old_status, new_status, reason | Health status transition |
-| TOL.ToolHeartbeatReceived |    tool_id, status, response_time_ms | Heartbeat signal processed |
-| TOL.ToolHeartbeatMissed |    tool_id, missed_count, max_threshold | Heartbeat timeout detected |
-| TOL.ProviderFailed |    provider, affected_tools, reason | All tools from provider marked unavailable |
-| TOL.ToolVersionChanged |    tool_id, old_version, new_version, is_breaking | Tool version updated |
-| TOL.ToolSunsetReached |    tool_id, version, sunset_date | Auto-removal triggered by sunset date |
-| TOL.ToolAutoDeregistered |    tool_id, provider, missed_heartbeats, duration | Tool removed due to provider failure |
+| TOL.ToolRegistered |     tool_id, name, provider, initial_stage, version | Tool registered in the system |
+| TOL.ToolActivated |     tool_id, previous_stage, health_status | Tool transitioned to active |
+| TOL.ToolDeprecated |     tool_id, reason, sunset_date, replacement_tool_id | Tool marked as deprecated |
+| TOL.ToolRemoved |     tool_id, reason, stage_duration_days | Tool removed from system |
+| TOL.ToolReinstated |     tool_id, reason, previous_stage | Tool restored after removal |
+| TOL.ToolHealthChanged |     tool_id, old_status, new_status, reason | Health status transition |
+| TOL.ToolHeartbeatReceived |     tool_id, status, response_time_ms | Heartbeat signal processed |
+| TOL.ToolHeartbeatMissed |     tool_id, missed_count, max_threshold | Heartbeat timeout detected |
+| TOL.ProviderFailed |     provider, affected_tools, reason | All tools from provider marked unavailable |
+| TOL.ToolVersionChanged |     tool_id, old_version, new_version, is_breaking | Tool version updated |
+| TOL.ToolSunsetReached |     tool_id, version, sunset_date | Auto-removal triggered by sunset date |
+| TOL.ToolAutoDeregistered |     tool_id, provider, missed_heartbeats, duration | Tool removed due to provider failure |
 
 ## Invariants
 

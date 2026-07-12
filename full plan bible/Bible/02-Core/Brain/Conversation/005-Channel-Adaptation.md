@@ -560,16 +560,16 @@ interface ChannelRegistry {
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| CONV.ChannelRegistered |    channel_id, channel_type, modality, capabilities_count | New channel registered with adapter |
-| CONV.InputAdapted |    channel_id, turn_id, original_length, normalized_length, latency_ms | Raw input adapted to normalized text |
-| CONV.OutputAdapted |    channel_id, turn_id, original_length, output_length, format, latency_ms | Sou response adapted to channel output |
-| CONV.ModalityConverted |    channel_id, from_modality, to_modality, turn_id | Modality conversion performed (e.g., text â†’ SSML) |
-| CONV.FormatApplied |    channel_id, turn_id, from_format, to_format, rules_applied | Response formatting transformation applied |
-| CONV.LengthTruncated |    channel_id, turn_id, original_length, truncated_length, strategy | Response truncated due to length constraint |
-| CONV.ChannelCapabilityUsed |    channel_id, capability, turn_id | Channel capability exercised during adaptation |
-| CONV.ChannelError |    channel_id, error_code, turn_id, recoverable | Error during channel adaptation |
-| CONV.ChannelRateLimited |    channel_id, backoff_ms, turn_id | Rate limit hit, backoff applied |
-| CONV.ChannelProfileUpdated |    channel_id, session_id, profile_fields | Session profile changed |
+| CONV.ChannelRegistered |     channel_id, channel_type, modality, capabilities_count | New channel registered with adapter |
+| CONV.InputAdapted |     channel_id, turn_id, original_length, normalized_length, latency_ms | Raw input adapted to normalized text |
+| CONV.OutputAdapted |     channel_id, turn_id, original_length, output_length, format, latency_ms | Sou response adapted to channel output |
+| CONV.ModalityConverted |     channel_id, from_modality, to_modality, turn_id | Modality conversion performed (e.g., text â†’ SSML) |
+| CONV.FormatApplied |     channel_id, turn_id, from_format, to_format, rules_applied | Response formatting transformation applied |
+| CONV.LengthTruncated |     channel_id, turn_id, original_length, truncated_length, strategy | Response truncated due to length constraint |
+| CONV.ChannelCapabilityUsed |     channel_id, capability, turn_id | Channel capability exercised during adaptation |
+| CONV.ChannelError |     channel_id, error_code, turn_id, recoverable | Error during channel adaptation |
+| CONV.ChannelRateLimited |     channel_id, backoff_ms, turn_id | Rate limit hit, backoff applied |
+| CONV.ChannelProfileUpdated |     channel_id, session_id, profile_fields | Session profile changed |
 
 ## Invariants
 

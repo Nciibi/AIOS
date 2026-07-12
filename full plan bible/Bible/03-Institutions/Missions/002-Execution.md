@@ -147,16 +147,16 @@ interface MissionExecutor {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.MSNEvent |    mission_id, worker_id, milestone_id, instruction_hash | Worker dispatched |
-| MSN.MSNEvent |    mission_id, worker_id, milestone_id, result_hash | Worker finishes milestone |
-| MSN.MSNEvent |    mission_id, overall_completion, milestone_progress | Progress snapshot taken |
-| MSN.MSNEvent |    mission_id, package_id, evidence_type, hash | Evidence collected |
-| MSN.MSNEvent |    mission_id, adaptation_id, resource_delta | Resources reallocated |
-| MSN.MSNEvent |    mission_id, old_timeline, new_timeline | Timeline adjusted |
-| MSN.MSNEvent |    mission_id, check_in_id, type, deadline | Check-in triggered |
-| MSN.MSNEvent |    mission_id, check_in_id, status, evidence_count | Check-in completed |
-| MSN.MSNEvent |    mission_id, reason, escalation_level | Escalation triggered |
-| MSN.MSNEvent |    mission_id, worker_id, timestamp, status | Periodic heartbeat |
+| MSN.MSNEvent |     mission_id, worker_id, milestone_id, instruction_hash | Worker dispatched |
+| MSN.MSNEvent |     mission_id, worker_id, milestone_id, result_hash | Worker finishes milestone |
+| MSN.MSNEvent |     mission_id, overall_completion, milestone_progress | Progress snapshot taken |
+| MSN.MSNEvent |     mission_id, package_id, evidence_type, hash | Evidence collected |
+| MSN.MSNEvent |     mission_id, adaptation_id, resource_delta | Resources reallocated |
+| MSN.MSNEvent |     mission_id, old_timeline, new_timeline | Timeline adjusted |
+| MSN.MSNEvent |     mission_id, check_in_id, type, deadline | Check-in triggered |
+| MSN.MSNEvent |     mission_id, check_in_id, status, evidence_count | Check-in completed |
+| MSN.MSNEvent |     mission_id, reason, escalation_level | Escalation triggered |
+| MSN.MSNEvent |     mission_id, worker_id, timestamp, status | Periodic heartbeat |
 
 ## Error Cases
 

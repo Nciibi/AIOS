@@ -196,17 +196,17 @@ All actions recorded as evidence (Law 4)
 
 ## Events
 
-| CON.EventType |    Produced When | Fields |
+| CON.EventType |     Produced When | Fields |
 |-------|--------|-------------|
-| CON.SessionStarted |    sessionId, humanId, mfaVerified | Human opened governance console |
-| CON.RfcDecided |    rfcId, decision, reviewerId | Human decision on RFC recorded |
-| CON.OverrideRequested |    overrideId, lawSuspended, scope, duration | Human override initiated |
-| CON.OverrideActive |    overrideId, lawSuspended, expiresAt | Override now in effect |
-| CON.OverrideExpired |    overrideId | Override auto-expired at duration end |
-| CON.OverrideRevoked |    overrideId, revokedBy | Override ended early by human |
-| CON.CertificationDecided |    agentId, targetStage, decision, reviewerId | Agent promotion approved/rejected |
-| CON.AuditQueried |    humanId, filter, resultCount | Human ran an audit query |
-| CON.SessionEnded |    sessionId, humanId | Console session closed |
+| CON.SessionStarted |     sessionId, humanId, mfaVerified | Human opened governance console |
+| CON.RfcDecided |     rfcId, decision, reviewerId | Human decision on RFC recorded |
+| CON.OverrideRequested |     overrideId, lawSuspended, scope, duration | Human override initiated |
+| CON.OverrideActive |     overrideId, lawSuspended, expiresAt | Override now in effect |
+| CON.OverrideExpired |     overrideId | Override auto-expired at duration end |
+| CON.OverrideRevoked |     overrideId, revokedBy | Override ended early by human |
+| CON.CertificationDecided |     agentId, targetStage, decision, reviewerId | Agent promotion approved/rejected |
+| CON.AuditQueried |     humanId, filter, resultCount | Human ran an audit query |
+| CON.SessionEnded |     sessionId, humanId | Console session closed |
 
 ## Error Cases
 

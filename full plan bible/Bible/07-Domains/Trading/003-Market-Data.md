@@ -137,16 +137,16 @@ interface FeedStatus {
 
 ## Events
 
-| TRD.EventType |    Produced When | Fields |
+| TRD.EventType |     Produced When | Fields |
 |-------|----------|---------|
-| TRD.FeedConnected |    FeedManager: feedId, exchange, symbols | Fired when a feed establishes connection |
-| TRD.TickProcessed |    Normalizer: tickId, symbol, exchange | Published for every normalized tick |
-| TRD.BarClosed |    OHLCVBuilder: symbol, timeframe, bar | Emitted when a bar period closes |
-| TRD.DataQualityAlert |    Validator: feedId, symbol, failedChecks[] | Fired when validation rules fail |
-| TRD.FeedDegraded |    FeedManager: feedId, reason, latencyMs | Published on latency or reliability degradation |
-| TRD.FeedDisconnected |    FeedManager: feedId, reason, lastSequence | Fired on unexpected disconnection |
-| TRD.GapDetected |    DataStore: symbol, fromTimestamp, toTimestamp, gapDuration | Emitted when a data gap is found |
-| TRD.OrderBookUpdated |    OrderBookManager: symbol, exchange, sequence, depth | Published on significant order book change |
+| TRD.FeedConnected |     FeedManager: feedId, exchange, symbols | Fired when a feed establishes connection |
+| TRD.TickProcessed |     Normalizer: tickId, symbol, exchange | Published for every normalized tick |
+| TRD.BarClosed |     OHLCVBuilder: symbol, timeframe, bar | Emitted when a bar period closes |
+| TRD.DataQualityAlert |     Validator: feedId, symbol, failedChecks[] | Fired when validation rules fail |
+| TRD.FeedDegraded |     FeedManager: feedId, reason, latencyMs | Published on latency or reliability degradation |
+| TRD.FeedDisconnected |     FeedManager: feedId, reason, lastSequence | Fired on unexpected disconnection |
+| TRD.GapDetected |     DataStore: symbol, fromTimestamp, toTimestamp, gapDuration | Emitted when a data gap is found |
+| TRD.OrderBookUpdated |     OrderBookManager: symbol, exchange, sequence, depth | Published on significant order book change |
 
 ## Error Cases
 
@@ -170,22 +170,6 @@ interface FeedStatus {
 | TRD-MKT-INV-004 | All timestamps must use UTC with microsecond precision | Enforcement in Normalizer; reject non-UTC timestamps |
 | TRD-MKT-INV-005 | Historical data query must return exactly-once semantics for overlapping time ranges | Deduplication key on (symbol, exchange, timestamp, sequence) |
 | TRD-MKT-INV-006 | Order book bid-ask spread must never be negative | Integrity check after each book update; fail-fast |
-
-## Design DNA
-
-| Rule | Assessment |
-|------|-----------|
-| R1 - Modulsingularity | Compliant |
-| R2 - Dependency Order | Compliant |
-| R3 - DRY | Compliant |
-| R4 - Builder Pattern | Compliant |
-| R5 - Liskov Substitution | Compliant |
-| R6 - DI over Singletons | Compliant |
-| R9 - Deterministic | Compliant |
-| R10 - Simpler Over Complex | Compliant |
-| R13 - Design for Failure | Compliant |
-| R14 - Paved Path | Compliant |
-| R15 - Open/Closed | Compliant |
 
 ## Design DNA
 

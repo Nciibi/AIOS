@@ -370,17 +370,17 @@ Validated ExecutionGraph (output to Progress Tracker, Institution OS)
 
 | Event | Fields | Description |
 |-------|--------|-------------|
-| PLN.PLNEvent |    plan_id, node_count, edge_count, depth | Execution graph constructed |
-| PLN.PLNEvent |    plan_id, cycle_nodes, suggested_resolution | Dependency cycle found and blocked |
-| PLN.PLNEvent |    plan_id, removed_dependency_id | Cycle resolved by user |
-| PLN.PLNEvent |    plan_id, path, total_duration_ms | Critical path identified |
-| PLN.PLNEvent |    plan_id, valid, warnings | Dependency validation finished |
-| PLN.PLNEvent |    dependency_id, from, to, type | New dependency created |
-| PLN.PLNEvent |    dependency_id, from, to | Dependency deleted |
-| PLN.PLNEvent |    dependency_id, updated_fields | Dependency type or condition changed |
-| PLN.PLNEvent |    dependency_id, condition, result | Conditional dependency evaluated |
-| PLN.PLNEvent |    dependency_id, condition, reason | Condition cannot be evaluated with current context |
-| PLN.PLNEvent |    group_id, milestone_ids, duration_ms | Parallel execution opportunity identified |
+| PLN.PLNEvent |     plan_id, node_count, edge_count, depth | Execution graph constructed |
+| PLN.PLNEvent |     plan_id, cycle_nodes, suggested_resolution | Dependency cycle found and blocked |
+| PLN.PLNEvent |     plan_id, removed_dependency_id | Cycle resolved by user |
+| PLN.PLNEvent |     plan_id, path, total_duration_ms | Critical path identified |
+| PLN.PLNEvent |     plan_id, valid, warnings | Dependency validation finished |
+| PLN.PLNEvent |     dependency_id, from, to, type | New dependency created |
+| PLN.PLNEvent |     dependency_id, from, to | Dependency deleted |
+| PLN.PLNEvent |     dependency_id, updated_fields | Dependency type or condition changed |
+| PLN.PLNEvent |     dependency_id, condition, result | Conditional dependency evaluated |
+| PLN.PLNEvent |     dependency_id, condition, reason | Condition cannot be evaluated with current context |
+| PLN.PLNEvent |     group_id, milestone_ids, duration_ms | Parallel execution opportunity identified |
 
 ## Invariants
 

@@ -143,17 +143,17 @@ interface MissionPlanner {
 
 | Event | Payload | Trigger |
 |-------|---------|---------|
-| MSN.MSNEvent |    mission_id, plan_hash, version | Plan created |
-| MSN.MSNEvent |    mission_id, validation_result, passed | Plan validated |
-| MSN.MSNEvent |    mission_id, goal_count, hierarchy | Goals decomposed |
-| MSN.MSNEvent |    mission_id, milestone_count, dag_hash | Milestones defined |
-| MSN.MSNEvent |    mission_id, resource_budget | Resources estimated |
-| MSN.MSNEvent |    mission_id, dependency_count, types | Dependencies mapped |
-| MSN.MSNEvent |    mission_id, start_date, end_date, critical_path | Timeline estimated |
-| MSN.MSNEvent |    mission_id, overall_score, top_risks | Risk assessed |
-| MSN.MSNEvent |    mission_id, approved_by, approval_hash | Plan approved |
-| MSN.MSNEvent |    mission_id, rejected_by, reasons | Plan rejected |
-| MSN.MSNEvent |    mission_id, old_version, new_version | Plan updated |
+| MSN.MSNEvent |     mission_id, plan_hash, version | Plan created |
+| MSN.MSNEvent |     mission_id, validation_result, passed | Plan validated |
+| MSN.MSNEvent |     mission_id, goal_count, hierarchy | Goals decomposed |
+| MSN.MSNEvent |     mission_id, milestone_count, dag_hash | Milestones defined |
+| MSN.MSNEvent |     mission_id, resource_budget | Resources estimated |
+| MSN.MSNEvent |     mission_id, dependency_count, types | Dependencies mapped |
+| MSN.MSNEvent |     mission_id, start_date, end_date, critical_path | Timeline estimated |
+| MSN.MSNEvent |     mission_id, overall_score, top_risks | Risk assessed |
+| MSN.MSNEvent |     mission_id, approved_by, approval_hash | Plan approved |
+| MSN.MSNEvent |     mission_id, rejected_by, reasons | Plan rejected |
+| MSN.MSNEvent |     mission_id, old_version, new_version | Plan updated |
 
 ## Error Cases
 

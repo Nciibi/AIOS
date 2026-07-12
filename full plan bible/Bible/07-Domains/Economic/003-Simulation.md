@@ -236,17 +236,17 @@ interface WhatIfEngine {
 
 ## Events
 
-| ECON.EventType |    Produced When | Fields |
+| ECON.EventType |     Produced When | Fields |
 |-------|--------|-------------|
-| ECON.ScenarioDefined |    scenarioId, name, changeCount | New economic scenario created and validated |
-| ECON.SimulationDefined |    scenarioId, params, bounds | Simulation parameters configured and bounds checked |
-| ECON.SimulationRun |    scenarioId, iterations, timeHorizon | Simulation execution started |
-| ECON.SimulationCompleted |    scenarioId, stabilityScore, warnings | Simulation finished with results |
-| ECON.SimulationDiverged |    scenarioId, iteration, diagnostic | Simulation terminated due to divergence |
-| ECON.ScenarioCompared |    comparisonId, scenarioCount, topRanked | Multi-scenario comparison completed |
-| ECON.SensitivityTested |    reportId, driversCount, stabilityAssessment | Sensitivity analysis completed |
-| ECON.SimulationAborted |    scenarioId, reason | Simulation manually aborted before completion |
-| ECON.WhatIfQueried |    resultId, confidence | Ad-hoc what-if analysis completed |
+| ECON.ScenarioDefined |     scenarioId, name, changeCount | New economic scenario created and validated |
+| ECON.SimulationDefined |     scenarioId, params, bounds | Simulation parameters configured and bounds checked |
+| ECON.SimulationRun |     scenarioId, iterations, timeHorizon | Simulation execution started |
+| ECON.SimulationCompleted |     scenarioId, stabilityScore, warnings | Simulation finished with results |
+| ECON.SimulationDiverged |     scenarioId, iteration, diagnostic | Simulation terminated due to divergence |
+| ECON.ScenarioCompared |     comparisonId, scenarioCount, topRanked | Multi-scenario comparison completed |
+| ECON.SensitivityTested |     reportId, driversCount, stabilityAssessment | Sensitivity analysis completed |
+| ECON.SimulationAborted |     scenarioId, reason | Simulation manually aborted before completion |
+| ECON.WhatIfQueried |     resultId, confidence | Ad-hoc what-if analysis completed |
 
 ## Error Cases
 
