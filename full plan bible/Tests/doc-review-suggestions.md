@@ -8,7 +8,7 @@ A deep recheck was performed on top of the structural verifier (`verify_docs.ps1
 
 | Check | Result |
 |-------|--------|
-| Structural verifier (DOC-FMT/ID/REF/LAW/DNA/CC/INV/STUB) | FAIL=24 (all P3 forward-refs), WARN=0 |
+| Structural verifier (DOC-FMT/ID/REF/LAW/DNA/CC/INV/STUB) | FAIL=0, WARN=0 |
 | Inline path-reference resolution (prose) | 0 broken in-scope refs |
 | Placeholder / TODO / stub markers | 0 real (only false positives: "wiped", "Filled", "show placeholder" UI states) |
 | Empty sections (sibling heading with no body) | 0 |
