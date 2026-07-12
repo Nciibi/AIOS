@@ -198,5 +198,5 @@ Results merge → Sou reviews → Final response
 | Bible/0007-Implementation-Roadmap.md | Implementation phasing — Phase 2 schedule |
 | Bible/0008-Future-Research.md | Research agenda and open questions |
 | Bible/02-Core/Brain/Autonomy/000-Overview.md | Autonomy System — L0–L4 progression |
-| ChatGPT-souuSouu Agent System Design.md | Original design vision — Agent Factory, Model Router, dynamic orgs |
-| sou new idea.md | Brain/Sou paradigm — Sou as single executive intelligence |
+| ChatGPT-souuSouu Agent System Design.md (project root) | Original design vision — Agent Factory, Model Router, dynamic orgs |
+| sou new idea.md (project root) | Brain/Sou paradigm — Sou as single executive intelligence |
