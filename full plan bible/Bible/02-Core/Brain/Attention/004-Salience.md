@@ -23,7 +23,7 @@ Under ATT-003, every signal must be evaluated before it can be dropped. Salience
 
 ### SalienceFactors
 
-`	ypescript
+```typescript
 SalienceFactors {
   goal_alignment: GoalAlignment
   urgency: UrgencyAssessment
