@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Brain/LLMOS |
 | Document ID | AIOS-BBL-002-LLM-013 |
-| Source Laws | Law 14 — Paved Path, Law 5 — Liskov Substitution |
+| Source Laws | Law 9 — Law of Constitutional Supremacy |
 | Source Physics | Physics/007-Capabilities.md, Physics/010-Execution.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |

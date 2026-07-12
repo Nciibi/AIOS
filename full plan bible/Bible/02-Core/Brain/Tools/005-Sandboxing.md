@@ -7,7 +7,7 @@
 | Version | 1.0 |
 | Category | Bible — Brain/Tools |
 | Document ID | AIOS-BBL-002-TOL-005 |
-| Source Laws | Law 7 — Law of Capability Bounds, Law 13 — Law of Design for Failure |
+| Source Laws | Law 7 — Law of Capability Bounds, Law 9 — Law of Constitutional Supremacy |
 | Source Physics | Physics/007-Capabilities.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
