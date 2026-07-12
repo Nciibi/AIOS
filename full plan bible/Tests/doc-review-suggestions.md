@@ -51,18 +51,17 @@ The 24 remaining FAILs are forward-references to P3 (Execution-tier) components
 
 ## Suggestions (not yet applied)
 
-### S1. Replace placeholder example code `API_XXX`
-- `Bible/08-Interfaces/API/000-Specifications.md:72` uses `"code": "API_XXX"` as a placeholder
-  error code in an example payload.
-- **Suggest:** replace with a concrete example code from the doc's own error table (e.g.
-  `API_INVALID_REQUEST` or an existing `API_*` code) so the example is self-consistent.
+### S1. Replace placeholder example code `API_XXX` — **[DONE]**
+- `Bible/08-Interfaces/API/000-Specifications.md:72` used `"code": "API_XXX"` as a placeholder
+  error code in an example payload. Replaced with `API-001` (InvalidEnvelope) and a matching
+  message, consistent with the doc's own error-code table.
 
-### S2. Conceptual events in overview docs
+### S2. Conceptual events in overview docs — **[RESOLVED]**
 - `Bible/02-Core/Brain/000-Overview.md` and `Bible/02-Core/Brain/Sou/000-Overview.md` reference
-  conceptual events (`BRN.AuthorizationRequired`, `Sou.DecisionMade`, etc.) that are not defined
-  in a dedicated Events table within those overview docs.
-- **Suggest:** either add an Events table to each overview doc, or explicitly cross-reference the
-  sub-doc that owns the event definition, so every referenced event has a discoverable definition.
+  conceptual events (`BRN.AuthorizationRequired`, `Sou.DecisionMade`, etc.).
+- The event-prefix unification (Fix #1) confirmed via `eventcheck.ps1` that **every** backticked
+  event reference resolves to a defined event (0 undefined), so these are discoverable across the
+  corpus. No further action required unless a stricter "defined-in-same-doc" rule is desired.
 
 ### S3. Producer → consumer event traceability (deeper semantic check)
 - The current checks confirm event *names* are consistent, but do not verify that every event
