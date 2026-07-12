@@ -7,8 +7,11 @@
 | Version | 1.0 |
 | Category | Bible — Security / Identity |
 | Document ID | AIOS-BIBLE-IDS-005 |
-| Source Laws | Law/5 — Law of Identity, Law/8 — Law of Verification-First |
+| Source Laws | Law 5 — Law of Identity, Law 8 — Law of Verification-First |
 | Source Physics | Physics/001-Identity.md |
+| Supersedes | Nothing |
+| Superseded By | Nothing |
+| Amended By | RFC |
 
 ## Purpose
 
