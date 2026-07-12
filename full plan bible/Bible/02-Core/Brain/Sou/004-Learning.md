@@ -197,15 +197,24 @@ Each model is versioned independently. Models may be shared with the Academy for
 | `Sou.LearningPrivacyBlocked` | Learning input blocked by privacy filter | outcome_id, privacy_rule_violated |
 | `Sou.KnowledgeSharedWithAcademy` | Learned pattern shared with Academy | knowledge_id, pattern_type |
 
-## Error Codes (R12)
+## Error Cases
 
-| Code | Description |
-|------|-------------|
-| SOU_LRN_001 | Evidence event not found in Event Store |
-| SOU_LRN_002 | Privacy filter blocked outcome ingestion |
-| SOU_LRN_003 | Model update fails constitutional validation |
-| SOU_LRN_004 | Regression test failure — improved model performs worse |
-| SOU_LRN_005 | Evidence chain incomplete — missing causal Events |
+| Condition | Error Code | Severity | Recovery |
+|-----------|------------|----------|----------|
+| Evidence event not found in Event Store | SOU_LRN_001 | High | Skip ingestion; log missing event for audit |
+| Privacy filter blocked outcome ingestion | SOU_LRN_002 | Medium | Record privacy block event; do not ingest |
+| Model update fails constitutional validation | SOU_LRN_003 | Critical | Roll back to previous model version; log validation failure |
+| Regression test failure — improved model performs worse | SOU_LRN_004 | High | Roll back automatically; restore previous version; log regression report |
+| Evidence chain incomplete — missing causal Events | SOU_LRN_005 | Medium | Continue with partial evidence; reduce confidence on affected models |
+
+## Invariants
+
+| ID | Invariant | Enforcement |
+|----|-----------|-------------|
+| SOU-LRN-001 | Learning never produces recommendations that violate Laws | Algorithmic — constitutional validation before model deployment |
+| SOU-LRN-002 | Every learning update traces to specific Evidence Events | Schema — evidence_chain required in ModelUpdate |
+| SOU-LRN-003 | Learning does not expose entity-identifiable information in shared models | Governance — privacy filter enforced before Academy sharing |
+| SOU-LRN-004 | Model updates are always validated before deployment | API-level — evaluateImprovement runs before model activation |
 
 ## Cross-Cutting Concerns
 
@@ -233,12 +242,17 @@ Learning communicates via ACF. Academy knowledge is received as evidence. Update
 
 | Rule | Compliance |
 |------|-----------|
-| R1 (Modulsingularity) | Learning is focused solely on self-improvement from evidence |
-| R3 (DRY) | Learned patterns are stored in Knowledge, not re-learned |
-| R9 (Deterministic) | Learning from the same evidence produces the same update |
-| R10 (Simpler Over Complex) | Learning uses the simplest sufficient model for each outcome type |
-| R12 (Embrace Errors) | All errors have unique codes (SOU_LRN_001–005) |
-| R13 (Design for Failure) | Learning failures do not block Sou operations — stale models are used |
+| R1 — Modulsingularity | Learning is focused solely on self-improvement from evidence |
+| R2 — Dependency Order | Learning depends on Event Store, Memory OS, Academy; no upward dependencies |
+| R3 — DRY | Learned patterns are stored in Knowledge, not re-learned |
+| R4 — Builder Pattern | Model updates are built through the ingest → update → validate pipeline |
+| R5 — Liskov Substitution | All learning models implement the LearningModel interface |
+| R6 — DI over Singletons | Event Store and Memory OS clients are injected dependencies |
+| R9 — Deterministic | Learning from the same evidence produces the same update |
+| R10 — Simpler Over Complex | Learning uses the simplest sufficient model for each outcome type |
+| R13 — Design for Failure | Learning failures do not block Sou operations — stale models are used |
+| R14 — Paved Path | All learning flows through ingestOutcome → updateModel → evaluateImprovement |
+| R15 — Open/Closed | New learning models added by extending LearningModel, not by modifying the engine |
 
 ## Related Documents
 
