@@ -7,7 +7,7 @@
 | Version | 0.1 |
 | Category | Research |
 | Document ID | RESEARCH-000 |
-| Source Laws | Law 2 — Law of Non-Execution, Law 5 — Law of Autonomy |
+| Source Laws | Law 2 — Law of Non-Execution, Law 5 — Law of Identity |
 | Source Physics | Physics/011-Design-DNA.md, Physics/012-Experience.md |
 | Supersedes | Nothing |
 | Superseded By | Nothing |
