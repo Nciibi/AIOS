@@ -114,7 +114,7 @@ flowchart TD
 Every action from an LLM must run a gauntlet through four hardened layers before touching the host system.
 
 ```mermaid
-graph LR
+flowchart LR
     LLM["LLM / Agent"] --> INTENT["aios-intent"]
     INTENT --> RESOLVER["aios-context-resolver"]
     RESOLVER --> POLICY["aios-policy"]
