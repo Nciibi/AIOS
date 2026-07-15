@@ -51,10 +51,10 @@ graph TB
 
     subgraph KERNEL["Kernel Layer (Implemented)"]
         Intent["aios-intent<br/>Semantic Parsing"]
-        Resolver["aios-context-resolver<br/>State & Security"]
+        Resolver["aios-context-resolver<br/>State &amp; Security"]
         Policy["aios-policy<br/>Zero-Trust Policy"]
         Exec["aios-execution<br/>Safe Execution"]
-        Core["aios-core<br/>Types & Primitives"]
+        Core["aios-core<br/>Types &amp; Primitives"]
     end
 
     subgraph HOST["Host Layer"]
@@ -88,7 +88,7 @@ graph TB
 ```mermaid
 graph TD
     CORE["aios-core<br/>Shared types, traits, primitives"]
-    INT["aios-intent<br/>Intent parsing & validation"]
+    INT["aios-intent<br/>Intent parsing &amp; validation"]
     RES["aios-context-resolver<br/>State binding & security"]
     POL["aios-policy<br/>Zero-trust decisions"]
     EXEC["aios-execution<br/>Sandboxed execution"]
@@ -457,4 +457,4 @@ MIT License — see [LICENSE](LICENSE).
 
 <p align="center">
   <strong>Built for a future where AI acts safely on behalf of humans.</strong>
-</p>
+<
