@@ -89,7 +89,7 @@ graph TB
 graph TD
     CORE["aios-core<br/>Shared types, traits, primitives"]
     INT["aios-intent<br/>Intent parsing &amp; validation"]
-    RES["aios-context-resolver<br/>State binding & security"]
+    RES["aios-context-resolver<br/>State binding &amp; security"]
     POL["aios-policy<br/>Zero-trust decisions"]
     EXEC["aios-execution<br/>Sandboxed execution"]
     TESTS["aios-integration-tests<br/>E2E pipeline tests"]
