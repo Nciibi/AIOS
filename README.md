@@ -166,7 +166,7 @@ Action (aios-core)
 Transforms abstract `Action` objects into fully resolved `ResolvedAction` with concrete system context.
 
 ```mermaid
-graph TB
+flowchart TB
     START["Raw Action"] --> C1["1. Confidence &amp; Thresholds"]
     C1 --> C2["2. Injection Scanning"]
     C2 --> C3["3. Agent History &amp; Loop Detection"]
@@ -219,7 +219,7 @@ flowchart LR
 The **only** crate with authority to mutate host state. Consumes the `VerifiedPolicyDecision` and orchestrates safe, audited execution.
 
 ```mermaid
-graph TB
+flowchart TB
     VPD["VerifiedPolicyDecision"] --> S1["1. Policy Verdict &amp; Capability Check"]
     S1 --> S2["2. Resource Lock (RAII)"]
     S2 --> S3["3. Confirmation Gate"]
@@ -457,4 +457,4 @@ MIT License — see [LICENSE](LICENSE).
 
 <p align="center">
   <strong>Built for a future where AI acts safely on behalf of humans.</strong>
-</p>
+<
