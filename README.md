@@ -220,7 +220,7 @@ The **only** crate with authority to mutate host state. Consumes the `VerifiedPo
 
 ```mermaid
 graph TB
-    VPD["VerifiedPolicyDecision"] --> S1["1. Policy Verdict & Capability Check"]
+    VPD["VerifiedPolicyDecision"] --> S1["1. Policy Verdict &amp; Capability Check"]
     S1 --> S2["2. Resource Lock (RAII)"]
     S2 --> S3["3. Confirmation Gate"]
     S3 --> S4["4. Dry Run Gate"]
@@ -229,7 +229,7 @@ graph TB
     S6 --> S7["7. Outcome Verification"]
     S7 --> S8["8. Output Sanitization"]
     S8 --> S9["9. Tamper-Proof Audit"]
-    S9 --> S10["10. Release Lock & Return"]
+    S9 --> S10["10. Release Lock &amp; Return"]
 
     S6 -.->|timeout| RB1["Rollback"]
     S7 -.->|diverged| RB2["Rollback"]
@@ -457,4 +457,4 @@ MIT License — see [LICENSE](LICENSE).
 
 <p align="center">
   <strong>Built for a future where AI acts safely on behalf of humans.</strong>
-</p>
+<
