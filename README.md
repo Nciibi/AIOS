@@ -196,7 +196,7 @@ graph TB
 Evaluates resolved actions against deterministic rules to produce an unforgeable `VerifiedPolicyDecision`.
 
 ```mermaid
-graph LR
+flowchart LR
     RA["ResolvedAction"] --> CAP["1. Capability Check<br/>3-level hierarchy"]
     CAP --> FR["2. Forbidden Rules<br/>System blacklist"]
     FR --> RC["3. Risk Computation<br/>MAX model - 6 factors"]
