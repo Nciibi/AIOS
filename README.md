@@ -457,4 +457,4 @@ MIT License — see [LICENSE](LICENSE).
 
 <p align="center">
   <strong>Built for a future where AI acts safely on behalf of humans.</strong>
-<
+</p>
