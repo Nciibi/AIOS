@@ -39,7 +39,7 @@ Unlike traditional operating systems that rely on identity-based access control,
 ### Full System Map
 
 ```mermaid
-graph TB
+flowchart TB
     subgraph BRAIN["Brain Layer (Planned)"]
         Sou["Sou<br/>Constitutional Intelligence"]
         OSYS["OSYS<br/>Organization System"]
