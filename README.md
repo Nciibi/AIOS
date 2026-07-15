@@ -46,7 +46,7 @@ graph TB
         DTS["DTS<br/>Decision &amp; Trust"]
         AGS["AGS<br/>Agent Genome System"]
         ROS["ROS<br/>Resource Orchestration"]
-        Academy["Academy<br/>Knowledge & Learning"]
+        Academy["Academy<br/>Knowledge &amp; Learning"]
     end
 
     subgraph KERNEL["Kernel Layer (Implemented)"]
