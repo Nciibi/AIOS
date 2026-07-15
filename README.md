@@ -167,10 +167,10 @@ Transforms abstract `Action` objects into fully resolved `ResolvedAction` with c
 
 ```mermaid
 graph TB
-    START["Raw Action"] --> C1["1. Confidence & Thresholds"]
+    START["Raw Action"] --> C1["1. Confidence &amp; Thresholds"]
     C1 --> C2["2. Injection Scanning"]
-    C2 --> C3["3. Agent History & Loop Detection"]
-    C3 --> C4["4. Namespace & Allowed Zone"]
+    C2 --> C3["3. Agent History &amp; Loop Detection"]
+    C3 --> C4["4. Namespace &amp; Allowed Zone"]
     C4 --> C5["5. Path Resolution via FD"]
     C5 --> C6["6. Resource Population"]
     C6 --> C7["7. Cryptographic Verification"]
