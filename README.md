@@ -329,23 +329,6 @@ AIOS provides structured observability across all layers:
 | Policy | `policy.allow`, `policy.deny` (tagged by agent & rule) | Structured entries with verdict, rule name, duration |
 | Execution | Execution latency, sandbox metrics | SHA-256 backward-chained, HMAC-SHA256 signed entries |
 
----
-
-## Sponsorship
-
-AIOS is an open-source project built in the open. If you find this project valuable for your infrastructure, research, or product, please consider supporting its development.
-
-**Ways to sponsor:**
-- **GitHub Sponsors**: [github.com/sponsors/aios-project](https://github.com/sponsors/aios-project)
-- **Open Collective**: [opencollective.com/aios](https://opencollective.com/aios)
-
-Sponsorship helps fund:
-- Security audits and formal verification
-- Additional sandbox runtime support (WASM, Firecracker, gVisor, Youki)
-- Developer tooling and CI infrastructure
-- Community documentation and examples
-
----
 
 ## License
 
