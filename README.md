@@ -86,7 +86,7 @@ flowchart TB
 ### Current Crate Dependency Graph
 
 ```mermaid
-graph TD
+flowchart TD
     CORE["aios-core<br/>Shared types, traits, primitives"]
     INT["aios-intent<br/>Intent parsing &amp; validation"]
     RES["aios-context-resolver<br/>State binding &amp; security"]
