@@ -43,7 +43,7 @@ graph TB
     subgraph BRAIN["Brain Layer (Planned)"]
         Sou["Sou<br/>Constitutional Intelligence"]
         OSYS["OSYS<br/>Organization System"]
-        DTS["DTS<br/>Decision & Trust"]
+        DTS["DTS<br/>Decision &amp; Trust"]
         AGS["AGS<br/>Agent Genome System"]
         ROS["ROS<br/>Resource Orchestration"]
         Academy["Academy<br/>Knowledge & Learning"]
